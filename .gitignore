@@ -13,6 +13,9 @@ documentation/git-docs
 *.sln.docstates
 *.userprefs
 
+# OSX specific files
+**/.DS_Store
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

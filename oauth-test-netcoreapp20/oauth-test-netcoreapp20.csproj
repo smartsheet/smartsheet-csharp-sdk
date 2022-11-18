@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'oauth_test_netcoreapp20' " />
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>

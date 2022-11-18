@@ -20,9 +20,6 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Versioning;
-#if !NETSTANDARD2_0
-using System.Management;
-#endif
 
 namespace Smartsheet.Api.Internal.Utility
 {
@@ -30,51 +27,6 @@ namespace Smartsheet.Api.Internal.Utility
     {
         public Utility()
         {
-        }
-
-        public static string GetOSFriendlyName()
-        {
-            var framework = Assembly
-                .GetEntryAssembly()?
-                .GetCustomAttribute<TargetFrameworkAttribute>()?
-                .FrameworkName;
-
-#if NETSTANDARD2_0
-            return framework + "-" + System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-#else
-            string result = string.Empty;
-            ManagementObjectCollection.ManagementObjectEnumerator enumerator = null;
-
-            try
-            {
-                enumerator = (
-                        new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem")
-                    ).Get()
-                    .GetEnumerator();
-
-                if (enumerator.MoveNext())
-                {
-                    result = ((ManagementObject)enumerator.Current)["Caption"].ToString();
-                }
-            }
-            catch (UnauthorizedAccessException)
-            {
-                // Hosted solution - Many not allow access to WMI
-                return "Hosted";
-            }
-            catch (System.NotImplementedException)
-            {
-                return ".Net Core-" + System.Environment.OSVersion.VersionString;
-            }
-            finally
-            {
-                if (enumerator != null)
-                {
-                    ((IDisposable)enumerator).Dispose();
-                }
-            }
-            return result + "-" + framework;
-#endif
         }
 
         /**
