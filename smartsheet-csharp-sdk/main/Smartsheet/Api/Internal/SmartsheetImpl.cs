@@ -632,6 +632,7 @@ namespace Smartsheet.Api.Internal
         private string GenerateUserAgent(string userAgent)
         {
             // Set User Agent
+            System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
             string thisVersion = "";
             string title = "";
             Assembly assembly = Assembly.GetCallingAssembly();
@@ -650,7 +651,7 @@ namespace Smartsheet.Api.Internal
                         userAgent = strings[0];
                 }
             }
-            return title + "/" + thisVersion + "/" + userAgent + "/" + Utils.GetOSFriendlyName();
+            return title + "/" + thisVersion + "/" + userAgent;
         }
     }
 }

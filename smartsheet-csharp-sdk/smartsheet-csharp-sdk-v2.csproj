@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>    
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon />
@@ -10,6 +10,7 @@
     <PackageLicenseUrl>https://raw.github.com/smartsheet-platform/smartsheet-csharp-sdk/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/smartsheet-platform/smartsheet-csharp-sdk</PackageProjectUrl>
     <PackageIconUrl>https://googledrive.com/host/0B0ESt9lII6BWZUcyZmlsalBDdlE/smartsheetAPI.png</PackageIconUrl>
+    <Company>Smartsheet</Company>
     <Title>Smartsheet C# SDK</Title>
     <Description>Library that uses C# to connect to Smartsheet services.</Description>
     <Copyright>Copyright 2014-2021</Copyright>
@@ -19,6 +20,7 @@
     <Version>2.126.0</Version>
     <AssemblyName>smartsheet-csharp-sdk</AssemblyName>
     <RootNamespace>smartsheet-csharp-sdk</RootNamespace>
+    <Configuration>Debug</Configuration>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -49,6 +51,7 @@
     <None Remove="packages\**" />
     <None Remove="Sample\**" />
     <None Remove="TestSDKMockAPI\**" />
+    <None Remove="NLogConfig" />
   </ItemGroup>
   <ItemGroup>
     <None Remove=".gitattributes" />
@@ -68,11 +71,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="NLog" Version="4.6.3" />
-    <PackageReference Include="RestSharp" Version="106.6.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NLog" Version="5.0.5" />
+    <PackageReference Include="RestSharp" Version="106.15.0" />
+    <PackageReference Include="System.Management" Version="7.0.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net452' ">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
     <Reference Include="System.Management" />
   </ItemGroup>
 </Project>
