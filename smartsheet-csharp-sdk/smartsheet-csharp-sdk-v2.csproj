@@ -51,6 +51,7 @@
     <None Remove="packages\**" />
     <None Remove="Sample\**" />
     <None Remove="TestSDKMockAPI\**" />
+    <None Remove="NLogConfig" />
   </ItemGroup>
   <ItemGroup>
     <None Remove=".gitattributes" />
