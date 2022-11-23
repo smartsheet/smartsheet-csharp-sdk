@@ -5,26 +5,12 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smartsheet-csharp-sdk-v2", "smartsheet-csharp-sdk\smartsheet-csharp-sdk-v2.csproj", "{44D56022-C6DC-44B3-AC7A-021F7C25E3DC}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "smartsheet-csharp-sdk-docs-v2", "documentation\smartsheet-csharp-sdk-docs-v2.shfbproj", "{5553F189-69F0-4AE8-907C-0067E12A7770}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F86D36D-ABD7-43F8-94E1-BBE7B8B77F31}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk-csharp-sample-net60", "sdk-csharp-sample-net60\sdk-csharp-sample-net60.csproj", "{A7720F0A-5B69-4555-8DC8-899ECB0F0610}"
-EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "mock-api-test-sdk-net452", "TestSDKMockAPI\net452\mock-api-test-sdk-net452.csproj", "{87629BC6-2C0B-4791-AFE9-07C22E7E239C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "integration-test-sdk-net452", "IntegrationTestSDK\net452\integration-test-sdk-net452.csproj", "{A6BC0307-C0AF-463F-B602-0C66578A9C9B}"
-EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "sdk-csharp-sample-net452", "Sample\net452\sdk-csharp-sample-net452.csproj", "{80A63EE2-788D-4B94-8AA3-6531E2AC06C6}"
-EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "sdk-csharp-sample-netcoreapp20", "Sample\netcoreapp2.0\sdk-csharp-sample-netcoreapp20.csproj", "{D48C56B6-C2E2-4248-B5AE-0F0BBAE7ED49}"
-EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "integration-test-sdk-netcoreapp20", "IntegrationTestSDK\netcoreapp2.0\integration-test-sdk-netcoreapp20.csproj", "{8AAA42A4-1E59-4B1A-9EE5-E7D8357A5CC1}"
-EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "mock-api-test-sdk-netcoreapp20", "TestSDKMockAPI\netcoreapp2.0\mock-api-test-sdk-netcoreapp20.csproj", "{40CF17DD-1EBF-4A2F-8FA3-65821B269D14}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oauth-test-netcoreapp20", "oauth-test-netcoreapp20\oauth-test-netcoreapp20.csproj", "{289FDB9E-EE0A-4805-B66E-9A527DAF4E3E}"
 EndProject
