@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ mainline ]
+  pull_request:
+    branches: [ mainline ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .Net Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+      - name: Install Dependencies
+        run: dotnet restore
+      - name: Build
+        working-directory: ./smartsheet-csharp-sdk
+        run: dotnet build --configuration Release --no-restore
+      - name: Clone smartsheet/smartsheet-sdk-tests PRIVATE repository
+        uses: GuillaumeFalourd/clone-github-repo-action@v2
+        with:
+          owner: 'smartsheet'
+          repository: 'smartsheet-sdk-tests'
+          access-token: ${{ secrets.SDK_TEST_ACCESS_TOKEN }}
+      - name: Setup Mock API
+        run: |
+          smartsheet-sdk-tests/travis_scripts/install_wiremock.sh
+          smartsheet-sdk-tests/travis_scripts/start_wiremock.sh
+      - name: Run Mock API Tests
+        working-directory: ./mock-api-test-sdk-net60
+        run: |
+          dotnet build --configuration Release --no-restore
+          dotnet test --no-restore
