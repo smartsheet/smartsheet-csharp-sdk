@@ -41,7 +41,7 @@ jobs:
         dotnet build --configuration Release --no-restore
         dotnet test --no-restore
     - name: Run Integration Tests
-      if: always()
+      continue-on-error: true
       working-directory: ./integration-test-sdk-net60
       env:
         SMARTSHEET_ACCESS_TOKEN: ${{secrets.SMARTSHEET_ACCESS_TOKEN}}
