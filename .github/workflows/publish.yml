@@ -50,7 +50,7 @@ jobs:
         dotnet test --no-restore
     - name: Package
       working-directory: ./smartsheet-csharp-sdk
-      run: dotnet pack Csp/Csp.csproj --no-build --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o .
+      run: dotnet pack smartsheet-csharp-sdk-v2.csproj --no-build --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o .
     - name: Publish to Nuget Test
       working-directory: ./smartsheet-csharp-sdk
       run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_TOKEN}} --source "https://api.nugettest.org/v3/index.json" --skip-duplicate
