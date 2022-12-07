@@ -1,6 +1,10 @@
-# Smartsheet SDK for C# [![Build Status](https://travis-ci.org/smartsheet-platform/smartsheet-csharp-sdk.svg?branch=master)](https://travis-ci.org/smartsheet-platform/smartsheet-csharp-sdk) [![Coverage Status](https://coveralls.io/repos/github/smartsheet-platform/smartsheet-csharp-sdk/badge.svg?branch=master)](https://coveralls.io/github/smartsheet-platform/smartsheet-csharp-sdk?branch=master) [![NuGet](https://img.shields.io/nuget/v/smartsheet-csharp-sdk.svg)](https://www.nuget.org/packages/smartsheet-csharp-sdk/)
+# Smartsheet SDK for C# [![Build Status](https://github.com/smartsheet/smartsheet-csharp-sdk/actions/workflows/main.yml/badge.svg)](https://github.com/smartsheet/smartsheet-python-sdk/actions/workflows/test-build.yaml) [![NuGet](https://img.shields.io/nuget/v/smartsheet-csharp-sdk.svg)](https://www.nuget.org/packages/smartsheet-csharp-sdk/)
 
 This is a C# SDK to simplify connecting to the [Smartsheet API](https://smartsheet.redoc.ly) from .NET applications.
+
+**NOTE ON 3.0.0 RELEASE**
+
+The SDK has been migrated to .Net 6.0.
 
 **NOTE ON 2.93.0 RELEASE**
 
@@ -19,8 +23,7 @@ SmartsheetClient smartsheet = new SmartsheetBuilder()
    
 ## System Requirements
 
-The SDK supports C# version 4.0 or later and targets .NET Framework version 4.5.2 or later or .NET Standard 2.0 or later. 
-In addition, we support any .NET language compatible with those platform versions.
+The SDK supports C# version 4.0 or later and targets .NET 6.0.
 
 ## Installation
 The SDK can be installed by using NuGet or by compiling from source. These two alternatives are outlined below.
@@ -45,7 +48,7 @@ You can download and compile the source code for the SDK from Github. Use [git](
 use Visual Studio 2017 or later to build it.
 
 ```dos
-git clone https://github.com/smartsheet-platform/smartsheet-csharp-sdk.git
+git clone https://github.com/smartsheet/smartsheet-csharp-sdk.git
 ```
 
 In Visual Studio 2017 you can open the entire solution with the file **smartsheet-csharp-sdk-v2.sln**, or open the specific 
@@ -122,9 +125,9 @@ For example, v2.68.0 means that you are using our 2.0 version of the API, the AP
 and then if there are numbers after the last decimal, that will indicate a minor change.
 
 ## Support
-If you have any questions or issues with this SDK please post on [StackOverflow using the tag "smartsheet-api"](http://stackoverflow.com/questions/tagged/smartsheet-api) or contact us directly at devrel@smartsheet.com.
+If you have any questions or issues with this SDK please post on [StackOverflow using the tag "smartsheet-api"](http://stackoverflow.com/questions/tagged/smartsheet-api) or contact us directly at sdk@smartsheet.com.
 
 ## Release Notes
 
-All releases and release notes are available on [Github](https://github.com/smartsheet-platform/smartsheet-csharp-sdk/releases) or the [NuGet repository](https://www.nuget.org/packages/smartsheet-csharp-sdk/).
+All releases and release notes are available on [Github](https://github.com/smartsheet/smartsheet-csharp-sdk/releases) or the [NuGet repository](https://www.nuget.org/packages/smartsheet-csharp-sdk/).
 
