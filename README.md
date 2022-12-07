@@ -1,4 +1,4 @@
-# Smartsheet SDK for C# [![Build Status](https://travis-ci.org/smartsheet-platform/smartsheet-csharp-sdk.svg?branch=master)](https://travis-ci.org/smartsheet-platform/smartsheet-csharp-sdk) [![Coverage Status](https://coveralls.io/repos/github/smartsheet-platform/smartsheet-csharp-sdk/badge.svg?branch=master)](https://coveralls.io/github/smartsheet-platform/smartsheet-csharp-sdk?branch=master) [![NuGet](https://img.shields.io/nuget/v/smartsheet-csharp-sdk.svg)](https://www.nuget.org/packages/smartsheet-csharp-sdk/)
+# Smartsheet SDK for C# [![Build Status](https://github.com/smartsheet/smartsheet-csharp-sdk/actions/workflows/main.yml/badge.svg)](https://github.com/smartsheet/smartsheet-python-sdk/actions/workflows/test-build.yaml) [![NuGet](https://img.shields.io/nuget/v/smartsheet-csharp-sdk.svg)](https://www.nuget.org/packages/smartsheet-csharp-sdk/)
 
 This is a C# SDK to simplify connecting to the [Smartsheet API](https://smartsheet.redoc.ly) from .NET applications.
 
