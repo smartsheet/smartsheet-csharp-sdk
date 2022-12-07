@@ -51,17 +51,6 @@ jobs:
     - name: Package
       working-directory: ./smartsheet-csharp-sdk
       run: dotnet pack smartsheet-csharp-sdk-v2.csproj --no-build --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o .
-    - name: Publish to Nuget Test
+    - name: Publish to Nuget
       working-directory: ./smartsheet-csharp-sdk
-      run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_TOKEN}} --source "https://api.nugettest.org/v3/index.json" --skip-duplicate
-    #- name: Publish to GitHub
-      #working-directory: ./smartsheet-csharp-sdk
-      #run: dotnet nuget push *.nupkg --api-key ${{secrets.SDK_TEST_ACCESS_TOKEN}} --source "https://nuget.pkg.github.com/lifebeyondfife/index.json" --skip-duplicate
-    #- name: Publish to Nuget
-      #working-directory: ./smartsheet-csharp-sdk
-      #run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_TOKEN}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
-    #- name: Create Tag
-      #working-directory: ./smartsheet-csharp-sdk
-      #run: |
-        #git tag v${{steps.package_version.outputs.version}}
-        #git push origin v${{steps.package_version.outputs.version}}
+      run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_TOKEN}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
