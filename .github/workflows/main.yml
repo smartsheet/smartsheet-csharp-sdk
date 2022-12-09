@@ -20,8 +20,8 @@ jobs:
           dotnet-version: '6.0.x'
       - name: Install Dependencies
         run: dotnet restore
-      - name: Install coveralls
-        run: dotnet add package Altcover --version 8.5.841
+      - name: Install Altcover
+        run: dotnet add package altcover --version 8.5.841
       - name: Build
         working-directory: ./smartsheet-csharp-sdk
         run: dotnet build --configuration Release --no-restore
