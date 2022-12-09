@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies
         run: dotnet restore
       - name: Install Altcover
-        run: dotnet tool install altcover --version 8.5.841 --tool-path tools
+        run: dotnet add mock-api-test-sdk-net60 package altcover --version 8.5.841
       - name: Build
         working-directory: ./smartsheet-csharp-sdk
         run: dotnet build --configuration Release --no-restore
