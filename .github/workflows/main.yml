@@ -41,6 +41,10 @@ jobs:
         run: |
           dotnet build --configuration Release --no-restore
           dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=$GITHUB_WORKSPACE/coverage.lcov /p:CoverletOutputFormat=lcov
+          ls
+          echo "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          ls
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
         with:
