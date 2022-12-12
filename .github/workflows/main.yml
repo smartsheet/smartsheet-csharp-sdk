@@ -49,7 +49,7 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: $GITHUB_WORKSPACE/coverage.lcov
+          path-to-lcov: $GITHUB_WORKSPACE/coverage.xml
       # - name: Upload to Coveralls
       #   run: |
       #     GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
