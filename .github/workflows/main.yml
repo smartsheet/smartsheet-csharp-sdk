@@ -44,7 +44,7 @@ jobs:
           dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=coverage.opencover.xml /p:CoverletOutputFormat=opencover
       - name: Run Coveralls
         run: |
-          ./tools/csmacnz.Coveralls --opencover -i ./mock-api-test-sdk-net60/coverage.opencover.xml --commitId ${{ GITHUB_SHA }} --commitBranch ${{ GITHUB_REF_NAME }}  --commitAuthor ${{ GITHUB_ACTOR }} --jobId ${{ GITHUB_JOB }}  --serviceName github-actions  --useRelativePaths
+          ./tools/csmacnz.Coveralls --opencover -i ./mock-api-test-sdk-net60/coverage.opencover.xml --commitId ${GITHUB_SHA} --commitBranch ${GITHUB_REF_NAME}  --commitAuthor ${GITHUB_ACTOR} --jobId ${GITHUB_JOB}  --serviceName github-actions  --useRelativePaths
       # - name: Coveralls
       #   uses: coverallsapp/github-action@1.1.3
       #   with:
