@@ -22,7 +22,8 @@ jobs:
         run: |
           dotnet restore
           dotnet tool install coveralls.net --version 4.0.1 --tool-path tools
-#         dotnet add mock-api-test-sdk-net60 package altcover --version 8.5.841
+          dotnet add package coverlet.collector
+#          dotnet add mock-api-test-sdk-net60 package altcover --version 8.5.841
       - name: Build
         working-directory: ./smartsheet-csharp-sdk
         run: dotnet build --configuration Release --no-restore
@@ -40,13 +41,14 @@ jobs:
         working-directory: ./mock-api-test-sdk-net60
         run: |
           dotnet build --configuration Release --no-restore
-          dotnet test --no-restore /p:CollectCoverage=true
+          dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=$GITHUB_WORKSPACE/coverage.opencover.xml /p:CoverletOutputFormat=opencover
+          cd $GITHUB_WORKSPACE
           ls
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./mock-api-test-sdk-net60/coverage.xml
+          path-to-lcov: $GITHUB_WORKSPACE/coverage.opencover.xml
       # - name: Upload to Coveralls
       #   run: |
       #     GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
