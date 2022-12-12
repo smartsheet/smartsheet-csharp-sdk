@@ -44,4 +44,4 @@ jobs:
       - name: Upload to Coveralls
         run: |
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
-          ./tools/csmacnz.Coveralls --opencover -i ./mock-api-test-sdk-net60/coverage.xml --repoToken ${{ secrets.COVERALLS_REPO_TOKEN }} --commitId ${GITHUB_SHA} --commitBranch $GIT_BRANCH --commitAuthor ${GITHUB_ACTOR} --commitMessage ${{ github.event.head_commit.message }} --jobId ${GITHUB_JOB}  --serviceName github-actions  --useRelativePaths
+          ./tools/csmacnz.Coveralls --opencover -i ./mock-api-test-sdk-net60/coverage.xml --repoToken ${{ secrets.COVERALLS_REPO_TOKEN }} --commitId ${GITHUB_SHA} --commitBranch $GIT_BRANCH --commitAuthor "${GITHUB_ACTOR}" --commitMessage "${{ github.event.head_commit.message }}" --jobId ${GITHUB_JOB}  --serviceName github-actions  --useRelativePaths
