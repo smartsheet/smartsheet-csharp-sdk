@@ -41,11 +41,7 @@ jobs:
         run: |
           dotnet build --configuration Release --no-restore
           dotnet test --no-restore /p:AltCover=true
-      - name: Run Coveralls
+      - name: Upload to Coveralls
         run: |
-          ./tools/csmacnz.Coveralls --opencover -i ./mock-api-test-sdk-net60/coverage.xml --repoToken ${{ secrets.COVERALLS_REPO_TOKEN }} --commitId ${GITHUB_SHA} --commitBranch ${GITHUB_REF_NAME}  --commitAuthor ${GITHUB_ACTOR} --jobId ${GITHUB_JOB}  --serviceName github-actions  --useRelativePaths
-      # - name: Coveralls
-      #   uses: coverallsapp/github-action@1.1.3
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     path-to-lcov: "./mock-api-test-sdk-net60/coverage.lcov"
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          ./tools/csmacnz.Coveralls --opencover -i ./mock-api-test-sdk-net60/coverage.xml --repoToken ${{ secrets.COVERALLS_REPO_TOKEN }} --commitId ${GITHUB_SHA} --commitBranch $GITHUB_BRANCH --commitAuthor ${GITHUB_ACTOR} --commitMessage ${{ github.event.head_commit.message }} --jobId ${GITHUB_JOB}  --serviceName github-actions  --useRelativePaths
