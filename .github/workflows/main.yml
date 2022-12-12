@@ -40,16 +40,13 @@ jobs:
         working-directory: ./mock-api-test-sdk-net60
         run: |
           dotnet build --configuration Release --no-restore
-          dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=$GITHUB_WORKSPACE/coverage.xml /p:CoverletOutputFormat=opencover
-          ls
-          echo "$GITHUB_WORKSPACE"
-          cd "$GITHUB_WORKSPACE"
+          dotnet test --no-restore /p:CollectCoverage=true
           ls
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: $GITHUB_WORKSPACE/coverage.xml
+          path-to-lcov: ./mock-api-test-sdk-net60/coverage.xml
       # - name: Upload to Coveralls
       #   run: |
       #     GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
