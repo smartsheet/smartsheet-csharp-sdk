@@ -22,7 +22,6 @@ jobs:
         run: |
           dotnet restore
           dotnet tool install coveralls.net --version 4.0.1 --tool-path tools
-          dotnet add mock-api-test-sdk-net60 package coverlet.collector
 #          dotnet add mock-api-test-sdk-net60 package altcover --version 8.5.841
       - name: Build
         working-directory: ./smartsheet-csharp-sdk
@@ -42,14 +41,18 @@ jobs:
         run: |
           dotnet build --configuration Release --no-restore
           dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=$GITHUB_WORKSPACE/coverage.opencover.xml /p:CoverletOutputFormat=opencover
+          ls
           cd $GITHUB_WORKSPACE
           ls
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: $GITHUB_WORKSPACE/coverage.opencover.xml
-      # - name: Upload to Coveralls
-      #   run: |
-      #     GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
-      #     ./tools/csmacnz.Coveralls --opencover -i $GITHUB_WORKSPACE/coverage.opencover.xml --repoToken ${{ secrets.COVERALLS_REPO_TOKEN }} --commitId ${GITHUB_SHA} --commitBranch $GIT_BRANCH --commitAuthor "${GITHUB_ACTOR}" --commitMessage "${{ github.event.head_commit.message }}" --jobId ${GITHUB_JOB}  --serviceName github-actions  --useRelativePaths
+      - name: Install coveralls.net
+        run: |
+          dotnet tool install coveralls.net --version 4.0.1 --tool-path tools
+      # - name: Coveralls Finished
+      #   uses: coverallsapp/github-action@master
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     path-to-lcov: $GITHUB_WORKSPACE/coverage.opencover.xml
+      - name: Upload to Coveralls
+        run: |
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          ./tools/csmacnz.Coveralls --opencover -i $GITHUB_WORKSPACE/coverage.opencover.xml --repoToken ${{ secrets.COVERALLS_REPO_TOKEN }} --commitId ${GITHUB_SHA} --commitBranch $GIT_BRANCH --commitAuthor "${GITHUB_ACTOR}" --commitMessage "${{ github.event.head_commit.message }}" --jobId ${GITHUB_JOB}  --serviceName github-actions  --useRelativePaths
