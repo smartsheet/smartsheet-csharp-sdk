@@ -1,4 +1,4 @@
-name: CI
+name: Documentation
 
 on:
   release:
@@ -21,7 +21,6 @@ jobs:
         working-directory: ./smartsheet-csharp-sdk-docs
         run: dotnet build --configuration Release --no-restore
       - uses: nikeee/docfx-action@v1.0.0
-        working-directory: ./smartsheet-csharp-sdk-docs
         name: Build Documentation
         with:
-          args: docfx.json
+          args: smartsheet-csharp-sdk-docs/docfx.json
