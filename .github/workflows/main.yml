@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies
         run: |
           dotnet restore
-          dotnet tool install coveralls.net --version 4.0.1 --tool-path tools
+#          dotnet tool install coveralls.net --version 4.0.1 --tool-path tools
 #          dotnet add mock-api-test-sdk-net60 package altcover --version 8.5.841
       - name: Build
         working-directory: ./smartsheet-csharp-sdk
