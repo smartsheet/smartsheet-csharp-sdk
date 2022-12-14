@@ -1,0 +1,841 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SmartsheetBuilder
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SmartsheetBuilder
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.SmartsheetBuilder">
+  
+  
+  <h1 id="Smartsheet_Api_SmartsheetBuilder" data-uid="Smartsheet.Api.SmartsheetBuilder" class="text-break">Class SmartsheetBuilder
+  </h1>
+  <div class="markdown level0 summary"><p>A convenience class to help create a <a class="xref" href="Smartsheet.Api.SmartsheetClient.html">SmartsheetClient</a> instance with the appropriate fields.</p>
+<p>Thread Safety: This class is not thread safe since it&apos;s mutable, one builder instance is NOT expected to be used in
+multiple threads.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">SmartsheetBuilder</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.html">Smartsheet.Api</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_SmartsheetBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SmartsheetBuilder : object</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder__ctor.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L108">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder__ctor_" data-uid="Smartsheet.Api.SmartsheetBuilder.#ctor*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder__ctor" data-uid="Smartsheet.Api.SmartsheetBuilder.#ctor">SmartsheetBuilder()</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_DEFAULT_BASE_URI.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.DEFAULT_BASE_URI%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L96">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_DEFAULT_BASE_URI" data-uid="Smartsheet.Api.SmartsheetBuilder.DEFAULT_BASE_URI">DEFAULT_BASE_URI</h4>
+  <div class="markdown level1 summary"><p>Represents the default base URI of the Smartsheet REST API.</p>
+<p>It is a constant with Value &quot;https://api.smartsheet.com/2.0&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DEFAULT_BASE_URI = null</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_GOV_BASE_URI.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.GOV_BASE_URI%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L103">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_GOV_BASE_URI" data-uid="Smartsheet.Api.SmartsheetBuilder.GOV_BASE_URI">GOV_BASE_URI</h4>
+  <div class="markdown level1 summary"><p>Represents the base URI of the Smartsheetgov REST API.</p>
+<p>It is a constant with Value &quot;https://api.smartsheetgov.com/2.0&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string GOV_BASE_URI = null</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_AccessToken.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.AccessToken%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L232">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_AccessToken_" data-uid="Smartsheet.Api.SmartsheetBuilder.AccessToken*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_AccessToken" data-uid="Smartsheet.Api.SmartsheetBuilder.AccessToken">AccessToken</h4>
+  <div class="markdown level1 summary"><p>Gets the access token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AccessToken { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the access token</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_AssumedUser.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.AssumedUser%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L241">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_AssumedUser_" data-uid="Smartsheet.Api.SmartsheetBuilder.AssumedUser*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_AssumedUser" data-uid="Smartsheet.Api.SmartsheetBuilder.AssumedUser">AssumedUser</h4>
+  <div class="markdown level1 summary"><p>Gets the assumed user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AssumedUser { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the assumed user</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_BaseURI.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.BaseURI%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L223">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_BaseURI_" data-uid="Smartsheet.Api.SmartsheetBuilder.BaseURI*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_BaseURI" data-uid="Smartsheet.Api.SmartsheetBuilder.BaseURI">BaseURI</h4>
+  <div class="markdown level1 summary"><p>Gets the base uri.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BaseURI { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the base uri</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_DefaultBaseUri.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.DefaultBaseUri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L250">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_DefaultBaseUri_" data-uid="Smartsheet.Api.SmartsheetBuilder.DefaultBaseUri*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_DefaultBaseUri" data-uid="Smartsheet.Api.SmartsheetBuilder.DefaultBaseUri">DefaultBaseUri</h4>
+  <div class="markdown level1 summary"><p>Gets the default base uri.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string DefaultBaseUri { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the default base uri</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_HttpClient.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.HttpClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L205">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_HttpClient_" data-uid="Smartsheet.Api.SmartsheetBuilder.HttpClient*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_HttpClient" data-uid="Smartsheet.Api.SmartsheetBuilder.HttpClient">HttpClient</h4>
+  <div class="markdown level1 summary"><p>Gets the http client.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClient HttpClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpClient.html">HttpClient</a></td>
+        <td><p>the http client</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_JsonSerializer.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.JsonSerializer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L214">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_JsonSerializer_" data-uid="Smartsheet.Api.SmartsheetBuilder.JsonSerializer*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_JsonSerializer" data-uid="Smartsheet.Api.SmartsheetBuilder.JsonSerializer">JsonSerializer</h4>
+  <div class="markdown level1 summary"><p>Gets the Json serializer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonSerializer JsonSerializer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializer.html">JsonSerializer</a></td>
+        <td><p>the Json serializer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_Build.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.Build%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L259">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_Build_" data-uid="Smartsheet.Api.SmartsheetBuilder.Build*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_Build" data-uid="Smartsheet.Api.SmartsheetBuilder.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Build the SmartsheetClient instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetClient Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetClient.html">SmartsheetClient</a></td>
+        <td><p>the SmartsheetClient instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetAccessToken_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetAccessToken(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L150">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetAccessToken_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetAccessToken*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetAccessToken_System_String_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetAccessToken(System.String)">SetAccessToken(String)</h4>
+  <div class="markdown level1 summary"><p>Set the access token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetAccessToken(string accessToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">accessToken</span></td>
+        <td><p>the access token</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td><p>the SmartsheetClient builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetAssumedUser_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetAssumedUser(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L161">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetAssumedUser_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetAssumedUser*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetAssumedUser_System_String_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetAssumedUser(System.String)">SetAssumedUser(String)</h4>
+  <div class="markdown level1 summary"><p>Set the assumed user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetAssumedUser(string assumedUser)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">assumedUser</span></td>
+        <td><p>the assumed user</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td><p>the SmartsheetClient builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetBaseURI_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetBaseURI(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L139">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetBaseURI_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetBaseURI*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetBaseURI_System_String_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetBaseURI(System.String)">SetBaseURI(String)</h4>
+  <div class="markdown level1 summary"><p>Set the base URI.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetBaseURI(string baseURI)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">baseURI</span></td>
+        <td><p>the base uri</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td><p>the SmartsheetClient builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetChangeAgent_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetChangeAgent(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L172">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetChangeAgent_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetChangeAgent*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetChangeAgent_System_String_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetChangeAgent(System.String)">SetChangeAgent(String)</h4>
+  <div class="markdown level1 summary"><p>Set the Smartsheet change agent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetChangeAgent(string changeAgent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">changeAgent</span></td>
+        <td><p>the change agent</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td><p>the SmartsheetClient builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetDateTimeFixOptOut_System_Boolean_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetDateTimeFixOptOut(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L195">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetDateTimeFixOptOut_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetDateTimeFixOptOut*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetDateTimeFixOptOut_System_Boolean_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetDateTimeFixOptOut(System.Boolean)">SetDateTimeFixOptOut(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Set optional flag to re-enable JSON deserializers conversion from string to C# DateTime</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetDateTimeFixOptOut(bool dateTimeFixOptOut)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">dateTimeFixOptOut</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetHttpClient_Smartsheet_Api_Internal_Http_HttpClient_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetHttpClient(Smartsheet.Api.Internal.Http.HttpClient)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L117">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetHttpClient_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetHttpClient*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetHttpClient_Smartsheet_Api_Internal_Http_HttpClient_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetHttpClient(Smartsheet.Api.Internal.Http.HttpClient)">SetHttpClient(HttpClient)</h4>
+  <div class="markdown level1 summary"><p>Set the HttpClient.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetHttpClient(HttpClient httpClient)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpClient.html">HttpClient</a></td>
+        <td><span class="parametername">httpClient</span></td>
+        <td><p>the http client</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td><p>the SmartsheetClient builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetJsonSerializer_Smartsheet_Api_Internal_Json_JsonSerializer_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetJsonSerializer(Smartsheet.Api.Internal.Json.JsonSerializer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L128">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetJsonSerializer_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetJsonSerializer*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetJsonSerializer_Smartsheet_Api_Internal_Json_JsonSerializer_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetJsonSerializer(Smartsheet.Api.Internal.Json.JsonSerializer)">SetJsonSerializer(JsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Set the JsonSerializer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetJsonSerializer(JsonSerializer jsonSerializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializer.html">JsonSerializer</a></td>
+        <td><span class="parametername">jsonSerializer</span></td>
+        <td><p>the JsonSerializer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td><p>the SmartsheetBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder_SetMaxRetryTimeout_System_Int64_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder.SetMaxRetryTimeout(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L184">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_SmartsheetBuilder_SetMaxRetryTimeout_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetMaxRetryTimeout*"></a>
+  <h4 id="Smartsheet_Api_SmartsheetBuilder_SetMaxRetryTimeout_System_Int64_" data-uid="Smartsheet.Api.SmartsheetBuilder.SetMaxRetryTimeout(System.Int64)">SetMaxRetryTimeout(Int64)</h4>
+  <div class="markdown level1 summary"><p>Create a DefaultCalcBackoff with a max elapsed timeout specified by the user. This interface
+is only valid when the DefaultHttpClient is used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmartsheetBuilder SetMaxRetryTimeout(long maxRetryTimeout)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">maxRetryTimeout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetBuilder.html">SmartsheetBuilder</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_SmartsheetBuilder.md&amp;value=---%0Auid%3A%20Smartsheet.Api.SmartsheetBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/SmartsheetBuilder.cs/#L35" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,890 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class OAuthFlowBuilder
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class OAuthFlowBuilder
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder">
+  
+  
+  <h1 id="Smartsheet_Api_OAuth_OAuthFlowBuilder" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder" class="text-break">Class OAuthFlowBuilder
+  </h1>
+  <div class="markdown level0 summary"><p>This is the builder that is used to build <a class="xref" href="Smartsheet.Api.OAuth.OAuthFlow.html">OAuthFlow</a> instances.</p>
+<p>Thread Safety: This class is not thread safe since it&apos;s mutable, one builder instance is NOT expected to be used in
+multiple threads.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">OAuthFlowBuilder</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.OAuth.html">Smartsheet.Api.OAuth</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class OAuthFlowBuilder : object</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder__ctor.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L106">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder__ctor_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.#ctor*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder__ctor" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.#ctor">OAuthFlowBuilder()</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_DEFAULT_AUTHORIZATION_URL.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.DEFAULT_AUTHORIZATION_URL%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L44">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_DEFAULT_AUTHORIZATION_URL" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.DEFAULT_AUTHORIZATION_URL">DEFAULT_AUTHORIZATION_URL</h4>
+  <div class="markdown level1 summary"><p>Represents the default OAuth authorization URL</p>
+<p>It is a constant with Value &quot;https://www.Smartsheet.com/b/authorize&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DEFAULT_AUTHORIZATION_URL = null</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_DEFAULT_TOKEN_URL.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.DEFAULT_TOKEN_URL%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L51">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_DEFAULT_TOKEN_URL" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.DEFAULT_TOKEN_URL">DEFAULT_TOKEN_URL</h4>
+  <div class="markdown level1 summary"><p>Represents the default token URL</p>
+<p>It is a constant with Value &quot;https://Api.Smartsheet.com/2.0/token&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string DEFAULT_TOKEN_URL = null</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_AuthorizationURL.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.AuthorizationURL%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L274">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_AuthorizationURL_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.AuthorizationURL*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_AuthorizationURL" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.AuthorizationURL">AuthorizationURL</h4>
+  <div class="markdown level1 summary"><p>Gets the authorization Url.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AuthorizationURL { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the authorization Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_ClientId.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.ClientId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L247">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_ClientId_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.ClientId*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_ClientId" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.ClientId">ClientId</h4>
+  <div class="markdown level1 summary"><p>Gets the client Id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ClientId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the client Id</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_ClientSecret.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.ClientSecret%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L256">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_ClientSecret_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.ClientSecret*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_ClientSecret" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.ClientSecret">ClientSecret</h4>
+  <div class="markdown level1 summary"><p>Gets the client secret.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ClientSecret { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the client secret</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_DefaultAuthorizationUrl.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.DefaultAuthorizationUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L211">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_DefaultAuthorizationUrl_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.DefaultAuthorizationUrl*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_DefaultAuthorizationUrl" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.DefaultAuthorizationUrl">DefaultAuthorizationUrl</h4>
+  <div class="markdown level1 summary"><p>Gets the default authorization Url.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string DefaultAuthorizationUrl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the default authorization Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_DefaultTokenUrl.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.DefaultTokenUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L220">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_DefaultTokenUrl_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.DefaultTokenUrl*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_DefaultTokenUrl" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.DefaultTokenUrl">DefaultTokenUrl</h4>
+  <div class="markdown level1 summary"><p>Gets the default token Url.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string DefaultTokenUrl { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the default token Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_HttpClient.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.HttpClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L229">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_HttpClient_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.HttpClient*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_HttpClient" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.HttpClient">HttpClient</h4>
+  <div class="markdown level1 summary"><p>Gets the http client.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClient HttpClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpClient.html">HttpClient</a></td>
+        <td><p>the http client</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_JsonSerializer.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.JsonSerializer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L238">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_JsonSerializer_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.JsonSerializer*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_JsonSerializer" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.JsonSerializer">JsonSerializer</h4>
+  <div class="markdown level1 summary"><p>Gets the Json serializer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonSerializer JsonSerializer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializer.html">JsonSerializer</a></td>
+        <td><p>the Json serializer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_RedirectURL.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.RedirectURL%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L265">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_RedirectURL_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.RedirectURL*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_RedirectURL" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.RedirectURL">RedirectURL</h4>
+  <div class="markdown level1 summary"><p>Gets the redirect Url.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string RedirectURL { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the redirect Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_TokenURL.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.TokenURL%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L283">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_TokenURL_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.TokenURL*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_TokenURL" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.TokenURL">TokenURL</h4>
+  <div class="markdown level1 summary"><p>Gets the token Url.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string TokenURL { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the token Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_Build.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.Build%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L293">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_Build_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.Build*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_Build" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Build the OAuthFlow instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlow Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlow.html">OAuthFlow</a></td>
+        <td><p>the OAuthFlow instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_SetAuthorizationURL_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.SetAuthorizationURL(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L185">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetAuthorizationURL_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetAuthorizationURL*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetAuthorizationURL_System_String_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetAuthorizationURL(System.String)">SetAuthorizationURL(String)</h4>
+  <div class="markdown level1 summary"><p>Set the authorization URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder SetAuthorizationURL(string authorizationURL)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authorizationURL</span></td>
+        <td><p>the authorization URL</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlowBuilder.html">OAuthFlowBuilder</a></td>
+        <td><p>the OAuthFlowBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_SetClientId_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.SetClientId(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L143">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetClientId_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetClientId*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetClientId_System_String_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetClientId(System.String)">SetClientId(String)</h4>
+  <div class="markdown level1 summary"><p>Set the client ID</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder SetClientId(string clientId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">clientId</span></td>
+        <td><p>the Value to set</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlowBuilder.html">OAuthFlowBuilder</a></td>
+        <td><p>the OAuthFlowBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_SetClientSecret_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.SetClientSecret(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L157">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetClientSecret_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetClientSecret*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetClientSecret_System_String_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetClientSecret(System.String)">SetClientSecret(String)</h4>
+  <div class="markdown level1 summary"><p>Set the client secret.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder SetClientSecret(string clientSecret)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">clientSecret</span></td>
+        <td><p>the client secret</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlowBuilder.html">OAuthFlowBuilder</a></td>
+        <td><p>the OAuthFlowBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_SetHttpClient_Smartsheet_Api_Internal_Http_HttpClient_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.SetHttpClient(Smartsheet.Api.Internal.Http.HttpClient)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L115">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetHttpClient_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetHttpClient*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetHttpClient_Smartsheet_Api_Internal_Http_HttpClient_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetHttpClient(Smartsheet.Api.Internal.Http.HttpClient)">SetHttpClient(HttpClient)</h4>
+  <div class="markdown level1 summary"><p>Set the HttpClient.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder SetHttpClient(HttpClient httpClient)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpClient.html">HttpClient</a></td>
+        <td><span class="parametername">httpClient</span></td>
+        <td><p>the HttpClient</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlowBuilder.html">OAuthFlowBuilder</a></td>
+        <td><p>the OAuthFlowBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_SetJsonSerializer_Smartsheet_Api_Internal_Json_JsonSerializer_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.SetJsonSerializer(Smartsheet.Api.Internal.Json.JsonSerializer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L129">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetJsonSerializer_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetJsonSerializer*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetJsonSerializer_Smartsheet_Api_Internal_Json_JsonSerializer_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetJsonSerializer(Smartsheet.Api.Internal.Json.JsonSerializer)">SetJsonSerializer(JsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Set the JsonSerializer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder SetJsonSerializer(JsonSerializer jsonSerializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializer.html">JsonSerializer</a></td>
+        <td><span class="parametername">jsonSerializer</span></td>
+        <td><p>the JsonSerializer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlowBuilder.html">OAuthFlowBuilder</a></td>
+        <td><p>the oAuthFlowBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_SetRedirectURL_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.SetRedirectURL(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L171">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetRedirectURL_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetRedirectURL*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetRedirectURL_System_String_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetRedirectURL(System.String)">SetRedirectURL(String)</h4>
+  <div class="markdown level1 summary"><p>Set the redirect URL</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder SetRedirectURL(string redirectURL)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">redirectURL</span></td>
+        <td><p>the redirect Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlowBuilder.html">OAuthFlowBuilder</a></td>
+        <td><p>the OAuthFlowBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder_SetTokenURL_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder.SetTokenURL(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L199">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetTokenURL_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetTokenURL*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlowBuilder_SetTokenURL_System_String_" data-uid="Smartsheet.Api.OAuth.OAuthFlowBuilder.SetTokenURL(System.String)">SetTokenURL(String)</h4>
+  <div class="markdown level1 summary"><p>Set the token URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthFlowBuilder SetTokenURL(string tokenURL)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tokenURL</span></td>
+        <td><p>the token Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthFlowBuilder.html">OAuthFlowBuilder</a></td>
+        <td><p>the OAuthFlowBuilder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlowBuilder.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlowBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlowBuilder.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

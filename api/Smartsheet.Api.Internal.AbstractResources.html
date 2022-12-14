@@ -1,0 +1,1581 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AbstractResources
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AbstractResources
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.Internal.AbstractResources">
+  
+  
+  <h1 id="Smartsheet_Api_Internal_AbstractResources" data-uid="Smartsheet.Api.Internal.AbstractResources" class="text-break">Class AbstractResources
+  </h1>
+  <div class="markdown level0 summary"><p>This is the base class of the SmartsheetClient REST API resources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and the underlying SmartsheetImpl is thread safe.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">AbstractResources</span></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.AbstractAssociatedResources.html">AbstractAssociatedResources</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.AttachmentVersioningResourcesImpl.html">AttachmentVersioningResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.CommentAttachmentResourcesImpl.html">CommentAttachmentResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.ContactResourcesImpl.html">ContactResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.DiscussionAttachmentResourcesImpl.html">DiscussionAttachmentResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.DiscussionCommentResourcesImpl.html">DiscussionCommentResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.EventResourcesImpl.html">EventResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.FavoriteResourcesImpl.html">FavoriteResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.FolderResourcesImpl.html">FolderResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.FolderSheetResourcesImpl.html">FolderSheetResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.GroupResourcesImpl.html">GroupResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.HomeFolderResourcesImpl.html">HomeFolderResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.HomeResourcesImpl.html">HomeResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.PassthroughResourcesImpl.html">PassthroughResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.ReportResourcesImpl.html">ReportResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.RowAttachmentResourcesImpl.html">RowAttachmentResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.RowColumnResourcesImpl.html">RowColumnResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.RowDiscussionResourcesImpl.html">RowDiscussionResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SearchResourcesImpl.html">SearchResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.ServerInfoResourcesImpl.html">ServerInfoResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetAttachmentResourcesImpl.html">SheetAttachmentResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetAutomationRuleResourcesImpl.html">SheetAutomationRuleResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetColumnResourcesImpl.html">SheetColumnResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetCommentResourcesImpl.html">SheetCommentResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetCrossSheetReferencesResourcesImpl.html">SheetCrossSheetReferencesResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetDiscussionResourcesImpl.html">SheetDiscussionResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetFilterResourcesImpl.html">SheetFilterResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetResourcesImpl.html">SheetResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetRowResourcesImpl.html">SheetRowResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetSummaryResourcesImpl.html">SheetSummaryResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SheetUpdateRequestResourcesImpl.html">SheetUpdateRequestResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.SightResourcesImpl.html">SightResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.TemplateResourcesImpl.html">TemplateResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.TokenResourcesImpl.html">TokenResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.UserResourcesImpl.html">UserResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.UserSheetResourcesImpl.html">UserSheetResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.WebhookResourcesImpl.html">WebhookResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.WorkspaceFolderResourcesImpl.html">WorkspaceFolderResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.WorkspaceResourcesImpl.html">WorkspaceResourcesImpl</a></div>
+      <div class="level2"><a class="xref" href="Smartsheet.Api.Internal.WorkspaceSheetResourcesImpl.html">WorkspaceSheetResourcesImpl</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.Internal.html">Smartsheet.Api.Internal</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_Internal_AbstractResources_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractResources : object</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources__ctor_Smartsheet_Api_Internal_SmartsheetImpl_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.%23ctor(Smartsheet.Api.Internal.SmartsheetImpl)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L158">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources__ctor_" data-uid="Smartsheet.Api.Internal.AbstractResources.#ctor*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources__ctor_Smartsheet_Api_Internal_SmartsheetImpl_" data-uid="Smartsheet.Api.Internal.AbstractResources.#ctor(Smartsheet.Api.Internal.SmartsheetImpl)">AbstractResources(SmartsheetImpl)</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected AbstractResources(SmartsheetImpl smartsheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.SmartsheetImpl.html">SmartsheetImpl</a></td>
+        <td><span class="parametername">smartsheet</span></td>
+        <td><p>the SmartsheetClient</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_smartsheet.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.smartsheet%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L152">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_smartsheet" data-uid="Smartsheet.Api.Internal.AbstractResources.smartsheet">smartsheet</h4>
+  <div class="markdown level1 summary"><p>Represents the SmartsheetImpl.</p>
+<p>It will be initialized in the constructor and will not change afterwards.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SmartsheetImpl smartsheet</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.SmartsheetImpl.html">SmartsheetImpl</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_Smartsheet.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.Smartsheet%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L879">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_Smartsheet_" data-uid="Smartsheet.Api.Internal.AbstractResources.Smartsheet*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_Smartsheet" data-uid="Smartsheet.Api.Internal.AbstractResources.Smartsheet">Smartsheet</h4>
+  <div class="markdown level1 summary"><p>Gets the SmartsheetClient.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SmartsheetImpl Smartsheet { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.SmartsheetImpl.html">SmartsheetImpl</a></td>
+        <td><p>the SmartsheetClient</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_CreateHttpRequest_Uri_Smartsheet_Api_Internal_Http_HttpMethod_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.CreateHttpRequest(Uri%2CSmartsheet.Api.Internal.Http.HttpMethod)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L803">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_CreateHttpRequest_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateHttpRequest*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_CreateHttpRequest_Uri_Smartsheet_Api_Internal_Http_HttpMethod_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateHttpRequest(Uri,Smartsheet.Api.Internal.Http.HttpMethod)">CreateHttpRequest(Uri, HttpMethod)</h4>
+  <div class="markdown level1 summary"><p>Create an HttpRequest.</p>
+<p>Exceptions: Any exception shall be propagated since it's a private method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual HttpRequest CreateHttpRequest(Uri uri, HttpMethod method)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>the URI</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpMethod.html">HttpMethod</a></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>the HttpMethod</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpRequest.html">HttpRequest</a></td>
+        <td><p>the HTTP request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_CreateResource__1_System_String_Type___0_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.CreateResource%60%601(System.String%2CType%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L307">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_CreateResource_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateResource*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_CreateResource__1_System_String_Type___0_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateResource``1(System.String,Type,``0)">CreateResource&lt;T&gt;(String, Type, T)</h4>
+  <div class="markdown level1 summary"><p>Create a resource using SmartsheetClient REST API.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual T CreateResource&lt;T&gt;(string path, Type objectClass, T object)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource collections</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">objectClass</span></td>
+        <td><p>the resource object class</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>the object to create</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>the created resource</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_CreateResource__2_System_String___1_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.CreateResource%60%602(System.String%2C%60%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L255">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_CreateResource_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateResource*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_CreateResource__2_System_String___1_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateResource``2(System.String,``1)">CreateResource&lt;S, T&gt;(String, T)</h4>
+  <div class="markdown level1 summary"><p>Create a resource using SmartsheetClient REST API.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual S CreateResource&lt;S, T&gt;(string path, T object)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource collections</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>the object to create</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">S</span></td>
+        <td><p>the created resource</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">S</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_CreateResourceWithAttachment__1_System_String___0_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.CreateResourceWithAttachment%60%601(System.String%2C%60%600%2CSystem.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L353">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_CreateResourceWithAttachment_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateResourceWithAttachment*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_CreateResourceWithAttachment__1_System_String___0_System_String_System_String_System_String_" data-uid="Smartsheet.Api.Internal.AbstractResources.CreateResourceWithAttachment``1(System.String,``0,System.String,System.String,System.String)">CreateResourceWithAttachment&lt;T&gt;(String, T, String, String, String)</h4>
+  <div class="markdown level1 summary"><p>Create a resource with an attachment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual T CreateResourceWithAttachment&lt;T&gt;(string path, T object, string objectType, string file, string fileType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource collections</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>the object to create</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">objectType</span></td>
+        <td><p>the object type to return as</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">file</span></td>
+        <td><p>the file path</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">fileType</span></td>
+        <td><p>the file type, can be null</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>the created resource</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_DeleteResource__1_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.DeleteResource%60%601(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L552">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_DeleteResource_" data-uid="Smartsheet.Api.Internal.AbstractResources.DeleteResource*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_DeleteResource__1_System_String_" data-uid="Smartsheet.Api.Internal.AbstractResources.DeleteResource``1(System.String)">DeleteResource&lt;T&gt;(String)</h4>
+  <div class="markdown level1 summary"><p>Delete a resource from SmartsheetClient REST API.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ResourceNotFoundException : if the resource cannot be found
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual T DeleteResource&lt;T&gt;(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_DeleteResource__1_System_String_Type_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.DeleteResource%60%601(System.String%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L598">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_DeleteResource_" data-uid="Smartsheet.Api.Internal.AbstractResources.DeleteResource*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_DeleteResource__1_System_String_Type_" data-uid="Smartsheet.Api.Internal.AbstractResources.DeleteResource``1(System.String,Type)">DeleteResource&lt;T&gt;(String, Type)</h4>
+  <div class="markdown level1 summary"><p>Delete a resource from SmartsheetClient REST API.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ResourceNotFoundException : if the resource cannot be found
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void DeleteResource&lt;T&gt;(string path, Type objectClass)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">objectClass</span></td>
+        <td><p>the resource object class</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_GetResource__1_System_String_Type_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.GetResource%60%601(System.String%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L185">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_GetResource_" data-uid="Smartsheet.Api.Internal.AbstractResources.GetResource*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_GetResource__1_System_String_Type_" data-uid="Smartsheet.Api.Internal.AbstractResources.GetResource``1(System.String,Type)">GetResource&lt;T&gt;(String, Type)</h4>
+  <div class="markdown level1 summary"><p>Get a resource from SmartsheetClient REST API.</p>
+<p>Parameters: - path : the relative path of the resource - objectClass : the resource object class</p>
+<p>Returns: the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
+rather than returning null).</p>
+<p>Exceptions: -
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ResourceNotFoundException : if the resource cannot be found
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual T GetResource&lt;T&gt;(string path, Type objectClass)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">objectClass</span></td>
+        <td><p>the object class</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>the resource</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_HandleError_Smartsheet_Api_Internal_Http_HttpResponse_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.HandleError(Smartsheet.Api.Internal.Http.HttpResponse)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L836">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_HandleError_" data-uid="Smartsheet.Api.Internal.AbstractResources.HandleError*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_HandleError_Smartsheet_Api_Internal_Http_HttpResponse_" data-uid="Smartsheet.Api.Internal.AbstractResources.HandleError(Smartsheet.Api.Internal.Http.HttpResponse)">HandleError(HttpResponse)</h4>
+  <div class="markdown level1 summary"><p>Handles an error HttpResponse (non-200) returned by SmartsheetClient REST API.</p>
+<p>Exceptions:
+SmartsheetRestException : the exception corresponding to the error</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void HandleError(HttpResponse response)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpResponse.html">HttpResponse</a></td>
+        <td><span class="parametername">response</span></td>
+        <td><p>the HttpResponse</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_ImportFile__1_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.ImportFile%60%601(System.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L751">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_ImportFile_" data-uid="Smartsheet.Api.Internal.AbstractResources.ImportFile*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_ImportFile__1_System_String_System_String_System_String_" data-uid="Smartsheet.Api.Internal.AbstractResources.ImportFile``1(System.String,System.String,System.String)">ImportFile&lt;T&gt;(String, String, String)</h4>
+  <div class="markdown level1 summary"><p>Post a file to an import endpoint</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual T ImportFile&lt;T&gt;(string path, string file, string contentType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>endpoint path</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">file</span></td>
+        <td><p>file</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>Content-Type of the file</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>the object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_ListResources__1_System_String_Type_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.ListResources%60%601(System.String%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L504">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_ListResources_" data-uid="Smartsheet.Api.Internal.AbstractResources.ListResources*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_ListResources__1_System_String_Type_" data-uid="Smartsheet.Api.Internal.AbstractResources.ListResources``1(System.String,Type)">ListResources&lt;T&gt;(String, Type)</h4>
+  <div class="markdown level1 summary"><p>List resources using SmartsheetClient REST API.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IList&lt;T&gt; ListResources&lt;T&gt;(string path, Type objectClass)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource collections</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">objectClass</span></td>
+        <td><p>the resource object class</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;T&gt;</td>
+        <td><p>the resources</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if an error occurred during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_ListResourcesWithWrapper__1_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.ListResourcesWithWrapper%60%601(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L455">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_ListResourcesWithWrapper_" data-uid="Smartsheet.Api.Internal.AbstractResources.ListResourcesWithWrapper*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_ListResourcesWithWrapper__1_System_String_" data-uid="Smartsheet.Api.Internal.AbstractResources.ListResourcesWithWrapper``1(System.String)">ListResourcesWithWrapper&lt;T&gt;(String)</h4>
+  <div class="markdown level1 summary"><p>List resources using SmartsheetClient REST API.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual PaginatedResult&lt;T&gt; ListResourcesWithWrapper&lt;T&gt;(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource collections</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.PaginatedResult-1.html">PaginatedResult</a>&lt;T&gt;</td>
+        <td><p>the resources</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if an error occurred during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_PostAndReceiveList__2_System_String___0_Type_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.PostAndReceiveList%60%602(System.String%2C%60%600%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L648">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_PostAndReceiveList_" data-uid="Smartsheet.Api.Internal.AbstractResources.PostAndReceiveList*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_PostAndReceiveList__2_System_String___0_Type_" data-uid="Smartsheet.Api.Internal.AbstractResources.PostAndReceiveList``2(System.String,``0,Type)">PostAndReceiveList&lt;T, S&gt;(String, T, Type)</h4>
+  <div class="markdown level1 summary"><p>Post an object to SmartsheetClient REST API and receive a list of objects from response.</p>
+<p>Parameters: - path : the relative path of the resource collections - objectToPost : the object to post -
+objectClassToReceive : the resource object class to receive</p>
+<p>Returns: the object list</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IList&lt;S&gt; PostAndReceiveList&lt;T, S&gt;(string path, T objectToPost, Type objectClassToReceive)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the path</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">objectToPost</span></td>
+        <td><p>the object to post</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">objectClassToReceive</span></td>
+        <td><p>the object class to receive</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;S&gt;</td>
+        <td><p>the list</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">S</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_PutAndReceiveList__2_System_String___0_Type_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.PutAndReceiveList%60%602(System.String%2C%60%600%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L699">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_PutAndReceiveList_" data-uid="Smartsheet.Api.Internal.AbstractResources.PutAndReceiveList*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_PutAndReceiveList__2_System_String___0_Type_" data-uid="Smartsheet.Api.Internal.AbstractResources.PutAndReceiveList``2(System.String,``0,Type)">PutAndReceiveList&lt;T, S&gt;(String, T, Type)</h4>
+  <div class="markdown level1 summary"><p>Put an object to SmartsheetClient REST API and receive a list of objects from response.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual IList&lt;S&gt; PutAndReceiveList&lt;T, S&gt;(string path, T objectToPut, Type objectClassToReceive)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource collections</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">objectToPut</span></td>
+        <td><p>the object to put</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">objectClassToReceive</span></td>
+        <td><p>the resource object class to receive</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;S&gt;</td>
+        <td><p>the object list</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">S</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_serializeToEntity__1___0_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.serializeToEntity%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L897">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_serializeToEntity_" data-uid="Smartsheet.Api.Internal.AbstractResources.serializeToEntity*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_serializeToEntity__1___0_" data-uid="Smartsheet.Api.Internal.AbstractResources.serializeToEntity``1(``0)">serializeToEntity&lt;T&gt;(T)</h4>
+  <div class="markdown level1 summary"><p>Serializes an object into an entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected HttpEntity serializeToEntity&lt;T&gt;(T objectToPost)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">objectToPost</span></td>
+        <td><p>The object to post.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpEntity.html">HttpEntity</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Object to Serialize to an Entity</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources_UpdateResource__1_System_String_Type___0_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources.UpdateResource%60%601(System.String%2CType%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L405">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_AbstractResources_UpdateResource_" data-uid="Smartsheet.Api.Internal.AbstractResources.UpdateResource*"></a>
+  <h4 id="Smartsheet_Api_Internal_AbstractResources_UpdateResource__1_System_String_Type___0_" data-uid="Smartsheet.Api.Internal.AbstractResources.UpdateResource``1(System.String,Type,``0)">UpdateResource&lt;T&gt;(String, Type, T)</h4>
+  <div class="markdown level1 summary"><p>Update a resource using SmartsheetClient REST API.</p>
+<p>Exceptions:
+IllegalArgumentException : if any argument is null, or path is an empty string
+InvalidRequestException : if there is any problem with the REST API request
+AuthorizationException : if there is any problem with the REST API authorization (access token)
+ResourceNotFoundException : if the resource cannot be found
+ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+SmartsheetRestException : if any other REST API related error occurred during the operation
+SmartsheetException : if any other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual T UpdateResource&lt;T&gt;(string path, Type objectClass, T object)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the relative path of the resource</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Type</span></td>
+        <td><span class="parametername">objectClass</span></td>
+        <td><p>the resource object class</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>the object to create</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>the updated resource</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>the SmartsheetClient exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_AbstractResources.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.AbstractResources%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/AbstractResources.cs/#L40" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

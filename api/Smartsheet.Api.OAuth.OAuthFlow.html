@@ -1,0 +1,541 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface OAuthFlow
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface OAuthFlow
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.OAuth.OAuthFlow">
+  
+  
+  <h1 id="Smartsheet_Api_OAuth_OAuthFlow" data-uid="Smartsheet.Api.OAuth.OAuthFlow" class="text-break">Interface OAuthFlow
+  </h1>
+  <div class="markdown level0 summary"><p>OAuthFlow interface provides methods to do the OAuth2 authorization.</p>
+<p>Thread Safety: Implementation of this interface must be thread safe.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.OAuth.html">Smartsheet.Api.OAuth</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_OAuth_OAuthFlow_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface OAuthFlow</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlow_ExtractAuthorizationResult_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlow.ExtractAuthorizationResult(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlow.cs/#L56">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlow_ExtractAuthorizationResult_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.ExtractAuthorizationResult*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlow_ExtractAuthorizationResult_System_String_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.ExtractAuthorizationResult(System.String)">ExtractAuthorizationResult(String)</h4>
+  <div class="markdown level1 summary"><p>Extract AuthorizationResult from the authorization response URL (i.e. the RedirectURL with the response
+parameters from Smartsheet OAuth server).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">AuthorizationResult ExtractAuthorizationResult(string authorizationResponseURL)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">authorizationResponseURL</span></td>
+        <td><p>the authorization response Url</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.AuthorizationResult.html">AuthorizationResult</a></td>
+        <td><p>the authorization RequestResult</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.AccessDeniedException.html">AccessDeniedException</a></td>
+        <td><p>the access denied exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.UnsupportedResponseTypeException.html">UnsupportedResponseTypeException</a></td>
+        <td><p>the unsupported response Type exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.InvalidScopeException.html">InvalidScopeException</a></td>
+        <td><p>the invalid scope exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthAuthorizationCodeException.html">OAuthAuthorizationCodeException</a></td>
+        <td><p>the o auth authorization Code exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlow_NewAuthorizationURL_IEnumerable_Smartsheet_Api_OAuth_AccessScope__System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlow.NewAuthorizationURL(IEnumerable%7BSmartsheet.Api.OAuth.AccessScope%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlow.cs/#L42">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlow_NewAuthorizationURL_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.NewAuthorizationURL*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlow_NewAuthorizationURL_IEnumerable_Smartsheet_Api_OAuth_AccessScope__System_String_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.NewAuthorizationURL(IEnumerable{Smartsheet.Api.OAuth.AccessScope},System.String)">NewAuthorizationURL(IEnumerable&lt;AccessScope&gt;, String)</h4>
+  <div class="markdown level1 summary"><p>Generate a new authorization URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string NewAuthorizationURL(IEnumerable&lt;AccessScope&gt; scopes, string state)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Smartsheet.Api.OAuth.AccessScope.html">AccessScope</a>&gt;</td>
+        <td><span class="parametername">scopes</span></td>
+        <td><p>the requested scopes</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>an arbitrary string that will be returned to your app; intended to be used by you to ensure that
+this redirect is indeed from an OAuth flow that you initiated.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the authorization URL</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlow_ObtainNewToken_Smartsheet_Api_OAuth_AuthorizationResult_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlow.ObtainNewToken(Smartsheet.Api.OAuth.AuthorizationResult)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlow.cs/#L68">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlow_ObtainNewToken_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.ObtainNewToken*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlow_ObtainNewToken_Smartsheet_Api_OAuth_AuthorizationResult_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.ObtainNewToken(Smartsheet.Api.OAuth.AuthorizationResult)">ObtainNewToken(AuthorizationResult)</h4>
+  <div class="markdown level1 summary"><p>Obtain a new token using AuthorizationResult.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Token ObtainNewToken(AuthorizationResult authorizationResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.AuthorizationResult.html">AuthorizationResult</a></td>
+        <td><span class="parametername">authorizationResult</span></td>
+        <td><p>the authorization RequestResult</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.Token.html">Token</a></td>
+        <td><p>the token</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthTokenException.html">OAuthTokenException</a></td>
+        <td><p>the o auth token exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>the invalid request exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlow_RefreshToken_Smartsheet_Api_OAuth_Token_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlow.RefreshToken(Smartsheet.Api.OAuth.Token)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlow.cs/#L80">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlow_RefreshToken_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.RefreshToken*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlow_RefreshToken_Smartsheet_Api_OAuth_Token_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.RefreshToken(Smartsheet.Api.OAuth.Token)">RefreshToken(Token)</h4>
+  <div class="markdown level1 summary"><p>Refresh token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Token RefreshToken(Token token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.Token.html">Token</a></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>the token to refresh</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.Token.html">Token</a></td>
+        <td><p>the refreshed token</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthTokenException.html">OAuthTokenException</a></td>
+        <td><p>the o auth token exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>the invalid request exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlow_RevokeAllForApiClient_Smartsheet_Api_OAuth_Token_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlow.RevokeAllForApiClient(Smartsheet.Api.OAuth.Token)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlow.cs/#L102">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlow_RevokeAllForApiClient_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.RevokeAllForApiClient*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlow_RevokeAllForApiClient_Smartsheet_Api_OAuth_Token_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.RevokeAllForApiClient(Smartsheet.Api.OAuth.Token)">RevokeAllForApiClient(Token)</h4>
+  <div class="markdown level1 summary"><p>Revoke token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RevokeAllForApiClient(Token token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.Token.html">Token</a></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>the  token</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthTokenException.html">OAuthTokenException</a></td>
+        <td><p>the o auth token exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>the invalid request exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlow_RevokeToken_Smartsheet_Api_OAuth_Token_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlow.RevokeToken(Smartsheet.Api.OAuth.Token)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlow.cs/#L91">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_OAuth_OAuthFlow_RevokeToken_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.RevokeToken*"></a>
+  <h4 id="Smartsheet_Api_OAuth_OAuthFlow_RevokeToken_Smartsheet_Api_OAuth_Token_" data-uid="Smartsheet.Api.OAuth.OAuthFlow.RevokeToken(Smartsheet.Api.OAuth.Token)">RevokeToken(Token)</h4>
+  <div class="markdown level1 summary"><p>Revoke token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RevokeToken(Token token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.Token.html">Token</a></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>the  token</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.OAuth.OAuthTokenException.html">OAuthTokenException</a></td>
+        <td><p>the o auth token exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>the invalid request exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_OAuth_OAuthFlow.md&amp;value=---%0Auid%3A%20Smartsheet.Api.OAuth.OAuthFlow%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/OAuth/OAuthFlow.cs/#L31" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

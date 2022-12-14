@@ -1,0 +1,1295 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AbstractSheet&lt;TRow, TColumn, TCell&gt;
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AbstractSheet&lt;TRow, TColumn, TCell&gt;
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.Models.AbstractSheet`3">
+  
+  
+  <h1 id="Smartsheet_Api_Models_AbstractSheet_3" data-uid="Smartsheet.Api.Models.AbstractSheet`3" class="text-break">Class AbstractSheet&lt;TRow, TColumn, TCell&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Represents the Sheet object.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Smartsheet.Api.Models.IdentifiableModel.html">IdentifiableModel</a></div>
+    <div class="level2"><a class="xref" href="Smartsheet.Api.Models.NamedModel.html">NamedModel</a></div>
+    <div class="level3"><span class="xref">AbstractSheet&lt;TRow, TColumn, TCell&gt;</span></div>
+      <div class="level4"><a class="xref" href="Smartsheet.Api.Models.Report.html">Report</a></div>
+      <div class="level4"><a class="xref" href="Smartsheet.Api.Models.Sheet.html">Sheet</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Models.NamedModel.html#Smartsheet_Api_Models_NamedModel_Name">NamedModel.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Models.IdentifiableModel.html#Smartsheet_Api_Models_IdentifiableModel_Id">IdentifiableModel.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Models.IdentifiableModel.html#Smartsheet_Api_Models_IdentifiableModel_Equals_System_Object_">IdentifiableModel.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Models.IdentifiableModel.html#Smartsheet_Api_Models_IdentifiableModel_GetHashCode">IdentifiableModel.GetHashCode()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.Models.html">Smartsheet.Api.Models</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_Models_AbstractSheet_3_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class AbstractSheet&lt;TRow, TColumn, TCell&gt; : NamedModel where TRow : AbstractRow&lt;TColumn, TCell&gt; where TColumn : Column where TCell : Cell</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TRow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TColumn</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TCell</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_columns.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.columns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L58">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_columns" data-uid="Smartsheet.Api.Models.AbstractSheet`3.columns">columns</h4>
+  <div class="markdown level1 summary"><p>Represents the columns for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IList&lt;TColumn&gt; columns</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;TColumn&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_rows.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.rows%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L145">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_rows" data-uid="Smartsheet.Api.Models.AbstractSheet`3.rows">rows</h4>
+  <div class="markdown level1 summary"><p>Represents the rows for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IList&lt;TRow&gt; rows</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;TRow&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_AccessLevel.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.AccessLevel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L210">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_AccessLevel_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.AccessLevel*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_AccessLevel" data-uid="Smartsheet.Api.Models.AbstractSheet`3.AccessLevel">AccessLevel</h4>
+  <div class="markdown level1 summary"><p>Gets the access level for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AccessLevel? AccessLevel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.AccessLevel.html">AccessLevel</a>&gt;</td>
+        <td><p>the access level</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Attachments.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Attachments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L220">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Attachments_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Attachments*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Attachments" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Attachments">Attachments</h4>
+  <div class="markdown level1 summary"><p>Gets the attachments for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;Attachment&gt; Attachments { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Smartsheet.Api.Models.Attachment.html">Attachment</a>&gt;</td>
+        <td><p>the attachments</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Columns.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Columns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L230">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Columns_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Columns*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Columns" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Columns">Columns</h4>
+  <div class="markdown level1 summary"><p>Gets the columns for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;TColumn&gt; Columns { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;TColumn&gt;</td>
+        <td><p>the columns</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_ContactReferences.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.ContactReferences%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L258">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_ContactReferences_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ContactReferences*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_ContactReferences" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ContactReferences">ContactReferences</h4>
+  <div class="markdown level1 summary"><p>Gets the list of contact references for this sheet</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;ContactObjectValue&gt; ContactReferences { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Smartsheet.Api.Models.ContactObjectValue.html">ContactObjectValue</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_CreatedAt.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.CreatedAt%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L240">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_CreatedAt_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.CreatedAt*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_CreatedAt" data-uid="Smartsheet.Api.Models.AbstractSheet`3.CreatedAt">CreatedAt</h4>
+  <div class="markdown level1 summary"><p>Gets the date and time the sheet was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime? CreatedAt { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">DateTime</span>&gt;</td>
+        <td><p>the created at</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_CrossSheetReferences.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.CrossSheetReferences%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L249">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_CrossSheetReferences_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.CrossSheetReferences*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_CrossSheetReferences" data-uid="Smartsheet.Api.Models.AbstractSheet`3.CrossSheetReferences">CrossSheetReferences</h4>
+  <div class="markdown level1 summary"><p>Gets the list of cross-sheet references used by this sheet</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;CrossSheetReference&gt; CrossSheetReferences { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Smartsheet.Api.Models.CrossSheetReference.html">CrossSheetReference</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_DependenciesEnabled.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.DependenciesEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L268">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_DependenciesEnabled_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.DependenciesEnabled*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_DependenciesEnabled" data-uid="Smartsheet.Api.Models.AbstractSheet`3.DependenciesEnabled">DependenciesEnabled</h4>
+  <div class="markdown level1 summary"><p>Gets the dependencies enabled flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? DependenciesEnabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>the dependencies enabled</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Discussions.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Discussions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L278">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Discussions_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Discussions*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Discussions" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Discussions">Discussions</h4>
+  <div class="markdown level1 summary"><p>Gets the discussions for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;Discussion&gt; Discussions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Smartsheet.Api.Models.Discussion.html">Discussion</a>&gt;</td>
+        <td><p>the discussions</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_EffectiveAttachmentOptions.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.EffectiveAttachmentOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L288">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_EffectiveAttachmentOptions_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.EffectiveAttachmentOptions*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_EffectiveAttachmentOptions" data-uid="Smartsheet.Api.Models.AbstractSheet`3.EffectiveAttachmentOptions">EffectiveAttachmentOptions</h4>
+  <div class="markdown level1 summary"><p>Array of enum strings (see Attachment.attachmentType) indicating the allowable attachment options for the current user and sheet</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;AttachmentType&gt; EffectiveAttachmentOptions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Smartsheet.Api.Models.AttachmentType.html">AttachmentType</a>&gt;</td>
+        <td><p>list of attachment types</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Favorite.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Favorite%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L298">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Favorite_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Favorite*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Favorite" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Favorite">Favorite</h4>
+  <div class="markdown level1 summary"><p>Returned only if the user has marked this sheet as a favorite in their Home tab (value = “true”).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Favorite { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>true if marked as favorite, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Filters.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Filters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L308">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Filters_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Filters*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Filters" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Filters">Filters</h4>
+  <div class="markdown level1 summary"><p>Gets the list of sheet filters for this sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;SheetFilter&gt; Filters { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Smartsheet.Api.Models.SheetFilter.html">SheetFilter</a>&gt;</td>
+        <td><p>the list of sheet filters</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_FromId.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.FromId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L191">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_FromId_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.FromId*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_FromId" data-uid="Smartsheet.Api.Models.AbstractSheet`3.FromId">FromId</h4>
+  <div class="markdown level1 summary"><p>Gets the Id of the sheet/template from which the sheet was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? FromId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><p>the from Id</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_GanttEnabled.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.GanttEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L318">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_GanttEnabled_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.GanttEnabled*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_GanttEnabled" data-uid="Smartsheet.Api.Models.AbstractSheet`3.GanttEnabled">GanttEnabled</h4>
+  <div class="markdown level1 summary"><p>Gets the Gantt enabled flag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? GanttEnabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>the Gantt enabled flag</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_HasSummaryFields.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.HasSummaryFields%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L328">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_HasSummaryFields_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.HasSummaryFields*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_HasSummaryFields" data-uid="Smartsheet.Api.Models.AbstractSheet`3.HasSummaryFields">HasSummaryFields</h4>
+  <div class="markdown level1 summary"><p>Gets a flag indicating whether the sheet summary is present</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? HasSummaryFields { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>flag indicating whether the sheet summary is present</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_ModifiedAt.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.ModifiedAt%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L338">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_ModifiedAt_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ModifiedAt*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_ModifiedAt" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ModifiedAt">ModifiedAt</h4>
+  <div class="markdown level1 summary"><p>Gets the date and time the sheet was last modified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime? ModifiedAt { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">DateTime</span>&gt;</td>
+        <td><p>the modified at</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Owner.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Owner%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L347">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Owner_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Owner*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Owner" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Owner">Owner</h4>
+  <div class="markdown level1 summary"><p>Represents the email of the owner</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Owner { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_OwnerId.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.OwnerId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L200">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_OwnerId_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.OwnerId*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_OwnerId" data-uid="Smartsheet.Api.Models.AbstractSheet`3.OwnerId">OwnerId</h4>
+  <div class="markdown level1 summary"><p>Represents the Id of the owner</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? OwnerId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Permalink.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Permalink%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L357">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Permalink_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Permalink*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Permalink" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Permalink">Permalink</h4>
+  <div class="markdown level1 summary"><p>Gets the Permalink for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Permalink { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the Permalink</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_ProjectSettings.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.ProjectSettings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L366">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_ProjectSettings_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ProjectSettings*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_ProjectSettings" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ProjectSettings">ProjectSettings</h4>
+  <div class="markdown level1 summary"><p>Gets sheet’s project settings containing the working days, non-working days, and length of day for a project sheet</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProjectSettings ProjectSettings { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.ProjectSettings.html">ProjectSettings</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_ReadOnly.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.ReadOnly%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L376">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_ReadOnly_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ReadOnly*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_ReadOnly" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ReadOnly">ReadOnly</h4>
+  <div class="markdown level1 summary"><p>Gets the read only flag for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? ReadOnly { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>the read only</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_ResourceManagementEnabled.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.ResourceManagementEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L386">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_ResourceManagementEnabled_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ResourceManagementEnabled*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_ResourceManagementEnabled" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ResourceManagementEnabled">ResourceManagementEnabled</h4>
+  <div class="markdown level1 summary"><p>Indicates whether resource management is enabled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? ResourceManagementEnabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>true if enabled, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Rows.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Rows%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L396">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Rows_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Rows*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Rows" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Rows">Rows</h4>
+  <div class="markdown level1 summary"><p>Gets the rows for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;TRow&gt; Rows { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;TRow&gt;</td>
+        <td><p>the rows</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_ShowParentRowsForFilters.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.ShowParentRowsForFilters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L406">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_ShowParentRowsForFilters_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ShowParentRowsForFilters*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_ShowParentRowsForFilters" data-uid="Smartsheet.Api.Models.AbstractSheet`3.ShowParentRowsForFilters">ShowParentRowsForFilters</h4>
+  <div class="markdown level1 summary"><p>Returned only if there are column filters on the sheet. Value = “true” if “show parent rows” is enabled for the filters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? ShowParentRowsForFilters { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>“true” if “show parent rows” is enabled for the filters</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Source.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Source%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L416">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Source_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Source*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Source" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Source">Source</h4>
+  <div class="markdown level1 summary"><p>A Source object indicating the sheet or template from which this sheet was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Source Source { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Source.html">Source</a></td>
+        <td><p>source of sheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Summary.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Summary%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L426">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Summary_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Summary*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Summary" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Summary">Summary</h4>
+  <div class="markdown level1 summary"><p>A SheetSummary object containting the sheet summary if available</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SheetSummary Summary { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.SheetSummary.html">SheetSummary</a></td>
+        <td><p>the sheet summary</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_TotalRowCount.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.TotalRowCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L436">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_TotalRowCount_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.TotalRowCount*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_TotalRowCount" data-uid="Smartsheet.Api.Models.AbstractSheet`3.TotalRowCount">TotalRowCount</h4>
+  <div class="markdown level1 summary"><p>The total number of rows in the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? TotalRowCount { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><p>The total number of rows in the sheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_UserPermissions.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.UserPermissions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L446">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_UserPermissions_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.UserPermissions*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_UserPermissions" data-uid="Smartsheet.Api.Models.AbstractSheet`3.UserPermissions">UserPermissions</h4>
+  <div class="markdown level1 summary"><p>A SheetUserPermissions object containing the sheet user permissions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SheetUserPermissions UserPermissions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.SheetUserPermissions.html">SheetUserPermissions</a></td>
+        <td><p>the sheet user permissions</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_UserSettings.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.UserSettings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L456">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_UserSettings_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.UserSettings*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_UserSettings" data-uid="Smartsheet.Api.Models.AbstractSheet`3.UserSettings">UserSettings</h4>
+  <div class="markdown level1 summary"><p>A SheetUserSettings object containing the current user’s sheet-specific settings..</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SheetUserSettings UserSettings { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.SheetUserSettings.html">SheetUserSettings</a></td>
+        <td><p>SheetUserSettings object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Version.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Version%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L466">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Version_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Version*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Version" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Version">Version</h4>
+  <div class="markdown level1 summary"><p>Gets the version for the sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Version { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><p>the version</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_Workspace.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.Workspace%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L476">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_Workspace_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Workspace*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_Workspace" data-uid="Smartsheet.Api.Models.AbstractSheet`3.Workspace">Workspace</h4>
+  <div class="markdown level1 summary"><p>Gets the workspace (ID and Name only) for the sheet</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Workspace Workspace { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Workspace.html">Workspace</a></td>
+        <td><p>the workspace</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_GetColumnByIndex_System_Int32_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.GetColumnByIndex(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L487">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_GetColumnByIndex_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.GetColumnByIndex*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_GetColumnByIndex_System_Int32_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.GetColumnByIndex(System.Int32)">GetColumnByIndex(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets a column by index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TColumn GetColumnByIndex(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>the column index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TColumn</span></td>
+        <td><p>the column by index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3_GetRowByRowNumber_System_Int32_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603.GetRowByRowNumber(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L511">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_AbstractSheet_3_GetRowByRowNumber_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.GetRowByRowNumber*"></a>
+  <h4 id="Smartsheet_Api_Models_AbstractSheet_3_GetRowByRowNumber_System_Int32_" data-uid="Smartsheet.Api.Models.AbstractSheet`3.GetRowByRowNumber(System.Int32)">GetRowByRowNumber(Int32)</h4>
+  <div class="markdown level1 summary"><p>Get a <a class="xref" href="Smartsheet.Api.Models.Row.html">Row</a> by row number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TRow GetRowByRowNumber(int rowNumber)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowNumber</span></td>
+        <td><p>the row number</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TRow</span></td>
+        <td><p>the row by row number</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_AbstractSheet_3.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.AbstractSheet%603%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AbstractSheet.cs/#L29" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

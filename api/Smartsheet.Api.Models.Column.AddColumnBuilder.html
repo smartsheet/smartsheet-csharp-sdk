@@ -1,0 +1,952 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Column.AddColumnBuilder
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Column.AddColumnBuilder
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder">
+  
+  
+  <h1 id="Smartsheet_Api_Models_Column_AddColumnBuilder" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder" class="text-break">Class Column.AddColumnBuilder
+  </h1>
+  <div class="markdown level0 summary"><p>A convenience class to help create a column object with the appropriate fields for adding to a sheet.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Column.AddColumnBuilder</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.Models.html">Smartsheet.Api.Models</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_Models_Column_AddColumnBuilder_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class AddColumnBuilder : object</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder__ctor_System_String_System_Nullable_System_Int32__System_Nullable_Smartsheet_Api_Models_ColumnType__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.%23ctor(System.String%2CSystem.Nullable%7BSystem.Int32%7D%2CSystem.Nullable%7BSmartsheet.Api.Models.ColumnType%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L328">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder__ctor_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.#ctor*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder__ctor_System_String_System_Nullable_System_Int32__System_Nullable_Smartsheet_Api_Models_ColumnType__" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.#ctor(System.String,System.Nullable{System.Int32},System.Nullable{Smartsheet.Api.Models.ColumnType})">AddColumnBuilder(String, Nullable&lt;Int32&gt;, Nullable&lt;ColumnType&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the required properties for adding a column to a sheet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AddColumnBuilder(string title, int? index, ColumnType? type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">title</span></td>
+        <td><p>the column title</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">index</span></td>
+        <td><p>the column index (zero-based)</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.ColumnType.html">ColumnType</a>&gt;</td>
+        <td><span class="parametername">type</span></td>
+        <td><p>the column type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_Build.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.Build%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L550">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_Build_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.Build*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_Build" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.Build">Build()</h4>
+  <div class="markdown level1 summary"><p>Builds the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column Build()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.html">Column</a></td>
+        <td><p>the column</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetAutoNumberFormat.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetAutoNumberFormat%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L525">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetAutoNumberFormat_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetAutoNumberFormat*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetAutoNumberFormat" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetAutoNumberFormat">GetAutoNumberFormat()</h4>
+  <div class="markdown level1 summary"><p>Gets the format for an auto number column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AutoNumberFormat GetAutoNumberFormat()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.AutoNumberFormat.html">AutoNumberFormat</a></td>
+        <td><p>the format for an auto number column</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetIndex.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L466">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetIndex_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetIndex*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetIndex" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetIndex">GetIndex()</h4>
+  <div class="markdown level1 summary"><p>Gets the index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? GetIndex()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><p>the index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetLocked.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetLocked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L541">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetLocked_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetLocked*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetLocked" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetLocked">GetLocked()</h4>
+  <div class="markdown level1 summary"><p>Gets the flag whether column is locked or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? GetLocked()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><p>the locked flag</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetOptions.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L490">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetOptions_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetOptions*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetOptions" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetOptions">GetOptions()</h4>
+  <div class="markdown level1 summary"><p>Gets the option for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IList&lt;string&gt; GetOptions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>the option</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetSymbol.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetSymbol%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L509">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetSymbol_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetSymbol*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetSymbol" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetSymbol">GetSymbol()</h4>
+  <div class="markdown level1 summary"><p>Gets the symbol for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Symbol? GetSymbol()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.Symbol.html">Symbol</a>&gt;</td>
+        <td><p>the symbol</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetSystemColumnType.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetSystemColumnType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L517">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetSystemColumnType_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetSystemColumnType*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetSystemColumnType" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetSystemColumnType">GetSystemColumnType()</h4>
+  <div class="markdown level1 summary"><p>Gets the system column type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SystemColumnType? GetSystemColumnType()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.SystemColumnType.html">SystemColumnType</a>&gt;</td>
+        <td><p>the system column type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetTitle.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetTitle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L474">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetTitle_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetTitle*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetTitle" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetTitle">GetTitle()</h4>
+  <div class="markdown level1 summary"><p>Gets the title.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetTitle()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>the title</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetType.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L482">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetType_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetType*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetType" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetType">GetType()</h4>
+  <div class="markdown level1 summary"><p>Gets the type for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ColumnType? GetType()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.ColumnType.html">ColumnType</a>&gt;</td>
+        <td><p>the type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_GetWidth.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.GetWidth%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L533">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetWidth_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetWidth*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_GetWidth" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.GetWidth">GetWidth()</h4>
+  <div class="markdown level1 summary"><p>Gets the display width.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? GetWidth()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><p>the display width</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetAutoNumberFormat_Smartsheet_Api_Models_AutoNumberFormat_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetAutoNumberFormat(Smartsheet.Api.Models.AutoNumberFormat)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L445">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetAutoNumberFormat_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetAutoNumberFormat*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetAutoNumberFormat_Smartsheet_Api_Models_AutoNumberFormat_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetAutoNumberFormat(Smartsheet.Api.Models.AutoNumberFormat)">SetAutoNumberFormat(AutoNumberFormat)</h4>
+  <div class="markdown level1 summary"><p>Sets the format for an auto number column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetAutoNumberFormat(AutoNumberFormat autoNumberFormat)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.AutoNumberFormat.html">AutoNumberFormat</a></td>
+        <td><span class="parametername">autoNumberFormat</span></td>
+        <td><p>the auto number format</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the adds the column to sheet builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetIndex_System_Int32_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetIndex(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L379">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetIndex_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetIndex*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetIndex_System_Int32_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetIndex(System.Int32)">SetIndex(Int32)</h4>
+  <div class="markdown level1 summary"><p>Sets the position for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetIndex(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>the position</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the add column builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetLocked_System_Boolean_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetLocked(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L456">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetLocked_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetLocked*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetLocked_System_Boolean_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetLocked(System.Boolean)">SetLocked(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Sets whether the column is locked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetLocked(bool locked)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">locked</span></td>
+        <td><p>the flag</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the add column builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetOptions_IList_System_String__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetOptions(IList%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L423">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetOptions_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetOptions*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetOptions_IList_System_String__" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetOptions(IList{System.String})">SetOptions(IList&lt;String&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the options for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetOptions(IList&lt;string&gt; options)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">options</span></td>
+        <td><p>the options</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the adds the column to sheet builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetSymbol_System_Nullable_Smartsheet_Api_Models_Symbol__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetSymbol(System.Nullable%7BSmartsheet.Api.Models.Symbol%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L500">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetSymbol_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetSymbol*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetSymbol_System_Nullable_Smartsheet_Api_Models_Symbol__" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetSymbol(System.Nullable{Smartsheet.Api.Models.Symbol})">SetSymbol(Nullable&lt;Symbol&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the symbol for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetSymbol(Symbol? symbol)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.Symbol.html">Symbol</a>&gt;</td>
+        <td><span class="parametername">symbol</span></td>
+        <td><p>the symbol</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the adds the column to sheet builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetSystemColumnType_System_Nullable_Smartsheet_Api_Models_SystemColumnType__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetSystemColumnType(System.Nullable%7BSmartsheet.Api.Models.SystemColumnType%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L434">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetSystemColumnType_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetSystemColumnType*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetSystemColumnType_System_Nullable_Smartsheet_Api_Models_SystemColumnType__" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetSystemColumnType(System.Nullable{Smartsheet.Api.Models.SystemColumnType})">SetSystemColumnType(Nullable&lt;SystemColumnType&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the system column type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetSystemColumnType(SystemColumnType? systemColumnType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.SystemColumnType.html">SystemColumnType</a>&gt;</td>
+        <td><span class="parametername">systemColumnType</span></td>
+        <td><p>the system column type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the adds the column to sheet builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetTitle_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetTitle(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L401">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetTitle_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetTitle*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetTitle_System_String_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetTitle(System.String)">SetTitle(String)</h4>
+  <div class="markdown level1 summary"><p>Sets the title for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetTitle(string title)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">title</span></td>
+        <td><p>the title</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the adds the column to sheet builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetType_System_Nullable_Smartsheet_Api_Models_ColumnType__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetType(System.Nullable%7BSmartsheet.Api.Models.ColumnType%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L412">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetType_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetType*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetType_System_Nullable_Smartsheet_Api_Models_ColumnType__" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetType(System.Nullable{Smartsheet.Api.Models.ColumnType})">SetType(Nullable&lt;ColumnType&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the type for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetType(ColumnType? type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.ColumnType.html">ColumnType</a>&gt;</td>
+        <td><span class="parametername">type</span></td>
+        <td><p>the type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the adds the column to sheet builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder_SetWidth_System_Nullable_System_Int64__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder.SetWidth(System.Nullable%7BSystem.Int64%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L390">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetWidth_" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetWidth*"></a>
+  <h4 id="Smartsheet_Api_Models_Column_AddColumnBuilder_SetWidth_System_Nullable_System_Int64__" data-uid="Smartsheet.Api.Models.Column.AddColumnBuilder.SetWidth(System.Nullable{System.Int64})">SetWidth(Nullable&lt;Int64&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the primary flag for the column.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Column.AddColumnBuilder SetWidth(long? width)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><span class="parametername">width</span></td>
+        <td><p>the width</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Column.AddColumnBuilder.html">Column.AddColumnBuilder</a></td>
+        <td><p>the add column builder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Models_Column_AddColumnBuilder.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Models.Column.AddColumnBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Models/Column.cs/#L320" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

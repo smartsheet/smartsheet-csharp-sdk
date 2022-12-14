@@ -1,0 +1,788 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DefaultHttpClient
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DefaultHttpClient
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient">
+  
+  
+  <h1 id="Smartsheet_Api_Internal_Http_DefaultHttpClient" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient" class="text-break">Class DefaultHttpClient
+  </h1>
+  <div class="markdown level0 summary"><p>This is the RestSharp based HttpClient implementation.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and the underlying http client is
+thread safe.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">DefaultHttpClient</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Smartsheet.Api.Internal.Http.HttpClient.html">HttpClient</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.Internal.Http.html">Smartsheet.Api.Internal.Http</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DefaultHttpClient : object, HttpClient</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient__ctor.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L91">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient__ctor_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.#ctor*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient__ctor" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.#ctor">DefaultHttpClient()</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DefaultHttpClient()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient__ctor_RestClient_Smartsheet_Api_Internal_Json_JsonSerializer_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.%23ctor(RestClient%2CSmartsheet.Api.Internal.Json.JsonSerializer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L105">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient__ctor_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.#ctor*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient__ctor_RestClient_Smartsheet_Api_Internal_Json_JsonSerializer_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.#ctor(RestClient,Smartsheet.Api.Internal.Json.JsonSerializer)">DefaultHttpClient(RestClient, JsonSerializer)</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+<p>Parameters: - HttpClient : the http client to use</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DefaultHttpClient(RestClient httpClient, JsonSerializer jsonSerializer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">RestClient</span></td>
+        <td><span class="parametername">httpClient</span></td>
+        <td><p>the http client</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializer.html">JsonSerializer</a></td>
+        <td><span class="parametername">jsonSerializer</span></td>
+        <td><p>custom JSON serializer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_httpClient.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.httpClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L51">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_httpClient" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.httpClient">httpClient</h4>
+  <div class="markdown level1 summary"><p>Represents the underlying http client.</p>
+<p>It will be initialized in constructor and will not change afterwards.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly RestClient httpClient</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">RestClient</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_jsonSerializer.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.jsonSerializer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L61">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_jsonSerializer" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.jsonSerializer">jsonSerializer</h4>
+  <div class="markdown level1 summary"><p>The JSON serializer (used to deserialize errors for ShouldRetry</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected JsonSerializer jsonSerializer</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializer.html">JsonSerializer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_logger.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.logger%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L56">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_logger" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.logger">logger</h4>
+  <div class="markdown level1 summary"><p>static logger</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Logger logger</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Logger</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_maxRetryTimeout.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.maxRetryTimeout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L66">View Source</a>
+  </span>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_maxRetryTimeout" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.maxRetryTimeout">maxRetryTimeout</h4>
+  <div class="markdown level1 summary"><p>maximum retry timeout used by ShouldRetry</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected long maxRetryTimeout</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_CalcBackoff_System_Int32_System_Int64_Smartsheet_Api_Models_Error_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.CalcBackoff(System.Int32%2CSystem.Int64%2CSmartsheet.Api.Models.Error)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L333">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_CalcBackoff_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.CalcBackoff*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_CalcBackoff_System_Int32_System_Int64_Smartsheet_Api_Models_Error_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.CalcBackoff(System.Int32,System.Int64,Smartsheet.Api.Models.Error)">CalcBackoff(Int32, Int64, Error)</h4>
+  <div class="markdown level1 summary"><p>The default CalcBackoff implementation. Uses exponential backoff. If the maximum elapsed time
+has expired, this calculation returns -1 causing the caller to fall out of the retry loop.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual long CalcBackoff(int previousAttempts, long totalElapsedTime, Error error)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">previousAttempts</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">totalElapsedTime</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Error.html">Error</a></td>
+        <td><span class="parametername">error</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_Close.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.Close%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L413">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_Close_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.Close*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_Close" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.Close">Close()</h4>
+  <div class="markdown level1 summary"><p>Close the HttpClient.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Close()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_CreateRestRequest_Smartsheet_Api_Internal_Http_HttpRequest_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.CreateRestRequest(Smartsheet.Api.Internal.Http.HttpRequest)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L288">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_CreateRestRequest_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.CreateRestRequest*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_CreateRestRequest_Smartsheet_Api_Internal_Http_HttpRequest_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.CreateRestRequest(Smartsheet.Api.Internal.Http.HttpRequest)">CreateRestRequest(HttpRequest)</h4>
+  <div class="markdown level1 summary"><p>Create the RestSharp request. Override this function to inject additional
+headers in the request or use a proxy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual RestRequest CreateRestRequest(HttpRequest smartsheetRequest)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpRequest.html">HttpRequest</a></td>
+        <td><span class="parametername">smartsheetRequest</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">RestRequest</span></td>
+        <td><p>the RestSharp request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_LogRequest_IRestRequest_IRestResponse_System_Int64_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(IRestRequest%2CIRestResponse%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L432">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_LogRequest_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_LogRequest_IRestRequest_IRestResponse_System_Int64_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(IRestRequest,IRestResponse,System.Int64)">LogRequest(IRestRequest, IRestResponse, Int64)</h4>
+  <div class="markdown level1 summary"><p>Log URL and response code to INFO, message bodies to DEBUG</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void LogRequest(IRestRequest request, IRestResponse response, long durationMs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IRestRequest</span></td>
+        <td><span class="parametername">request</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IRestResponse</span></td>
+        <td><span class="parametername">response</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">durationMs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_ReleaseConnection.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.ReleaseConnection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L421">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_ReleaseConnection_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.ReleaseConnection*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_ReleaseConnection" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.ReleaseConnection">ReleaseConnection()</h4>
+  <div class="markdown level1 summary"><p>Release connection - not currently used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void ReleaseConnection()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_Request_Smartsheet_Api_Internal_Http_HttpRequest_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.Request(Smartsheet.Api.Internal.Http.HttpRequest)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L198">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_Request_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.Request*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_Request_Smartsheet_Api_Internal_Http_HttpRequest_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.Request(Smartsheet.Api.Internal.Http.HttpRequest)">Request(HttpRequest)</h4>
+  <div class="markdown level1 summary"><p>Make an HTTP request and return the response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HttpResponse Request(HttpRequest smartsheetRequest)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpRequest.html">HttpRequest</a></td>
+        <td><span class="parametername">smartsheetRequest</span></td>
+        <td><p>the Smartsheet request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpResponse.html">HttpResponse</a></td>
+        <td><p>the HTTP response</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpClientException.html">HttpClientException</a></td>
+        <td><p>the HTTP client exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_Request_Smartsheet_Api_Internal_Http_HttpRequest_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.Request(Smartsheet.Api.Internal.Http.HttpRequest%2CSystem.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L123">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_Request_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.Request*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_Request_Smartsheet_Api_Internal_Http_HttpRequest_System_String_System_String_System_String_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.Request(Smartsheet.Api.Internal.Http.HttpRequest,System.String,System.String,System.String)">Request(HttpRequest, String, String, String)</h4>
+  <div class="markdown level1 summary"><p>Make a multipart HTTP request and return the response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpRequest.html">HttpRequest</a></td>
+        <td><span class="parametername">smartsheetRequest</span></td>
+        <td><p>the Smartsheet request</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">objectType</span></td>
+        <td><p>the object name, for example 'comment', or 'discussion'</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">file</span></td>
+        <td><p>the full file path</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">fileType</span></td>
+        <td><p>the file type, or also called the conent type of the file</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpResponse.html">HttpResponse</a></td>
+        <td><p>the HTTP response</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpClientException.html">HttpClientException</a></td>
+        <td><p>the HTTP client exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_SetMaxRetryTimeout_System_Int64_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.SetMaxRetryTimeout(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L320">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_SetMaxRetryTimeout_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.SetMaxRetryTimeout*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_SetMaxRetryTimeout_System_Int64_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.SetMaxRetryTimeout(System.Int64)">SetMaxRetryTimeout(Int64)</h4>
+  <div class="markdown level1 summary"><p>Sets the max retry timeout from the Smartsheet client</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetMaxRetryTimeout(long maxRetryTimeout)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">maxRetryTimeout</span></td>
+        <td><p>the retry timeout</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_SetUserAgent_System_String_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.SetUserAgent(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L405">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_SetUserAgent_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.SetUserAgent*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_SetUserAgent_System_String_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.SetUserAgent(System.String)">SetUserAgent(String)</h4>
+  <div class="markdown level1 summary"><p>Set the User-Agent in the RestClient since RestSharp won't pick it up at request time</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetUserAgent(string userAgent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">userAgent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient_ShouldRetry_System_Int32_System_Int64_Smartsheet_Api_Internal_Http_HttpResponse_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient.ShouldRetry(System.Int32%2CSystem.Int64%2CSmartsheet.Api.Internal.Http.HttpResponse)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L353">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Http_DefaultHttpClient_ShouldRetry_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.ShouldRetry*"></a>
+  <h4 id="Smartsheet_Api_Internal_Http_DefaultHttpClient_ShouldRetry_System_Int32_System_Int64_Smartsheet_Api_Internal_Http_HttpResponse_" data-uid="Smartsheet.Api.Internal.Http.DefaultHttpClient.ShouldRetry(System.Int32,System.Int64,Smartsheet.Api.Internal.Http.HttpResponse)">ShouldRetry(Int32, Int64, HttpResponse)</h4>
+  <div class="markdown level1 summary"><p>Called by DefaultHttpClient when a request fails to determine if we can retry the request. Calls
+calcBackoff to determine time in between retries.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool ShouldRetry(int previousAttempts, long totalElapsedTime, HttpResponse response)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">previousAttempts</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">totalElapsedTime</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Http.HttpResponse.html">HttpResponse</a></td>
+        <td><span class="parametername">response</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if this error code can be retried</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Smartsheet.Api.Internal.Http.HttpClient.html">HttpClient</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Http_DefaultHttpClient.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Http.DefaultHttpClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Http/DefaultHttpClient.cs/#L44" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

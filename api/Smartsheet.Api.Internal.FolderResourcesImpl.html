@@ -1,0 +1,915 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class FolderResourcesImpl
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class FolderResourcesImpl
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl">
+  
+  
+  <h1 id="Smartsheet_Api_Internal_FolderResourcesImpl" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl" class="text-break">Class FolderResourcesImpl
+  </h1>
+  <div class="markdown level0 summary"><p>This is the implementation of the FolderResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html">AbstractResources</a></div>
+    <div class="level2"><span class="xref">FolderResourcesImpl</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Smartsheet.Api.FolderResources.html">FolderResources</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_smartsheet">AbstractResources.smartsheet</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_GetResource__1_System_String_Type_">AbstractResources.GetResource&lt;T&gt;(String, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_CreateResource__2_System_String___1_">AbstractResources.CreateResource&lt;S, T&gt;(String, T)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_CreateResource__1_System_String_Type___0_">AbstractResources.CreateResource&lt;T&gt;(String, Type, T)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_CreateResourceWithAttachment__1_System_String___0_System_String_System_String_System_String_">AbstractResources.CreateResourceWithAttachment&lt;T&gt;(String, T, String, String, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_UpdateResource__1_System_String_Type___0_">AbstractResources.UpdateResource&lt;T&gt;(String, Type, T)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_ListResourcesWithWrapper__1_System_String_">AbstractResources.ListResourcesWithWrapper&lt;T&gt;(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_ListResources__1_System_String_Type_">AbstractResources.ListResources&lt;T&gt;(String, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_DeleteResource__1_System_String_">AbstractResources.DeleteResource&lt;T&gt;(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_DeleteResource__1_System_String_Type_">AbstractResources.DeleteResource&lt;T&gt;(String, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_PostAndReceiveList__2_System_String___0_Type_">AbstractResources.PostAndReceiveList&lt;T, S&gt;(String, T, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_PutAndReceiveList__2_System_String___0_Type_">AbstractResources.PutAndReceiveList&lt;T, S&gt;(String, T, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_ImportFile__1_System_String_System_String_System_String_">AbstractResources.ImportFile&lt;T&gt;(String, String, String)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_CreateHttpRequest_Uri_Smartsheet_Api_Internal_Http_HttpMethod_">AbstractResources.CreateHttpRequest(Uri, HttpMethod)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_HandleError_Smartsheet_Api_Internal_Http_HttpResponse_">AbstractResources.HandleError(HttpResponse)</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_Smartsheet">AbstractResources.Smartsheet</a>
+    </div>
+    <div>
+      <a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html#Smartsheet_Api_Internal_AbstractResources_serializeToEntity__1___0_">AbstractResources.serializeToEntity&lt;T&gt;(T)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.Internal.html">Smartsheet.Api.Internal</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_Internal_FolderResourcesImpl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class FolderResourcesImpl : AbstractResources, FolderResources</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl__ctor_Smartsheet_Api_Internal_SmartsheetImpl_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.%23ctor(Smartsheet.Api.Internal.SmartsheetImpl)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L42">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl__ctor_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.#ctor*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl__ctor_Smartsheet_Api_Internal_SmartsheetImpl_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.#ctor(Smartsheet.Api.Internal.SmartsheetImpl)">FolderResourcesImpl(SmartsheetImpl)</h4>
+  <div class="markdown level1 summary"><p>Constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FolderResourcesImpl(SmartsheetImpl smartsheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.SmartsheetImpl.html">SmartsheetImpl</a></td>
+        <td><span class="parametername">smartsheet</span></td>
+        <td><p>the SmartsheetImpl</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_SheetResources.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.SheetResources%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L214">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_SheetResources_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.SheetResources*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_SheetResources" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.SheetResources">SheetResources</h4>
+  <div class="markdown level1 summary"><p>Return the SheetResources object that provides access to Sheet resources associated with Folder resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual FolderSheetResources SheetResources { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.FolderSheetResources.html">FolderSheetResources</a></td>
+        <td><p>the SheetResources object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_CopyFolder_System_Int64_Smartsheet_Api_Models_ContainerDestination_IEnumerable_Smartsheet_Api_Models_FolderCopyInclusion__IEnumerable_Smartsheet_Api_Models_FolderRemapExclusion__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.CopyFolder(System.Int64%2CSmartsheet.Api.Models.ContainerDestination%2CIEnumerable%7BSmartsheet.Api.Models.FolderCopyInclusion%7D%2CIEnumerable%7BSmartsheet.Api.Models.FolderRemapExclusion%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L177">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_CopyFolder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.CopyFolder*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_CopyFolder_System_Int64_Smartsheet_Api_Models_ContainerDestination_IEnumerable_Smartsheet_Api_Models_FolderCopyInclusion__IEnumerable_Smartsheet_Api_Models_FolderRemapExclusion__" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.CopyFolder(System.Int64,Smartsheet.Api.Models.ContainerDestination,IEnumerable{Smartsheet.Api.Models.FolderCopyInclusion},IEnumerable{Smartsheet.Api.Models.FolderRemapExclusion})">CopyFolder(Int64, ContainerDestination, IEnumerable&lt;FolderCopyInclusion&gt;, IEnumerable&lt;FolderRemapExclusion&gt;)</h4>
+  <div class="markdown level1 summary"><p>Creates a copy of the specified Folder.</p>
+<p>It mirrors to the following Smartsheet REST API method:<br>
+POST /folders/{folderId}/copy</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Folder CopyFolder(long folderId, ContainerDestination destination, IEnumerable&lt;FolderCopyInclusion&gt; include, IEnumerable&lt;FolderRemapExclusion&gt; skipRemap)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">folderId</span></td>
+        <td><p>the folder Id</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.ContainerDestination.html">ContainerDestination</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td><p>the destination to copy to</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.FolderCopyInclusion.html">FolderCopyInclusion</a>&gt;</td>
+        <td><span class="parametername">include</span></td>
+        <td><p>the elements to copy. Note: Cell history will not be copied, regardless of which include parameter values are specified.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.FolderRemapExclusion.html">FolderRemapExclusion</a>&gt;</td>
+        <td><span class="parametername">skipRemap</span></td>
+        <td><p>the references to NOT re-map for the newly created folder</p>
+<p>
+If “cellLinks” is specified in the skipRemap parameter value, the cell links within the newly created folder will continue to point to the original source sheets.
+If “reports” is specified in the skipRemap parameter value, the reports within the newly created folder will continue to point to the original source sheets.
+</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a></td>
+        <td><p>the created folder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_CreateFolder_System_Int64_Smartsheet_Api_Models_Folder_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.CreateFolder(System.Int64%2CSmartsheet.Api.Models.Folder)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L151">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_CreateFolder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.CreateFolder*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_CreateFolder_System_Int64_Smartsheet_Api_Models_Folder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.CreateFolder(System.Int64,Smartsheet.Api.Models.Folder)">CreateFolder(Int64, Folder)</h4>
+  <div class="markdown level1 summary"><p>Creates a Folder in the specified Folder.</p>
+<p>It mirrors to the following Smartsheet REST API method:<br>
+POST /folders/{folderId}/folders</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Folder CreateFolder(long folderId, Folder folder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">folderId</span></td>
+        <td><p>the parent folder Id</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a></td>
+        <td><span class="parametername">folder</span></td>
+        <td><p>the folder to create</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a></td>
+        <td><p>the created folder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_DeleteFolder_System_Int64_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.DeleteFolder(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L102">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_DeleteFolder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.DeleteFolder*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_DeleteFolder_System_Int64_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.DeleteFolder(System.Int64)">DeleteFolder(Int64)</h4>
+  <div class="markdown level1 summary"><p>Deletes a folder.</p>
+<p>It mirrors to the following Smartsheet REST API method:<br>
+DELETE /folders/{folderId}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void DeleteFolder(long folderId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">folderId</span></td>
+        <td><p>the folder Id</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_GetFolder_System_Int64_IEnumerable_Smartsheet_Api_Models_FolderInclusion__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.GetFolder(System.Int64%2CIEnumerable%7BSmartsheet.Api.Models.FolderInclusion%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L62">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_GetFolder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.GetFolder*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_GetFolder_System_Int64_IEnumerable_Smartsheet_Api_Models_FolderInclusion__" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.GetFolder(System.Int64,IEnumerable{Smartsheet.Api.Models.FolderInclusion})">GetFolder(Int64, IEnumerable&lt;FolderInclusion&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gets the specified Folder (and lists its contents).</p>
+<p>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Folder GetFolder(long folderId, IEnumerable&lt;FolderInclusion&gt; include)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">folderId</span></td>
+        <td><p>the folder Id</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.FolderInclusion.html">FolderInclusion</a>&gt;</td>
+        <td><span class="parametername">include</span></td>
+        <td><p>(optional) – comma-separated list of elements to include in the respons</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a></td>
+        <td><p>the folder (note that if there is no such resource, this method will throw ResourceNotFoundException
+rather than returning null)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_ListFolders_System_Int64_Smartsheet_Api_Models_PaginationParameters_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.ListFolders(System.Int64%2CSmartsheet.Api.Models.PaginationParameters)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L127">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_ListFolders_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.ListFolders*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_ListFolders_System_Int64_Smartsheet_Api_Models_PaginationParameters_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.ListFolders(System.Int64,Smartsheet.Api.Models.PaginationParameters)">ListFolders(Int64, PaginationParameters)</h4>
+  <div class="markdown level1 summary"><p>Gets a list of the top-level child Folders within the specified Folder.</p>
+<remarks>This operation supports pagination of results. For more information, see Paging.</remarks>
+<p>It mirrors to the following Smartsheet REST API method:<br> GET /folders/{folderId}/folders</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PaginatedResult&lt;Folder&gt; ListFolders(long folderId, PaginationParameters paging)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">folderId</span></td>
+        <td><p>the folderId</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.PaginationParameters.html">PaginationParameters</a></td>
+        <td><span class="parametername">paging</span></td>
+        <td><p>the pagination information</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.PaginatedResult-1.html">PaginatedResult</a>&lt;<a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a>&gt;</td>
+        <td><p>the child Folders (note that an empty list will be returned if no child folder is found), limited to the following attributes:</p>
+<ul><li>id</li><li>name</li><li>permalink</li></ul>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_MoveFolder_System_Int64_Smartsheet_Api_Models_ContainerDestination_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.MoveFolder(System.Int64%2CSmartsheet.Api.Models.ContainerDestination)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L205">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_MoveFolder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.MoveFolder*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_MoveFolder_System_Int64_Smartsheet_Api_Models_ContainerDestination_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.MoveFolder(System.Int64,Smartsheet.Api.Models.ContainerDestination)">MoveFolder(Int64, ContainerDestination)</h4>
+  <div class="markdown level1 summary"><p>Moves the specified Folder to another location.</p>
+<p>It mirrors to the following Smartsheet REST API method:<br>
+POST /folders/{folderId}/move</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Folder MoveFolder(long folderId, ContainerDestination destination)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">folderId</span></td>
+        <td><p>the folder Id</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.ContainerDestination.html">ContainerDestination</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td><p>the destination to copy to</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a></td>
+        <td><p>the moved folder</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl_UpdateFolder_Smartsheet_Api_Models_Folder_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl.UpdateFolder(Smartsheet.Api.Models.Folder)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L85">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_FolderResourcesImpl_UpdateFolder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.UpdateFolder*"></a>
+  <h4 id="Smartsheet_Api_Internal_FolderResourcesImpl_UpdateFolder_Smartsheet_Api_Models_Folder_" data-uid="Smartsheet.Api.Internal.FolderResourcesImpl.UpdateFolder(Smartsheet.Api.Models.Folder)">UpdateFolder(Folder)</h4>
+  <div class="markdown level1 summary"><p>Updates a folder.</p>
+<p>It mirrors to the following Smartsheet REST API method: PUT /folders/{folderId}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Folder UpdateFolder(Folder folder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a></td>
+        <td><span class="parametername">folder</span></td>
+        <td><p>the folder to update</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Folder.html">Folder</a></td>
+        <td><p>the updated folder (note that if there is no such folder, this method will throw Resource Not Found
+Exception rather than returning null).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Smartsheet.Api.FolderResources.html">FolderResources</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_FolderResourcesImpl.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.FolderResourcesImpl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/FolderResourcesImpl.cs/#L33" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

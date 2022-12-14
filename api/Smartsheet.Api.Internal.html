@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace Smartsheet.Api.Internal
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace Smartsheet.Api.Internal
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.Internal">
+  
+  <h1 id="Smartsheet_Api_Internal" data-uid="Smartsheet.Api.Internal" class="text-break">Namespace Smartsheet.Api.Internal
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.AbstractAssociatedResources.html">AbstractAssociatedResources</a></h4>
+      <section><p>This is the base class of the Smartsheet REST API resources that are associated to other resources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.AbstractResources.html">AbstractResources</a></h4>
+      <section><p>This is the base class of the SmartsheetClient REST API resources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and the underlying SmartsheetImpl is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.AbstractResources.ErrorCode.html">AbstractResources.ErrorCode</a></h4>
+      <section><p>Error code class for mapping specific error codes to Exceptions</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.AttachmentVersioningResourcesImpl.html">AttachmentVersioningResourcesImpl</a></h4>
+      <section><p>This is the implementation of the AttachmentVersioningResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.CommentAttachmentResourcesImpl.html">CommentAttachmentResourcesImpl</a></h4>
+      <section><p>
+This is the implementation of the CommentAttachmentResources.
+</p>
+Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.ContactResourcesImpl.html">ContactResourcesImpl</a></h4>
+      <section><p>This is the implementation of the ContactResources.
+Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.DiscussionAttachmentResourcesImpl.html">DiscussionAttachmentResourcesImpl</a></h4>
+      <section><p>This is the implementation of the AssociatedAttachmentResources for Discussions.</p>
+<p>It extends AssociatedAttachmentResourcesImpl and overrides attachFile/attachURL methods by throwing
+UnsupportedOperationException (since they're not supported for Discussions).</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.DiscussionCommentResourcesImpl.html">DiscussionCommentResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.EventResourcesImpl.html">EventResourcesImpl</a></h4>
+      <section><p>This is the implementation of the EventResources.
+Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.FavoriteResourcesImpl.html">FavoriteResourcesImpl</a></h4>
+      <section><p>This is the implementation of the FavoriteResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.FolderResourcesImpl.html">FolderResourcesImpl</a></h4>
+      <section><p>This is the implementation of the FolderResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.FolderSheetResourcesImpl.html">FolderSheetResourcesImpl</a></h4>
+      <section><p>This is the implementation of the FolderSheetResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.GroupResourcesImpl.html">GroupResourcesImpl</a></h4>
+      <section><p>This is the implementation of the UserResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.HomeFolderResourcesImpl.html">HomeFolderResourcesImpl</a></h4>
+      <section><p>This is the implementation of the HomeFolderResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.HomeResourcesImpl.html">HomeResourcesImpl</a></h4>
+      <section><p>This is the implementation of HomeResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.PassthroughResourcesImpl.html">PassthroughResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.ReportResourcesImpl.html">ReportResourcesImpl</a></h4>
+      <section><p>This is the implementation of the ReportResources.
+Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.RowAttachmentResourcesImpl.html">RowAttachmentResourcesImpl</a></h4>
+      <section><p>This is the implementation of the RowAttachmentResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.RowColumnResourcesImpl.html">RowColumnResourcesImpl</a></h4>
+      <section><p>This is the implementation of the RowColumnResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.RowDiscussionResourcesImpl.html">RowDiscussionResourcesImpl</a></h4>
+      <section><p>This is the implementation of the RowDiscussionResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SearchResourcesImpl.html">SearchResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SearchResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.ServerInfoResourcesImpl.html">ServerInfoResourcesImpl</a></h4>
+      <section><p>This is the implementation of the ServerInfoResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.ShareResourcesImpl.html">ShareResourcesImpl</a></h4>
+      <section><p>This is the implementation of the ShareResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetAttachmentResourcesImpl.html">SheetAttachmentResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SheetAttachmentResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetAutomationRuleResourcesImpl.html">SheetAutomationRuleResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetColumnResourcesImpl.html">SheetColumnResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SheetColumnResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetCommentResourcesImpl.html">SheetCommentResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SheetCommentResources.
+Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetCrossSheetReferencesResourcesImpl.html">SheetCrossSheetReferencesResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetDiscussionResourcesImpl.html">SheetDiscussionResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SheetDiscussionResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetFilterResourcesImpl.html">SheetFilterResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetResourcesImpl.html">SheetResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SheetResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetRowResourcesImpl.html">SheetRowResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SheetRowResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetSummaryResourcesImpl.html">SheetSummaryResourcesImpl</a></h4>
+      <section><p>This is the implementation of the SheetSummaryResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SheetUpdateRequestResourcesImpl.html">SheetUpdateRequestResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SightResourcesImpl.html">SightResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.SmartsheetImpl.html">SmartsheetImpl</a></h4>
+      <section><p>This is the implementation of Smartsheet interface.</p>
+<p>Thread Safety: This class is thread safe because all its mutable fields are safe-guarded using AtomicReference to
+ensure atomic modifications, and also the underlying HttpClient and JsonSerializer interfaces are thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.TemplateResourcesImpl.html">TemplateResourcesImpl</a></h4>
+      <section><p>This is the implementation of the TemplateResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.TokenResourcesImpl.html">TokenResourcesImpl</a></h4>
+      <section><p>This is the implementation of TokenResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.UserResourcesImpl.html">UserResourcesImpl</a></h4>
+      <section><p>This is the implementation of the UserResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.UserSheetResourcesImpl.html">UserSheetResourcesImpl</a></h4>
+      <section><p>This is the implementation of the UserResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.WebhookResourcesImpl.html">WebhookResourcesImpl</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.WorkspaceFolderResourcesImpl.html">WorkspaceFolderResourcesImpl</a></h4>
+      <section><p>This is the implementation of the WorkspaceFolderResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.WorkspaceResourcesImpl.html">WorkspaceResourcesImpl</a></h4>
+      <section><p>This is the implementation of the WorkspaceResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+      <h4><a class="xref" href="Smartsheet.Api.Internal.WorkspaceSheetResourcesImpl.html">WorkspaceSheetResourcesImpl</a></h4>
+      <section><p>This is the implementation of the WorkspaceSheetResources.</p>
+<p>Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

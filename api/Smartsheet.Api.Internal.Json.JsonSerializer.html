@@ -1,0 +1,816 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface JsonSerializer
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface JsonSerializer
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer">
+  
+  
+  <h1 id="Smartsheet_Api_Internal_Json_JsonSerializer" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer" class="text-break">Interface JsonSerializer
+  </h1>
+  <div class="markdown level0 summary"><p>This interface defines methods to handle JSON serialization/de-serialization.</p>
+<p>Thread Safety: Implementation of this interface must be thread safe.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.Internal.Json.html">Smartsheet.Api.Internal.Json</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_Internal_Json_JsonSerializer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface JsonSerializer</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_deserialize__1_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.deserialize%60%601(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L66">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_deserialize_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserialize*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_deserialize__1_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserialize``1(StreamReader)">deserialize&lt;T&gt;(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize an object from JSON.</p>
+<p>Parameters: - objectClass : the class of the object to de-serialize - inputStream : the input stream from which
+the JSON will be read</p>
+<p>Returns: the de-serialized object</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">T deserialize&lt;T&gt;(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>the t</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeDataWrapper__1_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeDataWrapper%60%601(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L99">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeDataWrapper_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeDataWrapper*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeDataWrapper__1_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeDataWrapper``1(StreamReader)">DeserializeDataWrapper&lt;T&gt;(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize an object to DataWrapper from JSON.</p>
+<p>Parameters: - objectClass : the class of the object to de-serialize - inputStream : the input stream from which
+the JSON will be read</p>
+<p>Returns: the de-serialized object</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">PaginatedResult&lt;T&gt; DeserializeDataWrapper&lt;T&gt;(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.PaginatedResult-1.html">PaginatedResult</a>&lt;T&gt;</td>
+        <td><p>the t</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeEventResult_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeEventResult(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L171">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeEventResult_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeEventResult*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeEventResult_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeEventResult(StreamReader)">DeserializeEventResult(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize to a EventResult (holds pagination info) object from JSON.</p>
+<p>Parameters:</p>
+<ul>
+<li>inputStream : the input stream from which the JSON will be read</li>
+</ul>
+<p>Returns: the de-serialized EventResult</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">EventResult DeserializeEventResult(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.EventResult.html">EventResult</a></td>
+        <td><p>the EventResult containing a list of Event</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_deserializeList__1_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.deserializeList%60%601(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L82">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_deserializeList_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserializeList*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_deserializeList__1_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserializeList``1(StreamReader)">deserializeList&lt;T&gt;(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize an object list from JSON.</p>
+<p>Parameters: - objectClass : the class of the object (of the list) to de-serialize - inputStream : the input
+stream from which the JSON will be read</p>
+<p>Returns: the de-serialized list</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IList&lt;T&gt; deserializeList&lt;T&gt;(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;T&gt;</td>
+        <td><p>the list</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_deserializeListResult__1_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.deserializeListResult%60%601(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L139">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_deserializeListResult_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserializeListResult*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_deserializeListResult__1_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserializeListResult``1(StreamReader)">deserializeListResult&lt;T&gt;(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize a RequestResult&lt;List&lt;T&gt;&gt; object from JSON.</p>
+<p>Parameters: - objectClass : the class of the object (of the RequestResult) to de-serialize - inputStream : the input
+stream from which the JSON will be read</p>
+<p>Returns: the de-serialized RequestResult</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">RequestResult&lt;IList&lt;T&gt;&gt; deserializeListResult&lt;T&gt;(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.RequestResult-1.html">RequestResult</a>&lt;<span class="xref">IList</span>&lt;T&gt;&gt;</td>
+        <td><p>the RequestResult</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeMap_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeMap(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L107">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeMap_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeMap*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeMap_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeMap(StreamReader)">DeserializeMap(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize an object list from JSON to a Map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IDictionary&lt;string, object&gt; DeserializeMap(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><p>the map</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_deserializeResult__1_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.deserializeResult%60%601(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L123">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_deserializeResult_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserializeResult*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_deserializeResult__1_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.deserializeResult``1(StreamReader)">deserializeResult&lt;T&gt;(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize a RequestResult&lt;T&gt; object from JSON.</p>
+<p>Parameters: - objectClass : the class of the object (of the RequestResult) to de-serialize - inputStream : the input
+stream from which the JSON will be read</p>
+<p>Returns: the de-serialized RequestResult</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">RequestResult&lt;T&gt; deserializeResult&lt;T&gt;(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.RequestResult-1.html">RequestResult</a>&lt;T&gt;</td>
+        <td><p>the RequestResult</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeRowResult_StreamReader_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeRowResult(StreamReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L155">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeRowResult_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeRowResult*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeRowResult_StreamReader_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeRowResult(StreamReader)">DeserializeRowResult(StreamReader)</h4>
+  <div class="markdown level1 summary"><p>De-serialize a CopyOrMoveRowResult object from JSON.</p>
+<p>Parameters:</p>
+<ul>
+<li>inputStream : the input stream from which the JSON will be read</li>
+</ul>
+<p>Returns: the de-serialized CopyOrMoveRowResult</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">CopyOrMoveRowResult DeserializeRowResult(StreamReader inputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StreamReader</span></td>
+        <td><span class="parametername">inputStream</span></td>
+        <td><p>the input stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.CopyOrMoveRowResult.html">CopyOrMoveRowResult</a></td>
+        <td><p>the CopyOrMoveRowResult</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer_serialize__1___0_StreamWriter_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer.serialize%60%601(%60%600%2CStreamWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L49">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_Internal_Json_JsonSerializer_serialize_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.serialize*"></a>
+  <h4 id="Smartsheet_Api_Internal_Json_JsonSerializer_serialize__1___0_StreamWriter_" data-uid="Smartsheet.Api.Internal.Json.JsonSerializer.serialize``1(``0,StreamWriter)">serialize&lt;T&gt;(T, StreamWriter)</h4>
+  <div class="markdown level1 summary"><p>Serialize an object to JSON.</p>
+<p>Parameters: - object : the object to serialize - outputStream : the output stream to which the JSON will be
+written</p>
+<p>Returns: None</p>
+<p>Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+other error occurred during the operation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void serialize&lt;T&gt;(T object, StreamWriter outputStream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>the object</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">StreamWriter</span></td>
+        <td><span class="parametername">outputStream</span></td>
+        <td><p>the output stream</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Internal.Json.JsonSerializationException.html">JsonSerializationException</a></td>
+        <td><p>the JSON serializer exception</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_Internal_Json_JsonSerializer.md&amp;value=---%0Auid%3A%20Smartsheet.Api.Internal.Json.JsonSerializer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/Internal/Json/JsonSerializer.cs/#L32" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

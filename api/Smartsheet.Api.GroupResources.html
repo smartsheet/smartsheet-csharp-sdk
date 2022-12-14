@@ -1,0 +1,732 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface GroupResources
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface GroupResources
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Smartsheet.Api.GroupResources">
+  
+  
+  <h1 id="Smartsheet_Api_GroupResources" data-uid="Smartsheet.Api.GroupResources" class="text-break">Interface GroupResources
+  </h1>
+  <div class="markdown level0 summary"><p>This interface provides methods to access Group resources.</p>
+<p>Thread Safety: Implementation of this interface must be thread safe.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Smartsheet.Api.html">Smartsheet.Api</a></h6>
+  <h6><strong>Assembly</strong>: smartsheet-csharp-sdk.dll</h6>
+  <h5 id="Smartsheet_Api_GroupResources_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface GroupResources</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources_AddGroupMembers_System_Int64_IEnumerable_Smartsheet_Api_Models_GroupMember__.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources.AddGroupMembers(System.Int64%2CIEnumerable%7BSmartsheet.Api.Models.GroupMember%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L123">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_GroupResources_AddGroupMembers_" data-uid="Smartsheet.Api.GroupResources.AddGroupMembers*"></a>
+  <h4 id="Smartsheet_Api_GroupResources_AddGroupMembers_System_Int64_IEnumerable_Smartsheet_Api_Models_GroupMember__" data-uid="Smartsheet.Api.GroupResources.AddGroupMembers(System.Int64,IEnumerable{Smartsheet.Api.Models.GroupMember})">AddGroupMembers(Int64, IEnumerable&lt;GroupMember&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds one or more members to a Group.</p>
+<remarks><p>If called with a single GroupMember object, and that group member already exists, error code 1129 will be returned.
+If called with an array of GroupMember objects any users specified in the array that are already group members will be ignored and omitted from the response.</p>
+<p>This operation is only available to group administrators and system administrators.</p>
+<p>This operation is asynchronous, meaning the users may not yet have sharing access to sheets for a period of time after this operation returns.
+For small groups with limited sharing, the operation should complete quickly (within a few seconds).
+For large groups with many shares, this operation could possibly take more than a minute to complete.</p></remarks>
+<p>It mirrors to the following Smartsheet REST API method: POST /groups/{groupId}/members</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IList&lt;GroupMember&gt; AddGroupMembers(long groupId, IEnumerable&lt;GroupMember&gt; groupMembers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">groupId</span></td>
+        <td><p>the Id of the group</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Smartsheet.Api.Models.GroupMember.html">GroupMember</a>&gt;</td>
+        <td><span class="parametername">groupMembers</span></td>
+        <td><p>array of Group Member objects</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Smartsheet.Api.Models.GroupMember.html">GroupMember</a>&gt;</td>
+        <td><p>the members added to the group</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources_CreateGroup_Smartsheet_Api_Models_Group_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources.CreateGroup(Smartsheet.Api.Models.Group)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L60">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_GroupResources_CreateGroup_" data-uid="Smartsheet.Api.GroupResources.CreateGroup*"></a>
+  <h4 id="Smartsheet_Api_GroupResources_CreateGroup_Smartsheet_Api_Models_Group_" data-uid="Smartsheet.Api.GroupResources.CreateGroup(Smartsheet.Api.Models.Group)">CreateGroup(Group)</h4>
+  <div class="markdown level1 summary"><p>Creates a new Group.</p>
+<p>It mirrors to the following Smartsheet REST API method: POST /groups</p>
+<remarks>This operation is only available to group administrators and system administrators.</remarks>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Group CreateGroup(Group group)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Group.html">Group</a></td>
+        <td><span class="parametername">group</span></td>
+        <td><p>the group object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Group.html">Group</a></td>
+        <td><p>the created group</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources_DeleteGroup_System_Int64_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources.DeleteGroup(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L102">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_GroupResources_DeleteGroup_" data-uid="Smartsheet.Api.GroupResources.DeleteGroup*"></a>
+  <h4 id="Smartsheet_Api_GroupResources_DeleteGroup_System_Int64_" data-uid="Smartsheet.Api.GroupResources.DeleteGroup(System.Int64)">DeleteGroup(Int64)</h4>
+  <div class="markdown level1 summary"><p>Deletes the Group specified in the URL.</p>
+<remarks>This operation is only available to system administrators.</remarks>
+<p>It mirrors to the following Smartsheet REST API method: DELETE /groups/{groupId}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DeleteGroup(long groupId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">groupId</span></td>
+        <td><p>the Id of the group</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources_GetGroup_System_Int64_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources.GetGroup(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L73">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_GroupResources_GetGroup_" data-uid="Smartsheet.Api.GroupResources.GetGroup*"></a>
+  <h4 id="Smartsheet_Api_GroupResources_GetGroup_System_Int64_" data-uid="Smartsheet.Api.GroupResources.GetGroup(System.Int64)">GetGroup(Int64)</h4>
+  <div class="markdown level1 summary"><p>Gets the Group specified in the URL.</p>
+<p>It mirrors to the following Smartsheet REST API method: GET /groups/{groupId}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Group GetGroup(long groupId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">groupId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Group.html">Group</a></td>
+        <td><p>Group object that includes the list of GroupMembers</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources_ListGroups_Smartsheet_Api_Models_PaginationParameters_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources.ListGroups(Smartsheet.Api.Models.PaginationParameters)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L45">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_GroupResources_ListGroups_" data-uid="Smartsheet.Api.GroupResources.ListGroups*"></a>
+  <h4 id="Smartsheet_Api_GroupResources_ListGroups_Smartsheet_Api_Models_PaginationParameters_" data-uid="Smartsheet.Api.GroupResources.ListGroups(Smartsheet.Api.Models.PaginationParameters)">ListGroups(PaginationParameters)</h4>
+  <div class="markdown level1 summary"><p>List all Users.</p>
+<p>It mirrors to the following Smartsheet REST API method: GET /groups</p>
+<remarks>This operation supports pagination of results. For more information, see Paging.</remarks>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">PaginatedResult&lt;Group&gt; ListGroups(PaginationParameters paging)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.PaginationParameters.html">PaginationParameters</a></td>
+        <td><span class="parametername">paging</span></td>
+        <td><p>the pagination</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.PaginatedResult-1.html">PaginatedResult</a>&lt;<a class="xref" href="Smartsheet.Api.Models.Group.html">Group</a>&gt;</td>
+        <td><p>the list of all Users</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources_RemoveGroupMember_System_Int64_System_Int64_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources.RemoveGroupMember(System.Int64%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L141">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_GroupResources_RemoveGroupMember_" data-uid="Smartsheet.Api.GroupResources.RemoveGroupMember*"></a>
+  <h4 id="Smartsheet_Api_GroupResources_RemoveGroupMember_System_Int64_System_Int64_" data-uid="Smartsheet.Api.GroupResources.RemoveGroupMember(System.Int64,System.Int64)">RemoveGroupMember(Int64, Int64)</h4>
+  <div class="markdown level1 summary"><p>Removes a member from a Group.</p>
+<remarks><p>This operation is only available to group administrators and system administrators.</p>
+<p>This operation is asynchronous, meaning group members may retain their sharing access for a brief period of time after the call returns.
+For small groups with limited sharing, the operation should complete quickly (within a few seconds).
+For large groups with many shares, this operation could possibly take more than a minute to complete.</p></remarks>
+<p>It mirrors to the following Smartsheet REST API method: DELETE /groups/{groupId}/members/{userId}</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RemoveGroupMember(long groupId, long userId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">groupId</span></td>
+        <td><p>the Id of the group</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">userId</span></td>
+        <td><p>the Id of the user</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources_UpdateGroup_Smartsheet_Api_Models_Group_.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources.UpdateGroup(Smartsheet.Api.Models.Group)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L88">View Source</a>
+  </span>
+  <a id="Smartsheet_Api_GroupResources_UpdateGroup_" data-uid="Smartsheet.Api.GroupResources.UpdateGroup*"></a>
+  <h4 id="Smartsheet_Api_GroupResources_UpdateGroup_Smartsheet_Api_Models_Group_" data-uid="Smartsheet.Api.GroupResources.UpdateGroup(Smartsheet.Api.Models.Group)">UpdateGroup(Group)</h4>
+  <div class="markdown level1 summary"><p>Updates the Group specified in the URL.</p>
+<p>It mirrors to the following Smartsheet REST API method: PUT /groups/{groupId}</p>
+<remarks>This operation is only available to group administrators and system administrators.</remarks>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Group UpdateGroup(Group group)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Group.html">Group</a></td>
+        <td><span class="parametername">group</span></td>
+        <td><p>the group to update</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.Models.Group.html">Group</a></td>
+        <td><p>the updated user</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.InvalidRequestException.html">InvalidRequestException</a></td>
+        <td><p>if there is any problem with the REST API request</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.AuthorizationException.html">AuthorizationException</a></td>
+        <td><p>if there is any problem with  the REST API authorization (access token)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ResourceNotFoundException.html">ResourceNotFoundException</a></td>
+        <td><p>if the resource cannot be found</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.ServiceUnavailableException.html">ServiceUnavailableException</a></td>
+        <td><p>if the REST API service is not available (possibly due to rate limiting)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Smartsheet.Api.SmartsheetException.html">SmartsheetException</a></td>
+        <td><p>if there is any other error during the operation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/new/migrating-documentation/apiSpec/new?filename=Smartsheet_Api_GroupResources.md&amp;value=---%0Auid%3A%20Smartsheet.Api.GroupResources%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/smartsheet/smartsheet-csharp-sdk/blob/migrating-documentation/smartsheet-csharp-sdk/main/Smartsheet/Api/GroupResources.cs/#L30" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
