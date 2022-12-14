@@ -19,7 +19,10 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - name: Install Dependencies
-        run: dotnet restore
+        run: |
+          dotnet restore
+          dotnet add package AltCover
+          dotnet tool install coveralls.net --version 1.4.2
       - name: Build
         working-directory: ./smartsheet-csharp-sdk
         run: dotnet build --configuration Release --no-restore
@@ -37,4 +40,6 @@ jobs:
         working-directory: ./mock-api-test-sdk-net60
         run: |
           dotnet build --configuration Release --no-restore
-          dotnet test --no-restore
+          dotnet test --no-restore /p:AltCover=true
+      - name: Upload code coverage    
+        run: ./tools/csmacnz.Coveralls --opencover -i ./mock-api-test-sdk-net60/coverage.xml --commitId $GITHUB_SHA --commitBranch $GITHUB_REF --commitAuthor "$GITHUB_ACTOR" --commitMessage "${{ github.event.head_commit.message }}" --jobId $GITHUB_JOB  --serviceName github-actions  --useRelativePaths
