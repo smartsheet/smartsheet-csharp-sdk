@@ -7,13 +7,13 @@
     <Win32Resource />
     <PackageId>smartsheet-csharp-sdk</PackageId>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://raw.github.com/smartsheet-platform/smartsheet-csharp-sdk/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/smartsheet-platform/smartsheet-csharp-sdk</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.github.com/smartsheet/smartsheet-csharp-sdk/mainline/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/smartsheet/smartsheet-csharp-sdk</PackageProjectUrl>
     <PackageIconUrl>https://googledrive.com/host/0B0ESt9lII6BWZUcyZmlsalBDdlE/smartsheetAPI.png</PackageIconUrl>
     <Company>Smartsheet</Company>
     <Title>Smartsheet C# SDK</Title>
     <Description>Library that uses C# to connect to Smartsheet services.</Description>
-    <Copyright>Copyright 2014-2021</Copyright>
+    <Copyright>Copyright 2014-2022</Copyright>
     <Authors>Smartsheet</Authors>
     <Product>smartsheet-csharp-sdk</Product>
     <PackageTags>Smartsheet Collaboration Project Management Excel spreadsheet</PackageTags>
