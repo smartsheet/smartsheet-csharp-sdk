@@ -111,7 +111,7 @@ For details about logging, testing, how to use a passthrough option, and how to 
 ## Documentation
 The full Smartsheet API documentation is here: https://smartsheet.redoc.ly.
 
-The generated SDK class documentation is here: [http://smartsheet-platform.github.io/smartsheet-csharp-sdk/](http://smartsheet-platform.github.io/smartsheet-csharp-sdk/).
+The generated SDK class documentation is here: [https://smartsheet.github.io/smartsheet-csharp-sdk/](https://smartsheet.github.io/smartsheet-csharp-sdk/).
 
 ## Contributing
 If you would like to contribute a change to the SDK, please fork a branch and then submit a pull request. [More info here.](https://help.github.com/articles/using-pull-requests)
