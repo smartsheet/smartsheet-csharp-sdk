@@ -131,3 +131,12 @@ If you have any questions or issues with this SDK please post on [StackOverflow 
 
 All releases and release notes are available on [Github](https://github.com/smartsheet/smartsheet-csharp-sdk/releases) or the [NuGet repository](https://www.nuget.org/packages/smartsheet-csharp-sdk/).
 
+## Acknowledgements
+
+We would like to thank the following people for their contributions to this project:
+
+* Eric Yang - [ericyan1](https://github.com/EricYan1)
+* Tim Wells - [timwellswa](https://github.com/timwellswa)
+* Kevin Fansler - [kfansler](https://github.com/kfansler)
+* Brett Batie - [brettbatie](https://github.com/brettbatie)
+* Steve Weil - [seweil](https://github.com/seweil)
