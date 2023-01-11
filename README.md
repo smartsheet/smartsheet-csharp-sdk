@@ -20,7 +20,11 @@ SmartsheetClient smartsheet = new SmartsheetBuilder()
     .SetDateTimeFixOptOut(true)
     .Build();
 ```
-   
+
+## Developer Agreement
+
+Review the [Developer Program Agreement](https://www.smartsheet.com/legal/developer-program-agreement).
+
 ## System Requirements
 
 The SDK supports C# version 4.0 or later and targets .NET 6.0.
