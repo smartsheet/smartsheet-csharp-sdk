@@ -4,7 +4,7 @@ This is a C# SDK to simplify connecting to the [Smartsheet API](https://smartshe
 
 **NOTE ON 3.0.0 RELEASE**
 
-The SDK has been migrated to .Net 6.0.
+The SDK has been migrated to .NET 6.0.
 
 **NOTE ON 2.93.0 RELEASE**
 
@@ -30,33 +30,12 @@ Review the [Developer Program Agreement](https://www.smartsheet.com/legal/develo
 The SDK supports C# version 4.0 or later and targets .NET 6.0.
 
 ## Installation
-The SDK can be installed by using NuGet or by compiling from source. These two alternatives are outlined below.
 
-### Install with NuGet
-If unfamiliar with NuGet, please take a look at the [NuGet documentation](http://docs.nuget.org/). 
-
-To install the SDK in Visual Studio, right click the **References** for the project and select **Manage NuGet Packages**.
-
-Select the **Browse** or **Online** tab (depending upon the version of Visual Studio) then type **smartsheet** in the search box. Select **smartsheet-csharp-sdk** in the search results and click the **Install** button.
-
-After clicking **Install**, you will be asked to accept the License (Apache). Then it will install the Smartsheet SDK and the dependencies (RestSharp, Newtonsoft.Json, and NLog) by adding these libraries to the **References** section of the project.
-
-You can also use the following command in the **[Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)** to install the SDK:
+To add the SDK to a .Net project
 
 ```dos
-Install-Package smartsheet-csharp-sdk
+dotnet add package smartsheet-csharp-sdk
 ```
-
-### Compile From Source
-You can download and compile the source code for the SDK from Github. Use [git](http://git-scm.com/) to fetch it and 
-use Visual Studio 2017 or later to build it.
-
-```dos
-git clone https://github.com/smartsheet/smartsheet-csharp-sdk.git
-```
-
-In Visual Studio 2017 you can open the entire solution with the file **smartsheet-csharp-sdk-v2.sln**, or open the specific 
-project **smartsheet-csharp-sdk-v2.csproj**.
 
 ## Example Usage
 To call the API, you will need an *access token*, which looks something like this example: ll352u9jujauoqz4gstvsae05. You can find the access token in the UI at Account > Personal Settings > API Access.
@@ -73,37 +52,19 @@ using Smartsheet.Api.Models;
 
 static void Sample()
 {
-    // Initialize client
     SmartsheetClient smartsheet = new SmartsheetBuilder()
         // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
         // .SetAccessToken("JKlMNOpQ12RStUVwxYZAbcde3F5g6hijklM789")
         .Build();
 
-    // List all sheets
-    PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(
-        null,               // IEnumerable<SheetInclusion> includes
-        null,               // PaginationParameters
-        null                // Nullable<DateTime> modifiedSince = null
-    );
+    PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(null, null, null);
     Console.WriteLine("Found " + sheets.TotalCount + " sheets");
 
-    long sheetId = (long) sheets.Data[0].Id;                // Default to first sheet
-
-    // sheetId = 567034672138842;                         // TODO: Uncomment if you wish to read a specific sheet
+    long sheetId = (long) sheets.Data[0].Id;
 
     Console.WriteLine("Loading sheet id: " + sheetId);
 
-    // Load the entire sheet
-    var sheet = smartsheet.SheetResources.GetSheet(
-        5670346721388420,           // long sheetId
-        null,                       // IEnumerable<SheetLevelInclusion> includes
-        null,                       // IEnumerable<SheetLevelExclusion> excludes
-        null,                       // IEnumerable<long> rowIds
-        null,                       // IEnumerable<int> rowNumbers
-        null,                       // IEnumerable<long> columnIds
-        null,                       // Nullable<long> pageSize
-        null                        // Nullable<long> page
-    );
+    var sheet = smartsheet.SheetResources.GetSheet(sheetId, null, null, null, null, null, null, null);
     Console.WriteLine("Loaded " + sheet.Rows.Count + " rows from sheet: " + sheet.Name);
 }
 ```
@@ -115,21 +76,7 @@ For details about logging, testing, how to use a passthrough option, and how to 
 ## Documentation
 The full Smartsheet API documentation is here: https://smartsheet.redoc.ly.
 
-The generated SDK class documentation is here: [https://smartsheet.github.io/smartsheet-csharp-sdk/](https://smartsheet.github.io/smartsheet-csharp-sdk/).
-
-## Contributing
-If you would like to contribute a change to the SDK, please fork a branch and then submit a pull request. [More info here.](https://help.github.com/articles/using-pull-requests)
-
-## Version Numbers
-Starting from the v2.68.0 release, Smartsheet SDKs will use a new versioning strategy. Since all users are on the 
-Smartsheet API 2.0, the SDK version numbers will start with 2. The 2nd number will be an internal reference number.
-The 3rd number is for incremental changes.
-
-For example, v2.68.0 means that you are using our 2.0 version of the API, the API is synced internally to a tag of 68,
-and then if there are numbers after the last decimal, that will indicate a minor change.
-
-## Support
-If you have any questions or issues with this SDK please post on [StackOverflow using the tag "smartsheet-api"](http://stackoverflow.com/questions/tagged/smartsheet-api) or contact us directly at sdk@smartsheet.com.
+The generated SDK class documentation is here: [https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html](https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html).
 
 ## Release Notes
 
