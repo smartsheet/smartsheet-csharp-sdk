@@ -53,7 +53,7 @@ For details about logging, testing, how to use a passthrough option, and how to 
 ## Documentation
 The full Smartsheet API documentation is here: https://smartsheet.redoc.ly.
 
-The generated SDK class documentation is here: [https://smartsheet.github.io/smartsheet-csharp-sdk/](https://smartsheet.github.io/smartsheet-csharp-sdk/).
+The generated SDK class documentation is here: [https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html](https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html).
 
 ## Release Notes
 
