@@ -23,16 +23,15 @@ jobs:
       - name: Build
         working-directory: ./smartsheet-csharp-sdk
         run: dotnet build --configuration Release --no-restore
-      - name: Clone smartsheet/smartsheet-sdk-tests PRIVATE repository
+      - name: Clone smartsheet/smartsheet-sdk-tests PUBLIC repository
         uses: GuillaumeFalourd/clone-github-repo-action@v2
         with:
           owner: 'smartsheet'
           repository: 'smartsheet-sdk-tests'
-          access-token: ${{ secrets.SDK_TEST_ACCESS_TOKEN }}
       - name: Setup Mock API
         run: |
-          smartsheet-sdk-tests/travis_scripts/install_wiremock.sh
-          smartsheet-sdk-tests/travis_scripts/start_wiremock.sh
+          smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
+          smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
       - name: Run Mock API Tests
         working-directory: ./mock-api-test-sdk-net60
         run: |
