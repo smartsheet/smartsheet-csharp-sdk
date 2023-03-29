@@ -34,7 +34,7 @@ jobs:
           smartsheet-sdk-tests/travis_scripts/install_wiremock.sh
           smartsheet-sdk-tests/travis_scripts/start_wiremock.sh
       - name: Run Mock API Tests
-        working-directory: ./mock-api-test-sdk-net60
+        working-directory: ./mock-api-test-sdk-net70
         run: |
           dotnet build --configuration Release --no-restore
           dotnet test --no-restore
