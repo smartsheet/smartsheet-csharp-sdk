@@ -59,6 +59,10 @@ The generated SDK class documentation is here: [https://smartsheet.github.io/sma
 
 All releases and release notes are available on [Github](https://github.com/smartsheet/smartsheet-csharp-sdk/releases) or the [NuGet repository](https://www.nuget.org/packages/smartsheet-csharp-sdk/).
 
+## Developer Agreement
+
+Review the [Developer Program Agreement](https://www.smartsheet.com/legal/developer-program-agreement).
+
 ## Acknowledgements
 
 We would like to thank the following people for their contributions to this project:
