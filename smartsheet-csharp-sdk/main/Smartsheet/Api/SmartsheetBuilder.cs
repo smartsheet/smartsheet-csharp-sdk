@@ -103,6 +103,13 @@ namespace Smartsheet.Api
         public const string GOV_BASE_URI = "https://api.smartsheetgov.com/2.0/";
 
         /// <summary>
+        /// <para>Represents the environment variable for locating the Smartsheet API access token.</para>
+        /// 
+        /// <para>It is a constant with Value "SMARTSHEET_ACCESS_TOKEN".</para>
+        /// </summary>
+        public const string SMARTSHEET_ACCESS_TOKEN = "SMARTSHEET_ACCESS_TOKEN";
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public SmartsheetBuilder()
@@ -265,7 +272,9 @@ namespace Smartsheet.Api
 
             if (accessToken == null)
             {
-                accessToken = Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN");
+                accessToken = Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.Process) ??
+                    Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.User) ??
+                    Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.Machine);
             }
 
             SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut);
