@@ -71,7 +71,7 @@ namespace Smartsheet.Api.Internal.Http
 
         /// <summary>
         /// The http response. </summary>
-        private IRestResponse restResponse;
+        private RestResponse restResponse;
 
         /// <summary>
         /// 
@@ -88,9 +88,12 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DefaultHttpClient()
-            : this(new RestClient(), new JsonNetSerializer())
-        {
+        public DefaultHttpClient(){
+            RestClientOptions options = new RestClientOptions();
+            options.FollowRedirects = true;
+            
+            this(new RestClient(options), new JsonNetSerializer());
+    
         }
 
         /// <summary>
@@ -107,7 +110,7 @@ namespace Smartsheet.Api.Internal.Http
             Util.ThrowIfNull(httpClient);
 
             this.httpClient = httpClient;
-            this.httpClient.FollowRedirects = true;
+            //this.httpClient.FollowRedirects = true;
             this.jsonSerializer = jsonSerializer;
         }
 
@@ -429,7 +432,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="request"></param>
         /// <param name="response"></param>
         /// <param name="durationMs"></param>
-        public virtual void LogRequest(IRestRequest request, IRestResponse response, long durationMs)
+        public virtual void LogRequest(RestRequest request, RestResponse response, long durationMs)
         {
             logger.Info(() =>
             {

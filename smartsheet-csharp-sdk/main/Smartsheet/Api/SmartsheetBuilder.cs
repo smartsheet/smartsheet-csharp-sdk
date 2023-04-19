@@ -265,7 +265,9 @@ namespace Smartsheet.Api
 
             if (accessToken == null)
             {
-                accessToken = Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN");
+                accessToken = Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN", EnvironmentVariableTarget.Process) ??
+                    Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN", EnvironmentVariableTarget.User) ??
+                    Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN", EnvironmentVariableTarget.Machine);
             }
 
             SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut);
