@@ -88,12 +88,14 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DefaultHttpClient(){
+        public DefaultHttpClient() : this(SetupWithOptions(), new JsonNetSerializer()) {
+        }
+
+        private static RestClient SetupWithOptions() {
             RestClientOptions options = new RestClientOptions();
             options.FollowRedirects = true;
             
-            this(new RestClient(options), new JsonNetSerializer());
-    
+            return new RestClient(options);
         }
 
         /// <summary>
@@ -147,14 +149,14 @@ namespace Smartsheet.Api.Internal.Http
             restRequest.AddFile("file", File.ReadAllBytes(file), new FileInfo(file).Name, fileType);
             if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
             {
-                restRequest.AddParameter(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
+                restRequest.AddBody(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
                     smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
             }
 
             restRequest.AlwaysMultipartFormData = true;
 
             // Set the client base Url.
-            httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
+            httpClient.Options.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
 
             Stopwatch timer = new Stopwatch();
 
