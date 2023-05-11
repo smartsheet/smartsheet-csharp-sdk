@@ -167,8 +167,6 @@ namespace Smartsheet.Api.Internal.Http
 
             
             //httpClient.Options.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-
-            this.httpClient = new RestClient(options);
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
