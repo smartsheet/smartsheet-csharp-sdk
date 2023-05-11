@@ -164,7 +164,7 @@ namespace Smartsheet.Api.Internal.Http
             restRequest.AlwaysMultipartFormData = true;
 
             // Set the client base Url.
-
+            //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
             
             //httpClient.Options.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
             Stopwatch timer = new Stopwatch();
@@ -253,7 +253,7 @@ namespace Smartsheet.Api.Internal.Http
 
                 // Set the client base Url.
                 //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-
+                
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
@@ -485,15 +485,15 @@ namespace Smartsheet.Api.Internal.Http
                         }
                         else 
                         {
-                            body = System.Text.Encoding.UTF8.GetString((byte[])body_element[0].Value);
+                            body = body_element[0].ToString();
                         }
                     }
                     else
                     {
-                        body = string.Format("<< {0} content type suppressed >>", body_element[0].ContentType);
+                        body = string.Format("<< {0} content type suppressed >>", body_element[0].ToString());
                     }
                 }
-                return string.Format("Request Headers {0}Request Body: {1}", builder.ToString(), body);
+                return string.Format("Request Headers {0}Request Body: {1}", builder.ToString(), body.ToString());
             });
             logger.Debug(() =>
             {
