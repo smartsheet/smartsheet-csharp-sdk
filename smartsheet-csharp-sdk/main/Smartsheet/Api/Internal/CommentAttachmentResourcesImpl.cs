@@ -28,7 +28,8 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Http;
     using System.Net;
     using System;
-
+    using System.Threading;
+    using System.Threading.Tasks;
     /// <summary>
     /// <para>
     /// This is the implementation of the CommentAttachmentResources.
@@ -125,7 +126,8 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             Attachment attachment = null;
             switch (response.StatusCode)

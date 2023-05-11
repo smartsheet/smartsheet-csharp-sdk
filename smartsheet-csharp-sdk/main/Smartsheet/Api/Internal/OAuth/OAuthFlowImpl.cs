@@ -47,7 +47,8 @@ namespace Smartsheet.Api.Internal.OAuth
     using System.Security.Cryptography;
     using System.IO;
     using System.Net;
-
+    using System.Threading;
+    using System.Threading.Tasks;
     /// <summary>
     /// Default implementation of OAuthFlow.
     /// 
@@ -353,7 +354,8 @@ namespace Smartsheet.Api.Internal.OAuth
             request.Method = HttpMethod.POST;
             request.Headers = new Dictionary<string, string>();
             request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-            HttpResponse response = httpClient.Request(request);
+            Task<HttpResponse> responseAsTask = httpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             // Create a map of the response
             StreamReader inputStream = response.Entity.GetContent();
@@ -434,7 +436,8 @@ namespace Smartsheet.Api.Internal.OAuth
             // Set authorization header 
             request.Headers = new Dictionary<string, string>();
             request.Headers["Authorization"] = "Bearer " + token.AccessToken;
-            HttpResponse response = httpClient.Request(request);
+            Task<HttpResponse> responseAsTask = httpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
             // Another error by not getting a 200 RequestResult
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -463,7 +466,8 @@ namespace Smartsheet.Api.Internal.OAuth
             // Set authorization header 
             request.Headers = new Dictionary<string, string>();
             request.Headers["Authorization"] = "Bearer " + token.AccessToken;
-            HttpResponse response = httpClient.Request(request);
+            Task<HttpResponse> responseAsTask = httpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
             // Another error by not getting a 200 RequestResult
             if (response.StatusCode != HttpStatusCode.OK)
             {

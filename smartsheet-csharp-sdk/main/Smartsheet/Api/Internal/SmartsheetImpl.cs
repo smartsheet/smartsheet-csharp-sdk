@@ -365,8 +365,8 @@ namespace Smartsheet.Api.Internal
         {
             get { return changeAgent; }
             set { this.changeAgent = value; }
-        }
-
+         }
+         
         /// <summary>
         /// Set the RestSharp default user agent
         /// </summary>

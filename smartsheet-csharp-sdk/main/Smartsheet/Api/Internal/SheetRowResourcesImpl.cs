@@ -26,7 +26,8 @@ namespace Smartsheet.Api.Internal
     using System.Net;
     using System;
     using System.Text;
-
+    using System.Threading;
+    using System.Threading.Tasks;
     /// <summary>
     /// This is the implementation of the SheetRowResources.
     /// 
@@ -119,7 +120,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<Row>>(rows);
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             BulkItemRowResult bulkItemResult = null;
             switch (response.StatusCode)
@@ -346,7 +348,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<Row>>(rows);
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             BulkItemRowResult bulkItemResult = null;
             switch (response.StatusCode)

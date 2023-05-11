@@ -24,6 +24,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api.Internal
 {
@@ -76,7 +78,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<ImageUrl>>(requestUrls);
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             ImageUrlMap obj = null;
             switch (response.StatusCode)

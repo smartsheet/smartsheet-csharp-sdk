@@ -23,7 +23,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
-
+using System.Threading;
+using System.Threading.Tasks;
 namespace Smartsheet.Api.Internal
 {
     /// <summary>
@@ -127,7 +128,8 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             Attachment attachment = null;
             switch (response.StatusCode)

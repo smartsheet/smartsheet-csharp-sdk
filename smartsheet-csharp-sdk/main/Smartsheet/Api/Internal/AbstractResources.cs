@@ -31,6 +31,8 @@ namespace Smartsheet.Api.Internal
     using HttpRequest = Api.Internal.Http.HttpRequest;
     using HttpResponse = Api.Internal.Http.HttpResponse;
     using Utils = Api.Internal.Utility.Utility;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// This is the base class of the SmartsheetClient REST API resources.
@@ -203,8 +205,8 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
-
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
             Object obj = null;
 
             switch (response.StatusCode)
@@ -269,8 +271,9 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
-
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
+            
             Object obj = null;
             switch (response.StatusCode)
             {
@@ -321,7 +324,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             Object obj = null;
             switch (response.StatusCode)
@@ -366,7 +370,8 @@ namespace Smartsheet.Api.Internal
             }
 
             request.Entity = serializeToEntity<T>(@object);
-            HttpResponse response = this.smartsheet.HttpClient.Request(request, objectType, file, fileType);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request, objectType, file, fileType);
+            HttpResponse response = responseAsTask.Result;
 
             Object obj = null;
             switch (response.StatusCode)
@@ -419,7 +424,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             Object obj = null;
             switch (response.StatusCode)
@@ -467,7 +473,8 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             PaginatedResult<T> obj = null;
             switch (response.StatusCode)
@@ -516,7 +523,8 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             IList<T> obj = null;
             switch (response.StatusCode)
@@ -563,7 +571,10 @@ namespace Smartsheet.Api.Internal
             {
                 throw new SmartsheetException(e);
             }
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
+
             Object obj = null;
             switch (response.StatusCode)
             {
@@ -609,7 +620,8 @@ namespace Smartsheet.Api.Internal
             {
                 throw new SmartsheetException(e);
             }
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             switch (response.StatusCode)
             {
@@ -662,7 +674,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPost);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             IList<S> obj = null;
             switch (response.StatusCode)
@@ -713,7 +726,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPut);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             IList<S> obj = null;
             switch (response.StatusCode)
@@ -773,7 +787,8 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            HttpResponse response = smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             Object obj = null;
             switch (response.StatusCode)

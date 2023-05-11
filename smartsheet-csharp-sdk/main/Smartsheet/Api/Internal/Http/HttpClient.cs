@@ -15,7 +15,8 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 //    %[license]
-
+using System.Threading;
+using System.Threading.Tasks;
 namespace Smartsheet.Api.Internal.Http
 {
     /// <summary>
@@ -35,7 +36,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        HttpResponse Request(HttpRequest request, string objectType, string file, string fileType);
+        Task<HttpResponse> Request(HttpRequest request, string objectType, string file, string fileType);
 
         /// <summary>
         /// Make an HTTP request and return the response.
@@ -50,7 +51,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="request"> the request </param>
         /// <returns> the http response </returns>
         /// <exception cref="HttpClientException"> the http client exception </exception>
-        HttpResponse Request(HttpRequest request);
+        Task<HttpResponse> Request(HttpRequest request);
 
         /// <summary>
         /// Release connection.

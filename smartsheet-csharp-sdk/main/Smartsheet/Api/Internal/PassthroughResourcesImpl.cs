@@ -22,7 +22,8 @@ using System.Net;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
+using System.Threading.Tasks;
 namespace Smartsheet.Api.Internal
 {
     using HttpEntity = Api.Internal.Http.HttpEntity;
@@ -142,7 +143,8 @@ namespace Smartsheet.Api.Internal
                 request.Entity = entity;
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             string res = null;
             switch (response.StatusCode)

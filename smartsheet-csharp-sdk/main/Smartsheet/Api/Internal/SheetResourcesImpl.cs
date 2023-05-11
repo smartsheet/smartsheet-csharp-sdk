@@ -34,7 +34,8 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Util;
     using System.Text;
     using Smartsheet.Api.Internal.Http;
-
+    using System.Threading;
+    using System.Threading.Tasks;
     /// <summary>
     /// This is the implementation of the SheetResources.
     /// 
@@ -665,7 +666,8 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<SortSpecifier>(sortSpecifier);
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             Object obj = null;
             switch (response.StatusCode)
@@ -872,7 +874,8 @@ namespace Smartsheet.Api.Internal
             request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path.ToString()), HttpMethod.GET);
             request.Headers["Accept"] = contentType;
 
-            Api.Internal.Http.HttpResponse response = Smartsheet.HttpClient.Request(request);
+            Task<Api.Internal.Http.HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            Api.Internal.Http.HttpResponse response = responseAsTask.Result;
 
             switch (response.StatusCode)
             {

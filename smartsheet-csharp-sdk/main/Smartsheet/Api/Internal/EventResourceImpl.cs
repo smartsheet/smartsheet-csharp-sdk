@@ -24,6 +24,8 @@ using Smartsheet.Api.Internal.Util;
 using System.IO;
 using Smartsheet.Api.Internal.Http;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api.Internal
 {
@@ -110,7 +112,8 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             EventResult obj = null;
             switch (response.StatusCode)

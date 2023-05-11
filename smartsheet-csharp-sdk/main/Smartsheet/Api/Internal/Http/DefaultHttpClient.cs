@@ -32,6 +32,7 @@ namespace Smartsheet.Api.Internal.Http
     using System.Diagnostics;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using NLog;
 
     /// <summary>
@@ -46,9 +47,9 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Represents the underlying http client.
         /// 
-        /// It will be initialized in constructor and will not change afterwards.
+        /// It will be initialized in constructor and will not change afterwards. (might now....)
         /// </summary>
-        protected readonly RestClient httpClient;
+        protected RestClient httpClient;
 
         /// <summary>
         /// static logger 
@@ -74,6 +75,10 @@ namespace Smartsheet.Api.Internal.Http
         private RestResponse restResponse;
 
         /// <summary>
+        /// UserAgent. </summary>
+        private String userAgent;
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="previousAttempts"></param>
@@ -94,7 +99,6 @@ namespace Smartsheet.Api.Internal.Http
         private static RestClient SetupWithOptions() {
             RestClientOptions options = new RestClientOptions();
             options.FollowRedirects = true;
-            
             return new RestClient(options);
         }
 
@@ -125,7 +129,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
+        public virtual async Task<HttpResponse> Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -149,20 +153,31 @@ namespace Smartsheet.Api.Internal.Http
             restRequest.AddFile("file", File.ReadAllBytes(file), new FileInfo(file).Name, fileType);
             if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
             {
-                restRequest.AddBody(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
-                    smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
+                //restRequest.AddParameter(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
+                //    smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
+                
+                BodyParameter bodyParameter = new BodyParameter(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
+                    smartsheetRequest.Entity.ContentType);
+                restRequest.AddParameter(bodyParameter);
             }
 
             restRequest.AlwaysMultipartFormData = true;
 
             // Set the client base Url.
-            httpClient.Options.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
 
+            
+            //httpClient.Options.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
+            // TODO: Test this use with the base url and simple factory given out by RestSharp.
+            RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
+            options.FollowRedirects = true;
+            options.UserAgent = this.userAgent;
+
+            this.httpClient = new RestClient(options);
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
             timer.Start();
-            restResponse = httpClient.Execute(restRequest);
+            RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest);
             timer.Stop();
 
             LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -185,7 +200,10 @@ namespace Smartsheet.Api.Internal.Http
             {
                 HttpEntity entity = new HttpEntity();
                 entity.ContentType = restResponse.ContentType;
-                entity.ContentLength = restResponse.ContentLength;
+                if (restResponse.ContentLength != null) {
+                    entity.ContentLength = restResponse.ContentLength.Value;
+                }
+                
 
                 entity.Content = restResponse.RawBytes;
                 smartsheetResponse.Entity = entity;
@@ -200,7 +218,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="smartsheetRequest"> the Smartsheet request </param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        public virtual HttpResponse Request(HttpRequest smartsheetRequest)
+        public virtual async Task<HttpResponse> Request(HttpRequest smartsheetRequest)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -231,18 +249,27 @@ namespace Smartsheet.Api.Internal.Http
 
                 if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
                 {
-                    restRequest.AddParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), 
-                        smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
+                    //restRequest.AddParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), 
+                    //    smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
+
+                    BodyParameter param = (BodyParameter) Parameter.CreateParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()),
+                    ParameterType.RequestBody);
+                    restRequest = restRequest.AddBody(param);
                 }
 
                 // Set the client base Url.
-                httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
+                //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
+                // TODO: Test this use with the base url and simple factory given out by RestSharp.
+                RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
+                options.FollowRedirects = true;
+                options.UserAgent = this.userAgent;
+                this.httpClient = new RestClient(options);
 
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
                 timer.Start();
-                restResponse = httpClient.Execute(restRequest);
+                RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest);
                 timer.Stop();
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -265,7 +292,10 @@ namespace Smartsheet.Api.Internal.Http
                 {
                     HttpEntity entity = new HttpEntity();
                     entity.ContentType = restResponse.ContentType;
-                    entity.ContentLength = restResponse.ContentLength;
+                    if (restResponse.ContentLength != null) {
+                        entity.ContentLength = restResponse.ContentLength.Value;
+                    }
+                    
 
                     entity.Content = restResponse.RawBytes;
                     smartsheetResponse.Entity = entity;
@@ -297,19 +327,19 @@ namespace Smartsheet.Api.Internal.Http
             // Create HTTP request based on the smartsheetRequest request Type
             if (HttpMethod.GET == smartsheetRequest.Method)
             {
-                restRequest = new RestRequest(smartsheetRequest.Uri, Method.GET);
+                restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Get);
             }
             else if (HttpMethod.POST == smartsheetRequest.Method)
             {
-                restRequest = new RestRequest(smartsheetRequest.Uri, Method.POST);
+                restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Post);
             }
             else if (HttpMethod.PUT == smartsheetRequest.Method)
             {
-                restRequest = new RestRequest(smartsheetRequest.Uri, Method.PUT);
+                restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Put);
             }
             else if (HttpMethod.DELETE == smartsheetRequest.Method)
             {
-                restRequest = new RestRequest(smartsheetRequest.Uri, Method.DELETE);
+                restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Delete);
             }
             else
             {
@@ -409,7 +439,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="userAgent"></param>
         public void SetUserAgent(string userAgent)
         {
-            this.httpClient.UserAgent = userAgent;
+            this.userAgent = userAgent;
         }
 
         /// <summary>

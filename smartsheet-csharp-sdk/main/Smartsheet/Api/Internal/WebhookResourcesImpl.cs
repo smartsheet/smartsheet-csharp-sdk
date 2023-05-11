@@ -27,7 +27,8 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Models;
     using Smartsheet.Api.Internal.Util;
     using Api.Internal.Http;
-
+    using System.Threading;
+    using System.Threading.Tasks;
     public class WebhookResourcesImpl : AbstractResources, WebhookResources
     {
         /// <summary>
@@ -164,7 +165,8 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = responseAsTask.Result;
 
             WebhookSharedSecret secret = null;
             switch (response.StatusCode)
