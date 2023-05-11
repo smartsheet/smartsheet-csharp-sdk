@@ -167,10 +167,6 @@ namespace Smartsheet.Api.Internal.Http
 
             
             //httpClient.Options.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-            // TODO: Test this use with the base url and simple factory given out by RestSharp.
-            RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
-            options.FollowRedirects = true;
-            options.UserAgent = this.userAgent;
 
             this.httpClient = new RestClient(options);
             Stopwatch timer = new Stopwatch();
@@ -259,11 +255,6 @@ namespace Smartsheet.Api.Internal.Http
 
                 // Set the client base Url.
                 //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-                // TODO: Test this use with the base url and simple factory given out by RestSharp.
-                RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
-                options.FollowRedirects = true;
-                options.UserAgent = this.userAgent;
-                this.httpClient = new RestClient(options);
 
                 Stopwatch timer = new Stopwatch();
 
