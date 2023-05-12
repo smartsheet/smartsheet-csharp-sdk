@@ -22,7 +22,7 @@
   <ItemGroup>
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
-    <PackageReference Include="RestSharp" Version="107.0.1" />
+    <PackageReference Include="RestSharp" Version="109.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLog" Version="5.0.5" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
