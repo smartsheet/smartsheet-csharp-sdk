@@ -97,9 +97,9 @@ namespace Smartsheet.Api.Internal.Http
         }
 
         private static RestClient SetupWithOptions() {
-            RestClientOptions options = new RestClientOptions();
+            RestClientOptions options = new RestClientOptions(SmartsheetBuilder.DEFAULT_BASE_URI);
             options.FollowRedirects = true;
-            return new RestClient(options);
+            return new RestClient(options, null, null, true);
         }
 
         /// <summary>
@@ -165,8 +165,9 @@ namespace Smartsheet.Api.Internal.Http
 
             // Set the client base Url.
             //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-            
-            //httpClient.Options.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
+            RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
+            options.FollowRedirects = true;
+            this.httpClient = new RestClient(options, null, null, true);
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
@@ -246,14 +247,15 @@ namespace Smartsheet.Api.Internal.Http
                     //restRequest.AddParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), 
                     //    smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
 
-                    BodyParameter param = (BodyParameter) Parameter.CreateParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()),
-                    ParameterType.RequestBody);
+                    BodyParameter param = new BodyParameter(smartsheetRequest.Entity.ToString(), Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), smartsheetRequest.Entity.ContentType);
                     restRequest = restRequest.AddBody(param);
                 }
 
                 // Set the client base Url.
                 //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-                
+                RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
+                options.FollowRedirects = true;
+                this.httpClient = new RestClient(options, null, null, true);
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
@@ -265,7 +267,15 @@ namespace Smartsheet.Api.Internal.Http
 
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
-                    throw new HttpClientException("There was an issue connecting.");
+                    StringBuilder builder = new StringBuilder();
+                    builder.Append(" Smartsheet request URI is " + smartsheetRequest.Uri);
+                    builder.Append(" Smartsheet request method is " + smartsheetRequest.Method);
+                    builder.Append(" There was an issue connecting." +
+                     " RestResponse code is " + restResponse.StatusCode.ToString() + 
+                     " RestResponse ErrorMessage is " + restResponse.ErrorMessage);
+
+                    throw new HttpClientException(builder.ToString());
+                    //throw new HttpClientException("There was an issue connecting.");
                 }
 
                 // Set returned Headers
@@ -457,8 +467,8 @@ namespace Smartsheet.Api.Internal.Http
         {
             logger.Info(() =>
             {
-                return string.Format("{0} {1}, Response Code:{2}, Request completed in {3} ms", 
-                    request.Method.ToString(), httpClient.BuildUri(request), response.StatusCode, durationMs);
+                //return string.Format("{0} {1}, Response Code:{2}, Request completed in {3} ms", 
+                //    request.Method.ToString(), httpClient.BuildUri(request), response.StatusCode, durationMs);
             });
             logger.Debug(() =>
             {
@@ -477,7 +487,7 @@ namespace Smartsheet.Api.Internal.Http
                 var body_element = request.Parameters.Where(parameter => parameter.Type == ParameterType.RequestBody).ToList();
                 if (body_element.Count() > 0)
                 {
-                    if (body_element[0].ContentType != null && body_element[0].ContentType.Contains("application/json"))
+                    if (body_element[0].ContentType != null /*&& body_element[0].ContentType.Contains("application/json")*/)
                     {
                         if(body_element[0].Value.GetType() == typeof(string)) 
                         {
