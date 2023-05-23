@@ -282,8 +282,7 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             SummaryField summaryField = null;
             switch (response.StatusCode)
@@ -321,8 +320,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<SummaryField>>(fields);
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             BulkItemResult<SummaryField> bulkItemResult = null;
             switch (response.StatusCode)

@@ -120,8 +120,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<Row>>(rows);
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             BulkItemRowResult bulkItemResult = null;
             switch (response.StatusCode)
@@ -348,8 +347,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<Row>>(rows);
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             BulkItemRowResult bulkItemResult = null;
             switch (response.StatusCode)

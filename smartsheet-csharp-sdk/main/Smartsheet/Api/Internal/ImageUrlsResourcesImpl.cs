@@ -78,8 +78,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<ImageUrl>>(requestUrls);
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             ImageUrlMap obj = null;
             switch (response.StatusCode)

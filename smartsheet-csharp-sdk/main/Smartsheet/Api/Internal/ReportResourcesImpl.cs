@@ -290,8 +290,7 @@ namespace Smartsheet.Api.Internal
             request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path), HttpMethod.GET);
             request.Headers["Accept"] = contentType;
 
-            Task<Api.Internal.Http.HttpResponse> responseAsTask = Smartsheet.HttpClient.Request(request);
-            Api.Internal.Http.HttpResponse response = responseAsTask.Result;
+            Api.Internal.Http.HttpResponse response = Smartsheet.HttpClient.Request(request);
             
             switch (response.StatusCode)
             {

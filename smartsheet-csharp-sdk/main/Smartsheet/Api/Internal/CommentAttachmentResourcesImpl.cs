@@ -126,8 +126,7 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             Attachment attachment = null;
             switch (response.StatusCode)

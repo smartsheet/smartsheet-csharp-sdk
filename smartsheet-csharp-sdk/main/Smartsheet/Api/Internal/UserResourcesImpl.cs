@@ -367,8 +367,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -435,8 +434,7 @@ namespace Smartsheet.Api.Internal
             request.Entity = entity;
 
             User obj = null;
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             switch (response.StatusCode)
             {

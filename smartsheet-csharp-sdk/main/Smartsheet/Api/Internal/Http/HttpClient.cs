@@ -36,7 +36,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        Task<HttpResponse> Request(HttpRequest request, string objectType, string file, string fileType);
+        HttpResponse Request(HttpRequest request, string objectType, string file, string fileType);
 
         /// <summary>
         /// Make an HTTP request and return the response.
@@ -51,7 +51,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="request"> the request </param>
         /// <returns> the http response </returns>
         /// <exception cref="HttpClientException"> the http client exception </exception>
-        Task<HttpResponse> Request(HttpRequest request);
+        HttpResponse Request(HttpRequest request);
 
         /// <summary>
         /// Release connection.

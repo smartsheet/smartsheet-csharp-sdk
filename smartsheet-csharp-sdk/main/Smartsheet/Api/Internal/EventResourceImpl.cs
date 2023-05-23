@@ -112,8 +112,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             EventResult obj = null;
             switch (response.StatusCode)

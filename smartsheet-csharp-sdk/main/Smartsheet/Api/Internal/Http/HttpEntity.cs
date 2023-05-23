@@ -18,6 +18,7 @@
 
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 namespace Smartsheet.Api.Internal.Http
 {
 
@@ -89,6 +90,21 @@ namespace Smartsheet.Api.Internal.Http
             if (content == null) { content = new byte[0]; }
 
             return new StreamReader(new MemoryStream(content));
+        }
+
+        public string GetContentAsString() 
+        {
+            StreamReader reader = this.GetContent();
+            string line;
+    
+            List<string> lines = new List<string>();
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                lines.Add(line);
+            }
+
+            return string.Concat(lines);
         }
 
         public BinaryReader GetBinaryContent()

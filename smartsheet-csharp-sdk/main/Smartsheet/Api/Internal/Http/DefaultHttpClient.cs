@@ -120,6 +120,14 @@ namespace Smartsheet.Api.Internal.Http
             this.jsonSerializer = jsonSerializer;
         }
 
+
+        public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
+            var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
+            task.Wait(); // Blocks current thread until GetFooAsync task completes
+                         // For pedagogical use only: in general, don't do this!
+            var result = task.Result;
+            return result;
+        }
         /// <summary>
         /// Make a multipart HTTP request and return the response.
         /// </summary>
@@ -129,7 +137,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        public virtual async Task<HttpResponse> Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
+        private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -172,7 +180,9 @@ namespace Smartsheet.Api.Internal.Http
 
             // Make the HTTP request
             timer.Start();
-            RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest);
+            Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
+            restResponseAsTask.Wait();
+            restResponse = restResponseAsTask.Result;
             timer.Stop();
 
             LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -207,13 +217,21 @@ namespace Smartsheet.Api.Internal.Http
             return smartsheetResponse;
         }
 
+
+        public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
+            var task = this.RequestAsync(smartsheetRequest);
+            task.Wait(); // Blocks current thread until GetFooAsync task completes
+                         // For pedagogical use only: in general, don't do this!
+            var result = task.Result;
+            return result;
+        }
         /// <summary>
         /// Make an HTTP request and return the response.
         /// </summary>
         /// <param name="smartsheetRequest"> the Smartsheet request </param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        public virtual async Task<HttpResponse> Request(HttpRequest smartsheetRequest)
+        private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -241,41 +259,67 @@ namespace Smartsheet.Api.Internal.Http
                         restRequest.AddHeader(header.Key, header.Value);
                     }
                 }
-
+                Boolean bodyAdded = false;
                 if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
                 {
                     //restRequest.AddParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), 
                     //    smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
+                    bodyAdded = true;
+                    if (smartsheetRequest.Entity.ContentType == "application/json") {
+                        restRequest = restRequest.AddStringBody(smartsheetRequest.Entity.GetContentAsString(), ContentType.Json);
+                        // JsonParameter param = new JsonParameter();
+                        // restRequest = restRequest.AddBody(param);
+                    } else {
+  
+                        BodyParameter param = new BodyParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), smartsheetRequest.Entity.ContentType);
+                        restRequest = restRequest.AddBody(param);
+                    }
 
-                    BodyParameter param = new BodyParameter(smartsheetRequest.Entity.ToString(), Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), smartsheetRequest.Entity.ContentType);
-                    restRequest = restRequest.AddBody(param);
                 }
 
                 // Set the client base Url.
                 //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-                RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
+                Uri baseUrlAsURI = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
+                RestClientOptions options = new RestClientOptions(baseUrlAsURI);
                 options.FollowRedirects = true;
                 this.httpClient = new RestClient(options, null, null, true);
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
                 timer.Start();
-                RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest);
+                Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
+                restResponseAsTask.Wait();
+                restResponse = restResponseAsTask.Result;
                 timer.Stop();
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
 
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
-                    StringBuilder builder = new StringBuilder();
-                    builder.Append(" Smartsheet request URI is " + smartsheetRequest.Uri);
-                    builder.Append(" Smartsheet request method is " + smartsheetRequest.Method);
-                    builder.Append(" There was an issue connecting." +
-                     " RestResponse code is " + restResponse.StatusCode.ToString() + 
-                     " RestResponse ErrorMessage is " + restResponse.ErrorMessage);
+                    Boolean debugging = true;
+                    if (debugging) {
+                        StringBuilder builder = new StringBuilder();
+                        builder.Append(" Smartsheet request URI is " + smartsheetRequest.Uri + "\n");
+                        foreach (KeyValuePair<string, string> header in smartsheetRequest.Headers)
+                        {
+                            builder.Append("Headers: " + "\n");
+                            builder.Append("Key: " +  header.Key + " Value: " + header.Value + "\n");
+                        }
+                        builder.Append(" baseUrlAsURI is " + baseUrlAsURI.ToString() + "\n");
+                        builder.Append(" Smartsheet request method is " + smartsheetRequest.Method + "\n");
+                        builder.Append(" Was there a body added??? " + bodyAdded.ToString() + "\n");
+                        builder.Append(" Was there a body entity content type: " + smartsheetRequest.Entity.ContentType + "\n");
+                        builder.Append(" Was there a body entity as string : " + smartsheetRequest.Entity.GetContentAsString() + "\n");
+                        builder.Append(" There was an issue connecting.");
+                        builder.Append(" RestResponse code is " + restResponse.StatusCode.ToString() + "\n");
+                        builder.Append(" RestResponse ErrorMessage is " + restResponse.ErrorMessage + "\n");
+                        builder.Append(" RestResponse Content is " + restResponse.Content + "\n");
 
                     throw new HttpClientException(builder.ToString());
-                    //throw new HttpClientException("There was an issue connecting.");
+                    } else {
+                        throw new HttpClientException("There was an issue connecting.");
+                    }
+  
                 }
 
                 // Set returned Headers

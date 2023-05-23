@@ -666,8 +666,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<SortSpecifier>(sortSpecifier);
 
-            Task<HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -874,8 +873,7 @@ namespace Smartsheet.Api.Internal
             request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path.ToString()), HttpMethod.GET);
             request.Headers["Accept"] = contentType;
 
-            Task<Api.Internal.Http.HttpResponse> responseAsTask = this.smartsheet.HttpClient.Request(request);
-            Api.Internal.Http.HttpResponse response = responseAsTask.Result;
+            Api.Internal.Http.HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
             switch (response.StatusCode)
             {

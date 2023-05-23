@@ -354,8 +354,7 @@ namespace Smartsheet.Api.Internal.OAuth
             request.Method = HttpMethod.POST;
             request.Headers = new Dictionary<string, string>();
             request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-            Task<HttpResponse> responseAsTask = httpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = httpClient.Request(request);
 
             // Create a map of the response
             StreamReader inputStream = response.Entity.GetContent();
@@ -436,8 +435,7 @@ namespace Smartsheet.Api.Internal.OAuth
             // Set authorization header 
             request.Headers = new Dictionary<string, string>();
             request.Headers["Authorization"] = "Bearer " + token.AccessToken;
-            Task<HttpResponse> responseAsTask = httpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response  = httpClient.Request(request);
             // Another error by not getting a 200 RequestResult
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -466,8 +464,7 @@ namespace Smartsheet.Api.Internal.OAuth
             // Set authorization header 
             request.Headers = new Dictionary<string, string>();
             request.Headers["Authorization"] = "Bearer " + token.AccessToken;
-            Task<HttpResponse> responseAsTask = httpClient.Request(request);
-            HttpResponse response = responseAsTask.Result;
+            HttpResponse response = httpClient.Request(request);
             // Another error by not getting a 200 RequestResult
             if (response.StatusCode != HttpStatusCode.OK)
             {
