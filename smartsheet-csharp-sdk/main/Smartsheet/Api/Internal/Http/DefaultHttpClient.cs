@@ -308,8 +308,11 @@ namespace Smartsheet.Api.Internal.Http
                         builder.Append(" baseUrlAsURI is " + baseUrlAsURI.ToString() + "\n");
                         builder.Append(" Smartsheet request method is " + smartsheetRequest.Method + "\n");
                         builder.Append(" Was there a body added??? " + bodyAdded.ToString() + "\n");
-                        builder.Append(" Was there a body entity content type: " + smartsheetRequest.Entity.ContentType + "\n");
-                        builder.Append(" Was there a body entity as string : " + smartsheetRequest.Entity.GetContentAsString() + "\n");
+                        if (smartsheetRequest.Entity != null) {
+                            builder.Append(" Was there a body entity content type: " + smartsheetRequest.Entity.ContentType + "\n");
+                            builder.Append(" Was there a body entity as string : " + smartsheetRequest.Entity.GetContentAsString() + "\n");
+                        }
+
                         builder.Append(" There was an issue connecting.");
                         builder.Append(" RestResponse code is " + restResponse.StatusCode.ToString() + "\n");
                         builder.Append(" RestResponse ErrorMessage is " + restResponse.ErrorMessage + "\n");
