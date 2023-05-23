@@ -123,8 +123,7 @@ namespace Smartsheet.Api.Internal.Http
 
         public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
             var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
-            task.Wait(); // Blocks current thread until GetFooAsync task completes
-                         // For pedagogical use only: in general, don't do this!
+            task.Wait(); 
             var result = task.Result;
             return result;
         }
@@ -220,8 +219,7 @@ namespace Smartsheet.Api.Internal.Http
 
         public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
             var task = this.RequestAsync(smartsheetRequest);
-            task.Wait(); // Blocks current thread until GetFooAsync task completes
-                         // For pedagogical use only: in general, don't do this!
+            task.Wait(); 
             var result = task.Result;
             return result;
         }
@@ -310,7 +308,7 @@ namespace Smartsheet.Api.Internal.Http
                         builder.Append(" Was there a body added??? " + bodyAdded.ToString() + "\n");
                         if (smartsheetRequest.Entity != null) {
                             builder.Append(" Was there a body entity content type: " + smartsheetRequest.Entity.ContentType + "\n");
-                            builder.Append(" Was there a body entity as string : " + smartsheetRequest.Entity.GetContentAsString() + "\n");
+                        builder.Append(" Was there a body entity as string : " + smartsheetRequest.Entity.GetContentAsString() + "\n");
                         }
 
                         builder.Append(" There was an issue connecting.");
