@@ -30,7 +30,7 @@ namespace Smartsheet.Api.Internal
     using HttpMethod = Api.Internal.Http.HttpMethod;
     using HttpRequest = Api.Internal.Http.HttpRequest;
     using HttpResponse = Api.Internal.Http.HttpResponse;
-    
+
     /// <summary>
     /// This is the implementation of the UserResources.
     /// 
