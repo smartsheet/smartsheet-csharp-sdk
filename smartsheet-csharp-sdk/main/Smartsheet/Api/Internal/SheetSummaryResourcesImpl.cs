@@ -26,6 +26,7 @@ namespace Smartsheet.Api.Internal
     using System.Net;
     using System.IO;
     using System;
+
     /// <summary>
     /// This is the implementation of the SheetSummaryResources.
     /// 
@@ -286,7 +287,7 @@ namespace Smartsheet.Api.Internal
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    summaryField = this.Smartsheet.JsonSerializer.deserializeResult<SummaryField>(response.Entity.GetContent()).Result;
+                    summaryField = this.smartsheet.JsonSerializer.deserializeResult<SummaryField>(response.Entity.GetContent()).Result;
                     break;
                 default:
                     HandleError(response);

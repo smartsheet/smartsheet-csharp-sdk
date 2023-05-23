@@ -270,7 +270,7 @@ namespace Smartsheet.Api.Internal
             request.Entity = serializeToEntity<T>(@object);
 
             HttpResponse response = this.smartsheet.HttpClient.Request(request);
-            
+
             Object obj = null;
             switch (response.StatusCode)
             {

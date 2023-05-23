@@ -28,6 +28,7 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Http;
     using System.Net;
     using System;
+    
     /// <summary>
     /// <para>
     /// This is the implementation of the CommentAttachmentResources.

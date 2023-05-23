@@ -34,6 +34,7 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Util;
     using System.Text;
     using Smartsheet.Api.Internal.Http;
+
     /// <summary>
     /// This is the implementation of the SheetResources.
     /// 
@@ -871,7 +872,7 @@ namespace Smartsheet.Api.Internal
             request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path.ToString()), HttpMethod.GET);
             request.Headers["Accept"] = contentType;
 
-            Api.Internal.Http.HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            Api.Internal.Http.HttpResponse response = Smartsheet.HttpClient.Request(request);
 
             switch (response.StatusCode)
             {

@@ -22,6 +22,7 @@ using System.Net;
 using System.IO;
 using System.Linq;
 using System.Text;
+
 namespace Smartsheet.Api.Internal
 {
     using HttpEntity = Api.Internal.Http.HttpEntity;

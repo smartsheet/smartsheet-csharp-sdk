@@ -47,6 +47,7 @@ namespace Smartsheet.Api.Internal.OAuth
     using System.Security.Cryptography;
     using System.IO;
     using System.Net;
+    
     /// <summary>
     /// Default implementation of OAuthFlow.
     /// 

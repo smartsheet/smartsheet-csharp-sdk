@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Net;
+
 namespace Smartsheet.Api.Internal
 {
     /// <summary>
