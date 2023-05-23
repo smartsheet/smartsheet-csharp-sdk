@@ -24,8 +24,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 namespace Smartsheet.Api.Internal
 {
     /// <summary>
@@ -197,7 +195,7 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             switch (response.StatusCode)
             {

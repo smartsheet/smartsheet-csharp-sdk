@@ -30,8 +30,6 @@ namespace Smartsheet.Api.Internal
     using HttpMethod = Api.Internal.Http.HttpMethod;
     using HttpRequest = Api.Internal.Http.HttpRequest;
     using HttpResponse = Api.Internal.Http.HttpResponse;
-    using System.Threading;
-    using System.Threading.Tasks;
     /// <summary>
     /// This is the implementation of the UserResources.
     /// 
@@ -434,7 +432,7 @@ namespace Smartsheet.Api.Internal
             request.Entity = entity;
 
             User obj = null;
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             switch (response.StatusCode)
             {

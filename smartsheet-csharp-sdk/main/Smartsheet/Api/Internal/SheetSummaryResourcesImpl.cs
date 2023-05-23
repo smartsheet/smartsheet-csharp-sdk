@@ -26,8 +26,6 @@ namespace Smartsheet.Api.Internal
     using System.Net;
     using System.IO;
     using System;
-    using System.Threading;
-    using System.Threading.Tasks;
     /// <summary>
     /// This is the implementation of the SheetSummaryResources.
     /// 
@@ -282,13 +280,13 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             SummaryField summaryField = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    summaryField = this.smartsheet.JsonSerializer.deserializeResult<SummaryField>(response.Entity.GetContent()).Result;
+                    summaryField = this.Smartsheet.JsonSerializer.deserializeResult<SummaryField>(response.Entity.GetContent()).Result;
                     break;
                 default:
                     HandleError(response);
@@ -320,7 +318,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<IEnumerable<SummaryField>>(fields);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             BulkItemResult<SummaryField> bulkItemResult = null;
             switch (response.StatusCode)

@@ -24,8 +24,6 @@ using Smartsheet.Api.Internal.Util;
 using System.IO;
 using Smartsheet.Api.Internal.Http;
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 namespace Smartsheet.Api.Internal
 {
     /// <summary>
@@ -291,7 +289,7 @@ namespace Smartsheet.Api.Internal
             request.Headers["Accept"] = contentType;
 
             Api.Internal.Http.HttpResponse response = Smartsheet.HttpClient.Request(request);
-            
+
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:

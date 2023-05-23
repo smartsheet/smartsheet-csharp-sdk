@@ -47,8 +47,6 @@ namespace Smartsheet.Api.Internal.OAuth
     using System.Security.Cryptography;
     using System.IO;
     using System.Net;
-    using System.Threading;
-    using System.Threading.Tasks;
     /// <summary>
     /// Default implementation of OAuthFlow.
     /// 
@@ -435,7 +433,7 @@ namespace Smartsheet.Api.Internal.OAuth
             // Set authorization header 
             request.Headers = new Dictionary<string, string>();
             request.Headers["Authorization"] = "Bearer " + token.AccessToken;
-            HttpResponse response  = httpClient.Request(request);
+            HttpResponse response = httpClient.Request(request);
             // Another error by not getting a 200 RequestResult
             if (response.StatusCode != HttpStatusCode.OK)
             {

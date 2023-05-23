@@ -24,8 +24,6 @@ namespace Smartsheet.Api.Internal
     using System.IO;
     using System.Net;
     using System.Text;
-    using System.Threading;
-    using System.Threading.Tasks;
     /// <summary>
     /// This is the implementation of the AttachmentVersioningResources.
     /// 
@@ -142,7 +140,7 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             Attachment attachment = null;
             switch (response.StatusCode)

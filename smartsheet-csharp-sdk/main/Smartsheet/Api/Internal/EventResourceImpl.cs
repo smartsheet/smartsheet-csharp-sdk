@@ -24,8 +24,6 @@ using Smartsheet.Api.Internal.Util;
 using System.IO;
 using Smartsheet.Api.Internal.Http;
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Smartsheet.Api.Internal
 {
