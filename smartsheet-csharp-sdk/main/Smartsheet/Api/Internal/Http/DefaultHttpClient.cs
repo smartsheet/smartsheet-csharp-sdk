@@ -158,9 +158,7 @@ namespace Smartsheet.Api.Internal.Http
             restRequest.AddFile("file", File.ReadAllBytes(file), new FileInfo(file).Name, fileType);
             if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
             {
-                //restRequest.AddParameter(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
-                //    smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
-                
+                  
                 BodyParameter bodyParameter = new BodyParameter(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
                     smartsheetRequest.Entity.ContentType);
                 restRequest.AddParameter(bodyParameter);
@@ -255,8 +253,6 @@ namespace Smartsheet.Api.Internal.Http
                 Boolean bodyAdded = false;
                 if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
                 {
-                    //restRequest.AddParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), 
-                    //    smartsheetRequest.Entity.ContentType, ParameterType.RequestBody);
                     bodyAdded = true;
                     if (smartsheetRequest.Entity.ContentType == "application/json") {
                         restRequest = restRequest.AddStringBody(smartsheetRequest.Entity.GetContentAsString(), ContentType.Json);
@@ -309,7 +305,7 @@ namespace Smartsheet.Api.Internal.Http
 
                     throw new HttpClientException(builder.ToString());
                     } else {
-                        throw new HttpClientException("There was an issue connecting.");
+                        throw new HttpClientException("There was an issue connecting. Error response: " + restResponse.ErrorMessage);
                     }
   
                 }
