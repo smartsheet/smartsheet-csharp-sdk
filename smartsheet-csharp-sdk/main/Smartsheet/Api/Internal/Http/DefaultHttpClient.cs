@@ -294,8 +294,8 @@ namespace Smartsheet.Api.Internal.Http
 
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
-                    Boolean debugging = true;
-                    if (debugging) {
+                    Boolean restClientDebugging = false;
+                    if (restClientDebugging) {
                         StringBuilder builder = new StringBuilder();
                         builder.Append(" Smartsheet request URI is " + smartsheetRequest.Uri + "\n");
                         foreach (KeyValuePair<string, string> header in smartsheetRequest.Headers)
