@@ -93,11 +93,11 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DefaultHttpClient() : this(SetupWithOptions(), new JsonNetSerializer()) {
+        public DefaultHttpClient() : this(SetupWithOptions(SmartsheetBuilder.DEFAULT_BASE_URI), new JsonNetSerializer()) {
         }
 
-        private static RestClient SetupWithOptions() {
-            RestClientOptions options = new RestClientOptions(SmartsheetBuilder.DEFAULT_BASE_URI);
+        private static RestClient SetupWithOptions(string baseUri) {
+            RestClientOptions options = new RestClientOptions(baseUri);
             options.FollowRedirects = true;
             return new RestClient(options, null, null, true);
         }
@@ -116,7 +116,6 @@ namespace Smartsheet.Api.Internal.Http
             Util.ThrowIfNull(httpClient);
 
             this.httpClient = httpClient;
-            //this.httpClient.FollowRedirects = true;
             this.jsonSerializer = jsonSerializer;
         }
 
@@ -124,8 +123,7 @@ namespace Smartsheet.Api.Internal.Http
         public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
             var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
             task.Wait(); 
-            var result = task.Result;
-            return result;
+            return task.Result;
         }
         /// <summary>
         /// Make a multipart HTTP request and return the response.
@@ -172,9 +170,7 @@ namespace Smartsheet.Api.Internal.Http
 
             // Set the client base Url.
             //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-            RestClientOptions options = new RestClientOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)));
-            options.FollowRedirects = true;
-            this.httpClient = new RestClient(options, null, null, true);
+            this.httpClient = SetupWithOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)).ToString());
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
@@ -220,8 +216,7 @@ namespace Smartsheet.Api.Internal.Http
         public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
             var task = this.RequestAsync(smartsheetRequest);
             task.Wait(); 
-            var result = task.Result;
-            return result;
+            return task.Result;
         }
         /// <summary>
         /// Make an HTTP request and return the response.
@@ -277,10 +272,7 @@ namespace Smartsheet.Api.Internal.Http
 
                 // Set the client base Url.
                 //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-                Uri baseUrlAsURI = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-                RestClientOptions options = new RestClientOptions(baseUrlAsURI);
-                options.FollowRedirects = true;
-                this.httpClient = new RestClient(options, null, null, true);
+                this.httpClient = SetupWithOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)).ToString());
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
@@ -303,7 +295,6 @@ namespace Smartsheet.Api.Internal.Http
                             builder.Append("Headers: " + "\n");
                             builder.Append("Key: " +  header.Key + " Value: " + header.Value + "\n");
                         }
-                        builder.Append(" baseUrlAsURI is " + baseUrlAsURI.ToString() + "\n");
                         builder.Append(" Smartsheet request method is " + smartsheetRequest.Method + "\n");
                         builder.Append(" Was there a body added??? " + bodyAdded.ToString() + "\n");
                         if (smartsheetRequest.Entity != null) {
