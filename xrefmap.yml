@@ -1910,12 +1910,12 @@ references:
   commentId: F:Smartsheet.Api.Internal.Http.DefaultHttpClient.logger
   fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.logger
   nameWithType: DefaultHttpClient.logger
-- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(IRestRequest,IRestResponse,System.Int64)
-  name: LogRequest(IRestRequest, IRestResponse, Int64)
-  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_LogRequest_IRestRequest_IRestResponse_System_Int64_
-  commentId: M:Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(IRestRequest,IRestResponse,System.Int64)
-  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(IRestRequest, IRestResponse, System.Int64)
-  nameWithType: DefaultHttpClient.LogRequest(IRestRequest, IRestResponse, Int64)
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(RestRequest,RestResponse,System.Int64)
+  name: LogRequest(RestRequest, RestResponse, Int64)
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_LogRequest_RestRequest_RestResponse_System_Int64_
+  commentId: M:Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(RestRequest,RestResponse,System.Int64)
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest(RestRequest, RestResponse, System.Int64)
+  nameWithType: DefaultHttpClient.LogRequest(RestRequest, RestResponse, Int64)
 - uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.LogRequest*
   name: LogRequest
   href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_LogRequest_
@@ -2147,6 +2147,19 @@ references:
   isSpec: "True"
   fullName: Smartsheet.Api.Internal.Http.HttpEntity.GetContent
   nameWithType: HttpEntity.GetContent
+- uid: Smartsheet.Api.Internal.Http.HttpEntity.GetContentAsString
+  name: GetContentAsString()
+  href: api/Smartsheet.Api.Internal.Http.HttpEntity.html#Smartsheet_Api_Internal_Http_HttpEntity_GetContentAsString
+  commentId: M:Smartsheet.Api.Internal.Http.HttpEntity.GetContentAsString
+  fullName: Smartsheet.Api.Internal.Http.HttpEntity.GetContentAsString()
+  nameWithType: HttpEntity.GetContentAsString()
+- uid: Smartsheet.Api.Internal.Http.HttpEntity.GetContentAsString*
+  name: GetContentAsString
+  href: api/Smartsheet.Api.Internal.Http.HttpEntity.html#Smartsheet_Api_Internal_Http_HttpEntity_GetContentAsString_
+  commentId: Overload:Smartsheet.Api.Internal.Http.HttpEntity.GetContentAsString
+  isSpec: "True"
+  fullName: Smartsheet.Api.Internal.Http.HttpEntity.GetContentAsString
+  nameWithType: HttpEntity.GetContentAsString
 - uid: Smartsheet.Api.Internal.Http.HttpMessage
   name: HttpMessage
   href: api/Smartsheet.Api.Internal.Http.HttpMessage.html
@@ -25844,6 +25857,12 @@ references:
   isSpec: "True"
   fullName: Smartsheet.Api.SmartsheetBuilder.SetMaxRetryTimeout
   nameWithType: SmartsheetBuilder.SetMaxRetryTimeout
+- uid: Smartsheet.Api.SmartsheetBuilder.SMARTSHEET_ACCESS_TOKEN
+  name: SMARTSHEET_ACCESS_TOKEN
+  href: api/Smartsheet.Api.SmartsheetBuilder.html#Smartsheet_Api_SmartsheetBuilder_SMARTSHEET_ACCESS_TOKEN
+  commentId: F:Smartsheet.Api.SmartsheetBuilder.SMARTSHEET_ACCESS_TOKEN
+  fullName: Smartsheet.Api.SmartsheetBuilder.SMARTSHEET_ACCESS_TOKEN
+  nameWithType: SmartsheetBuilder.SMARTSHEET_ACCESS_TOKEN
 - uid: Smartsheet.Api.SmartsheetClient
   name: SmartsheetClient
   href: api/Smartsheet.Api.SmartsheetClient.html
