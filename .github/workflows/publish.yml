@@ -26,15 +26,15 @@ jobs:
         owner: 'smartsheet'
         repository: 'smartsheet-sdk-tests'
         access-token: ${{ secrets.SDK_TEST_ACCESS_TOKEN }}
-    #- name: Setup Mock API
-    #  run: |
-    #    smartsheet-sdk-tests/travis_scripts/install_wiremock.sh
-    #    smartsheet-sdk-tests/travis_scripts/start_wiremock.sh
-    #- name: Run Mock API Tests
-    #  working-directory: ./mock-api-test-sdk-net60
-    #  run: |
-    #    dotnet build --configuration Release --no-restore
-    #    dotnet test --no-restore
+    - name: Setup Mock API
+     run: |
+       smartsheet-sdk-tests/travis_scripts/install_wiremock.sh
+       smartsheet-sdk-tests/travis_scripts/start_wiremock.sh
+    - name: Run Mock API Tests
+     working-directory: ./mock-api-test-sdk-net60
+     run: |
+       dotnet build --configuration Release --no-restore
+       dotnet test --no-restore
     - name: Run Integration Tests
       continue-on-error: true
       working-directory: ./integration-test-sdk-net60
