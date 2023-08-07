@@ -254,6 +254,9 @@ namespace Smartsheet.Api.Internal.Http
                 if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
                 {
                     bodyAdded = true;
+
+                    restRequest.AddHeader("Content-Type", "application/json");
+
                     if (smartsheetRequest.Entity.ContentType == "application/json") {
                         restRequest = restRequest.AddStringBody(smartsheetRequest.Entity.GetContentAsString(), ContentType.Json);
                         // JsonParameter param = new JsonParameter();
@@ -279,7 +282,7 @@ namespace Smartsheet.Api.Internal.Http
                 timer.Stop();
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
-
+/* 
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
                     Boolean restClientDebugging = false;
@@ -308,7 +311,7 @@ namespace Smartsheet.Api.Internal.Http
                         throw new HttpClientException("There was an issue connecting. Error response: " + restResponse.ErrorMessage);
                     }
   
-                }
+                } */
 
                 // Set returned Headers
                 smartsheetResponse.Headers = new Dictionary<string, string>();
