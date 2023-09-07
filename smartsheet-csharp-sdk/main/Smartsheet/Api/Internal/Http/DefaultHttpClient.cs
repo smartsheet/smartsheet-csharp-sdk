@@ -283,7 +283,7 @@ namespace Smartsheet.Api.Internal.Http
 
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
-                    throw new HttpClientException("There was an issue connecting.);
+                    throw new HttpClientException("There was an issue connecting.");
                 }
 
 
