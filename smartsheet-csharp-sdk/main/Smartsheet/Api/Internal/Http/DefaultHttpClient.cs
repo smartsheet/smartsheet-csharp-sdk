@@ -250,10 +250,8 @@ namespace Smartsheet.Api.Internal.Http
                         restRequest.AddHeader(header.Key, header.Value);
                     }
                 }
-                Boolean bodyAdded = false;
                 if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
                 {
-                    bodyAdded = true;
 
                     restRequest.AddHeader("Content-Type", "application/json");
 
@@ -282,36 +280,12 @@ namespace Smartsheet.Api.Internal.Http
                 timer.Stop();
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
-/* 
+
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
-                    Boolean restClientDebugging = false;
-                    if (restClientDebugging) {
-                        StringBuilder builder = new StringBuilder();
-                        builder.Append(" Smartsheet request URI is " + smartsheetRequest.Uri + "\n");
-                        foreach (KeyValuePair<string, string> header in smartsheetRequest.Headers)
-                        {
-                            builder.Append("Headers: " + "\n");
-                            builder.Append("Key: " +  header.Key + " Value: " + header.Value + "\n");
-                        }
-                        builder.Append(" Smartsheet request method is " + smartsheetRequest.Method + "\n");
-                        builder.Append(" Was there a body added??? " + bodyAdded.ToString() + "\n");
-                        if (smartsheetRequest.Entity != null) {
-                            builder.Append(" Was there a body entity content type: " + smartsheetRequest.Entity.ContentType + "\n");
-                        builder.Append(" Was there a body entity as string : " + smartsheetRequest.Entity.GetContentAsString() + "\n");
-                        }
+                    throw new HttpClientException("There was an issue connecting.);
+                }
 
-                        builder.Append(" There was an issue connecting.");
-                        builder.Append(" RestResponse code is " + restResponse.StatusCode.ToString() + "\n");
-                        builder.Append(" RestResponse ErrorMessage is " + restResponse.ErrorMessage + "\n");
-                        builder.Append(" RestResponse Content is " + restResponse.Content + "\n");
-
-                    throw new HttpClientException(builder.ToString());
-                    } else {
-                        throw new HttpClientException("There was an issue connecting. Error response: " + restResponse.ErrorMessage);
-                    }
-  
-                } */
 
                 // Set returned Headers
                 smartsheetResponse.Headers = new Dictionary<string, string>();
