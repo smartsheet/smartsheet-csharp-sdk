@@ -29,11 +29,11 @@ jobs:
           owner: 'smartsheet'
           repository: 'smartsheet-sdk-tests'
       - name: Setup Mock API
-       run: |
+        run: |
          smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
          smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
       - name: Run Mock API Tests
-       working-directory: ./mock-api-test-sdk-net60
-       run: |
+        working-directory: ./mock-api-test-sdk-net60
+        run: |
          dotnet build --configuration Release --no-restore
          dotnet test --no-restore
