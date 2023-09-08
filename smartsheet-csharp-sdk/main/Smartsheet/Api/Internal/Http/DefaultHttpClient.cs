@@ -253,9 +253,8 @@ namespace Smartsheet.Api.Internal.Http
                 if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
                 {
 
-                    restRequest.AddHeader("Content-Type", "application/json");
-
                     if (smartsheetRequest.Entity.ContentType == "application/json") {
+                        restRequest.AddHeader("Content-Type", "application/json");
                         restRequest = restRequest.AddStringBody(smartsheetRequest.Entity.GetContentAsString(), ContentType.Json);
                         // JsonParameter param = new JsonParameter();
                         // restRequest = restRequest.AddBody(param);
@@ -284,7 +283,12 @@ namespace Smartsheet.Api.Internal.Http
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
                     //Not good but testing the sdk tests.
-                    //throw new HttpClientException("There was an issue connecting.");
+                    StringBuilder builder = new StringBuilder();
+                        builder.AppendLine(" There was an issue connecting.");
+                        builder.AppendLine(" RestResponse code is " + restResponse.StatusCode.ToString() + "\n");
+                        builder.AppendLine(" RestResponse ErrorMessage is " + restResponse.ErrorMessage + "\n");
+                        builder.AppendLine(" RestResponse Content is " + restResponse.Content + "\n");
+                    throw new HttpClientException(builder.ToString());
                 }
 
 
