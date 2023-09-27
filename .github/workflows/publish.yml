@@ -28,8 +28,8 @@ jobs:
         access-token: ${{ secrets.SDK_TEST_ACCESS_TOKEN }}
     - name: Setup Mock API
       run: |
-       smartsheet-sdk-tests/travis_scripts/install_wiremock.sh
-       smartsheet-sdk-tests/travis_scripts/start_wiremock.sh
+       smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
+       smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
     - name: Run Mock API Tests
       working-directory: ./mock-api-test-sdk-net60
       run: |
