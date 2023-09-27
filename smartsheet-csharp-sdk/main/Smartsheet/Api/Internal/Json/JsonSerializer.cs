@@ -66,6 +66,23 @@ namespace Smartsheet.Api.Internal.Json
         T deserialize<T>(StreamReader inputStream);
 
         /// <summary>
+        /// De-serialize an object from A JSON String.
+        /// 
+        /// Parameters: - objectClass : the class of the object to de-serialize - string : the input stream from which
+        /// the JSON will be stored
+        /// 
+        /// Returns: the de-serialized object
+        /// 
+        /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+        /// other error occurred during the operation
+        /// </summary>
+        /// <param name="input"> the input string that holds the JSON object </param>
+        /// <returns> the t </returns>
+        /// <exception cref="Newtonsoft.Json.JsonException"> the Json parse exception </exception>
+        /// <exception cref="IOException"> Signals that an I/O exception has occurred. </exception>
+        T deserialize<T>(string input);
+
+        /// <summary>
         /// De-serialize an object list from JSON.
         /// 
         /// Parameters: - objectClass : the class of the object (of the list) to de-serialize - inputStream : the input
