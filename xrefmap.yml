@@ -1961,6 +1961,64 @@ references:
   isSpec: "True"
   fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.Request
   nameWithType: DefaultHttpClient.Request
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent
+  name: DefaultHttpClient.RestResponseContent
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html
+  commentId: T:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent
+  nameWithType: DefaultHttpClient.RestResponseContent
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.#ctor
+  name: RestResponseContent()
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent__ctor
+  commentId: M:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.#ctor
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.RestResponseContent()
+  nameWithType: DefaultHttpClient.RestResponseContent.RestResponseContent()
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.#ctor*
+  name: RestResponseContent
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent__ctor_
+  commentId: Overload:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.#ctor
+  isSpec: "True"
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.RestResponseContent
+  nameWithType: DefaultHttpClient.RestResponseContent.RestResponseContent
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.errorCode
+  name: errorCode
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent_errorCode
+  commentId: P:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.errorCode
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.errorCode
+  nameWithType: DefaultHttpClient.RestResponseContent.errorCode
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.errorCode*
+  name: errorCode
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent_errorCode_
+  commentId: Overload:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.errorCode
+  isSpec: "True"
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.errorCode
+  nameWithType: DefaultHttpClient.RestResponseContent.errorCode
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.message
+  name: message
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent_message
+  commentId: P:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.message
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.message
+  nameWithType: DefaultHttpClient.RestResponseContent.message
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.message*
+  name: message
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent_message_
+  commentId: Overload:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.message
+  isSpec: "True"
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.message
+  nameWithType: DefaultHttpClient.RestResponseContent.message
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.refId
+  name: refId
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent_refId
+  commentId: P:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.refId
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.refId
+  nameWithType: DefaultHttpClient.RestResponseContent.refId
+- uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.refId*
+  name: refId
+  href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_RestResponseContent_refId_
+  commentId: Overload:Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.refId
+  isSpec: "True"
+  fullName: Smartsheet.Api.Internal.Http.DefaultHttpClient.RestResponseContent.refId
+  nameWithType: DefaultHttpClient.RestResponseContent.refId
 - uid: Smartsheet.Api.Internal.Http.DefaultHttpClient.SetMaxRetryTimeout(System.Int64)
   name: SetMaxRetryTimeout(Int64)
   href: api/Smartsheet.Api.Internal.Http.DefaultHttpClient.html#Smartsheet_Api_Internal_Http_DefaultHttpClient_SetMaxRetryTimeout_System_Int64_
@@ -2327,6 +2385,15 @@ references:
   fullName.vb: Smartsheet.Api.Internal.Json.JsonNetSerializer.deserialize(Of T)(StreamReader)
   nameWithType: JsonNetSerializer.deserialize<T>(StreamReader)
   nameWithType.vb: JsonNetSerializer.deserialize(Of T)(StreamReader)
+- uid: Smartsheet.Api.Internal.Json.JsonNetSerializer.deserialize``1(System.String)
+  name: deserialize<T>(String)
+  href: api/Smartsheet.Api.Internal.Json.JsonNetSerializer.html#Smartsheet_Api_Internal_Json_JsonNetSerializer_deserialize__1_System_String_
+  commentId: M:Smartsheet.Api.Internal.Json.JsonNetSerializer.deserialize``1(System.String)
+  name.vb: deserialize(Of T)(String)
+  fullName: Smartsheet.Api.Internal.Json.JsonNetSerializer.deserialize<T>(System.String)
+  fullName.vb: Smartsheet.Api.Internal.Json.JsonNetSerializer.deserialize(Of T)(System.String)
+  nameWithType: JsonNetSerializer.deserialize<T>(String)
+  nameWithType.vb: JsonNetSerializer.deserialize(Of T)(String)
 - uid: Smartsheet.Api.Internal.Json.JsonNetSerializer.DeserializeDataWrapper*
   name: DeserializeDataWrapper
   href: api/Smartsheet.Api.Internal.Json.JsonNetSerializer.html#Smartsheet_Api_Internal_Json_JsonNetSerializer_DeserializeDataWrapper_
@@ -2512,6 +2579,15 @@ references:
   fullName.vb: Smartsheet.Api.Internal.Json.JsonSerializer.deserialize(Of T)(StreamReader)
   nameWithType: JsonSerializer.deserialize<T>(StreamReader)
   nameWithType.vb: JsonSerializer.deserialize(Of T)(StreamReader)
+- uid: Smartsheet.Api.Internal.Json.JsonSerializer.deserialize``1(System.String)
+  name: deserialize<T>(String)
+  href: api/Smartsheet.Api.Internal.Json.JsonSerializer.html#Smartsheet_Api_Internal_Json_JsonSerializer_deserialize__1_System_String_
+  commentId: M:Smartsheet.Api.Internal.Json.JsonSerializer.deserialize``1(System.String)
+  name.vb: deserialize(Of T)(String)
+  fullName: Smartsheet.Api.Internal.Json.JsonSerializer.deserialize<T>(System.String)
+  fullName.vb: Smartsheet.Api.Internal.Json.JsonSerializer.deserialize(Of T)(System.String)
+  nameWithType: JsonSerializer.deserialize<T>(String)
+  nameWithType.vb: JsonSerializer.deserialize(Of T)(String)
 - uid: Smartsheet.Api.Internal.Json.JsonSerializer.DeserializeDataWrapper*
   name: DeserializeDataWrapper
   href: api/Smartsheet.Api.Internal.Json.JsonSerializer.html#Smartsheet_Api_Internal_Json_JsonSerializer_DeserializeDataWrapper_
