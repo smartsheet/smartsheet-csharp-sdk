@@ -6,7 +6,7 @@ namespace integration_test_sdk_net60
     [TestClass]
     public class CommentResourcesTest
     {
-        private static string path = "../../../../../integration-test-sdk-net60/TestFile.txt";
+        readonly static string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestFile.txt");
 
         [TestMethod]
         public void TestCommentResources()
