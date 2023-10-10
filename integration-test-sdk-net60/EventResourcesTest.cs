@@ -46,19 +46,19 @@ namespace integration_test_sdk_net60
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
+        [ExpectedException(typeof(SmartsheetException))]
         public void TestInvalidParams()
         {
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
-            EventResult eventResult = smartsheet.EventResources.ListEvents(0, "2.1.0An4ZapaQaOXPdojlmediSZ1WqMdi5U_3l9gViOW7ic", 10, null);
+            smartsheet.EventResources.ListEvents(0, "2.1.0An4ZapaQaOXPdojlmediSZ1WqMdi5U_3l9gViOW7ic", 10, null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
+        [ExpectedException(typeof(SmartsheetException))]
         public void TestInvalidParams_2()
         {
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
-            EventResult eventResult = smartsheet.EventResources.ListEvents(DateTime.Today, null, 10, true);
+            smartsheet.EventResources.ListEvents(DateTime.Today, null, 10, true);
         }
     }
 }  
