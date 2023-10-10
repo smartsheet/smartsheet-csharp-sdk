@@ -191,6 +191,24 @@ namespace Smartsheet.Api.Internal.Json
             }
         }
 
+        public virtual T deserialize<T>(string input)
+        {
+            Utils.ThrowIfNull(input);
+            try
+            {
+                return serializer.Deserialize<T>(new Newtonsoft.Json.JsonTextReader(new StringReader(input)));
+            }
+            catch (Newtonsoft.Json.JsonException ex)
+            {
+                throw new JsonSerializationException(ex);
+            }
+            catch (IOException ex)
+            {
+
+                throw new JsonSerializationException(ex);
+            }
+        }
+
         /// <summary>
         /// De-serialize an object list from JSON. 
         /// 

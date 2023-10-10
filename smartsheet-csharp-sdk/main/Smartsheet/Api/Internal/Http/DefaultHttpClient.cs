@@ -121,9 +121,16 @@ namespace Smartsheet.Api.Internal.Http
 
 
         public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
-            var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
-            task.Wait(); 
-            return task.Result;
+            HttpResponse response = new HttpResponse();
+            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead. 
+            try {
+                var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
+                task.Wait(); 
+                response = task.Result;
+            } catch (AggregateException ex) {
+                throw new SmartsheetException(ex.InnerException.Message);
+            }
+            return response;
         }
         /// <summary>
         /// Make a multipart HTTP request and return the response.
@@ -212,9 +219,18 @@ namespace Smartsheet.Api.Internal.Http
 
 
         public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
+            HttpResponse response = new HttpResponse();
+            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead. 
+            // This helps with error mock api tests.
+            try {
             var task = this.RequestAsync(smartsheetRequest);
             task.Wait(); 
-            return task.Result;
+            response = task.Result;
+            } catch (AggregateException ex) {
+                throw new SmartsheetException(ex.InnerException.Message);
+            }
+
+            return response;
         }
         /// <summary>
         /// Make an HTTP request and return the response.
@@ -250,11 +266,11 @@ namespace Smartsheet.Api.Internal.Http
                         restRequest.AddHeader(header.Key, header.Value);
                     }
                 }
-                Boolean bodyAdded = false;
                 if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
                 {
-                    bodyAdded = true;
+
                     if (smartsheetRequest.Entity.ContentType == "application/json") {
+                        restRequest.AddHeader("Content-Type", "application/json");
                         restRequest = restRequest.AddStringBody(smartsheetRequest.Entity.GetContentAsString(), ContentType.Json);
                         // JsonParameter param = new JsonParameter();
                         // restRequest = restRequest.AddBody(param);
@@ -282,33 +298,12 @@ namespace Smartsheet.Api.Internal.Http
 
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
-                    Boolean restClientDebugging = false;
-                    if (restClientDebugging) {
-                        StringBuilder builder = new StringBuilder();
-                        builder.Append(" Smartsheet request URI is " + smartsheetRequest.Uri + "\n");
-                        foreach (KeyValuePair<string, string> header in smartsheetRequest.Headers)
-                        {
-                            builder.Append("Headers: " + "\n");
-                            builder.Append("Key: " +  header.Key + " Value: " + header.Value + "\n");
-                        }
-                        builder.Append(" Smartsheet request method is " + smartsheetRequest.Method + "\n");
-                        builder.Append(" Was there a body added??? " + bodyAdded.ToString() + "\n");
-                        if (smartsheetRequest.Entity != null) {
-                            builder.Append(" Was there a body entity content type: " + smartsheetRequest.Entity.ContentType + "\n");
-                        builder.Append(" Was there a body entity as string : " + smartsheetRequest.Entity.GetContentAsString() + "\n");
-                        }
-
-                        builder.Append(" There was an issue connecting.");
-                        builder.Append(" RestResponse code is " + restResponse.StatusCode.ToString() + "\n");
-                        builder.Append(" RestResponse ErrorMessage is " + restResponse.ErrorMessage + "\n");
-                        builder.Append(" RestResponse Content is " + restResponse.Content + "\n");
-
-                    throw new HttpClientException(builder.ToString());
-                    } else {
-                        throw new HttpClientException("There was an issue connecting. Error response: " + restResponse.ErrorMessage);
-                    }
-  
+                    //JSON deserialize the exception we want from the Restsharp response. 
+                    //Once we get this we can throw it up and make sure to pass it along from an inner exception inside an aggregate exception.
+                    RestResponseContent restResponseContent = this.jsonSerializer.deserialize<RestResponseContent>(restResponse.Content);       
+                    throw new SmartsheetException(restResponseContent.message);
                 }
+
 
                 // Set returned Headers
                 smartsheetResponse.Headers = new Dictionary<string, string>();
@@ -556,5 +551,35 @@ namespace Smartsheet.Api.Internal.Http
                 return string.Format("Response Headers: {0}Response Body: {1}", builder.ToString(), body);
             });
         }
+
+    //Little helper class to help us get the content of the RestSharp response. 
+    //This holds the relevant error for the user that we have mock api test cases that test the error message. 
+    protected class RestResponseContent {
+        private int privateErrorCode;
+
+        private string privateMessage;
+        private string privateRefId;
+        public RestResponseContent()
+        {
+            this.privateErrorCode = -1;
+            this.privateMessage = "";
+            this.privateRefId = "";
+        }
+
+        public int errorCode {
+            get { return this.privateErrorCode; }
+            set { this.privateErrorCode = value; }
+        }
+
+        public string message {
+            get { return this.privateMessage; }
+            set { this.privateMessage = value; }
+        }
+
+        public string refId {
+            get { return this.privateRefId; }
+            set { this.privateRefId = value; }
+        }
+    }    
     }
 }
