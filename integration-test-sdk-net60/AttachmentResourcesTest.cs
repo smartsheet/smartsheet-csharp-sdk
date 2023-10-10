@@ -6,7 +6,7 @@ namespace integration_test_sdk_net60
     [TestClass]
     public class AttachmentResourcesTest
     {
-        readonly string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestFile.txt");
+        readonly string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestAssets", "TestFile.txt");
 
         [TestMethod]
         public void TestAttachmentResources()

@@ -107,9 +107,9 @@ namespace integration_test_sdk_net60
         [TestMethod]
         public void AddProfileImage()
         {
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "me.jpg");
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestAssets", "PNG_500kB.png");
             UserProfile me = smartsheet.UserResources.GetCurrentUser();
-            smartsheet.UserResources.AddProfileImage(me.Id.Value, path, "image/jpeg");
+            smartsheet.UserResources.AddProfileImage(me.Id.Value, path, "image/png");
             me = smartsheet.UserResources.GetCurrentUser();
             Assert.IsNotNull(me.ProfileImage.ImageId);
             const int squareProfileImageSize = 1050;

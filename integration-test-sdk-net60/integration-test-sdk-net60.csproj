@@ -21,11 +21,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\smartsheet-csharp-sdk\smartsheet-csharp-sdk-v2.csproj" />
+  </ItemGroup>
 
-    <Content Include="TestFile.txt">
+  <ItemGroup>
+    <Content Include="TestAssets/PNG_500kB.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="me.jpg">
+    <Content Include="TestAssets/TestFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
