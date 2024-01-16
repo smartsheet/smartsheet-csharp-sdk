@@ -275,9 +275,10 @@ namespace Smartsheet.Api.Internal.Http
                         // JsonParameter param = new JsonParameter();
                         // restRequest = restRequest.AddBody(param);
                     } else {
-  
-                        BodyParameter param = new BodyParameter(smartsheetRequest.Entity.ContentType, Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent()), smartsheetRequest.Entity.ContentType);
-                        restRequest = restRequest.AddBody(param);
+                        var bytes = Util.ReadAllBytes(smartsheetRequest.Entity.GetBinaryContent());
+                        var contentType = smartsheetRequest.Entity.ContentType;
+
+                        restRequest = restRequest.AddBody(bytes, contentType);
                     }
 
                 }
