@@ -1,12 +1,12 @@
 ﻿using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
-namespace integration_test_sdk_net60
+namespace integration_test_sdk_net80
 {
     [TestClass]
     public class CommentResourcesTest
     {
-        private static string path = "../../../../../integration-test-sdk-net60/TestFile.txt";
+        private static string path = "../../../../../integration-test-sdk-net80/TestFile.txt";
 
         [TestMethod]
         public void TestCommentResources()

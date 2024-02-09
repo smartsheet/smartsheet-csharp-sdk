@@ -1,7 +1,7 @@
 ﻿using Smartsheet.Api;
 using Newtonsoft.Json;
 
-namespace integration_test_sdk_net60
+namespace integration_test_sdk_net80
 {
     [TestClass]
     public class PassthroughResourcesTest

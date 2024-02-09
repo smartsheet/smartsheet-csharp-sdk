@@ -1,6 +1,6 @@
 ﻿using Smartsheet.Api.Models;
 
-namespace integration_test_sdk_net60
+namespace integration_test_sdk_net80
 {
     [TestClass]
     public class UserResourcesTest : TestResources
@@ -108,7 +108,7 @@ namespace integration_test_sdk_net60
         public void AddProfileImage()
         {
             UserProfile me = smartsheet.UserResources.GetCurrentUser();
-            smartsheet.UserResources.AddProfileImage(me.Id.Value, "../../../../../integration-test-sdk-net60/curly.jpg", "image/jpeg");
+            smartsheet.UserResources.AddProfileImage(me.Id.Value, "../../../../../integration-test-sdk-net80/curly.jpg", "image/jpeg");
             me = smartsheet.UserResources.GetCurrentUser();
             Assert.IsNotNull(me.ProfileImage.ImageId);
             const int squareProfileImageSize = 1050;

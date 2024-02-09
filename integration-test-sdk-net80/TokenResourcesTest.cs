@@ -2,7 +2,7 @@
 using Smartsheet.Api.OAuth;
 using System.Diagnostics;
 
-namespace integration_test_sdk_net60
+namespace integration_test_sdk_net80
 {
     [TestClass]
     public class TokenResourcesTest

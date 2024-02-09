@@ -2,7 +2,7 @@
 using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
-namespace integration_test_sdk_net60
+namespace integration_test_sdk_net80
 {
     [TestClass]
     public class WorkspaceResourcesCopyTest
