@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>sdk_csharp_sample_net60</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>sdk_csharp_sample_net80</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

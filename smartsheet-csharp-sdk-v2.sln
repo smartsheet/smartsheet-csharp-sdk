@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk-csharp-sample-net60", "sdk-csharp-sample-net60\sdk-csharp-sample-net60.csproj", "{A7720F0A-5B69-4555-8DC8-899ECB0F0610}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdk-csharp-sample-net80", "sdk-csharp-sample-net60\sdk-csharp-sample-net80.csproj", "{A7720F0A-5B69-4555-8DC8-899ECB0F0610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mock-api-test-sdk-net60", "mock-api-test-sdk-net60\mock-api-test-sdk-net60.csproj", "{DB4A1698-72DB-4228-9479-692AC932D00D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mock-api-test-sdk-net80", "mock-api-test-sdk-net60\mock-api-test-sdk-net80.csproj", "{DB4A1698-72DB-4228-9479-692AC932D00D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "integration-test-sdk-net60", "integration-test-sdk-net60\integration-test-sdk-net60.csproj", "{9F1AB018-EA39-4154-B1DB-B6440A673208}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "integration-test-sdk-net80", "integration-test-sdk-net60\integration-test-sdk-net80.csproj", "{9F1AB018-EA39-4154-B1DB-B6440A673208}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smartsheet-csharp-sdk-docs", "smartsheet-csharp-sdk-docs\smartsheet-csharp-sdk-docs.csproj", "{A38A7884-9542-4503-B8DD-ED5E64449128}"
 EndProject

@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>integration_test_sdk_net60</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>integration_test_sdk_net80</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
