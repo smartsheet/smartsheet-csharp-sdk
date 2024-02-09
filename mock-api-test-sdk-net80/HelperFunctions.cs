@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Smartsheet.Api;
 
-namespace mock_api_test_sdk_net60
+namespace mock_api_test_sdk_net80
 {
     public static class HelperFunctions
     {

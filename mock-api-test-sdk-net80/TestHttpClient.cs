@@ -1,4 +1,4 @@
-﻿namespace mock_api_test_sdk_net60
+﻿namespace mock_api_test_sdk_net80
 {
     using Smartsheet.Api.Internal.Http;
     using RestSharp;

@@ -2,7 +2,7 @@
 using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
-namespace mock_api_test_sdk_net60
+namespace mock_api_test_sdk_net80
 {
     [TestClass]
     public class SightsTest

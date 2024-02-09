@@ -6,12 +6,12 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="sdk-csharp-sample-net60" expanded="True" selected="True" />
+          <Node name="sdk-csharp-sample-net80" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.sdk-csharp-sample-net60 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.sdk-csharp-sample-net80 PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
