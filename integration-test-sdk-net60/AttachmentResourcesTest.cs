@@ -89,6 +89,7 @@ namespace integration_test_sdk_net60
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
 
+            VerifyAttachmentContent(smartsheet, sheetId, attachment);
 
             return attachment.Id.Value;
         }
@@ -102,6 +103,8 @@ namespace integration_test_sdk_net60
             Attachment attachment = smartsheet.SheetResources.RowResources.AttachmentResources.AttachFile(sheetId, rowId, path, null);
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
+
+            VerifyAttachmentContent(smartsheet, sheetId, attachment);
 
             Attachment attachToResource = new Attachment.CreateAttachmentBuilder("http://www.bing.com", AttachmentType.LINK).Build();
             attachment = smartsheet.SheetResources.RowResources.AttachmentResources.AttachUrl(sheetId, rowId, attachToResource);
@@ -119,6 +122,17 @@ namespace integration_test_sdk_net60
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
 
+            VerifyAttachmentContent(smartsheet, sheetId, attachment);
+
+            Attachment attachToResource = new Attachment.CreateAttachmentBuilder("http://www.google.com", AttachmentType.LINK).Build();
+            attachment = smartsheet.SheetResources.CommentResources.AttachmentResources.AttachUrl(sheetId, commentId, attachToResource);
+            Assert.IsTrue(attachment.Url == "http://www.google.com");
+
+            return discussionCreated.Id.Value;
+        }
+
+        private Attachment VerifyAttachmentContent(SmartsheetClient smartsheet, long sheetId, Attachment attachment)
+        {
             attachment = smartsheet.SheetResources.AttachmentResources.GetAttachment(sheetId, attachment.Id.Value);
 
             var request = new RestRequest(attachment.Url);
@@ -128,12 +142,7 @@ namespace integration_test_sdk_net60
             var fileContents = File.ReadAllText(path);
 
             Assert.AreEqual(attachmentContent, fileContents);
-
-            Attachment attachToResource = new Attachment.CreateAttachmentBuilder("http://www.google.com", AttachmentType.LINK).Build();
-            attachment = smartsheet.SheetResources.CommentResources.AttachmentResources.AttachUrl(sheetId, commentId, attachToResource);
-            Assert.IsTrue(attachment.Url == "http://www.google.com");
-
-            return discussionCreated.Id.Value;
+            return attachment;
         }
 
         private static long CreateSheet(SmartsheetClient smartsheet)
