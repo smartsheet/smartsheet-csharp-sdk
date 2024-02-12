@@ -1,4 +1,4 @@
-﻿using RestSharp;
+using RestSharp;
 using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
@@ -131,7 +131,7 @@ namespace integration_test_sdk_net60
             return discussionCreated.Id.Value;
         }
 
-        private Attachment VerifyAttachmentContent(SmartsheetClient smartsheet, long sheetId, Attachment attachment)
+        private void VerifyAttachmentContent(SmartsheetClient smartsheet, long sheetId, Attachment attachment)
         {
             attachment = smartsheet.SheetResources.AttachmentResources.GetAttachment(sheetId, attachment.Id.Value);
 
@@ -141,8 +141,7 @@ namespace integration_test_sdk_net60
 
             var fileContents = File.ReadAllText(path);
 
-            Assert.AreEqual(attachmentContent, fileContents);
-            return attachment;
+            Assert.AreEqual(fileContents, attachmentContent);
         }
 
         private static long CreateSheet(SmartsheetClient smartsheet)
