@@ -131,19 +131,6 @@ namespace integration_test_sdk_net60
             return discussionCreated.Id.Value;
         }
 
-        private void VerifyAttachmentContent(SmartsheetClient smartsheet, long sheetId, Attachment attachment)
-        {
-            attachment = smartsheet.SheetResources.AttachmentResources.GetAttachment(sheetId, attachment.Id.Value);
-
-            var request = new RestRequest(attachment.Url);
-
-            var attachmentContent = new RestClient(attachment.Url).Get(request).Content;
-
-            var fileContents = File.ReadAllText(path);
-
-            Assert.AreEqual(fileContents, attachmentContent);
-        }
-
         private static long CreateSheet(SmartsheetClient smartsheet)
         {
             Column[] columnsToCreate = new Column[] {
@@ -155,6 +142,19 @@ namespace integration_test_sdk_net60
             Assert.IsTrue(createdSheet.Columns.Count == 3);
             Assert.IsTrue(createdSheet.Columns[1].Title == "col 2");
             return createdSheet.Id.Value;
+        }
+
+        private void VerifyAttachmentContent(SmartsheetClient smartsheet, long sheetId, Attachment attachment)
+        {
+            attachment = smartsheet.SheetResources.AttachmentResources.GetAttachment(sheetId, attachment.Id.Value);
+
+            var request = new RestRequest(attachment.Url);
+
+            var attachmentContent = new RestClient(attachment.Url).Get(request).Content;
+
+            var fileContents = File.ReadAllText(path);
+
+            Assert.AreEqual(fileContents, attachmentContent);
         }
     }
 }
