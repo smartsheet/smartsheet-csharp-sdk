@@ -1,4 +1,5 @@
-﻿using Smartsheet.Api;
+﻿using RestSharp;
+using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
 namespace integration_test_sdk_net60
@@ -117,6 +118,16 @@ namespace integration_test_sdk_net60
             Attachment attachment = smartsheet.SheetResources.CommentResources.AttachmentResources.AttachFile(sheetId, commentId, path, "text/plain");
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
+
+            attachment = smartsheet.SheetResources.AttachmentResources.GetAttachment(sheetId, attachment.Id.Value);
+
+            var request = new RestRequest(attachment.Url);
+
+            var attachmentContent = new RestClient(attachment.Url).Get(request).Content;
+
+            var fileContents = File.ReadAllText(path);
+
+            Assert.AreEqual(attachmentContent, fileContents);
 
             Attachment attachToResource = new Attachment.CreateAttachmentBuilder("http://www.google.com", AttachmentType.LINK).Build();
             attachment = smartsheet.SheetResources.CommentResources.AttachmentResources.AttachUrl(sheetId, commentId, attachToResource);
