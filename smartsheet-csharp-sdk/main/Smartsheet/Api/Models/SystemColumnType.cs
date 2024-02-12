@@ -23,10 +23,25 @@ namespace Smartsheet.Api.Models
     /// <seealso href="http://help.Smartsheet.com/customer/portal/articles/504619-column-types">Column Types Help</seealso>
     public enum SystemColumnType
     {
+        /// <summary>
+        /// Auto number columns generate values for every row in the sheet that contains data.
+        /// </summary>
         AUTO_NUMBER,
+        /// <summary>
+        /// When a row is modified this column updates the date.
+        /// </summary>
         MODIFIED_DATE,
+        /// <summary>
+        /// When a row is modified this column updates the user that modified it.
+        /// </summary>
         MODIFIED_BY,
+        /// <summary>
+        /// Populated by date that row was created.
+        /// </summary>
         CREATED_DATE,
+        /// <summary>
+        /// Populated by who created the row.
+        /// </summary>
         CREATED_BY
     }
 }

@@ -20,6 +20,9 @@ using Smartsheet.Api.Models;
 
 namespace Smartsheet.Api
 {
+    /// <summary>
+    /// Interface used to encapsulate sheet update request resources. 
+    /// </summary>
     public interface SheetUpdateRequestResources
     {
         /// <summary>

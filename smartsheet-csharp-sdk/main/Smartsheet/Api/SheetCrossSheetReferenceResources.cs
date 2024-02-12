@@ -24,6 +24,9 @@ using Smartsheet.Api.Models;
 
 namespace Smartsheet.Api
 {
+    /// <summary>
+    /// Interface used to encapsulate sheet cross sheet reference resources. 
+    /// </summary>
     public interface SheetCrossSheetReferenceResources
     {
         /// <summary>
