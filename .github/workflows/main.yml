@@ -17,7 +17,7 @@ jobs:
       - name: Setup .Net Core
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '8.0.x'
       - name: Install Dependencies
         run: dotnet restore
       - name: Build
@@ -34,7 +34,7 @@ jobs:
          smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
          smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
       - name: Run Mock API Tests
-        working-directory: ./mock-api-test-sdk-net60
+        working-directory: ./mock-api-test-sdk-net80
         run: |
          dotnet build --configuration Release --no-restore
          dotnet test --no-restore
