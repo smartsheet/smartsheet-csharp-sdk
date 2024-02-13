@@ -23,8 +23,17 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum DestinationType
     {
+        /// <summary>
+        /// Destination is home.
+        /// </summary>
         HOME,
+        /// <summary>
+        /// Destination is a workspace.
+        /// </summary>
         WORKSPACE,
+        /// <summary>
+        /// Destination is a folder.
+        /// </summary>
         FOLDER
     }
 }

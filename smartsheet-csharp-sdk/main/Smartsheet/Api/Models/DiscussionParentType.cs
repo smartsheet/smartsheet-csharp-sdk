@@ -23,7 +23,13 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum DiscussionParentType
     {
+        /// <summary>
+        /// Discussion parent is a sheet.
+        /// </summary>
         SHEET,
+        /// <summary>
+        /// Discussion parent is a row.
+        /// </summary>
         ROW
     }
 }
