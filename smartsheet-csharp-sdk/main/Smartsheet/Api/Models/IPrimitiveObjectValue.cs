@@ -24,10 +24,19 @@ using Newtonsoft.Json;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Common interface for primitive types.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IPrimitiveObjectValue<T> : ObjectValue
     {
+        //Get value of primitive object.
         T Value {get; set;}
 
+        /// <summary>
+        /// Common method to serialize value to a JsonWriter.
+        /// </summary>
+        /// <param name="writer"></param>
         void Serialize(JsonWriter writer);
     }
 }
