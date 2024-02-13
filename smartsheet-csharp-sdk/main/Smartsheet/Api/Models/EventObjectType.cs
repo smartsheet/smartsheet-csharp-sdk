@@ -18,6 +18,9 @@
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum EventObjectType
     {
         ACCESS_TOKEN,

@@ -30,7 +30,9 @@ namespace Smartsheet.Api.Models
     /// <typeparam name="T"></typeparam>
     public interface IPrimitiveObjectValue<T> : ObjectValue
     {
-        //Get value of primitive object.
+        /// <summary>
+        /// Get value of primitive object.
+        /// </summary>
         T Value {get; set;}
 
         /// <summary>
