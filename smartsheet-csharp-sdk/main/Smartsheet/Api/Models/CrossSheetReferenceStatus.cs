@@ -23,15 +23,42 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Enum to hold status of cross sheet references. 
+    /// </summary>
     public enum CrossSheetReferenceStatus
     {
+        /// <summary>
+        /// Blocked status
+        /// </summary>
         BLOCKED,
+        /// <summary>
+        /// Broken status
+        /// </summary>
         BROKEN,
+        /// <summary>
+        /// Circular status
+        /// </summary>
         CIRCULAR,
+        /// <summary>
+        /// Disabled status
+        /// </summary>
         DISABLED,
+        /// <summary>
+        /// Inaccessible status
+        /// </summary>
         INACCESSIBLE,
+        /// <summary>
+        /// Invalid status
+        /// </summary>
         INVALID,
+        /// <summary>
+        /// Not shared status
+        /// </summary>
         NOT_SHARED,
+        /// <summary>
+        /// Ok status
+        /// </summary>
         OK
     }
 }
