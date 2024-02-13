@@ -41,7 +41,7 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Getter/Setter for actual value.
+        /// Getter/Setter for the string value.
         /// </summary>
         public string Value
         {
@@ -50,7 +50,7 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Return objectValueType of String.
+        /// Method to return the type of object this is.
         /// </summary>
         public ObjectValueType ObjectType
         {
