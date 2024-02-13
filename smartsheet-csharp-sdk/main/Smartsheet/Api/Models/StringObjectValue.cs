@@ -24,26 +24,43 @@ using Newtonsoft.Json;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Wrapper on string object primitive string values.
+    /// </summary>
     public class StringObjectValue : IPrimitiveObjectValue<string>
     {
         private string value;
 
+        /// <summary>
+        /// Constructor for string value.
+        /// </summary>
+        /// <param name="value"></param>
         public StringObjectValue(string value)
         {
             this.value = value;
         }
 
+        /// <summary>
+        /// Getter/Setter for actual value.
+        /// </summary>
         public string Value
         {
             get { return this.value; }
             set { this.value = value; }
         }
 
+        /// <summary>
+        /// Return objectValueType of String.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.STRING; }
         }
 
+        /// <summary>
+        /// Serialize function that returns nothing but writes object using writer passed in.
+        /// </summary>
+        /// <param name="writer"></param>
         public void Serialize(JsonWriter writer)
         {
             writer.WriteValue(value);

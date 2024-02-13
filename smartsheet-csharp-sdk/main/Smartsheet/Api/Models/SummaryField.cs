@@ -26,8 +26,10 @@ namespace Smartsheet.Api.Models
     /// <seealso href="http://smartsheet-platform.github.io/api-docs/?shell#summaryfield-object">SummaryField Object Help</seealso>    
     public class SummaryField : IdentifiableModel
     {
-        // Override Id property so that JSON.NET knows to make an exception of not serializating the Id.
-        // (i.e. serialize the Id in this case)
+        /// <summary>
+        /// Override Id property so that JSON.NET knows to make an exception of not serializating the Id.
+        /// (i.e. serialize the Id in this case)
+        /// </summary>
         public override long? Id
         {
             get { return base.Id; }
