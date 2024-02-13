@@ -23,7 +23,13 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum ShareType
     {
+        /// <summary>
+        /// User directly shared to an asset.
+        /// </summary>
         USER,
+        /// <summary>
+        /// Group shared to an asset.
+        /// </summary>
         GROUP
     }
 }
