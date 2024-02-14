@@ -28,6 +28,9 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum CriteriaTarget
     {
+        /// <summary>
+        /// Criteria target for rows.
+        /// </summary>
         ROW
     }
 }
