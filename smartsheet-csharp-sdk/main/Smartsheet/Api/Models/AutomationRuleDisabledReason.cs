@@ -23,14 +23,38 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Enum for possible reasons for automation rules to be disabled
+    /// </summary>
     public enum AutomationRuleDisabledReason
     {
+        /// <summary>
+        /// Automation not enabled for the current org
+        /// </summary>
         AUTOMATION_NOT_ENABLED_FOR_ORG,
+        /// <summary>
+        /// Missing a column
+        /// </summary>
         COLUMN_MISSING,
+        /// <summary>
+        /// Type of column is incompatible
+        /// </summary>
         COLUMN_TYPE_INCOMPATIBLE,
+        /// <summary>
+        /// No recipients 
+        /// </summary>
         NO_POTENTIAL_RECIPIENTS,
+        /// <summary>
+        /// No columns selected that are valid
+        /// </summary>
         NO_VALID_SELECTED_COLUMNS,
+        /// <summary>
+        /// Missing an approval column
+        /// </summary>
         APPROVAL_COLUMN_MISSING,
+        /// <summary>
+        /// Approval column is of wrong type
+        /// </summary>
         APPROVAL_COLUMN_WRONG_TYPE
     }
 }

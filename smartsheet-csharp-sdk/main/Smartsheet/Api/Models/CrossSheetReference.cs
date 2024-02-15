@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class encapsulating a cross sheet reference
+    /// </summary>
     public class CrossSheetReference : NamedModel
     {
         /// <summary>
