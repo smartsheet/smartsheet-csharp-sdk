@@ -23,16 +23,24 @@ using System.Runtime.Versioning;
 
 namespace Smartsheet.Api.Internal.Utility
 {
+    /// <summary>
+    /// Utility class for common functions.
+    /// </summary>
     public class Utility
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Utility()
         {
         }
 
-        /**
-         * Helper function that throws an IllegalArgumentException if one of the parameters is null.
-         * @param objects the paramters to 
-         */
+        /// <summary>
+        /// Helper function that throws an IllegalArgumentException if one of the parameters is null.
+        /// @param objects the parameters to 
+        /// </summary>
+        /// <param name="objects"></param>
+        /// <exception cref="System.ArgumentException"></exception>       
         public static void ThrowIfNull(params object[] objects)
         {
             foreach (object obj in objects)
@@ -44,6 +52,12 @@ namespace Smartsheet.Api.Internal.Utility
             }
         }
 
+        /// <summary>
+        /// Helper function that throws an IllegalArgumentException if one of the parameters is empty.
+        /// @param objects the parameters to 
+        /// </summary>
+        /// <param name="strings"></param>
+        /// <exception cref="System.ArgumentException"></exception>
         public static void ThrowIfEmpty(params string[] strings)
         {
             foreach (string @string in strings)
@@ -55,6 +69,11 @@ namespace Smartsheet.Api.Internal.Utility
             }
         }
 
+        /// <summary>
+        /// Helper function that reads a binary reader into a byte array.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         public static byte[] ReadAllBytes(BinaryReader reader)
         {
             const int bufferSize = 4096;
