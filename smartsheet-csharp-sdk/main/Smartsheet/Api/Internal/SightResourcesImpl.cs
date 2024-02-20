@@ -24,6 +24,9 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Util;
     using System;
 
+    /// <summary>
+    /// Implmentation resource class for sights/dashboards
+    /// </summary>
     public class SightResourcesImpl : AbstractResources, SightResources
     {
         /// <summary>

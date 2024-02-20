@@ -25,6 +25,9 @@ namespace Smartsheet.Api.Internal
     using Api.Models;
     using Smartsheet.Api.Internal.Util;
 
+    /// <summary>
+    /// Implemenation class for sheet filter resources
+    /// </summary>
     public class SheetFilterResourcesImpl : AbstractResources, SheetFilterResources
     {
         /// <summary>
