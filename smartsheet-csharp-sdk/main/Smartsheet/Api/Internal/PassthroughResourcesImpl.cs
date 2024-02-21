@@ -32,9 +32,16 @@ namespace Smartsheet.Api.Internal
     using Utils = Api.Internal.Utility.Utility;
     using Api.Internal.Util;
 
+    /// <summary>
+    /// Impl class for pass through resources
+    /// </summary>
     public class PassthroughResourcesImpl : AbstractResources, PassthroughResources
     {
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="smartsheet"> the Smartsheet </param>
         public PassthroughResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {
@@ -112,6 +119,15 @@ namespace Smartsheet.Api.Internal
             return PassthroughRequest(HttpMethod.DELETE, endpoint, null, null);
         }
 
+        /// <summary>
+        /// Private impl function for pass through request
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="endpoint"></param>
+        /// <param name="payload"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        /// <exception cref="SmartsheetException"></exception>
         private string PassthroughRequest(HttpMethod method, string endpoint, string payload, IDictionary<string, string> parameters)
         {
             Utils.ThrowIfNull(endpoint);

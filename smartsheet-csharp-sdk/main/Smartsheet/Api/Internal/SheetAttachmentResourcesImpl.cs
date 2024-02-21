@@ -64,21 +64,44 @@ namespace Smartsheet.Api.Internal
         {
             return AttachFile("sheets/" + sheetId + "/attachments", file, fileType);
         }
+        /// <summary>
+        /// Attach a url to a sheet.
+        /// </summary>
+        /// <param name="sheetId"></param>
+        /// <param name="attachment"></param>
+        /// <returns></returns>
         public virtual Attachment AttachUrl(long sheetId, Attachment attachment)
         {
             return this.CreateResource("sheets/" + sheetId + "/attachments", typeof(Attachment), attachment);
         }
 
+        /// <summary>
+        /// Delete an attachment with sheetId and attachmentId
+        /// </summary>
+        /// <param name="sheetId"></param>
+        /// <param name="attachmentId"></param>
         public virtual void DeleteAttachment(long sheetId, long attachmentId)
         {
             this.DeleteResource<Attachment>("sheets/" + sheetId + "/attachments/" + attachmentId, typeof(Attachment));
         }
 
+        /// <summary>
+        /// Get attachment with sheetId and attachmentId.
+        /// </summary>
+        /// <param name="sheetId"></param>
+        /// <param name="attachmentId"></param>
+        /// <returns></returns>
         public virtual Attachment GetAttachment(long sheetId, long attachmentId)
         {
             return this.GetResource<Attachment>("sheets/" + sheetId + "/attachments/" + attachmentId, typeof(Attachment));
         }
 
+        /// <summary>
+        /// Function to get a paginated result of attachments.
+        /// </summary>
+        /// <param name="sheetId"></param>
+        /// <param name="paging"></param>
+        /// <returns></returns>
         public virtual PaginatedResult<Attachment> ListAttachments(long sheetId, PaginationParameters paging)
         {
             StringBuilder path = new StringBuilder("sheets/" + sheetId + "/attachments");
@@ -89,6 +112,9 @@ namespace Smartsheet.Api.Internal
             return this.ListResourcesWithWrapper<Attachment>(path.ToString());
         }
 
+        /// <summary>
+        /// Get versioning resources
+        /// </summary>
         public virtual AttachmentVersioningResources VersioningResources
         {
             get
