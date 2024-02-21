@@ -23,13 +23,29 @@ using Smartsheet.Api.Models;
 
 namespace Smartsheet.Api.Internal.Json
 {
+    /// <summary>
+    /// Converter class for widget content
+    /// </summary>
     class WidgetContentConverter : JsonConverter
     {
+        /// <summary>
+        /// Helper function to know if conversion can be done
+        /// </summary>
+        /// <param name="objectType"></param>
+        /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
             return typeof(IWidgetContent).IsAssignableFrom(objectType);
         }
 
+        /// <summary>
+        /// Read object from json
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="objectType"></param>
+        /// <param name="existingValue"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
             IWidgetContent content;
@@ -120,10 +136,19 @@ namespace Smartsheet.Api.Internal.Json
             return content;
         }
 
+        /// <summary>
+        /// Write object to json.
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
         {
         }
 
+        /// <summary>
+        /// Private helper class to encapsulate widget content possibilies
+        /// </summary>
         private class WidgetContentSuperset
         {
             // Common

@@ -65,7 +65,7 @@ namespace Smartsheet.Api.Internal
             return AttachFile("sheets/" + sheetId + "/attachments", file, fileType);
         }
         /// <summary>
-        /// Attach a url to a sheet.
+        /// Attach a url to a sheet
         /// </summary>
         /// <param name="sheetId"></param>
         /// <param name="attachment"></param>

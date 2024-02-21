@@ -21,6 +21,9 @@ using System;
 
 namespace Smartsheet.Api.Internal
 {
+    /// <summary>
+    /// Impl class to handle discussion/comment resources
+    /// </summary>
     public class DiscussionCommentResourcesImpl : AbstractResources, DiscussionCommentResources
     {
         /// <summary>
