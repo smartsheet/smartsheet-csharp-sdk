@@ -1,4 +1,4 @@
-﻿using RestSharp;
+using RestSharp;
 using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
@@ -89,6 +89,7 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
 
+            VerifyAttachmentContent(smartsheet, sheetId, attachment);
 
             return attachment.Id.Value;
         }
@@ -102,6 +103,8 @@ namespace integration_test_sdk_net80
             Attachment attachment = smartsheet.SheetResources.RowResources.AttachmentResources.AttachFile(sheetId, rowId, path, null);
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
+
+            VerifyAttachmentContent(smartsheet, sheetId, attachment);
 
             Attachment attachToResource = new Attachment.CreateAttachmentBuilder("http://www.bing.com", AttachmentType.LINK).Build();
             attachment = smartsheet.SheetResources.RowResources.AttachmentResources.AttachUrl(sheetId, rowId, attachToResource);
@@ -119,15 +122,7 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
 
-            attachment = smartsheet.SheetResources.AttachmentResources.GetAttachment(sheetId, attachment.Id.Value);
-
-            var request = new RestRequest(attachment.Url);
-
-            var attachmentContent = new RestClient(attachment.Url).Get(request).Content;
-
-            var fileContents = File.ReadAllText(path);
-
-            Assert.AreEqual(attachmentContent, fileContents);
+            VerifyAttachmentContent(smartsheet, sheetId, attachment);
 
             Attachment attachToResource = new Attachment.CreateAttachmentBuilder("http://www.google.com", AttachmentType.LINK).Build();
             attachment = smartsheet.SheetResources.CommentResources.AttachmentResources.AttachUrl(sheetId, commentId, attachToResource);
@@ -147,6 +142,19 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(createdSheet.Columns.Count == 3);
             Assert.IsTrue(createdSheet.Columns[1].Title == "col 2");
             return createdSheet.Id.Value;
+        }
+
+        private void VerifyAttachmentContent(SmartsheetClient smartsheet, long sheetId, Attachment attachment)
+        {
+            attachment = smartsheet.SheetResources.AttachmentResources.GetAttachment(sheetId, attachment.Id.Value);
+
+            var request = new RestRequest(attachment.Url);
+
+            var attachmentContent = new RestClient(attachment.Url).Get(request).Content;
+
+            var fileContents = File.ReadAllText(path);
+
+            Assert.AreEqual(fileContents, attachmentContent);
         }
     }
 }
