@@ -37,4 +37,3 @@ jobs:
         run: |
          dotnet build --configuration Release --no-restore
          dotnet test --no-restore
-

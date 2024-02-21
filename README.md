@@ -10,12 +10,12 @@ The SDK supports C# version 4.0 or later and targets .NET 6.0.
 
 To add the SDK to a .Net project
 
-```shell
+```dos
 dotnet add package smartsheet-csharp-sdk
 ```
 
 ## Example Usage
-To call the API, you will need an *access token*, which looks something like this example: `ll352u9jujauoqz4gstvsae05`. You can find the access token in the UI at Account > Personal Settings > API Access.
+To call the API, you will need an *access token*, which looks something like this example: ll352u9jujauoqz4gstvsae05. You can find the access token in the UI at Account > Personal Settings > API Access.
 
 The following is a brief sample that shows you how to:
 
