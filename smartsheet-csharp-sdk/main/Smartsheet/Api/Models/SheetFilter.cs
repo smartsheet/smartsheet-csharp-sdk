@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class to encapsulate an entire sheet filter.
+    /// </summary>
     public class SheetFilter : NamedModel
     {
         /// <summary>

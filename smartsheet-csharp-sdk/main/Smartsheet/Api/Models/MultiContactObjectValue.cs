@@ -23,8 +23,15 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class to encapulate the multi contact object.
+    /// </summary>
     public class MultiContactObjectValue : ObjectValue
     {
+        /// <summary>
+        /// Constructor to take a list and set it.
+        /// </summary>
+        /// <param name="values"></param>
         public MultiContactObjectValue(IList<ContactObjectValue> values)
         {
             this.values = values;
@@ -35,6 +42,9 @@ namespace Smartsheet.Api.Models
         /// </summary>
         private IList<ContactObjectValue> values;
 
+        /// <summary>
+        /// Method to return the type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.MULTI_CONTACT; }

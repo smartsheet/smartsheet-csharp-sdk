@@ -23,10 +23,25 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum DayOrdinal
     {
+        /// <summary>
+        /// First day ordinal
+        /// </summary>
         FIRST,
+        /// <summary>
+        /// Second day ordinal
+        /// </summary>
         SECOND,
+        /// <summary>
+        /// Third day ordinal
+        /// </summary>
         THIRD,
+        /// <summary>
+        /// Fourth day ordinal
+        /// </summary>
         FOURTH,
+        /// <summary>
+        /// Last day ordinal
+        /// </summary>
         LAST
     }
 }

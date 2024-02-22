@@ -20,17 +20,45 @@ namespace Smartsheet.Api.Models
 {
     /// <summary>
     /// Represents page dimensions in the Smartsheet REST API.
+    /// Dimensions pulled from https://community.smartsheet.com/discussion/4116/custom-print-sizes
     /// </summary>
     public enum PaperSize
     {
+        /// <summary>
+        /// 8.5in x 11in
+        /// </summary>
         LETTER,
+        /// <summary>
+        /// 8.5in x 14in
+        /// </summary>
         LEGAL,
+        /// <summary>
+        /// 11 x 17
+        /// </summary>
         WIDE,
+        /// <summary>
+        /// 24in x 36in
+        /// </summary>
         ARCHD,
+        /// <summary>
+        /// 210mm x 297mm
+        /// </summary>
         A4,
+        /// <summary>
+        /// 297mm x 420mm
+        /// </summary>
         A3,
+        /// <summary>
+        /// 420mm x 594mm
+        /// </summary>
         A2,
+        /// <summary>
+        /// 594mm x 841mm
+        /// </summary>
         A1,
+        /// <summary>
+        /// 841mm x 1189mm
+        /// </summary>
         A0
     }
 }

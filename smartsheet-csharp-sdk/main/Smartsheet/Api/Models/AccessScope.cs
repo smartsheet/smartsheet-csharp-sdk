@@ -23,13 +23,37 @@ namespace Smartsheet.Api.Models
     /// <seealso href="http://www.Smartsheet.com/developers/Api-documentation#h.89hb3ivv7eum">Access Scopes Help</seealso>
     public enum AccessScope
     {
+        /// <summary>
+        /// Read sheets access scope
+        /// </summary>
         READ_SHEETS,
+        /// <summary>
+        /// Write sheets access scope
+        /// </summary>
         WRITE_SHEETS,
+        /// <summary>
+        /// share sheets access scope
+        /// </summary>
         SHARE_SHEETS,
+        /// <summary>
+        /// Delete sheets access scope
+        /// </summary>
         DELETE_SHEETS,
+        /// <summary>
+        /// Create sheets access scope
+        /// </summary>
         CREATE_SHEETS,
+        /// <summary>
+        /// Admin users access scope
+        /// </summary>
         ADMIN_USERS,
+        /// <summary>
+        /// Admin sheets access scope
+        /// </summary>
         ADMIN_SHEETS,
+        /// <summary>
+        /// Admin workspaces access scope
+        /// </summary>
         ADMIN_WORKSPACES
     }
 }

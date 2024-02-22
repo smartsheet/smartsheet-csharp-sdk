@@ -20,6 +20,9 @@ using Smartsheet.Api.Models;
 
 namespace Smartsheet.Api
 {
+    /// <summary>
+    /// Interface for event resources
+    /// </summary>
     public interface EventResources
     {
         /// <summary>

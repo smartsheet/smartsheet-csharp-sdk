@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Wrapper class on lists of potential sort criteria.
+    /// </summary>
     public class SortSpecifier
     {
         /// <summary>

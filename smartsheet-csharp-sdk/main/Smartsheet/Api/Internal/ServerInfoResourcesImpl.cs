@@ -40,6 +40,10 @@ namespace Smartsheet.Api.Internal
         {
         }
 
+        /// <summary>
+        /// Get what type of server we have.
+        /// </summary>
+        /// <returns></returns>
         public ServerInfo GetServerInfo()
         {
             return this.GetResource<ServerInfo>("serverinfo", typeof(ServerInfo));

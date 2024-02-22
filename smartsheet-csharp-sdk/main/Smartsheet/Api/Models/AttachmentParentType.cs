@@ -23,8 +23,17 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum AttachmentParentType
     {
+        /// <summary>
+        /// Attachment parent is a sheet
+        /// </summary>
         SHEET,
+        /// <summary>
+        /// Attachment parent is a row
+        /// </summary>
         ROW,
+        /// <summary>
+        /// Attachment parent is a comment
+        /// </summary>
         COMMENT
     }
 }

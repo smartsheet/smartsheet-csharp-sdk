@@ -20,11 +20,21 @@ using System.Collections.Generic;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Wrapper to encapsulate a list of Predecessors.
+    /// </summary>
     public class PredecessorList : ObjectValue
     {
         private IList<Predecessor> predecessors;
 
+        /// <summary>
+        /// Default empty constructor.
+        /// </summary>
         public PredecessorList() { }
+        /// <summary>
+        /// Constructor to set list of predecessors on construction.
+        /// </summary>
+        /// <param name="predecessors"></param>
         public PredecessorList(IList<Predecessor> predecessors)
         {
             this.predecessors = predecessors;
@@ -40,6 +50,9 @@ namespace Smartsheet.Api.Models
             set { this.predecessors = value; }
         }
 
+        /// <summary>
+        /// Public accessor for what type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.PREDECESSOR_LIST; }

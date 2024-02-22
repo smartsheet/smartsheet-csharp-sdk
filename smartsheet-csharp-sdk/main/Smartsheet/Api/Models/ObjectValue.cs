@@ -20,6 +20,9 @@ using System.Collections.Generic;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Interface to hold that an objectValue must have a type
+    /// </summary>
     public interface ObjectValue
     {
         /// <summary>

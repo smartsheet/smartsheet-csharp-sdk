@@ -115,6 +115,10 @@ namespace Smartsheet.Api.Models
         /// </summary>
         public class AddCommentBuilder
         {
+            /// <summary>
+            /// Constructor that takes a string of text for the comment.
+            /// </summary>
+            /// <param name="text"></param>
             public AddCommentBuilder(string text)
             {
                 this.text = text;

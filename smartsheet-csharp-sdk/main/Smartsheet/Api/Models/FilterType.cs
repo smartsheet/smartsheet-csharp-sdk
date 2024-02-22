@@ -27,8 +27,14 @@ namespace Smartsheet.Api.Models
     [JsonConverter(typeof(StringEnumConverter))]
     public enum FilterType
     {
+        /// <summary>
+        /// Filter type is a list.
+        /// </summary>
         [EnumMember(Value = "list")]
         LIST,
+        /// <summary>
+        /// Custom filter type.
+        /// </summary>
         [EnumMember(Value = "custom")]
         CUSTOM
     }

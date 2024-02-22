@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class for implmentation of a contact object value
+    /// </summary>
     public class ContactObjectValue : Contact, ObjectValue
     {
         /// <summary>
@@ -36,6 +39,9 @@ namespace Smartsheet.Api.Models
         /// </summary>
         private string imageId;
 
+        /// <summary>
+        /// Method to return the type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.CONTACT; }

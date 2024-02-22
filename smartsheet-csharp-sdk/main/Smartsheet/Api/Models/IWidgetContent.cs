@@ -20,6 +20,9 @@ using System.Collections.Generic;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Interface for widget contents.
+    /// </summary>
     public interface IWidgetContent
     {
         /// <summary>

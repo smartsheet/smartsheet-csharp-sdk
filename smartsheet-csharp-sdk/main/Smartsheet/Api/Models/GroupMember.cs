@@ -30,6 +30,9 @@ namespace Smartsheet.Api.Models
         /// </summary>
         public class AddGroupMemberBuilder
         {
+            /// <summary>
+            /// Email to use for adding a new group member.
+            /// </summary>
             private string email;
 
             /// <summary>
@@ -41,12 +44,21 @@ namespace Smartsheet.Api.Models
                 this.email = email;
             }
 
+            /// <summary>
+            /// Setter for setting email after construction.
+            /// </summary>
+            /// <param name="email"></param>
+            /// <returns></returns>
             public AddGroupMemberBuilder SetEmail(string email)
             {
                 this.email = email;
                 return this;
             }
 
+            /// <summary>
+            /// Getter for getting email that is currently set.
+            /// </summary>
+            /// <returns></returns>
             public string getEmail()
             {
                 return this.email;

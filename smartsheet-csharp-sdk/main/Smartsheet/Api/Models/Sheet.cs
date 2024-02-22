@@ -21,6 +21,9 @@ using System.Collections.Generic;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Implementation of a sheet.
+    /// </summary>
     public class Sheet : AbstractSheet<Row, Column, Cell>
     {
         /// <summary>

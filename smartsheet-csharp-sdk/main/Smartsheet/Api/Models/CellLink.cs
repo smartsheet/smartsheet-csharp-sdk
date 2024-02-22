@@ -132,6 +132,9 @@ namespace Smartsheet.Api.Models
             set { status = value; }
         }
 
+        /// <summary>
+        /// Is cell link null.
+        /// </summary>
         [JsonIgnore]
         public bool IsNull
         {

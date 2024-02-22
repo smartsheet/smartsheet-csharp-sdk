@@ -92,6 +92,10 @@ namespace Smartsheet.Api.Internal.Http
             return new StreamReader(new MemoryStream(content));
         }
 
+        /// <summary>
+        /// Helper method to get content as a string
+        /// </summary>
+        /// <returns></returns>
         public string GetContentAsString() 
         {
             StreamReader reader = this.GetContent();
@@ -107,6 +111,10 @@ namespace Smartsheet.Api.Internal.Http
             return string.Concat(lines);
         }
 
+        /// <summary>
+        /// Get content in the form of a binary reader
+        /// </summary>
+        /// <returns></returns>
         public BinaryReader GetBinaryContent()
         {
             if (content == null) { content = new byte[0]; }

@@ -28,6 +28,9 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Util;
     using Api.Internal.Http;
 
+    /// <summary>
+    /// Webhook resources implmentation class
+    /// </summary>
     public class WebhookResourcesImpl : AbstractResources, WebhookResources
     {
         /// <summary>

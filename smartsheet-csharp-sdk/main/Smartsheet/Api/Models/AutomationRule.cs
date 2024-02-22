@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class encapsulating one automation rule
+    /// </summary>
     public class AutomationRule : IdentifiableModel
     {
         /// <summary>

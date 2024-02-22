@@ -23,11 +23,26 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Automation action frequency enumeration
+    /// </summary>
     public enum AutomationActionFrequency
     {
+        /// <summary>
+        /// Immediately have action done
+        /// </summary>
         IMMEDIATELY,
+        /// <summary>
+        /// Have action happen hourly
+        /// </summary>
         HOURLY,
+        /// <summary>
+        /// Have action happen daily
+        /// </summary>
         DAILY,
+        /// <summary>
+        /// Have action happen weekly
+        /// </summary>
         WEEKLY
     }
 }

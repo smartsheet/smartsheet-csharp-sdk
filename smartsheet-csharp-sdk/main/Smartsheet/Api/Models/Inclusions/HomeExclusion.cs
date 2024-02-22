@@ -28,6 +28,9 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum HomeExclusion
     {
+        /// <summary>
+        /// Permalinks to not include in the response.
+        /// </summary>
         PERMALINKS
     }
 }

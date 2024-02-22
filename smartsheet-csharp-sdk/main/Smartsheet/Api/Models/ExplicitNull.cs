@@ -24,19 +24,32 @@ using Newtonsoft.Json;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Object value for the explicit null value.
+    /// </summary>
     public class ExplicitNull : IPrimitiveObjectValue<object>
     {
+        /// <summary>
+        /// Getter to return null, and no way to set anything else.
+        /// </summary>
         public object Value
         {
             get { return null; }
             set { }
         }
 
+        /// <summary>
+        /// Method to return the type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.NULL; }
         }
 
+        /// <summary>
+        /// Serialize function that returns nothing but writes object using writer passed in.
+        /// </summary>
+        /// <param name="writer"></param>
         public void Serialize(JsonWriter writer)
         {
             writer.WriteNull();

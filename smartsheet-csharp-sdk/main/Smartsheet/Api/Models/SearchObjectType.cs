@@ -29,24 +29,54 @@ namespace Smartsheet.Api.Models
     {
         // ObjectType must also be in all lower case when building the path.
         // Below, the EnumMembers turn the enums into lowercase only during serialization into JSON object
+        /// <summary>
+        /// Attachment search object type.
+        /// </summary>
         [EnumMember(Value = "attachment")]
         ATTACHMENT,
+        /// <summary>
+        /// Discussion/comment search object type.
+        /// </summary>
         [EnumMember(Value = "discussion")]
         DISCUSSION,
+        /// <summary>
+        /// Folder search object type.
+        /// </summary>
         [EnumMember(Value = "folder")]
         FOLDER,
+        /// <summary>
+        /// Report search object type.
+        /// </summary>
         [EnumMember(Value = "report")]
         REPORT,
+        /// <summary>
+        /// Row search object type.
+        /// </summary>
         [EnumMember(Value = "row")]
         ROW,
+        /// <summary>
+        /// Sheet search object type.
+        /// </summary>
         [EnumMember(Value = "sheet")]
         SHEET,
+        /// <summary>
+        /// Sight/dashboard search object type.
+        /// </summary>
         [EnumMember(Value = "sight")]
         SIGHT,
+        /// <summary>
+        /// Summary field search object type.
+        /// </summary>
         [EnumMember(Value = "summaryField")]
         SUMMARY_FIELD,
+        /// <summary>
+        /// Template search object type.
+        /// </summary>
         [EnumMember(Value = "template")]
         TEMPLATE,
+        /// <summary>
+        /// Workspace search object type.
+        /// </summary>
         [EnumMember(Value = "workspace")]
         WORKSPACE
     }

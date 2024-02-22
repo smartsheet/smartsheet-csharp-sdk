@@ -18,6 +18,9 @@
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Object to handle if rows that have dependencies on a predecessor
+    /// </summary>
     public class Predecessor
     {
         /// <summary>

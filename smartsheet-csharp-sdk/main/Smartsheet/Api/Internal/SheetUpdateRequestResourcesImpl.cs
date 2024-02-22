@@ -4,8 +4,15 @@ using System.Collections.Generic;
 
 namespace Smartsheet.Api.Internal
 {
+    /// <summary>
+    /// Implemenation class for sheet update requests
+    /// </summary>
     public class SheetUpdateRequestResourcesImpl: AbstractResources, SheetUpdateRequestResources
     {
+        /// <summary>
+        /// Constructor that takes a smartsheetImpl object
+        /// </summary>
+        /// <param name="smartsheet"></param>
         public SheetUpdateRequestResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {

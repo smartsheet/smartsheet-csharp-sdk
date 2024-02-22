@@ -26,8 +26,15 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Models;
     using Smartsheet.Api.Internal.Util;
 
+    /// <summary>
+    /// Cross sheet references implementation class for resources
+    /// </summary>
     public class SheetCrossSheetReferencesResourcesImpl : AbstractResources, SheetCrossSheetReferenceResources
     {
+        /// <summary>
+        /// Constructor that takes a smartsheet implementation.
+        /// </summary>
+        /// <param name="smartsheet"></param>
         public SheetCrossSheetReferencesResourcesImpl(SmartsheetImpl smartsheet): base(smartsheet)
         {
         }

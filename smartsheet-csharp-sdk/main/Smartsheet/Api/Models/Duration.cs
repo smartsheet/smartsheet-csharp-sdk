@@ -18,9 +18,28 @@
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class encapsulating a duration object value.
+    /// </summary>
     public class Duration : ObjectValue
     {
+        /// <summary>
+        /// Default/empty constructor.
+        /// </summary>
         public Duration() {}
+
+        /// <summary>
+        /// Constructor that takes time in weeks, days, hours, minutes, seconds, and milliseconds. 
+        /// There is also a boolean for negative and elapsed.
+        /// </summary>
+        /// <param name="negative"></param>
+        /// <param name="elapsed"></param>
+        /// <param name="weeks"></param>
+        /// <param name="days"></param>
+        /// <param name="hours"></param>
+        /// <param name="minutes"></param>
+        /// <param name="seconds"></param>
+        /// <param name="milliseconds"></param>
         public Duration(bool negative, bool elapsed, double weeks, double days, double hours, double minutes, 
             double seconds, double milliseconds)
         {
@@ -153,6 +172,9 @@ namespace Smartsheet.Api.Models
             set { weeks = value; }
         }
 
+        /// <summary>
+        /// Method to return the type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.DURATION; }
