@@ -28,7 +28,7 @@ namespace Smartsheet.Api.Internal
     using System;
 
     /// <summary>
-    /// Automation rule resources impl class
+    /// Automation rule resources implementation class
     /// </summary>
     public class SheetAutomationRuleResourcesImpl : AbstractResources, SheetAutomationRuleResources
     {

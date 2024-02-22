@@ -33,7 +33,7 @@ namespace Smartsheet.Api.Internal
     using Api.Internal.Util;
 
     /// <summary>
-    /// Impl class for pass through resources
+    /// Implementation class for pass through resources
     /// </summary>
     public class PassthroughResourcesImpl : AbstractResources, PassthroughResources
     {
@@ -120,7 +120,7 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// Private impl function for pass through request
+        /// Private implementation function for pass through request
         /// </summary>
         /// <param name="method"></param>
         /// <param name="endpoint"></param>
