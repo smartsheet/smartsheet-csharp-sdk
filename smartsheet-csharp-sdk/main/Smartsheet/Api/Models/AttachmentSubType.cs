@@ -28,23 +28,23 @@ namespace Smartsheet.Api.Models
         /// </summary>
         DOCUMENT,
         /// <summary>
-        /// Spreadsheet sub type
+        /// Spreadsheet attachment sub type
         /// </summary>
         SPREADSHEET,
         /// <summary>
-        /// 
+        /// Presentation attachment sub type
         /// </summary>
         PRESENTATION,
         /// <summary>
-        /// 
+        /// PDF attachment sub type
         /// </summary>
         PDF,
         /// <summary>
-        /// 
+        /// Drawing attachment sub type
         /// </summary>
         DRAWING,
         /// <summary>
-        /// 
+        /// Folder attachment sub type
         /// </summary>
         FOLDER
     }
