@@ -23,10 +23,25 @@ namespace Smartsheet.Api.Models
     /// <seealso href="http://www.Smartsheet.com/developers/Api-documentation#h.umfgm4xt25dq">Access Level Help</seealso>
     public enum AccessLevel
     {
+        /// <summary>
+        /// Viewer access level
+        /// </summary>
         VIEWER,
+        /// <summary>
+        /// Editor access level
+        /// </summary>
         EDITOR,
+        /// <summary>
+        /// Editor with share access level
+        /// </summary>
         EDITOR_SHARE,
+        /// <summary>
+        /// Admin access level
+        /// </summary>
         ADMIN,
+        /// <summary>
+        /// Owner access level
+        /// </summary>
         OWNER
     }
 }

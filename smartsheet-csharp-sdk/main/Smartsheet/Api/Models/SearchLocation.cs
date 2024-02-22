@@ -22,8 +22,14 @@ using System.Runtime.Serialization;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Wrapper over include option for searching inside your personal workspace (sheets folder)
+    /// </summary>
     public enum SearchLocation
     {
+        /// <summary>
+        /// Special flag to be set in the includes for a request.
+        /// </summary>
         [EnumMember(Value = "personalWorkspace")]
         PERSONAL_WORKSPACE
     }

@@ -24,6 +24,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Internal.Json
 {
+    /// <summary>
+    /// Class for lowercase contract resolver
+    /// </summary>
     public class LowercaseContractResolver : DefaultContractResolver
     {
 

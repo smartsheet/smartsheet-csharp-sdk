@@ -28,7 +28,13 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum SheetFilterOperator
     {
+        /// <summary>
+        /// Logical AND for filtering.
+        /// </summary>
         AND,
+        /// <summary>
+        /// Logical OR for filtering.
+        /// </summary>
         OR
     }
 }

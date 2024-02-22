@@ -24,13 +24,29 @@ using Smartsheet.Api.Models;
 
 namespace Smartsheet.Api.Internal.Json
 {
+    /// <summary>
+    /// Helper class to convert object types
+    /// </summary>
     class ObjectValueTypeConverter : JsonConverter
     {
+        /// <summary>
+        /// Helper function to know if conversion can be done
+        /// </summary>
+        /// <param name="objectType"></param>
+        /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
             return typeof(ObjectValue).IsAssignableFrom(objectType);
         }
 
+        /// <summary>
+        /// Read object from json
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="objectType"></param>
+        /// <param name="existingValue"></param>
+        /// <param name="serializer"></param>
+        /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
             ObjectValue objectValue;
@@ -119,6 +135,12 @@ namespace Smartsheet.Api.Internal.Json
             return objectValue;
         }
 
+        /// <summary>
+        /// Write object to json.
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
         {
             Newtonsoft.Json.JsonSerializer serializerHelper = new Newtonsoft.Json.JsonSerializer();
@@ -131,6 +153,9 @@ namespace Smartsheet.Api.Internal.Json
             serializerHelper.Serialize(writer, value);
         }
 
+        /// <summary>
+        /// Private helper class to encapsulate object value attribute possibilities
+        /// </summary>
         private class ObjectValueAttributeSuperset
         {
             public string objectType;

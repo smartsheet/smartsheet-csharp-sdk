@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class to encapsulate an automation action
+    /// </summary>
     public class AutomationAction
     {
         /// <summary>

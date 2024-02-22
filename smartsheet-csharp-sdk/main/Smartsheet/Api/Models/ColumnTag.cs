@@ -23,16 +23,50 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum ColumnTag
     {
+        /// <summary>
+        /// Start date of calendar
+        /// </summary>
         CALENDAR_START_DATE,
+        /// <summary>
+        /// End date of calendar
+        /// </summary>
         CALENDAR_END_DATE,
+        /// <summary>
+        /// Checkbox type that allows for card view to show a done status
+        /// </summary>
         CARD_DONE,
+        /// <summary>
+        /// Start date of gantt chart
+        /// </summary>
         GANTT_START_DATE,
+        /// <summary>
+        /// End date of gantt chart
+        /// </summary>
         GANTT_END_DATE,
+        /// <summary>
+        /// Completion so far in percent for a gantt project
+        /// </summary>
         GANTT_PERCENT_COMPLETE,
+        /// <summary>
+        /// Display for gantt chart
+        /// </summary>
         GANTT_DISPLAY_LABEL,
+        /// <summary>
+        /// Used to define predecessors in gantt chart
+        /// </summary>
         GANTT_PREDECESSOR,
+        /// <summary>
+        /// Duration in gantt chart
+        /// </summary>
         GANTT_DURATION,
+        /// <summary>
+        /// Assigned resources in gantt chart
+        /// </summary>
         GANTT_ASSIGNED_RESOURCE,
+        /// <summary>
+        /// Allocation in gantt chart
+        /// </summary>
         GANTT_ALLOCATION
+        
     }
 }

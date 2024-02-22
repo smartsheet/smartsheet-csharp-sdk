@@ -23,8 +23,15 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class to encapulate the multi pick list object.
+    /// </summary>
     public class MultiPicklistObjectValue : ObjectValue
     {
+        /// <summary>
+        /// Constructor to take a list and set it.
+        /// </summary>
+        /// <param name="values"></param>
         public MultiPicklistObjectValue(IList<string> values)
         {
             this.values = values;
@@ -35,6 +42,9 @@ namespace Smartsheet.Api.Models
         /// </summary>
         private IList<string> values;
 
+        /// <summary>
+        /// Method to return the type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.MULTI_PICKLIST; }

@@ -23,10 +23,22 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Enum holding all types of automation actions.
+    /// </summary>
     public enum AutomationActionType
     {
+        /// <summary>
+        /// Action is to send notification
+        /// </summary>
         NOTIFICATION_ACTION,
+        /// <summary>
+        /// Action is to request an update
+        /// </summary>
         UPDATE_REQUEST_ACTION,
+        /// <summary>
+        /// Action is to request approval
+        /// </summary>
         APPROVAL_REQUEST_ACTION
     }
 }

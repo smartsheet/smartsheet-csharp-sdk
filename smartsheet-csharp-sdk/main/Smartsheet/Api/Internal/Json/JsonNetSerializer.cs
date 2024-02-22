@@ -47,6 +47,9 @@ namespace Smartsheet.Api.Internal.Json
         //private static readonly ObjectMapper OBJECT_MAPPER = new ObjectMapper();
         private static readonly Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
 
+        /// <summary>
+        /// Static class setting newtonsoft settings
+        /// </summary>
         static JsonNetSerializer()
         {
             // No formatting to decrease the length;
@@ -191,6 +194,13 @@ namespace Smartsheet.Api.Internal.Json
             }
         }
 
+        /// <summary>
+        /// Generic deserialize function
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        /// <exception cref="JsonSerializationException"></exception>
         public virtual T deserialize<T>(string input)
         {
             Utils.ThrowIfNull(input);

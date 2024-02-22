@@ -18,13 +18,34 @@
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Enum holding source of an event.
+    /// </summary>
     public enum EventSource
     {
+        /// <summary>
+        /// Smartsheet web application.
+        /// </summary>
         WEB_APP,
+        /// <summary>
+        /// Mobile IOS device.
+        /// </summary>
         MOBILE_IOS,
+        /// <summary>
+        /// Mobile android device.
+        /// </summary>
         MOBILE_ANDROID,
+        /// <summary>
+        /// API integrated application.
+        /// </summary>
         API_INTEGRATED_APP,
+        /// <summary>
+        /// API through undefined application.
+        /// </summary>
         API_UNDEFINED_APP,
+        /// <summary>
+        /// Not known at this point.
+        /// </summary>
         UNKNOWN
     }
 }

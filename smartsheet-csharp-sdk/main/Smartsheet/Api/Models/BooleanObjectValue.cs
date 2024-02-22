@@ -24,26 +24,46 @@ using Newtonsoft.Json;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Object value for the boolean primitive value.
+    /// </summary>
     public class BooleanObjectValue : IPrimitiveObjectValue<bool>
     {
+        /// <summary>
+        /// Internal boolean state.
+        /// </summary>
         private bool value;
 
+        /// <summary>
+        /// Constructor to set boolean value
+        /// </summary>
+        /// <param name="value"></param>
         public BooleanObjectValue(bool value)
         {
             this.value = value;
         }
 
+        /// <summary>
+        /// Getter/setter for the boolean value.
+        /// </summary>
         public bool Value
         {
             get { return this.value; }
             set { this.value = value; }
         }
 
+        /// <summary>
+        /// Method to return the type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return ObjectValueType.BOOLEAN; }
         }
 
+        /// <summary>
+        /// Serialize function that returns nothing but writes object using writer passed in.
+        /// </summary>
+        /// <param name="writer"></param>
         public void Serialize(JsonWriter writer)
         {
             writer.WriteValue(value);

@@ -22,26 +22,59 @@ using System.Runtime.Serialization;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Possible search filters to use to narrow results.
+    /// </summary>
     public enum SearchScope
     {
+        /// <summary>
+        /// Search for names and descriptions of attachments
+        /// </summary>
         [EnumMember(Value = "attachments")]
         ATTACHMENTS,
+        /// <summary>
+        /// Search for data within rows
+        /// </summary>
         [EnumMember(Value = "cellData")]
         CELL_DATA,
+        /// <summary>
+        /// Search for comments including replies to an initial comment
+        /// </summary>
         [EnumMember(Value = "comments")]
         COMMENTS,
+        /// <summary>
+        /// Search for names of folders
+        /// </summary>
         [EnumMember(Value = "folderNames")]
         FOLDER_NAMES,
+        /// <summary>
+        /// Search for names of reports
+        /// </summary>
         [EnumMember(Value = "reportNames")]
         REPORT_NAMES,
+        /// <summary>
+        /// Search for names of sheets
+        /// </summary>
         [EnumMember(Value = "sheetNames")]
         SHEET_NAMES,
+        /// <summary>
+        /// Search for names of sights, also known as dashboards
+        /// </summary>
         [EnumMember(Value = "sightNames")]
         SIGHT_NAMES,
+        /// <summary>
+        /// Search for summary fields
+        /// </summary>
         [EnumMember(Value = "summaryFields")]
         SUMMARY_FIELDS,
+        /// <summary>
+        /// Search for names of templates 
+        /// </summary>
         [EnumMember(Value = "templateNames")]
         TEMPLATE_NAMES,
+        /// <summary>
+        /// Search for names of workspaces
+        /// </summary>
         [EnumMember(Value = "workspaceNames")]
         WORKSPACE_NAMES
     }

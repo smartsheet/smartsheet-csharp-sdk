@@ -23,6 +23,9 @@ namespace Smartsheet.Api
     using Api.Models;
     using System;
 
+    /// <summary>
+    /// Interface used to encapsulate sight/dashboard resources. 
+    /// </summary>
     public interface SightResources
     {
         /// <summary>

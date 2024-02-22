@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>sdk_csharp_sample_net80</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="System.IO" />
+    <None Remove="System.Threading" />
+    <None Remove="RestSharp" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="NLog" />
+    <None Remove="System.Runtime" />
+    <None Remove="Unofficial.System.Unit" />
+    <None Remove="System.Linq" />
+    <None Remove="System.Collections" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.IO" Version="4.3.0" />
+    <PackageReference Include="System.Threading" Version="4.3.0" />
+    <PackageReference Include="RestSharp" Version="109.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NLog" Version="5.0.5" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\smartsheet-csharp-sdk\smartsheet-csharp-sdk-v2.csproj" />
+  </ItemGroup>
+</Project>

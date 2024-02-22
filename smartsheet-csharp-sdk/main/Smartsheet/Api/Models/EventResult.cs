@@ -20,6 +20,9 @@ using System.Collections.Generic;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class encapsulating the result of an event.
+    /// </summary>
     public class EventResult
     {
         /// <summary>

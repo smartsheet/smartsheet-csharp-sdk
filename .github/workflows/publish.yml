@@ -14,7 +14,7 @@ jobs:
     - name: Setup .Net Core
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '8.0.x'
     - name: Install Dependencies
       run: dotnet restore
     - name: Build
@@ -31,13 +31,13 @@ jobs:
        smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
        smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
     - name: Run Mock API Tests
-      working-directory: ./mock-api-test-sdk-net60
+      working-directory: ./mock-api-test-sdk-net80
       run: |
        dotnet build --configuration Release --no-restore
        dotnet test --no-restore
     - name: Run Integration Tests
       continue-on-error: true
-      working-directory: ./integration-test-sdk-net60
+      working-directory: ./integration-test-sdk-net80
       env:
         SMARTSHEET_ACCESS_TOKEN: ${{secrets.SMARTSHEET_ACCESS_TOKEN}}
       run: |

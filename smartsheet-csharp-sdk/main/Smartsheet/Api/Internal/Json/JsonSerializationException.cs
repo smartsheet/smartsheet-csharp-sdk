@@ -21,18 +21,34 @@ using System;
 
 namespace Smartsheet.Api.Internal.Json
 {
+    /// <summary>
+    /// Class wrapping exceptions from JSON serialization
+    /// </summary>
     public class JsonSerializationException : SmartsheetException
     {
+        /// <summary>
+        /// Constructor taking a string
+        /// </summary>
+        /// <param name="message"></param>
         public JsonSerializationException(string message)
             : base(message)
         {
         }
 
+        /// <summary>
+        /// Constructor taking a message and exception for cause
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="cause"></param>
         public JsonSerializationException(string message, Exception cause)
             : base(message, cause)
         {
         }
 
+        /// <summary>
+        /// Constructor taking an exception for an argument
+        /// </summary>
+        /// <param name="e"></param>
         public JsonSerializationException(Exception e)
             : base(e)
         {

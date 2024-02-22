@@ -23,15 +23,45 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum DayDescriptor
     {
+        /// <summary>
+        /// Day descriptor for day
+        /// </summary>
         DAY,
+        /// <summary>
+        /// Descriptor for weekdays only.
+        /// </summary>
         WEEKDAY,
+        /// <summary>
+        /// Descriptor for weekends.
+        /// </summary>
         WEEKEND,
+        /// <summary>
+        /// Descriptor for Sunday.
+        /// </summary>
         SUNDAY,
+        /// <summary>
+        /// Descriptor for Monday.
+        /// </summary>
         MONDAY,
+        /// <summary>
+        /// Descriptor for Tuesday.
+        /// </summary>
         TUESDAY,
+        /// <summary>
+        /// Descriptor for Wednesday.
+        /// </summary>
         WEDNESDAY,
+        /// <summary>
+        /// Descriptor for Thursday.
+        /// </summary>
         THURSDAY,
+        /// <summary>
+        /// Descriptor for Friday.
+        /// </summary>
         FRIDAY,
+        /// <summary>
+        /// Descriptor for Saturday.
+        /// </summary>
         SATURDAY
     }
 }

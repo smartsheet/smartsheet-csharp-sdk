@@ -119,7 +119,15 @@ namespace Smartsheet.Api.Internal.Http
             this.jsonSerializer = jsonSerializer;
         }
 
-
+        /// <summary>
+        /// Wrapper function on a request, objectType, file, and fileType to hide the async nature of RestSharp
+        /// </summary>
+        /// <param name="smartsheetRequest"></param>
+        /// <param name="objectType"></param>
+        /// <param name="file"></param>
+        /// <param name="fileType"></param>
+        /// <returns></returns>
+        /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
             HttpResponse response = new HttpResponse();
             // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead. 
@@ -218,6 +226,12 @@ namespace Smartsheet.Api.Internal.Http
         }
 
 
+        /// <summary>
+        /// Wrapper function on a request to hide the async nature of RestSharp
+        /// </summary>
+        /// <param name="smartsheetRequest"></param>
+        /// <returns></returns>
+        /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
             HttpResponse response = new HttpResponse();
             // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead. 
@@ -553,13 +567,18 @@ namespace Smartsheet.Api.Internal.Http
             });
         }
 
-    //Little helper class to help us get the content of the RestSharp response. 
-    //This holds the relevant error for the user that we have mock api test cases that test the error message. 
+    /// <summary>
+    /// Little helper class to help us get the content of the RestSharp response. 
+    /// This holds the relevant error for the user that we have mock api test cases that test the error message.
+    /// </summary>
     protected class RestResponseContent {
         private int privateErrorCode;
 
         private string privateMessage;
         private string privateRefId;
+        /// <summary>
+        /// Helper class to hold error code, private message and refId.
+        /// </summary>
         public RestResponseContent()
         {
             this.privateErrorCode = -1;
@@ -567,16 +586,25 @@ namespace Smartsheet.Api.Internal.Http
             this.privateRefId = "";
         }
 
+        /// <summary>
+        /// Getter/setter for errorCode
+        /// </summary>
         public int errorCode {
             get { return this.privateErrorCode; }
             set { this.privateErrorCode = value; }
         }
 
+        /// <summary>
+        /// Getter/setter for message
+        /// </summary>
         public string message {
             get { return this.privateMessage; }
             set { this.privateMessage = value; }
         }
 
+        /// <summary>
+        /// Getter/setter for refId
+        /// </summary>
         public string refId {
             get { return this.privateRefId; }
             set { this.privateRefId = value; }

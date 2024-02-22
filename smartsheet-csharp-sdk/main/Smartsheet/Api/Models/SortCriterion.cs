@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class to hold sorting criterion given a columnId and sortDirection. 
+    /// </summary>
     public class SortCriterion
     {
         /// <summary>

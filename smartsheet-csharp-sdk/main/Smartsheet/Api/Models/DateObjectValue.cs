@@ -23,28 +23,46 @@ using System.Text;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class encapsulating the date object value. 
+    /// </summary>
     public class DateObjectValue : ObjectValue
     {
         private string value;
         private ObjectValueType objectType;
 
+        /// <summary>
+        /// Constructor taking an object typ and value to set.
+        /// </summary>
+        /// <param name="objectType"></param>
+        /// <param name="value"></param>
         public DateObjectValue(ObjectValueType objectType, string value)
         {
             this.objectType = objectType;
             this.value = value;
         }
 
+        /// <summary>
+        /// Getter/setter for string value.
+        /// </summary>
         public string Value
         {
             get { return this.value; }
             set { this.value = value; }
         }
 
+        /// <summary>
+        /// Helper function to return string value as a dateTime.
+        /// </summary>
+        /// <returns></returns>
         public DateTime ToDate()
         {
             return DateTime.Parse(this.value);
         }
 
+        /// <summary>
+        /// Method to return the type of object this is.
+        /// </summary>
         public ObjectValueType ObjectType
         {
             get { return objectType; }

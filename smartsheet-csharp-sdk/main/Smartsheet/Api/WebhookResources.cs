@@ -25,6 +25,9 @@ namespace Smartsheet.Api
 {
     using Api.Models;
 
+    /// <summary>
+    /// Interface used to encapsulate webhook resources. 
+    /// </summary>
     public interface WebhookResources
     {
         /// <summary>

@@ -73,6 +73,9 @@ namespace Smartsheet.Api.Models
         /// SHORTCUTLIST, SHORTCUTICON (both now SHORTCUT) decode to ShortcutWidgetContent object
         /// </summary>
         SHORTCUTLIST,
+        /// <summary>
+        /// SHORTCUTLIST, SHORTCUTICON (both now SHORTCUT) decode to ShortcutWidgetContent object
+        /// </summary>
         SHORTCUTICON,
 
         /// <summary>

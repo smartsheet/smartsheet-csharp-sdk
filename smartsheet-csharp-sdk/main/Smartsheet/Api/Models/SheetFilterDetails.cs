@@ -24,6 +24,9 @@ using System.Runtime.Serialization;
 
 namespace Smartsheet.Api.Models
 {
+    /// <summary>
+    /// Class encapsulating the sheet filter details.
+    /// </summary>
     public class SheetFilterDetails
     {
         /// <summary>

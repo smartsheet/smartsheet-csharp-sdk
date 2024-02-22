@@ -28,10 +28,25 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum ScheduleType
     {
+        /// <summary>
+        /// Schedule only to happen once
+        /// </summary>
         ONCE,
+        /// <summary>
+        /// Schedule to recur daily
+        /// </summary>
         DAILY,
+        /// <summary>
+        /// Schedule to recur weekly
+        /// </summary>
         WEEKLY,
+        /// <summary>
+        /// Schedule to recur monthly
+        /// </summary>
         MONTHLY,
+        /// <summary>
+        /// Schedule to recur yearly
+        /// </summary>
         YEARLY
     }
 }

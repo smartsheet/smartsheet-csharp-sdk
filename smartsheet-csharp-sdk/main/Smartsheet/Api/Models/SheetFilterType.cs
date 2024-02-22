@@ -28,8 +28,17 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public enum SheetFilterType
     {
+        /// <summary>
+        /// Adhoc sheet filter type.
+        /// </summary>
         ADHOC,
+        /// <summary>
+        /// Personal sheet filter type.
+        /// </summary>
         PERSONAL,
+        /// <summary>
+        /// Shared sheet filter type.
+        /// </summary>
         SHARED
     }
 }

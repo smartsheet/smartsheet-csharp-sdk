@@ -23,6 +23,9 @@ using System.Text;
 
 namespace Smartsheet.Api
 {
+    /// <summary>
+    /// Interface used to encapsulate resources that are just pass throughs to more implmentation specific uses. 
+    /// </summary>
     public interface PassthroughResources
     {
         /// <summary>
