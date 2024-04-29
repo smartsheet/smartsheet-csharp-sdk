@@ -24,7 +24,7 @@ namespace Smartsheet.Api
     using PersonalFolder = Smartsheet.Api.Models.PersonalFolder;
 
     /// <summary>
-    /// <para>This interface provides methods to access Home resources.</para>
+    /// <para>This interface provides methods to access resources previously from the deprecated home API.</para>
     /// 
     /// <para>Thread Safety: Implementation of this interface must be thread safe.</para>
     /// </summary>
@@ -32,7 +32,7 @@ namespace Smartsheet.Api
     {
         /// <summary>
         /// <para>
-        /// Gets a nested list of all Home objects, including folders, reports, sheets, templates, and workspaces as shown on the Home tab.
+        /// Gets a nested list of shared items that were previously found from the /home API, including reports, sheets, templates, and dashboards.
         /// </para>
         /// <para>
         /// Mirrors to the following Smartsheet REST API method: GET /home
@@ -51,10 +51,10 @@ namespace Smartsheet.Api
 
         /// <summary>
         /// <para>
-        /// Gets a nested list of all Home objects, including folders, reports, sheets, templates, and workspaces as shown on the Home tab.
+        /// Gets a nested list of shared items that were previously found from the /home API, including reports, sheets, templates, and dashboards.
         /// </para>
         /// <para>
-        /// Mirrors to the following Smartsheet REST API method: GET /home
+        /// Mirrors to the following Smartsheet REST API method: GET /folders/personal
         /// </para>
         /// </summary>
         /// <param name="includes"> used to specify the optional objects to include, currently TEMPLATES is supported. </param>
