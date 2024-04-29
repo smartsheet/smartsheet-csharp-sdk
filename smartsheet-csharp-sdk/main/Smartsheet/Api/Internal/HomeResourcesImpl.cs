@@ -22,7 +22,7 @@ namespace Smartsheet.Api.Internal
     using System.Collections.Generic;
     using Smartsheet.Api.Internal.Util;
     using Smartsheet.Api.Models;
-    using PersonalFolder = Api.Models.PersonalFolder;
+    using PersonalFolder = Smartsheet.Api.Models.PersonalFolder;
 
     /// <summary>
     /// This is the implementation of HomeResources.
@@ -68,7 +68,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        public virtual Home GetFoldersPersonal(IEnumerable<HomeInclusion> includes)
+        public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes)
         {
             return GetFoldersPersonal(includes, null);
         }
@@ -91,7 +91,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        public virtual Home GetFoldersPersonal(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes)
+        public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
 

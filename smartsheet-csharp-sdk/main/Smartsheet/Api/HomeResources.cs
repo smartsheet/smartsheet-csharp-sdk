@@ -21,7 +21,7 @@ namespace Smartsheet.Api
 
     using Smartsheet.Api.Models;
     using System.Collections.Generic;
-    using Home = Api.Models.Home;
+    using PersonalFolder = Smartsheet.Api.Models.PersonalFolder;
 
     /// <summary>
     /// <para>This interface provides methods to access Home resources.</para>
@@ -47,7 +47,7 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        Home GetHome(IEnumerable<HomeInclusion> includes);
+        PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes);
 
         /// <summary>
         /// <para>
@@ -67,7 +67,7 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        Home GetHome(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes);
+        PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes);
 
         /// <summary>
         /// <para>Returns the HomeFolderResources object that provides access to folder resources under home.</para>

@@ -21,9 +21,9 @@ using System.Collections.Generic;
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Represents the Home object. </summary>
-    /// <seealso href="http://help.Smartsheet.com/customer/portal/articles/522237-the-home-tab">Home Tab Help</seealso>
-    public class Home
+    /// Represents the Personal folder object. 
+    /// </summary>
+    public class PersonalFolder
     {
         /// <summary>
         /// Represents the Folders in the home location.
@@ -49,11 +49,6 @@ namespace Smartsheet.Api.Models
         /// Represents the Templates in the home location.
         /// </summary>
         private IList<Template> templates;
-
-        /// <summary>
-        /// Represents the Workspaces in the home location.
-        /// </summary>
-        private IList<Workspace> workspaces;
 
         /// <summary>
         /// Gets the Folders in the home location.
@@ -103,16 +98,6 @@ namespace Smartsheet.Api.Models
         {
             get { return templates; }
             set { templates = value; }
-        }
-
-        /// <summary>
-        /// Gets the Workspaces in the home location.
-        /// </summary>
-        /// <returns> the Workspaces </returns>
-        public IList<Workspace> Workspaces
-        {
-            get { return workspaces; }
-            set { workspaces = value; }
         }
     }
 }
