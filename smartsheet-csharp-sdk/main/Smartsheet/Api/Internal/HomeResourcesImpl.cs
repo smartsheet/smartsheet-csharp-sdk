@@ -22,7 +22,7 @@ namespace Smartsheet.Api.Internal
     using System.Collections.Generic;
     using Smartsheet.Api.Internal.Util;
     using Smartsheet.Api.Models;
-    using Home = Api.Models.Home;
+    using PersonalFolder = Smartsheet.Api.Models.PersonalFolder;
 
     /// <summary>
     /// This is the implementation of HomeResources.
@@ -56,7 +56,7 @@ namespace Smartsheet.Api.Internal
         /// templates as shown on the Home tab.
         /// </para>
         /// <para>
-        /// Mirrors to the following Smartsheet REST API method: GET /home
+        /// Mirrors to the following Smartsheet REST API method: GET /folders/personal
         /// </para>
         /// </summary>
         /// <param name="includes"> used to specify the optional objects to include, currently TEMPLATES is supported. </param>
@@ -68,9 +68,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        public virtual Home GetHome(IEnumerable<HomeInclusion> includes)
+        public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes)
         {
-            return GetHome(includes, null);
+            return GetFoldersPersonal(includes, null);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Smartsheet.Api.Internal
         /// Gets a nested list of all Home objects, including folders, reports, sheets, templates, and workspaces as shown on the Home tab.
         /// </para>
         /// <para>
-        /// Mirrors to the following Smartsheet REST API method: GET /home
+        /// Mirrors to the following Smartsheet REST API method: GET /folders/personal
         /// </para>
         /// </summary>
         /// <param name="includes"> used to specify the optional objects to include, currently TEMPLATES is supported. </param>
@@ -91,7 +91,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        public virtual Home GetHome(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes)
+        public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -103,7 +103,7 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("exclude", QueryUtil.GenerateCommaSeparatedList(excludes));
             }
-            return this.GetResource<Home>("home" + QueryUtil.GenerateUrl(null, parameters), typeof(Home));
+            return this.GetResource<PersonalFolder>("folders/personal" + QueryUtil.GenerateUrl(null, parameters), typeof(PersonalFolder));
         }
 
         /// <summary>
