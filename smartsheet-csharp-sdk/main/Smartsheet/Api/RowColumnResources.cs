@@ -47,7 +47,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion> include, PaginationParameters paging);
+        PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion>? include = null, PaginationParameters? paging = null);
 
         /// <summary>
         /// <para>Gets the cell modification history.</para>
@@ -68,7 +68,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion> include, PaginationParameters paging, int? level);
+        PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion>? include = null, PaginationParameters? paging = null, int? level = null);
 
         /// <summary>
         /// <para>Uploads an image to the specified cell within a sheet.</para>
@@ -86,7 +86,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        void AddImageToCell(long sheetId, long rowId, long columnId, string file, string fileType);
+        void AddImageToCell(long sheetId, long rowId, long columnId, string file, string? fileType = null);
 
         /// <summary>
         /// <para>Uploads an image to the specified cell within a sheet.</para>
@@ -106,7 +106,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        void AddImageToCell(long sheetId, long rowId, long columnId, string file, string fileType, bool overrideValidation, string altText);
+        void AddImageToCell(long sheetId, long rowId, long columnId, string file, string? fileType = null, bool? overrideValidation = false, string? altText = null);
     }
 
 }
