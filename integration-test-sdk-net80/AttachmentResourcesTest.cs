@@ -17,7 +17,7 @@ namespace integration_test_sdk_net80
 
             long discussionId = AttachFileAndUrlToComment(smartsheet, sheetId);
 
-            ListDiscussionAttachments(smartsheet, sheetId, discussionId);
+            ListDiscussionAttachmentsWithAndWithoutPaginationParameters(smartsheet, sheetId, discussionId);
 
             long rowId = AttachFileAndUrlToRow(smartsheet, sheetId);
 
@@ -27,11 +27,18 @@ namespace integration_test_sdk_net80
 
             GetAttachment(smartsheet, sheetId, attachmentId);
 
-            AttachNewVersion(smartsheet, sheetId, attachmentId);
+            // Test that filetype is optional.
+            AttachNewVersionWithoutFileType(smartsheet, sheetId, attachmentId);
+
+            DeleteAttachment(smartsheet, sheetId, attachmentId);
 
             ListAttachmentVersions(smartsheet, sheetId, attachmentId);
 
+            AttachNewVersionWithFileType(smartsheet, sheetId, attachmentId);
+
             DeleteAttachment(smartsheet, sheetId, attachmentId);
+
+            ListAttachmentVersions(smartsheet, sheetId, attachmentId);
 
             smartsheet.SheetResources.DeleteSheet(sheetId);
         }
@@ -42,7 +49,12 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(attachmentVersions.Data.Count == 2);
         }
 
-        private void AttachNewVersion(SmartsheetClient smartsheet, long sheetId, long attachmentId)
+        private void AttachNewVersionWithoutFileType(SmartsheetClient smartsheet, long sheetId, long attachmentId)
+        {
+            smartsheet.SheetResources.AttachmentResources.VersioningResources.AttachNewVersion(sheetId, attachmentId, path);
+        }
+
+        private void AttachNewVersionWithFileType(SmartsheetClient smartsheet, long sheetId, long attachmentId)
         {
             smartsheet.SheetResources.AttachmentResources.VersioningResources.AttachNewVersion(sheetId, attachmentId, path, "text/plain");
         }
@@ -53,9 +65,14 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(attachments.Data.Count == 2);
         }
 
-        private static void ListDiscussionAttachments(SmartsheetClient smartsheet, long sheetId, long discussionId)
+        private static void ListDiscussionAttachmentsWithAndWithoutPaginationParameters(SmartsheetClient smartsheet, long sheetId, long discussionId)
         {
-            PaginatedResult<Attachment> attachments = smartsheet.SheetResources.DiscussionResources.AttachmentResources.ListAttachments(sheetId, discussionId, null);
+            //Test without pagination.
+            PaginatedResult<Attachment> attachments = smartsheet.SheetResources.DiscussionResources.AttachmentResources.ListAttachments(sheetId, discussionId);
+            Assert.IsTrue(attachments.Data.Count == 2);
+
+            PaginationParameters paginationParameters = new PaginationParameters(true, 100, 1);
+            PaginatedResult<Attachment> attachments = smartsheet.SheetResources.DiscussionResources.AttachmentResources.ListAttachments(sheetId, discussionId, paginationParameters);
             Assert.IsTrue(attachments.Data.Count == 2);
         }
 
