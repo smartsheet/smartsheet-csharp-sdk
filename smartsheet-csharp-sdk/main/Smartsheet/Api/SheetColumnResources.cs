@@ -112,7 +112,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Column GetColumn(long sheetId, long columnId, IEnumerable<ColumnInclusion> include);
+        Column GetColumn(long sheetId, long columnId, IEnumerable<ColumnInclusion>? include = null);
 
 
         /// <summary>

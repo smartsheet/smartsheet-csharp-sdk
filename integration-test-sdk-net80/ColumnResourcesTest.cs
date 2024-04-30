@@ -28,7 +28,7 @@ namespace integration_test_sdk_net80
             smartsheet.SheetResources.ColumnResources.DeleteColumn(sheetId, columnId);
             try
             {
-                smartsheet.SheetResources.ColumnResources.GetColumn(sheetId, columnId, null);
+                smartsheet.SheetResources.ColumnResources.GetColumn(sheetId, columnId);
                 Assert.Fail("Cannot get a column that is deleted.");
             }
             catch

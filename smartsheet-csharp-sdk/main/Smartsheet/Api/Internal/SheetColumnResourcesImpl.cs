@@ -153,7 +153,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Column GetColumn(long sheetId, long columnId, IEnumerable<ColumnInclusion> include)
+        public virtual Column GetColumn(long sheetId, long columnId, IEnumerable<ColumnInclusion>? include)
         {
             StringBuilder path = new StringBuilder("sheets/" + sheetId + "/columns/" + columnId);
             if (include != null)
