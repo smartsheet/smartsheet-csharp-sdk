@@ -104,7 +104,7 @@ namespace integration_test_sdk_net80
         private void TestCreateSheetInFolderFromTemplate()
         {
             Sheet sheet = new Sheet.CreateSheetFromTemplateBuilder("CSharp SDK Sheet from Template", newSheetHome.Id.Value).Build();
-            Sheet newSheetFromTemplate = smartsheet.FolderResources.SheetResources.CreateSheetFromTemplate(folder.Id.Value, sheet, null);
+            Sheet newSheetFromTemplate = smartsheet.FolderResources.SheetResources.CreateSheetFromTemplate(folder.Id.Value, sheet);
 
             if(newSheetFromTemplate.Id.ToString().Length == 0 || newSheetFromTemplate.AccessLevel != AccessLevel.OWNER ||
                 newSheetFromTemplate.Permalink.Length == 0)
