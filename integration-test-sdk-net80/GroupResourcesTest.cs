@@ -19,7 +19,9 @@ namespace integration_test_sdk_net80
 
             GetGroup(smartsheet, groupId);
 
-            ListGroups(smartsheet);
+            ListGroups(smartsheet, usePagination: true);
+
+            ListGroups(smartshee, usePagination: false);
 
             DeleteGroup(smartsheet, groupId);
         }
@@ -46,9 +48,16 @@ namespace integration_test_sdk_net80
             }
         }
 
-        private static void ListGroups(SmartsheetClient smartsheet)
+        private static void ListGroups(SmartsheetClient smartsheet, bool usePagination)
         {
-            PaginatedResult<Group> groups = smartsheet.GroupResources.ListGroups(null);
+            
+            PaginatedResult<Group> groups; 
+            if(usePagination == true) {
+                PaginationParameters paginationParameters = new PaginationParameters(true, 100, 1);
+                groups = smartsheet.GroupResources.ListGroups(paginationParameters);
+            } else {
+                groups = smartsheet.GroupResources.ListGroups();
+            }
             // Don't actually know that there is only one group if its a test account
             // Assert.IsTrue(groups.Data.Count == 1);
             bool found = false;
