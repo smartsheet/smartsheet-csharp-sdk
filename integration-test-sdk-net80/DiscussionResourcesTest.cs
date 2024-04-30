@@ -21,7 +21,7 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(createdDiscussionWithFile.Comments[0].Attachments[0].Name == "TestFile.txt");
 
 
-            PaginatedResult<Discussion> discussions = smartsheet.SheetResources.DiscussionResources.ListDiscussions(sheetId, new DiscussionInclusion[] { DiscussionInclusion.COMMENTS, DiscussionInclusion.ATTACHMENTS }, null);
+            PaginatedResult<Discussion> discussions = smartsheet.SheetResources.DiscussionResources.ListDiscussions(sheetId, new DiscussionInclusion[] { DiscussionInclusion.COMMENTS, DiscussionInclusion.ATTACHMENTS });
             Assert.IsTrue(discussions.TotalCount == 2);
             Assert.IsTrue(discussions.Data.Count == 2);
             Assert.IsTrue(discussions.Data[0].Id.Value == createdDiscussion.Id.Value || discussions.Data[0].Id.Value == createdDiscussionWithFile.Id.Value);
@@ -43,7 +43,7 @@ namespace integration_test_sdk_net80
             Discussion discussionToCreateOnRow = new Discussion.CreateDiscussionBuilder("discussion on row", comment).Build();
             Discussion discussionCreatedOnRow = smartsheet.SheetResources.RowResources.DiscussionResources.CreateDiscussionWithAttachment(sheetId, rowId, discussionToCreateOnRow, path, null);
             PaginatedResult<Discussion> discussionsOnRow = smartsheet.SheetResources.RowResources.DiscussionResources
-            .ListDiscussions(sheetId, rowId, new DiscussionInclusion[] { DiscussionInclusion.COMMENTS }, null);
+            .ListDiscussions(sheetId, rowId, new DiscussionInclusion[] { DiscussionInclusion.COMMENTS });
             Assert.IsTrue(discussionsOnRow.Data.Count == 1);
             Assert.IsTrue(discussionsOnRow.Data[0].Title == "discussion on row");
             Assert.IsTrue(discussionsOnRow.Data[0].Comments[0].Text == "discussion on row\n\na comment!");
