@@ -60,7 +60,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual string GetRequest(string endpoint, IDictionary<string, string> parameters)
+        public virtual string GetRequest(string endpoint, IDictionary<string, string>? parameters)
         {
             return PassthroughRequest(HttpMethod.GET, endpoint, null, parameters);
         }
@@ -78,7 +78,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual string PostRequest(string endpoint, string payload, IDictionary<string, string> parameters)
+        public virtual string PostRequest(string endpoint, string payload, IDictionary<string, string>? parameters)
         {
             Utils.ThrowIfNull(payload);
             return PassthroughRequest(HttpMethod.POST, endpoint, payload, parameters);
@@ -97,7 +97,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual string PutRequest(string endpoint, string payload, IDictionary<string, string> parameters)
+        public virtual string PutRequest(string endpoint, string payload, IDictionary<string, string>? parameters)
         {
             Utils.ThrowIfNull(payload);
             return PassthroughRequest(HttpMethod.PUT, endpoint, payload, parameters);
