@@ -49,6 +49,9 @@ namespace integration_test_sdk_net80
             PaginationParameters pagination = new PaginationParameters(true, null, null);
             PaginatedResult<CrossSheetReference> xrefs = smartsheet.SheetResources.CrossSheetReferenceResources.ListCrossSheetReferences(sheetA.Id.Value, pagination);
             Assert.AreEqual(xrefs.Data[0].Id.Value, xref.Id.Value);
+
+            xrefs = smartsheet.SheetResources.CrossSheetReferenceResources.ListCrossSheetReferences(sheetA.Id.Value);
+            Assert.AreEqual(xrefs.Data[0].Id.Value, xref.Id.Value);
         }
 
         private void TestGetCrossSheetReference()
