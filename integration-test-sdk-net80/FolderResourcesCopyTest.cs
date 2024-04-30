@@ -34,7 +34,7 @@ namespace integration_test_sdk_net80
 
             long copiedFolderId = newCopiedFolder.Id.Value;
 
-            Folder copiedFolder = smartsheet.FolderResources.GetFolder(copiedFolderId, null);
+            Folder copiedFolder = smartsheet.FolderResources.GetFolder(copiedFolderId);
             Assert.IsTrue(copiedFolder.Name == "SubFolder1Copy");
 
             DeleteFolders(smartsheet, createdFolderInHomeId1, createdFolderInHomeId2);
@@ -46,7 +46,7 @@ namespace integration_test_sdk_net80
             smartsheet.FolderResources.DeleteFolder(folder2);
             try
             {
-                smartsheet.FolderResources.GetFolder(folder2, null);
+                smartsheet.FolderResources.GetFolder(folder2);
                 Assert.Fail("Exception should have been thrown. Cannot get a deleted folder.");
             }
             catch
@@ -56,7 +56,7 @@ namespace integration_test_sdk_net80
             smartsheet.FolderResources.DeleteFolder(folder1);
             try
             {
-                smartsheet.FolderResources.GetFolder(folder1, null);
+                smartsheet.FolderResources.GetFolder(folder1);
                 Assert.Fail("Exception should have been thrown. Cannot get a deleted folder.");
             }
             catch

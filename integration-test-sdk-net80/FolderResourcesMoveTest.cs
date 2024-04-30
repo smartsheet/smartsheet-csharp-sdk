@@ -34,7 +34,7 @@ namespace integration_test_sdk_net80
 
             long movedFolderId = newMovedFolder.Id.Value;
 
-            Folder movedFolder = smartsheet.FolderResources.GetFolder(movedFolderId, null);
+            Folder movedFolder = smartsheet.FolderResources.GetFolder(movedFolderId);
             Assert.IsTrue(movedFolder.Name == "SubFolder1");
 
             // Assert the Folder which use to contain the moved Folder is now empty.
@@ -51,7 +51,7 @@ namespace integration_test_sdk_net80
             smartsheet.FolderResources.DeleteFolder(folder2);
             try
             {
-                smartsheet.FolderResources.GetFolder(folder2, null);
+                smartsheet.FolderResources.GetFolder(folder2);
                 Assert.Fail("Exception should have been thrown. Cannot get a deleted folder.");
             }
             catch
@@ -61,7 +61,7 @@ namespace integration_test_sdk_net80
             smartsheet.FolderResources.DeleteFolder(folder1);
             try
             {
-                smartsheet.FolderResources.GetFolder(folder1, null);
+                smartsheet.FolderResources.GetFolder(folder1);
                 Assert.Fail("Exception should have been thrown. Cannot get a deleted folder.");
             }
             catch
