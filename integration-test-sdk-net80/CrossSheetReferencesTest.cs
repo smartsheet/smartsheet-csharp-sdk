@@ -56,7 +56,7 @@ namespace integration_test_sdk_net80
 
         private void TestGetCrossSheetReference()
         {
-            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetA.Id.Value, new List<SheetLevelInclusion> { SheetLevelInclusion.CROSS_SHEET_REFERENCES }, null, null, null, null, null, null);
+            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetA.Id.Value, new List<SheetLevelInclusion> { SheetLevelInclusion.CROSS_SHEET_REFERENCES });
             Assert.IsTrue(sheet.CrossSheetReferences.Count == 1);
 
             CrossSheetReference _xref = smartsheet.SheetResources.CrossSheetReferenceResources.GetCrossSheetReference(sheetA.Id.Value, sheet.CrossSheetReferences[0].Id.Value);

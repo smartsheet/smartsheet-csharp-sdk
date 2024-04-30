@@ -41,7 +41,7 @@ static void Sample()
 
     Console.WriteLine("Loading sheet id: " + sheetId);
 
-    var sheet = smartsheet.SheetResources.GetSheet(sheetId, null, null, null, null, null, null, null);
+    var sheet = smartsheet.SheetResources.GetSheet(sheetId);
     Console.WriteLine("Loaded " + sheet.Rows.Count + " rows from sheet: " + sheet.Name);
 }
 ```

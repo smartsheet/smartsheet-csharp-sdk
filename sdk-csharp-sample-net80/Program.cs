@@ -27,7 +27,7 @@ namespace sdk_csharp_sample
                 Console.WriteLine("Loading sheet id: " + sheetId);
 
                 // Load the entire sheet
-                var sheet = smartsheet.SheetResources.GetSheet(sheetId, null, null, null, null, null, null, null);
+                var sheet = smartsheet.SheetResources.GetSheet(sheetId);
                 Console.WriteLine("Loaded " + sheet.Rows.Count + " rows from sheet: " + sheet.Name);
 
                 // Display the first 5 rows

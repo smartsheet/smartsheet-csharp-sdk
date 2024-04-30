@@ -76,7 +76,7 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         [Obsolete("use Smartsheet.UserResources.SheetResources.ListOrgSheets", true)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        PaginatedResult<Sheet> ListOrganizationSheets(PaginationParameters paging);
+        PaginatedResult<Sheet> ListOrganizationSheets(PaginationParameters? paging = null);
 
         /// <summary>
         /// <para>Gets a sheet.</para>
@@ -101,13 +101,13 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Sheet GetSheet(
                     long sheetId,
-                    IEnumerable<SheetLevelInclusion> includes,
-                    IEnumerable<SheetLevelExclusion> excludes,
-                    IEnumerable<long> rowIds,
-                    IEnumerable<int> rowNumbers,
-                    IEnumerable<long> columnIds,
-                    long? pageSize,
-                    long? page);
+                    IEnumerable<SheetLevelInclusion>? includes = null,
+                    IEnumerable<SheetLevelExclusion>? excludes = null,
+                    IEnumerable<long>? rowIds = null,
+                    IEnumerable<int>? rowNumbers = null,
+                    IEnumerable<long>? columnIds = null,
+                    long? pageSize = null,
+                    long? page = null);
 
         /// <summary>
         /// <para>Gets a sheet.</para>

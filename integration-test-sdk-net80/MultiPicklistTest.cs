@@ -79,13 +79,12 @@ namespace integration_test_sdk_net80
 
         private void TestGetMultiPicklistSheet()
         {
-            Sheet mpl = smartsheet.SheetResources.GetSheet(sheetId, new List<SheetLevelInclusion> { SheetLevelInclusion.OBJECT_VALUE },
-                null, null, null, new List<long> { addCols[0].Id.Value }, null, null, null, null);
+            Sheet mpl = smartsheet.SheetResources.GetSheet(sheetId,
+             new List<SheetLevelInclusion> { SheetLevelInclusion.OBJECT_VALUE }, columnIds: new List<long> { addCols[0].Id.Value });
             // should be TEXT_NUMBER since level not specified
             Assert.AreEqual(mpl.Rows[0].Cells[0].ObjectValue.GetType(), typeof(StringObjectValue));
 
-            mpl = smartsheet.SheetResources.GetSheet(sheetId, new List<SheetLevelInclusion> { SheetLevelInclusion.OBJECT_VALUE },
-                null, null, null, new List<long> { addCols[0].Id.Value }, null, null, null, 2);
+            mpl = smartsheet.SheetResources.GetSheet(sheetId, new List<SheetLevelInclusion> { SheetLevelInclusion.OBJECT_VALUE }, columnIds: new List<long> { addCols[0].Id.Value }, level: 2);
             // should be MULTI_PICKLIST since level 2 specified
             Assert.AreEqual(mpl.Rows[0].Cells[0].ObjectValue.GetType(), typeof(MultiPicklistObjectValue));
         }

@@ -134,7 +134,7 @@ namespace integration_test_sdk_net80
 
         private void TestGetSheet()
         {
-            Sheet sheet = smartsheet.SheetResources.GetSheet(newSheetHome.Id.Value, null, null, null, null, null, null, null);
+            Sheet sheet = smartsheet.SheetResources.GetSheet(newSheetHome.Id.Value);
             Assert.AreEqual(sheet.Permalink, newSheetHome.Permalink);
         }
 

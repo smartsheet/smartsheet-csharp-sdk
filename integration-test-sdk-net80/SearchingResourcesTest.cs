@@ -51,7 +51,7 @@ namespace integration_test_sdk_net80
 
         private static void AddValuesToSheet(SmartsheetClient smartsheet, long sheetId, string query)
         {
-            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetId, null, null, null, null, null, null, null);
+            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetId);
             long columnId = sheet.Columns[0].Id.Value;
             Cell cell = new Cell.AddCellBuilder(columnId, query).SetStrict(false).Build();
             Row[] rows = new Row[] { new Row.AddRowBuilder(true, null, null, null, false).SetCells(new Cell[] { cell }).Build() };

@@ -178,7 +178,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Sheet> ListOrganizationSheets(PaginationParameters paging)
+        public virtual PaginatedResult<Sheet> ListOrganizationSheets(PaginationParameters? paging)
         {
             StringBuilder path = new StringBuilder("users/sheets");
             if (paging != null)
@@ -209,8 +209,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion> includes, IEnumerable<SheetLevelExclusion> excludes, 
-            IEnumerable<long> rowIds, IEnumerable<int> rowNumbers, IEnumerable<long> columnIds, long? pageSize, long? page)
+        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page)
         {
             return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, null, null);
         }
@@ -237,8 +237,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion> includes, IEnumerable<SheetLevelExclusion> excludes, 
-            IEnumerable<long> rowIds, IEnumerable<int> rowNumbers, IEnumerable<long> columnIds, long? pageSize, long? page, long? ifVersionAfter)
+        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, long? ifVersionAfter)
         {
             return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, ifVersionAfter, null);
         }
@@ -266,8 +266,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion> includes, IEnumerable<SheetLevelExclusion> excludes,
-            IEnumerable<long> rowIds, IEnumerable<int> rowNumbers, IEnumerable<long> columnIds, long? pageSize, long? page, long? ifVersionAfter, int? level)
+        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, long? ifVersionAfter, int? level)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (includes != null)

@@ -40,7 +40,7 @@ namespace integration_test_sdk_net80
 
             Assert.IsNotNull(updateRequest.Id);
 
-            Sheet a = smartsheet.SheetResources.GetSheet(sheetId, new SheetLevelInclusion[] { SheetLevelInclusion.ROW_PERMALINK }, null, null, null, null, null, null);
+            Sheet a = smartsheet.SheetResources.GetSheet(sheetId, new SheetLevelInclusion[] { SheetLevelInclusion.ROW_PERMALINK });
 
             smartsheet.SheetResources.DeleteSheet(sheetId);
 
