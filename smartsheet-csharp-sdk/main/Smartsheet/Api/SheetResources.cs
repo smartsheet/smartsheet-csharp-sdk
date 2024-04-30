@@ -59,7 +59,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        PaginatedResult<Sheet> ListSheets(IEnumerable<SheetInclusion> includes, PaginationParameters paging, DateTime? modifiedSince = null);
+        PaginatedResult<Sheet> ListSheets(IEnumerable<SheetInclusion>? includes = null, PaginationParameters? paging = null, DateTime? modifiedSince = null);
 
         /// <summary>
         /// <para>Lists all sheets in the organization.</para>

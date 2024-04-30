@@ -15,7 +15,7 @@ namespace sdk_csharp_sample
                 .Build();
 
             // List all sheets
-            PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.SHEET_VERSION }, null, null);
+            PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.SHEET_VERSION });
             Console.WriteLine("Found " + sheets.TotalCount + " sheets");
 
             if (sheets.TotalCount > 0)
