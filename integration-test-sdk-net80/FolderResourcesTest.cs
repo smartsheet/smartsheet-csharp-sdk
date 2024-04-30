@@ -82,12 +82,13 @@ namespace integration_test_sdk_net80
             Folder getFolderWithoutPagination = smartsheet.FolderResources.GetFolder(createdFolderInHomeId);
             Assert.IsTrue(getFolderWithoutPagination.Id == createdFolderInHomeId);
             Assert.IsTrue(getFolderWithoutPagination.Name == folderInHomeName);
-            Assert.IsTrue(getgetFolderWithoutPaginationolder.Folders.Count == 1);
+            Assert.IsTrue(getFolderWithoutPagination.Folders.Count == 1);
             Assert.IsTrue(getFolderWithoutPagination.Folders[0].Id == createdFolderInFolderId);
             Assert.IsTrue(getFolderWithoutPagination.Folders[0].Name == updatedFolderInFolderName);
 
-            PaginationParameters paginationParameters = new PaginationParameters(true, 100, 1);
-            Folder getFolderWithPagination = smartsheet.FolderResources.GetFolder(createdFolderInHomeId, paginationParameters);
+            List<FolderInclusion> inclusionParameters = new List<FolderInclusion>();
+            inclusionParameters.Add(FolderInclusion.SHEET_VERSION);
+            Folder getFolderWithPagination = smartsheet.FolderResources.GetFolder(createdFolderInHomeId, inclusionParameters);
             Assert.IsTrue(getFolderWithPagination.Id == createdFolderInHomeId);
             Assert.IsTrue(getFolderWithPagination.Name == folderInHomeName);
             Assert.IsTrue(getFolderWithPagination.Folders.Count == 1);

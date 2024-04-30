@@ -21,7 +21,7 @@ namespace integration_test_sdk_net80
 
             ListGroups(smartsheet, usePagination: true);
 
-            ListGroups(smartshee, usePagination: false);
+            ListGroups(smartsheet, usePagination: false);
 
             DeleteGroup(smartsheet, groupId);
         }

@@ -72,7 +72,7 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(attachments.Data.Count == 2);
 
             PaginationParameters paginationParameters = new PaginationParameters(true, 100, 1);
-            PaginatedResult<Attachment> attachments = smartsheet.SheetResources.DiscussionResources.AttachmentResources.ListAttachments(sheetId, discussionId, paginationParameters);
+            attachments = smartsheet.SheetResources.DiscussionResources.AttachmentResources.ListAttachments(sheetId, discussionId, paginationParameters);
             Assert.IsTrue(attachments.Data.Count == 2);
         }
 

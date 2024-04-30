@@ -16,12 +16,12 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(contactResults.TotalCount >= 0);
 
             //Test with paginated results set to null. 
-            PaginatedResult<Contact> contactResults = smartsheet.ContactResources.ListContacts(null);
+            contactResults = smartsheet.ContactResources.ListContacts(null);
             Assert.IsTrue(contactResults.TotalCount >= 0);
 
             //Test with paginated results set to an object. 
             PaginationParameters paginationParameters = new PaginationParameters(true, 100, 1);
-            PaginatedResult<Contact> contactResults = smartsheet.ContactResources.ListContacts(paginationParameters);
+            contactResults = smartsheet.ContactResources.ListContacts(paginationParameters);
             Assert.IsTrue(contactResults.TotalCount >= 0);
         }
     }

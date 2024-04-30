@@ -39,7 +39,7 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(favsResult.Data.Count == 0);
 
             //Test without specifying pagination parameters.
-            PaginatedResult<Favorite> favsResult = smartsheet.FavoriteResources.ListFavorites();
+            favsResult = smartsheet.FavoriteResources.ListFavorites();
             Assert.IsTrue(favsResult.Data.Count == 0);
         }
 
