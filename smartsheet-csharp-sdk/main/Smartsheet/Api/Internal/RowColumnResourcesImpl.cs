@@ -177,7 +177,7 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("altText", altText);
             }
-            if(overrideValidation != null && overrideValidation.Value == true)
+            if(overrideValidation.HasValue && overrideValidation.Value == true)
             {
                 parameters.Add("overrideValidation", "true");
             }

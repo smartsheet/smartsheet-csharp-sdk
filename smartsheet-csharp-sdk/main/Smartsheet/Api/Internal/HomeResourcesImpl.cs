@@ -70,7 +70,7 @@ namespace Smartsheet.Api.Internal
         /// rather than returning null). </returns>
         public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes)
         {
-            return GetHome(includes, null);
+            return GetFoldersPersonal(includes, null);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("exclude", QueryUtil.GenerateCommaSeparatedList(excludes));
             }
-            return this.GetResource<Home>("folders/personal" + QueryUtil.GenerateUrl(null, parameters), typeof(PersonalFolder));
+            return this.GetResource<PersonalFolder>("folders/personal" + QueryUtil.GenerateUrl(null, parameters), typeof(PersonalFolder));
         }
 
         /// <summary>
