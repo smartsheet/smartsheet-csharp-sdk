@@ -14,6 +14,11 @@ namespace integration_test_sdk_net80
             PersonalFolder personalFolder = smartsheet.HomeResources.GetFoldersPersonal(new HomeInclusion[] { HomeInclusion.SOURCE });
 
             Assert.IsTrue(personalFolder != null);
+
+            //Test without includes or excludes
+            personalFolder = smartsheet.HomeResources.GetFoldersPersonal();
+
+            Assert.IsTrue(personalFolder != null);
         }
 
         [TestMethod]
