@@ -59,7 +59,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Column> ListColumns(long sheetId, IEnumerable<ColumnInclusion> include, PaginationParameters paging)
+        public virtual PaginatedResult<Column> ListColumns(long sheetId, IEnumerable<ColumnInclusion>? include, PaginationParameters? paging)
         {
             return this.ListColumns(sheetId, include, paging, null);
         }
@@ -80,7 +80,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Column> ListColumns(long sheetId, IEnumerable<ColumnInclusion> include, PaginationParameters paging, int? level)
+        public virtual PaginatedResult<Column> ListColumns(long sheetId, IEnumerable<ColumnInclusion>? include, PaginationParameters? paging, int? level)
         {
             StringBuilder path = new StringBuilder("sheets/" + sheetId + "/columns");
             IDictionary<string, string> parameters = new Dictionary<string, string>();
@@ -92,9 +92,9 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
             }
-            if (level != null)
+            if (level.HasValue && level.Value != null)
             {
-                parameters.Add("level", level.ToString());
+                parameters.Add("level", level.Value.ToString());
             }
             return this.ListResourcesWithWrapper<Column>(QueryUtil.GenerateUrl("sheets/" + sheetId + "/columns", parameters));
         }
