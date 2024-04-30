@@ -68,7 +68,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        public virtual  PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes)
+        public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes)
         {
             return GetHome(includes, null);
         }
