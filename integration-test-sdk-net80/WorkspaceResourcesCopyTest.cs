@@ -44,7 +44,7 @@ namespace integration_test_sdk_net80
             smartsheet.FolderResources.DeleteFolder(folder1);
             try
             {
-                smartsheet.FolderResources.GetFolder(folder1, null);
+                smartsheet.FolderResources.GetFolder(folder1);
                 Assert.Fail("Exception should have been thrown. Cannot get a deleted folder.");
             }
             catch

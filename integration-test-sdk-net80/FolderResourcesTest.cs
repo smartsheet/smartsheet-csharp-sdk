@@ -20,7 +20,7 @@ namespace integration_test_sdk_net80
         /// smartsheet.FolderResources.DeleteFolder(123);
         /// 
         /// Get Folder
-        /// smartsheet.FolderResources.GetFolder(123, null);
+        /// smartsheet.FolderResources.GetFolder(123);
         /// 
         /// List Folder
         /// smartsheet.HomeResources.FolderResources.ListFolders(null);
@@ -58,7 +58,7 @@ namespace integration_test_sdk_net80
             smartsheet.FolderResources.DeleteFolder(createdFolderInFolderId);
             try
             {
-                smartsheet.FolderResources.GetFolder(createdFolderInFolderId, null);
+                smartsheet.FolderResources.GetFolder(createdFolderInFolderId);
                 Assert.Fail("Exception should have been thrown. Cannot get a deleted folder.");
             }
             catch
@@ -68,7 +68,7 @@ namespace integration_test_sdk_net80
             smartsheet.FolderResources.DeleteFolder(createdFolderInHomeId);
             try
             {
-                smartsheet.FolderResources.GetFolder(createdFolderInHomeId, null);
+                smartsheet.FolderResources.GetFolder(createdFolderInHomeId);
                 Assert.Fail("Exception should have been thrown. Cannot get a deleted folder.");
             }
             catch
@@ -79,12 +79,20 @@ namespace integration_test_sdk_net80
 
         private static void GetFolderInHome(SmartsheetClient smartsheet, long createdFolderInHomeId, long createdFolderInFolderId)
         {
-            Folder getFolder = smartsheet.FolderResources.GetFolder(createdFolderInHomeId, null);
-            Assert.IsTrue(getFolder.Id == createdFolderInHomeId);
-            Assert.IsTrue(getFolder.Name == folderInHomeName);
-            Assert.IsTrue(getFolder.Folders.Count == 1);
-            Assert.IsTrue(getFolder.Folders[0].Id == createdFolderInFolderId);
-            Assert.IsTrue(getFolder.Folders[0].Name == updatedFolderInFolderName);
+            Folder getFolderWithoutPagination = smartsheet.FolderResources.GetFolder(createdFolderInHomeId);
+            Assert.IsTrue(getFolderWithoutPagination.Id == createdFolderInHomeId);
+            Assert.IsTrue(getFolderWithoutPagination.Name == folderInHomeName);
+            Assert.IsTrue(getgetFolderWithoutPaginationolder.Folders.Count == 1);
+            Assert.IsTrue(getFolderWithoutPagination.Folders[0].Id == createdFolderInFolderId);
+            Assert.IsTrue(getFolderWithoutPagination.Folders[0].Name == updatedFolderInFolderName);
+
+            PaginationParameters paginationParameters = new PaginationParameters(true, 100, 1);
+            Folder getFolderWithPagination = smartsheet.FolderResources.GetFolder(createdFolderInHomeId, paginationParameters);
+            Assert.IsTrue(getFolderWithPagination.Id == createdFolderInHomeId);
+            Assert.IsTrue(getFolderWithPagination.Name == folderInHomeName);
+            Assert.IsTrue(getFolderWithPagination.Folders.Count == 1);
+            Assert.IsTrue(getFolderWithPagination.Folders[0].Id == createdFolderInFolderId);
+            Assert.IsTrue(getFolderWithPagination.Folders[0].Name == updatedFolderInFolderName);
         }
 
         private static void UpdateFolderInFolder(SmartsheetClient smartsheet, long createdFolderInFolderId)

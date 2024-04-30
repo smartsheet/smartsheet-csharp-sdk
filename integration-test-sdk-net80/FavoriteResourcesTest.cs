@@ -34,7 +34,12 @@ namespace integration_test_sdk_net80
             //smartsheet.FavoriteResources().RemoveFavorites(ObjectType.TEMPLATE, new long[] { templateId });
             smartsheet.FavoriteResources.RemoveFavorites(ObjectType.WORKSPACE, new long[] { workspaceId });
 
+            //Test with pagination parameters
             PaginatedResult<Favorite> favsResult = smartsheet.FavoriteResources.ListFavorites(new PaginationParameters(true, null, null));
+            Assert.IsTrue(favsResult.Data.Count == 0);
+
+            //Test without specifying pagination parameters.
+            PaginatedResult<Favorite> favsResult = smartsheet.FavoriteResources.ListFavorites();
             Assert.IsTrue(favsResult.Data.Count == 0);
         }
 
