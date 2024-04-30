@@ -11,9 +11,9 @@ namespace integration_test_sdk_net80
         {
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
 
-            Home home = smartsheet.HomeResources.GetHome(new HomeInclusion[] { HomeInclusion.SOURCE });
+            PersonalFolder personalFolder = smartsheet.HomeResources.GetFoldersPersonal(new HomeInclusion[] { HomeInclusion.SOURCE });
 
-            Assert.IsTrue(home != null);
+            Assert.IsTrue(personalFolder != null);
         }
     }
 }

@@ -21,10 +21,10 @@ namespace Smartsheet.Api
 
     using Smartsheet.Api.Models;
     using System.Collections.Generic;
-    using Home = Api.Models.Home;
+    using PersonalFolder = Smartsheet.Api.Models.PersonalFolder;
 
     /// <summary>
-    /// <para>This interface provides methods to access Home resources.</para>
+    /// <para>This interface provides methods to access resources previously from the deprecated home API.</para>
     /// 
     /// <para>Thread Safety: Implementation of this interface must be thread safe.</para>
     /// </summary>
@@ -32,7 +32,7 @@ namespace Smartsheet.Api
     {
         /// <summary>
         /// <para>
-        /// Gets a nested list of all Home objects, including folders, reports, sheets, templates, and workspaces as shown on the Home tab.
+        /// Gets a nested list of shared items that were previously found from the /home API, including reports, sheets, templates, and dashboards.
         /// </para>
         /// <para>
         /// Mirrors to the following Smartsheet REST API method: GET /home
@@ -47,14 +47,14 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        Home GetHome(IEnumerable<HomeInclusion> includes);
+        PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes);
 
         /// <summary>
         /// <para>
-        /// Gets a nested list of all Home objects, including folders, reports, sheets, templates, and workspaces as shown on the Home tab.
+        /// Gets a nested list of shared items that were previously found from the /home API, including reports, sheets, templates, and dashboards.
         /// </para>
         /// <para>
-        /// Mirrors to the following Smartsheet REST API method: GET /home
+        /// Mirrors to the following Smartsheet REST API method: GET /folders/personal
         /// </para>
         /// </summary>
         /// <param name="includes"> used to specify the optional objects to include, currently TEMPLATES is supported. </param>
@@ -67,7 +67,7 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        Home GetHome(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes);
+        PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes);
 
         /// <summary>
         /// <para>Returns the HomeFolderResources object that provides access to folder resources under home.</para>
