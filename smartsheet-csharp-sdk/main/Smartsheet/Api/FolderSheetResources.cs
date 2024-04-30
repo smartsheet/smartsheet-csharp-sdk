@@ -59,7 +59,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Sheet CreateSheetFromTemplate(long folderId, Sheet sheet, IEnumerable<TemplateInclusion> includes);
+        Sheet CreateSheetFromTemplate(long folderId, Sheet sheet, IEnumerable<TemplateInclusion>? includes);
 
         /// <summary>
         /// <para>Imports a sheet in the specified folder (from CSV). </para>
@@ -77,7 +77,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Sheet ImportCsvSheet(long folderId, string file, string sheetName, int? headerRowIndex, int? primaryColumnIndex);
+        Sheet ImportCsvSheet(long folderId, string file, string? sheetName, int? headerRowIndex, int? primaryColumnIndex);
 
         /// <summary>
         /// <para>Imports a sheet in the specified folder (from XLSX). </para>
@@ -95,6 +95,6 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Sheet ImportXlsSheet(long folderId, string file, string sheetName, int? headerRowIndex, int? primaryColumnIndex);
+        Sheet ImportXlsSheet(long folderId, string file, string? sheetName, int? headerRowIndex, int? primaryColumnIndex);
     }
 }
