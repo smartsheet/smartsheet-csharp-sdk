@@ -62,7 +62,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Attachment> ListAttachments(long sheetId, long rowId, PaginationParameters paging)
+        public virtual PaginatedResult<Attachment> ListAttachments(long sheetId, long rowId, PaginationParameters? paging)
         {
             StringBuilder path = new StringBuilder("sheets/" + sheetId + "/rows/" + rowId + "/attachments");
             if (paging != null)
@@ -90,7 +90,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public Attachment AttachFile(long sheetId, long rowId, string file, string fileType)
+        public Attachment AttachFile(long sheetId, long rowId, string file, string? fileType)
         {
             return AttachFile("sheets/" + sheetId + "/rows/" + rowId + "/attachments", file, fileType);
         }
@@ -130,7 +130,7 @@ namespace Smartsheet.Api.Internal
         /// <returns> the attachment </returns>
         /// <exception cref="FileNotFoundException"> the file not found exception </exception>
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
-        private Attachment AttachFile(string path, string file, string contentType)
+        private Attachment AttachFile(string path, string file, string? contentType)
         {
             Utility.Utility.ThrowIfNull(path, file);
             if (contentType == null)

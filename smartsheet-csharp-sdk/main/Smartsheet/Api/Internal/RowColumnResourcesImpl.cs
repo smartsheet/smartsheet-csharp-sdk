@@ -63,7 +63,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion> include, PaginationParameters paging)
+        public virtual PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion>? include, PaginationParameters? paging)
         {
             return GetCellHistory(sheetId, rowId, columnId, include, paging, null);
         }
@@ -87,7 +87,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion> include, PaginationParameters paging, int? level)
+        public virtual PaginatedResult<CellHistory> GetCellHistory(long sheetId, long rowId, long columnId, IEnumerable<CellInclusion>? include, PaginationParameters? paging, int? level)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (paging != null)
@@ -122,7 +122,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual void AddImageToCell(long sheetId, long rowId, long columnId, string file, string fileType)
+        public virtual void AddImageToCell(long sheetId, long rowId, long columnId, string file, string? fileType)
         {
             AddImage("sheets/" + sheetId + "/rows/" + rowId + "/columns/" + columnId + "/cellimages", file, fileType, false, null);
         }
@@ -145,8 +145,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual void AddImageToCell(long sheetId, long rowId, long columnId, string file, string fileType, 
-            bool overrideValidation, string altText)
+        public virtual void AddImageToCell(long sheetId, long rowId, long columnId, string file, string? fileType, 
+            bool? overrideValidation, string? altText)
         {
             AddImage("sheets/" + sheetId + "/rows/" + rowId + "/columns/" + columnId + "/cellimages", file, fileType,
                 overrideValidation, altText);
@@ -163,7 +163,7 @@ namespace Smartsheet.Api.Internal
         /// <returns> the attachment </returns>
         /// <exception cref="FileNotFoundException"> the file not found exception </exception>
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
-        private void AddImage(string path, string file, string contentType, bool overrideValidation, string altText)
+        private void AddImage(string path, string file, string? contentType, bool? overrideValidation, string? altText)
         {
             Utility.Utility.ThrowIfNull(file);
 
@@ -177,7 +177,7 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("altText", altText);
             }
-            if(overrideValidation)
+            if(overrideValidation.HasValue && overrideValidation.Value == true)
             {
                 parameters.Add("overrideValidation", "true");
             }

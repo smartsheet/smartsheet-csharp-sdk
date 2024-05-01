@@ -45,7 +45,7 @@ namespace integration_test_sdk_net80
 
         private static void ListAttachmentVersions(SmartsheetClient smartsheet, long sheetId, long attachmentId)
         {
-            PaginatedResult<Attachment> attachmentVersions = smartsheet.SheetResources.AttachmentResources.VersioningResources.ListVersions(sheetId, attachmentId, null);
+            PaginatedResult<Attachment> attachmentVersions = smartsheet.SheetResources.AttachmentResources.VersioningResources.ListVersions(sheetId, attachmentId);
             Assert.IsTrue(attachmentVersions.Data.Count == 2);
         }
 
@@ -61,7 +61,7 @@ namespace integration_test_sdk_net80
 
         private static void ListRowAttachments(SmartsheetClient smartsheet, long sheetId, long rowId)
         {
-            PaginatedResult<Attachment> attachments = smartsheet.SheetResources.RowResources.AttachmentResources.ListAttachments(sheetId, rowId, null);
+            PaginatedResult<Attachment> attachments = smartsheet.SheetResources.RowResources.AttachmentResources.ListAttachments(sheetId, rowId);
             Assert.IsTrue(attachments.Data.Count == 2);
         }
 
@@ -102,7 +102,7 @@ namespace integration_test_sdk_net80
             Attachment attachment = smartsheet.SheetResources.AttachmentResources.AttachUrl(sheetId, attachToResource);
             Assert.IsTrue(attachment.Url == "http://www.smartsheet.com");
 
-            attachment = smartsheet.SheetResources.AttachmentResources.AttachFile(sheetId, path, null);
+            attachment = smartsheet.SheetResources.AttachmentResources.AttachFile(sheetId, path);
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
 
@@ -117,7 +117,7 @@ namespace integration_test_sdk_net80
             smartsheet.SheetResources.RowResources.AddRows(sheetId, rows);
             Sheet sheet = smartsheet.SheetResources.GetSheet(sheetId, null, null, null, null, null, null, null);
             long rowId = sheet.Rows[0].Id.Value;
-            Attachment attachment = smartsheet.SheetResources.RowResources.AttachmentResources.AttachFile(sheetId, rowId, path, null);
+            Attachment attachment = smartsheet.SheetResources.RowResources.AttachmentResources.AttachFile(sheetId, rowId, path);
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);
             Assert.IsTrue(attachment.Name == "TestFile.txt");
 
