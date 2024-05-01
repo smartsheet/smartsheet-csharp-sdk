@@ -143,7 +143,7 @@ namespace integration_test_sdk_net80
 
             // Test rowsModifiedSince
 
-            sheet = smartsheet.SheetResources.GetSheet(newSheetHome.Id.Valu, rowsModifiedSince: DateTime.UnixEpoch);
+            sheet = smartsheet.SheetResources.GetSheet(newSheetHome.Id.Value, rowsModifiedSince: DateTime.UnixEpoch);
             Assert.AreEqual(sheet.Permalink, newSheetHome.Permalink);
         }
 
