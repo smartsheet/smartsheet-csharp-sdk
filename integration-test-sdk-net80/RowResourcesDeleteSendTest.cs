@@ -11,7 +11,7 @@ namespace integration_test_sdk_net80
         {
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
 
-            long templateId = smartsheet.TemplateResources.ListPublicTemplates(null).Data[0].Id.Value;
+            long templateId = smartsheet.TemplateResources.ListPublicTemplates().Data[0].Id.Value;
 
             long sheetId = CreateSheetFromTemplate(smartsheet, templateId);
 

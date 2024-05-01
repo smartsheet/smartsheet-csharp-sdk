@@ -32,7 +32,7 @@ namespace integration_test_sdk_net80
 
             long copiedWorkspaceId = newCopiedWorkspace.Id.Value;
 
-            Workspace copiedWorkspace = smartsheet.WorkspaceResources.GetWorkspace(copiedWorkspaceId, null, null);
+            Workspace copiedWorkspace = smartsheet.WorkspaceResources.GetWorkspace(copiedWorkspaceId);
             Assert.IsTrue(copiedWorkspace.Name == "Workspace1Copy");
 
             smartsheet.WorkspaceResources.DeleteWorkspace(workspaceId);

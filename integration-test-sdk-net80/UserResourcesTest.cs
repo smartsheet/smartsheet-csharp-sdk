@@ -14,12 +14,12 @@ namespace integration_test_sdk_net80
             smartsheet = CreateClient();
 
             // Remove user if it exists from a previous run.
-            PaginatedResult<User> users = smartsheet.UserResources.ListUsers(null, new PaginationParameters(true, null, null));
+            PaginatedResult<User> users = smartsheet.UserResources.ListUsers(paging: new PaginationParameters(true, null, null));
             foreach (User tmpUser in users.Data)
             {
                 if (tmpUser.Email == email)
                 {
-                    smartsheet.UserResources.RemoveUser((long)tmpUser.Id, null, null, true);
+                    smartsheet.UserResources.RemoveUser((long)tmpUser.Id, removeFromSharing: true);
                     break;
                 }
             }
@@ -75,14 +75,14 @@ namespace integration_test_sdk_net80
 
         private void ListAllUsers()
         {
-            PaginatedResult<User> users = smartsheet.UserResources.ListUsers(null, null);
+            PaginatedResult<User> users = smartsheet.UserResources.ListUsers();
             // current user + added user
             Assert.IsTrue(users.Data.Count >= 2);
         }
 
         private void RemoveUser()
         {
-            smartsheet.UserResources.RemoveUser(user.Id.Value, null, null, null);
+            smartsheet.UserResources.RemoveUser(user.Id.Value);
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace integration_test_sdk_net80
             AlternateEmail altEmail2 = new AlternateEmail.AlternateEmailBuilder("test+altemail3@invalidsmartsheet.com").Build();
             smartsheet.UserResources.AddAlternateEmail(me.Id.Value, new AlternateEmail[] { altEmail1, altEmail2 });
 
-            PaginatedResult<AlternateEmail> altEmails = smartsheet.UserResources.ListAlternateEmails(me.Id.Value, null);
+            PaginatedResult<AlternateEmail> altEmails = smartsheet.UserResources.ListAlternateEmails(me.Id.Value);
             Assert.IsTrue(altEmails.Data.Count >= 2);
 
             AlternateEmail altEmail = smartsheet.UserResources.GetAlternateEmail(me.Id.Value, altEmails.Data[0].Id.Value);

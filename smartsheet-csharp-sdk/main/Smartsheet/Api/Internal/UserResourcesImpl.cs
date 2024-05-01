@@ -65,24 +65,6 @@ namespace Smartsheet.Api.Internal
         /// <para>Mirrors to the following Smartsheet REST API method: GET /Users</para>
         /// </summary>
         /// <param name="emails">list of emails</param>
-        /// <param name="paging"> the pagination</param>
-        /// <returns> the list of all users </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, PaginationParameters paging)
-        {
-            return this.ListUsers(emails, null, paging);
-        }
-
-        /// <summary>
-        /// <para>Lists all users.</para>
-        /// <para>Mirrors to the following Smartsheet REST API method: GET /Users</para>
-        /// </summary>
-        /// <param name="emails">list of emails</param>
         /// <param name="includes">elements to include in response</param>
         /// <param name="paging"> the pagination</param>
         /// <returns> the list of all users </returns>
@@ -92,7 +74,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion> includes, PaginationParameters paging)
+        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging)
         {
             StringBuilder path = new StringBuilder("users");
 
@@ -173,7 +155,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual UserProfile GetCurrentUser(IEnumerable<UserInclusion> includes)
+        public virtual UserProfile GetCurrentUser(IEnumerable<UserInclusion>? includes)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (includes != null)
@@ -266,7 +248,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public PaginatedResult<AlternateEmail> ListAlternateEmails(long userId, PaginationParameters pagination)
+        public PaginatedResult<AlternateEmail> ListAlternateEmails(long userId, PaginationParameters? pagination)
         {
             StringBuilder path = new StringBuilder("users/" + userId + "/alternateemails");
 
@@ -397,7 +379,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual User AddProfileImage(long userId, string file, string fileType)
+        public virtual User AddProfileImage(long userId, string file, string? fileType)
         {
             return AttachProfileImage("users/" + userId + "/profileimage", file, fileType);
         }
@@ -411,7 +393,7 @@ namespace Smartsheet.Api.Internal
         /// <returns> the attachment </returns>
         /// <exception cref="FileNotFoundException"> the file not found exception </exception>
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
-        private User AttachProfileImage(string path, string file, string contentType)
+        private User AttachProfileImage(string path, string file, string? contentType)
         {
             Utility.Utility.ThrowIfNull(file);
 
