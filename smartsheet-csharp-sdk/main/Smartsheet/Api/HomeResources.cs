@@ -67,7 +67,7 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
-        PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion>? includes = null, IEnumerable<HomeExclusion>? excludes= null);
+        PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion>? includes = null, IEnumerable<HomeExclusion>? excludes = null);
 
         /// <summary>
         /// <para>Returns the HomeFolderResources object that provides access to folder resources under home.</para>
