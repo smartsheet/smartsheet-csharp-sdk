@@ -83,7 +83,7 @@ namespace Smartsheet.Api.OAuth
         /// <summary>
         /// Retrieve events.
         /// </summary>
-        READ_EVENTS
+        READ_EVENTS,
         /// <summary>
         /// Add and remove users from your Smartsheet organization; create groups and manage membership
         /// </summary>
