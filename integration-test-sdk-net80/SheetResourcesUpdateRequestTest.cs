@@ -13,7 +13,7 @@ namespace integration_test_sdk_net80
 
             long sheetId = CreateSheet(smartsheet);
 
-            PaginatedResult<Column> columnsResult = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId, null, null);
+            PaginatedResult<Column> columnsResult = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId);
             long columnId = columnsResult.Data[0].Id.Value;
 
             Cell[] cellsToAdd = new Cell[] { new Cell.AddCellBuilder(columnId, true).SetValue("hello").SetStrict(false).Build() };
@@ -40,7 +40,7 @@ namespace integration_test_sdk_net80
 
             Assert.IsNotNull(updateRequest.Id);
 
-            Sheet a = smartsheet.SheetResources.GetSheet(sheetId, new SheetLevelInclusion[] { SheetLevelInclusion.ROW_PERMALINK }, null, null, null, null, null, null);
+            Sheet a = smartsheet.SheetResources.GetSheet(sheetId, new SheetLevelInclusion[] { SheetLevelInclusion.ROW_PERMALINK });
 
             smartsheet.SheetResources.DeleteSheet(sheetId);
 

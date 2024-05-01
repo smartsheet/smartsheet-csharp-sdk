@@ -115,7 +115,7 @@ namespace integration_test_sdk_net80
         {
             Row[] rows = new Row[] { new Row.AddRowBuilder(true, null, null, null, null).Build() };
             smartsheet.SheetResources.RowResources.AddRows(sheetId, rows);
-            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetId, null, null, null, null, null, null, null);
+            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetId);
             long rowId = sheet.Rows[0].Id.Value;
             Attachment attachment = smartsheet.SheetResources.RowResources.AttachmentResources.AttachFile(sheetId, rowId, path);
             Assert.IsTrue(attachment.AttachmentType == AttachmentType.FILE);

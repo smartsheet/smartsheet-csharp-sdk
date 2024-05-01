@@ -62,7 +62,7 @@ namespace integration_test_sdk_net80
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetAccessToken(token.AccessToken).Build();
             try
             {
-                smartsheet.SheetResources.ListSheets(null, null);
+                smartsheet.SheetResources.ListSheets();
                 Assert.Fail();
             }
             catch
@@ -95,7 +95,7 @@ namespace integration_test_sdk_net80
             smartsheet.TokenResources.RevokeAccessToken();
             try
             {
-                smartsheet.SheetResources.ListSheets(null, null);
+                smartsheet.SheetResources.ListSheets();
                 Assert.Fail();
             }
             catch

@@ -148,7 +148,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Sheet> ListSheets(IEnumerable<SheetInclusion> includes, PaginationParameters paging, DateTime? modifiedSince)
+        public virtual PaginatedResult<Sheet> ListSheets(IEnumerable<SheetInclusion>? includes, PaginationParameters? paging, DateTime? modifiedSince)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (paging != null)
@@ -178,7 +178,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Sheet> ListOrganizationSheets(PaginationParameters paging)
+        public virtual PaginatedResult<Sheet> ListOrganizationSheets(PaginationParameters? paging)
         {
             StringBuilder path = new StringBuilder("users/sheets");
             if (paging != null)
@@ -209,8 +209,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion> includes, IEnumerable<SheetLevelExclusion> excludes, 
-            IEnumerable<long> rowIds, IEnumerable<int> rowNumbers, IEnumerable<long> columnIds, long? pageSize, long? page)
+        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page)
         {
             return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, null, null);
         }
@@ -237,8 +237,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion> includes, IEnumerable<SheetLevelExclusion> excludes, 
-            IEnumerable<long> rowIds, IEnumerable<int> rowNumbers, IEnumerable<long> columnIds, long? pageSize, long? page, long? ifVersionAfter)
+        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, long? ifVersionAfter)
         {
             return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, ifVersionAfter, null);
         }
@@ -266,8 +266,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion> includes, IEnumerable<SheetLevelExclusion> excludes,
-            IEnumerable<long> rowIds, IEnumerable<int> rowNumbers, IEnumerable<long> columnIds, long? pageSize, long? page, long? ifVersionAfter, int? level)
+        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, long? ifVersionAfter, int? level)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (includes != null)
@@ -401,7 +401,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet CreateSheetFromTemplate(Sheet sheet, IEnumerable<TemplateInclusion> includes)
+        public virtual Sheet CreateSheetFromTemplate(Sheet sheet, IEnumerable<TemplateInclusion>? includes)
         {
             StringBuilder path = new StringBuilder("sheets");
             if (includes != null)
@@ -513,26 +513,6 @@ namespace Smartsheet.Api.Internal
         /// <param name="sheetId"> the sheet Id </param>
         /// <param name="destination"> the destination to copy to </param>
         /// <param name="include"> the elements to copy. Note: Cell history will not be copied, regardless of which include parameter values are specified.</param>
-        /// <returns> the created folder </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet CopySheet(long sheetId, ContainerDestination destination, IEnumerable<SheetCopyInclusion> include)
-        {
-            return this.CopySheet(sheetId, destination, include, null);
-        }
-
-        /// <summary>
-        /// <para>Creates a copy of the specified sheet.</para>
-        /// <para>Mirrors to the following Smartsheet REST API method:<br />
-        /// POST /sheets/{sheetId}/copy</para>
-        /// </summary>
-        /// <param name="sheetId"> the sheet Id </param>
-        /// <param name="destination"> the destination to copy to </param>
-        /// <param name="include"> the elements to copy. Note: Cell history will not be copied, regardless of which include parameter values are specified.</param>
         /// <param name="exclude"> optional elements to exclude </param>
         /// <returns> the created folder </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
@@ -541,7 +521,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet CopySheet(long sheetId, ContainerDestination destination, IEnumerable<SheetCopyInclusion> include, IEnumerable<SheetCopyExclusion> exclude)
+        public virtual Sheet CopySheet(long sheetId, ContainerDestination destination, IEnumerable<SheetCopyInclusion>? include, IEnumerable<SheetCopyExclusion>? exclude)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (include != null)
@@ -618,25 +598,6 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="id"> the sheet Id </param>
         /// <param name="sortSpecifier"> the sort criteria </param>
-        /// <returns> the sheet (note that if there is no such resource, this method will throw a ResourceNotFoundException rather than returning null). </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet SortSheet(long id, SortSpecifier sortSpecifier)
-        {
-            return SortSheet(id, sortSpecifier, null);
-        }
-
-        /// <summary>
-        /// <para>Sorts a sheet according to the sort criteria.</para>
-        /// 
-        /// <para>Mirrors to the following Smartsheet REST API method: POST /sheets/{sheetId}/sort</para>
-        /// </summary>
-        /// <param name="id"> the sheet Id </param>
-        /// <param name="sortSpecifier"> the sort criteria </param>
         /// <param name="level"> compatibility level </param>
         /// <returns> the sheet (note that if there is no such resource, this method will throw a ResourceNotFoundException rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
@@ -699,7 +660,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet ImportCsvSheet(string file, string sheetName, int? headerRowIndex, int? primaryColumnIndex)
+        public virtual Sheet ImportCsvSheet(string file, string? sheetName, int? headerRowIndex, int? primaryColumnIndex)
         {
             if (sheetName == null)
             {

@@ -22,7 +22,7 @@ namespace mock_api_test_sdk_net80
         {
             SmartsheetClient ss = HelperFunctions.SetupClient("List Sheets - Include Owner Info");
 
-            PaginatedResult<Sheet> sheets = ss.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.OWNER_INFO }, null);
+            PaginatedResult<Sheet> sheets = ss.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.OWNER_INFO });
 
             Assert.IsNotNull(sheets.Data.Where(s => s.Owner.Equals("john.doe@smartsheet.com")).FirstOrDefault());
         }

@@ -49,11 +49,14 @@ namespace integration_test_sdk_net80
             PaginationParameters pagination = new PaginationParameters(true, null, null);
             PaginatedResult<CrossSheetReference> xrefs = smartsheet.SheetResources.CrossSheetReferenceResources.ListCrossSheetReferences(sheetA.Id.Value, pagination);
             Assert.AreEqual(xrefs.Data[0].Id.Value, xref.Id.Value);
+
+            xrefs = smartsheet.SheetResources.CrossSheetReferenceResources.ListCrossSheetReferences(sheetA.Id.Value);
+            Assert.AreEqual(xrefs.Data[0].Id.Value, xref.Id.Value);
         }
 
         private void TestGetCrossSheetReference()
         {
-            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetA.Id.Value, new List<SheetLevelInclusion> { SheetLevelInclusion.CROSS_SHEET_REFERENCES }, null, null, null, null, null, null);
+            Sheet sheet = smartsheet.SheetResources.GetSheet(sheetA.Id.Value, new List<SheetLevelInclusion> { SheetLevelInclusion.CROSS_SHEET_REFERENCES });
             Assert.IsTrue(sheet.CrossSheetReferences.Count == 1);
 
             CrossSheetReference _xref = smartsheet.SheetResources.CrossSheetReferenceResources.GetCrossSheetReference(sheetA.Id.Value, sheet.CrossSheetReferences[0].Id.Value);
