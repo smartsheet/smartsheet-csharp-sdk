@@ -64,6 +64,10 @@ namespace integration_test_sdk_net80
             Sheet sheet = smartsheet.SheetResources.CopySheet(newSheetHome.Id.Value, destination,
                 new List<SheetCopyInclusion> { SheetCopyInclusion.ALL });
             Assert.IsTrue(sheet.Name == "CSharp SDK Copied Sheet");
+
+            destination.NewName = "CSharp SDK Copied Sheet Without Inclusions";
+            sheet = smartsheet.SheetResources.CopySheet(newSheetHome.Id.Value, destination);
+            Assert.IsTrue(sheet.Name == "CSharp SDK Copied Sheet Without Inclusions");
             DeleteFolder(folder.Id.Value);
         }
 
@@ -155,6 +159,9 @@ namespace integration_test_sdk_net80
         {
             BinaryWriter writer = new BinaryWriter(new MemoryStream());
             smartsheet.SheetResources.GetSheetAsPDF(newSheetHome.Id.Value, writer, PaperSize.A3);
+
+            //Test with no size given
+            smartsheet.SheetResources.GetSheetAsPDF(newSheetHome.Id.Value, writer);
         }
 
         private void TestGetPublishStatus()

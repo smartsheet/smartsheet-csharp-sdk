@@ -133,14 +133,14 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Sheet GetSheet(
                     long sheetId,
-                    IEnumerable<SheetLevelInclusion> includes,
-                    IEnumerable<SheetLevelExclusion> excludes,
-                    IEnumerable<long> rowIds,
-                    IEnumerable<int> rowNumbers,
-                    IEnumerable<long> columnIds,
-                    long? pageSize,
-                    long? page,
-                    long? ifVersionAfter);
+                    IEnumerable<SheetLevelInclusion>? includes = null,
+                    IEnumerable<SheetLevelExclusion>? excludes = null,
+                    IEnumerable<long>? rowIds = null,
+                    IEnumerable<int>? rowNumbers = null,
+                    IEnumerable<long>? columnIds = null,
+                    long? pageSize = null,
+                    long? page = null,
+                    long? ifVersionAfter = null);
 
         /// <summary>
         /// <para>Gets a sheet.</para>
@@ -167,15 +167,15 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Sheet GetSheet(
                     long sheetId,
-                    IEnumerable<SheetLevelInclusion> includes,
-                    IEnumerable<SheetLevelExclusion> excludes,
-                    IEnumerable<long> rowIds,
-                    IEnumerable<int> rowNumbers,
-                    IEnumerable<long> columnIds,
-                    long? pageSize,
-                    long? page,
-                    long? ifVersionAfter,
-                    int? level);
+                    IEnumerable<SheetLevelInclusion>? includes = null,
+                    IEnumerable<SheetLevelExclusion>? excludes = null,
+                    IEnumerable<long>? rowIds = null,
+                    IEnumerable<int>? rowNumbers = null,
+                    IEnumerable<long>? columnIds = null,
+                    long? pageSize = null,
+                    long? pag = null,
+                    long? ifVersionAfter = null,
+                    int? level = null);
 
         /// <summary>
         /// <para>Gets a sheet as an Excel file.</para>
@@ -208,7 +208,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        void GetSheetAsPDF(long sheetId, BinaryWriter outputStream, PaperSize? paperSize);
+        void GetSheetAsPDF(long sheetId, BinaryWriter outputStream, PaperSize? paperSize = null);
 
         /// <summary>
         /// <para>Gets a sheet as a CSV file.</para>
@@ -256,7 +256,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Sheet CreateSheetFromTemplate(Sheet sheet, IEnumerable<TemplateInclusion> include);
+        Sheet CreateSheetFromTemplate(Sheet sheet, IEnumerable<TemplateInclusion>? include = null);
 
         ///// <summary>
         ///// <para>Creates a sheet in given folder.</para>
@@ -419,7 +419,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Sheet CopySheet(long sheetId, ContainerDestination destination, IEnumerable<SheetCopyInclusion> include);
+        Sheet CopySheet(long sheetId, ContainerDestination destination, IEnumerable<SheetCopyInclusion>? include = null);
 
         /// <summary>
         /// <para>Creates a copy of the specified sheet.</para>
@@ -437,7 +437,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Sheet CopySheet(long sheetId, ContainerDestination destination, IEnumerable<SheetCopyInclusion> include, IEnumerable<SheetCopyExclusion> exclude);
+        Sheet CopySheet(long sheetId, ContainerDestination destination, IEnumerable<SheetCopyInclusion>? include = null, IEnumerable<SheetCopyExclusion>? exclude = null);
 
         /// <summary>
         /// <para>Moves the specified sheet to a new location.</para>
