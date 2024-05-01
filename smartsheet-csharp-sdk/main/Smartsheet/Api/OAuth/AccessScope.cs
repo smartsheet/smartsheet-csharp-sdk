@@ -80,7 +80,10 @@ namespace Smartsheet.Api.OAuth
         /// Retrieve contacts
         /// </summary>
         READ_CONTACTS,
-
+        /// <summary>
+        /// Retrieve events.
+        /// </summary>
+        READ_EVENTS,
         /// <summary>
         /// Add and remove users from your Smartsheet organization; create groups and manage membership
         /// </summary>
@@ -90,10 +93,17 @@ namespace Smartsheet.Api.OAuth
         /// Modify sheet structure, including column definition, publish state, etc.
         /// </summary>
         ADMIN_SHEETS,
-
+        /// <summary>
+        /// Modify Sights/dashboards structure.
+        /// </summary>
+        ADMIN_SIGHTS,
         /// <summary>
         /// Create and manage workspaces and folders, including sharing
         /// </summary>
-        ADMIN_WORKSPACES
+        ADMIN_WORKSPACES,
+        /// <summary>
+        /// Create, delete, and update webhooks; get all webhooks; reset shared secret.
+        /// </summary>
+        ADMIN_WEBHOOKS
     }
 }
