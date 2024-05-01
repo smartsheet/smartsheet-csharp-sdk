@@ -140,6 +140,11 @@ namespace integration_test_sdk_net80
         {
             Sheet sheet = smartsheet.SheetResources.GetSheet(newSheetHome.Id.Value);
             Assert.AreEqual(sheet.Permalink, newSheetHome.Permalink);
+
+            // Test rowsModifiedSince
+
+            sheet = smartsheet.SheetResources.GetSheet(newSheetHome.Id.Value, rowsModifiedSince: DateTime.UnixEpoch);
+            Assert.AreEqual(sheet.Permalink, newSheetHome.Permalink);
         }
 
         private void TestGetSheetVersion()
