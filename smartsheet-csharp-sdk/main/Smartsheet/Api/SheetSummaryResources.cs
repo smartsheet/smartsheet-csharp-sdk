@@ -43,7 +43,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        SheetSummary GetSheetSummary(long sheetId, IEnumerable<SummaryFieldInclusion> include, IEnumerable<SummaryFieldExclusion> exclude);
+        SheetSummary GetSheetSummary(long sheetId, IEnumerable<SummaryFieldInclusion>? include = null, IEnumerable<SummaryFieldExclusion>? exclude = null);
 
         /// <summary>
         /// <para>Gets the sheet summary fields</para>
@@ -60,7 +60,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        PaginatedResult<SummaryField> GetSheetSummaryFields(long sheetId, IEnumerable<SummaryFieldInclusion> include, IEnumerable<SummaryFieldExclusion> exclude, PaginationParameters paging);
+        PaginatedResult<SummaryField> GetSheetSummaryFields(long sheetId, IEnumerable<SummaryFieldInclusion>? include = null, IEnumerable<SummaryFieldExclusion>? exclude = null, PaginationParameters? paging = null);
 
         /// <summary>
         /// <para>Insert fields into a sheet summary</para>
@@ -76,7 +76,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        IList<SummaryField> AddSheetSummaryFields(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict);
+        IList<SummaryField> AddSheetSummaryFields(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict = null);
 
         /// <summary>
         /// <para>Insert fields into a sheet summary</para>
@@ -92,7 +92,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        BulkItemResult<SummaryField> AddSheetSummaryFieldsAllowPartialSuccess(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict);
+        BulkItemResult<SummaryField> AddSheetSummaryFieldsAllowPartialSuccess(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict = null);
 
         /// <summary>
         /// <para>Update fields in the sheet summary</para>
@@ -108,7 +108,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        IList<SummaryField> UpdateSheetSummaryFields(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict);
+        IList<SummaryField> UpdateSheetSummaryFields(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict = null);
 
         /// <summary>
         /// <para>Update fields in the sheet summary</para>
@@ -124,7 +124,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        BulkItemResult<SummaryField> UpdateSheetSummaryFieldsAllowPartialSuccess(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict);
+        BulkItemResult<SummaryField> UpdateSheetSummaryFieldsAllowPartialSuccess(long sheetId, IEnumerable<SummaryField> fields, bool? renameIfConflict = null);
 
         /// <summary>
         /// <para>Delete fields in a sheet summary.</para>
@@ -140,7 +140,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        IList<long> DeleteSheetSummaryFields(long sheetId, IEnumerable<long> fieldIds, bool? ignoreSummaryFieldsNotFound);
+        IList<long> DeleteSheetSummaryFields(long sheetId, IEnumerable<long> fieldIds, bool? ignoreSummaryFieldsNotFound = null);
 
         /// <summary>
         /// <para>Adds an image to the sheet summary field.</para>
@@ -158,6 +158,6 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        SummaryField AddSheetSummaryFieldImage(long sheetId, long fieldId, string file, string fileType, string altText);
+        SummaryField AddSheetSummaryFieldImage(long sheetId, long fieldId, string file, string? fileType = null, string? altText = null);
     }
 }

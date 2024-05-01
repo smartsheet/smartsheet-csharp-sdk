@@ -58,6 +58,10 @@ namespace integration_test_sdk_net80
                 new List<SummaryFieldInclusion> { SummaryFieldInclusion.FORMAT, SummaryFieldInclusion.WRITER_INFO },
                 new List<SummaryFieldExclusion> { SummaryFieldExclusion.DISPLAY_VALUE });
             Assert.AreEqual(sheetSummary.Fields.Count, 2);
+
+            //Test without includes/excludes that are optional.
+            sheetSummary = smartsheet.SheetResources.SummaryResources.GetSheetSummary(sheet.Id.Value);
+            Assert.AreEqual(sheetSummary.Fields.Count, 2);
         }
 
         private void TestAddSheetSummaryFieldsWithPartialSuccess()
@@ -73,7 +77,7 @@ namespace integration_test_sdk_net80
             sf1.ObjectValue = new StringObjectValue("Sammy Smart");
 
             BulkItemResult<SummaryField> asf = smartsheet.SheetResources.SummaryResources.AddSheetSummaryFieldsAllowPartialSuccess(
-                sheet.Id.Value,  new List<SummaryField> { sf, sf1 }, null);
+                sheet.Id.Value,  new List<SummaryField> { sf, sf1 });
 
             Assert.AreEqual(asf.FailedItems.Count, 1);
         }
@@ -82,7 +86,10 @@ namespace integration_test_sdk_net80
         {
             PaginatedResult<SummaryField> fields = smartsheet.SheetResources.SummaryResources.GetSheetSummaryFields(sheet.Id.Value,
                 new List<SummaryFieldInclusion> { SummaryFieldInclusion.WRITER_INFO },
-                new List<SummaryFieldExclusion> { SummaryFieldExclusion.DISPLAY_VALUE }, null);
+                new List<SummaryFieldExclusion> { SummaryFieldExclusion.DISPLAY_VALUE });
+            Assert.AreEqual(fields.Data.Count, 3);
+
+            fields = smartsheet.SheetResources.SummaryResources.GetSheetSummaryFields(sheet.Id.Value);
             Assert.AreEqual(fields.Data.Count, 3);
         }
 
@@ -97,7 +104,7 @@ namespace integration_test_sdk_net80
             sf1.Title = "Eeek!";
 
             IList<SummaryField> usf = smartsheet.SheetResources.SummaryResources.UpdateSheetSummaryFields(sheet.Id.Value,
-                new List<SummaryField> { sf, sf1 }, null);
+                new List<SummaryField> { sf, sf1 });
         }
 
         private void TestUpdateSheetSummaryFieldsWithPartialSuccess()
