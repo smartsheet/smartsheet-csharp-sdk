@@ -104,7 +104,7 @@ namespace integration_test_sdk_net80
 
         private static void ListFoldersInFolder(SmartsheetClient smartsheet, long createdFolderInHomeId, long createdFolderInFolderId)
         {
-            PaginatedResult<Folder> folderResults = smartsheet.FolderResources.ListFolders(createdFolderInHomeId, null);
+            PaginatedResult<Folder> folderResults = smartsheet.FolderResources.ListFolders(createdFolderInHomeId);
             Assert.IsTrue(folderResults.Data.Count == 1);
             Assert.IsTrue(folderResults.TotalCount == 1);
             Assert.IsTrue(folderResults.Data[0].Id == createdFolderInFolderId);

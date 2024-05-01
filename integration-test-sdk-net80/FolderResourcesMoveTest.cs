@@ -38,7 +38,7 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(movedFolder.Name == "SubFolder1");
 
             // Assert the Folder which use to contain the moved Folder is now empty.
-            PaginatedResult<Folder> foldersResult = smartsheet.FolderResources.ListFolders(createdFolderInHomeId1, null);
+            PaginatedResult<Folder> foldersResult = smartsheet.FolderResources.ListFolders(createdFolderInHomeId1);
             Assert.IsTrue(foldersResult.Data.Count == 0);
 
 
