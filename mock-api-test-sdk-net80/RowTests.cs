@@ -974,8 +974,7 @@ namespace mock_api_test_sdk_net80
                     {
                         SheetId = 799249123305348
                     }
-                },
-                null, null);
+                });
             Assert.AreEqual(result.DestinationSheetId, 799249123305348);
         }
 
@@ -995,8 +994,7 @@ namespace mock_api_test_sdk_net80
                     {
                         SheetId = 799249123305348
                     }
-                },
-                null, null);
+                });
             Assert.AreEqual(result.DestinationSheetId, 799249123305348);
         }
     }

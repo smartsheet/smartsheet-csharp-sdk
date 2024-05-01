@@ -54,7 +54,10 @@ namespace integration_test_sdk_net80
             smartsheet.SheetResources.RowResources.DeleteRows(sheetId, new long[] { rowId }, false);
             try
             {
-                smartsheet.SheetResources.RowResources.GetRow(sheetId, rowId, new RowInclusion[] { RowInclusion.COLUMNS }, null);
+                smartsheet.SheetResources.RowResources.GetRow(sheetId, rowId, new RowInclusion[] { RowInclusion.COLUMNS });
+                Assert.Fail("Cannot get a deleted row.");
+
+                smartsheet.SheetResources.RowResources.GetRow(sheetId, rowId);
                 Assert.Fail("Cannot get a deleted row.");
             }
             catch
