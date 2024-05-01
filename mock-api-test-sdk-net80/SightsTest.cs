@@ -11,7 +11,7 @@ namespace mock_api_test_sdk_net80
         public void ListSights()
         {
             SmartsheetClient ss = HelperFunctions.SetupClient("List Sights");
-            PaginatedResult<Sight> sights = ss.SightResources.ListSights(null, null);
+            PaginatedResult<Sight> sights = ss.SightResources.ListSights();
             Assert.AreEqual(6, (long)sights.TotalCount);
         }
 
