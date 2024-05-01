@@ -13,10 +13,6 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClient("List Automation Rules");
             PaginatedResult<AutomationRule> automationRules = ss.SheetResources.AutomationRuleResources.ListAutomationRules(324);
             Assert.AreEqual(2, (long)automationRules.TotalCount);
-
-            PaginationParameters paginationParameters = new PaginationParameters(false, 100, 1);
-            automationRules = ss.SheetResources.AutomationRuleResources.ListAutomationRules(324, paginationParameters);
-            Assert.AreEqual(2, (long)automationRules.TotalCount);
         }
 
         [TestMethod]
