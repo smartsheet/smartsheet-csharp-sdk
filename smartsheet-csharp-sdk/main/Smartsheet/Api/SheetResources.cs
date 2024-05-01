@@ -107,7 +107,8 @@ namespace Smartsheet.Api
                     IEnumerable<int>? rowNumbers = null,
                     IEnumerable<long>? columnIds = null,
                     long? pageSize = null,
-                    long? page = null);
+                    long? page = null,
+                    DateTime? rowsModifiedSince = null);
 
         /// <summary>
         /// <para>Gets a sheet.</para>
@@ -140,6 +141,7 @@ namespace Smartsheet.Api
                     IEnumerable<long>? columnIds = null,
                     long? pageSize = null,
                     long? page = null,
+                    DateTime? rowsModifiedSince = null,
                     long? ifVersionAfter = null);
 
         /// <summary>
@@ -173,7 +175,8 @@ namespace Smartsheet.Api
                     IEnumerable<int>? rowNumbers = null,
                     IEnumerable<long>? columnIds = null,
                     long? pageSize = null,
-                    long? pag = null,
+                    long? page = null,
+                    DateTime? rowsModifiedSince = null,
                     long? ifVersionAfter = null,
                     int? level = null);
 

@@ -210,9 +210,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
-            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page)
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince)
         {
-            return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, null, null);
+            return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, rowsModifiedSince, null, null);
         }
 
         /// <summary>
@@ -238,9 +238,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
-            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, long? ifVersionAfter)
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince, long? ifVersionAfter)
         {
-            return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, ifVersionAfter, null);
+            return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, rowsModifiedSince, ifVersionAfter, null);
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
-            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, long? ifVersionAfter, int? level)
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince, long? ifVersionAfter, int? level)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (includes != null)
@@ -297,6 +297,9 @@ namespace Smartsheet.Api.Internal
             if (page != null)
             {
                 parameters.Add("page", page.ToString());
+            }
+            if (rowsModifiedSince != null) {
+                parameters.Add("rowsModifiedSince", ((DateTime)rowsModifiedSince).ToUniversalTime().ToString("o"));
             }
             if (ifVersionAfter != null)
             {
