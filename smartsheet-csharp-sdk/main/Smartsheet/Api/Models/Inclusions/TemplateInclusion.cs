@@ -48,6 +48,14 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Includes the forms.
         /// </summary>
-        FORMS
+        FORMS,
+        /// <summary>
+        /// Include rule recipients
+        /// </summary>                 
+        RULE_RECIPIENTS,
+        /// <summary>
+        /// Include rules
+        /// </summary>
+        RULES
     }
 }

@@ -90,7 +90,7 @@ namespace integration_test_sdk_net80
         {
             Sheet sheet = new Sheet.CreateSheetFromTemplateBuilder("CSharp SDK Sheet from Template", newSheetHome.Id.Value).Build();
             newSheetTemplate = smartsheet.SheetResources.CreateSheetFromTemplate(sheet,
-                new List<TemplateInclusion> { TemplateInclusion.ATTACHMENTS, TemplateInclusion.DATA, TemplateInclusion.DISCUSSIONS });
+                new List<TemplateInclusion> { TemplateInclusion.ATTACHMENTS, TemplateInclusion.DATA, TemplateInclusion.DISCUSSIONS, TemplateInclusion.RULE_RECIPIENTS, TemplateInclusion.RULES });
             Assert.AreEqual(AccessLevel.OWNER, newSheetTemplate.AccessLevel);
         }
 
@@ -108,7 +108,7 @@ namespace integration_test_sdk_net80
         private void TestCreateSheetInFolderFromTemplate()
         {
             Sheet sheet = new Sheet.CreateSheetFromTemplateBuilder("CSharp SDK Sheet from Template", newSheetHome.Id.Value).Build();
-            Sheet newSheetFromTemplate = smartsheet.FolderResources.SheetResources.CreateSheetFromTemplate(folder.Id.Value, sheet, null);
+            Sheet newSheetFromTemplate = smartsheet.FolderResources.SheetResources.CreateSheetFromTemplate(folder.Id.Value, sheet);
 
             if(newSheetFromTemplate.Id.ToString().Length == 0 || newSheetFromTemplate.AccessLevel != AccessLevel.OWNER ||
                 newSheetFromTemplate.Permalink.Length == 0)
@@ -128,7 +128,7 @@ namespace integration_test_sdk_net80
         {
             Sheet sheet = new Sheet.CreateSheetFromTemplateBuilder("CSharp SDK Sheet in Workspace from Template", newSheetHome.Id.Value).Build();
             Sheet newSheetFromTemplate = smartsheet.WorkspaceResources.SheetResources.CreateSheetFromTemplate(workspace.Id.Value, sheet,
-                new List<TemplateInclusion> { TemplateInclusion.ATTACHMENTS, TemplateInclusion.DATA, TemplateInclusion.DISCUSSIONS });
+                new List<TemplateInclusion> { TemplateInclusion.ATTACHMENTS, TemplateInclusion.DATA, TemplateInclusion.DISCUSSIONS, TemplateInclusion.RULE_RECIPIENTS, TemplateInclusion.RULES });
             if (newSheetFromTemplate.Id.ToString().Length == 0 || newSheetFromTemplate.AccessLevel != AccessLevel.OWNER ||
                 newSheetFromTemplate.Permalink.Length == 0)
             {
