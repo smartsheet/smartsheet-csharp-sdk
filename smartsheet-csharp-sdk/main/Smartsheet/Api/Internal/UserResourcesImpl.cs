@@ -38,13 +38,6 @@ namespace Smartsheet.Api.Internal
     /// </summary>
     public class UserResourcesImpl : AbstractResources, UserResources
     {
-        /// <summary>
-        /// Represents the SmartsheetImpl.
-        /// 
-        /// It will be initialized in the constructor and will not change afterwards.
-        /// </summary>
-        private SmartsheetImpl smartsheet;
-
         private UserSheetResources sheets;
 
         /// <summary>
@@ -56,7 +49,6 @@ namespace Smartsheet.Api.Internal
         public UserResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {
-            this.smartsheet = smartsheet;
             this.sheets = new UserSheetResourcesImpl(smartsheet);
         }
 
