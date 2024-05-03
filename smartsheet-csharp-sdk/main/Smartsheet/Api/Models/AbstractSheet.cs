@@ -54,7 +54,6 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Represents the columns for the sheet.
         /// </summary>
-        [CLSCompliant(false)]
         protected IList<TColumn> columns;
 
         /// <summary>
@@ -141,7 +140,6 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Represents the rows for the sheet.
         /// </summary>
-        [CLSCompliant(false)]
         protected IList<TRow> rows;
 
         /// <summary>
