@@ -19,7 +19,7 @@ jobs:
       run: dotnet restore
     - name: Build
       working-directory: ./
-      run: dotnet build --configuration Release --no-restore
+      run: pwd && dotnet build --configuration Release --no-restore
     - name: Clone smartsheet/smartsheet-sdk-tests PRIVATE repository
       uses: GuillaumeFalourd/clone-github-repo-action@v2
       with:
