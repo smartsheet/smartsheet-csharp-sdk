@@ -201,61 +201,6 @@ namespace Smartsheet.Api.Internal
         /// <param name="columnIds"> used to specify the optional objects to include. </param>
         /// <param name="pageSize"> used to specify the optional objects to include. </param>
         /// <param name="page"> used to specify the optional objects to include. </param>
-        /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
-        /// ResourceNotFoundException rather than returning null). </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
-            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince)
-        {
-            return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, rowsModifiedSince, null, null);
-        }
-
-        /// <summary>
-        /// <para>Gets a sheet.</para>
-        /// 
-        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}</para>
-        /// </summary>
-        /// <param name="sheetId"> the Id of the sheet </param>
-        /// <param name="includes"> used to specify the optional objects to include. </param>
-        /// <param name="excludes"> used to specify the optional objects to include. </param>
-        /// <param name="rowIds"> used to specify the optional objects to include. </param>
-        /// <param name="rowNumbers"> used to specify the optional objects to include. </param>
-        /// <param name="columnIds"> used to specify the optional objects to include. </param>
-        /// <param name="pageSize"> used to specify the optional objects to include. </param>
-        /// <param name="page"> used to specify the optional objects to include. </param>
-        /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
-        /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
-        /// ResourceNotFoundException rather than returning null). </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes, 
-            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince, long? ifVersionAfter)
-        {
-            return GetSheet(sheetId, includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, rowsModifiedSince, ifVersionAfter, null);
-        }
-
-        /// <summary>
-        /// <para>Gets a sheet.</para>
-        /// 
-        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}</para>
-        /// </summary>
-        /// <param name="sheetId"> the Id of the sheet </param>
-        /// <param name="includes"> used to specify the optional objects to include. </param>
-        /// <param name="excludes"> used to specify the optional objects to include. </param>
-        /// <param name="rowIds"> used to specify the optional objects to include. </param>
-        /// <param name="rowNumbers"> used to specify the optional objects to include. </param>
-        /// <param name="columnIds"> used to specify the optional objects to include. </param>
-        /// <param name="pageSize"> used to specify the optional objects to include. </param>
-        /// <param name="page"> used to specify the optional objects to include. </param>
         /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
         /// <param name="level"> compatibility level </param>
         /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
