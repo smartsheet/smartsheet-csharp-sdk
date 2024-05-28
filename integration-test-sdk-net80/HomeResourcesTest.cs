@@ -26,12 +26,12 @@ namespace integration_test_sdk_net80
         {
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
 
-            PaginatedResult<Folder> folders = smartsheet.HomeFolderResources.ListFolders();
+            var folders = smartsheet.HomeResources.FolderResources.ListFolders();
 
             Assert.IsTrue(folders != null);
 
             PaginationParameters paginationParameters = new PaginationParameters(true, 100, 1);
-            folders = smartsheet.HomeFolderResources.ListFolders(paginationParameters);
+            folders = smartsheet.HomeResources.FolderResources.ListFolders(paginationParameters);
 
             Assert.IsTrue(folders != null);
         }

@@ -44,7 +44,7 @@ namespace integration_test_sdk_net80
             }
             catch
             {
-                //Not found.
+                //Not found - expected failure.
             }
         }
 

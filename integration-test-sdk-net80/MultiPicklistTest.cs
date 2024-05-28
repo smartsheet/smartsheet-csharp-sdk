@@ -49,7 +49,7 @@ namespace integration_test_sdk_net80
 
         private void TestListMultiPicklistColumn()
         {
-            PaginatedResult<Column> cols = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId);
+            PaginatedResult<Column> cols = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId, null, null);
             // should be TEXT_NUMBER since level not specified
             Assert.AreEqual(cols.Data[0].Type, ColumnType.TEXT_NUMBER);
 

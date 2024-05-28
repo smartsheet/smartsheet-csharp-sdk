@@ -39,7 +39,7 @@ namespace integration_test_sdk_net80
 
         private static long ListColumns(SmartsheetClient smartsheet, long sheetId)
         {
-            PaginatedResult<Column> columnsResult = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId, new ColumnInclusion[] { ColumnInclusion.FILTERS });
+            PaginatedResult<Column> columnsResult = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId, new ColumnInclusion[] { ColumnInclusion.FILTERS }, null);
             Assert.IsTrue(columnsResult.TotalCount == 4);
             Assert.IsTrue(columnsResult.Data.Count == 4);
             return columnsResult.Data[3].Id.Value;

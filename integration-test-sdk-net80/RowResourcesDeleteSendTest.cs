@@ -15,7 +15,7 @@ namespace integration_test_sdk_net80
 
             long sheetId = CreateSheetFromTemplate(smartsheet, templateId);
 
-            PaginatedResult<Column> columnsResult = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId);
+            PaginatedResult<Column> columnsResult = smartsheet.SheetResources.ColumnResources.ListColumns(sheetId, null, null);
             long columnId = columnsResult.Data[0].Id.Value;
 
             Cell[] cellsToAdd = new Cell[] { new Cell.AddCellBuilder(columnId, true).SetValue("hello").SetStrict(false).Build() };
@@ -83,7 +83,7 @@ namespace integration_test_sdk_net80
         private static long CreateSheetFromTemplate(SmartsheetClient smartsheet, long templateId)
         {
             // Create a new sheet off of that template.
-            Sheet newSheet = smartsheet.SheetResources.CreateSheetFromTemplate(new Sheet.CreateSheetFromTemplateBuilder("New Sheet", templateId).Build(), new TemplateInclusion[] { TemplateInclusion.DAT, TemplateInclusion.RULE_RECIPIENTS, TemplateInclusion.RULES });
+            Sheet newSheet = smartsheet.SheetResources.CreateSheetFromTemplate(new Sheet.CreateSheetFromTemplateBuilder("New Sheet", templateId).Build(), new TemplateInclusion[] { TemplateInclusion.DATA, TemplateInclusion.RULE_RECIPIENTS, TemplateInclusion.RULES });
             return newSheet.Id.Value;
         }
     }

@@ -14,7 +14,7 @@ namespace integration_test_sdk_net80
             smartsheet = CreateClient();
 
             // Remove user if it exists from a previous run.
-            PaginatedResult<User> users = smartsheet.UserResources.ListUsers(paging: new PaginationParameters(true, null, null));
+            PaginatedResult<User> users = smartsheet.UserResources.ListUsers(null, null, paging: new PaginationParameters(true, null, null));
             foreach (User tmpUser in users.Data)
             {
                 if (tmpUser.Email == email)
@@ -35,6 +35,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestUserResources()
         {
+            // JOHN'S FAIL: fails on add user with a 500 error
             AddUser();
             GetUser();
             UpdateUser();
@@ -75,7 +76,7 @@ namespace integration_test_sdk_net80
 
         private void ListAllUsers()
         {
-            PaginatedResult<User> users = smartsheet.UserResources.ListUsers();
+            PaginatedResult<User> users = smartsheet.UserResources.ListUsers(new String[] { "test+email@invalidsmartsheet.com" }, null);
             // current user + added user
             Assert.IsTrue(users.Data.Count >= 2);
         }
@@ -108,7 +109,7 @@ namespace integration_test_sdk_net80
         public void AddProfileImage()
         {
             UserProfile me = smartsheet.UserResources.GetCurrentUser();
-            smartsheet.UserResources.AddProfileImage(me.Id.Value, "../../../../../integration-test-sdk-net80/curly.jpg", "image/jpeg");
+            smartsheet.UserResources.AddProfileImage(me.Id.Value, "../../../../integration-test-sdk-net80/profileimage.png", "image/png");
             me = smartsheet.UserResources.GetCurrentUser();
             Assert.IsNotNull(me.ProfileImage.ImageId);
             const int squareProfileImageSize = 1050;

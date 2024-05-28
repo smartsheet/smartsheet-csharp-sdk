@@ -25,6 +25,7 @@ namespace integration_test_sdk_net80
         public void TestSheetSummaryResources()
         {
             TestAddSheetSummaryFields();
+            // JOHNS FAIL: "no healthy upstream"
             TestGetSheetSummary();
             TestAddSheetSummaryFieldsWithPartialSuccess();
             TestGetSheetSummaryFields();
