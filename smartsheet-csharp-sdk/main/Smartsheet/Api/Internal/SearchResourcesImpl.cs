@@ -79,7 +79,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        [Obsolete("Use Search without the location query parameter as it has been deprecated.")]
+        [Obsolete("Use Search without the location query parameter as it has been deprecated. The location parameter is now ignored.")]
         public virtual SearchResult Search(string query, IEnumerable<SearchInclusion>? includes, SearchLocation? location,
             DateTime? modifiedSince, IEnumerable<SearchScope>? scopes)
         {
