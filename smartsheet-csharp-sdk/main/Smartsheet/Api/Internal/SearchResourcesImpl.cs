@@ -83,7 +83,7 @@ namespace Smartsheet.Api.Internal
         public virtual SearchResult Search(string query, IEnumerable<SearchInclusion>? includes, SearchLocation? location,
             DateTime? modifiedSince, IEnumerable<SearchScope>? scopes)
         {
-            return Search(query, includes, modifiedSince, scopes);
+            return Search(query, includes, modifiedSince, scopes)
         }
 
                 /// <summary>
@@ -110,26 +110,6 @@ namespace Smartsheet.Api.Internal
             if (includes != null)
             {
                 parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(includes));
-            }
-            {
-                Regex regex = new Regex(@"[^_]+");
-                // Converts the enum members to camel case to be passed in the url as a parameter.
-                // For example, 'COLUMN_TYPE' becomes 'columnType' and is appended to the path.
-                // Different from JsonEnymTypeConverter because this does not involve serialization/deserialization.
-                MatchCollection matches = regex.Matches(location.ToString());
-                List<string> values = new List<string>();
-                foreach (Match match in matches)
-                {
-                    if (values.Count == 0)
-                    {
-                        values.Add(match.Value.ToLower());
-                    }
-                    else
-                    {
-                        values.Add(match.Value.Substring(0, 1).ToUpper() + match.Value.Substring(1).ToLower());
-                    }
-                }
-                parameters.Add("location", string.Join(string.Empty, values));
             }
             if (modifiedSince != null)
             {
