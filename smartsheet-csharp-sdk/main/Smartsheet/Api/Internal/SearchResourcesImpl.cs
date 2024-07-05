@@ -59,7 +59,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual SearchResult Search(string query)
         {
-            return this.Search(query, null, null, null, null);
+            return this.Search(query, null, null, null);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="query"> (required): Text with which to perform the search. </param>
         /// <param name="includes">includes enum set of inclusions</param>
-        /// <param name="location">location when specified with a value of "personalWorkspace limits response to only those
+        /// <param name="location">DEPRECATED: location when specified with a value of "personalWorkspace limits response to only those
         /// items in the user's workspace</param>
         /// <param name="modifiedSince">only return items modified since this date</param>
         /// <param name="scopes">scopes enum set of search filters</param>
@@ -79,8 +79,31 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("Use Search without the location query parameter as it has been deprecated.")]
         public virtual SearchResult Search(string query, IEnumerable<SearchInclusion>? includes, SearchLocation? location,
             DateTime? modifiedSince, IEnumerable<SearchScope>? scopes)
+        {
+            return Search(query, includes, modifiedSince, scopes)
+        }
+
+                /// <summary>
+        /// <para>Searches all sheets that the user can access for the specified text.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /search</para>
+        /// </summary>
+        /// <param name="query"> (required): Text with which to perform the search. </param>
+        /// <param name="includes">includes enum set of inclusions</param>
+        /// <param name="modifiedSince">only return items modified since this date</param>
+        /// <param name="scopes">scopes enum set of search filters</param>
+        /// <returns> SearchResult object that contains a maximum of 100 SearchResultems </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("Use Search without the location query parameter as it has been deprecated.")]
+        public virtual SearchResult Search(string query, IEnumerable<SearchInclusion>? includes,
+            DateTime? modifiedSince, IEnumerable<SearchScope>? scopes) 
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
 

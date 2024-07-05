@@ -50,7 +50,7 @@ namespace Smartsheet.Api
         /// </summary>
         /// <param name="query"> (required): Text with which to perform the search. </param>
         /// <param name="includes">includes enum set of inclusions</param>
-        /// <param name="location">location when specified with a value of "personalWorkspace limits response to only those
+        /// <param name="location">DEPRECATED: location when specified with a value of "personalWorkspace limits response to only those
         /// items in the user's workspace</param>
         /// <param name="modifiedSince">only return items modified since this date</param>
         /// <param name="scopes">scopes enum set of search filters</param>
@@ -61,7 +61,26 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("Use Search without the location query parameter as it has been deprecated.")]
         SearchResult Search(string query, IEnumerable<SearchInclusion>? includes = null, SearchLocation? location = null,
+            DateTime? modifiedSince = null, IEnumerable<SearchScope>? scopes = null);
+
+                    /// <summary>
+        /// <para>Searches all sheets that the user can access, for the specified text.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /search</para>
+        /// </summary>
+        /// <param name="query"> (required): Text with which to perform the search. </param>
+        /// <param name="includes">includes enum set of inclusions</param>
+        /// <param name="modifiedSince">only return items modified since this date</param>
+        /// <param name="scopes">scopes enum set of search filters</param>
+        /// <returns> SearchResult object that contains a maximum of 100 SearchResultems </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        SearchResult Search(string query, IEnumerable<SearchInclusion>? includes = null,
             DateTime? modifiedSince = null, IEnumerable<SearchScope>? scopes = null);
 
         /// <summary>
