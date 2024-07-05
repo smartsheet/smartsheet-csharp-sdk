@@ -83,7 +83,7 @@ namespace Smartsheet.Api.Internal
         public virtual SearchResult Search(string query, IEnumerable<SearchInclusion>? includes, SearchLocation? location,
             DateTime? modifiedSince, IEnumerable<SearchScope>? scopes)
         {
-            return Search(query, includes, modifiedSince, scopes)
+            return Search(query, includes, modifiedSince, scopes);
         }
 
                 /// <summary>
