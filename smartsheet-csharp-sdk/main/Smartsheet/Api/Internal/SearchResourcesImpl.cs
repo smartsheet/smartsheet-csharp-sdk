@@ -111,7 +111,6 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(includes));
             }
-            if (location != null)
             {
                 Regex regex = new Regex(@"[^_]+");
                 // Converts the enum members to camel case to be passed in the url as a parameter.
