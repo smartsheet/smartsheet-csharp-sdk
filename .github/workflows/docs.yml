@@ -18,7 +18,7 @@ jobs:
       - name: Install Dependencies
         run: dotnet restore
       - name: Build
-        working-directory: ./smartsheet-csharp-sdk-docs
+        working-directory: ./
         run: dotnet build --configuration Release --no-restore
       - uses: nikeee/docfx-action@v1.0.0
         name: Build Documentation
