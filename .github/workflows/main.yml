@@ -23,19 +23,19 @@ jobs:
       - name: Build
         working-directory: ./
         run: dotnet build --configuration Release --no-restore
-      # - name: Clone smartsheet/smartsheet-sdk-tests PUBLIC repository
-      #   uses: GuillaumeFalourd/clone-github-repo-action@v2
-      #   with:
-      #     owner: 'smartsheet'
-      #     repository: 'smartsheet-sdk-tests'
-      # - name: Setup Mock API
-      #   run: |
-      #    smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
-      #    smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
-      # - name: Run Mock API Tests
-      #   working-directory: ./mock-api-test-sdk-net80
-      #   run: |
-      #    dotnet test --no-restore
+      - name: Clone smartsheet/smartsheet-sdk-tests PUBLIC repository
+        uses: GuillaumeFalourd/clone-github-repo-action@v2
+        with:
+          owner: 'smartsheet'
+          repository: 'smartsheet-sdk-tests'
+      - name: Setup Mock API
+        run: |
+         smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
+         smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
+      - name: Run Mock API Tests
+        working-directory: ./mock-api-test-sdk-net80
+        run: |
+         dotnet test --no-restore
       - name: Run Integration Tests
         continue-on-error: true
         working-directory: ./integration-test-sdk-net80
