@@ -93,7 +93,8 @@ namespace Smartsheet.Api
         /// 
         /// <para>It is a constant with Value "https://api.smartsheet.com/2.0".</para>
         /// </summary>
-        public const string DEFAULT_BASE_URI = "https://api.smartsheet.com/2.0/";
+        // public const string DEFAULT_BASE_URI = "https://api.smartsheet.com/2.0/";
+        public const string DEFAULT_BASE_URI = "https://api.jsimonstepbox.smart.ninja/2.0/";
 
         /// <summary>
         /// <para>Represents the base URI of the Smartsheetgov REST API.</para>
