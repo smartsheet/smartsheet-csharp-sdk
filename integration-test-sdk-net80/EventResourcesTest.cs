@@ -51,7 +51,6 @@ namespace integration_test_sdk_net80
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
 
             DateTime lastHour = DateTime.Today.AddHours(-1);
-            // JOHNS: a stream position or since is required for ListEvents
             EventResult eventResult = smartsheet.EventResources.ListEvents(since: 0);
             Assert.IsTrue(eventResult != null);
             Assert.IsTrue(eventResult.Data.Count <= 10);

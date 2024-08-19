@@ -30,7 +30,7 @@ namespace integration_test_sdk_net80
             // Test that filetype is optional.
             AttachNewVersionWithoutFileType(smartsheet, sheetId, attachmentId);
 
-            // JOHNS: this throws a not found exception because the attachment is deleted
+            // FIXME: this throws a not found exception because the attachment is deleted
             // DeleteAttachment(smartsheet, sheetId, attachmentId);
 
             ListAttachmentVersions(smartsheet, sheetId, attachmentId);
@@ -39,7 +39,7 @@ namespace integration_test_sdk_net80
 
             DeleteAttachment(smartsheet, sheetId, attachmentId);
 
-            // JOHNS: likewise
+            // FIXME: likewise
             // ListAttachmentVersions(smartsheet, sheetId, attachmentId);
 
             smartsheet.SheetResources.DeleteSheet(sheetId);
