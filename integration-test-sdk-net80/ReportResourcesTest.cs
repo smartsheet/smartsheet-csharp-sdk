@@ -16,7 +16,7 @@ namespace integration_test_sdk_net80
             long reportId = 1176442848470916;
             string reportName = "New Blank Report";
 
-            Report report = smartsheet.ReportResources.GetReport(reportId, new ReportInclusion[] { ReportInclusion.ATTACHMENTS, ReportInclusion.DISCUSSIONS });
+            Report report = smartsheet.ReportResources.GetReport(reportId, new ReportInclusion[] { ReportInclusion.ATTACHMENTS, ReportInclusion.DISCUSSIONS }, null, null);
             Assert.IsTrue(report.Name == reportName);
             SheetEmail email = new SheetEmail.CreateSheetEmail(new Recipient[] { new Recipient { Email = "ericyan99@outlook.com" } }, SheetEmailFormat.PDF).SetCcMe(true).Build();
             smartsheet.ReportResources.SendReport(reportId, email);

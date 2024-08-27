@@ -21,10 +21,12 @@ namespace integration_test_sdk_net80
             DeleteSheet(sheet.Id.Value);
         }
 
+        [Ignore]
         [TestMethod]
         public void TestSheetSummaryResources()
         {
             TestAddSheetSummaryFields();
+            // FAIL: "no healthy upstream"
             TestGetSheetSummary();
             TestAddSheetSummaryFieldsWithPartialSuccess();
             TestGetSheetSummaryFields();

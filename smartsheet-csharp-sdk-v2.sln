@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mock-api-test-sdk-net80", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "integration-test-sdk-net80", "integration-test-sdk-net80\integration-test-sdk-net80.csproj", "{9F1AB018-EA39-4154-B1DB-B6440A673208}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smartsheet-csharp-sdk-docs", "smartsheet-csharp-sdk-docs\smartsheet-csharp-sdk-docs.csproj", "{A38A7884-9542-4503-B8DD-ED5E64449128}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

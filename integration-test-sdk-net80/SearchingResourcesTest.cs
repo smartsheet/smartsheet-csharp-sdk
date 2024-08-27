@@ -18,6 +18,7 @@ namespace integration_test_sdk_net80
             AddValuesToSheet(smartsheet, sheetId, query);
             // this very rarely shows up in 5 seconds
             System.Threading.Thread.Sleep(5000);
+
             SearchEverywhere(smartsheet, query, sheetId);
 
             SearchSheet(smartsheet, query, sheetId);

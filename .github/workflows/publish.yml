@@ -18,7 +18,7 @@ jobs:
     - name: Install Dependencies
       run: dotnet restore
     - name: Build
-      working-directory: ./smartsheet-csharp-sdk
+      working-directory: ./
       run: dotnet build --configuration Release --no-restore
     - name: Clone smartsheet/smartsheet-sdk-tests PRIVATE repository
       uses: GuillaumeFalourd/clone-github-repo-action@v2
@@ -33,8 +33,7 @@ jobs:
     - name: Run Mock API Tests
       working-directory: ./mock-api-test-sdk-net80
       run: |
-       dotnet build --configuration Release --no-restore
-       dotnet test --no-restore
+        dotnet test --no-restore
     - name: Run Integration Tests
       continue-on-error: true
       working-directory: ./integration-test-sdk-net80

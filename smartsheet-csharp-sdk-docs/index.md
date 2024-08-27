@@ -1,1 +1,0 @@
-# Smartsheet C# SDK Documentation

@@ -51,7 +51,7 @@ namespace integration_test_sdk_net80
             SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
 
             DateTime lastHour = DateTime.Today.AddHours(-1);
-            EventResult eventResult = smartsheet.EventResources.ListEvents();
+            EventResult eventResult = smartsheet.EventResources.ListEvents(since: 0);
             Assert.IsTrue(eventResult != null);
             Assert.IsTrue(eventResult.Data.Count <= 10);
             foreach(Event _event in eventResult.Data)
