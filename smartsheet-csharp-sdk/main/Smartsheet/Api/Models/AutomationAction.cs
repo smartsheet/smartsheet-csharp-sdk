@@ -46,7 +46,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Specifies which columns to include in message
         /// </summary>
-        private IList<long> includeColumnIds;
+        private IList<long> includedColumnIds;
 
         /// <summary>
         /// Include discussions in email
@@ -117,10 +117,10 @@ namespace Smartsheet.Api.Models
         /// Gets the list of included columns
         /// </summary>
         /// <returns> the list of included columns </returns>
-        public IList<long> IncludeColumnIds
+        public IList<long> IncludedColumnIds
         {
-            get { return includeColumnIds; }
-            set { includeColumnIds = value; }
+            get { return includedColumnIds; }
+            set { includedColumnIds = value; }
         }
 
         /// <summary>
