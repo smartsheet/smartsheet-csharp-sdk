@@ -198,3 +198,4 @@ Desktop.ini
 $RECYCLE.BIN/
 
 .vs/*
+.vscode/*

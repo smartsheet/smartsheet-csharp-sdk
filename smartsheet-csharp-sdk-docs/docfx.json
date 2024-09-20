@@ -1,0 +1,47 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../../smartsheet-csharp-sdk",
+          "files": [
+            "**/smartsheet-csharp-sdk-v2.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "filter": "filterConfig.yml"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/*.{md,yml}",
+          "index.md"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "Smartsheet C# SDK",
+      "_appTitle": "Smartsheet C# SDK",
+      "_enableSearch": true,
+      "pdf": false
+    }
+  }
+}
