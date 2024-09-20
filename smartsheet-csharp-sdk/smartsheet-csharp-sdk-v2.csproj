@@ -18,7 +18,7 @@
     <Authors>Smartsheet</Authors>
     <Product>smartsheet-csharp-sdk</Product>
     <PackageTags>Smartsheet Collaboration Project Management Excel spreadsheet</PackageTags>
-    <Version>4.0.0</Version>
+    <Version>5.0.0</Version>
     <AssemblyName>smartsheet-csharp-sdk</AssemblyName>
     <RootNamespace>smartsheet-csharp-sdk</RootNamespace>
     <Configuration>Debug</Configuration>
