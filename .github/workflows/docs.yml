@@ -7,25 +7,25 @@ on:
 
 jobs:
   build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup .Net Core
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '8.0.x'
-      - name: Install Dependencies
-        run: dotnet restore
-      - name: Build
-        working-directory: ./smartsheet-csharp-sdk-docs
-        run: dotnet build --configuration Release --no-restore
-      - uses: nikeee/docfx-action@v1.0.0
-        name: Build Documentation
-        with:
-          args: smartsheet-csharp-sdk-docs/docfx.json
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./smartsheet-csharp-sdk-docs/_site
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Dotnet Setup
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.x
+
+    - run: dotnet tool update -g docfx
+    - run: docfx ./smartsheet-csharp-sdk-docs/docfx.json
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './smartsheet-csharp-sdk-docs/_site'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

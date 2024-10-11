@@ -1,0 +1,6 @@
+### YamlMime:ManagedReference
+apiRules:
+  - exclude:
+      uidRegex: ^Smartsheet\.Api\.Internal*
+  - include:
+      uidRegex: ^Smartsheet\.Api$
