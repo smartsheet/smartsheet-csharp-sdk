@@ -1,6 +1,6 @@
 # Smartsheet SDK for C# [![Build Status](https://github.com/smartsheet/smartsheet-csharp-sdk/actions/workflows/main.yml/badge.svg)](https://github.com/smartsheet/smartsheet-csharp-sdk/actions/workflows/main.yml) [![NuGet](https://img.shields.io/nuget/v/smartsheet-csharp-sdk.svg)](https://www.nuget.org/packages/smartsheet-csharp-sdk/)
 
-C# SDK to simplify connecting to the [Smartsheet API](https://smartsheet.redoc.ly) from .NET applications.
+C# SDK to simplify connecting to the [Smartsheet API](https://developers.smartsheet.com/api/smartsheet/) from .NET applications.
    
 ## System Requirements
 
@@ -51,7 +51,7 @@ A simple, but complete sample application project is here: https://github.com/sm
 For details about logging, testing, how to use a passthrough option, and how to override HTTP client behavior, see [Advanced Topics](ADVANCED.md).
 
 ## Documentation
-The full Smartsheet API documentation is here: https://smartsheet.redoc.ly.
+The full Smartsheet API documentation is here: https://developers.smartsheet.com/api/smartsheet/
 
 The generated SDK class documentation is here: [https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html](https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html).
 
