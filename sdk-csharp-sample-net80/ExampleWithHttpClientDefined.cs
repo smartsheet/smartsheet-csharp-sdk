@@ -16,14 +16,6 @@ namespace sdk_csharp_sample
                 .SetHttpClient(new RetryHttpClient())                          // Explicitly setting a custom HttpClient
                 .Build();
 
-            // You can also use the DefaultHttpClient explicitly if you want
-            // This gives you the same behavior as not setting an HttpClient at all,
-            // but makes it clear what implementation you're using
-            SmartsheetClient smartsheetWithExplicitDefault = new SmartsheetBuilder()
-                .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")
-                .SetHttpClient(new DefaultHttpClient())                        // Explicitly using DefaultHttpClient
-                .Build();
-            
             // For this example, we'll use the client with the custom RetryHttpClient
             
             // List all sheets
