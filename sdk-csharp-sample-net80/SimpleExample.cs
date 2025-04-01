@@ -4,15 +4,19 @@ using Smartsheet.Api.Models;
 
 namespace sdk_csharp_sample
 {
-    class Program
+    class SimpleExample
     {
         public static void Main(string[] args)
         {
-            // Initialize client
+            // Initialize client without setting HttpClient explicitly
+            // When no HttpClient is provided, SmartsheetBuilder automatically uses DefaultHttpClient
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")       // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
-                .SetHttpClient(new RetryHttpClient())
+                // No HttpClient set - DefaultHttpClient will be used automatically
                 .Build();
+            
+            // The DefaultHttpClient provides standard HTTP functionality with built-in
+            // handling for rate limiting, retry logic, and proper error handling
 
             // List all sheets
             PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.SHEET_VERSION });

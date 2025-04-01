@@ -28,7 +28,10 @@ namespace Smartsheet.Api
 
     /// <summary>
     /// <para>A convenience class to help create a <seealso cref="SmartsheetClient"/> instance with the appropriate fields.</para>
-    /// 
+    ///
+    /// <para>If not explicitly set, the builder will use default implementations for HttpClient (DefaultHttpClient)
+    /// and JsonSerializer (JsonNetSerializer).</para>
+    ///
     /// <para>Thread Safety: This class is not thread safe since it's mutable, one builder instance is NOT expected to be used in
     /// multiple threads.</para>
     /// </summary>
@@ -36,15 +39,15 @@ namespace Smartsheet.Api
     {
         /// <summary>
         /// <para>Represents the HttpClient.</para>
-        /// 
-        /// <para>It can be set using corresponding setter.</para>
+        ///
+        /// <para>It can be set using corresponding setter. If not set, a DefaultHttpClient instance will be created automatically.</para>
         /// </summary>
         private HttpClient httpClient;
 
         /// <summary>
         /// <para>Represents the JsonSerializer.</para>
-        /// 
-        /// <para>It can be set using corresponding setter.</para>
+        ///
+        /// <para>It can be set using corresponding setter. If not set, a JsonNetSerializer instance will be created automatically.</para>
         /// </summary>
         private JsonSerializer jsonSerializer;
 
@@ -118,6 +121,7 @@ namespace Smartsheet.Api
 
         /// <summary>
         /// <para>Set the HttpClient.</para>
+        /// <para>This is optional. If not set, a DefaultHttpClient instance will be used.</para>
         /// </summary>
         /// <param name="httpClient"> the http client </param>
         /// <returns> the SmartsheetClient builder </returns>
@@ -129,6 +133,7 @@ namespace Smartsheet.Api
 
         /// <summary>
         /// <para>Set the JsonSerializer.</para>
+        /// <para>This is optional. If not set, a JsonNetSerializer instance will be used.</para>
         /// </summary>
         /// <param name="jsonSerializer"> the JsonSerializer </param>
         /// <returns> the SmartsheetBuilder </returns>
@@ -275,6 +280,18 @@ namespace Smartsheet.Api
                 accessToken = Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.Process) ??
                     Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.User) ??
                     Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.Machine);
+            }
+
+            // Create default HttpClient if none is provided
+            if (httpClient == null)
+            {
+                httpClient = new DefaultHttpClient();
+            }
+
+            // Create default JsonSerializer if none is provided
+            if (jsonSerializer == null)
+            {
+                jsonSerializer = new JsonNetSerializer();
             }
 
             SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut);
