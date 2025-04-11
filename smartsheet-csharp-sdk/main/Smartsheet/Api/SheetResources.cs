@@ -163,7 +163,7 @@ namespace Smartsheet.Api
 
         /// <summary>
         /// <para>Creates a sheet in default "Sheets" collection.</para>
-        /// 
+        ///
         /// <para>Mirrors to the following Smartsheet REST API method:<br />
         ///  POST /Sheets</para>
         /// </summary>
@@ -175,6 +175,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated. Please use CreateSheetFromTemplate instead.")]
         Sheet CreateSheet(Sheet sheet);
 
         /// <summary>
