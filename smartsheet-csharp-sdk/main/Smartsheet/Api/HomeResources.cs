@@ -25,9 +25,10 @@ namespace Smartsheet.Api
 
     /// <summary>
     /// <para>This interface provides methods to access resources previously from the deprecated home API.</para>
-    /// 
+    ///
     /// <para>Thread Safety: Implementation of this interface must be thread safe.</para>
     /// </summary>
+    [System.Obsolete("HomeResources is deprecated. Please use the specific resource endpoints instead: FolderResources.cs for GET /folders calls, SightResources.cs for GET /sights, ReportResources.cs for GET /reports, TemplateResources.cs for GET /templates and SheetResources.cs for GET /sheets.")]
     public interface HomeResources
     {
         /// <summary>
@@ -47,6 +48,7 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
+        [System.Obsolete("This method is deprecated. Please use the following alternatives instead: GET /folders to list folders, GET /folders/{folderId} to fetch folder children, GET /sights for dashboards, GET /reports for reports, GET /sheets for sheets, GET /templates for user-created templates, and GET /templates/public for public templates.")]
         PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes);
 
         /// <summary>
@@ -67,6 +69,7 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
+        [System.Obsolete("This method is deprecated. Please use the following alternatives instead: GET /folders to list folders, GET /folders/{folderId} to fetch folder children, GET /sights for dashboards, GET /reports for reports, GET /sheets for sheets, GET /templates for user-created templates, and GET /templates/public for public templates.")]
         PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion>? includes = null, IEnumerable<HomeExclusion>? excludes = null);
 
         /// <summary>
