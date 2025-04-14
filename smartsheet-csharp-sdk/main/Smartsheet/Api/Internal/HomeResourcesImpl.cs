@@ -26,9 +26,10 @@ namespace Smartsheet.Api.Internal
 
     /// <summary>
     /// This is the implementation of HomeResources.
-    /// 
+    ///
     /// Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.
     /// </summary>
+    [System.Obsolete("HomeResources is deprecated. Please use the specific resource endpoints instead: FolderResources.cs for GET /folders calls, SightResources.cs for GET /sights, ReportResources.cs for GET /reports, TemplateResources.cs for GET /templates and SheetResources.cs for GET /sheets.")]
     public class HomeResourcesImpl : AbstractResources, HomeResources
     {
         /// <summary>
@@ -68,6 +69,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
+        [System.Obsolete("This method is deprecated. Please use the following alternatives instead: GET /folders to list folders, GET /folders/{folderId} to fetch folder children, GET /sights for dashboards, GET /reports for reports, GET /sheets for sheets, GET /templates for user-created templates, and GET /templates/public for public templates.")]
         public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes)
         {
             return GetFoldersPersonal(includes, null);
@@ -91,6 +93,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException">if any other error occurred during the operation</exception>
         /// <returns> the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null). </returns>
+        [System.Obsolete("This method is deprecated. Please use the following alternatives instead: GET /folders to list folders, GET /folders/{folderId} to fetch folder children, GET /sights for dashboards, GET /reports for reports, GET /sheets for sheets, GET /templates for user-created templates, and GET /templates/public for public templates.")]
         public virtual PersonalFolder GetFoldersPersonal(IEnumerable<HomeInclusion> includes, IEnumerable<HomeExclusion> excludes)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();

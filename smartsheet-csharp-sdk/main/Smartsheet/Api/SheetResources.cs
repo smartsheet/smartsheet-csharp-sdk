@@ -175,7 +175,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        [Obsolete("This method is deprecated. Please use CreateSheetFromTemplate instead.")]
+        [Obsolete("This method is deprecated. Please use POST /workspaces/{workspaceId}/sheets instead.")]
         Sheet CreateSheet(Sheet sheet);
 
         /// <summary>
@@ -406,6 +406,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated. Please use POST /workspaces/{workspaceId}/sheets/import instead.")]
         Sheet ImportCsvSheet(string file, string? sheetName = null, int? headerRowIndex = null, int? primaryColumnIndex = null);
 
         /// <summary>
