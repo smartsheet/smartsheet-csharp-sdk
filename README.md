@@ -4,7 +4,7 @@ C# SDK to simplify connecting to the [Smartsheet API](https://developers.smartsh
    
 ## System Requirements
 
-The SDK supports C# version 4.0 or later and targets .NET 6.0.
+The SDK supports C# version 4.0 or later and targets .NET 8.0.
 
 ## Installation
 
@@ -34,7 +34,7 @@ static void Sample()
         // .SetAccessToken("JKlMNOpQ12RStUVwxYZAbcde3F5g6hijklM789")
         .Build();
 
-    PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(null, null, null);
+    PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.SHEET_VERSION });
     Console.WriteLine("Found " + sheets.TotalCount + " sheets");
 
     long sheetId = (long) sheets.Data[0].Id;
@@ -50,10 +50,13 @@ A simple, but complete sample application project is here: https://github.com/sm
 ## Advanced Topics
 For details about logging, testing, how to use a passthrough option, and how to override HTTP client behavior, see [Advanced Topics](ADVANCED.md).
 
-## Documentation
+## Documentation and Changelog
 The full Smartsheet API documentation is here: https://developers.smartsheet.com/api/smartsheet/
 
-The generated SDK class documentation is here: [https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html](https://smartsheet.github.io/smartsheet-csharp-sdk/api/index.html).
+The changelog for the public API is here: https://developers.smartsheet.com/api/smartsheet/changelog
+
+** Please take a look at the above changelog as the API is subject to deprecations and other changes.
+
 
 ## Release Notes
 
