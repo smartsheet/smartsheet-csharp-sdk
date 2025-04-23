@@ -104,7 +104,8 @@ namespace Smartsheet.Api.Models
         private string role;
 
         /// <summary>
-        /// The number of sheets owned by the current user within the organization
+        /// The number of sheets owned by the current user within the organization.
+        /// Note: As of 5-12-2025, this behavior will be discontinued and sheetCount will hold a value of -1 only if the user's status is ACTIVE.
         /// </summary>
         private int? sheetCount;
 
@@ -261,7 +262,9 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Get the number of sheets owned by the current user within the organization
+        /// Get the number of sheets owned by the current user within the organization.
+        /// Note: As of 5-12-2025, this behavior will be discontinued and sheetCount will hold a value of -1 only if the user's status is ACTIVE.
+        /// For more information, see the <a href="https://developers.smartsheet.com/api/smartsheet/changelog#2025-04-22">API Changelog</a>.
         /// </summary>
         public int? SheetCount
         {
