@@ -28,7 +28,7 @@ namespace sdk_csharp_sample
             {
                 long sheetId = (long)sheets.Data[0].Id;                // Default first sheet
 
-                sheetId = 5192468317661060;                         // TODO: Uncomment if you wish to read a specific sheet
+                sheetId = 5192468317661060;                         
 
                 Console.WriteLine("Loading sheet id: " + sheetId);
 
