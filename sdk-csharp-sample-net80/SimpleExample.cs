@@ -2,7 +2,7 @@
 using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
-namespace sdk_csharp_sample
+namespace sdk_csharp_simpleExample
 {
     class SimpleExample
     {
@@ -10,6 +10,8 @@ namespace sdk_csharp_sample
         {
             // Initialize client without setting HttpClient explicitly
             // When no HttpClient is provided, SmartsheetBuilder automatically uses DefaultHttpClient
+            Console.WriteLine("Simple Example - Smartsheet API C# SDK");
+            Console.WriteLine("========================================="); 
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")       // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
                 // No HttpClient set - DefaultHttpClient will be used automatically

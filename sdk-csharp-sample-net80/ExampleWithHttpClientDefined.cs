@@ -11,6 +11,8 @@ namespace sdk_csharp_sample
         {
             // Initialize client with explicitly defined HttpClient
             // This example shows how to set a custom HttpClient implementation
+            Console.WriteLine("ExampleWithHttpClientDefined - Smartsheet API C# SDK");
+            Console.WriteLine("========================================="); 
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")       // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
                 .SetHttpClient(new RetryHttpClient())                          // Explicitly setting a custom HttpClient
