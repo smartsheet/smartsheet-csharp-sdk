@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.1.0] - 2025-06-30
+### Added
+- Added new asset-based sharing endpoints through `SharingResources` interface
+- Added `AssetType` enum to support multiple asset types (sheets, reports, sights, workspaces)
+- Added methods for listing, getting, creating, updating, and deleting shares for any asset type
+
+### Changed
+- Deprecated old asset-specific sharing methods in `ShareResources` with notices to use the new asset-based methods
+
 ## [3.0.0] - 2022-12-07
 ### Updated
 - Migrated SDK to new project

@@ -243,12 +243,21 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// Represents the AtomicReference for event resources.
-        /// 
+        ///
         /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
         /// as null, and can be set via corresponding setter, therefore effectively the assumed user can be updated in the
         /// SmartsheetImpl in thread safe manner.
         /// </summary>
         private EventResources events;
+
+        /// <summary>
+        /// Represents the AtomicReference for sharing resources.
+        ///
+        /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
+        /// as null, and can be set via corresponding setter, therefore effectively the assumed user can be updated in the
+        /// SmartsheetImpl in thread safe manner.
+        /// </summary>
+        private SharingResources sharing;
 
         /// <summary>
         /// static logger 
@@ -621,6 +630,19 @@ namespace Smartsheet.Api.Internal
             {
                 Interlocked.CompareExchange<EventResources>(ref events, new EventResourcesImpl(this), null);
                 return events;
+            }
+        }
+
+        /// <summary>
+        /// Returns the SharingResources instance that provides access to asset-based sharing resources.
+        /// </summary>
+        /// <returns> the sharing resources </returns>
+        public virtual SharingResources SharingResources
+        {
+            get
+            {
+                Interlocked.CompareExchange<SharingResources>(ref sharing, new SharingResourcesImpl(this), null);
+                return sharing;
             }
         }
 

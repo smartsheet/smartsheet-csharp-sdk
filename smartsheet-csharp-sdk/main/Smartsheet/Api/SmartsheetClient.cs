@@ -159,5 +159,11 @@ namespace Smartsheet.Api
         /// </summary>
         /// <returns> the event resources instance </returns>
         EventResources EventResources { get; }
+
+        /// <summary>
+        /// <para>Returns the SharingResources instance that provides access to asset-based sharing resources.</para>
+        /// </summary>
+        /// <returns> the sharing resources instance </returns>
+        SharingResources SharingResources { get; }
     }
 }
