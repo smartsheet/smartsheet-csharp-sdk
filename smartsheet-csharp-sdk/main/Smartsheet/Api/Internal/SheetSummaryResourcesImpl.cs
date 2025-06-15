@@ -82,6 +82,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="sheetId"> the sheet Id </param>
         /// <param name="include"> optional objects to include </param>
         /// <param name="exclude"> optional object to exclude </param>
+        /// <param name="paging"> pagination parameters </param>
         /// <returns> the paged list of sheet summary fields </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -287,7 +288,7 @@ namespace Smartsheet.Api.Internal
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    summaryField = this.smartsheet.JsonSerializer.deserializeResult<SummaryField>(response.Entity.GetContent()).Result;
+                    summaryField = this.Smartsheet.JsonSerializer.deserializeResult<SummaryField>(response.Entity.GetContent()).Result;
                     break;
                 default:
                     HandleError(response);

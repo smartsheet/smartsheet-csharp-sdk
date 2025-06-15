@@ -38,7 +38,7 @@ namespace Smartsheet.Api.Internal
         /// 
         /// Exceptions: - IllegalArgumentException : if any argument is null
         /// </summary>
-        /// <param name="smartsheet"> the Smartsheet </param>
+        /// <param name="Smartsheet"> the Smartsheet </param>
         public EventResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {
@@ -103,27 +103,27 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(this.smartsheet.BaseURI, "events" + QueryUtil.GenerateUrl(null, parameters)), HttpMethod.GET);
+                request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, "events" + QueryUtil.GenerateUrl(null, parameters)), HttpMethod.GET);
             }
             catch (Exception e)
             {
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             EventResult obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.DeserializeEventResult(response.Entity.GetContent());
+                    obj = this.Smartsheet.JsonSerializer.DeserializeEventResult(response.Entity.GetContent());
                     break;
                 default:
                     HandleError(response);
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return obj;
         }

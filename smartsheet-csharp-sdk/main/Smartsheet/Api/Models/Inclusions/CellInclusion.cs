@@ -16,6 +16,7 @@
 //    limitations under the License.
 //    %[license]
 
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
@@ -37,6 +38,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// The format attribute for a cell if the revision also included a format change
         /// </summary>
+        [CLSCompliant(false)]
         FORMAT,
 
         /// <summary>

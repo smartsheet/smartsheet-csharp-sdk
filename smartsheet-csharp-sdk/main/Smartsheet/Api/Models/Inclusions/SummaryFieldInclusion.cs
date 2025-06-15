@@ -16,6 +16,8 @@
 //    limitations under the License.
 //    %[license]
 
+using System;
+
 namespace Smartsheet.Api.Models
 {
     /// <summary>
@@ -26,6 +28,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         ///  includes format info for cells, rows, and summary fields
         /// </summary>
+        [CLSCompliant(false)]
         FORMAT,
         /// <summary>
         /// includes createdBy and modifiedBy attributes for rows and summary fields

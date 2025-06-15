@@ -18,14 +18,14 @@ namespace integration_test_sdk_net80
             Assert.IsNotNull(createdDiscussion.Id);
             long createdDiscussionId = createdDiscussion.Id.Value;
             string path = "../../../../integration-test-sdk-net80/TestFile.txt";
-            Discussion createdDiscussionWithFile = smartsheet.SheetResources.DiscussionResources.CreateDiscussionWithAttachment(sheetId, discussionToCreate, path, null);
+            Discussion createdDiscussionWithFile = smartsheet.SheetResources.DiscussionResources.CreateDiscussionWithAttachment(sheetId, discussionToCreate, path, "text/plain");
             Assert.IsTrue(createdDiscussionWithFile.Comments[0].Attachments[0].Name == "TestFile.txt");
 
 
             PaginatedResult<Discussion> discussions = smartsheet.SheetResources.DiscussionResources.ListDiscussions(sheetId, new DiscussionInclusion[] { DiscussionInclusion.COMMENTS, DiscussionInclusion.ATTACHMENTS });
             Assert.IsTrue(discussions.TotalCount == 2);
             Assert.IsTrue(discussions.Data.Count == 2);
-            var discussionIds = discussions.Data.Select(d => d.Id.Value).ToList();
+            var discussionIds = discussions.Data.Select(d => d.Id!.Value).ToList();
             var discussionDataFirst = discussions.Data[0].Id;
             var discussionDataSecond = discussions.Data[1].Id;
             Assert.IsNotNull(discussionDataFirst);
@@ -49,7 +49,7 @@ namespace integration_test_sdk_net80
             long rowId = rowsId.Value;
             Comment comment = new Comment.AddCommentBuilder("a comment!").Build();
             Discussion discussionToCreateOnRow = new Discussion.CreateDiscussionBuilder("discussion on row", comment).Build();
-            Discussion discussionCreatedOnRow = smartsheet.SheetResources.RowResources.DiscussionResources.CreateDiscussionWithAttachment(sheetId, rowId, discussionToCreateOnRow, path, null);
+            Discussion discussionCreatedOnRow = smartsheet.SheetResources.RowResources.DiscussionResources.CreateDiscussionWithAttachment(sheetId, rowId, discussionToCreateOnRow, path, "text/plain");
             PaginatedResult<Discussion> discussionsOnRow = smartsheet.SheetResources.RowResources.DiscussionResources
             .ListDiscussions(sheetId, rowId, new DiscussionInclusion[] { DiscussionInclusion.COMMENTS });
             Assert.IsTrue(discussionsOnRow.Data.Count == 1);

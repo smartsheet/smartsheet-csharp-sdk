@@ -9,7 +9,10 @@ namespace integration_test_sdk_net80
 
         public SmartsheetClient CreateClient()
         {
-            smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            smartsheet = new SmartsheetBuilder()
+                .SetMaxRetryTimeout(30000)
+                // .SetAccessToken("your_token_here") // Uncomment and replace with your actual token if not using environment variable
+                .Build();
             return smartsheet;
         }
 
@@ -31,9 +34,9 @@ namespace integration_test_sdk_net80
             Assert.IsNotNull(sheet.Id);
             var sheetColumns = sheet.Columns[1].Id;
             Assert.IsNotNull(sheetColumns);
-            Cell cellA = new Cell.AddCellBuilder(sheetColumns.Value, null).SetValue("A").SetStrict(false).Build();
-            Cell cellB = new Cell.AddCellBuilder(sheetColumns.Value, null).SetValue("B").SetStrict(false).Build();
-            Cell cellC = new Cell.AddCellBuilder(sheetColumns.Value, null).SetValue("C").SetStrict(false).Build();
+            Cell cellA = new Cell.AddCellBuilder(sheetColumns.Value, "A").SetValue("A").SetStrict(false).Build();
+            Cell cellB = new Cell.AddCellBuilder(sheetColumns.Value, "B").SetValue("B").SetStrict(false).Build();
+            Cell cellC = new Cell.AddCellBuilder(sheetColumns.Value, "C").SetValue("C").SetStrict(false).Build();
             Row rowA = new Row.AddRowBuilder(true, null, null, null, null).SetCells(new Cell[] { cellA }).Build();
             Row rowB = new Row.AddRowBuilder(true, null, null, null, null).SetCells(new Cell[] { cellB }).Build();
             Row rowC = new Row.AddRowBuilder(true, null, null, null, null).SetCells(new Cell[] { cellC }).Build();

@@ -51,11 +51,6 @@ namespace Smartsheet.Api.Models
         /// </summary>
         private IList<Attachment> attachments;
 
-        /// <summary>
-        /// Represents the columns for the sheet.
-        /// </summary>
-        [CLSCompliant(false)]
-        protected IList<TColumn> columns;
 
         /// <summary>
         /// Represents the creation timestamp for the sheet.
@@ -228,11 +223,7 @@ namespace Smartsheet.Api.Models
         /// Gets the columns for the sheet.
         /// </summary>
         /// <returns> the columns </returns>
-        public IList<TColumn> Columns
-        {
-            get { return columns; }
-            set { columns = value; }
-        }
+        public IList<TColumn> Columns { get; set; }
 
         /// <summary>
         /// Gets the date and time the sheet was created.
@@ -488,13 +479,13 @@ namespace Smartsheet.Api.Models
         /// <returns> the column by index </returns>
         public TColumn GetColumnByIndex(int index)
         {
-            if (columns == null)
+            if (Columns == null)
             {
                 return null;
             }
 
             TColumn result = null;
-            foreach (TColumn column in columns)
+            foreach (var column in Columns)
             {
                 if (column.Index == index)
                 {
@@ -518,7 +509,7 @@ namespace Smartsheet.Api.Models
             }
 
             TRow result = null;
-            foreach (TRow row in rows)
+            foreach (var row in rows)
             {
                 if (row.RowNumber == rowNumber)
                 {

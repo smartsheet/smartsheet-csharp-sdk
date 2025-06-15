@@ -38,25 +38,17 @@ namespace Smartsheet.Api.Internal
     /// </summary>
     public class UserResourcesImpl : AbstractResources, UserResources
     {
-        /// <summary>
-        /// Represents the SmartsheetImpl.
-        /// 
-        /// It will be initialized in the constructor and will not change afterwards.
-        /// </summary>
-        private SmartsheetImpl smartsheet;
-
         private UserSheetResources sheets;
 
         /// <summary>
         /// Constructor.
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null
         /// </summary>
-        /// <param name="smartsheet"> the Smartsheet </param>
+        /// <param name="Smartsheet"> the Smartsheet </param>
         public UserResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {
-            this.smartsheet = smartsheet;
             this.sheets = new UserSheetResourcesImpl(smartsheet);
         }
 
@@ -341,20 +333,20 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(this.smartsheet.BaseURI, "users/" + userId + "/alternateemails/" + altEmailId + "/makeprimary"), HttpMethod.POST);
+                request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, "users/" + userId + "/alternateemails/" + altEmailId + "/makeprimary"), HttpMethod.POST);
             }
             catch (Exception e)
             {
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             Object obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserializeResult<AlternateEmail>(
+                    obj = this.Smartsheet.JsonSerializer.deserializeResult<AlternateEmail>(
                         response.Entity.GetContent()).Result;
                     break;
                 default:
@@ -362,7 +354,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (AlternateEmail)obj;
         }
@@ -420,7 +412,7 @@ namespace Smartsheet.Api.Internal
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserializeResult<User>(
+                    obj = this.Smartsheet.JsonSerializer.deserializeResult<User>(
                         response.Entity.GetContent()).Result;
                     break;
                 default:

@@ -33,13 +33,13 @@ namespace Smartsheet.Api.Models
         /// <returns> the column by Id </returns>
         public Column GetColumnById(long columnId)
         {
-            if (columns == null)
+            if (Columns == null)
             {
                 return null;
             }
 
             Column result = null;
-            foreach (Column column in columns)
+            foreach (var column in Columns)
             {
                 if (column.Id == columnId)
                 {
@@ -117,7 +117,7 @@ namespace Smartsheet.Api.Models
             public Sheet Build()
             {
                 Sheet sheet = new Sheet();
-                sheet.columns = columns;
+                sheet.Columns = columns;
                 sheet.Name = name;
                 return sheet;
             }

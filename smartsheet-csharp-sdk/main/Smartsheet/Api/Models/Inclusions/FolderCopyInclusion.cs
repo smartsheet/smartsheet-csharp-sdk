@@ -71,10 +71,5 @@ namespace Smartsheet.Api.Models
         /// includes shares.
         /// </summary>
         SHARES,
-
-        /// <summary>
-        /// includeS everything (data, attachments, discussions, cellLinks, and forms).
-        /// </summary>
-        ALL,
     }
 }

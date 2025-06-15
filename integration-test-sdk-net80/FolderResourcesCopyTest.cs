@@ -28,7 +28,7 @@ namespace integration_test_sdk_net80
                 DestinationType = DestinationType.FOLDER,
                 NewName = "SubFolder1Copy"
             };
-            Folder newCopiedFolder = smartsheet.FolderResources.CopyFolder(createdFolderInFolderId, destination, new FolderCopyInclusion[] { FolderCopyInclusion.ALL }, new FolderRemapExclusion[] { FolderRemapExclusion.CELL_LINKS });
+            Folder newCopiedFolder = smartsheet.FolderResources.CopyFolder(createdFolderInFolderId, destination, new FolderCopyInclusion[] { FolderCopyInclusion.DATA }, new FolderRemapExclusion[] { FolderRemapExclusion.CELL_LINKS });
 
             Assert.IsTrue(newCopiedFolder.Name == "SubFolder1Copy");
             Assert.IsNotNull(newCopiedFolder.Id);

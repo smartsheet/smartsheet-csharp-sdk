@@ -149,6 +149,7 @@ namespace Smartsheet.Api.Internal.Json
         /// <summary>
         /// Private helper class to encapsulate widget content possibilies
         /// </summary>
+#pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
         private class WidgetContentSuperset
         {
             // Common
@@ -189,6 +190,7 @@ namespace Smartsheet.Api.Internal.Json
             // WebContentWidgetContent
             public string url;
         }
+#pragma warning restore CS0649
     }
 }
 

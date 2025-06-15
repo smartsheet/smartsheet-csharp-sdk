@@ -145,21 +145,20 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// Represents the SmartsheetImpl.
-        /// 
-        /// It will be initialized in the constructor and will not change afterwards.
+        /// Gets the SmartsheetClient.
         /// </summary>
-        protected SmartsheetImpl smartsheet;
+        /// <returns> the SmartsheetClient </returns>
+        public virtual SmartsheetImpl Smartsheet { get; protected set; }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="smartsheet"> the SmartsheetClient </param>
+        /// <param name="Smartsheet"> the SmartsheetClient </param>
         protected internal AbstractResources(SmartsheetImpl smartsheet)
         {
             Utils.ThrowIfNull(smartsheet);
 
-            this.smartsheet = smartsheet;
+            this.Smartsheet = smartsheet;
         }
 
         /// <summary>
@@ -196,14 +195,14 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.GET);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.GET);
             }
             catch (Exception e)
             {
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             Object obj = null;
 
@@ -212,7 +211,7 @@ namespace Smartsheet.Api.Internal
                 case HttpStatusCode.OK:
                     try
                     {
-                        obj = this.smartsheet.JsonSerializer.deserialize<T>(response.Entity.GetContent());
+                        obj = this.Smartsheet.JsonSerializer.deserialize<T>(response.Entity.GetContent());
                     }
                     catch (JsonSerializationException ex)
                     {
@@ -232,7 +231,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (T)obj;
         }
@@ -260,7 +259,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.POST);
             }
             catch (Exception e)
             {
@@ -269,13 +268,13 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             Object obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserialize<S>(
+                    obj = this.Smartsheet.JsonSerializer.deserialize<S>(
                         response.Entity.GetContent());
                     break;
                 default:
@@ -283,7 +282,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (S)obj;
         }
@@ -312,7 +311,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.POST);
             }
             catch (Exception e)
             {
@@ -321,13 +320,13 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             Object obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserializeResult<T>(
+                    obj = this.Smartsheet.JsonSerializer.deserializeResult<T>(
                         response.Entity.GetContent()).Result;
                     break;
                 default:
@@ -335,7 +334,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (T)obj;
         }
@@ -358,7 +357,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.POST);
             }
             catch (Exception e)
             {
@@ -366,13 +365,13 @@ namespace Smartsheet.Api.Internal
             }
 
             request.Entity = serializeToEntity<T>(@object);
-            HttpResponse response = this.smartsheet.HttpClient.Request(request, objectType, file, fileType);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request, objectType, file, fileType);
 
             Object obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserializeResult<T>(
+                    obj = this.Smartsheet.JsonSerializer.deserializeResult<T>(
                         response.Entity.GetContent()).Result;
                     break;
                 default:
@@ -380,7 +379,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (T)obj;
         }
@@ -410,7 +409,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.PUT);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.PUT);
             }
             catch (Exception e)
             {
@@ -419,21 +418,21 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             Object obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    //obj = this.smartsheet.JsonSerializer.DeserializeResult(objectClass, response.Entity.content).RequestResult;
-                    obj = this.smartsheet.JsonSerializer.deserializeResult<T>(response.Entity.GetContent()).Result;
+                    //obj = this.Smartsheet.JsonSerializer.DeserializeResult(objectClass, response.Entity.content).RequestResult;
+                    obj = this.Smartsheet.JsonSerializer.deserializeResult<T>(response.Entity.GetContent()).Result;
                     break;
                 default:
                     HandleError(response);
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (T)obj;
         }
@@ -460,28 +459,28 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.GET);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.GET);
             }
             catch (Exception e)
             {
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             PaginatedResult<T> obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    //obj = this.smartsheet.JsonSerializer.DeserializeList(objectClass, response.Entity.content);
-                    obj = this.smartsheet.JsonSerializer.DeserializeDataWrapper<T>(response.Entity.GetContent());
+                    //obj = this.Smartsheet.JsonSerializer.DeserializeList(objectClass, response.Entity.content);
+                    obj = this.Smartsheet.JsonSerializer.DeserializeDataWrapper<T>(response.Entity.GetContent());
                     break;
                 default:
                     HandleError(response);
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return obj;
         }
@@ -509,28 +508,28 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.GET);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.GET);
             }
             catch (Exception e)
             {
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             IList<T> obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    //obj = this.smartsheet.JsonSerializer.DeserializeList(objectClass, response.Entity.content);
-                    obj = this.smartsheet.JsonSerializer.deserializeList<T>(response.Entity.GetContent());
+                    //obj = this.Smartsheet.JsonSerializer.DeserializeList(objectClass, response.Entity.content);
+                    obj = this.Smartsheet.JsonSerializer.deserializeList<T>(response.Entity.GetContent());
                     break;
                 default:
                     HandleError(response);
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return obj;
         }
@@ -557,25 +556,25 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.DELETE);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.DELETE);
             }
             catch (Exception e)
             {
                 throw new SmartsheetException(e);
             }
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
             Object obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserializeResult<T>(response.Entity.GetContent()).Result;
+                    obj = this.Smartsheet.JsonSerializer.deserializeResult<T>(response.Entity.GetContent()).Result;
                     break;
                 default:
                     HandleError(response);
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (T)obj;
         }
@@ -603,25 +602,25 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.DELETE);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.DELETE);
             }
             catch (Exception e)
             {
                 throw new SmartsheetException(e);
             }
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    this.smartsheet.JsonSerializer.deserializeResult<T>(response.Entity.GetContent());
+                    this.Smartsheet.JsonSerializer.deserializeResult<T>(response.Entity.GetContent());
                     break;
                 default:
                     HandleError(response);
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
         }
 
         /// <summary>
@@ -653,7 +652,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.POST);
             }
             catch (Exception e)
             {
@@ -662,20 +661,20 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPost);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             IList<S> obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserializeListResult<S>(response.Entity.GetContent()).Result;
+                    obj = this.Smartsheet.JsonSerializer.deserializeListResult<S>(response.Entity.GetContent()).Result;
                     break;
                 default:
                     HandleError(response);
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return obj;
         }
@@ -704,7 +703,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.PUT);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.PUT);
             }
             catch (Exception e)
             {
@@ -713,13 +712,13 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPut);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             IList<S> obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = this.smartsheet.JsonSerializer.deserializeListResult<S>(
+                    obj = this.Smartsheet.JsonSerializer.deserializeListResult<S>(
                         response.Entity.GetContent()).Result;
                     break;
                 default:
@@ -727,7 +726,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return obj;
         }
@@ -756,7 +755,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.POST);
             }
             catch (Exception e)
             {
@@ -773,13 +772,13 @@ namespace Smartsheet.Api.Internal
             entity.ContentLength = fi.Length;
             request.Entity = entity;
 
-            HttpResponse response = smartsheet.HttpClient.Request(request);
+            HttpResponse response = Smartsheet.HttpClient.Request(request);
 
             Object obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = smartsheet.JsonSerializer.deserializeResult<T>(
+                    obj = Smartsheet.JsonSerializer.deserializeResult<T>(
                         response.Entity.GetContent()).Result;
                     break;
                 default:
@@ -787,7 +786,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return (T)obj;
         }
@@ -808,18 +807,18 @@ namespace Smartsheet.Api.Internal
 
             // Set authorization header 
             request.Headers = new Dictionary<string, string>();
-            request.Headers["Authorization"] = "Bearer " + smartsheet.AccessToken;
+            request.Headers["Authorization"] = "Bearer " + Smartsheet.AccessToken;
 
             // Set assumed user
-            if (smartsheet.AssumedUser != null)
+            if (Smartsheet.AssumedUser != null)
             {
-                request.Headers["Assume-User"] = Uri.EscapeDataString(smartsheet.AssumedUser);
+                request.Headers["Assume-User"] = Uri.EscapeDataString(Smartsheet.AssumedUser);
             }
 
             // Set change agent
-            if (smartsheet.ChangeAgent != null)
+            if (Smartsheet.ChangeAgent != null)
             {
-                request.Headers["Smartsheet-Change-Agent"] = Uri.EscapeDataString(smartsheet.ChangeAgent);
+                request.Headers["Smartsheet-Change-Agent"] = Uri.EscapeDataString(Smartsheet.ChangeAgent);
             }
 
             return request;
@@ -839,7 +838,7 @@ namespace Smartsheet.Api.Internal
             Api.Models.Error error;
             try
             {
-                error = this.smartsheet.JsonSerializer.deserialize<Api.Models.Error>(
+                error = this.Smartsheet.JsonSerializer.deserialize<Api.Models.Error>(
                     response.Entity.GetContent());
             }
             catch (JsonSerializationException ex)
@@ -872,21 +871,6 @@ namespace Smartsheet.Api.Internal
             }
         }
 
-        /// <summary>
-        /// Gets the SmartsheetClient.
-        /// </summary>
-        /// <returns> the SmartsheetClient </returns>
-        public virtual SmartsheetImpl Smartsheet
-        {
-            get
-            {
-                return smartsheet;
-            }
-            set
-            {
-                this.smartsheet = value;
-            }
-        }
 
         /// <summary>
         /// Serializes an object into an entity.
@@ -900,7 +884,7 @@ namespace Smartsheet.Api.Internal
             entity.ContentType = "application/json";
             using (StreamWriter writer = new StreamWriter(new MemoryStream()))
             {
-                this.smartsheet.JsonSerializer.serialize<T>(objectToPost, writer);
+                this.Smartsheet.JsonSerializer.serialize<T>(objectToPost, writer);
                 writer.Flush();
                 writer.BaseStream.Position = 0;
 

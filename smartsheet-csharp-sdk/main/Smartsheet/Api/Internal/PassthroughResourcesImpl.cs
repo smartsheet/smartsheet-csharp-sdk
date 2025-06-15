@@ -141,7 +141,7 @@ namespace Smartsheet.Api.Internal
             HttpRequest request = null;
             try
             {
-                request = CreateHttpRequest(new Uri(this.smartsheet.BaseURI, endpoint), method);
+                request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, endpoint), method);
             }
             catch (Exception e)
             {
@@ -158,7 +158,7 @@ namespace Smartsheet.Api.Internal
                 request.Entity = entity;
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
 
             string res = null;
             switch (response.StatusCode)
@@ -175,7 +175,7 @@ namespace Smartsheet.Api.Internal
                     break;
             }
 
-            smartsheet.HttpClient.ReleaseConnection();
+            Smartsheet.HttpClient.ReleaseConnection();
 
             return res;
         }
