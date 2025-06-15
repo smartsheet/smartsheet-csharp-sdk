@@ -201,6 +201,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="columnIds"> used to specify the optional objects to include. </param>
         /// <param name="pageSize"> used to specify the optional objects to include. </param>
         /// <param name="page"> used to specify the optional objects to include. </param>
+        /// <param name="rowsModifiedSince"> only return rows modified on or after the specified date </param>
         /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
         /// <param name="level"> compatibility level </param>
         /// <returns> the sheet resource (note that if there is no such resource, this method will throw 

@@ -136,7 +136,7 @@ namespace Smartsheet.Api.Internal.Http
                 task.Wait(); 
                 response = task.Result;
             } catch (AggregateException ex) {
-                throw new SmartsheetException(ex.InnerException.Message);
+                throw new SmartsheetException(ex.InnerException?.Message ?? ex.Message);
             }
             return response;
         }
@@ -188,9 +188,7 @@ namespace Smartsheet.Api.Internal.Http
 
             // Make the HTTP request
             timer.Start();
-            Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
-            restResponseAsTask.Wait();
-            restResponse = restResponseAsTask.Result;
+            restResponse = await this.httpClient.ExecuteAsync(restRequest);
             timer.Stop();
 
             LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -241,7 +239,7 @@ namespace Smartsheet.Api.Internal.Http
             task.Wait(); 
             response = task.Result;
             } catch (AggregateException ex) {
-                throw new SmartsheetException(ex.InnerException.Message);
+                throw new SmartsheetException(ex.InnerException?.Message ?? ex.Message);
             }
 
             return response;
@@ -304,9 +302,7 @@ namespace Smartsheet.Api.Internal.Http
 
                 // Make the HTTP request
                 timer.Start();
-                Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
-                restResponseAsTask.Wait();
-                restResponse = restResponseAsTask.Result;
+                restResponse = await this.httpClient.ExecuteAsync(restRequest);
                 timer.Stop();
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);

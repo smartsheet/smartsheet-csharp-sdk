@@ -26,7 +26,7 @@ namespace sdk_csharp_simpleExample
 
             if (sheets.TotalCount > 0)
             {
-                long sheetId = (long)sheets.Data[0].Id;                // Default first sheet
+                long sheetId = sheets.Data[0].Id!.Value;                // Default first sheet
 
                 sheetId = 5192468317661060;                        
 

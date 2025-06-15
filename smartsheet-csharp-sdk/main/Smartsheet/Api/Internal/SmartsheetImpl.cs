@@ -91,12 +91,14 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// Represents the AtomicReference to HomeResources.
-        /// 
+        ///
         /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
         /// as null, and will be initialized to non-null the first time it is accessed via corresponding getter, therefore
         /// effectively the underlying value is lazily created in a thread safe manner.
         /// </summary>
+#pragma warning disable CS0618 // Type or member is obsolete
         private HomeResources home;
+#pragma warning restore CS0618
 
         /// <summary>
         /// Represents the AtomicReference to WorkspaceResources.
@@ -394,6 +396,7 @@ namespace Smartsheet.Api.Internal
         /// Returns the HomeResources instance that provides access to home resources.
         /// </summary>
         /// <returns> the home resources </returns>
+#pragma warning disable CS0618 // Type or member is obsolete
         public virtual HomeResources HomeResources
         {
             get
@@ -402,6 +405,7 @@ namespace Smartsheet.Api.Internal
                 return home;
             }
         }
+#pragma warning restore CS0618
 
         /// <summary>
         /// Returns the WorkspaceResources instance that provides access to workspace resources.

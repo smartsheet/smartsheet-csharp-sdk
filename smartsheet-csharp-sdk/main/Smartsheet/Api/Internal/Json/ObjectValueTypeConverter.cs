@@ -156,6 +156,7 @@ namespace Smartsheet.Api.Internal.Json
         /// <summary>
         /// Private helper class to encapsulate object value attribute possibilities
         /// </summary>
+#pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
         private class ObjectValueAttributeSuperset
         {
             public string objectType;
@@ -186,6 +187,7 @@ namespace Smartsheet.Api.Internal.Json
             // Various other types
             public object value;
         }
+#pragma warning restore CS0649
     }
 }
 

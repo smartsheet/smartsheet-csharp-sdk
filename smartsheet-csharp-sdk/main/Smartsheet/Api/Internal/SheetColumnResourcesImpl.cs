@@ -72,7 +72,7 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
             }
-            if (level.HasValue && level.Value != null)
+            if (level.HasValue)
             {
                 parameters.Add("level", level.Value.ToString());
             }

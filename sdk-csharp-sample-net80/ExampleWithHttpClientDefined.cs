@@ -12,14 +12,14 @@ namespace sdk_csharp_sample
             // Initialize client with explicitly defined HttpClient
             // This example shows how to set a custom HttpClient implementation
             Console.WriteLine("ExampleWithHttpClientDefined - Smartsheet API C# SDK");
-            Console.WriteLine("========================================="); 
+            Console.WriteLine("=========================================");
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")       // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
                 .SetHttpClient(new RetryHttpClient())                          // Explicitly setting a custom HttpClient
                 .Build();
 
             // For this example, we'll use the client with the custom RetryHttpClient
-            
+
             // List all sheets
             PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.SHEET_VERSION });
             Console.WriteLine("Found " + sheets.TotalCount + " sheets");
@@ -28,7 +28,7 @@ namespace sdk_csharp_sample
             {
                 long sheetId = (long)sheets.Data[0].Id;                // Default first sheet
 
-                sheetId = 5192468317661060;                         
+                sheetId = 5192468317661060;
 
                 Console.WriteLine("Loading sheet id: " + sheetId);
 
