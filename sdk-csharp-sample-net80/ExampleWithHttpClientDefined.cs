@@ -3,11 +3,11 @@ using Smartsheet.Api;
 using Smartsheet.Api.Models;
 using Smartsheet.Api.Internal.Http;
 
-namespace sdk_csharp_sample
+namespace sdk_csharp_HttpClientExample
 {
     class ExampleWithHttpClientDefined
     {
-        public static void Main(string[] args)
+        public static void RunExample(string[] args)
         {
             // Initialize client with explicitly defined HttpClient
             // This example shows how to set a custom HttpClient implementation
@@ -15,7 +15,7 @@ namespace sdk_csharp_sample
             Console.WriteLine("========================================="); 
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")       // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
-                .SetHttpClient(new RetryHttpClient())                          // Explicitly setting a custom HttpClient
+                .SetHttpClient(new sdk_csharp_sample.RetryHttpClient())                          // Explicitly setting a custom HttpClient
                 .Build();
 
             // For this example, we'll use the client with the custom RetryHttpClient

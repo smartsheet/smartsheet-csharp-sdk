@@ -6,7 +6,7 @@ namespace sdk_csharp_simpleExample
 {
     class SimpleExample
     {
-        public static void Main(string[] args)
+        public static void RunExample(string[] args)
         {
             // Initialize client without setting HttpClient explicitly
             // When no HttpClient is provided, SmartsheetBuilder automatically uses DefaultHttpClient
