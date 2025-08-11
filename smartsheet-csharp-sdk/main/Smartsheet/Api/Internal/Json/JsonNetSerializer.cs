@@ -284,6 +284,36 @@ namespace Smartsheet.Api.Internal.Json
         }
 
         /// <summary>
+        /// De-serialize to a TokenPaginatedResult (holds token pagination info) from JSON
+        /// </summary>
+        /// <returns>TokenPaginatedResult containing data and pagination token</returns>
+        /// <param name="inputStream"> the input stream from which the JSON will be read </param>
+        /// <exception cref="ArgumentException"> if any argument is null </exception>
+        /// <exception cref="JsonSerializationException">if there is any other error occurred during the operation </exception>
+        public TokenPaginatedResult<T> DeserializeTokenDataWrapper<T>(StreamReader inputStream)
+        {
+            Utils.ThrowIfNull(inputStream);
+
+            TokenPaginatedResult<T> rw = null;
+
+            try
+            {
+                // Read the Json input stream into a TokenPaginatedResult.
+                rw = serializer.Deserialize<TokenPaginatedResult<T>>(new Newtonsoft.Json.JsonTextReader(inputStream));
+            }
+            catch (Newtonsoft.Json.JsonException ex)
+            {
+                throw new JsonSerializationException(ex);
+            }
+            catch (IOException ex)
+            {
+                throw new JsonSerializationException(ex);
+            }
+
+            return rw;
+        }
+
+        /// <summary>
         /// De-serialize to a map from JSON.
         /// </summary>
         /// <param name="inputStream">
