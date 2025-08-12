@@ -13,7 +13,7 @@ namespace sdk_csharp_simpleExample
             Console.WriteLine("Simple Example - Smartsheet API C# SDK");
             Console.WriteLine("========================================="); 
             SmartsheetClient smartsheet = new SmartsheetBuilder()
-                .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")
+                .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "your_token_here")
                 // No HttpClient set - DefaultHttpClient will be used automatically
                 .Build();
             

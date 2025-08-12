@@ -14,7 +14,7 @@ namespace sdk_csharp_sample
             Console.WriteLine("ExampleWithHttpClientDefined - Smartsheet API C# SDK");
             Console.WriteLine("========================================="); 
             SmartsheetClient smartsheet = new SmartsheetBuilder()
-                .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")
+                .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "your_token_here")
                 .SetHttpClient(new RetryHttpClient())                          // Explicitly setting a custom HttpClient
                 .Build();
 
