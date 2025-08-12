@@ -6,7 +6,7 @@ namespace sdk_csharp_tokenPaginationExample
 {
     class TokenPaginationExample
     {
-        public static void RunExample(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Token Pagination Example - Smartsheet API C# SDK");
             Console.WriteLine("=================================================");

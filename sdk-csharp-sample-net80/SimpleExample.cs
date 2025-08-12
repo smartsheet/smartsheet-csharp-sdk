@@ -6,14 +6,14 @@ namespace sdk_csharp_simpleExample
 {
     class SimpleExample
     {
-        public static void RunExample(string[] args)
+        public static void Main(string[] args)
         {
             // Initialize client without setting HttpClient explicitly
             // When no HttpClient is provided, SmartsheetBuilder automatically uses DefaultHttpClient
             Console.WriteLine("Simple Example - Smartsheet API C# SDK");
             Console.WriteLine("========================================="); 
             SmartsheetClient smartsheet = new SmartsheetBuilder()
-                .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")       // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
+                .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")
                 // No HttpClient set - DefaultHttpClient will be used automatically
                 .Build();
             
@@ -27,8 +27,6 @@ namespace sdk_csharp_simpleExample
             if (sheets.TotalCount > 0)
             {
                 long sheetId = (long)sheets.Data[0].Id;                // Default first sheet
-
-                sheetId = 5192468317661060;                        
 
                 Console.WriteLine("Loading sheet id: " + sheetId);
 
@@ -60,4 +58,3 @@ namespace sdk_csharp_simpleExample
         }
     }
 }
-

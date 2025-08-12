@@ -6,6 +6,7 @@
     <RootNamespace>sdk_csharp_sample_net80</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>sdk_csharp_simpleExample.SimpleExample</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

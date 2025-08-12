@@ -14,34 +14,44 @@ This project contains multiple examples demonstrating how to use the Smartsheet 
    dotnet build
    ```
 
-3. Run the examples:
+3. Run a specific example (see instructions below for each file):
    ```bash
+   # Run the default program (currently set to SimpleExample)
    dotnet run
+   
+   # Or run a specific .cs file by setting it as the startup file
+   dotnet run --project sdk-csharp-sample-net80.csproj
    ```
+
+## How to Run Individual Examples
+
+Each .cs file contains a separate example with its own Main method. To run a specific example:
+
+### Method 1: Modify the project file
+Edit `sdk-csharp-sample-net80.csproj` and change the `<StartupObject>` to point to the desired class:
+
+```xml
+<PropertyGroup>
+  <StartupObject>sdk_csharp_simpleExample.SimpleExample</StartupObject>
+</PropertyGroup>
+```
+
 
 ## Available Examples
 
-### 1. Simple Example
-Basic demonstration of listing sheets and reading row data using traditional pagination.
+### Running Each Example:
 
-### 2. Token Pagination Example (NEW!)
-Comprehensive demonstration of the new token-based pagination features for workspace operations:
-- Basic token pagination with `maxItems` parameter
-- Multi-page navigation using `lastKey` tokens
-- Comparison between traditional offset-based and new token-based pagination
-- Error handling for invalid parameters
+**To run SimpleExample.cs:**
+- Set `<StartupObject>sdk_csharp_simpleExample.SimpleExample</StartupObject>` in project file
+- Or run: `dotnet run` (if it's the default)
 
-### 3. HTTP Client Example
-Shows how to use a custom HTTP client implementation with the SDK.
+**To run ExampleWithHttpClientDefined.cs:**
+- Set `<StartupObject>sdk_csharp_sample.ExampleWithHttpClientDefined</StartupObject>` in project file
+- Then run: `dotnet run`
 
-## Token Pagination Features
-
-The new token pagination system provides several advantages:
-
-- **Efficient paging**: Uses `lastKey` tokens instead of offset calculations
-- **Consistent results**: Prevents issues with data changes during pagination
-- **Flexible parameters**: Support for `maxItems`, `paginationType`, and `lastKey`
-- **Backward compatibility**: Traditional pagination still works alongside token pagination
+**To run TokenPaginationExample.cs:**
+- Set `<StartupObject>sdk_csharp_tokenPaginationExample.TokenPaginationExample</StartupObject>` in project file  
+- Then run: `dotnet run`
 
 ### Example Usage
 
@@ -59,25 +69,3 @@ if (result.LastKey != null)
     TokenPaginatedResult<Workspace> nextPage = smartsheet.WorkspaceResources.ListWorkspaces(nextPageParams);
 }
 ```
-
-## Screenshots and Sample Output
-
-When you run the Token Pagination Example (option 2), you'll see output like:
-
-```
-1. Demonstrating Token-Based Pagination for Workspaces
-======================================================
-Fetching workspaces with token pagination (maxItems=10)...
-
-✓ Retrieved 5 workspaces
-✓ Last Key: abc123def456 (or null if last page)
-✓ Pagination Type: token-based
-
-Workspace Details:
-------------------
-  • ID: 12345, Name: 'Project Alpha'
-  • ID: 12346, Name: 'Marketing Campaign'
-  ...
-```
-
-This provides a practical demonstration of the new pagination features that can be referenced when troubleshooting user implementations.
