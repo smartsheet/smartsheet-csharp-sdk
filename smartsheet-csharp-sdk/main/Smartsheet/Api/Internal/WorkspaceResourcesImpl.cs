@@ -91,6 +91,29 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// <para>List all Workspaces using token-based pagination.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces</para>
+        /// <remarks>This operation supports token-based pagination of results.</remarks>
+        /// </summary>
+        /// <param name="tokenPaging">Token-based pagination parameters</param>
+        /// <returns> the list of Workspaces with pagination token (note that an empty list will be returned if there are none) </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual TokenPaginatedResult<Workspace> ListWorkspaces(TokenPaginationParameters? tokenPaging)
+        {
+            StringBuilder path = new StringBuilder("workspaces");
+            if (tokenPaging != null)
+            {
+                path.Append(tokenPaging.ToQueryString());
+            }
+            return this.ListResourcesWithTokenWrapper<Workspace>(path.ToString());
+        }
+
+        /// <summary>
         /// <para>Gets the specified Workspace (and lists its contents).</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceid}</para>
         /// <remarks><para>By default, this operation only returns the top-level items in the Workspace. To load all of the contents, 
