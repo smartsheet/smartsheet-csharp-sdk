@@ -214,7 +214,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual RequestResult<object> UpgradeUserSeatType(long userId, long planId, string seatType)
+        public virtual RequestResult<object> UpgradeUserForPlan(long userId, long planId, string seatType)
         {
             if (string.IsNullOrEmpty(seatType))
                 throw new System.InvalidOperationException("seatType cannot be null or empty.");
@@ -237,7 +237,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">User not found.</exception>
         /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual RequestResult<object> DowngradeUserSeatType(long userId, long planId, string seatType)
+        public virtual RequestResult<object> DowngradeUserForPlan(long userId, long planId, string seatType)
         {
             if (string.IsNullOrEmpty(seatType))
                 throw new System.InvalidOperationException("seatType cannot be null or empty.");
