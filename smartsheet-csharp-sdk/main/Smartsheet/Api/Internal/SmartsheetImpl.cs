@@ -90,6 +90,17 @@ namespace Smartsheet.Api.Internal
         private string changeAgent;
 
         /// <summary>
+        /// Represents the AtomicReference for the smartsheet integration source.
+        /// 
+        /// Format: $TYPE,$ORG_NAME,$INTEGRATOR_NAME
+        /// (NB: Comma is used as a delimiter and is required if value is missing)
+        /// $INTEGRATION-TYPE - Required, the type of the integrator (e.g. AI, SCRIPT, APPLICATION)
+        /// $SMAR-ORGANIZATION-NAME - Optional (but COMMA is required), organization name (e.g. Microsoft, Google, OpenAI, etc.)
+        /// $INTEGRATOR-NAME - Required, the name of the integrator (e.g. Claude, Copilot, ChatGPT, DeepSeek, etc.)
+        /// </summary>
+        private string smartsheetIntegrationSource;
+
+        /// <summary>
         /// Represents the AtomicReference to HomeResources.
         /// 
         /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
@@ -365,6 +376,16 @@ namespace Smartsheet.Api.Internal
         {
             get { return changeAgent; }
             set { this.changeAgent = value; }
+        }
+        
+        /// <summary>
+        /// Return the smartsheet integration source
+        /// </summary>
+        /// <returns> the smartsheet integration source </returns>
+        public string SmartsheetIntegrationSource
+        {
+            get { return smartsheetIntegrationSource; }
+            set { this.smartsheetIntegrationSource = value; }
         }
 
         /// <summary>

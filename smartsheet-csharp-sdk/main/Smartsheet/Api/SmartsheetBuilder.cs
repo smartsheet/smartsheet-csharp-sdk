@@ -87,6 +87,13 @@ namespace Smartsheet.Api
         private string changeAgent;
 
         /// <summary>
+        /// <para>Represents the Smartsheet integration source.</para>
+        /// 
+        /// <para>It can be set using corresponding setter.</para>
+        /// </summary>
+        private string smartsheetIntegrationSource;
+
+        /// <summary>
         /// Optional setting to re-enable the JSON serializers string to C# DateTime conversion
         /// </summary>
         private bool dateTimeFixOptOut = false;
@@ -184,6 +191,17 @@ namespace Smartsheet.Api
         public SmartsheetBuilder SetChangeAgent(string changeAgent)
         {
             this.changeAgent = changeAgent;
+            return this;
+        }
+
+        /// <summary>
+        /// <para>Set the Smartsheet integration source.</para>
+        /// </summary>
+        /// <param name="smartsheetIntegrationSource"> the smartsheet integration source </param>
+        /// <returns> the SmartsheetClient builder </returns>
+        public SmartsheetBuilder SetSmartsheetIntegrationSource(string SmartsheetIntegrationSource)
+        {
+            this.smartsheetIntegrationSource = smartsheetIntegrationSource;
             return this;
         }
 
@@ -299,6 +317,11 @@ namespace Smartsheet.Api
             if (changeAgent != null)
             {
                 smartsheet.ChangeAgent = changeAgent;
+            }
+
+            if (smartsheetIntegrationSource != null)
+            {
+                smartsheet.SmartsheetIntegrationSource = smartsheetIntegrationSource;
             }
 
             if (assumedUser != null)
