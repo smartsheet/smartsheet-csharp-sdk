@@ -14,7 +14,7 @@ namespace sdk_csharp_sample
             Console.WriteLine("ExampleWithHttpClientDefined - Smartsheet API C# SDK");
             Console.WriteLine("========================================="); 
             SmartsheetClient smartsheet = new SmartsheetBuilder()
-                .SetAccessToken("7qJcdNyfy2McIMHeeumgzClqHCxhunFJYt4Qz")       // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
+                .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "your_token_here")
                 .SetHttpClient(new RetryHttpClient())                          // Explicitly setting a custom HttpClient
                 .Build();
 
@@ -27,9 +27,7 @@ namespace sdk_csharp_sample
             if (sheets.TotalCount > 0)
             {
                 long sheetId = (long)sheets.Data[0].Id;                // Default first sheet
-
-                sheetId = 5192468317661060;                         
-
+                
                 Console.WriteLine("Loading sheet id: " + sheetId);
 
                 // Load the entire sheet

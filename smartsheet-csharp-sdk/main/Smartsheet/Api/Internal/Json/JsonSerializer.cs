@@ -116,6 +116,23 @@ namespace Smartsheet.Api.Internal.Json
         PaginatedResult<T> DeserializeDataWrapper<T>(StreamReader inputStream);
 
         /// <summary>
+        /// De-serialize an object to TokenPaginatedResult from JSON.
+        /// 
+        /// Parameters: - objectClass : the class of the object to de-serialize - inputStream : the input stream from which
+        /// the JSON will be read
+        /// 
+        /// Returns: the de-serialized object
+        /// 
+        /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+        /// other error occurred during the operation
+        /// </summary>
+        /// <param name="inputStream"> the input stream </param>
+        /// <returns> the TokenPaginatedResult </returns>
+        /// <exception cref="Newtonsoft.Json.JsonException"> the Json parse exception </exception>
+        /// <exception cref="IOException"> Signals that an I/O exception has occurred. </exception>
+        TokenPaginatedResult<T> DeserializeTokenDataWrapper<T>(StreamReader inputStream);
+
+        /// <summary>
         /// De-serialize an object list from JSON to a Map.
         /// </summary>
         /// <param name="inputStream"> the input stream </param>
