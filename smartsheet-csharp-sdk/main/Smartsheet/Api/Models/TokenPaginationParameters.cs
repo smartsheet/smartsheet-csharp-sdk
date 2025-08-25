@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Builds optional query string parameters for token-based pagination.
+    /// Base class for token-based pagination parameters with common properties.
     /// </summary>
     public class TokenPaginationParameters
     {
@@ -19,21 +19,14 @@ namespace Smartsheet.Api.Models
         private int? maxItems;
 
         /// <summary>
-        /// the pagination type
-        /// </summary>
-        private string paginationType;
-
-        /// <summary>
-        /// Builds optional query string parameters for token-based pagination.
+        /// Base constructor for token-based pagination parameters.
         /// </summary>
         /// <param name="lastKey">The token to continue pagination from. Null for first page.</param>
         /// <param name="maxItems">The maximum number of items to return per page.</param>
-        /// <param name="paginationType">The pagination type. Defaults to "token".</param>
-        public TokenPaginationParameters(string? lastKey, int? maxItems, string paginationType = "token")
+        public TokenPaginationParameters(string? lastKey, int? maxItems)
         {
             this.lastKey = lastKey;
             this.maxItems = maxItems;
-            this.paginationType = paginationType;
         }
 
         /// <summary>
@@ -54,14 +47,6 @@ namespace Smartsheet.Api.Models
             set { maxItems = value; }
         }
 
-        /// <summary>
-        /// The pagination type.
-        /// </summary>
-        public string PaginationType
-        {
-            get { return paginationType; }
-            set { paginationType = value; }
-        }
 
         /// <summary>
         /// Returns a formatted string of query string parameters.
@@ -75,9 +60,10 @@ namespace Smartsheet.Api.Models
 
         /// <summary>
         /// Returns a dictionary of query string parameters.
+        /// Derived classes should override this method to add their specific parameters.
         /// </summary>
         /// <returns></returns>
-        public IDictionary<string, string> toDictionary()
+        public virtual IDictionary<string, string> toDictionary()
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -89,11 +75,6 @@ namespace Smartsheet.Api.Models
             if (maxItems.HasValue)
             {
                 parameters.Add("maxItems", maxItems.ToString());
-            }
-
-            if (!string.IsNullOrEmpty(paginationType))
-            {
-                parameters.Add("paginationType", paginationType);
             }
 
             return parameters;

@@ -8,31 +8,28 @@ namespace mock_api_test_sdk_net80
     public class TokenPaginationParametersTest
     {
         [TestMethod]
-        public void TestTokenPaginationParameters_DefaultPaginationType()
+        public void TestTokenPaginationParameters_BaseClass()
         {
             TokenPaginationParameters parameters = new TokenPaginationParameters(null, 10);
-            
-            Assert.AreEqual("token", parameters.PaginationType);
-            
+
+            Assert.IsNull(parameters.LastKey);
+            Assert.AreEqual(10, parameters.MaxItems);
+
             IDictionary<string, string> dict = parameters.toDictionary();
-            Assert.IsTrue(dict.ContainsKey("paginationType"));
-            Assert.AreEqual("token", dict["paginationType"]);
             Assert.IsTrue(dict.ContainsKey("maxItems"));
             Assert.AreEqual("10", dict["maxItems"]);
+            Assert.IsFalse(dict.ContainsKey("lastKey"));
         }
 
         [TestMethod]
-        public void TestTokenPaginationParameters_ExplicitPaginationType()
+        public void TestTokenPaginationParameters_WithLastKey()
         {
-            TokenPaginationParameters parameters = new TokenPaginationParameters("abc123", 20, "token");
-            
-            Assert.AreEqual("token", parameters.PaginationType);
+            TokenPaginationParameters parameters = new TokenPaginationParameters("abc123", 20);
+
             Assert.AreEqual("abc123", parameters.LastKey);
             Assert.AreEqual(20, parameters.MaxItems);
-            
+
             IDictionary<string, string> dict = parameters.toDictionary();
-            Assert.IsTrue(dict.ContainsKey("paginationType"));
-            Assert.AreEqual("token", dict["paginationType"]);
             Assert.IsTrue(dict.ContainsKey("lastKey"));
             Assert.AreEqual("abc123", dict["lastKey"]);
             Assert.IsTrue(dict.ContainsKey("maxItems"));
@@ -43,10 +40,9 @@ namespace mock_api_test_sdk_net80
         public void TestTokenPaginationParameters_ToQueryString()
         {
             TokenPaginationParameters parameters = new TokenPaginationParameters("abc123", 15);
-            
+
             string queryString = parameters.ToQueryString();
             Assert.IsNotNull(queryString);
-            Assert.IsTrue(queryString.Contains("paginationType=token"));
             Assert.IsTrue(queryString.Contains("lastKey=abc123"));
             Assert.IsTrue(queryString.Contains("maxItems=15"));
         }
@@ -55,14 +51,11 @@ namespace mock_api_test_sdk_net80
         public void TestTokenPaginationParameters_NullValues()
         {
             TokenPaginationParameters parameters = new TokenPaginationParameters(null, null);
-            
-            Assert.AreEqual("token", parameters.PaginationType);
+
             Assert.IsNull(parameters.LastKey);
             Assert.IsNull(parameters.MaxItems);
-            
+
             IDictionary<string, string> dict = parameters.toDictionary();
-            Assert.IsTrue(dict.ContainsKey("paginationType"));
-            Assert.AreEqual("token", dict["paginationType"]);
             Assert.IsFalse(dict.ContainsKey("lastKey"));
             Assert.IsFalse(dict.ContainsKey("maxItems"));
         }

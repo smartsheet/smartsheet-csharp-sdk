@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 //    limitations under the License.
 //    %[license]
 
+using System;
 using System.Collections.Generic;
 
 namespace Smartsheet.Api.Internal
@@ -27,36 +28,36 @@ namespace Smartsheet.Api.Internal
 
     /// <summary>
     /// This is the implementation of the WorkspaceResources.
-    /// 
+    ///
     /// Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.
     /// </summary>
     public class WorkspaceResourcesImpl : AbstractResources, WorkspaceResources
     {
         /// <summary>
         /// Represents the WorkspaceFolderResources.
-        /// 
+        ///
         /// It will be initialized in constructor and will not change afterwards.
         /// </summary>
         private WorkspaceFolderResources folders;
 
         /// <summary>
         /// Represents the WorkspaceSheetResources.
-        /// 
+        ///
         /// It will be initialized in constructor and will not change afterwards.
         /// </summary>
         private WorkspaceSheetResources sheets;
 
         /// <summary>
         /// Represents the ShareResources.
-        /// 
+        ///
         /// It will be initialized in constructor and will not change afterwards.
         /// </summary>
         private ShareResources shares;
 
         /// <summary>
         /// Constructor.
-        /// 
-        /// Exceptions: 
+        ///
+        /// Exceptions:
         ///   - IllegalArgumentException : if any argument is
         /// </summary>
         /// <param name="smartsheet"> the Smartsheet </param>
@@ -103,7 +104,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual TokenPaginatedResult<Workspace> ListWorkspaces(TokenPaginationParameters? tokenPaging)
+        public virtual TokenPaginatedResult<Workspace> ListWorkspaces(ListWorkspacesTokenPaginationParameters? tokenPaging)
         {
             StringBuilder path = new StringBuilder("workspaces");
             if (tokenPaging != null)
@@ -116,9 +117,9 @@ namespace Smartsheet.Api.Internal
         /// <summary>
         /// <para>Gets the specified Workspace (and lists its contents).</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceid}</para>
-        /// <remarks><para>By default, this operation only returns the top-level items in the Workspace. To load all of the contents, 
+        /// <remarks><para>By default, this operation only returns the top-level items in the Workspace. To load all of the contents,
         /// including nested Folders, include the loadAll query string parameter with a value of true.</para>
-        /// <para>If no Folders, Sheets, Reports, or Templates are present in the Workspace, the corresponding attribute 
+        /// <para>If no Folders, Sheets, Reports, or Templates are present in the Workspace, the corresponding attribute
         /// (e.g., "folders", "sheets") will not be present in the response object.</para></remarks>
         /// </summary>
         /// <param name="workspaceId">the workspace id</param>
@@ -132,6 +133,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated. Use GetWorkspaceChildren and GetWorkspaceMetadata instead.")]
         public virtual Workspace GetWorkspace(long workspaceId, bool? loadAll, IEnumerable<WorkspaceInclusion>? include)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
@@ -259,6 +261,109 @@ namespace Smartsheet.Api.Internal
         public virtual ShareResources ShareResources
         {
             get { return this.shares; }
+        }
+
+        /// <summary>
+        /// <para>Gets a page of a workspace's children of the specified type.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceId}/children</para>
+        /// </summary>
+        /// <param name="workspaceId">the workspace id</param>
+        /// <param name="childrenResourceTypes">A comma-separated list of the child types to include in the response</param>
+        /// <param name="include">A comma-separated list of optional elements to include in the response</param>
+        /// <param name="numericDates">If true, dates are accepted and returned in Unix epoch time. Default is false, which means ISO-8601 format</param>
+        /// <param name="accessApiLevel">Allows COMMENTER access for inputs and return values. For backwards-compatibility, VIEWER is the default</param>
+        /// <param name="lastKey">The lastKey token returned from the previous page of results</param>
+        /// <param name="maxItems">The maximum number of items to return in the response (default: 100, min: 100, max: 500)</param>
+        /// <returns>An array of asset references with a pagination token if there are more results</returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual TokenPaginatedResult<object> GetWorkspaceChildren(long workspaceId, IEnumerable<ChildrenResourceType>? childrenResourceTypes, IEnumerable<ChildrenInclusion>? include, bool? numericDates, int? accessApiLevel, string? lastKey, int? maxItems)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if (childrenResourceTypes != null)
+            {
+                parameters.Add("childrenResourceTypes", QueryUtil.GenerateCommaSeparatedList(childrenResourceTypes));
+            }
+            if (include != null)
+            {
+                parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
+            }
+            if (numericDates.HasValue)
+            {
+                parameters.Add("numericDates", numericDates.ToString());
+            }
+            if (accessApiLevel.HasValue)
+            {
+                parameters.Add("accessApiLevel", accessApiLevel.ToString());
+            }
+            if (!string.IsNullOrEmpty(lastKey))
+            {
+                parameters.Add("lastKey", lastKey);
+            }
+            if (maxItems.HasValue)
+            {
+                parameters.Add("maxItems", maxItems.ToString());
+            }
+
+            // First deserialize into ChildResource objects
+            var childResourceResult = this.ListResourcesWithTokenWrapper<ChildResource>(QueryUtil.GenerateUrl("workspaces/" + workspaceId + "/children", parameters));
+
+            // Convert ChildResource objects to their specific types
+            var convertedData = new List<object>();
+            if (childResourceResult.Data != null)
+            {
+                foreach (var childResource in childResourceResult.Data)
+                {
+                    convertedData.Add(ChildResource.ConvertToSpecificType(childResource));
+                }
+            }
+
+            // Return the result with converted objects
+            return new TokenPaginatedResult<object>
+            {
+                Data = convertedData,
+                LastKey = childResourceResult.LastKey
+            };
+        }
+
+        /// <summary>
+        /// <para>Gets the metadata of a workspace.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceId}/metadata</para>
+        /// </summary>
+        /// <param name="workspaceId">the workspace id</param>
+        /// <param name="include">A comma-separated list of optional elements to include in the response</param>
+        /// <param name="numericDates">If true, dates are accepted and returned in Unix epoch time. Default is false, which means ISO-8601 format</param>
+        /// <param name="accessApiLevel">Allows COMMENTER access for inputs and return values. For backwards-compatibility, VIEWER is the default</param>
+        /// <returns>The metadata of a workspace</returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual Workspace GetWorkspaceMetadata(long workspaceId, IEnumerable<WorkspaceInclusion>? include, bool? numericDates, int? accessApiLevel)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if (include != null)
+            {
+                parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
+            }
+            if (numericDates.HasValue)
+            {
+                parameters.Add("numericDates", numericDates.ToString());
+            }
+            if (accessApiLevel.HasValue)
+            {
+                parameters.Add("accessApiLevel", accessApiLevel.ToString());
+            }
+
+            return this.GetResource<Workspace>(QueryUtil.GenerateUrl("workspaces/" + workspaceId + "/metadata", parameters), typeof(Workspace));
         }
     }
 }
