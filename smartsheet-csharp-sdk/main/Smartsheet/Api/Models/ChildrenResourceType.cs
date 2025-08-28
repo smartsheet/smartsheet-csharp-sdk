@@ -16,42 +16,37 @@
 //    limitations under the License.
 //    %[license]
 
-using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// <para>Object returned for GET operations against index endpoints using token-based pagination.</para>
-    /// This object provides data and a token for the next page of results.
+    /// Represents the types of child resources that can be included in children endpoints.
     /// </summary>
-    public class TokenPaginatedResult<T>
+    public enum ChildrenResourceType
     {
         /// <summary>
-        /// the result set (array)
+        /// Include sheets in the response.
         /// </summary>
-        private IList<T> data;
+        [EnumMember(Value = "sheets")]
+        SHEETS,
 
         /// <summary>
-        /// the token for the next page of results
+        /// Include reports in the response.
         /// </summary>
-        private string? lastKey;
+        [EnumMember(Value = "reports")]
+        REPORTS,
 
         /// <summary>
-        /// A list of objects representing the current page of data in the result set.
+        /// Include sights (dashboards) in the response.
         /// </summary>
-        public IList<T> Data
-        {
-            get { return data; }
-            set { data = value; }
-        }
+        [EnumMember(Value = "sights")]
+        SIGHTS,
 
         /// <summary>
-        /// The token for the next page of results. Null if this is the last page.
+        /// Include folders in the response.
         /// </summary>
-        public string? LastKey
-        {
-            get { return lastKey; }
-            set { lastKey = value; }
-        }
+        [EnumMember(Value = "folders")]
+        FOLDERS
     }
 }

@@ -10,7 +10,7 @@ namespace sdk_csharp_tokenPaginationExample
         {
             Console.WriteLine("Token Pagination Example - Smartsheet API C# SDK");
             Console.WriteLine("=================================================");
-            
+
             // Initialize client - Set your access token in environment variable SMARTSHEET_ACCESS_TOKEN
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "your_token_here")
@@ -21,19 +21,19 @@ namespace sdk_csharp_tokenPaginationExample
             {
                 Console.WriteLine("\n1. Demonstrating Token-Based Pagination for Workspaces");
                 Console.WriteLine("======================================================");
-                
+
                 DemonstrateBasicTokenPagination(smartsheet);
-                
+
                 Console.WriteLine("\n2. Demonstrating Multi-Page Token Pagination");
                 Console.WriteLine("============================================");
-                
+
                 DemonstrateMultiPageTokenPagination(smartsheet);
-                
+
                 Console.WriteLine("\n3. Comparing Traditional vs Token Pagination");
                 Console.WriteLine("============================================");
-                
+
                 CompareTraditionalVsTokenPagination(smartsheet);
-                
+
             }
             catch (SmartsheetException ex)
             {
@@ -55,17 +55,17 @@ namespace sdk_csharp_tokenPaginationExample
         static void DemonstrateBasicTokenPagination(SmartsheetClient smartsheet)
         {
             Console.WriteLine("Fetching workspaces with token pagination (maxItems=100)...\n");
-            
-            // Create token pagination parameters
-            TokenPaginationParameters tokenParams = new TokenPaginationParameters(null, 100);
-            
+
+            // Create token pagination parameters for ListWorkspaces
+            ListWorkspacesTokenPaginationParameters tokenParams = new ListWorkspacesTokenPaginationParameters(null, 100);
+
             // Get first page using token pagination
             TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
-            
+
             Console.WriteLine($"✓ Retrieved {result.Data?.Count ?? 0} workspaces");
             Console.WriteLine($"✓ Last Key: {result.LastKey ?? "null (last page)"}");
-            Console.WriteLine($"✓ Pagination Type: token-based");
-            
+            Console.WriteLine($"✓ Pagination Type: {tokenParams.PaginationType}");
+
             // Display workspace details
             if (result.Data != null && result.Data.Count > 0)
             {
@@ -75,7 +75,7 @@ namespace sdk_csharp_tokenPaginationExample
                 {
                     Console.WriteLine($"  • ID: {workspace.Id}, Name: '{workspace.Name}'");
                 }
-                
+
                 if (result.Data.Count > 5)
                 {
                     Console.WriteLine($"  ... and {result.Data.Count - 5} more workspaces");
@@ -86,23 +86,23 @@ namespace sdk_csharp_tokenPaginationExample
         static void DemonstrateMultiPageTokenPagination(SmartsheetClient smartsheet)
         {
             Console.WriteLine("Demonstrating multi-page token pagination (maxItems=100)...\n");
-            
+
             int pageNumber = 1;
             int totalWorkspaces = 0;
             string? lastKey = null;
-            
+
             do
             {
                 // Create pagination parameters with lastKey from previous page
-                TokenPaginationParameters tokenParams = new TokenPaginationParameters(lastKey, 100);
-                
+                ListWorkspacesTokenPaginationParameters tokenParams = new ListWorkspacesTokenPaginationParameters(lastKey, 100);
+
                 // Get page
                 TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
-                
+
                 Console.WriteLine($"Page {pageNumber}:");
                 Console.WriteLine($"  ├─ Retrieved: {result.Data?.Count ?? 0} workspaces");
                 Console.WriteLine($"  ├─ Last Key: {result.LastKey ?? "null (final page)"}");
-                
+
                 if (result.Data != null && result.Data.Count > 0)
                 {
                     foreach (var workspace in result.Data)
@@ -111,21 +111,21 @@ namespace sdk_csharp_tokenPaginationExample
                         totalWorkspaces++;
                     }
                 }
-                
+
                 // Update lastKey for next iteration
                 lastKey = result.LastKey;
                 pageNumber++;
-                
+
                 Console.WriteLine($"  └─ Total so far: {totalWorkspaces} workspaces\n");
-                
+
                 // Break if we've fetched enough pages for demo
                 if (pageNumber > 3 || lastKey == null) break;
-                
+
                 // Small delay for demo purposes
                 System.Threading.Thread.Sleep(500);
-                
+
             } while (lastKey != null);
-            
+
             Console.WriteLine($"✓ Total workspaces found: {totalWorkspaces}");
             Console.WriteLine($"✓ Pages processed: {pageNumber - 1}");
         }
@@ -133,31 +133,32 @@ namespace sdk_csharp_tokenPaginationExample
         static void CompareTraditionalVsTokenPagination(SmartsheetClient smartsheet)
         {
             Console.WriteLine("Comparing traditional offset vs token-based pagination...\n");
-            
+
             // 1. Traditional offset-based pagination
             Console.WriteLine("Traditional Pagination (PaginationParameters):");
             var traditionalParams = new PaginationParameters(false, 100, 0); // page size 5, offset 0
             var traditionalResult = smartsheet.WorkspaceResources.ListWorkspaces(traditionalParams);
-            
+
             Console.WriteLine($"  ├─ Type: Offset-based");
             Console.WriteLine($"  ├─ Page Size: {traditionalParams.PageSize}");
             Console.WriteLine($"  ├─ Retrieved: {traditionalResult.Data?.Count ?? 0} workspaces");
             Console.WriteLine($"  ├─ Total Count: {traditionalResult.TotalCount ?? 0}");
             Console.WriteLine($"  └─ Has More: {traditionalResult.TotalCount > (traditionalParams.Page * traditionalParams.PageSize)}");
-            
+
             Console.WriteLine();
-            
+
             // 2. Token-based pagination
-            Console.WriteLine("Token-Based Pagination (TokenPaginationParameters):");
-            var tokenParams = new TokenPaginationParameters(null, 100, "token");
+            Console.WriteLine("Token-Based Pagination (ListWorkspacesTokenPaginationParameters):");
+            var tokenParams = new ListWorkspacesTokenPaginationParameters(null, 100, "token");
             var tokenResult = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
-            
+
             Console.WriteLine($"  ├─ Type: Token-based");
             Console.WriteLine($"  ├─ Max Items: {tokenParams.MaxItems}");
+            Console.WriteLine($"  ├─ Pagination Type: {tokenParams.PaginationType}");
             Console.WriteLine($"  ├─ Retrieved: {tokenResult.Data?.Count ?? 0} workspaces");
             Console.WriteLine($"  ├─ Last Key: {tokenResult.LastKey ?? "null"}");
             Console.WriteLine($"  └─ Has More: {tokenResult.LastKey != null}");
-            
+
             Console.WriteLine("\n📝 Key Differences:");
             Console.WriteLine("   • Traditional: Uses offset/limit, provides total count");
             Console.WriteLine("   • Token-based: Uses lastKey, more efficient for large datasets");
