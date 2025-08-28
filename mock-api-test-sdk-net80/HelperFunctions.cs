@@ -11,6 +11,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = new SmartsheetBuilder()
             .SetBaseURI("http://localhost:8082/")
             .SetAccessToken("aaaaaaaaaaaaaaaaaaaaaaaaaa")
+            .SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT")
             .SetHttpClient(testHttpClient)
             .Build();
 

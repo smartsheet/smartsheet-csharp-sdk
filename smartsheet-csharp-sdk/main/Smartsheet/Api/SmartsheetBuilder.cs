@@ -25,6 +25,7 @@ namespace Smartsheet.Api
     using HttpClient = Api.Internal.Http.HttpClient;
     using JsonNetSerializer = Api.Internal.Json.JsonNetSerializer;
     using JsonSerializer = Api.Internal.Json.JsonSerializer;
+    using Api.Internal.Util;
 
     /// <summary>
     /// <para>A convenience class to help create a <seealso cref="SmartsheetClient"/> instance with the appropriate fields.</para>
@@ -199,9 +200,12 @@ namespace Smartsheet.Api
         /// </summary>
         /// <param name="smartsheetIntegrationSource"> the smartsheet integration source </param>
         /// <returns> the SmartsheetClient builder </returns>
-        public SmartsheetBuilder SetSmartsheetIntegrationSource(string SmartsheetIntegrationSource)
+        public SmartsheetBuilder SetSmartsheetIntegrationSource(string smartsheetIntegrationSource)
         {
-            this.smartsheetIntegrationSource = smartsheetIntegrationSource;
+            if (SmartsheetIntegrationSourceValidator.IsValidFormat(smartsheetIntegrationSource))
+            {
+                this.smartsheetIntegrationSource = smartsheetIntegrationSource;
+            }
             return this;
         }
 

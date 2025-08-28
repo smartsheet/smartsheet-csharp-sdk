@@ -9,7 +9,11 @@ namespace integration_test_sdk_net80
 
         public SmartsheetClient CreateClient()
         {
-            smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            smartsheet = new SmartsheetBuilder()
+                .SetBaseURI("https://api.test.smartsheet.com/2.0/")
+                .SetMaxRetryTimeout(30000)
+                .SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT")
+                .Build();
             return smartsheet;
         }
 

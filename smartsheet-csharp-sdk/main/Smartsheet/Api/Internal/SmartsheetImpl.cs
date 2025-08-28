@@ -385,7 +385,7 @@ namespace Smartsheet.Api.Internal
         public string SmartsheetIntegrationSource
         {
             get { return smartsheetIntegrationSource; }
-            set { this.smartsheetIntegrationSource = value; }
+            set { if (SmartsheetIntegrationSourceValidator.IsValidFormat(value)) this.smartsheetIntegrationSource = value; }
         }
 
         /// <summary>
