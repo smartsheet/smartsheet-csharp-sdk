@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -61,6 +61,21 @@ namespace Smartsheet.Api.Models
         /// Represents the templates contained in the folder.
         /// </summary>
         private IList<Template> templates;
+
+        /// <summary>
+        /// The date and time the folder was created.
+        /// </summary>
+        private object createdAt;
+
+        /// <summary>
+        /// The date and time the folder was last modified.
+        /// </summary>
+        private object modifiedAt;
+
+        /// <summary>
+        /// Represents the source of the folder (if the folder was created from another folder or template).
+        /// </summary>
+        private Source? source;
 
         /// <summary>
         /// Gets and sets whether this folder is favorited.
@@ -131,6 +146,38 @@ namespace Smartsheet.Api.Models
         {
             get { return templates; }
             set { templates = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the date and time the folder was created.
+        /// Either a DateTime object, or Long if numericDates parameter is true on API call.
+        /// </summary>
+        /// <returns> the created at </returns>
+        public object CreatedAt
+        {
+            get { return createdAt; }
+            set { createdAt = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the date and time the folder was last modified.
+        /// Either a DateTime object, or Long if numericDates parameter is true on API call.
+        /// </summary>
+        /// <returns> the modified at </returns>
+        public object ModifiedAt
+        {
+            get { return modifiedAt; }
+            set { modifiedAt = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the source of the folder (if the folder was created from another folder or template).
+        /// </summary>
+        /// <returns> the source </returns>
+        public Source Source
+        {
+            get { return source; }
+            set { source = value; }
         }
 
         /// <summary>
