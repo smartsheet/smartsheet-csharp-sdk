@@ -9,7 +9,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestFolderCopyResources()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
             // Before
             // Folder1-----SubFolder1
             // Folder2

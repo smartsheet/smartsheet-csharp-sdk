@@ -316,16 +316,11 @@ namespace Smartsheet.Api
                 jsonSerializer = new JsonNetSerializer();
             }
 
-            SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut);
+            SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut, smartsheetIntegrationSource);
 
             if (changeAgent != null)
             {
                 smartsheet.ChangeAgent = changeAgent;
-            }
-
-            if (smartsheetIntegrationSource != null)
-            {
-                smartsheet.SmartsheetIntegrationSource = smartsheetIntegrationSource;
             }
 
             if (assumedUser != null)

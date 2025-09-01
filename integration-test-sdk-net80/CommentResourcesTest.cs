@@ -11,7 +11,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestCommentResources()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
             
             long sheetId = CreateSheet(smartsheet);
 

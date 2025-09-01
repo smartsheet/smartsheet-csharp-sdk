@@ -12,7 +12,7 @@ namespace integration_test_sdk_net80
         public void TestFavoriteResources()
         {
             
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
 
             RemoveAllFavoritesBeforeRunningTest(smartsheet);
 

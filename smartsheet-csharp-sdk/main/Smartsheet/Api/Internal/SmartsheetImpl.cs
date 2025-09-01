@@ -275,8 +275,9 @@ namespace Smartsheet.Api.Internal
         /// <param name="accessToken"> the access token </param>
         /// <param name="httpClient"> the HTTP client (optional) </param>
         /// <param name="jsonSerializer"> the JSON serializer (optional) </param>
-        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer) 
-            : this(baseURI, accessToken, httpClient, jsonSerializer, false)
+        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, 
+            string smartsheetIntegrationSource) 
+            : this(baseURI, accessToken, httpClient, jsonSerializer, false, smartsheetIntegrationSource)
         {
         }
 
@@ -290,7 +291,8 @@ namespace Smartsheet.Api.Internal
         /// <param name="httpClient"> the HTTP client (optional) </param>
         /// <param name="jsonSerializer"> the JSON serializer (optional) </param>
         /// <param name="dateTimeFixOptOut"> opt out of deserializer string ==> DateTime conversion fix </param>
-        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, bool dateTimeFixOptOut)
+        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, bool dateTimeFixOptOut, 
+            string smartsheetIntegrationSource)
         {
             Utils.ThrowIfNull(baseURI);
             Utils.ThrowIfEmpty(baseURI);
@@ -308,6 +310,8 @@ namespace Smartsheet.Api.Internal
             this.jsonSerializer = jsonSerializer;
             this.httpClient = httpClient == null ? new DefaultHttpClient(new RestClient(), this.jsonSerializer) : httpClient;
             this.UserAgent = null;
+            SmartsheetIntegrationSourceValidator.IsValidFormat(smartsheetIntegrationSource);
+            this.smartsheetIntegrationSource = smartsheetIntegrationSource;
         }
 
         /// <summary>

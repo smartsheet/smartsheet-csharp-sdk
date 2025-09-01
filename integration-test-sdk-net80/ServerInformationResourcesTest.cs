@@ -10,7 +10,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestServerInfoResources()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
 
             ServerInfo info = smartsheet.ServerInfoResources.GetServerInfo();
             Assert.IsTrue(info.FeatureInfo != null);
