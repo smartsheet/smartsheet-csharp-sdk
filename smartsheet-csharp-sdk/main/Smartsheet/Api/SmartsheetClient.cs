@@ -48,6 +48,11 @@ namespace Smartsheet.Api
         string UserAgent { set; }
 
         /// <summary>
+        /// Set the smartsheet integration source header string
+        /// </summary>
+        string SmartsheetIntegrationSource { set; }
+
+        /// <summary>
         /// Sets the max retyr time if the HtppClient is an instance of DefaultHttpClient
         /// </summary>
         long MaxRetryTimeout { set; }

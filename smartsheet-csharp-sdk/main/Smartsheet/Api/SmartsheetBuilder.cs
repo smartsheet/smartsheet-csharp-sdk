@@ -25,6 +25,7 @@ namespace Smartsheet.Api
     using HttpClient = Api.Internal.Http.HttpClient;
     using JsonNetSerializer = Api.Internal.Json.JsonNetSerializer;
     using JsonSerializer = Api.Internal.Json.JsonSerializer;
+    using Api.Internal.Util;
 
     /// <summary>
     /// <para>A convenience class to help create a <seealso cref="SmartsheetClient"/> instance with the appropriate fields.</para>
@@ -85,6 +86,13 @@ namespace Smartsheet.Api
         /// <para>It can be set using corresponding setter.</para>
         /// </summary>
         private string changeAgent;
+
+        /// <summary>
+        /// <para>Represents the Smartsheet integration source.</para>
+        /// 
+        /// <para>It can be set using corresponding setter.</para>
+        /// </summary>
+        private string smartsheetIntegrationSource;
 
         /// <summary>
         /// Optional setting to re-enable the JSON serializers string to C# DateTime conversion
@@ -184,6 +192,20 @@ namespace Smartsheet.Api
         public SmartsheetBuilder SetChangeAgent(string changeAgent)
         {
             this.changeAgent = changeAgent;
+            return this;
+        }
+
+        /// <summary>
+        /// <para>Set the Smartsheet integration source.</para>
+        /// </summary>
+        /// <param name="smartsheetIntegrationSource"> the smartsheet integration source </param>
+        /// <returns> the SmartsheetClient builder </returns>
+        public SmartsheetBuilder SetSmartsheetIntegrationSource(string smartsheetIntegrationSource)
+        {
+            if (SmartsheetIntegrationSourceValidator.IsValidFormat(smartsheetIntegrationSource))
+            {
+                this.smartsheetIntegrationSource = smartsheetIntegrationSource;
+            }
             return this;
         }
 
@@ -294,7 +316,7 @@ namespace Smartsheet.Api
                 jsonSerializer = new JsonNetSerializer();
             }
 
-            SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut);
+            SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut, smartsheetIntegrationSource);
 
             if (changeAgent != null)
             {

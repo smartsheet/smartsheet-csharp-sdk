@@ -90,6 +90,17 @@ namespace Smartsheet.Api.Internal
         private string changeAgent;
 
         /// <summary>
+        /// Represents the AtomicReference for the smartsheet integration source.
+        /// 
+        /// Format: $TYPE,$ORG_NAME,$INTEGRATOR_NAME
+        /// (NB: Comma is used as a delimiter and is required if value is missing)
+        /// $INTEGRATION-TYPE - Required, the type of the integrator (e.g. AI, SCRIPT, APPLICATION, PERSONAL_ACCOUNT)
+        /// $SMAR-ORGANIZATION-NAME - Optional (but COMMA is required), organization name (e.g. Microsoft, Google, OpenAI, etc.)
+        /// $INTEGRATOR-NAME - Required, the name of the integrator (e.g. Claude, Copilot, ChatGPT, DeepSeek, etc.)
+        /// </summary>
+        private string smartsheetIntegrationSource;
+
+        /// <summary>
         /// Represents the AtomicReference to HomeResources.
         /// 
         /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
@@ -264,8 +275,10 @@ namespace Smartsheet.Api.Internal
         /// <param name="accessToken"> the access token </param>
         /// <param name="httpClient"> the HTTP client (optional) </param>
         /// <param name="jsonSerializer"> the JSON serializer (optional) </param>
-        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer) 
-            : this(baseURI, accessToken, httpClient, jsonSerializer, false)
+        /// <param name="smartsheetIntegrationSource"> the smartsheet integration source </param>
+        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, 
+            string smartsheetIntegrationSource) 
+            : this(baseURI, accessToken, httpClient, jsonSerializer, false, smartsheetIntegrationSource)
         {
         }
 
@@ -279,7 +292,9 @@ namespace Smartsheet.Api.Internal
         /// <param name="httpClient"> the HTTP client (optional) </param>
         /// <param name="jsonSerializer"> the JSON serializer (optional) </param>
         /// <param name="dateTimeFixOptOut"> opt out of deserializer string ==> DateTime conversion fix </param>
-        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, bool dateTimeFixOptOut)
+        /// <param name="smartsheetIntegrationSource"> the smartsheet integration source </param>
+        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, bool dateTimeFixOptOut, 
+            string smartsheetIntegrationSource)
         {
             Utils.ThrowIfNull(baseURI);
             Utils.ThrowIfEmpty(baseURI);
@@ -297,6 +312,8 @@ namespace Smartsheet.Api.Internal
             this.jsonSerializer = jsonSerializer;
             this.httpClient = httpClient == null ? new DefaultHttpClient(new RestClient(), this.jsonSerializer) : httpClient;
             this.UserAgent = null;
+            SmartsheetIntegrationSourceValidator.IsValidFormat(smartsheetIntegrationSource);
+            this.smartsheetIntegrationSource = smartsheetIntegrationSource;
         }
 
         /// <summary>
@@ -365,6 +382,16 @@ namespace Smartsheet.Api.Internal
         {
             get { return changeAgent; }
             set { this.changeAgent = value; }
+        }
+        
+        /// <summary>
+        /// Return the smartsheet integration source
+        /// </summary>
+        /// <returns> the smartsheet integration source </returns>
+        public string SmartsheetIntegrationSource
+        {
+            get { return smartsheetIntegrationSource; }
+            set { if (SmartsheetIntegrationSourceValidator.IsValidFormat(value)) this.smartsheetIntegrationSource = value; }
         }
 
         /// <summary>

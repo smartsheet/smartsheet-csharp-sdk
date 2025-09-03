@@ -14,6 +14,7 @@ namespace sdk_csharp_tokenPaginationExample
             // Initialize client - Set your access token in environment variable SMARTSHEET_ACCESS_TOKEN
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "your_token_here")
+                .SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT")
                 .Build();
 
             try

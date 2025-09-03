@@ -15,6 +15,7 @@ namespace sdk_csharp_simpleExample
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "your_token_here")
                 // No HttpClient set - DefaultHttpClient will be used automatically
+                .SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT")
                 .Build();
             
             // The DefaultHttpClient provides standard HTTP functionality with built-in

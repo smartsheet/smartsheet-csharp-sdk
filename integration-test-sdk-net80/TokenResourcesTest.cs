@@ -59,7 +59,7 @@ namespace integration_test_sdk_net80
             Assert.IsTrue(token.AccessToken != "ACCESS_TOKEN");
 
             oauth.RevokeToken(token);
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetAccessToken(token.AccessToken).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetAccessToken(token.AccessToken).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
             try
             {
                 smartsheet.SheetResources.ListSheets();
@@ -73,7 +73,7 @@ namespace integration_test_sdk_net80
 
         private static void UseTokenResources()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
             try
             {
                 smartsheet.TokenResources.GetAccessToken();

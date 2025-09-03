@@ -9,7 +9,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestRowDeleteSendResources()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
             long templateId = smartsheet.TemplateResources.ListPublicTemplates().Data[0].Id.GetValueOrDefault();
             Assert.IsNotNull(templateId);
 

@@ -10,7 +10,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestReportResources()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
 
             //Must manually create a Report at smartsheet.com and paste reportId and reportName below.
             long reportId = 1176442848470916;

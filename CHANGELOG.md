@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
-## [5.1.0] - 2025-08-25
+## [6.3.0] - 2025-08-14
+### Added
+- Added support for the `Smartsheet-Integration-Source` header. This can be configured using the `SmartsheetBuilder` or set directly on the `SmartsheetClient`.
+
+## [5.1.0] - 2025-08-12
 ### Added
 - Add support for token-based pagination in WorkspaceResources.ListWorkspaces()
 - New TokenPaginationParameters class to support paginationType, lastKey and maxItems parameters

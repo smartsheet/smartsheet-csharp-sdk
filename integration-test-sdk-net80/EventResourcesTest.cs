@@ -9,7 +9,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestListEvents()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
 
             DateTime lastHour = DateTime.Today.AddHours(-1);
             EventResult eventResult = smartsheet.EventResources.ListEvents(lastHour, null, 10, false);
@@ -48,7 +48,7 @@ namespace integration_test_sdk_net80
         [TestMethod]
         public void TestListEventsEverythingIsNotSet()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
 
             DateTime lastHour = DateTime.Today.AddHours(-1);
             EventResult eventResult = smartsheet.EventResources.ListEvents(since: 0);
@@ -72,7 +72,7 @@ namespace integration_test_sdk_net80
         [ExpectedException(typeof(SmartsheetException))]
         public void TestInvalidParams()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
             smartsheet.EventResources.ListEvents(0, "2.1.0An4ZapaQaOXPdojlmediSZ1WqMdi5U_3l9gViOW7ic", 10);
         }
 
@@ -80,7 +80,7 @@ namespace integration_test_sdk_net80
         [ExpectedException(typeof(SmartsheetException))]
         public void TestInvalidParams_2()
         {
-            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).Build();
+            SmartsheetClient smartsheet = new SmartsheetBuilder().SetMaxRetryTimeout(30000).SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT").Build();
             smartsheet.EventResources.ListEvents(DateTime.Today, maxCount: 10, numericDates: true);
         }
     }

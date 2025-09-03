@@ -869,6 +869,12 @@ namespace Smartsheet.Api.Internal
                 request.Headers["Smartsheet-Change-Agent"] = Uri.EscapeDataString(smartsheet.ChangeAgent);
             }
 
+            // Set smartsheet integration source
+            if (smartsheet.SmartsheetIntegrationSource != null)
+            {
+                request.Headers["Smartsheet-Integration-Source"] = Uri.EscapeDataString(smartsheet.SmartsheetIntegrationSource);
+            }
+
             return request;
         }
 

@@ -16,6 +16,7 @@ namespace sdk_csharp_sample
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetAccessToken(Environment.GetEnvironmentVariable("SMARTSHEET_ACCESS_TOKEN") ?? "your_token_here")
                 .SetHttpClient(new RetryHttpClient())                          // Explicitly setting a custom HttpClient
+                .SetSmartsheetIntegrationSource("AI,MyOrg,MyGPT")
                 .Build();
 
             // For this example, we'll use the client with the custom RetryHttpClient
