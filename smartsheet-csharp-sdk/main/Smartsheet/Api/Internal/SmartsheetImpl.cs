@@ -94,7 +94,7 @@ namespace Smartsheet.Api.Internal
         /// 
         /// Format: $TYPE,$ORG_NAME,$INTEGRATOR_NAME
         /// (NB: Comma is used as a delimiter and is required if value is missing)
-        /// $INTEGRATION-TYPE - Required, the type of the integrator (e.g. AI, SCRIPT, APPLICATION)
+        /// $INTEGRATION-TYPE - Required, the type of the integrator (e.g. AI, SCRIPT, APPLICATION, PERSONAL_ACCOUNT)
         /// $SMAR-ORGANIZATION-NAME - Optional (but COMMA is required), organization name (e.g. Microsoft, Google, OpenAI, etc.)
         /// $INTEGRATOR-NAME - Required, the name of the integrator (e.g. Claude, Copilot, ChatGPT, DeepSeek, etc.)
         /// </summary>
@@ -275,6 +275,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="accessToken"> the access token </param>
         /// <param name="httpClient"> the HTTP client (optional) </param>
         /// <param name="jsonSerializer"> the JSON serializer (optional) </param>
+        /// <param name="smartsheetIntegrationSource"> the smartsheet integration source </param>
         public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, 
             string smartsheetIntegrationSource) 
             : this(baseURI, accessToken, httpClient, jsonSerializer, false, smartsheetIntegrationSource)
@@ -291,6 +292,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="httpClient"> the HTTP client (optional) </param>
         /// <param name="jsonSerializer"> the JSON serializer (optional) </param>
         /// <param name="dateTimeFixOptOut"> opt out of deserializer string ==> DateTime conversion fix </param>
+        /// <param name="smartsheetIntegrationSource"> the smartsheet integration source </param>
         public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, bool dateTimeFixOptOut, 
             string smartsheetIntegrationSource)
         {

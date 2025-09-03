@@ -6,6 +6,8 @@ namespace Smartsheet.Api.Internal.Util
 {
     public class SmartsheetIntegrationSourceValidator
     {
+        private static readonly string documentationLink = "https://developers.smartsheet.com/api/smartsheet/guides/basics/http-and-rest#http-headers";
+
         /// <summary>
         /// Validates a smartsheet integration source string in the format:
         ///   type, organisation name, integrator name
@@ -27,7 +29,8 @@ namespace Smartsheet.Api.Internal.Util
             string[] parts = input.Split(new char[] { ',' }, StringSplitOptions.None);
             if (parts.Length != 3)
             {
-                throw new SmartsheetException("Invalid smartsheet integration source format");
+                throw new SmartsheetException("Invalid smartsheet integration source format. " +
+                        "Expected format: 'TYPE,ORGANIZATION,INTEGRATOR. " + documentationLink);
             }
 
             string integrationType = parts[0].Trim();
@@ -37,8 +40,9 @@ namespace Smartsheet.Api.Internal.Util
             if (!IsValidType(integrationType))
             {
                 throw new SmartsheetException("Invalid smartsheet integration source format. " +
-                        "The integration type has to be one of the following: " +
-                        string.Join(", ", Enum.GetNames(typeof(SmartsheetIntegrationSourceType))));
+                        "The integration type has to be one of the following: "
+                        + string.Join(", ", Enum.GetNames(typeof(SmartsheetIntegrationSourceType)))
+                        + ". Invalid integration type: " + integrationType + " " + documentationLink);
             }
 
             // Integrator name must be non-empty
@@ -62,7 +66,7 @@ namespace Smartsheet.Api.Internal.Util
             {
                 return false;
             }
-            return Enum.GetNames(typeof(SmartsheetIntegrationSourceType))
+            return Enum.GetNames(typeof(Models.SmartsheetIntegrationSourceType))
                          .Any(name => name.Equals(integrationTypeValue, StringComparison.OrdinalIgnoreCase));
         }
     }

@@ -34,6 +34,10 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Represents the APPLICATION integration source type.
     /// </summary>
-    APPLICATION
+    APPLICATION,
+    /// <summary>
+    /// Represents the PERSONAL_ACCOUNT integration source type.
+    /// </summary>
+    PERSONAL_ACCOUNT
     }
 }
