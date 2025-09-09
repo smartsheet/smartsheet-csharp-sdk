@@ -200,6 +200,45 @@ namespace Smartsheet.Api.Internal
             return this.UpdateResource<User>("users/" + user.Id, typeof(User), user);
         }
 
+        public virtual UserPlansResponse GetUserPlans(long userId)
+        {
+            string path = $"users/{userId}/plans";
+            return this.GetResource<UserPlansResponse>(path, typeof(UserPlansResponse));
+        }
+
+        public virtual RequestResult<object> DeleteUserFromPlan(long userId, long planId)
+        {
+            string path = $"users/{userId}/plans/{planId}";
+            return this.DeleteResource<RequestResult<object>>(path);
+        }
+
+        public virtual PaginatedResult<User> ListUsersWithFilters(
+            long? planId = null,
+            string? seatType = null,
+            IEnumerable<string>? emails = null,
+            int? pageSize = null,
+            int? page = null,
+            bool? numericDates = null
+        )
+        {
+            var parameters = new Dictionary<string, string>();
+            if (planId.HasValue)
+                parameters.Add("planId", planId.Value.ToString());
+            if (!string.IsNullOrEmpty(seatType))
+                parameters.Add("seatType", seatType);
+            if (emails != null)
+                parameters.Add("emails", string.Join(",", emails));
+            if (pageSize.HasValue)
+                parameters.Add("pageSize", pageSize.Value.ToString());
+            if (page.HasValue)
+                parameters.Add("page", page.Value.ToString());
+            if (numericDates.HasValue)
+                parameters.Add("numericDates", numericDates.Value.ToString());
+
+            string path = "users" + QueryUtil.GenerateUrl(null, parameters);
+            return this.ListResourcesWithWrapper<User>(path);
+        }
+
         /// <summary>
         /// <para>Removes a user from an organization. User is transitioned to a free collaborator with read-only access to owned sheets (unless those are optionally transferred to another user).</para>
         /// <remarks>This operation is only available to system administrators.</remarks>

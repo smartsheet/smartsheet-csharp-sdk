@@ -117,6 +117,19 @@ namespace Smartsheet.Api
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         User UpdateUser(User user);
 
+        UserPlansResponse GetUserPlans(long userId);
+
+        RequestResult<object> DeleteUserFromPlan(long userId, long planId);
+
+        PaginatedResult<User> ListUsersWithFilters(
+            long? planId = null,
+            string? seatType = null,
+            IEnumerable<string>? emails = null,
+            int? pageSize = null,
+            int? page = null,
+            bool? numericDates = null
+        );
+
         /// <summary>
         /// <para>Removes a User from an organization. User is transitioned to a free collaborator with read-only access to owned sheets (unless those are optionally transferred to another user).</para>
         /// <remarks>This operation is only available to system administrators.</remarks>
