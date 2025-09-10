@@ -200,18 +200,55 @@ namespace Smartsheet.Api.Internal
             return this.UpdateResource<User>("users/" + user.Id, typeof(User), user);
         }
 
+        /// <summary>
+        /// <para>Fetch all user's plans.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users/{userId}/plans</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to fetch plans for.</param>
+        /// <returns><see cref="UserPlansResponse"/> object.</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
         public virtual UserPlansResponse GetUserPlans(long userId)
         {
             string path = $"users/{userId}/plans";
             return this.GetResource<UserPlansResponse>(path, typeof(UserPlansResponse));
         }
 
+        /// <summary>
+        /// <para>Removes a user from a plan.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: DELETE /2.0/users/{userId}/plans/{planId}</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to remove from the plan.</param>
+        /// <param name="planId">The ID of the plan to remove the user from.</param>
+        /// <returns><see cref="RequestResult{object}"/> object.</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
         public virtual RequestResult<object> DeleteUserFromPlan(long userId, long planId)
         {
             string path = $"users/{userId}/plans/{planId}";
             return this.DeleteResource<RequestResult<object>>(path);
         }
 
+        /// <summary>
+        /// <para>List users.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
+        /// </summary>
+        /// <param name="userId">A list of users.</param>
+        /// <returns><see cref="UserPlansResponse"/> object.</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
         public virtual PaginatedResult<User> ListUsersWithFilters(
             long? planId = null,
             string? seatType = null,
