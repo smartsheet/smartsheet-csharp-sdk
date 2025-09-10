@@ -241,7 +241,12 @@ namespace Smartsheet.Api.Internal
         /// <para>List users.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
         /// </summary>
-        /// <param name="userId">A list of users.</param>
+        /// <param name="planId">Optional plan ID to filter users.</param>
+        /// <param name="seatType">Optional seat type to filter users.</param>
+        /// <param name="emails">Optional list of emails to filter users.</param>
+        /// <param name="pageSize">Optional page size for pagination. Minimum: 1, Maximum: 100, Default: 100.</param>
+        /// <param name="page">Optional page number for pagination. Minimum: 1, Default: 1.</param>
+        /// <param name="numericDates">Optional flag to return dates as numeric timestamps. Default: false.</param>
         /// <returns><see cref="UserPlansResponse"/> object.</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
