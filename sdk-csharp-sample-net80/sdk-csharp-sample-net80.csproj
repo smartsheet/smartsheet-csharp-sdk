@@ -6,6 +6,7 @@
     <RootNamespace>sdk_csharp_sample_net80</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>sdk_csharp_simpleExample.SimpleExample</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,9 +27,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLog" Version="5.0.5" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="ExampleWithHttpClientDefined.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\smartsheet-csharp-sdk\smartsheet-csharp-sdk-v2.csproj" />
