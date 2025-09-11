@@ -18,7 +18,7 @@ This project contains multiple examples demonstrating how to use the Smartsheet 
    ```bash
    # Run the default program (currently set to SimpleExample)
    dotnet run
-   
+
    # Or run a specific .cs file by setting it as the startup file
    dotnet run --project sdk-csharp-sample-net80.csproj
    ```
@@ -50,14 +50,14 @@ Edit `sdk-csharp-sample-net80.csproj` and change the `<StartupObject>` to point 
 - Then run: `dotnet run`
 
 **To run TokenPaginationExample.cs:**
-- Set `<StartupObject>sdk_csharp_tokenPaginationExample.TokenPaginationExample</StartupObject>` in project file  
+- Set `<StartupObject>sdk_csharp_tokenPaginationExample.TokenPaginationExample</StartupObject>` in project file
 - Then run: `dotnet run`
 
 ### Example Usage
 
 ```csharp
-// Create token pagination parameters
-TokenPaginationParameters tokenParams = new TokenPaginationParameters(null, 10);
+// Create token pagination parameters for ListWorkspaces
+ListWorkspacesTokenPaginationParameters tokenParams = new ListWorkspacesTokenPaginationParameters(null, 100);
 
 // Get first page
 TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
@@ -65,7 +65,10 @@ TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorks
 // Navigate to next page using lastKey
 if (result.LastKey != null)
 {
-    TokenPaginationParameters nextPageParams = new TokenPaginationParameters(result.LastKey, 10);
+    ListWorkspacesTokenPaginationParameters nextPageParams = new ListWorkspacesTokenPaginationParameters(result.LastKey, 100);
     TokenPaginatedResult<Workspace> nextPage = smartsheet.WorkspaceResources.ListWorkspaces(nextPageParams);
 }
+
+// For other operations that do not require params specific to ListWorkspaces, use the base class.
+TokenPaginationParameters baseParams = new TokenPaginationParameters(null, 200);
 ```

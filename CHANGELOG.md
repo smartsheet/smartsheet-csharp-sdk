@@ -3,18 +3,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
 ## [Unreleased]
 
 ## [5.2.0] - 2025-08-14
 ### Added
-- Support for POST /users/{userId}/plans/{planId}/downgrade
-- Support for POST /users/{userId}/plans/{planId}/upgrade
+- Support for POST /2.0/users/{userId}/plans/{planId}/downgrade
+- Support for POST /2.0/users/{userId}/plans/{planId}/upgrade
 
-## [5.1.0] - 2025-08-12
+## [5.1.0] - 2025-08-25
 ### Added
 - Add support for token-based pagination in WorkspaceResources.ListWorkspaces()
 - New TokenPaginationParameters class to support paginationType, lastKey and maxItems parameters
 - New TokenPaginatedResult<T> class for token-based pagination responses with data and lastKey properties
+- GetWorkspaceChildren endpoint with support for token-based pagination
+- GetWorkspaceMetadata endpoint with support for numericDates and accessApiLevel parameters
+- GetFolderChildren endpoint with support for token-based pagination
+- GetFolderMetadata endpoint with support for numericDates parameter
+
+### Changed
+- Updated Folder model with CreatedAt and ModifiedAt properties supporting both DateTime and Long values
+
+### Deprecated
+- GetFolder method in FolderResources (use GetFolderChildren and GetFolderMetadata instead)
+- GetWorkspace method in WorkspaceResources (use GetWorkspaceChildren and GetWorkspaceMetadata instead)
+- ListFolders method in FolderResources (use GetFolderChildren instead)
+- ListFolders method in WorkspaceFolderResources (use GetWorkspaceChildren instead)
+- HomeFolderResources interface and all its methods (See the API docs article on [migrating off the Sheets folder](https://developers.smartsheet.com/api/smartsheet/guides/updating-code/migrate-from-using-the-sheets-folder))
 
 ## [3.0.0] - 2022-12-07
 ### Updated
@@ -41,16 +56,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [Unable to Search Sheet Summary #117](https://github.com/smartsheet-platform/smartsheet-csharp-sdk/issues/117)
 
 ## [2.93.0] - 2020-03-12
-### Added 
+### Added
 - Webhooks for columns support
 
-### Fixed 
+### Fixed
 - [Json deserialization error #113](https://github.com/smartsheet-platform/smartsheet-csharp-sdk/issues/113)
 
 ### Changed
-- disable Newtonsoft default configuration of deserializing strings that "look like" dates into C# DateTime objects, 
-see [README](https://github.com/smartsheet-platform/smartsheet-csharp-sdk/blob/master/README.md) for details on how 
-to opt-out of this change if required.  
+- disable Newtonsoft default configuration of deserializing strings that "look like" dates into C# DateTime objects,
+see [README](https://github.com/smartsheet-platform/smartsheet-csharp-sdk/blob/master/README.md) for details on how
+to opt-out of this change if required.
 
 ## [2.86.0] - 2019-11-07
 ### Added
@@ -69,7 +84,7 @@ to opt-out of this change if required.
 - continue to support level 0 widget types
 
 ## [2.77.0] - 2019-07-25
-### Added 
+### Added
 - CARD_DONE tag to column tags enumeration
 - `Description` property to Column model
 - ListUsers accepts an `includes` parameter - the only currently accepted argument value is `LAST_LOGIN`
@@ -88,7 +103,7 @@ to opt-out of this change if required.
 
 ## [2.68.2] - 2019-05-29
 ### Added
-- Support for .NET Standard 2.0. Nuget.org package contains assemblies for both .NET Framework 4.5.2 and 
+- Support for .NET Standard 2.0. Nuget.org package contains assemblies for both .NET Framework 4.5.2 and
 .NET Standard 2.0.
 
 ## [2.68.1] - 2019-05-15
@@ -132,7 +147,7 @@ to opt-out of this change if required.
 - Row sort feature
 - User profile properties (including profileImage) to UserModel
 - Scope, location, and favoriteFlag inclusion to search
-- getSheet() ifVersionAfter parameter 
+- getSheet() ifVersionAfter parameter
 - Expose Change-Agent, Assumed-User, and User-Agent on Smartsheet client
 - Bulk access to sheet version through sheetVersion inclusion
 - Missing report and sheet publish flags
@@ -143,10 +158,10 @@ to opt-out of this change if required.
 
 ### Changed
 - Implementation of objectValue to better support PredecessorList and objectValue primitives (examples of how to set and clear Predecessor list can be found in the `RowTests.cs` mock tests)
-- HttpClient interface to allow SDK users to inject HTTP headers or implement an HTTP proxy by extending 
+- HttpClient interface to allow SDK users to inject HTTP headers or implement an HTTP proxy by extending
 DefaultHttpClient (a proxy sample is provided in the Advanced Topics section of the README)
 - Removed outdated Link model and replaced all references with current Hyperlink model
-- Removed ShouldRetry and CalcBackoff interfaces and replaced with HttpClient interface methods. You can now customize 
+- Removed ShouldRetry and CalcBackoff interfaces and replaced with HttpClient interface methods. You can now customize
 shouldRetry or calcBackoff using the same method as proxy or request header injection (i.e., extend DefaultHttpClient).
 
 ### Fixed

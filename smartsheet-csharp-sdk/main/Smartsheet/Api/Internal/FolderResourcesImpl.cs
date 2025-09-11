@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,7 @@ namespace Smartsheet.Api.Internal
 
     /// <summary>
     /// This is the implementation of the FolderResources.
-    /// 
+    ///
     /// Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.
     /// </summary>
     public class FolderResourcesImpl : AbstractResources, FolderResources
@@ -51,7 +51,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="folderId"> the folder Id </param>
         /// <param name="include"> (optional) – comma-separated list of elements to include in the respons</param>
-        /// <returns> the folder (note that if there is no such resource, this method will throw ResourceNotFoundException 
+        /// <returns> the folder (note that if there is no such resource, this method will throw ResourceNotFoundException
         /// rather than returning null) </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -59,6 +59,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated. Use GetFolderChildren and GetFolderMetadata instead.")]
         public virtual Folder GetFolder(long folderId, IEnumerable<FolderInclusion>? include)
         {
             StringBuilder path = new StringBuilder("folders/" + folderId);
@@ -74,7 +75,7 @@ namespace Smartsheet.Api.Internal
         /// <para>It mirrors to the following Smartsheet REST API method: PUT /folders/{folderId}</para>
         /// </summary>
         /// <param name="folder"> the folder to update </param>
-        /// <returns> the updated folder (note that if there is no such folder, this method will throw Resource Not Found 
+        /// <returns> the updated folder (note that if there is no such folder, this method will throw Resource Not Found
         /// Exception rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -124,6 +125,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated. Use GetFolderChildren instead.")]
         public virtual PaginatedResult<Folder> ListFolders(long folderId, PaginationParameters? paging)
         {
             StringBuilder path = new StringBuilder("folders/" + folderId + "/folders");
@@ -214,6 +216,103 @@ namespace Smartsheet.Api.Internal
         public virtual FolderSheetResources SheetResources
         {
             get { return this.sheets; }
+        }
+
+        /// <summary>
+        /// <para>Gets a page of a folder's children of the specified type.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/children</para>
+        /// </summary>
+        /// <param name="folderId">the folder id</param>
+        /// <param name="childrenResourceTypes">A comma-separated list of the child types to include in the response</param>
+        /// <param name="include">A comma-separated list of optional elements to include in the response</param>
+        /// <param name="numericDates">If true, dates are accepted and returned in Unix epoch time. Default is false, which means ISO-8601 format</param>
+        /// <param name="accessApiLevel">Allows COMMENTER access for inputs and return values. For backwards-compatibility, VIEWER is the default</param>
+        /// <param name="lastKey">The lastKey token returned from the previous page of results</param>
+        /// <param name="maxItems">The maximum number of items to return in the response (default: 100, min: 100, max: 500)</param>
+        /// <returns>An array of asset references with a pagination token if there are more results</returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual TokenPaginatedResult<object> GetFolderChildren(long folderId, IEnumerable<ChildrenResourceType>? childrenResourceTypes, IEnumerable<ChildrenInclusion>? include, bool? numericDates, int? accessApiLevel, string? lastKey, int? maxItems)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if (childrenResourceTypes != null)
+            {
+                parameters.Add("childrenResourceTypes", QueryUtil.GenerateCommaSeparatedList(childrenResourceTypes));
+            }
+            if (include != null)
+            {
+                parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
+            }
+            if (numericDates.HasValue)
+            {
+                parameters.Add("numericDates", numericDates.ToString());
+            }
+            if (accessApiLevel.HasValue)
+            {
+                parameters.Add("accessApiLevel", accessApiLevel.ToString());
+            }
+            if (!string.IsNullOrEmpty(lastKey))
+            {
+                parameters.Add("lastKey", lastKey);
+            }
+            if (maxItems.HasValue)
+            {
+                parameters.Add("maxItems", maxItems.ToString());
+            }
+
+            // First deserialize into ChildResource, then convert to specific types
+            var childResourceResult = this.ListResourcesWithTokenWrapper<ChildResource>(QueryUtil.GenerateUrl("folders/" + folderId + "/children", parameters));
+
+            // Convert ChildResource objects to their specific types
+            var convertedData = new List<object>();
+            if (childResourceResult.Data != null)
+            {
+                foreach (var childResource in childResourceResult.Data)
+                {
+                    convertedData.Add(ChildResource.ConvertToSpecificType(childResource));
+                }
+            }
+
+            return new TokenPaginatedResult<object>
+            {
+                Data = convertedData,
+                LastKey = childResourceResult.LastKey
+            };
+        }
+
+        /// <summary>
+        /// <para>Gets the metadata of a folder.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/metadata</para>
+        /// </summary>
+        /// <param name="folderId">the folder id</param>
+        /// <param name="include">A comma-separated list of optional elements to include in the response</param>
+        /// <param name="numericDates">If true, dates are accepted and returned in Unix epoch time. Default is false, which means ISO-8601 format</param>
+        /// <returns>The metadata of a folder</returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual Folder GetFolderMetadata(long folderId, IEnumerable<FolderInclusion>? include, bool? numericDates)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if (include != null)
+            {
+                parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
+            }
+            if (numericDates.HasValue)
+            {
+                parameters.Add("numericDates", numericDates.ToString());
+            }
+
+            return this.GetResource<Folder>(QueryUtil.GenerateUrl("folders/" + folderId + "/metadata", parameters), typeof(Folder));
         }
     }
 
