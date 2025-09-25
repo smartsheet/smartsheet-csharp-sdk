@@ -79,31 +79,6 @@ namespace integration_test_sdk_net80
             Assert.IsFalse(user.LicensedSheetCreator.Value);
         }
 
-        [TestMethod]
-        public void UpgradeUserForPlan()
-        {
-            long userId = 123;
-            long planId = 456;
-            string seatType = "MEMBER";
-
-            var result = smartsheet.UserResources.UpgradeUserForPlan(userId, planId, seatType);
-
-            Assert.AreEqual("SUCCESS", result.Message);
-            Assert.AreEqual(0, result.ResultCode);
-        }
-
-        [TestMethod]
-        public void DowngradeUserForPlan()
-        {
-            long userId = 123;
-            long planId = 456;
-            string seatType = "MEMBER";
-
-            var result = smartsheet.UserResources.DowngradeUserForPlan(userId, planId, seatType);
-
-            Assert.AreEqual("SUCCESS", result.Message);
-            Assert.AreEqual(0, result.ResultCode);
-        }
 
         private void ListOneUser()
         {

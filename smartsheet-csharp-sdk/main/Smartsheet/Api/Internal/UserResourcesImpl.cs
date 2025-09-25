@@ -214,13 +214,12 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual RequestResult<object> UpgradeUserForPlan(long userId, long planId, string seatType)
+        public virtual RequestResult<object> UpgradeUser(long userId, long planId, UpgradeSeatType seatType)
         {
-            if (string.IsNullOrEmpty(seatType))
-                throw new System.InvalidOperationException("seatType cannot be null or empty.");
-            var body = new { seatType };
+            var body = new { seatType = seatType.ToString() };
             string path = $"users/{userId}/plans/{planId}/upgrade";
-            return this.CreateResource<RequestResult<object>, object>(path, body);
+            
+            return this.ExecuteUpgradeDowngradeOperation<object>(path, body);
         }
 
         /// <summary>
@@ -237,13 +236,12 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">User not found.</exception>
         /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual RequestResult<object> DowngradeUserForPlan(long userId, long planId, string seatType)
+        public virtual RequestResult<object> DowngradeUser(long userId, long planId, DowngradeSeatType seatType)
         {
-            if (string.IsNullOrEmpty(seatType))
-                throw new System.InvalidOperationException("seatType cannot be null or empty.");
-            var body = new { seatType };
+            var body = new { seatType = seatType.ToString() };
             string path = $"users/{userId}/plans/{planId}/downgrade";
-            return this.CreateResource<RequestResult<object>, object>(path, body);
+            
+            return this.ExecuteUpgradeDowngradeOperation<object>(path, body);
         }
 
         /// <summary>

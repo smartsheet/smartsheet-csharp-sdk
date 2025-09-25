@@ -131,7 +131,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        RequestResult<object> UpgradeUserForPlan(long userId, long planId, string seatType);
+        RequestResult<object> UpgradeUser(long userId, long planId, UpgradeSeatType seatType);
 
         /// <summary>
         /// <para>Downgrades a user's seat type within your Smartsheet organization or plan from a licensed Member, Provisional Member or Guest to a non-licensed Viewer or Guest.</para>
@@ -147,7 +147,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">User not found.</exception>
         /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        RequestResult<object> DowngradeUserForPlan(long userId, long planId, string seatType);
+        RequestResult<object> DowngradeUser(long userId, long planId, DowngradeSeatType seatType);
 
         /// <summary>
         /// <para>Removes a User from an organization. User is transitioned to a free collaborator with read-only access to owned sheets (unless those are optionally transferred to another user).</para>
