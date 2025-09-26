@@ -79,55 +79,6 @@ namespace integration_test_sdk_net80
             Assert.IsFalse(user.LicensedSheetCreator.Value);
         }
 
-        [TestMethod]
-        public void DeleteUserFromPlan()
-        {
-            long userId = 123;
-            long planId = 123;
-
-            var result = smartsheet.UserResources.DeleteUserFromPlan(userId, planId);
-
-            Assert.AreEqual("SUCCESS", result.Message);
-            Assert.AreEqual(0, result.ResultCode);
-        }
-
-        [TestMethod]
-        public void GetUserPlans()
-        {
-            long userId = 123;
-            UserPlansResponse result = smartsheet.UserResources.GetUserPlans(userId);
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Data.Count >= 0);
-        }
-
-        [TestMethod]
-        public void ListUsersWithFilters()
-        {
-            Assert.IsNotNull(smartsheet);
-
-            long? planId = 123;
-            string seatType = "VIEWER";
-            IEnumerable<string> emails = new List<string> { "test@smartsheet.com" };
-            int? pageSize = 10;
-            int? page = 1;
-            bool? numericDates = true;
-
-            PaginatedResult<User> result = smartsheet.UserResources.ListUsersWithFilters(
-                planId: planId,
-                seatType: seatType,
-                emails: emails,
-                pageSize: pageSize,
-                page: page,
-                numericDates: numericDates
-            );
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Data.Count >= 0);
-        }
-
         private void ListOneUser()
         {
             Assert.IsNotNull(smartsheet);

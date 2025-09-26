@@ -47,6 +47,23 @@ namespace Smartsheet.Api
         PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes = null, PaginationParameters? paging = null);
 
         /// <summary>
+        /// <para>Gets the list of Users in the organization with plan and seat type filtering.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
+        /// </summary>
+        /// <param name="emails">list of email addresses on which to filter the results</param>
+        /// <param name="planId">plan ID to filter users</param>
+        /// <param name="seatType">seat type to filter users</param>
+        /// <param name="paging">the pagination</param>
+        /// <returns>the list of filtered Users</returns>
+        /// <exception cref="System.InvalidOperationException">if any argument is null or empty string</exception>
+        /// <exception cref="InvalidRequestException">if there is any problem with the REST API request</exception>
+        /// <exception cref="AuthorizationException">if there is any problem with the REST API authorization (access token)</exception>
+        /// <exception cref="ResourceNotFoundException">if the resource cannot be found</exception>
+        /// <exception cref="ServiceUnavailableException">if the REST API service is not available (possibly due to rate limiting)</exception>
+        /// <exception cref="SmartsheetException">if there is any other error during the operation</exception>
+        PaginatedResult<User> ListUsers(IEnumerable<string> emails, long planId, SeatType seatType, PaginationParameters? paging = null);
+
+        /// <summary>
         /// <para>Add a user to the organization</para>
         /// <para>It mirrors to the following Smartsheet REST API method: POST /Users</para>
         /// </summary>
@@ -122,14 +139,16 @@ namespace Smartsheet.Api
         /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users/{userId}/plans</para>
         /// </summary>
         /// <param name="userId">The ID of the user to fetch plans for.</param>
-        /// <returns><see cref="UserPlansResponse"/> object.</returns>
+        /// <param name="lastKey">The last key for pagination.</param>
+        /// <param name="maxItems">The maximum number of items to return.</param>
+        /// <returns><see cref="TokenPaginatedResult{T}"/> object containing <see cref="UserPlan"/>.</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
         /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        UserPlansResponse GetUserPlans(long userId);
+        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, long lastKey, long maxItems);
 
         /// <summary>
         /// <para>Removes a user from a plan.</para>
@@ -137,40 +156,14 @@ namespace Smartsheet.Api
         /// </summary>
         /// <param name="userId">The ID of the user to remove from the plan.</param>
         /// <param name="planId">The ID of the plan to remove the user from.</param>
-        /// <returns><see cref="RequestResult{object}"/> object.</returns>
+        /// <returns>void</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
         /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        RequestResult<object> DeleteUserFromPlan(long userId, long planId);
-
-        /// <summary>
-        /// <para>List users.</para>
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
-        /// </summary>
-        /// <param name="planId">Optional plan ID to filter users.</param>
-        /// <param name="seatType">Optional seat type to filter users. Allowed values: "VIEWER", "GUEST", "MEMBER", "PROVISIONAL_MEMBER", "NO_ACCESS".</param>
-        /// <param name="emails">Optional list of emails to filter users.</param>
-        /// <param name="pageSize">Optional page size for pagination. Minimum: 1, Maximum: 100, Default: 100.</param>
-        /// <param name="page">Optional page number for pagination. Minimum: 1, Default: 1.</param>
-        /// <param name="numericDates">Optional flag to return dates as numeric timestamps. Default: false.</param>
-        /// <returns><see cref="UserPlansResponse"/> object.</returns>
-        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
-        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
-        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
-        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
-        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
-        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        PaginatedResult<User> ListUsersWithFilters(
-            long? planId = null,
-            string? seatType = null,
-            IEnumerable<string>? emails = null,
-            int? pageSize = null,
-            int? page = null,
-            bool? numericDates = null
-        );
+        void RemoveUserFromPlan(long userId, long planId);
 
         /// <summary>
         /// <para>Removes a User from an organization. User is transitioned to a free collaborator with read-only access to owned sheets (unless those are optionally transferred to another user).</para>
