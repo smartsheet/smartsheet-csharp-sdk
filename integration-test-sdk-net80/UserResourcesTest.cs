@@ -79,7 +79,6 @@ namespace integration_test_sdk_net80
             Assert.IsFalse(user.LicensedSheetCreator.Value);
         }
 
-
         private void ListOneUser()
         {
             Assert.IsNotNull(smartsheet);

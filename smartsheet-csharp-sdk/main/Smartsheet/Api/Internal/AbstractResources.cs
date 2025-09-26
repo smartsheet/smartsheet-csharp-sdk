@@ -385,7 +385,6 @@ namespace Smartsheet.Api.Internal
             return (T)obj;
         }
 
-
         /// <summary>
         /// Update a resource using SmartsheetClient REST API.
         /// 
