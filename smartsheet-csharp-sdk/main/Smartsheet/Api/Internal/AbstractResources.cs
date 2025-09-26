@@ -385,56 +385,6 @@ namespace Smartsheet.Api.Internal
             return (T)obj;
         }
 
-        /// <summary>
-        /// Execute a POST operation that returns a RequestResult (typically used for upgrade/downgrade operations).
-        /// 
-        /// Exceptions:
-        ///   IllegalArgumentException : if any argument is null, or path is an empty string
-        ///   InvalidRequestException : if there is any problem with the REST API request
-        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
-        ///   ResourceNotFoundException : if the resource cannot be found
-        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
-        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
-        ///   SmartsheetException : if any other error occurred during the operation
-        /// </summary>
-        /// <param name="path"> the relative path of the resource </param>
-        /// <param name="object"> the object to send in the request body </param>
-        /// <returns> the RequestResult containing the result </returns>
-        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
-        protected internal virtual RequestResult<T> ExecuteUpgradeDowngradeOperation<T>(string path, T @object)
-        {
-            Utils.ThrowIfNull(path, @object);
-            Utils.ThrowIfEmpty(path);
-
-            HttpRequest request = null;
-            try
-            {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
-            }
-            catch (Exception e)
-            {
-                throw new SmartsheetException(e);
-            }
-
-            request.Entity = serializeToEntity<T>(@object);
-
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
-
-            RequestResult<T> result = null;
-            switch (response.StatusCode)
-            {
-                case HttpStatusCode.OK:
-                    result = this.smartsheet.JsonSerializer.deserializeResult<T>(response.Entity.GetContent());
-                    break;
-                default:
-                    HandleError(response);
-                    break;
-            }
-
-            smartsheet.HttpClient.ReleaseConnection();
-
-            return result;
-        }
 
         /// <summary>
         /// Update a resource using SmartsheetClient REST API.

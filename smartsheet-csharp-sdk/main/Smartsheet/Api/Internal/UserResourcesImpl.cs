@@ -207,19 +207,19 @@ namespace Smartsheet.Api.Internal
         /// <param name="userId">The ID of the user to upgrade.</param>
         /// <param name="planId">The ID of the plan.</param>
         /// <param name="seatType">The seat type to upgrade to ("MEMBER" or "GUEST").</param>
-        /// <returns>A <see cref="RequestResult"/> containing the result of the upgrade operation.</returns>
+        /// <returns>void</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request (400 Bad Request).</exception>
         /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization (401 Unauthorized).</exception>
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual RequestResult<object> UpgradeUser(long userId, long planId, UpgradeSeatType seatType)
+        public virtual void UpgradeUser(long userId, long planId, UpgradeSeatType seatType)
         {
             var body = new { seatType = seatType.ToString() };
             string path = $"users/{userId}/plans/{planId}/upgrade";
             
-            return this.ExecuteUpgradeDowngradeOperation<object>(path, body);
+            this.CreateResource<object>(path, typeof(object), body);
         }
 
         /// <summary>
@@ -229,19 +229,19 @@ namespace Smartsheet.Api.Internal
         /// <param name="userId">The ID of the user to downgrade.</param>
         /// <param name="planId">The ID of the plan.</param>
         /// <param name="seatType">The seat type to downgrade to ("VIEWER" or "GUEST").</param>
-        /// <returns>A <see cref="RequestResult{object}"/> containing the result of the downgrade operation.</returns>
+        /// <returns>void</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException"> User is not eligible for downgrade (e.g., not Active, not Member/Provisional/Guest, or is an admin and removeAdminStatus is false).</exception>
         /// <exception cref="AuthorizationException"> Authentication failed or token missing.</exception>
         /// <exception cref="ResourceNotFoundException">User not found.</exception>
         /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual RequestResult<object> DowngradeUser(long userId, long planId, DowngradeSeatType seatType)
+        public virtual void DowngradeUser(long userId, long planId, DowngradeSeatType seatType)
         {
             var body = new { seatType = seatType.ToString() };
             string path = $"users/{userId}/plans/{planId}/downgrade";
             
-            return this.ExecuteUpgradeDowngradeOperation<object>(path, body);
+            this.CreateResource<object>(path, typeof(object), body);
         }
 
         /// <summary>
