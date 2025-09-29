@@ -37,6 +37,10 @@ namespace Smartsheet.Api.Models
             private string firstName;
             private string lastName;
             private bool? resourceViewer;
+            private long? planId;
+            private SeatType? seatType;
+            private bool? isInternal;
+            private DateTime? seatTypeLastChangedAt;
 
             /// <summary>
             /// User object with required attributes
@@ -118,6 +122,50 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Sets the plan ID.
+            /// </summary>
+            /// <param name="planId"> the plan ID </param>
+            /// <returns> the adds the user builder </returns>
+            public AddUserBuilder SetPlanId(long? planId)
+            {
+                this.planId = planId;
+                return this;
+            }
+
+            /// <summary>
+            /// Sets the seat type.
+            /// </summary>
+            /// <param name="seatType"> the seat type </param>
+            /// <returns> the adds the user builder </returns>
+            public AddUserBuilder SetSeatType(SeatType? seatType)
+            {
+                this.seatType = seatType;
+                return this;
+            }
+
+            /// <summary>
+            /// Sets the seat type last changed at.
+            /// </summary>
+            /// <param name="seatTypeLastChangedAt"> the seat type last changed at </param>
+            /// <returns> the adds the user builder </returns>
+            public AddUserBuilder SetSeatTypeLastChangedAt(DateTime? seatTypeLastChangedAt)
+            {
+                this.seatTypeLastChangedAt = seatTypeLastChangedAt;
+                return this;
+            }
+
+            /// <summary>
+            /// Sets the is internal.
+            /// </summary>
+            /// <param name="isInternal"> the is internal </param>
+            /// <returns> the adds the user builder </returns>
+            public AddUserBuilder SetIsInternal(bool? isInternal)
+            {
+                this.isInternal = isInternal;
+                return this;
+            }
+
+            /// <summary>
             /// Gets the Admin.
             /// </summary>
             /// <returns> the Admin </returns>
@@ -172,6 +220,42 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Gets the plan ID.
+            /// </summary>
+            /// <returns> the plan ID </returns>
+            public long? GetPlanId()
+            {
+                return planId;
+            }
+
+            /// <summary>
+            /// Gets the seat type.
+            /// </summary>
+            /// <returns> the seat type </returns>
+            public SeatType? GetSeatType()
+            {
+                return seatType;
+            }
+
+            /// <summary>
+            /// Gets the seat type last changed at.
+            /// </summary>
+            /// <returns> the seat type last changed at </returns>
+            public DateTime? GetSeatTypeLastChangedAt()
+            {
+                return seatTypeLastChangedAt;
+            }
+
+            /// <summary>
+            /// Gets the is internal.
+            /// </summary>
+            /// <returns> the is internal </returns>
+            public bool? GetIsInternal()
+            {
+                return isInternal;
+            }
+
+            /// <summary>
             /// Builds the <seealso cref="User"/> object using the required fields.
             /// </summary>
             /// <returns> the user </returns>
@@ -189,6 +273,10 @@ namespace Smartsheet.Api.Models
                 user.FirstName = firstName;
                 user.LastName = lastName;
                 user.ResourceViewer = resourceViewer;
+                user.PlanId = planId;
+                user.SeatType = seatType;
+                user.SeatTypeLastChangedAt = seatTypeLastChangedAt;
+                user.IsInternal = isInternal;
                 return user;
             }
         }
@@ -204,6 +292,10 @@ namespace Smartsheet.Api.Models
             private string firstName;
             private string lastName;
             private bool? resourceViewer;
+            private long? planId;
+            private SeatType? seatType;
+            private bool? isInternal;
+            private DateTime? seatTypeLastChangedAt;
 
             /// <summary>
             /// User object containing the required attributes:
@@ -274,6 +366,50 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Sets the plan ID.
+            /// </summary>
+            /// <param name="planId"> the plan ID </param>
+            /// <returns> the UpdateUserBuilder </returns>
+            public UpdateUserBuilder SetPlanId(long? planId)
+            {
+                this.planId = planId;
+                return this;
+            }
+
+            /// <summary>
+            /// Sets the seat type.
+            /// </summary>
+            /// <param name="seatType"> the seat type </param>
+            /// <returns> the UpdateUserBuilder </returns>
+            public UpdateUserBuilder SetSeatType(SeatType? seatType)
+            {
+                this.seatType = seatType;
+                return this;
+            }
+
+            /// <summary>
+            /// Sets the seat type last changed at.
+            /// </summary>
+            /// <param name="seatTypeLastChangedAt"> the seat type last changed at </param>
+            /// <returns> the UpdateUserBuilder </returns>
+            public UpdateUserBuilder SetSeatTypeLastChangedAt(DateTime? seatTypeLastChangedAt)
+            {
+                this.seatTypeLastChangedAt = seatTypeLastChangedAt;
+                return this;
+            }
+
+            /// <summary>
+            /// Sets the is internal.
+            /// </summary>
+            /// <param name="isInternal"> the is internal </param>
+            /// <returns> the UpdateUserBuilder </returns>
+            public UpdateUserBuilder SetIsInternal(bool? isInternal)
+            {
+                this.isInternal = isInternal;
+                return this;
+            }
+
+            /// <summary>
             /// Gets the Admin.
             /// </summary>
             /// <returns> the Admin </returns>
@@ -319,6 +455,42 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Gets the plan ID.
+            /// </summary>
+            /// <returns> the plan ID </returns>
+            public long? GetPlanId()
+            {
+                return planId;
+            }
+
+            /// <summary>
+            /// Gets the seat type.
+            /// </summary>
+            /// <returns> the seat type </returns>
+            public SeatType? GetSeatType()
+            {
+                return seatType;
+            }
+
+            /// <summary>
+            /// Gets the seat type last changed at.
+            /// </summary>
+            /// <returns> the seat type last changed at </returns>
+            public DateTime? GetSeatTypeLastChangedAt()
+            {
+                return seatTypeLastChangedAt;
+            }
+
+            /// <summary>
+            /// Gets the is internal.
+            /// </summary>
+            /// <returns> the is internal </returns>
+            public bool? GetIsInternal()
+            {
+                return isInternal;
+            }
+
+            /// <summary>
             /// Builds the <seealso cref="User"/> object using the required fields.
             /// </summary>
             /// <returns> the user </returns>
@@ -331,6 +503,10 @@ namespace Smartsheet.Api.Models
                 user.FirstName = firstName;
                 user.LastName = lastName;
                 user.ResourceViewer = resourceViewer;
+                user.PlanId = planId;
+                user.SeatType = seatType;
+                user.SeatTypeLastChangedAt = seatTypeLastChangedAt;
+                user.IsInternal = isInternal;
                 return user;
             }
         }
