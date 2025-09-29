@@ -61,7 +61,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">if the resource cannot be found</exception>
         /// <exception cref="ServiceUnavailableException">if the REST API service is not available (possibly due to rate limiting)</exception>
         /// <exception cref="SmartsheetException">if there is any other error during the operation</exception>
-        PaginatedResult<User> ListUsers(IEnumerable<string> emails, long planId, SeatType seatType, PaginationParameters? paging = null);
+        PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging = null);
 
         /// <summary>
         /// <para>Add a user to the organization</para>
@@ -148,7 +148,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long maxItems);
+        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems);
 
         /// <summary>
         /// <para>Removes a user from a plan.</para>
