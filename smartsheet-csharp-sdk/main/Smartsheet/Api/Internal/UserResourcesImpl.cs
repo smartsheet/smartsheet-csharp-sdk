@@ -214,12 +214,12 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual TokenPaginatedResult<UserPlan> ListUserPlans(long userId, long lastKey, long maxItems) 
+        public virtual TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long maxItems) 
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
-            if (lastKey != 0)
+            if (lastKey != null)
             {
-                parameters.Add("lastKey", lastKey.ToString());
+                parameters.Add("lastKey", lastKey);
             }
             if (maxItems != 0)
             {

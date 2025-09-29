@@ -15,7 +15,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Gets or sets the seat type.
         /// </summary>
-        public string SeatType { get; set; }
+        public SeatType SeatType { get; set; }
 
         /// <summary>
         /// Gets or sets the seat type last changed at timestamp.
