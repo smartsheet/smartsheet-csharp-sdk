@@ -201,7 +201,7 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// <para>Upgrades a user's seat type within your Smartsheet organization or plan to a licensed Member or Guest.</para>
+        /// <para>Upgrades a user's seat type within your Smartsheet plan to a licensed Member or Guest.</para>
         /// <para>Mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/upgrade</para>
         /// </summary>
         /// <param name="userId">The ID of the user to upgrade.</param>

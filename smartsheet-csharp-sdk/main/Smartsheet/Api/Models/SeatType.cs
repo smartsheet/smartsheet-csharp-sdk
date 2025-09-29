@@ -39,7 +39,7 @@ namespace Smartsheet.Api.Models
         MEMBER,
 
         /// <summary>
-        /// Provisional member seat type - member with temporary access
+        /// Provisional member seat type - member with trial access
         /// </summary>
         PROVISIONAL_MEMBER
     }
