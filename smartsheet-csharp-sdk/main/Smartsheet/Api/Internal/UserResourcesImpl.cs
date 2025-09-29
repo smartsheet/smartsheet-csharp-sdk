@@ -76,6 +76,46 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging)
         {
+            return ListUsersInternal(emails, null, null, includes, paging);
+        }
+
+        /// <summary>
+        /// <para>List users.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
+        /// </summary>
+        /// <param name="emails">list of email addresses on which to filter the results</param>
+        /// <param name="planId">plan ID to filter users</param>
+        /// <param name="seatType">seat type to filter users</param>
+        /// <param name="paging">the pagination</param>
+        /// <returns>the list of filtered Users</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging)
+        {
+            return ListUsersInternal(emails, planId, seatType, null, paging);
+        }
+
+        /// <summary>
+        /// <para>Internal method to list users with various filtering options.</para>
+        /// <para>This method handles the common logic for both ListUsers overloads.</para>
+        /// </summary>
+        /// <param name="emails">list of email addresses on which to filter the results</param>
+        /// <param name="planId">plan ID to filter users</param>
+        /// <param name="seatType">seat type to filter users</param>
+        /// <param name="includes">elements to include in response</param>
+        /// <param name="paging">the pagination</param>
+        /// <returns>the list of filtered Users</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        private PaginatedResult<User> ListUsersInternal(IEnumerable<string> emails, long? planId, SeatType? seatType, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging) {
             StringBuilder path = new StringBuilder("users");
 
             IDictionary<string, string> parameters = new Dictionary<string,string>();
@@ -91,6 +131,14 @@ namespace Smartsheet.Api.Internal
             if (includes != null)
             {
                 parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(includes));
+            }
+            if (planId != null)
+            {
+                parameters.Add("planId", planId.ToString());
+            }
+            if (seatType != null)
+            {
+                parameters.Add("seatType", seatType.ToString());
             }
 
             path.Append(QueryUtil.GenerateUrl(null, parameters));
@@ -247,43 +295,6 @@ namespace Smartsheet.Api.Internal
         {
             string path = $"users/{userId}/plans/{planId}";
             this.DeleteResource<User>(path);
-        }
-
-        /// <summary>
-        /// <para>List users.</para>
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
-        /// </summary>
-        /// <param name="emails">list of email addresses on which to filter the results</param>
-        /// <param name="planId">plan ID to filter users</param>
-        /// <param name="seatType">seat type to filter users</param>
-        /// <param name="paging">the pagination</param>
-        /// <returns>the list of filtered Users</returns>
-        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
-        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
-        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
-        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
-        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
-        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging)
-        {
-            IDictionary<string, string> parameters = new Dictionary<string, string>();
-            if (planId != null)
-            {
-                parameters.Add("planId", planId.ToString());
-            }
-            if (seatType != null)
-            {
-                parameters.Add("seatType", seatType.ToString());
-            }
-            if (emails != null)
-                parameters.Add("emails", string.Join(",", emails));
-            if (paging != null)
-            {
-                parameters = paging.toDictionary();
-            }
-
-            string path = "users" + QueryUtil.GenerateUrl(null, parameters);
-            return this.ListResourcesWithWrapper<User>(path);
         }
 
         /// <summary>
