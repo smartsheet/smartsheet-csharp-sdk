@@ -173,6 +173,7 @@ namespace Smartsheet.Api
         /// <param name="planId">The ID of the plan.</param>
         /// <param name="seatType">The seat type to upgrade to ("MEMBER" or "GUEST").</param>
         /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
         /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
