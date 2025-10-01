@@ -201,6 +201,50 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// <para>Upgrades a user's seat type within your Smartsheet plan to a licensed Member or Guest.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/upgrade</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to upgrade.</param>
+        /// <param name="planId">The ID of the plan.</param>
+        /// <param name="seatType">The seat type to upgrade to ("MEMBER" or "GUEST").</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request (400 Bad Request).</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization (401 Unauthorized).</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual void UpgradeUser(long userId, long planId, UpgradeSeatType seatType)
+        {
+            var body = new { seatType = seatType.ToString() };
+            string path = $"users/{userId}/plans/{planId}/upgrade";
+            
+            this.CreateResource<object>(path, typeof(object), body);
+        }
+
+        /// <summary>
+        /// <para>Downgrades a user's seat type within your Smartsheet organization or plan from a licensed Member, Provisional Member or Guest to a non-licensed Viewer or Guest.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/downgrade</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to downgrade.</param>
+        /// <param name="planId">The ID of the plan.</param>
+        /// <param name="seatType">The seat type to downgrade to ("VIEWER" or "GUEST").</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException"> User is not eligible for downgrade (e.g., not Active, not Member/Provisional/Guest, or is an admin and removeAdminStatus is false).</exception>
+        /// <exception cref="AuthorizationException"> Authentication failed or token missing.</exception>
+        /// <exception cref="ResourceNotFoundException">User not found.</exception>
+        /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual void DowngradeUser(long userId, long planId, DowngradeSeatType seatType)
+        {
+            var body = new { seatType = seatType.ToString() };
+            string path = $"users/{userId}/plans/{planId}/downgrade";
+            
+            this.CreateResource<object>(path, typeof(object), body);
+        }
+
+        /// <summary>
         /// <para>Removes a user from an organization. User is transitioned to a free collaborator with read-only access to owned sheets (unless those are optionally transferred to another user).</para>
         /// <remarks>This operation is only available to system administrators.</remarks>
         /// <para>Mirrors to the following Smartsheet REST API method: DELETE /user{Id}</para>
