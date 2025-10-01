@@ -297,6 +297,7 @@ namespace Smartsheet.Api.Internal
             this.DeleteResource<User>(path);
         }
         
+        /// <summary>
         /// <para>Upgrades a user's seat type within your Smartsheet plan to a licensed Member or Guest.</para>
         /// <para>Mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/upgrade</para>
         /// </summary>
