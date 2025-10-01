@@ -1,4 +1,3 @@
-
 //    #[license]
 //    SmartsheetClient SDK for C#
 //    %%
