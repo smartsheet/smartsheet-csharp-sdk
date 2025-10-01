@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Support for POST /2.0/users/{userId}/plans/{planId}/downgrade
 - Support for POST /2.0/users/{userId}/plans/{planId}/upgrade
+- Support for GET /2.0/users/{userId}/plans
+- Support for GET /2.0/users?planId={planId}&seatType={seatType}
+- Support for DELETE /2.0/users/{userId}/plans/{planId}
 
 ## [5.1.0] - 2025-08-25
 ### Added
