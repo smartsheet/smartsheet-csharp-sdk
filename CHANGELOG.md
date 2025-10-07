@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [6.3.0] - 2025-09-25
 ### Added
+- - Add provisionalExpirationDate field to the User and UserPlan models
+
+## [6.3.0] - 2025-09-25
+### Added
 - Support for POST /2.0/users/{userId}/plans/{planId}/downgrade
 - Support for POST /2.0/users/{userId}/plans/{planId}/upgrade
 - Support for GET /2.0/users/{userId}/plans
