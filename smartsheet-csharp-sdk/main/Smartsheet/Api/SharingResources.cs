@@ -16,6 +16,7 @@
 //    limitations under the License.
 //    %[license]
 
+using System;
 using System.Collections.Generic;
 
 namespace Smartsheet.Api
@@ -38,7 +39,7 @@ namespace Smartsheet.Api
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the asset Id </param>
-        /// <param name="paging"> the pagination request </param>
+        /// <param name="lastKey"> the pagination token </param>
         /// <param name="shareScope"> when specified with a value of <see cref="ShareScope.Workspace"/>, the response will contain both item-level shares (scope='ITEM') and workspace-level shares (scope='WORKSPACE'). </param>
         /// <returns> the list of Share objects (note that an empty list will be returned if there is none). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
@@ -47,7 +48,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        PaginatedResult<Share> ListAssetShares(AssetType assetType, long assetId, PaginationParameters? paging = null, ShareScope? shareScope = null);
+        GetSharesResponse ListAssetShares(AssetType assetType, long assetId, String? lastKey = null, ShareScope? shareScope = null);
 
         /// <summary>
         /// <para>Get a specific share for the specified asset.</para>
@@ -78,7 +79,7 @@ namespace Smartsheet.Api
         /// <param name="assetId"> the Id of the asset </param>
         /// <param name="shares"> the share objects </param>
         /// <param name="sendEmail">(optional): Either true or false to indicate whether or not
-        /// to notify the user by email. Default is false.</param>
+        ///     to notify the user by email. Default is false.</param>
         /// <returns> the created share </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -86,7 +87,8 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        IList<Share> ShareAsset(AssetType assetType, long assetId, IEnumerable<Share> shares, bool? sendEmail = null);
+        BulkItemResult<Share> ShareAsset(AssetType assetType, long assetId, IEnumerable<Share> shares,
+            bool? sendEmail = null);
 
         /// <summary>
         /// <para>Updates the access level of a User or Group for the specified asset.</para>
@@ -95,7 +97,8 @@ namespace Smartsheet.Api
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the ID of the asset </param>
-        /// <param name="share"> the share </param>
+        /// <param name="shareId"> the share </param>
+        /// <param name="updateShareRequest"> the update request </param>
         /// <returns> the updated share (note that if there is no such resource, this method will throw
         ///  ResourceNotFoundException rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
@@ -104,7 +107,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Share UpdateShare(AssetType assetType, long assetId, Share share);
+        Share UpdateShare(AssetType assetType, long assetId, String shareId, UpdateShareRequest updateShareRequest);
 
         /// <summary>
         /// <para>Delete a share.</para>

@@ -437,6 +437,100 @@ namespace Smartsheet.Api.Internal
 
             return (T)obj;
         }
+        
+                /// <summary>
+        /// Update a resource using SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="body"> the object to create </param>
+        /// <returns> the updated resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal T1 PartialUpdateResource<T1, T2>(string path, T2 body)
+        {
+            Utils.ThrowIfNull(path);
+            Utils.ThrowIfEmpty(path);
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.PATCH);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = request.Entity = serializeToEntity(body);
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            Object obj = null;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    obj = smartsheet.JsonSerializer.deserialize<T1>(response.Entity.GetContent());
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+
+            return (T1)obj;
+        }
+        
+        /// <summary>
+        /// List resources using SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <returns> the resources </returns>
+        /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
+        protected internal GetSharesResponse GetShares(string path)
+        {
+            Utils.ThrowIfNull(path);
+            Utils.ThrowIfEmpty(path);
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.GET);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    smartsheet.HttpClient.ReleaseConnection();
+                    return smartsheet.JsonSerializer.deserialize<GetSharesResponse>(response.Entity.GetContent());
+                default:
+                    smartsheet.HttpClient.ReleaseConnection();
+                    HandleError(response);
+                    return null;
+            }
+        }
 
         /// <summary>
         /// List resources using SmartsheetClient REST API.

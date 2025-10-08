@@ -42,7 +42,6 @@ namespace Smartsheet.Api
         /// <remarks>
         /// Deprecated: Use SharingResources.ListAssetShares instead with the appropriate AssetType.
         /// </remarks>
-        [System.Obsolete("This method is deprecated. Use SharingResources.ListAssetShares instead.")]
         /// <param name="objectId"> the object Id </param>
         /// <param name="paging"> the pagination request </param>
         /// <param name="shareScope"> when specified with a value of <see cref="ShareScope.Workspace"/>, the response will contain both item-level shares (scope=‘ITEM’) and workspace-level shares (scope='WORKSPACE’). </param>
@@ -53,6 +52,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [System.Obsolete("This method is deprecated. Use SharingResources.ListAssetShares instead.")]
         PaginatedResult<Share> ListShares(long objectId, PaginationParameters? paging = null, ShareScope? shareScope = null);
 
         /// <summary>
@@ -66,7 +66,6 @@ namespace Smartsheet.Api
         /// <remarks>
         /// Deprecated: Use SharingResources.GetAssetShare instead with the appropriate AssetType.
         /// </remarks>
-        [System.Obsolete("This method is deprecated. Use SharingResources.GetAssetShare instead.")]
         /// <param name="objectId"> the ID of the object to share </param>
         /// <param name="shareId"> the ID of the share instance </param>
         /// <returns> the share (note that if there is no such resource, this method will throw ResourceNotFoundException
@@ -77,6 +76,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [System.Obsolete("This method is deprecated. Use SharingResources.GetAssetShare instead.")]
         Share GetShare(long objectId, string shareId);
 
         /// <summary>

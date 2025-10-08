@@ -18,7 +18,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Smartsheet.Api.Internal.Http;
 
 namespace Smartsheet.Api.Internal
 {
@@ -52,7 +54,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the asset Id </param>
-        /// <param name="paging"> the pagination request </param>
+        /// <param name="lastKey"> the pagination token </param>
         /// <param name="shareScope"> when specified with a value of <see cref="ShareScope.Workspace"/>, the response will contain both item-level shares (scope='ITEM') and workspace-level shares (scope='WORKSPACE'). </param>
         /// <returns> the list of Share objects (note that an empty list will be returned if there is none). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
@@ -61,27 +63,27 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Share> ListAssetShares(AssetType assetType, long assetId, PaginationParameters? paging = null, ShareScope? shareScope = null)
+        public virtual GetSharesResponse ListAssetShares(AssetType assetType, long assetId, String? lastKey = null, ShareScope? shareScope = null)
         {
-            StringBuilder path = new StringBuilder("/shares");
-            
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("assetType", assetType.ToString().ToLower());
             parameters.Add("assetId", assetId.ToString());
-            
+            if (lastKey != null)
+            {
+                parameters.Add("lastKey", lastKey);
+            }
+
             if (shareScope.HasValue)
             {
-                parameters.Add("include", "workspaceShares");
+                if (ShareScope.Workspace.Equals(shareScope))
+                {
+                    parameters.Add("include", "workspaceShares");
+                }
             }
             
-            if (paging != null)
-            {
-                parameters.Add("page", paging.Page.ToString());
-                parameters.Add("pageSize", paging.PageSize.ToString());
-                parameters.Add("includeAll", paging.IncludeAll.ToString().ToLower());
-            }
+            String path = QueryUtil.GenerateUrl("/2.0/shares", parameters);
             
-            return this.ListResourcesWithWrapper<Share>(path.ToString(), parameters);
+            return GetShares(path);
         }
 
         /// <summary>
@@ -103,14 +105,15 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Share GetAssetShare(AssetType assetType, long assetId, string shareId)
         {
-            StringBuilder path = new StringBuilder("/shares/");
-            path.Append(shareId);
+            StringBuilder url = new StringBuilder("/2.0/shares/");
+            url.Append(shareId);
             
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("assetType", assetType.ToString().ToLower());
             parameters.Add("assetId", assetId.ToString());
-            
-            return this.GetResource<Share>(path.ToString(), parameters);
+            String path = QueryUtil.GenerateUrl(url.ToString(), parameters);
+
+            return GetResource<Share>(path, typeof(Share));
         }
 
         /// <summary>
@@ -123,7 +126,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="assetId"> the Id of the asset </param>
         /// <param name="shares"> the share objects </param>
         /// <param name="sendEmail">(optional): Either true or false to indicate whether or not
-        /// to notify the user by email. Default is false.</param>
+        ///     to notify the user by email. Default is false.</param>
         /// <returns> the created share </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -131,9 +134,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual IList<Share> ShareAsset(AssetType assetType, long assetId, IEnumerable<Share> shares, bool? sendEmail = null)
+        public virtual BulkItemResult<Share> ShareAsset(AssetType assetType, long assetId, IEnumerable<Share> shares, bool? sendEmail = null)
         {
-            StringBuilder path = new StringBuilder("/shares");
+            StringBuilder url = new StringBuilder("/2.0/shares");
             
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("assetType", assetType.ToString().ToLower());
@@ -144,7 +147,35 @@ namespace Smartsheet.Api.Internal
                 parameters.Add("sendEmail", sendEmail.ToString().ToLower());
             }
             
-            return this.PostAndReceiveList<IEnumerable<Share>, Share>(path.ToString(), shares, parameters);
+            String path = QueryUtil.GenerateUrl(url.ToString(), parameters);
+            
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(Smartsheet.BaseURI, path), HttpMethod.POST);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+            
+            request.Entity = serializeToEntity(shares);
+            HttpResponse response = Smartsheet.HttpClient.Request(request);
+            
+            BulkItemRowResult bulkItemResult = null;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    Smartsheet.HttpClient.ReleaseConnection();
+                    return Smartsheet.JsonSerializer.deserialize<BulkItemResult<Share>>(response.Entity.GetContent());
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            Smartsheet.HttpClient.ReleaseConnection();
+
+            return null;
         }
 
         /// <summary>
@@ -154,7 +185,8 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the ID of the asset </param>
-        /// <param name="share"> the share </param>
+        /// <param name="shareId"> the ID of the share </param>
+        /// <param name="updateShareRequest"> the update request </param>
         /// <returns> the updated share (note that if there is no such resource, this method will throw
         ///  ResourceNotFoundException rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
@@ -163,16 +195,17 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Share UpdateShare(AssetType assetType, long assetId, Share share)
+        public virtual Share UpdateShare(AssetType assetType, long assetId, String shareId, UpdateShareRequest updateShareRequest)
         {
-            StringBuilder path = new StringBuilder("/shares/");
-            path.Append(share.Id);
+            StringBuilder url = new StringBuilder("/2.0/shares/");
+            url.Append(shareId);
             
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("assetType", assetType.ToString().ToLower());
             parameters.Add("assetId", assetId.ToString());
+            String path = QueryUtil.GenerateUrl(url.ToString(), parameters);
             
-            return this.UpdateResource<Share, Share>(path.ToString(), share, parameters);
+            return PartialUpdateResource<Share, UpdateShareRequest>(path, updateShareRequest);
         }
 
         /// <summary>
@@ -191,14 +224,16 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual void DeleteShare(AssetType assetType, long assetId, string shareId)
         {
-            StringBuilder path = new StringBuilder("/shares/");
-            path.Append(shareId);
+            StringBuilder url = new StringBuilder("/2.0/shares/");
+            url.Append(shareId);
             
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("assetType", assetType.ToString().ToLower());
             parameters.Add("assetId", assetId.ToString());
             
-            this.DeleteResource<Share>(path.ToString(), parameters);
+            String path = QueryUtil.GenerateUrl(url.ToString(), parameters);
+            
+            DeleteResource<Share>(path);
         }
     }
 }

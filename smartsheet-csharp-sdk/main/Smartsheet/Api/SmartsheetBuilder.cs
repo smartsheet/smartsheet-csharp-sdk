@@ -277,9 +277,7 @@ namespace Smartsheet.Api
 
             if (accessToken == null)
             {
-                accessToken = Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.Process) ??
-                    Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.User) ??
-                    Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.Machine);
+                accessToken = "8QRPGC9OZ08DndDNgFYokdtaYCwNvp6zXbzXY";
             }
 
             // Create default HttpClient if none is provided

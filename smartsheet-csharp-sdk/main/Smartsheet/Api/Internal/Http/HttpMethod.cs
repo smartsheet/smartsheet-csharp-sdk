@@ -41,7 +41,11 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// The delete
         /// </summary>
-        DELETE
+        DELETE,
+        /// <summary>
+        /// The patch
+        /// </summary>
+        PATCH
     }
 
 }
