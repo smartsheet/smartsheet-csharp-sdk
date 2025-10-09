@@ -16,7 +16,7 @@ namespace integration_test_sdk_net80
             long workspaceId = CreateWorkspace(smartsheet);
             
             // Create a share object
-            Share share = new Share.CreateShareBuilder("alokin8@gmail.com", AccessLevel.EDITOR).Build();
+            Share share = new Share.CreateShareBuilder("sharingexp_test@smartsheet.biz", AccessLevel.EDITOR).Build();
             
             // Test sharing for different asset types
             TestAssetSharing(smartsheet, AssetType.SHEET, sheetId, share);
