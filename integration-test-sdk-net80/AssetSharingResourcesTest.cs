@@ -4,7 +4,7 @@ using Smartsheet.Api.Models;
 namespace integration_test_sdk_net80
 {
     [TestClass]
-    public class SharingResourcesTest
+    public class AssetSharingResourcesTest
     {
         [TestMethod]
         public void TestSharingResources()
@@ -30,7 +30,7 @@ namespace integration_test_sdk_net80
         private static void TestAssetSharing(SmartsheetClient smartsheet, AssetType assetType, long assetId, Share share)
         {
             // Share the asset
-            BulkItemResult<Share> shares = smartsheet.SharingResources.ShareAsset(assetType, assetId, new Share[] { share }, false);
+            BulkItemResult<Share> shares = smartsheet.AssetSharingResources.ShareAsset(assetType, assetId, new Share[] { share }, false);
             Assert.IsNotNull(shares);
             Assert.IsTrue(shares.Result.Count > 0);
             string shareId = shares.Result[0].Id;
@@ -38,23 +38,23 @@ namespace integration_test_sdk_net80
             // Assert.IsNotNull(shareId);
             
             // List shares for the asset
-            GetSharesResponse shareList = smartsheet.SharingResources.ListAssetShares(assetType, assetId);
+            ListAssetSharesResponse shareList = smartsheet.AssetSharingResources.ListAssetShares(assetType, assetId);
             Assert.IsNotNull(shareList);
             Assert.IsTrue(shareList.Items.Count > 0);
             
             // Get a specific share
-            Share retrievedShare = smartsheet.SharingResources.GetAssetShare(assetType, assetId, shareId);
+            Share retrievedShare = smartsheet.AssetSharingResources.GetAssetShare(assetType, assetId, shareId);
             Assert.IsNotNull(retrievedShare);
             Assert.AreEqual(shareId, retrievedShare.Id);
             Assert.AreEqual(AccessLevel.EDITOR, retrievedShare.AccessLevel);
             
             // Update the share
-            Share updatedShare = smartsheet.SharingResources.UpdateShare(assetType, assetId, shareId, new UpdateShareRequest { AccessLevel = AccessLevel.VIEWER });
+            Share updatedShare = smartsheet.AssetSharingResources.UpdateAssetShare(assetType, assetId, shareId, new UpdateShareRequest { AccessLevel = AccessLevel.VIEWER });
             Assert.IsNotNull(updatedShare);
             Assert.AreEqual(AccessLevel.VIEWER, updatedShare.AccessLevel);
             
             // Delete the share
-            smartsheet.SharingResources.DeleteShare(assetType, assetId, shareId);
+            smartsheet.AssetSharingResources.DeleteAssetShare(assetType, assetId, shareId);
         }
         
         private static long CreateWorkspace(SmartsheetClient smartsheet)

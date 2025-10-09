@@ -7,7 +7,7 @@ namespace Smartsheet.Api.Models
     /// <para>Object returned for the get /shares endpoint.</para>
     /// This object provides metadata which can be used to perform paging on potentially large data sets.
     /// </summary>
-    public class GetSharesResponse
+    public class ListAssetSharesResponse
     {
         
         /// <summary>

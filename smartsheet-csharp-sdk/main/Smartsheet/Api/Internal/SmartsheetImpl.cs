@@ -257,7 +257,7 @@ namespace Smartsheet.Api.Internal
         /// as null, and can be set via corresponding setter, therefore effectively the assumed user can be updated in the
         /// SmartsheetImpl in thread safe manner.
         /// </summary>
-        private SharingResources sharing;
+        private AssetSharingResources assetSharing;
 
         /// <summary>
         /// static logger 
@@ -637,12 +637,12 @@ namespace Smartsheet.Api.Internal
         /// Returns the SharingResources instance that provides access to asset-based sharing resources.
         /// </summary>
         /// <returns> the sharing resources </returns>
-        public virtual SharingResources SharingResources
+        public virtual AssetSharingResources AssetSharingResources
         {
             get
             {
-                Interlocked.CompareExchange<SharingResources>(ref sharing, new SharingResourcesImpl(this), null);
-                return sharing;
+                Interlocked.CompareExchange<AssetSharingResources>(ref assetSharing, new AssetSharingResourcesImpl(this), null);
+                return assetSharing;
             }
         }
 
