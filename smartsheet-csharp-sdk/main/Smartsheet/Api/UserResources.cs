@@ -47,6 +47,23 @@ namespace Smartsheet.Api
         PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes = null, PaginationParameters? paging = null);
 
         /// <summary>
+        /// <para>Gets the list of Users in the organization with plan and seat type filtering.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
+        /// </summary>
+        /// <param name="emails">list of email addresses on which to filter the results</param>
+        /// <param name="planId">plan ID to filter users</param>
+        /// <param name="seatType">seat type to filter users</param>
+        /// <param name="paging">the pagination</param>
+        /// <returns>the list of filtered Users</returns>
+        /// <exception cref="System.InvalidOperationException">if any argument is null or empty string</exception>
+        /// <exception cref="InvalidRequestException">if there is any problem with the REST API request</exception>
+        /// <exception cref="AuthorizationException">if there is any problem with the REST API authorization (access token)</exception>
+        /// <exception cref="ResourceNotFoundException">if the resource cannot be found</exception>
+        /// <exception cref="ServiceUnavailableException">if the REST API service is not available (possibly due to rate limiting)</exception>
+        /// <exception cref="SmartsheetException">if there is any other error during the operation</exception>
+        PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging = null);
+
+        /// <summary>
         /// <para>Add a user to the organization</para>
         /// <para>It mirrors to the following Smartsheet REST API method: POST /Users</para>
         /// </summary>
@@ -116,6 +133,69 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         User UpdateUser(User user);
+
+        /// <summary>
+        /// <para>Fetch all user's plans.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users/{userId}/plans</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to fetch plans for.</param>
+        /// <param name="lastKey">The last key for pagination.</param>
+        /// <param name="maxItems">The maximum number of items to return.</param>
+        /// <returns><see cref="TokenPaginatedResult{T}"/> object containing <see cref="UserPlan"/>.</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems);
+
+        /// <summary>
+        /// <para>Removes a user from a plan.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: DELETE /2.0/users/{userId}/plans/{planId}</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to remove from the plan.</param>
+        /// <param name="planId">The ID of the plan to remove the user from.</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        void RemoveUserFromPlan(long userId, long planId);
+
+        /// <summary>
+        /// <para>Upgrades a user's seat type within your Smartsheet organization or plan to a licensed Member or Guest.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/upgrade</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to upgrade.</param>
+        /// <param name="planId">The ID of the plan.</param>
+        /// <param name="seatType">The seat type to upgrade to ("MEMBER" or "GUEST").</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        void UpgradeUser(long userId, long planId, UpgradeSeatType seatType);
+
+        /// <summary>
+        /// <para>Downgrades a user's seat type within your Smartsheet organization or plan from a licensed Member, Provisional Member or Guest to a non-licensed Viewer or Guest.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/downgrade</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to downgrade.</param>
+        /// <param name="planId">The ID of the plan.</param>
+        /// <param name="seatType">The seat type to downgrade to ("VIEWER" or "GUEST").</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException"> User is not eligible for downgrade (e.g., not Active, not Member/Provisional/Guest, or is an admin and removeAdminStatus is false).</exception>
+        /// <exception cref="AuthorizationException"> Authentication failed or token missing.</exception>
+        /// <exception cref="ResourceNotFoundException">User not found.</exception>
+        /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        void DowngradeUser(long userId, long planId, DowngradeSeatType seatType);
 
         /// <summary>
         /// <para>Removes a User from an organization. User is transitioned to a free collaborator with read-only access to owned sheets (unless those are optionally transferred to another user).</para>

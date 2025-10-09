@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 //    limitations under the License.
 //    %[license]
 
+using System;
 using System.Collections.Generic;
 
 namespace Smartsheet.Api
@@ -25,7 +26,7 @@ namespace Smartsheet.Api
 
     /// <summary>
     /// <para>This interface provides methods to access Workspace resources.</para>
-    /// 
+    ///
     /// <para>Thread Safety: Implementation of this interface must be thread safe.</para>
     /// </summary>
     public interface WorkspaceResources
@@ -45,11 +46,26 @@ namespace Smartsheet.Api
         PaginatedResult<Workspace> ListWorkspaces(PaginationParameters? paging = null);
 
         /// <summary>
+        /// <para>List all Workspaces using token-based pagination.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /Workspaces</para>
+        /// <remarks>This operation supports token-based pagination of results.</remarks>
+        /// </summary>
+        /// <param name="tokenPaging">Token-based pagination parameters</param>
+        /// <returns> the list of Workspaces with pagination token (note that an empty list will be returned if there are none) </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        TokenPaginatedResult<Workspace> ListWorkspaces(ListWorkspacesTokenPaginationParameters? tokenPaging);
+
+        /// <summary>
         /// <para>Gets the specified Workspace (and lists its contents).</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceid}</para>
-        /// <remarks><para>By default, this operation only returns the top-level items in the Workspace. To load all of the contents, 
+        /// <remarks><para>By default, this operation only returns the top-level items in the Workspace. To load all of the contents,
         /// including nested Folders, include the loadAll query string parameter with a value of true.</para>
-        /// <para>If no Folders, Sheets, Reports, or Templates are present in the Workspace, the corresponding attribute 
+        /// <para>If no Folders, Sheets, Reports, or Templates are present in the Workspace, the corresponding attribute
         /// (e.g., "folders", "sheets") will not be present in the response object.</para></remarks>
         /// </summary>
         /// <param name="workspaceid">the workspace id</param>
@@ -63,6 +79,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated. Use GetWorkspaceChildren and GetWorkspaceMetadata instead.")]
         Workspace GetWorkspace(long workspaceid, bool? loadAll = null, IEnumerable<WorkspaceInclusion>? include = null);
 
         /// <summary>
@@ -145,11 +162,48 @@ namespace Smartsheet.Api
         WorkspaceSheetResources SheetResources { get; }
 
         /// <summary>
-        /// <para>Return the ShareResources object that provides access to Share resources associated with Workspace 
+        /// <para>Return the ShareResources object that provides access to Share resources associated with Workspace
         /// resources.</para>
         /// </summary>
         /// <returns> the share resources object </returns>
         ShareResources ShareResources { get; }
+
+        /// <summary>
+        /// <para>Gets a page of a workspace's children of the specified type.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceId}/children</para>
+        /// </summary>
+        /// <param name="workspaceId">the workspace id</param>
+        /// <param name="childrenResourceTypes">A comma-separated list of the child types to include in the response</param>
+        /// <param name="include">A comma-separated list of optional elements to include in the response</param>
+        /// <param name="numericDates">If true, dates are accepted and returned in Unix epoch time. Default is false, which means ISO-8601 format</param>
+        /// <param name="accessApiLevel">Allows COMMENTER access for inputs and return values. For backwards-compatibility, VIEWER is the default</param>
+        /// <param name="lastKey">The lastKey token returned from the previous page of results</param>
+        /// <param name="maxItems">The maximum number of items to return in the response (default: 100, min: 100, max: 500)</param>
+        /// <returns>An array of asset references with a pagination token if there are more results</returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        TokenPaginatedResult<object> GetWorkspaceChildren(long workspaceId, IEnumerable<ChildrenResourceType>? childrenResourceTypes = null, IEnumerable<ChildrenInclusion>? include = null, bool? numericDates = null, int? accessApiLevel = null, string? lastKey = null, int? maxItems = null);
+
+        /// <summary>
+        /// <para>Gets the metadata of a workspace.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceId}/metadata</para>
+        /// </summary>
+        /// <param name="workspaceId">the workspace id</param>
+        /// <param name="include">A comma-separated list of optional elements to include in the response</param>
+        /// <param name="numericDates">If true, dates are accepted and returned in Unix epoch time. Default is false, which means ISO-8601 format</param>
+        /// <param name="accessApiLevel">Allows COMMENTER access for inputs and return values. For backwards-compatibility, VIEWER is the default</param>
+        /// <returns>The metadata of a workspace</returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Workspace GetWorkspaceMetadata(long workspaceId, IEnumerable<WorkspaceInclusion>? include = null, bool? numericDates = null, int? accessApiLevel = null);
     }
 
 }

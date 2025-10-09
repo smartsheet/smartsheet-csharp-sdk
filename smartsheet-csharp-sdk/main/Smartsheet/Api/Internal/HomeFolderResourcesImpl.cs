@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,9 +26,10 @@ namespace Smartsheet.Api.Internal
 
     /// <summary>
     /// This is the implementation of the HomeFolderResources.
-    /// 
+    ///
     /// Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class HomeFolderResourcesImpl : AbstractResources, HomeFolderResources
     {
         /// <summary>
@@ -43,7 +44,7 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// <para>List Folders under home.</para>
-        /// 
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         /// GET /home/Folders</para>
         /// </summary>
@@ -60,6 +61,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated.")]
         public virtual PaginatedResult<Folder> ListFolders(PaginationParameters? paging)
         {
             StringBuilder path = new StringBuilder("home/folders");
@@ -72,7 +74,7 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// <para>Create a folder in home.</para>
-        /// 
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         /// POST /home/Folders</para>
         /// </summary>
@@ -84,6 +86,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated.")]
         public virtual Folder CreateFolder(Folder folder)
         {
             return this.CreateResource<Folder>("home/folders", typeof(Folder), folder);

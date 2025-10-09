@@ -581,6 +581,53 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// List resources using SmartsheetClient REST API with token-based pagination.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <returns> the resources with token-based pagination </returns>
+        /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
+        protected internal virtual TokenPaginatedResult<T> ListResourcesWithTokenWrapper<T>(string path)
+        {
+            Utils.ThrowIfNull(path);
+            Utils.ThrowIfEmpty(path);
+
+            HttpRequest request = null;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.GET);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+
+            TokenPaginatedResult<T> obj = null;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    obj = this.smartsheet.JsonSerializer.DeserializeTokenDataWrapper<T>(response.Entity.GetContent());
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+
+            return obj;
+        }
+
+        /// <summary>
         /// List resources using SmartsheetClient REST API.
         /// 
         /// Exceptions:

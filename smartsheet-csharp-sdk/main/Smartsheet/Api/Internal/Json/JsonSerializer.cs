@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,7 +26,7 @@ namespace Smartsheet.Api.Internal.Json
 
     /// <summary>
     /// This interface defines methods to handle JSON serialization/de-serialization.
-    /// 
+    ///
     /// Thread Safety: Implementation of this interface must be thread safe.
     /// </summary>
     public interface JsonSerializer
@@ -34,12 +34,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// Serialize an object to JSON.
-        /// 
+        ///
         /// Parameters: - object : the object to serialize - outputStream : the output stream to which the JSON will be
         /// written
-        /// 
+        ///
         /// Returns: None
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -50,12 +50,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize an object from JSON.
-        /// 
+        ///
         /// Parameters: - objectClass : the class of the object to de-serialize - inputStream : the input stream from which
         /// the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized object
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -67,12 +67,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize an object from A JSON String.
-        /// 
+        ///
         /// Parameters: - objectClass : the class of the object to de-serialize - string : the input stream from which
         /// the JSON will be stored
-        /// 
+        ///
         /// Returns: the de-serialized object
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -84,12 +84,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize an object list from JSON.
-        /// 
+        ///
         /// Parameters: - objectClass : the class of the object (of the list) to de-serialize - inputStream : the input
         /// stream from which the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized list
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -100,12 +100,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize an object to DataWrapper from JSON.
-        /// 
+        ///
         /// Parameters: - objectClass : the class of the object to de-serialize - inputStream : the input stream from which
         /// the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized object
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -114,6 +114,24 @@ namespace Smartsheet.Api.Internal.Json
         /// <exception cref="Newtonsoft.Json.JsonException"> the Json parse exception </exception>
         /// <exception cref="IOException"> Signals that an I/O exception has occurred. </exception>
         PaginatedResult<T> DeserializeDataWrapper<T>(StreamReader inputStream);
+
+        /// <summary>
+        /// De-serialize an object to TokenPaginatedResult from JSON.
+        ///
+        /// Parameters: - objectClass : the class of the object to de-serialize
+        ///             - inputStream : the input stream from which
+        /// the JSON will be read
+        ///
+        /// Returns: the de-serialized TokenPaginatedResult object
+        ///
+        /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
+        /// other error occurred during the operation
+        /// </summary>
+        /// <param name="inputStream"> the input stream </param>
+        /// <returns> the TokenPaginatedResult </returns>
+        /// <exception cref="Newtonsoft.Json.JsonException"> the Json parse exception </exception>
+        /// <exception cref="IOException"> Signals that an I/O exception has occurred. </exception>
+        TokenPaginatedResult<T> DeserializeTokenDataWrapper<T>(StreamReader inputStream);
 
         /// <summary>
         /// De-serialize an object list from JSON to a Map.
@@ -125,12 +143,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize a RequestResult&lt;T&gt; object from JSON.
-        /// 
+        ///
         /// Parameters: - objectClass : the class of the object (of the RequestResult) to de-serialize - inputStream : the input
         /// stream from which the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized RequestResult
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -141,12 +159,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize a RequestResult&lt;List&lt;T&gt;&gt; object from JSON.
-        /// 
+        ///
         /// Parameters: - objectClass : the class of the object (of the RequestResult) to de-serialize - inputStream : the input
         /// stream from which the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized RequestResult
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -157,12 +175,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize a CopyOrMoveRowResult object from JSON.
-        /// 
-        /// Parameters: 
+        ///
+        /// Parameters:
         ///     - inputStream : the input stream from which the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized CopyOrMoveRowResult
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -173,12 +191,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize to a EventResult (holds pagination info) object from JSON.
-        /// 
+        ///
         /// Parameters:
         ///     - inputStream : the input stream from which the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized EventResult
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
