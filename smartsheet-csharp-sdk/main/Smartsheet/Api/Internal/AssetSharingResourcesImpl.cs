@@ -52,7 +52,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the asset Id </param>
         /// <param name="tokenPaginationParameters"> contains token pagination parameters </param>
-        /// <param name="sharingInclusions"> when specified with a value of <see cref="SharingInclusion.WORKSPACE"/>, the response will contain both item-level shares (scope='ITEM') and workspace-level shares (scope='WORKSPACE'). </param>
+        /// <param name="sharingInclude"> when specified with a value of <see cref="ShareScope.WORKSPACE"/>, the response will contain both item-level shares (scope='ITEM') and workspace-level shares (scope='WORKSPACE'). </param>
         /// <returns> the list of Share objects (note that an empty list will be returned if there is none). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -61,7 +61,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual ListAssetSharesResponse ListAssetShares(AssetType assetType, long assetId,
-            TokenPaginationParameters? tokenPaginationParameters = null, List<SharingInclusion>? sharingInclusions = null)
+            TokenPaginationParameters? tokenPaginationParameters = null, ShareScope? sharingInclude = null)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("assetType", assetType.ToString().ToLower());
@@ -79,9 +79,9 @@ namespace Smartsheet.Api.Internal
                 }
             }
 
-            if (sharingInclusions != null && sharingInclusions.Contains(SharingInclusion.WORKSPACE))
+            if (sharingInclusion != null)
             {
-                parameters.Add("sharingInclude", nameof(SharingInclusion.WORKSPACE));
+                parameters.Add("sharingInclude", sharingInclusion.ToString());
             }
 
             String path = QueryUtil.GenerateUrl("/2.0/shares", parameters);
