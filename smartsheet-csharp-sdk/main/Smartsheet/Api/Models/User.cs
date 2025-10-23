@@ -41,6 +41,7 @@ namespace Smartsheet.Api.Models
             private SeatType? seatType;
             private bool? isInternal;
             private DateTime? seatTypeLastChangedAt;
+            private DateTime? provisionalExpirationDate;
 
             /// <summary>
             /// User object with required attributes
@@ -155,6 +156,17 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Sets the expiration date of the provisional seat type of the user.
+            /// </summary>
+            /// <param name="provisionalExpirationDate"> the provisional expiration date </param>
+            /// <returns> the adds the user builder </returns>
+            public AddUserBuilder SetProvisionalExpirationDate(DateTime? provisionalExpirationDate)
+            {
+                this.provisionalExpirationDate = provisionalExpirationDate;
+                return this;
+            }
+
+            /// <summary>
             /// Sets the is internal.
             /// </summary>
             /// <param name="isInternal"> the is internal </param>
@@ -247,6 +259,15 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Gets expiration date of the provisional seat type of the user.
+            /// </summary>
+            /// <returns> the provisional expiration date </returns>
+            public DateTime? GetProvisionalExpirationDate()
+            {
+                return provisionalExpirationDate;
+            }
+
+            /// <summary>
             /// Gets the is internal.
             /// </summary>
             /// <returns> the is internal </returns>
@@ -276,6 +297,7 @@ namespace Smartsheet.Api.Models
                 user.PlanId = planId;
                 user.SeatType = seatType;
                 user.SeatTypeLastChangedAt = seatTypeLastChangedAt;
+                user.ProvisionalExpirationDate = provisionalExpirationDate;
                 user.IsInternal = isInternal;
                 return user;
             }
@@ -296,6 +318,7 @@ namespace Smartsheet.Api.Models
             private SeatType? seatType;
             private bool? isInternal;
             private DateTime? seatTypeLastChangedAt;
+            private DateTime? provisionalExpirationDate;
 
             /// <summary>
             /// User object containing the required attributes:
@@ -399,6 +422,17 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Sets the expiration date of the provisional seat type of the user.
+            /// </summary>
+            /// <param name="provisionalExpirationDate"> the provisional expiration date </param>
+            /// <returns> the UpdateUserBuilder </returns>
+            public UpdateUserBuilder SetProvisionalExpirationDate(DateTime? provisionalExpirationDate)
+            {
+                this.provisionalExpirationDate = provisionalExpirationDate;
+                return this;
+            }
+
+            /// <summary>
             /// Sets the is internal.
             /// </summary>
             /// <param name="isInternal"> the is internal </param>
@@ -482,6 +516,15 @@ namespace Smartsheet.Api.Models
             }
 
             /// <summary>
+            /// Gets expiration date of the provisional seat type of the user.
+            /// </summary>
+            /// <returns> the provisional expiration date </returns>
+            public DateTime? GetProvisionalExpirationDate()
+            {
+                return provisionalExpirationDate;
+            }
+
+            /// <summary>
             /// Gets the is internal.
             /// </summary>
             /// <returns> the is internal </returns>
@@ -506,6 +549,7 @@ namespace Smartsheet.Api.Models
                 user.PlanId = planId;
                 user.SeatType = seatType;
                 user.SeatTypeLastChangedAt = seatTypeLastChangedAt;
+                user.ProvisionalExpirationDate = provisionalExpirationDate;
                 user.IsInternal = isInternal;
                 return user;
             }
