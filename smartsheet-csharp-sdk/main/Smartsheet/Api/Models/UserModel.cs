@@ -140,6 +140,11 @@ namespace Smartsheet.Api.Models
         private DateTime? seatTypeLastChangedAt;
 
         /// <summary>
+        /// Gets the expiration date of the provisional seat type of the user.
+        /// </summary>
+        private DateTime? provisionalExpirationDate;
+
+        /// <summary>
         /// Gets the is internal.
         /// </summary>
         private bool? isInternal;
@@ -297,6 +302,15 @@ namespace Smartsheet.Api.Models
         {
             get { return seatTypeLastChangedAt; }
             set { seatTypeLastChangedAt = value; }
+        }
+
+        /// <summary>
+        /// Gets the expiration date of the provisional seat type of the user.
+        /// </summary>
+        public DateTime? ProvisionalExpirationDate
+        {
+            get { return provisionalExpirationDate; }
+            set { provisionalExpirationDate = value; }
         }
 
         /// <summary>
