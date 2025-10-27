@@ -171,7 +171,7 @@ namespace Smartsheet.Api
         /// PUT /reports/{reportId}/shares/{shareId}</para>
         /// </summary>
         /// <remarks>
-        /// Deprecated: Use AssetSharingResources.UpdateShare instead with the appropriate AssetType.
+        /// Deprecated: Use AssetSharingResources.UpdateAssetShare instead with the appropriate AssetType.
         /// </remarks>
         [System.Obsolete("This method is deprecated. Use AssetSharingResources.UpdateAssetShare instead.")]
         /// <param name="objectId"> the ID of the object to share, (report, sheet, or workspace)  </param>
@@ -194,7 +194,7 @@ namespace Smartsheet.Api
         /// DELETE /reports/{reportId}/shares/{shareId}</para>
         /// </summary>
         /// <remarks>
-        /// Deprecated: Use AssetSharingResources.DeleteShare instead with the appropriate AssetType.
+        /// Deprecated: Use AssetSharingResources.DeleteAssetShare instead with the appropriate AssetType.
         /// </remarks>
         [System.Obsolete("This method is deprecated. Use AssetSharingResources.DeleteAssetShare instead.")]
         /// <param name="objectId"> the ID of the object to share, (report, sheet, or workspace)  </param>
