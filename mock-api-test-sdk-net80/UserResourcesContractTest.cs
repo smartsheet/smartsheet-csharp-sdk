@@ -11,7 +11,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUserPlansGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
             
             long userId = 12345678L;
             String lastKey = "abcDefGhIjKlMnOpQrStUvWxYz";
@@ -34,7 +34,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             long userId = 12345678L;
             String lastKey = "abcDefGhIjKlMnOpQrStUvWxYz";
@@ -55,7 +55,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             long userId = 12345678L;
 
@@ -73,7 +73,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
 
             long userId = 12345678L;
 
@@ -85,7 +85,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
 
             long userId = 12345678L;
 
@@ -97,7 +97,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersGeneratedUrlIsCorrectIncludeAllTrue()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             List<String> emails = new List<String> { "test.user@smartsheet.com" };
             long planId = 1234567890123456L;
@@ -126,7 +126,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersGeneratedUrlIsCorrectIncludeAllFalse()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             List<String> emails = new List<String> { "test.user@smartsheet.com" };
             long planId = 1234567890123456L;
@@ -157,7 +157,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/users/list-users/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-users/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             long planId = 1234567890123456;
 
@@ -187,7 +187,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             long planId = 1234567890123456;
 
@@ -214,7 +214,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUsersError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
 
             long planId = 1234567890123456;
 
@@ -226,7 +226,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUsersError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeader(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
 
             long planId = 1234567890123456;
 

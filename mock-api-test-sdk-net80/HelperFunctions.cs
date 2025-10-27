@@ -17,7 +17,7 @@ namespace mock_api_test_sdk_net80
             return ss;
         }
 
-        public static SmartsheetClient SetupClientWithCustomHeader(Dictionary<string, string> customHeaders)
+        public static SmartsheetClient SetupClientWithCustomHeaders(Dictionary<string, string> customHeaders)
         {
             TestHttpClientWithCustomHeader testHttpClient = new TestHttpClientWithCustomHeader(customHeaders);
             SmartsheetClient ss = new SmartsheetBuilder()
