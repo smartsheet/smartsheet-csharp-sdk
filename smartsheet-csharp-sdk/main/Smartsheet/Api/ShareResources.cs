@@ -173,7 +173,7 @@ namespace Smartsheet.Api
         /// <remarks>
         /// Deprecated: Use AssetSharingResources.UpdateShare instead with the appropriate AssetType.
         /// </remarks>
-        [System.Obsolete("This method is deprecated. Use AssetSharingResources.UpdateShare instead.")]
+        [System.Obsolete("This method is deprecated. Use AssetSharingResources.UpdateAssetShare instead.")]
         /// <param name="objectId"> the ID of the object to share, (report, sheet, or workspace)  </param>
         /// <param name="share"> the share </param>
         /// <returns> the updated share (note that if there is no such resource, this method will throw
@@ -196,7 +196,7 @@ namespace Smartsheet.Api
         /// <remarks>
         /// Deprecated: Use AssetSharingResources.DeleteShare instead with the appropriate AssetType.
         /// </remarks>
-        [System.Obsolete("This method is deprecated. Use AssetSharingResources.DeleteShare instead.")]
+        [System.Obsolete("This method is deprecated. Use AssetSharingResources.DeleteAssetShare instead.")]
         /// <param name="objectId"> the ID of the object to share, (report, sheet, or workspace)  </param>
         /// <param name="shareId"> the ID of the user to whom the object is shared </param>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
