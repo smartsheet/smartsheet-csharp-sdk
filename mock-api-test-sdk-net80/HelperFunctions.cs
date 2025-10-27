@@ -17,6 +17,18 @@ namespace mock_api_test_sdk_net80
             return ss;
         }
 
+        public static SmartsheetClient SetupClientWithCustomHeader(Dictionary<string, string> customHeaders)
+        {
+            TestHttpClientWithCustomHeader testHttpClient = new TestHttpClientWithCustomHeader(customHeaders);
+            SmartsheetClient ss = new SmartsheetBuilder()
+            .SetBaseURI("http://localhost:8082/2.0/")
+            .SetAccessToken("aaaaaaaaaaaaaaaaaaaaaaaaaa")
+            .SetHttpClient(testHttpClient)
+            .Build();
+
+            return ss;
+        }
+
         ///<summary>
         /// Runs the action statement and asserts that it causes an exception with the expected type and message
         ///</summary>
