@@ -382,6 +382,10 @@ namespace Smartsheet.Api.Internal.Http
             {
                 restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Delete);
             }
+            else if (HttpMethod.PATCH == smartsheetRequest.Method)
+            {
+                restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Patch);
+            }
             else
             {
                 throw new System.NotSupportedException("Request method " + smartsheetRequest.Method + " is not supported!");
