@@ -5,12 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
-## [6.5.0] - 2025-10-23
+## [6.4.0] - 2025-10-27
 ### Added
 - Add provisionalExpirationDate field to the User and UserPlan models
-
-### Changed
-- Deprecated old asset-specific sharing methods in `ShareResources` with notices to use the new asset-based methods
 
 ## [6.4.0] - 2025-10-09
 ### Added

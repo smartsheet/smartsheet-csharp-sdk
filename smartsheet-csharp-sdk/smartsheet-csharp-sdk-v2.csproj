@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <Nullable>annotations</Nullable>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>    
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon />
     <Win32Resource />
@@ -26,7 +26,7 @@
   <ItemGroup>
     <Folder Include="Properties\" />
     <Compile Remove="Properties\AssemblyInfo.cs" />
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <Compile Remove="docs\**" />
     <Compile Remove="documentation\**" />
