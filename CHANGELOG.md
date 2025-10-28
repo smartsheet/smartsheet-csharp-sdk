@@ -4,8 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
+## [6.5.0] - 2025-10-27
+### Added
+- Added new asset-based sharing endpoints through `SharingResources` interface
+- Added `AssetType` enum to support multiple asset types (sheets, reports, sights, workspaces)
+- Added methods for listing, getting, creating, updating, and deleting shares for any asset type
+### Changed
+- Deprecated old asset-specific sharing methods in `ShareResources` with notices to use the new asset-based methods
 
-## [6.4.0] - 2025-10-07
+## [6.4.0] - 2025-10-27
 ### Added
 - Add provisionalExpirationDate field to the User and UserPlan models
 
