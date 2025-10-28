@@ -30,8 +30,8 @@ jobs:
           repository: 'smartsheet-sdk-tests'
       - name: Setup Mock API
         run: |
-         smartsheet-sdk-tests/ci_scripts/install_wiremock.sh
-         smartsheet-sdk-tests/ci_scripts/start_wiremock.sh
+          docker compose -f smartsheet-sdk-tests/docker-compose.yml up -d
+          sleep 5
       - name: Run Mock API Tests
         working-directory: ./mock-api-test-sdk-net80
         run: |
