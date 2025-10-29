@@ -28,8 +28,7 @@ jobs:
         access-token: ${{ secrets.SDK_TEST_ACCESS_TOKEN }}
     - name: Setup Mock API
       run: |
-        docker compose -f smartsheet-sdk-tests/docker-compose.yml up -d
-        sleep 5
+        docker compose -f smartsheet-sdk-tests/docker-compose.yml up -d --wait
     - name: Run Mock API Tests
       working-directory: ./mock-api-test-sdk-net80
       run: |
