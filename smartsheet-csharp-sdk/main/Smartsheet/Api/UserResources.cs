@@ -179,7 +179,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        void UpgradeUser(long userId, long planId, UpgradeSeatType seatType);
+        void UpgradeUser(long userId, long planId, UpgradeSeatType? seatType);
 
         /// <summary>
         /// <para>Downgrades a user's seat type within your Smartsheet organization or plan from a licensed Member, Provisional Member or Guest to a non-licensed Viewer or Guest.</para>

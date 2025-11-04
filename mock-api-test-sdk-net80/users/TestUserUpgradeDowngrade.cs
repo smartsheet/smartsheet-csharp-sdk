@@ -43,6 +43,19 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
+        public void TestUpgradeUserNoSeatType()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
+                { "x-test-name", "/users/upgrade-user/all-response-body-properties" },
+                { "x-request-id", requestId.ToString() }
+            });
+
+            // If this throws an exception, the test will fail automatically
+            ss.UserResources.UpgradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, null);
+        }
+
+        [TestMethod]
         public void TestUpgradeUserError500Response()
         {
             Guid requestId = Guid.NewGuid();
