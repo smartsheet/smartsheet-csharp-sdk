@@ -22,7 +22,7 @@ using System.Collections.Generic;
 namespace Smartsheet.Api
 {
     using Models;
-    using Share = Models.Share;
+    using AssetShare = Models.AssetShare;
 
     /// <summary>
     /// <para>This interface provides methods to access asset-based Sharing resources.</para>
@@ -66,7 +66,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Share GetAssetShare(AssetType assetType, long assetId, string shareId);
+        AssetShare GetAssetShare(AssetType assetType, long assetId, string shareId);
 
         /// <summary>
         /// <para>Shares an asset with the specified Users and Groups.</para>
@@ -86,7 +86,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        BulkItemResult<Share> ShareAsset(AssetType assetType, long assetId, IEnumerable<Share> shares,
+        BulkItemResult<AssetShare> ShareAsset(AssetType assetType, long assetId, IEnumerable<AssetShare> shares,
             bool? sendEmail = null);
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Share UpdateAssetShare(AssetType assetType, long assetId, String shareId, UpdateShareRequest updateShareRequest);
+        AssetShare UpdateAssetShare(AssetType assetType, long assetId, String shareId, UpdateShareRequest updateShareRequest);
 
         /// <summary>
         /// <para>Delete a share.</para>
