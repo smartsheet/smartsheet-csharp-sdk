@@ -106,7 +106,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Share GetAssetShare(AssetType assetType, long assetId, string shareId)
+        public virtual AssetShare GetAssetShare(AssetType assetType, long assetId, string shareId)
         {
             StringBuilder url = new StringBuilder("/2.0/shares/");
             url.Append(shareId);
@@ -116,7 +116,7 @@ namespace Smartsheet.Api.Internal
             parameters.Add("assetId", assetId.ToString());
             String path = QueryUtil.GenerateUrl(url.ToString(), parameters);
 
-            return GetResource<Share>(path, typeof(Share));
+            return GetResource<AssetShare>(path, typeof(AssetShare));
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual BulkItemResult<Share> ShareAsset(AssetType assetType, long assetId, IEnumerable<Share> shares,
+        public virtual BulkItemResult<AssetShare> ShareAsset(AssetType assetType, long assetId, IEnumerable<AssetShare> shares,
             bool? sendEmail = null)
         {
             StringBuilder url = new StringBuilder("/2.0/shares");
@@ -171,7 +171,7 @@ namespace Smartsheet.Api.Internal
             {
                 case HttpStatusCode.OK:
                     Smartsheet.HttpClient.ReleaseConnection();
-                    return Smartsheet.JsonSerializer.deserialize<BulkItemResult<Share>>(response.Entity.GetContent());
+                    return Smartsheet.JsonSerializer.deserialize<BulkItemResult<AssetShare>>(response.Entity.GetContent());
                 default:
                     HandleError(response);
                     break;
@@ -199,7 +199,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Share UpdateAssetShare(AssetType assetType, long assetId, String shareId,
+        public virtual AssetShare UpdateAssetShare(AssetType assetType, long assetId, String shareId,
             UpdateShareRequest updateShareRequest)
         {
             StringBuilder url = new StringBuilder("/2.0/shares/");
@@ -210,7 +210,7 @@ namespace Smartsheet.Api.Internal
             parameters.Add("assetId", assetId.ToString());
             String path = QueryUtil.GenerateUrl(url.ToString(), parameters);
 
-            return PatchResource<Share, UpdateShareRequest>(path, updateShareRequest);
+            return PatchResource<AssetShare, UpdateShareRequest>(path, updateShareRequest);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace Smartsheet.Api.Internal
 
             String path = QueryUtil.GenerateUrl(url.ToString(), parameters);
 
-            DeleteResource<Share>(path);
+            DeleteResource<AssetShare>(path);
         }
 
         /// <summary>
