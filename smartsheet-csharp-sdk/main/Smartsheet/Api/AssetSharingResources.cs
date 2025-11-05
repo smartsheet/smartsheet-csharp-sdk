@@ -47,7 +47,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        ListAssetSharesResponse ListAssetShares(AssetType assetType, long assetId, TokenPaginationParameters? tokenPaginationParameters = null, ShareScope? sharingInclude = null);
+        ListAssetSharesResponse ListAssetShares(AssetType assetType, string assetId, TokenPaginationParameters? tokenPaginationParameters = null, ShareScope? sharingInclude = null);
 
         /// <summary>
         /// <para>Get a specific share for the specified asset.</para>
@@ -66,7 +66,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        AssetShare GetAssetShare(AssetType assetType, long assetId, string shareId);
+        AssetShare GetAssetShare(AssetType assetType, string assetId, string shareId);
 
         /// <summary>
         /// <para>Shares an asset with the specified Users and Groups.</para>
@@ -86,7 +86,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        BulkItemResult<AssetShare> ShareAsset(AssetType assetType, long assetId, IEnumerable<AssetShare> shares,
+        BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, IEnumerable<AssetShare> shares,
             bool? sendEmail = null);
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        AssetShare UpdateAssetShare(AssetType assetType, long assetId, String shareId, UpdateShareRequest updateShareRequest);
+        AssetShare UpdateAssetShare(AssetType assetType, string assetId, String shareId, UpdateShareRequest updateShareRequest);
 
         /// <summary>
         /// <para>Delete a share.</para>
@@ -122,6 +122,6 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        void DeleteAssetShare(AssetType assetType, long assetId, string shareId);
+        void DeleteAssetShare(AssetType assetType, string assetId, string shareId);
     }
 }

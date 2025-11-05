@@ -7,21 +7,29 @@ namespace mock_api_test_sdk_net80
     [TestClass]
     public class AssetSharingResourcesContractTest
     {
+        // Test constants matching Python SDK
+        private const string TEST_ASSET_ID = "AAAMCmYGFOeE";
+        private const string TEST_SHARE_ID = "AAABbbbCccDdd";
+        private const string TEST_EMAIL = "test.email@smartsheet.com";
+        private const string TEST_USER_ID = "9876543210";
+        private const string TEST_GROUP_ID = "1234567890";
+        private const string TEST_NAME = "Example Name";
+        private const int TEST_MAX_ITEMS = 100;
+        private const string TEST_LAST_KEY = "test_last_key";
+        private const string TEST_LAST_KEY_RESPONSE = "abcDefGhIjKlMnOpQrStUvWxYz";
+
         [TestMethod]
         public async Task TestListAssetSharesGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/list-asset-shares/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/list-asset-shares/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            int maxItems = 100;
-            string lastKey = "abcDefGhIjKlMnOpQrStUvWxYz";
-            ShareScope sharingInclude = ShareScope.Workspace;
+            ShareScope sharingInclude = ShareScope.Item;
 
-            TokenPaginationParameters pagination = new TokenPaginationParameters(lastKey, maxItems);
+            TokenPaginationParameters pagination = new TokenPaginationParameters(TEST_LAST_KEY, TEST_MAX_ITEMS);
 
-            ss.AssetSharingResources.ListAssetShares(assetType, assetId, pagination, sharingInclude);
+            ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, pagination, sharingInclude);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -30,51 +38,52 @@ namespace mock_api_test_sdk_net80
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
             Assert.AreEqual("/2.0/shares", path);
-            Assert.AreEqual(assetType.ToString(), queryParams["assetType"]);
-            Assert.AreEqual(assetId.ToString(), queryParams["assetId"]);
-            Assert.AreEqual(maxItems.ToString(), queryParams["maxItems"]);
-            Assert.AreEqual(lastKey, queryParams["lastKey"]);
-            Assert.AreEqual(sharingInclude.ToString(), queryParams["include"]);
+            Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
+            Assert.AreEqual(TEST_ASSET_ID, queryParams["assetId"]);
+            Assert.AreEqual(TEST_MAX_ITEMS.ToString(), queryParams["maxItems"]);
+            Assert.AreEqual(TEST_LAST_KEY, queryParams["lastKey"]);
+            Assert.AreEqual(sharingInclude.ToString(), queryParams["sharingInclude"]);
         }
 
         [TestMethod]
         public void TestListAssetSharesAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/list-asset-shares/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/list-asset-shares/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            ListAssetSharesResponse response = ss.AssetSharingResources.ListAssetShares(assetType, assetId, null, null);
+            ListAssetSharesResponse response = ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Items);
             Assert.IsTrue(response.Items.Count > 0);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Items[0].Id);
-            Assert.AreEqual("user@example.com", response.Items[0].Email);
-            Assert.AreEqual(AccessLevel.VIEWER, response.Items[0].AccessLevel);
-            Assert.AreEqual(ShareScope.Item, response.Items[0].Scope);
+            Assert.AreEqual(TEST_ASSET_ID, response.Items[0].Id);
+            Assert.AreEqual(TEST_EMAIL, response.Items[0].Email);
+            Assert.AreEqual(AccessLevel.ADMIN, response.Items[0].AccessLevel);
+            Assert.AreEqual(ShareScope.Item.ToString(), response.Items[0].Scope);
             Assert.AreEqual(ShareType.USER, response.Items[0].Type);
-            Assert.AreEqual("1234567890", response.Items[0].UserId);
+            Assert.AreEqual(TEST_USER_ID, response.Items[0].UserId);
+            Assert.AreEqual(TEST_GROUP_ID, response.Items[0].GroupId);
+            Assert.AreEqual(TEST_NAME, response.Items[0].Name);
         }
 
         [TestMethod]
         public void TestListAssetSharesRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/list-asset-shares/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/list-asset-shares/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            ListAssetSharesResponse response = ss.AssetSharingResources.ListAssetShares(assetType, assetId, null, null);
+            ListAssetSharesResponse response = ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Items);
             Assert.IsTrue(response.Items.Count > 0);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Items[0].Id);
-            Assert.AreEqual(AccessLevel.VIEWER, response.Items[0].AccessLevel);
+            Assert.AreEqual(TEST_ASSET_ID, response.Items[0].Id);
+            Assert.AreEqual(AccessLevel.ADMIN, response.Items[0].AccessLevel);
+            Assert.IsNull(response.Items[0].Name);
         }
 
         [TestMethod]
@@ -84,9 +93,8 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ListAssetShares(assetType, assetId, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -97,9 +105,8 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ListAssetShares(assetType, assetId, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -107,13 +114,12 @@ namespace mock_api_test_sdk_net80
         public async Task TestGetAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/get-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/get-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            ss.AssetSharingResources.GetAssetShare(assetType, assetId, shareId);
+            ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -122,47 +128,47 @@ namespace mock_api_test_sdk_net80
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
             Assert.AreEqual($"/2.0/shares/{shareId}", path);
-            Assert.AreEqual(assetType.ToString(), queryParams["assetType"]);
-            Assert.AreEqual(assetId.ToString(), queryParams["assetId"]);
+            Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
+            Assert.AreEqual(TEST_ASSET_ID, queryParams["assetId"]);
         }
 
         [TestMethod]
         public void TestGetAssetShareAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/get-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/get-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            AssetShare response = ss.AssetSharingResources.GetAssetShare(assetType, assetId, shareId);
+            AssetShare response = ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Id);
-            Assert.AreEqual("user@example.com", response.Email);
-            Assert.AreEqual(AccessLevel.VIEWER, response.AccessLevel);
-            Assert.AreEqual(ShareScope.Item, response.Scope);
+            Assert.AreEqual(TEST_ASSET_ID, response.Id);
+            Assert.AreEqual(TEST_EMAIL, response.Email);
+            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
+            Assert.AreEqual(ShareScope.Item.ToString(), response.Scope);
             Assert.AreEqual(ShareType.USER, response.Type);
-            Assert.AreEqual("1234567890", response.UserId);
-            Assert.AreEqual("Test User", response.Name);
+            Assert.AreEqual(TEST_USER_ID, response.UserId);
+            Assert.AreEqual(TEST_GROUP_ID, response.GroupId);
+            Assert.AreEqual(TEST_NAME, response.Name);
         }
 
         [TestMethod]
         public void TestGetAssetShareRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/get-asset-share/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/get-asset-share/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            AssetShare response = ss.AssetSharingResources.GetAssetShare(assetType, assetId, shareId);
+            AssetShare response = ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Id);
-            Assert.AreEqual(AccessLevel.VIEWER, response.AccessLevel);
+            Assert.AreEqual(TEST_ASSET_ID, response.Id);
+            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
+            Assert.IsNull(response.Name);
         }
 
         [TestMethod]
@@ -172,10 +178,9 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.GetAssetShare(assetType, assetId, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -186,10 +191,9 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.GetAssetShare(assetType, assetId, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -197,20 +201,16 @@ namespace mock_api_test_sdk_net80
         public async Task TestShareAssetGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/share-asset/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/share-asset/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            bool sendEmail = true;
+            bool sendEmail = false;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.VIEWER)
-                .SetEmail("user@example.com")
-                .SetSubject("Check out this sheet")
-                .SetMessage("I thought you might find this interesting")
-                .SetCcMe(true)
+            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
+                .SetEmail(TEST_EMAIL)
                 .Build();
 
-            ss.AssetSharingResources.ShareAsset(assetType, assetId, new List<AssetShare> { newShare }, sendEmail);
+            ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, sendEmail);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -219,8 +219,8 @@ namespace mock_api_test_sdk_net80
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
             Assert.AreEqual("/2.0/shares", path);
-            Assert.AreEqual(assetType.ToString(), queryParams["assetType"]);
-            Assert.AreEqual(assetId.ToString(), queryParams["assetId"]);
+            Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
+            Assert.AreEqual(TEST_ASSET_ID, queryParams["assetId"]);
             Assert.AreEqual(sendEmail.ToString().ToLower(), queryParams["sendEmail"]);
         }
 
@@ -228,50 +228,47 @@ namespace mock_api_test_sdk_net80
         public void TestShareAssetAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/share-asset/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/share-asset/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.VIEWER)
-                .SetEmail("user@example.com")
-                .SetSubject("Check out this sheet")
-                .SetMessage("I thought you might find this interesting")
-                .SetCcMe(true)
+            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
+                .SetEmail(TEST_EMAIL)
                 .Build();
 
-            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, assetId, new List<AssetShare> { newShare }, true);
+            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
             Assert.AreEqual(1, response.Result.Count);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Result[0].Id);
-            Assert.AreEqual("user@example.com", response.Result[0].Email);
-            Assert.AreEqual(AccessLevel.VIEWER, response.Result[0].AccessLevel);
-            Assert.AreEqual(ShareScope.Item, response.Result[0].Scope);
+            Assert.AreEqual(TEST_ASSET_ID, response.Result[0].Id);
+            Assert.AreEqual(TEST_EMAIL, response.Result[0].Email);
+            Assert.AreEqual(AccessLevel.ADMIN, response.Result[0].AccessLevel);
+            Assert.AreEqual(ShareScope.Item.ToString(), response.Result[0].Scope);
             Assert.AreEqual(ShareType.USER, response.Result[0].Type);
+            Assert.AreEqual(TEST_NAME, response.Result[0].Name);
         }
 
         [TestMethod]
         public void TestShareAssetRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/share-asset/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/share-asset/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.VIEWER)
-                .SetEmail("user@example.com")
+            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
+                .SetEmail(TEST_EMAIL)
                 .Build();
 
-            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, assetId, new List<AssetShare> { newShare }, null);
+            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
             Assert.AreEqual(1, response.Result.Count);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Result[0].Id);
-            Assert.AreEqual(AccessLevel.VIEWER, response.Result[0].AccessLevel);
+            Assert.AreEqual(TEST_ASSET_ID, response.Result[0].Id);
+            Assert.AreEqual(AccessLevel.ADMIN, response.Result[0].AccessLevel);
+            Assert.IsNull(response.Result[0].Name);
         }
 
         [TestMethod]
@@ -281,13 +278,12 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.VIEWER)
-                .SetEmail("user@example.com")
+            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
+                .SetEmail(TEST_EMAIL)
                 .Build();
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, assetId, new List<AssetShare> { newShare }, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -298,13 +294,12 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.VIEWER)
+            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
                 .SetEmail("invalid-email")
                 .Build();
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, assetId, new List<AssetShare> { newShare }, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -312,18 +307,17 @@ namespace mock_api_test_sdk_net80
         public async Task TestUpdateAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/update-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/update-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
             UpdateShareRequest updateRequest = new UpdateShareRequest
             {
-                AccessLevel = AccessLevel.EDITOR
+                AccessLevel = AccessLevel.ADMIN
             };
 
-            ss.AssetSharingResources.UpdateAssetShare(assetType, assetId, shareId, updateRequest);
+            ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -332,54 +326,54 @@ namespace mock_api_test_sdk_net80
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
             Assert.AreEqual($"/2.0/shares/{shareId}", path);
-            Assert.AreEqual(assetType.ToString(), queryParams["assetType"]);
-            Assert.AreEqual(assetId.ToString(), queryParams["assetId"]);
+            Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
+            Assert.AreEqual(TEST_ASSET_ID, queryParams["assetId"]);
         }
 
         [TestMethod]
         public void TestUpdateAssetShareAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/update-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/update-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
             UpdateShareRequest updateRequest = new UpdateShareRequest
             {
-                AccessLevel = AccessLevel.EDITOR
+                AccessLevel = AccessLevel.ADMIN
             };
 
-            AssetShare response = ss.AssetSharingResources.UpdateAssetShare(assetType, assetId, shareId, updateRequest);
+            AssetShare response = ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Id);
-            Assert.AreEqual(AccessLevel.EDITOR, response.AccessLevel);
-            Assert.AreEqual("user@example.com", response.Email);
-            Assert.AreEqual(ShareScope.Item, response.Scope);
+            Assert.AreEqual(TEST_ASSET_ID, response.Id);
+            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
+            Assert.AreEqual(TEST_EMAIL, response.Email);
+            Assert.AreEqual(ShareScope.Item.ToString(), response.Scope);
+            Assert.AreEqual(TEST_NAME, response.Name);
         }
 
         [TestMethod]
         public void TestUpdateAssetShareRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/update-asset-share/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/update-asset-share/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
             UpdateShareRequest updateRequest = new UpdateShareRequest
             {
-                AccessLevel = AccessLevel.EDITOR
+                AccessLevel = AccessLevel.ADMIN
             };
 
-            AssetShare response = ss.AssetSharingResources.UpdateAssetShare(assetType, assetId, shareId, updateRequest);
+            AssetShare response = ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual("AAABbbbCCCdddd", response.Id);
-            Assert.AreEqual(AccessLevel.EDITOR, response.AccessLevel);
+            Assert.AreEqual(TEST_ASSET_ID, response.Id);
+            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
+            Assert.IsNull(response.Name);
         }
 
         [TestMethod]
@@ -389,15 +383,14 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
             UpdateShareRequest updateRequest = new UpdateShareRequest
             {
-                AccessLevel = AccessLevel.EDITOR
+                AccessLevel = AccessLevel.ADMIN
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.UpdateAssetShare(assetType, assetId, shareId, updateRequest));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -408,15 +401,14 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
             UpdateShareRequest updateRequest = new UpdateShareRequest
             {
-                AccessLevel = AccessLevel.EDITOR
+                AccessLevel = AccessLevel.ADMIN
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.UpdateAssetShare(assetType, assetId, shareId, updateRequest));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -424,13 +416,12 @@ namespace mock_api_test_sdk_net80
         public async Task TestDeleteAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/delete-asset-share/success" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/delete-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            ss.AssetSharingResources.DeleteAssetShare(assetType, assetId, shareId);
+            ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -439,22 +430,21 @@ namespace mock_api_test_sdk_net80
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
             Assert.AreEqual($"/2.0/shares/{shareId}", path);
-            Assert.AreEqual(assetType.ToString(), queryParams["assetType"]);
-            Assert.AreEqual(assetId.ToString(), queryParams["assetId"]);
+            Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
+            Assert.AreEqual(TEST_ASSET_ID, queryParams["assetId"]);
         }
 
         [TestMethod]
         public void TestDeleteAssetShareSuccess()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/shares/delete-asset-share/success" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/delete-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
             // Should not throw any exception
-            ss.AssetSharingResources.DeleteAssetShare(assetType, assetId, shareId);
+            ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId);
         }
 
         [TestMethod]
@@ -464,10 +454,9 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.DeleteAssetShare(assetType, assetId, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -478,10 +467,9 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
 
             AssetType assetType = AssetType.SHEET;
-            long assetId = 1234567890123456L;
-            string shareId = "AAABbbbCCCdddd";
+            string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.DeleteAssetShare(assetType, assetId, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
     }
