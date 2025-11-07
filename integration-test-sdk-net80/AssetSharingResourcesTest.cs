@@ -19,15 +19,15 @@ namespace integration_test_sdk_net80
             AssetShare share = new AssetShare.CreateAssetShareBuilder(AccessLevel.EDITOR).SetEmail("sharingexp_test@smartsheet.biz").Build();
             
             // Test sharing for different asset types
-            TestAssetSharing(smartsheet, AssetType.SHEET, sheetId, share);
-            TestAssetSharing(smartsheet, AssetType.WORKSPACE, workspaceId, share);
+            TestAssetSharing(smartsheet, AssetType.SHEET, sheetId.ToString(), share);
+            TestAssetSharing(smartsheet, AssetType.WORKSPACE, workspaceId.ToString(), share);
             
             // Clean up
             smartsheet.SheetResources.DeleteSheet(sheetId);
             smartsheet.WorkspaceResources.DeleteWorkspace(workspaceId);
         }
         
-        private static void TestAssetSharing(SmartsheetClient smartsheet, AssetType assetType, long assetId, AssetShare share)
+        private static void TestAssetSharing(SmartsheetClient smartsheet, AssetType assetType, string assetId, AssetShare share)
         {
             // Share the asset
             BulkItemResult<AssetShare> shares = smartsheet.AssetSharingResources.ShareAsset(assetType, assetId, new AssetShare[] { share }, false);
