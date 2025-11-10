@@ -1,4 +1,5 @@
 using System.Web;
+using Newtonsoft.Json;
 using Smartsheet.Api;
 using Smartsheet.Api.Models;
 
@@ -24,6 +25,10 @@ namespace mock_api_test_sdk_net80
 
             Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans/{CommonTestConstants.TEST_PLAN_ID}/upgrade", path);
             Assert.AreEqual("POST", foundRequest.Method);
+
+            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "MEMBER" } };
+            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
+            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
 
         [TestMethod]
@@ -84,6 +89,10 @@ namespace mock_api_test_sdk_net80
 
             Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans/{CommonTestConstants.TEST_PLAN_ID}/downgrade", path);
             Assert.AreEqual("POST", foundRequest.Method);
+
+            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "VIEWER" } };
+            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
+            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
 
         [TestMethod]
