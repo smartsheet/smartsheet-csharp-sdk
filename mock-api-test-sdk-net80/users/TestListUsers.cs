@@ -27,7 +27,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-users/required-response-body-properties", requestId.ToString());
 
             PaginationParameters pagination = new PaginationParameters(TEST_INCLUDE_ALL, TEST_PAGE_SIZE, TEST_PAGE);
 
@@ -51,7 +51,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-users/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-users/all-response-body-properties", requestId.ToString());
 
             PaginatedResult<User> response = ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
 
@@ -79,7 +79,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-users/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-users/required-response-body-properties", requestId.ToString());
 
             PaginatedResult<User> response = ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
 
@@ -104,7 +104,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUsersError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Internal Server Error", exception.Message);
@@ -114,7 +114,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUsersError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);

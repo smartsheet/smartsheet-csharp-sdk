@@ -14,10 +14,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestUpgradeUserGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/users/upgrade-user/all-response-body-properties" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/upgrade-user/all-response-body-properties", requestId.ToString());
 
             ss.UserResources.UpgradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_UPGRADE_SEAT_TYPE);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -33,10 +30,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpgradeUserAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/users/upgrade-user/all-response-body-properties" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/upgrade-user/all-response-body-properties", requestId.ToString());
 
             // If this throws an exception, the test will fail automatically
             ss.UserResources.UpgradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_UPGRADE_SEAT_TYPE);
@@ -46,10 +40,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpgradeUserNoSeatType()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/users/upgrade-user/all-response-body-properties" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/upgrade-user/all-response-body-properties", requestId.ToString());
 
             // If this throws an exception, the test will fail automatically
             ss.UserResources.UpgradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, null);
@@ -59,10 +50,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpgradeUserError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/errors/500-response" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 ss.UserResources.UpgradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_UPGRADE_SEAT_TYPE));
@@ -74,10 +62,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpgradeUserError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/errors/400-response" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 ss.UserResources.UpgradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_UPGRADE_SEAT_TYPE));
@@ -89,10 +74,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestDowngradeUserGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/users/downgrade-user/all-response-body-properties" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
 
             ss.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_DOWNGRADE_SEAT_TYPE);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -108,10 +90,7 @@ namespace mock_api_test_sdk_net80
         public void TestDowngradeUserAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/users/downgrade-user/all-response-body-properties" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
 
             // If this throws an exception, the test will fail automatically
             ss.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_DOWNGRADE_SEAT_TYPE);
@@ -121,10 +100,7 @@ namespace mock_api_test_sdk_net80
         public void TestDowngradeUserError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/errors/500-response" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 ss.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_DOWNGRADE_SEAT_TYPE));
@@ -136,10 +112,7 @@ namespace mock_api_test_sdk_net80
         public void TestDowngradeUserError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> {
-                { "x-test-name", "/errors/400-response" },
-                { "x-request-id", requestId.ToString() }
-            });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 ss.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_DOWNGRADE_SEAT_TYPE));

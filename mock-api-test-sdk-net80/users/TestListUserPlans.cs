@@ -17,7 +17,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUserPlansGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
             
             ss.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -36,7 +36,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
 
             TokenPaginatedResult<UserPlan> response = ss.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS);
 
@@ -53,7 +53,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/users/list-user-plans/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-user-plans/required-response-body-properties", requestId.ToString());
 
             TokenPaginatedResult<UserPlan> response = ss.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null);
 
@@ -69,7 +69,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null));
             Assert.AreEqual("Internal Server Error", exception.Message);
@@ -79,7 +79,7 @@ namespace mock_api_test_sdk_net80
         public void TestListUserPlansError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);

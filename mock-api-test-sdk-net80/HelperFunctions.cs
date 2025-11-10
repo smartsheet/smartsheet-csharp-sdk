@@ -17,9 +17,9 @@ namespace mock_api_test_sdk_net80
             return ss;
         }
 
-        public static SmartsheetClient SetupClientWithCustomHeaders(Dictionary<string, string> customHeaders)
+        public static SmartsheetClient SetupClient(string testName, string requestId)
         {
-            TestHttpClientWithCustomHeader testHttpClient = new TestHttpClientWithCustomHeader(customHeaders);
+            TestHttpClientWithCustomHeader testHttpClient = new TestHttpClientWithCustomHeader(testName, requestId);
             SmartsheetClient ss = new SmartsheetBuilder()
             .SetBaseURI("http://localhost:8082/2.0/")
             .SetAccessToken("aaaaaaaaaaaaaaaaaaaaaaaaaa")
