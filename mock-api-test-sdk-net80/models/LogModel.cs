@@ -7,6 +7,9 @@ namespace mock_api_test_sdk_net80
         [JsonProperty("url")]
         public string? Url { get; set; }
 
+        [JsonProperty("body")]
+        public string? Body { get; set; }
+
         [JsonProperty("absoluteUrl")]
         public string? AbsoluteUrl { get; set; }
 

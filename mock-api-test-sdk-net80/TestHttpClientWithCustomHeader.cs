@@ -7,9 +7,13 @@ namespace mock_api_test_sdk_net80
     {
         private Dictionary<string, string> customHeaders;
 
-        public TestHttpClientWithCustomHeader(Dictionary<string, string> customHeaders)
+        public TestHttpClientWithCustomHeader(string testName, string requestId)
         {
-            this.customHeaders = customHeaders;
+            this.customHeaders = new Dictionary<string, string>
+            {
+                { "x-test-name", testName },
+                { "x-request-id", requestId }
+            };
         }
 
         public override RestRequest CreateRestRequest(HttpRequest smartsheetRequest)
