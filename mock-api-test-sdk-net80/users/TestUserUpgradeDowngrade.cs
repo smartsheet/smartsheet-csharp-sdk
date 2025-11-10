@@ -25,20 +25,22 @@ namespace mock_api_test_sdk_net80
 
             Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans/{CommonTestConstants.TEST_PLAN_ID}/upgrade", path);
             Assert.AreEqual("POST", foundRequest.Method);
-
-            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "MEMBER" } };
-            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
-            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
 
         [TestMethod]
-        public void TestUpgradeUserAllResponseBodyProperties()
+        public async Task TestUpgradeUserAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/users/upgrade-user/all-response-body-properties", requestId.ToString());
 
             // If this throws an exception, the test will fail automatically
             ss.UserResources.UpgradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_UPGRADE_SEAT_TYPE);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "MEMBER" } };
+            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
+            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
 
         [TestMethod]
@@ -89,20 +91,22 @@ namespace mock_api_test_sdk_net80
 
             Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans/{CommonTestConstants.TEST_PLAN_ID}/downgrade", path);
             Assert.AreEqual("POST", foundRequest.Method);
-
-            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "VIEWER" } };
-            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
-            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
 
         [TestMethod]
-        public void TestDowngradeUserAllResponseBodyProperties()
+        public async Task TestDowngradeUserAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
 
             // If this throws an exception, the test will fail automatically
             ss.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_DOWNGRADE_SEAT_TYPE);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "VIEWER" } };
+            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
+            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
 
         [TestMethod]
