@@ -22,7 +22,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestListAssetSharesGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/list-asset-shares/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/list-asset-shares/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             ShareScope sharingInclude = ShareScope.Item;
@@ -49,7 +49,7 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/list-asset-shares/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/list-asset-shares/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -57,6 +57,7 @@ namespace mock_api_test_sdk_net80
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Items);
+            Assert.IsNull(response.Items[0].lastKey);
             Assert.IsTrue(response.Items.Count > 0);
             Assert.AreEqual(TEST_ASSET_ID, response.Items[0].Id);
             Assert.AreEqual(TEST_EMAIL, response.Items[0].Email);
@@ -72,7 +73,7 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/list-asset-shares/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/list-asset-shares/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -90,7 +91,7 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response",requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -102,7 +103,7 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -114,7 +115,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestGetAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/get-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/get-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -136,7 +137,7 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/get-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/get-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -158,7 +159,7 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/get-asset-share/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/get-asset-share/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -175,7 +176,7 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -188,7 +189,7 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -201,7 +202,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestShareAssetGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/share-asset/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             bool sendEmail = false;
@@ -225,10 +226,10 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void TestShareAssetAllResponseBodyProperties()
+        public async void TestShareAssetAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/share-asset/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -237,6 +238,13 @@ namespace mock_api_test_sdk_net80
                 .Build();
 
             BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            string path = uri.AbsolutePath;
+
+            Assert.IsNotNull(foundRequest.Body);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
@@ -253,7 +261,7 @@ namespace mock_api_test_sdk_net80
         public void TestShareAssetRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/share-asset/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -262,6 +270,13 @@ namespace mock_api_test_sdk_net80
                 .Build();
 
             BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            string path = uri.AbsolutePath;
+
+            Assert.IsNotNull(foundRequest.Body);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
@@ -275,7 +290,7 @@ namespace mock_api_test_sdk_net80
         public void TestShareAssetError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -291,7 +306,7 @@ namespace mock_api_test_sdk_net80
         public void TestShareAssetError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -307,7 +322,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestUpdateAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/update-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/update-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -334,7 +349,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/update-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/update-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -358,7 +373,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/update-asset-share/required-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/update-asset-share/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -380,7 +395,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -398,7 +413,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -416,7 +431,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestDeleteAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/delete-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/delete-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -438,7 +453,7 @@ namespace mock_api_test_sdk_net80
         public void TestDeleteAssetShareSuccess()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/sharing/delete-asset-share/all-response-body-properties" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/delete-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -451,7 +466,7 @@ namespace mock_api_test_sdk_net80
         public void TestDeleteAssetShareError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/500-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -464,7 +479,7 @@ namespace mock_api_test_sdk_net80
         public void TestDeleteAssetShareError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClientWithCustomHeaders(new Dictionary<string, string> { { "x-test-name", "/errors/400-response" }, { "x-request-id", requestId.ToString() } });
+            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
