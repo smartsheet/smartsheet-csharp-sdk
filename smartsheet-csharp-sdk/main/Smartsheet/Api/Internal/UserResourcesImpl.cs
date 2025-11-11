@@ -311,11 +311,18 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual void UpgradeUser(long userId, long planId, UpgradeSeatType seatType)
+        public virtual void UpgradeUser(long userId, long planId, UpgradeSeatType? seatType)
         {
-            var body = new { seatType = seatType.ToString() };
+            object body;
+            if (seatType != null)
+            {
+                body = new { seatType = seatType.ToString() };
+            }
+            else
+            {
+                body = new { };
+            }
             string path = $"users/{userId}/plans/{planId}/upgrade";
-
             this.CreateResource<object>(path, typeof(object), body);
         }
 
