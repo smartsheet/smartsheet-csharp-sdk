@@ -56,8 +56,10 @@ namespace mock_api_test_sdk_net80
             ListAssetSharesResponse response = ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null);
 
             Assert.IsNotNull(response);
+            Assert.IsNotNull(response.LastKey);
+            Assert.AreEqual(TEST_LAST_KEY_RESPONSE, response.LastKey);
+            
             Assert.IsNotNull(response.Items);
-            Assert.IsNull(response.Items[0].lastKey);
             Assert.IsTrue(response.Items.Count > 0);
             Assert.AreEqual(TEST_ASSET_ID, response.Items[0].Id);
             Assert.AreEqual(TEST_EMAIL, response.Items[0].Email);
@@ -258,7 +260,7 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void TestShareAssetRequiredResponseBodyProperties()
+        public async void TestShareAssetRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/required-response-body-properties", requestId.ToString());
