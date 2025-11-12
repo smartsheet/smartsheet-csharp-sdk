@@ -78,13 +78,83 @@ while(id == 0 && reader.Read()) {
 A more complete example can be found in the Integration test file, `PassthroughResourcesTest.cs`.
 
 ## Testing
-Integration tests:
-1. Your environment must contain a variable named SMARTSHEET_ACCESS_TOKEN containing an api access token in order to proceed with the tests.
-2. Run the tests from within Visual Studio.
 
 Mock API tests:
-1. Clone the [Smartsheet sdk tests](https://github.com/smartsheet-platform/smartsheet-sdk-tests) repo and follow the instructions from the readme to start the mock server.
-2. Run the tests within the `TestSDKMockAPI` project from within Visual Studio.
+
+We use WireMock for API contract testing. This allows us to simulate Smartsheet API responses and run tests without relying on the live API.
+The [smartsheet-sdk-tests](https://github.com/smartsheet/smartsheet-sdk-tests) repo provides a standalone WireMock server with JSON mappings that simulate the Smartsheet API.
+Each mapping defines a request to match and a response to return.
+
+Common test cases use catch-all path patterns (e.g., /errors/500-response).
+
+We use two custom headers:
+
+- x-test-name: Used for exact mapping match, allowing different mock responses for the same HTTP method and endpoint.
+- x-request-id: A UUID generated for each request, used to verify request URLs and search for requests in WireMock admin history.
+
+To run the mock API tests:
+1. Clone the [smartsheet-sdk-tests](https://github.com/smartsheet/smartsheet-sdk-tests) repo and follow the instructions from the readme to start the mock server.
+2. `dotnet test mock-api-test-sdk-net80/mock-api-test-sdk-net80.csproj`
+
+To add new mock API tests:
+
+1. Add a WireMock Mapping (JSON) in the [smartsheet-sdk-tests](https://github.com/smartsheet/smartsheet-sdk-tests):
+```json
+{
+    "request": {
+        "urlPathTemplate": "/2.0/users/{userId}/plans",
+        "method": "GET",
+        "headers": {
+            "Authorization": {
+                "matches": "Bearer .*"
+            },
+            "x-test-name": {
+                "equalTo": "/users/list-user-plans/all-response-body-properties"
+            },
+            "x-request-id": {
+                "matches" : ".*"
+            }
+        }
+    },
+    "response": {
+        "statusMessage": "OK",
+        "status": 200,
+        "jsonBody": {
+            "lastKey": "12345678901234569",
+            "data": [
+                {
+                    "planId": 1234567890123456,
+                    "seatType": "MEMBER",
+                    "seatTypeLastChangedAt": "2025-01-01T00:00:00.123456789Z",
+                    "provisionalExpirationDate": "2026-12-13T12:17:52.525696Z",
+                    "isInternal": false
+                }
+            ]
+        },
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}
+```
+2. Write a Test in the SDK:
+
+- Always use x-test-name to target specific mock responses.
+- Use x-request-id for traceability in WireMock admin.
+- Keep mappings in the smartsheet-sdk-tests repository organized and descriptive
+
+```csharp
+    [TestMethod]
+    public void TestListUserPlansAllResponseBodyProperties()
+    {
+        Guid requestId = Guid.NewGuid();
+        SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
+
+        TokenPaginatedResult<UserPlan> response = ss.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS);
+
+        Assert.IsNotNull(response);
+    }
+```
 
 ## Overriding HTTP Client Behavior
 You can provide a number of customizations to the default HTTP behavior by extending the DefaultHttpClient class and 
