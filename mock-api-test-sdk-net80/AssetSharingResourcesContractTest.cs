@@ -58,13 +58,13 @@ namespace mock_api_test_sdk_net80
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.LastKey);
             Assert.AreEqual(TEST_LAST_KEY_RESPONSE, response.LastKey);
-            
+
             Assert.IsNotNull(response.Items);
             Assert.IsTrue(response.Items.Count > 0);
             Assert.AreEqual(TEST_ASSET_ID, response.Items[0].Id);
             Assert.AreEqual(TEST_EMAIL, response.Items[0].Email);
             Assert.AreEqual(AccessLevel.ADMIN, response.Items[0].AccessLevel);
-            Assert.AreEqual(ShareScope.Item.ToString(), response.Items[0].Scope);
+            Assert.AreEqual(AssetShareScope.ITEM, response.Items[0].Scope);
             Assert.AreEqual(ShareType.USER, response.Items[0].Type);
             Assert.AreEqual(TEST_USER_ID, response.Items[0].UserId);
             Assert.AreEqual(TEST_GROUP_ID, response.Items[0].GroupId);
@@ -150,7 +150,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_ASSET_ID, response.Id);
             Assert.AreEqual(TEST_EMAIL, response.Email);
             Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
-            Assert.AreEqual(ShareScope.Item.ToString(), response.Scope);
+            Assert.AreEqual(AssetShareScope.ITEM, response.Scope);
             Assert.AreEqual(ShareType.USER, response.Type);
             Assert.AreEqual(TEST_USER_ID, response.UserId);
             Assert.AreEqual(TEST_GROUP_ID, response.GroupId);
@@ -367,7 +367,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_ASSET_ID, response.Id);
             Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
             Assert.AreEqual(TEST_EMAIL, response.Email);
-            Assert.AreEqual(ShareScope.Item.ToString(), response.Scope);
+            Assert.AreEqual(AssetShareScope.ITEM, response.Scope);
             Assert.AreEqual(TEST_NAME, response.Name);
         }
 
