@@ -224,7 +224,9 @@ namespace mock_api_test_sdk_net80
 
             var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
             Assert.IsNotNull(actualShareBody.First());
-            Assert.AreEqual(newShare, actualShareBody.First());
+            Assert.AreEqual(newShare.Email, actualShareBody.First().Email);
+            Assert.AreEqual(newShare.Scope, actualShareBody.First().Scope);
+            Assert.AreEqual(newShare.AccessLevel, actualShareBody.First().AccessLevel);
 
             Assert.AreEqual("/2.0/shares", path);
             Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
@@ -254,7 +256,9 @@ namespace mock_api_test_sdk_net80
             Assert.IsNotNull(foundRequest.Body);
             var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
             Assert.IsNotNull(actualShareBody.First());
-            Assert.AreEqual(newShare, actualShareBody.First());
+            Assert.AreEqual(newShare.Email, actualShareBody.First().Email);
+            Assert.AreEqual(newShare.Scope, actualShareBody.First().Scope);
+            Assert.AreEqual(newShare.AccessLevel, actualShareBody.First().AccessLevel);
         
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
@@ -268,7 +272,7 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public async void TestShareAssetRequiredResponseBodyProperties()
+        public async Task TestShareAssetRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/required-response-body-properties", requestId.ToString());
@@ -287,6 +291,11 @@ namespace mock_api_test_sdk_net80
             string path = uri.AbsolutePath;
 
             Assert.IsNotNull(foundRequest.Body);
+            var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
+            Assert.IsNotNull(actualShareBody.First());
+            Assert.AreEqual(newShare.Email, actualShareBody.First().Email);
+            Assert.AreEqual(newShare.Scope, actualShareBody.First().Scope);
+            Assert.AreEqual(newShare.AccessLevel, actualShareBody.First().AccessLevel);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
