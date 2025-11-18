@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Web;
 using Smartsheet.Api;
 using Smartsheet.Api.Models;
@@ -221,6 +222,10 @@ namespace mock_api_test_sdk_net80
 
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
+            var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
+            Assert.IsNotNull(actualShareBody.First());
+            Assert.AreEqual(newShare, actualShareBody.First());
+
             Assert.AreEqual("/2.0/shares", path);
             Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
             Assert.AreEqual(TEST_ASSET_ID, queryParams["assetId"]);
@@ -228,7 +233,7 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public async void TestShareAssetAllResponseBodyProperties()
+        public async Task TestShareAssetAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/all-response-body-properties", requestId.ToString());
@@ -247,14 +252,17 @@ namespace mock_api_test_sdk_net80
             string path = uri.AbsolutePath;
 
             Assert.IsNotNull(foundRequest.Body);
-
+            var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
+            Assert.IsNotNull(actualShareBody.First());
+            Assert.AreEqual(newShare, actualShareBody.First());
+        
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
             Assert.AreEqual(1, response.Result.Count);
             Assert.AreEqual(TEST_ASSET_ID, response.Result[0].Id);
             Assert.AreEqual(TEST_EMAIL, response.Result[0].Email);
             Assert.AreEqual(AccessLevel.ADMIN, response.Result[0].AccessLevel);
-            Assert.AreEqual(ShareScope.Item.ToString(), response.Result[0].Scope);
+            Assert.AreEqual(AssetShareScope.ITEM, response.Result[0].Scope);
             Assert.AreEqual(ShareType.USER, response.Result[0].Type);
             Assert.AreEqual(TEST_NAME, response.Result[0].Name);
         }
