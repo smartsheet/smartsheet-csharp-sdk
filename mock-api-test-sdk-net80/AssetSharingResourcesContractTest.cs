@@ -33,6 +33,8 @@ namespace mock_api_test_sdk_net80
             ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, pagination, sharingInclude);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            Assert.IsNotNull(foundRequest);
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
@@ -126,6 +128,8 @@ namespace mock_api_test_sdk_net80
             ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            Assert.IsNotNull(foundRequest);
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
@@ -217,16 +221,27 @@ namespace mock_api_test_sdk_net80
             ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, sendEmail);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            Assert.IsNotNull(foundRequest);
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
+            Assert.IsNotNull(foundRequest.Body);
+            
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
-            var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
-            Assert.IsNotNull(actualShareBody.First());
-            Assert.AreEqual(newShare.Email, actualShareBody.First().Email);
-            Assert.AreEqual(newShare.Scope, actualShareBody.First().Scope);
-            Assert.AreEqual(newShare.AccessLevel, actualShareBody.First().AccessLevel);
+            var expectedBodyMap = new List<Dictionary<string, object>>
+            {
+                new Dictionary<string, object>
+                {
+                    { "accessLevel", "ADMIN" },
+                    { "email", TEST_EMAIL },
+                    { "scope", "ITEM" }
+                }
+            };
+            var actualBodyMap = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(foundRequest.Body ?? "[]");
+            Assert.AreEqual(1, actualBodyMap.Count);
+            CollectionAssert.AreEquivalent(expectedBodyMap.First(), actualBodyMap.First());
 
             Assert.AreEqual("/2.0/shares", path);
             Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
@@ -250,15 +265,25 @@ namespace mock_api_test_sdk_net80
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            Assert.IsNotNull(foundRequest);
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
+            Assert.IsNotNull(foundRequest.Body);
+
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
-            Assert.IsNotNull(foundRequest.Body);
-            var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
-            Assert.IsNotNull(actualShareBody.First());
-            Assert.AreEqual(newShare.Email, actualShareBody.First().Email);
-            Assert.AreEqual(newShare.Scope, actualShareBody.First().Scope);
-            Assert.AreEqual(newShare.AccessLevel, actualShareBody.First().AccessLevel);
+            var expectedBodyMap = new List<Dictionary<string, object>>
+            {
+                new Dictionary<string, object>
+                {
+                    { "accessLevel", "ADMIN" },
+                    { "email", TEST_EMAIL },
+                    { "scope", "ITEM" }
+                }
+            };
+            var actualBodyMap = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(foundRequest.Body ?? "[]");
+            Assert.AreEqual(1, actualBodyMap.Count);
+            CollectionAssert.AreEquivalent(expectedBodyMap.First(), actualBodyMap.First());
         
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
@@ -287,6 +312,8 @@ namespace mock_api_test_sdk_net80
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            Assert.IsNotNull(foundRequest);
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
@@ -458,6 +485,8 @@ namespace mock_api_test_sdk_net80
             ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            Assert.IsNotNull(foundRequest);
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
