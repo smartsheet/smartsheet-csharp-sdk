@@ -18,7 +18,7 @@ namespace mock_api_test_sdk_net80
         private const SeatType TEST_SEAT_TYPE = SeatType.MEMBER;
         private const int TEST_SHEET_COUNT = -1;
         private const UserStatus TEST_USER_STATUS = UserStatus.ACTIVE;
-        private static readonly DateTime TEST_SEAT_TYPE_LAST_CHANGED_AT = DateTime.Parse("2025-06-14T09:55:30Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
+        private static readonly DateTime TEST_SEAT_TYPE_LAST_CHANGED_AT = DateTime.Parse("2025-01-01T00:00:00.123456789Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
         private static readonly DateTime TEST_PROVISIONAL_EXPIRATION_DATE = DateTime.Parse("2026-12-13T12:17:52.525696Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
         private static readonly DateTime TEST_LAST_LOGIN = DateTime.Parse("2020-10-04T18:32:47Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
         private static readonly DateTime TEST_CUSTOM_WELCOME_SCREEN_VIEWED = DateTime.Parse("2020-08-25T12:15:47Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
