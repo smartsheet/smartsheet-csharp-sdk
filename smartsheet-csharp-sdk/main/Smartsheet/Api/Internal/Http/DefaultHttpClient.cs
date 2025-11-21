@@ -52,6 +52,11 @@ namespace Smartsheet.Api.Internal.Http
         protected RestClient httpClient;
 
         /// <summary>
+        /// Proxy to be used for all HTTP requests. Preserved when creating new RestClient instances.
+        /// </summary>
+        protected IWebProxy proxy;
+
+        /// <summary>
         /// static logger 
         /// </summary>
         protected static Logger logger = LogManager.GetCurrentClassLogger();
@@ -93,12 +98,16 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DefaultHttpClient() : this(SetupWithOptions(SmartsheetBuilder.DEFAULT_BASE_URI), new JsonNetSerializer()) {
+        public DefaultHttpClient() : this(SetupWithOptions(SmartsheetBuilder.DEFAULT_BASE_URI, null), new JsonNetSerializer()) {
         }
 
-        private static RestClient SetupWithOptions(string baseUri) {
+        private static RestClient SetupWithOptions(string baseUri, IWebProxy proxy) {
             RestClientOptions options = new RestClientOptions(baseUri);
             options.FollowRedirects = true;
+            if (proxy != null)
+            {
+                options.Proxy = proxy;
+            }
             return new RestClient(options, null, null, true);
         }
 
@@ -117,6 +126,9 @@ namespace Smartsheet.Api.Internal.Http
 
             this.httpClient = httpClient;
             this.jsonSerializer = jsonSerializer;
+            
+            // Store the proxy from the provided client so it can be reused
+            this.proxy = httpClient.Options.Proxy;
         }
 
         /// <summary>
@@ -182,8 +194,7 @@ namespace Smartsheet.Api.Internal.Http
             restRequest.AlwaysMultipartFormData = true;
 
             // Set the client base Url.
-            //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-            this.httpClient = SetupWithOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)).ToString());
+            this.httpClient = SetupWithOptions(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority), proxy);
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
@@ -298,8 +309,7 @@ namespace Smartsheet.Api.Internal.Http
                 }
 
                 // Set the client base Url.
-                //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-                this.httpClient = SetupWithOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)).ToString());
+                this.httpClient = SetupWithOptions(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority), proxy);
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
@@ -357,7 +367,7 @@ namespace Smartsheet.Api.Internal.Http
 
         /// <summary>
         /// Create the RestSharp request. Override this function to inject additional
-        /// headers in the request or use a proxy.
+        /// headers in the request.
         /// </summary>
         /// <param name="smartsheetRequest"></param>
         /// <returns> the RestSharp request </returns>
