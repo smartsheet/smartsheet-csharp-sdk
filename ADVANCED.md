@@ -180,6 +180,8 @@ SmartsheetClient smartsheet = new SmartsheetBuilder()
 
 ```csharp
 using Smartsheet.Api.Internal.Http;
+using Smartsheet.Api.Internal.Json;
+using RestSharp;
 using System.Net;
 
 namespace sdk_csharp_sample
@@ -187,10 +189,12 @@ namespace sdk_csharp_sample
     class ProxyHttpClient : DefaultHttpClient
     {
         public ProxyHttpClient(string host, int port)
-            : base()
+            : base(new RestClient(new RestClientOptions(Smartsheet.Api.SmartsheetBuilder.DEFAULT_BASE_URI)
+            {
+                Proxy = new WebProxy(host, port),
+                FollowRedirects = true
+            }), new JsonNetSerializer())
         {
-            // create a WebProxy on the RestSharp client
-            this.httpClient.Proxy = new WebProxy(host, port);
         }
     }
 }
