@@ -192,7 +192,6 @@ namespace sdk_csharp_sample
             : base(new RestClient(new RestClientOptions(Smartsheet.Api.SmartsheetBuilder.DEFAULT_BASE_URI)
             {
                 Proxy = new WebProxy(host, port),
-                FollowRedirects = true
             }), new JsonNetSerializer())
         {
         }

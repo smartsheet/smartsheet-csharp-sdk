@@ -17,8 +17,6 @@
 //    %[license]
 
 using System.Collections.Generic;
-using Smartsheet.Api.Internal;
-using Smartsheet.Api.Internal.Http;
 using Smartsheet.Api.Internal.Json;
 
 namespace Smartsheet.Api.Internal.Http
@@ -98,16 +96,10 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DefaultHttpClient() : this(SetupWithOptions(SmartsheetBuilder.DEFAULT_BASE_URI, null), new JsonNetSerializer()) {
+        public DefaultHttpClient() : this(SetupWithOptions(new RestClientOptions(SmartsheetBuilder.DEFAULT_BASE_URI)), new JsonNetSerializer()) {
         }
 
-        private static RestClient SetupWithOptions(string baseUri, IWebProxy proxy) {
-            RestClientOptions options = new RestClientOptions(baseUri);
-            options.FollowRedirects = true;
-            if (proxy != null)
-            {
-                options.Proxy = proxy;
-            }
+        private static RestClient SetupWithOptions(RestClientOptions options) {
             return new RestClient(options, null, null, true);
         }
 
@@ -126,9 +118,6 @@ namespace Smartsheet.Api.Internal.Http
 
             this.httpClient = httpClient;
             this.jsonSerializer = jsonSerializer;
-            
-            // Store the proxy from the provided client so it can be reused
-            this.proxy = httpClient.Options.Proxy;
         }
 
         /// <summary>
@@ -192,9 +181,7 @@ namespace Smartsheet.Api.Internal.Http
             }
 
             restRequest.AlwaysMultipartFormData = true;
-
-            // Set the client base Url.
-            this.httpClient = SetupWithOptions(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority), proxy);
+           
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
@@ -307,9 +294,7 @@ namespace Smartsheet.Api.Internal.Http
                     }
 
                 }
-
-                // Set the client base Url.
-                this.httpClient = SetupWithOptions(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority), proxy);
+                
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
