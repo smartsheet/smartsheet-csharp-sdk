@@ -172,32 +172,23 @@ DefaultHttpClient.
 Invoke the SmartsheetBuilder with a custom HttpClient:
 
 ```csharp
-// Initialize client
-SmartsheetClient smartsheet = new SmartsheetBuilder()
-    .SetHttpClient(new ProxyHttpClient("localhost", 8888))
-    .Build();
-``` 
-
-```csharp
+using Smartsheet.Api;
 using Smartsheet.Api.Internal.Http;
 using Smartsheet.Api.Internal.Json;
 using RestSharp;
 using System.Net;
 
-namespace sdk_csharp_sample
-{
-    class ProxyHttpClient : DefaultHttpClient
-    {
-        public ProxyHttpClient(string host, int port)
-            : base(new RestClient(new RestClientOptions(Smartsheet.Api.SmartsheetBuilder.DEFAULT_BASE_URI)
-            {
-                Proxy = new WebProxy(host, port),
-            }), new JsonNetSerializer())
-        {
-        }
-    }
-}
-```
+// Create RestClient
+RestClient client = new RestClient(new RestClientOptions(SmartsheetBuilder.DEFAULT_BASE_URI) {
+    Proxy = new WebProxy("localhost", 8888)
+});
+
+// Initialize client with the custom RestClient
+SmartsheetClient smartsheet = new SmartsheetBuilder()
+    .SetHttpClient(new DefaultHttpClient(client, new JsonNetSerializer()))
+    .Build();
+``` 
+
 ### Sample RetryHttpClient
 The following example shows how to override the default retry/timeout logic.  
 

@@ -50,11 +50,6 @@ namespace Smartsheet.Api.Internal.Http
         protected RestClient httpClient;
 
         /// <summary>
-        /// Proxy to be used for all HTTP requests. Preserved when creating new RestClient instances.
-        /// </summary>
-        protected IWebProxy proxy;
-
-        /// <summary>
         /// static logger 
         /// </summary>
         protected static Logger logger = LogManager.GetCurrentClassLogger();
@@ -96,11 +91,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DefaultHttpClient() : this(SetupWithOptions(new RestClientOptions(SmartsheetBuilder.DEFAULT_BASE_URI)), new JsonNetSerializer()) {
-        }
-
-        private static RestClient SetupWithOptions(RestClientOptions options) {
-            return new RestClient(options, null, null, true);
+        public DefaultHttpClient() : this(new RestClient(new RestClientOptions(SmartsheetBuilder.DEFAULT_BASE_URI)), new JsonNetSerializer()) {
         }
 
         /// <summary>
