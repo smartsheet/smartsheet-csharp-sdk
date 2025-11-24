@@ -11,7 +11,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - WireMock integration tests for contract testing for GET /2.0/users/{userId}/plans and GET /2.0/users endpoints
 - WireMock integration tests for contract testing for POST /2.0/users/{userId}/plans/{planId}/upgrade and POST /2.0/users/{userId}/plans/{planId}/downgrade
 - WireMock integration tests for contract testing for DELETE /2.0/users/{userId}/plans/{planId} endpoint
-- Remove integration tests from the sdk test suite and workflows
 - Added new asset-based sharing endpoints through `SharingResources` interface
 - Added `AssetType` enum to support multiple asset types (sheets, reports, sights, workspaces)
 - Added methods for listing, getting, creating, updating, and deleting shares for any asset type
@@ -21,6 +20,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Folder structure for the Users related WireMock tests
 ### Fixed
 - Implementation issue in DefaultHttpClient that recreates the httpClient on every request
+### Removed
+- Remove integration tests from the sdk test suite and workflows
 
 ## [6.4.0] - 2025-10-27
 ### Added
