@@ -13,7 +13,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// A list of objects representing the current page of data in the result set.
         /// </summary>
-        public IList<Share> Items { get; set; }
+        public IList<AssetShare> Items { get; set; }
 
         /// <summary>
         /// Pagination token that can be used to retrieve the next set of results.
