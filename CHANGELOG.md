@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 - Remove integration tests from the sdk test suite and workflows
 
+### Fixed
+- Fix issue in the implementation of the DefaultHttpClient class that recreates the httpClient (RestClient) instance on every request
+
 ## [6.4.0] - 2025-10-27
 ### Added
 - Add provisionalExpirationDate field to the User and UserPlan models
