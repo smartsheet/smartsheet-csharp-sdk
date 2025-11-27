@@ -16,36 +16,18 @@
 //    limitations under the License.
 //    %[license]
 
-namespace Smartsheet.Api.Internal.Http
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Smartsheet.Api
 {
-
-
-     /// <summary>
-     /// Represents HTTP methods.
-     /// Thread Safety: This enumeration is thread safe as it is immutable.
-     /// </summary>
-    public enum HttpMethod
+    /// <summary>
+    /// Represents the share scope for asset sharing operations.
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum AssetShareScope
     {
-        /// <summary>
-        /// The get
-        /// </summary>
-        GET,
-        /// <summary>
-        /// The post
-        /// </summary>
-        POST,
-        /// <summary>
-        /// The put
-        /// </summary>
-        PUT,
-        /// <summary>
-        /// The delete
-        /// </summary>
-        DELETE,
-        /// <summary>
-        /// The patch
-        /// </summary>
-        PATCH
+        ITEM,
+        WORKSPACE,
     }
-
 }

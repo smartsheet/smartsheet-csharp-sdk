@@ -17,8 +17,6 @@
 //    %[license]
 
 using System.Collections.Generic;
-using Smartsheet.Api.Internal;
-using Smartsheet.Api.Internal.Http;
 using Smartsheet.Api.Internal.Json;
 
 namespace Smartsheet.Api.Internal.Http
@@ -93,13 +91,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DefaultHttpClient() : this(SetupWithOptions(SmartsheetBuilder.DEFAULT_BASE_URI), new JsonNetSerializer()) {
-        }
-
-        private static RestClient SetupWithOptions(string baseUri) {
-            RestClientOptions options = new RestClientOptions(baseUri);
-            options.FollowRedirects = true;
-            return new RestClient(options, null, null, true);
+        public DefaultHttpClient() : this(new RestClient(new RestClientOptions(SmartsheetBuilder.DEFAULT_BASE_URI)), new JsonNetSerializer()) {
         }
 
         /// <summary>
@@ -180,10 +172,7 @@ namespace Smartsheet.Api.Internal.Http
             }
 
             restRequest.AlwaysMultipartFormData = true;
-
-            // Set the client base Url.
-            //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-            this.httpClient = SetupWithOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)).ToString());
+           
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
@@ -296,10 +285,7 @@ namespace Smartsheet.Api.Internal.Http
                     }
 
                 }
-
-                // Set the client base Url.
-                //httpClient.BaseUrl = new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority));
-                this.httpClient = SetupWithOptions(new Uri(smartsheetRequest.Uri.GetLeftPart(UriPartial.Authority)).ToString());
+                
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
@@ -357,7 +343,7 @@ namespace Smartsheet.Api.Internal.Http
 
         /// <summary>
         /// Create the RestSharp request. Override this function to inject additional
-        /// headers in the request or use a proxy.
+        /// headers in the request.
         /// </summary>
         /// <param name="smartsheetRequest"></param>
         /// <returns> the RestSharp request </returns>
@@ -381,6 +367,10 @@ namespace Smartsheet.Api.Internal.Http
             else if (HttpMethod.DELETE == smartsheetRequest.Method)
             {
                 restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Delete);
+            }
+            else if (HttpMethod.PATCH == smartsheetRequest.Method)
+            {
+                restRequest = new RestRequest(smartsheetRequest.Uri.ToString(), Method.Patch);
             }
             else
             {

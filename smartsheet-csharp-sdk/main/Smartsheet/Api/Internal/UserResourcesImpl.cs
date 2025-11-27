@@ -76,6 +76,46 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging)
         {
+            return ListUsersInternal(emails, null, null, includes, paging);
+        }
+
+        /// <summary>
+        /// <para>List users.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users</para>
+        /// </summary>
+        /// <param name="emails">list of email addresses on which to filter the results</param>
+        /// <param name="planId">plan ID to filter users</param>
+        /// <param name="seatType">seat type to filter users</param>
+        /// <param name="paging">the pagination</param>
+        /// <returns>the list of filtered Users</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging)
+        {
+            return ListUsersInternal(emails, planId, seatType, null, paging);
+        }
+
+        /// <summary>
+        /// <para>Internal method to list users with various filtering options.</para>
+        /// <para>This method handles the common logic for both ListUsers overloads.</para>
+        /// </summary>
+        /// <param name="emails">list of email addresses on which to filter the results</param>
+        /// <param name="planId">plan ID to filter users</param>
+        /// <param name="seatType">seat type to filter users</param>
+        /// <param name="includes">elements to include in response</param>
+        /// <param name="paging">the pagination</param>
+        /// <returns>the list of filtered Users</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        private PaginatedResult<User> ListUsersInternal(IEnumerable<string> emails, long? planId, SeatType? seatType, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging) {
             StringBuilder path = new StringBuilder("users");
 
             IDictionary<string, string> parameters = new Dictionary<string,string>();
@@ -91,6 +131,14 @@ namespace Smartsheet.Api.Internal
             if (includes != null)
             {
                 parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(includes));
+            }
+            if (planId != null)
+            {
+                parameters.Add("planId", planId.ToString());
+            }
+            if (seatType != null)
+            {
+                parameters.Add("seatType", seatType.ToString());
             }
 
             path.Append(QueryUtil.GenerateUrl(null, parameters));
@@ -198,6 +246,106 @@ namespace Smartsheet.Api.Internal
         public virtual User UpdateUser(User user)
         {
             return this.UpdateResource<User>("users/" + user.Id, typeof(User), user);
+        }
+
+        /// <summary>
+        /// <para>Fetch all user's plans.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /2.0/users/{userId}/plans</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to fetch plans for.</param>
+        /// <param name="lastKey">The last key for pagination.</param>
+        /// <param name="maxItems">The maximum number of items to return.</param>
+        /// <returns><see cref="TokenPaginatedResult{T}"/> object containing <see cref="UserPlan"/>.</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems) 
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+            if (lastKey != null)
+            {
+                parameters.Add("lastKey", lastKey);
+            }
+            if (maxItems != null)
+            {
+                parameters.Add("maxItems", maxItems.ToString());
+            }
+            string path = $"users/{userId}/plans" + QueryUtil.GenerateUrl(null, parameters);
+            
+            return this.ListResourcesWithTokenWrapper<UserPlan>(path);
+        }
+
+        /// <summary>
+        /// <para>Removes a user from a plan.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: DELETE /2.0/users/{userId}/plans/{planId}</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to remove from the plan.</param>
+        /// <param name="planId">The ID of the plan to remove the user from.</param>
+        /// <returns><see cref="RequestResult{T}"/> object.</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization.</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual void RemoveUserFromPlan(long userId, long planId)
+        {
+            string path = $"users/{userId}/plans/{planId}";
+            this.DeleteResource<User>(path);
+        }
+        
+        /// <summary>
+        /// <para>Upgrades a user's seat type within your Smartsheet plan to a licensed Member or Guest.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/upgrade</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to upgrade.</param>
+        /// <param name="planId">The ID of the plan.</param>
+        /// <param name="seatType">The seat type to upgrade to ("MEMBER" or "GUEST").</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">If there is any problem with the REST API request (400 Bad Request).</exception>
+        /// <exception cref="AuthorizationException">If there is any problem with the REST API authorization (401 Unauthorized).</exception>
+        /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
+        /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual void UpgradeUser(long userId, long planId, UpgradeSeatType? seatType)
+        {
+            object body;
+            if (seatType != null)
+            {
+                body = new { seatType = seatType.ToString() };
+            }
+            else
+            {
+                body = new { };
+            }
+            string path = $"users/{userId}/plans/{planId}/upgrade";
+            this.CreateResource<object>(path, typeof(object), body);
+        }
+
+        /// <summary>
+        /// <para>Downgrades a user's seat type within your Smartsheet organization or plan from a licensed Member, Provisional Member or Guest to a non-licensed Viewer or Guest.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/downgrade</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to downgrade.</param>
+        /// <param name="planId">The ID of the plan.</param>
+        /// <param name="seatType">The seat type to downgrade to ("VIEWER" or "GUEST").</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException"> User is not eligible for downgrade (e.g., not Active, not Member/Provisional/Guest, or is an admin and removeAdminStatus is false).</exception>
+        /// <exception cref="AuthorizationException"> Authentication failed or token missing.</exception>
+        /// <exception cref="ResourceNotFoundException">User not found.</exception>
+        /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        public virtual void DowngradeUser(long userId, long planId, DowngradeSeatType seatType)
+        {
+            var body = new { seatType = seatType.ToString() };
+            string path = $"users/{userId}/plans/{planId}/downgrade";
+            
+            this.CreateResource<object>(path, typeof(object), body);
         }
 
         /// <summary>
