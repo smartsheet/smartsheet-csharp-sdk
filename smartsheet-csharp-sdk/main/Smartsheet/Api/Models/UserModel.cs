@@ -125,6 +125,31 @@ namespace Smartsheet.Api.Models
         private string workPhone;
 
         /// <summary>
+        /// Gets the plan ID.
+        /// </summary>
+        private long? planId;
+        
+        /// <summary>
+        /// Gets the seat type.
+        /// </summary>
+        private SeatType? seatType;
+
+        /// <summary>
+        /// Gets the seat type last changed at.
+        /// </summary>
+        private DateTime? seatTypeLastChangedAt;
+
+        /// <summary>
+        /// Gets the expiration date of the provisional seat type of the user.
+        /// </summary>
+        private DateTime? provisionalExpirationDate;
+
+        /// <summary>
+        /// Gets the is internal.
+        /// </summary>
+        private bool? isInternal;
+
+        /// <summary>
         /// Gets the Admin flag which allows managing users and accounts.
         /// </summary>
         /// <returns> the admin </returns>
@@ -250,6 +275,51 @@ namespace Smartsheet.Api.Models
         {
             get { return resourceViewer; }
             set { resourceViewer = value; }
+        }
+
+        /// <summary>
+        /// Gets the plan ID.
+        /// </summary>
+        public long? PlanId
+        {
+            get { return planId; }
+            set { planId = value; }
+        }
+
+        /// <summary>
+        /// Gets the seat type.
+        /// </summary>
+        public SeatType? SeatType
+        {
+            get { return seatType; }
+            set { seatType = value; }
+        }
+
+        /// <summary>
+        /// Gets the seat type last changed at.
+        /// </summary>
+        public DateTime? SeatTypeLastChangedAt
+        {
+            get { return seatTypeLastChangedAt; }
+            set { seatTypeLastChangedAt = value; }
+        }
+
+        /// <summary>
+        /// Gets the expiration date of the provisional seat type of the user.
+        /// </summary>
+        public DateTime? ProvisionalExpirationDate
+        {
+            get { return provisionalExpirationDate; }
+            set { provisionalExpirationDate = value; }
+        }
+
+        /// <summary>
+        /// Gets the is internal.
+        /// </summary>
+        public bool? IsInternal
+        {
+            get { return isInternal; }
+            set { isInternal = value; }
         }
 
         /// <summary>

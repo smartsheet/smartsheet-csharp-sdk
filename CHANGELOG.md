@@ -3,7 +3,41 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
-## [Unreleased]
+## [X.X.X] - Unreleased
+## [6.5.0] - 2025-11-25
+### Added
+- WireMock integration tests for contract testing for GET /2.0/users/{userId}/plans and GET /2.0/users endpoints
+- WireMock integration tests for contract testing for POST /2.0/users/{userId}/plans/{planId}/upgrade and POST /2.0/users/{userId}/plans/{planId}/downgrade
+- WireMock integration tests for contract testing for DELETE /2.0/users/{userId}/plans/{planId} endpoint
+- Added new `AssetShare` class
+- Added new asset-based sharing endpoints through `SharingResources` interface
+- Added `AssetType` enum to support multiple asset types (sheets, reports, sights, workspaces)
+- Added methods for listing, getting, creating, updating, and deleting shares for any asset type
+
+### Updated
+- Folder structure for the Users related WireMock tests
+- Replaced `Share` in `AssetSharingResources` classes with `AssetShare`
+
+### Changed
+- Deprecated old asset-specific sharing methods in `ShareResources` with notices to use the new asset-based methods
+
+### Removed
+- Remove integration tests from the sdk test suite and workflows
+
+### Fixed
+- Fix [issue #128](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/128) - in the implementation of the DefaultHttpClient class that recreates the httpClient (RestClient) instance on every request
+
+## [6.4.0] - 2025-10-27
+### Added
+- Add provisionalExpirationDate field to the User and UserPlan models
+
+## [6.3.0] - 2025-09-25
+### Added
+- Support for POST /2.0/users/{userId}/plans/{planId}/downgrade
+- Support for POST /2.0/users/{userId}/plans/{planId}/upgrade
+- Support for GET /2.0/users/{userId}/plans
+- Support for GET /2.0/users?planId={planId}&seatType={seatType}
+- Support for DELETE /2.0/users/{userId}/plans/{planId}
 
 ## [5.1.0] - 2025-08-25
 ### Added
