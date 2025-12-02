@@ -27,18 +27,18 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Implmentation of the number object value type
     /// </summary>
-    public class NumberObjectValue : IPrimitiveObjectValue<double>
+    public class NumberObjectValue : IPrimitiveObjectValue<decimal>
     {
         /// <summary>
         /// Value held by the object.
         /// </summary>
-        private double value;
+        private decimal value;
 
         /// <summary>
-        /// Constructor for taking a double and holding it.
+        /// Constructor for taking a decimal and holding it.
         /// </summary>
         /// <param name="value"></param>
-        public NumberObjectValue(double value)
+        public NumberObjectValue(decimal value)
         {
             this.value = value;
         }
@@ -46,7 +46,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Getter/setter for the numeric value.
         /// </summary>
-        public double Value
+        public decimal Value
         {
             get { return this.value; }
             set { this.value = value; }
