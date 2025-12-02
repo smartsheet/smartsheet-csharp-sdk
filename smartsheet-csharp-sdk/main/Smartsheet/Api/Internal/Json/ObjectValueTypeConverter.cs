@@ -117,11 +117,11 @@ namespace Smartsheet.Api.Internal.Json
                 }
                 else if (reader.TokenType == JsonToken.Integer)
                 {
-                    objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
+                    objectValue = new NumberObjectValue(Convert.ToDecimal(reader.Value));
                 }
                 else if (reader.TokenType == JsonToken.Float)
                 {
-                    objectValue = new NumberObjectValue((double)reader.Value);
+                    objectValue = new NumberObjectValue((decimal)reader.Value);
                 }
                 else if (reader.TokenType == JsonToken.Date)
                 {
@@ -188,4 +188,3 @@ namespace Smartsheet.Api.Internal.Json
         }
     }
 }
-
