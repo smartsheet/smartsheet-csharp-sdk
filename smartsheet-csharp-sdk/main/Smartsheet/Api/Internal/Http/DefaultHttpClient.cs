@@ -497,11 +497,11 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="durationMs"></param>
         public virtual void LogRequest(RestRequest request, RestResponse response, long durationMs)
         {
-            logger.Info(() =>
-            {
-                //return string.Format("{0} {1}, Response Code:{2}, Request completed in {3} ms", 
-                //    request.Method.ToString(), httpClient.BuildUri(request), response.StatusCode, durationMs);
-            });
+            // logger.Info(() =>
+            // {
+            //     return string.Format("{0} {1}, Response Code:{2}, Request completed in {3} ms", 
+            //         request.Method.ToString(), httpClient.BuildUri(request), response.StatusCode, durationMs);
+            // });
             logger.Debug(() =>
             {
                 var headers_list = request.Parameters.Where(parameter => parameter.Type == ParameterType.HttpHeader).ToList();
