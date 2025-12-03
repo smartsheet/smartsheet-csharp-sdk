@@ -77,10 +77,4 @@
     <PackageReference Include="NLog" Version="5.0.5" />
     <PackageReference Include="RestSharp" Version="109.0.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-    <PackageReference Include="System.Management" Version="7.0.0" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Management" Version="7.0.0" />
-  </ItemGroup>
 </Project>
