@@ -53,20 +53,23 @@ namespace Smartsheet.Api.Internal.Json
         static JsonNetSerializer()
         {
             // No formatting to decrease the length;
-            serializer.Formatting = Newtonsoft.Json.Formatting.None;
+            serializer.Formatting = Formatting.None;
 
             // Allow deserialization if there are properties that can't be deserialized
-            serializer.MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore;
+            serializer.MissingMemberHandling = MissingMemberHandling.Ignore;
 
             // Set the date Format to ISO 8601
-            serializer.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+            serializer.DateFormatHandling = DateFormatHandling.IsoDateFormat;
 
             // See https://github.com/JamesNK/Newtonsoft.Json/issues/862 for context
             // Disable converting strings that "look like" dates to C# DateTime objects
-            serializer.DateParseHandling = Newtonsoft.Json.DateParseHandling.None;
+            serializer.DateParseHandling = DateParseHandling.None;
+
+            // Use Decimal for all floating point numbers to avoid precision loss
+            serializer.FloatParseHandling = FloatParseHandling.Decimal;
 
             // Only include non-null properties in when serializing
-            serializer.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            serializer.NullValueHandling = NullValueHandling.Ignore;
 
             // Excludes "Id" field from being serialized to JSON for any IdentifiableModel class
             serializer.ContractResolver = new ContractResolver();
