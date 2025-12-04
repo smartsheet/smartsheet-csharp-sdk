@@ -198,6 +198,37 @@ namespace Smartsheet.Api
         void DowngradeUser(long userId, long planId, DowngradeSeatType seatType);
 
         /// <summary>
+        /// <para>Reactivates the user associated with the current Smartsheet plan, restoring the user's access to Smartsheet, owned items, and shared items.</para>
+        /// <para>Optionally, with Enterprise Plan Manager (EPM) enabled, you can specify the ID of a user within your managed plan hierarchy.</para>
+        /// <para>Important: You can reactivate the user only if that user has been deactivated for less than thirty (30) days.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /users/{userId}/reactivate</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to reactivate.</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">User is not eligible for reactivation (e.g., email belongs to ISP domain, email unassociated with plan domain, user not in organization, or deactivated for more than 30 days).</exception>
+        /// <exception cref="AuthorizationException">Authentication failed or token missing. Requires System Admin permissions.</exception>
+        /// <exception cref="ResourceNotFoundException">User not found.</exception>
+        /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        void ReactivateUser(long userId);
+
+        /// <summary>
+        /// <para>Deactivates the user associated with the current Smartsheet plan, blocking the user from using Smartsheet in any way. Deactivating a user does not affect their existing permissions on owned or shared items.</para>
+        /// <para>Optionally, with Enterprise Plan Manager (EPM) enabled, you can deactivate a user from child organizations.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /users/{userId}/deactivate</para>
+        /// </summary>
+        /// <param name="userId">The ID of the user to deactivate.</param>
+        /// <returns>void</returns>
+        /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
+        /// <exception cref="InvalidRequestException">User is not eligible for deactivation (e.g., email belongs to ISP domain, email unassociated with plan domain, or user is managed by external source like IdP or directory integration).</exception>
+        /// <exception cref="AuthorizationException">Authentication failed or token missing. Requires System Admin permissions.</exception>
+        /// <exception cref="ResourceNotFoundException">User not found.</exception>
+        /// <exception cref="ServiceUnavailableException">Unexpected error on the server.</exception>
+        /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
+        void DeactivateUser(long userId);
+
+        /// <summary>
         /// <para>Removes a User from an organization. User is transitioned to a free collaborator with read-only access to owned sheets (unless those are optionally transferred to another user).</para>
         /// <remarks>This operation is only available to system administrators.</remarks>
         /// <para>It mirrors to the following Smartsheet REST API method: DELETE /user{Id}</para>
