@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Serialization of float numbers to double caused precision loss. Switched to decimal.
+- Renamed `IncludeColumnIds` to `IncludedColumnIds` in [`AutomationAction`](smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AutomationAction.cs) class to match Smartsheet API specification and align with Python and Java SDK implementations. Fixes [issue #32](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/32).
 
 ## [6.5.0] - 2025-11-25
 ### Added
