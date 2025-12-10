@@ -17,6 +17,7 @@
 //    %[license]
 
 using System;
+using Smartsheet.Api.Internal.Util;
 
 namespace Smartsheet.Api.Models
 {
@@ -108,8 +109,8 @@ namespace Smartsheet.Api.Models
                 Name = childResource.Name,
                 AccessLevel = childResource.AccessLevel,
                 Permalink = childResource.Permalink,
-                CreatedAt = childResource.CreatedAt as DateTime?,
-                ModifiedAt = childResource.ModifiedAt as DateTime?,
+                CreatedAt = DateTimeConverter.ConvertToDateTime(childResource.CreatedAt),
+                ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
                 Source = childResource.Source,
                 OwnerId = childResource.OwnerId,
                 Owner = childResource.Owner
@@ -127,8 +128,8 @@ namespace Smartsheet.Api.Models
                 Name = childResource.Name,
                 AccessLevel = childResource.AccessLevel,
                 Permalink = childResource.Permalink,
-                CreatedAt = childResource.CreatedAt as DateTime?,
-                ModifiedAt = childResource.ModifiedAt as DateTime?,
+                CreatedAt = DateTimeConverter.ConvertToDateTime(childResource.CreatedAt),
+                ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
                 Source = childResource.Source
             };
         }
@@ -144,8 +145,8 @@ namespace Smartsheet.Api.Models
                 Name = childResource.Name,
                 AccessLevel = childResource.AccessLevel,
                 Permalink = childResource.Permalink,
-                CreatedAt = childResource.CreatedAt as DateTime?,
-                ModifiedAt = childResource.ModifiedAt as DateTime?,
+                CreatedAt = DateTimeConverter.ConvertToDateTime(childResource.CreatedAt),
+                ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
                 Source = childResource.Source
             };
         }
