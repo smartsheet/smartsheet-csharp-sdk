@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [6.6.1] - 2025-12-10
 ### Fixed
-- Fix data conversions in the ChildResource class
+- Fix `DateTime` conversions in the ChildResource class
 
 ## [6.6.0] - 2025-12-04
 ### Added
