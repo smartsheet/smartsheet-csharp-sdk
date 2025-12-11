@@ -4,8 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
+
+## [6.6.1] - 2025-12-10
+### Fixed
+- Fix `DateTime` conversions in the ChildResource class
+
+## [6.6.0] - 2025-12-04
+### Added
+- Support for POST /2.0/users/{userId}/reactivate endpoint
+- Support for POST /2.0/users/{userId}/deactivate endpoint
+### Updated
+- Update csproj file for backwards compatibility
+
 ### Fixed
 - Serialization of float numbers to double caused precision loss. Switched to decimal.
+- Renamed `IncludeColumnIds` to `IncludedColumnIds` in [`AutomationAction`](smartsheet-csharp-sdk/main/Smartsheet/Api/Models/AutomationAction.cs) class to match Smartsheet API specification and align with Python and Java SDK implementations. Fixes [issue #32](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/32).
 
 ## [6.5.0] - 2025-11-25
 ### Added
