@@ -47,6 +47,12 @@ namespace Smartsheet.Api.Models
         /// Include folders in the response.
         /// </summary>
         [EnumMember(Value = "folders")]
-        FOLDERS
+        FOLDERS,
+
+        /// <summary>
+        /// Include templates in the response.
+        /// </summary>
+        [EnumMember(Value = "templates")]
+        TEMPLATES
     }
 }
