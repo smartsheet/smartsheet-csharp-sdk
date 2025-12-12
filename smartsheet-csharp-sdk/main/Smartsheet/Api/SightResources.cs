@@ -42,7 +42,24 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        [Obsolete("This method is deprecated. Please use the overload that accepts TokenPaginationParameters instead.")]
         PaginatedResult<Sight> ListSights(PaginationParameters? paging = null, DateTime? modifiedSince = null);
+
+        /// <summary>
+        /// <para>Gets the list of all Sights that the User has access to.</para>
+        /// 
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sights</para>
+        /// </summary>
+        /// <returns>IndexResult object containing an array of Sight objects limited to the following attributes:
+        ///        id, name, accessLevel, permalink, createdAt, modifiedAt 
+        /// </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        TokenPaginatedResult<Sight> ListSights(ListSightsTokenPaginationParameters? tokenPaging, DateTime? modifiedSince = null);
 
         /// <summary>
         /// <para>Get a specified Sight.</para>
