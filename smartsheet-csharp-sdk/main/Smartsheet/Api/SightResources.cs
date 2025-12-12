@@ -59,7 +59,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        TokenPaginatedResult<Sight> ListSights(ListSightsTokenPaginationParameters? tokenPaging, DateTime? modifiedSince = null);
+        TokenPaginatedResult<Sight> ListSights(TokenPaginationParameters? tokenPaging, DateTime? modifiedSince = null);
 
         /// <summary>
         /// <para>Get a specified Sight.</para>

@@ -89,7 +89,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void TestListWorkspacesTokenPaginationParameters_OverridesToDictionary()
         {
-            ListWorkspacesTokenPaginationParameters parameters = new ListWorkspacesTokenPaginationParameters("key456", 30, "workspace");
+            ListWorkspacesTokenPaginationParameters parameters = new ListWorkspacesTokenPaginationParameters("key456", 30, "token");
 
             IDictionary<string, string> dict = parameters.toDictionary();
 
@@ -100,7 +100,7 @@ namespace mock_api_test_sdk_net80
             Assert.IsTrue(dict.ContainsKey("maxItems"));
             Assert.AreEqual("30", dict["maxItems"]);
             Assert.IsTrue(dict.ContainsKey("paginationType"));
-            Assert.AreEqual("workspace", dict["paginationType"]);
+            Assert.AreEqual("token", dict["paginationType"]);
         }
     }
 }
