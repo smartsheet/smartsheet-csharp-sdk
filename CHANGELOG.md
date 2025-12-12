@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+## [6.6.2] - 2025-12-12
+### Fixed
+- Add support ofr templates to the ConvertToSpecificType class
+
 ## [6.6.1] - 2025-12-10
 ### Fixed
 - Fix `DateTime` conversions in the ChildResource class
