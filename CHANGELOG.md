@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [6.6.2] - 2025-12-12
 ### Fixed
-- Add support ofr templates to the ConvertToSpecificType class
+- Fixed "Unknown resourceType" exception when template resources are returned in folder/workspace children endpoints by adding template support to `ChildResource.ConvertToSpecificType()` method
+- Added `TEMPLATES` enum value to `ChildrenResourceType` for consistency with supported child resource types
 
 ## [6.6.1] - 2025-12-10
 ### Fixed
