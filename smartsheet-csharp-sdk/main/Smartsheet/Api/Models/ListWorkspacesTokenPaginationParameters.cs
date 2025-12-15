@@ -42,7 +42,7 @@ namespace Smartsheet.Api.Models
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>(base.toDictionary());
 
-            if (!string.IsNullOrEmpty(paginationType))
+            if (!string.IsNullOrEmpty(paginationType) && !parameters.ContainsKey("paginationType"))
             {
                 parameters.Add("paginationType", paginationType);
             }

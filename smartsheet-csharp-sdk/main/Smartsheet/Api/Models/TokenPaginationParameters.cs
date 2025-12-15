@@ -77,6 +77,8 @@ namespace Smartsheet.Api.Models
                 parameters.Add("maxItems", maxItems.ToString());
             }
 
+            parameters.Add("paginationType", "token");
+
             return parameters;
         }
     }
