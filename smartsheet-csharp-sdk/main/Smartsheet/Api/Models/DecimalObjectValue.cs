@@ -1,4 +1,4 @@
-﻿//    #[license]
+//    #[license]
 //    SmartsheetClient SDK for C#
 //    %%
 //    Copyright (C) 2018 SmartsheetClient
@@ -25,28 +25,29 @@ using Newtonsoft.Json;
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Implmentation of the number object value type
+    /// Implementation of the decimal object value type.
+    /// This class preserves decimal precision for numeric values, unlike NumberObjectValue which uses double.
     /// </summary>
-    public class NumberObjectValue : IPrimitiveObjectValue<double>
+    public class DecimalObjectValue : IPrimitiveObjectValue<decimal>
     {
         /// <summary>
         /// Value held by the object.
         /// </summary>
-        private double value;
+        private decimal value;
 
         /// <summary>
-        /// Constructor for taking a double and holding it.
+        /// Constructor for taking a decimal and holding it.
         /// </summary>
         /// <param name="value"></param>
-        public NumberObjectValue(double value)
+        public DecimalObjectValue(decimal value)
         {
             this.value = value;
         }
 
         /// <summary>
-        /// Getter/setter for the numeric value.
+        /// Getter/setter for the decimal value.
         /// </summary>
-        public double Value
+        public decimal Value
         {
             get { return this.value; }
             set { this.value = value; }

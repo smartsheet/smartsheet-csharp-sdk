@@ -92,8 +92,15 @@ namespace Smartsheet.Api
         private bool dateTimeFixOptOut = false;
 
         /// <summary>
+        /// Optional setting to enable DecimalObjectValue when deserializing numeric ObjectValue types.
+        /// When true, numeric values are deserialized as DecimalObjectValue preserving decimal precision.
+        /// When false (default), numeric values are deserialized as NumberObjectValue converting to double.
+        /// </summary>
+        private bool enableDecimalObjectValue = false;
+
+        /// <summary>
         /// <para>Represents the default base URI of the Smartsheet REST API.</para>
-        /// 
+        ///
         /// <para>It is a constant with Value "https://api.smartsheet.com/2.0".</para>
         /// </summary>
         public const string DEFAULT_BASE_URI = "https://api.smartsheet.com/2.0/";
@@ -211,6 +218,19 @@ namespace Smartsheet.Api
         }
 
         /// <summary>
+        /// Set optional flag to enable DecimalObjectValue when deserializing numeric ObjectValue types.
+        /// When set to true, numeric values are deserialized as DecimalObjectValue preserving decimal precision.
+        /// When set to false (default), numeric values are deserialized as NumberObjectValue converting to double.
+        /// </summary>
+        /// <param name="enableDecimalObjectValue">true to enable DecimalObjectValue, false to use NumberObjectValue (default)</param>
+        /// <returns>the SmartsheetBuilder</returns>
+        public SmartsheetBuilder SetEnableDecimalObjectValue(bool enableDecimalObjectValue)
+        {
+            this.enableDecimalObjectValue = enableDecimalObjectValue;
+            return this;
+        }
+
+        /// <summary>
         /// <para>Gets the http client.</para>
         /// </summary>
         /// <returns> the http client </returns>
@@ -294,7 +314,7 @@ namespace Smartsheet.Api
                 jsonSerializer = new JsonNetSerializer();
             }
 
-            SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut);
+            SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut, enableDecimalObjectValue);
 
             if (changeAgent != null)
             {

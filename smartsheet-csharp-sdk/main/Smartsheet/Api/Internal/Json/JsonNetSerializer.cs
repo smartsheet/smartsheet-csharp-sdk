@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,6 +23,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Smartsheet.Api.Internal.Json
 {
@@ -30,7 +31,7 @@ namespace Smartsheet.Api.Internal.Json
 
     /// <summary>
     /// This is the Jackson based JsonSerializer implementation.
-    /// 
+    ///
     /// Thread Safety: This class is thread safe because it is immutable and the underlying JSON.NET is thread
     /// safe as long as it is not re-configured.
     /// </summary>
@@ -38,9 +39,9 @@ namespace Smartsheet.Api.Internal.Json
     {
         /// <summary>
         /// Represents the ObjectMapper used to serialize/de-serialize JSON.
-        /// 
+        ///
         /// It will be initialized in a static initializer and will not change afterwards.
-        /// 
+        ///
         /// Because ObjectMapper is thread-safe as long as it's not reconfigured, a static final class-level ObjectMapper is
         /// used to achieve best performance.
         /// </summary>
@@ -84,7 +85,7 @@ namespace Smartsheet.Api.Internal.Json
             serializer.Converters.Add(new PrimitiveObjectValueConverter());
 
             // Handles objectValue serialization
-            serializer.Converters.Add(new ObjectValueTypeConverter());
+            serializer.Converters.Add(new ObjectValueTypeConverter(false));
 
             // Handles widget content deserialization
             serializer.Converters.Add(new WidgetContentConverter());
@@ -93,9 +94,9 @@ namespace Smartsheet.Api.Internal.Json
             serializer.Converters.Add(new HyperlinkConverter());
 
             // Handles linkInFromCell serialization
-            serializer.Converters.Add(new CellTypeConverter());
+            serializer.Converters.Add(new CellTypeConverter(false));
 
-            // Handles ErrorDetails 
+            // Handles ErrorDetails
             serializer.Converters.Add(new ErrorTypeConverter());
         }
 
@@ -120,10 +121,40 @@ namespace Smartsheet.Api.Internal.Json
         }
 
         /// <summary>
+        /// Sets whether to enable DecimalObjectValue when deserializing numeric ObjectValue types.
+        /// When set to true, numeric values are deserialized as DecimalObjectValue preserving decimal precision.
+        /// When set to false, numeric values are deserialized as NumberObjectValue converting to double (default behavior).
+        ///
+        /// Note: This modifies the shared static serializer and affects all instances. Not thread-safe during reconfiguration.
+        /// </summary>
+        /// <param name="value">true to enable DecimalObjectValue, false to use NumberObjectValue (default)</param>
+        public bool EnableDecimalObjectValue
+        {
+            set
+            {
+                // Replace the existing CellTypeConverter with a new one with the desired setting
+                var oldCellTypeConverter = serializer.Converters.OfType<CellTypeConverter>().FirstOrDefault();
+                if (oldCellTypeConverter != null)
+                {
+                    serializer.Converters.Remove(oldCellTypeConverter);
+                }
+                serializer.Converters.Add(new CellTypeConverter(value));
+
+                // Replace the existing ObjectValueTypeConverter with a new one with the desired setting
+                var oldObjConverter = serializer.Converters.OfType<ObjectValueTypeConverter>().FirstOrDefault();
+                if (oldObjConverter != null)
+                {
+                    serializer.Converters.Remove(oldObjConverter);
+                }
+                serializer.Converters.Add(new ObjectValueTypeConverter(value));
+            }
+        }
+
+        /// <summary>
         /// Constructor.
-        /// 
+        ///
         /// Parameters: None
-        /// 
+        ///
         /// Exceptions: None
         /// </summary>
         public JsonNetSerializer()
@@ -132,13 +163,13 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// Serialize an object to JSON.
-        /// 
-        /// Parameters: 
+        ///
+        /// Parameters:
         ///   object : the object to serialize
         ///   outputStream : the output stream to which the JSON will be written
-        /// 
+        ///
         /// Returns: None
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -170,11 +201,11 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize an object from JSON.
-        /// 
+        ///
         /// Returns: the de-serialized object
-        /// 
-        /// Exceptions: 
-        ///   - IllegalArgumentException : if any argument is null 
+        ///
+        /// Exceptions:
+        ///   - IllegalArgumentException : if any argument is null
         ///   - JSONSerializationException : if there is any other error occurred during the operation
         /// </summary>
         /// <param name="inputStream"> the input stream from which the JSON will be read </param>
@@ -223,12 +254,12 @@ namespace Smartsheet.Api.Internal.Json
         }
 
         /// <summary>
-        /// De-serialize an object list from JSON. 
-        /// 
+        /// De-serialize an object list from JSON.
+        ///
         /// Returns: the de-serialized list
-        /// 
-        /// Exceptions: 
-        ///   - IllegalArgumentException : if any argument is null 
+        ///
+        /// Exceptions:
+        ///   - IllegalArgumentException : if any argument is null
         ///   - JSONSerializationException : if there is any other error occurred during the operation
         /// </summary>
         /// <param name="inputStream"> the input stream from which the JSON will be read </param>
@@ -346,10 +377,10 @@ namespace Smartsheet.Api.Internal.Json
         }
 
         /// <summary>
-        /// De-serialize a RequestResult&lt;T&gt; object from JSON. 
-        /// 
-        /// Exceptions: 
-        ///   - IllegalArgumentException : if any argument is null 
+        /// De-serialize a RequestResult&lt;T&gt; object from JSON.
+        ///
+        /// Exceptions:
+        ///   - IllegalArgumentException : if any argument is null
         ///   - JSONSerializationException : if there is any other error occurred during the operation
         /// </summary>
         /// <param name="inputStream"> the input stream from which the JSON will be read </param>
@@ -384,13 +415,13 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize a RequestResult&lt;List&lt;T&gt;&gt; object from JSON.
-        /// 
-        /// Parameters: - objectClass :  - inputStream : 
-        /// 
+        ///
+        /// Parameters: - objectClass :  - inputStream :
+        ///
         /// Returns: the de-serialized RequestResult
-        /// 
-        /// Exceptions: 
-        ///   - IllegalArgumentException : if any argument is null 
+        ///
+        /// Exceptions:
+        ///   - IllegalArgumentException : if any argument is null
         ///   - JSONSerializationException : if there is any other error occurred during the operation
         /// </summary>
         /// <param name="inputStream"> the input stream from which the JSON will be read </param>
@@ -420,12 +451,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize a CopyOrMoveRowResult object from JSON.
-        /// 
-        /// Parameters: 
+        ///
+        /// Parameters:
         ///     - inputStream : the input stream from which the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized CopyOrMoveRowResult
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>
@@ -456,12 +487,12 @@ namespace Smartsheet.Api.Internal.Json
 
         /// <summary>
         /// De-serialize to a EventResult (holds pagination info) object from JSON.
-        /// 
+        ///
         /// Parameters:
         ///     - inputStream : the input stream from which the JSON will be read
-        /// 
+        ///
         /// Returns: the de-serialized EventResult
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null - JSONSerializationException : if there is any
         /// other error occurred during the operation
         /// </summary>

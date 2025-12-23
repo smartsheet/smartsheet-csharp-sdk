@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,6 +29,20 @@ namespace Smartsheet.Api.Internal.Json
     /// </summary>
     class ObjectValueTypeConverter : JsonConverter
     {
+        private readonly bool _enableDecimalObjectValue;
+
+        /// <summary>
+        /// Constructor that accepts configuration for decimal object value handling.
+        /// </summary>
+        /// <param name="enableDecimalObjectValue">
+        /// If true, numeric values are deserialized as DecimalObjectValue preserving decimal precision.
+        /// If false, numeric values are deserialized as NumberObjectValue converting to double (default behavior).
+        /// </param>
+        public ObjectValueTypeConverter(bool enableDecimalObjectValue)
+        {
+            _enableDecimalObjectValue = enableDecimalObjectValue;
+        }
+
         /// <summary>
         /// Helper function to know if conversion can be done
         /// </summary>
@@ -56,9 +70,9 @@ namespace Smartsheet.Api.Internal.Json
                 ObjectValueAttributeSuperset superset = new ObjectValueAttributeSuperset();
                 serializer.Populate(reader, superset);
                 ObjectValueType parsedObjectType;
-                if(!Enum.TryParse(superset.objectType, true, out parsedObjectType)) 
+                if(!Enum.TryParse(superset.objectType, true, out parsedObjectType))
                 {
-                    // If a new object type is introduced to the Smartsheet API that this version of the SDK doesn't support, 
+                    // If a new object type is introduced to the Smartsheet API that this version of the SDK doesn't support,
                     // return null instead of throwing an exception.
                     return null;
                 }
@@ -117,11 +131,26 @@ namespace Smartsheet.Api.Internal.Json
                 }
                 else if (reader.TokenType == JsonToken.Integer)
                 {
-                    objectValue = new NumberObjectValue(Convert.ToDecimal(reader.Value));
+                    if (_enableDecimalObjectValue)
+                    {
+                        objectValue = new DecimalObjectValue(Convert.ToDecimal(reader.Value));
+                    }
+                    else
+                    {
+                        objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
+                    }
                 }
                 else if (reader.TokenType == JsonToken.Float)
                 {
-                    objectValue = new NumberObjectValue((decimal)reader.Value);
+                    if (_enableDecimalObjectValue)
+                    {
+                        objectValue = new DecimalObjectValue((decimal)reader.Value);
+                    }
+                    else
+                    {
+                        // reader.Value is decimal due to FloatParseHandling.Decimal, convert to double
+                        objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
+                    }
                 }
                 else if (reader.TokenType == JsonToken.Date)
                 {

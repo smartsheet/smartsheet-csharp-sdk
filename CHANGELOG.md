@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
+### Added
+- Added `SetEnableDecimalObjectValue` method to `SmartsheetBuilder` to enable opt-in support for `DecimalObjectValue` when deserializing numeric cell values, preserving full decimal precision instead of converting to `double`. See [ADVANCED.md](ADVANCED.md#preserving-decimal-precision-with-decimalobjectvalue) for usage details and important considerations.
+
+### Fixed
+- Reverted [#134](https://github.com/smartsheet/smartsheet-csharp-sdk/pull/134) because it introduced breaking changes. The addition above adds support for decimal conversion with an opt-in flag.
 
 ## [6.6.2] - 2025-12-12
 ### Fixed
