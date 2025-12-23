@@ -29,6 +29,20 @@ namespace Smartsheet.Api.Internal.Json
     /// </summary>
     class ObjectValueTypeConverter : JsonConverter
     {
+        private readonly bool _enableDecimalObjectValue;
+
+        /// <summary>
+        /// Constructor that accepts configuration for decimal object value handling.
+        /// </summary>
+        /// <param name="enableDecimalObjectValue">
+        /// If true, numeric values are deserialized as DecimalObjectValue preserving decimal precision.
+        /// If false, numeric values are deserialized as NumberObjectValue converting to double (default behavior).
+        /// </param>
+        public ObjectValueTypeConverter(bool enableDecimalObjectValue)
+        {
+            _enableDecimalObjectValue = enableDecimalObjectValue;
+        }
+
         /// <summary>
         /// Helper function to know if conversion can be done
         /// </summary>
@@ -117,11 +131,26 @@ namespace Smartsheet.Api.Internal.Json
                 }
                 else if (reader.TokenType == JsonToken.Integer)
                 {
-                    objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
+                    if (_enableDecimalObjectValue)
+                    {
+                        objectValue = new DecimalObjectValue(Convert.ToDecimal(reader.Value));
+                    }
+                    else
+                    {
+                        objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
+                    }
                 }
                 else if (reader.TokenType == JsonToken.Float)
                 {
-                    objectValue = new NumberObjectValue((double)reader.Value);
+                    if (_enableDecimalObjectValue)
+                    {
+                        objectValue = new DecimalObjectValue((decimal)reader.Value);
+                    }
+                    else
+                    {
+                        // reader.Value is decimal due to FloatParseHandling.Decimal, convert to double
+                        objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
+                    }
                 }
                 else if (reader.TokenType == JsonToken.Date)
                 {

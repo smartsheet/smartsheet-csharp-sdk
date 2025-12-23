@@ -280,7 +280,7 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// Creates an instance with given server URI, HttpClient (optional), and JsonSerializer (optional)
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if serverURI/Version/AccessToken is null/empty
         /// </summary>
         /// <param name="baseURI"> the server uri </param>
@@ -288,7 +288,8 @@ namespace Smartsheet.Api.Internal
         /// <param name="httpClient"> the HTTP client (optional) </param>
         /// <param name="jsonSerializer"> the JSON serializer (optional) </param>
         /// <param name="dateTimeFixOptOut"> opt out of deserializer string ==> DateTime conversion fix </param>
-        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, bool dateTimeFixOptOut)
+        /// <param name="enableDecimalObjectValue"> enable DecimalObjectValue for numeric values (preserves decimal precision) </param>
+        public SmartsheetImpl(string baseURI, string accessToken, HttpClient httpClient, JsonSerializer jsonSerializer, bool dateTimeFixOptOut, bool enableDecimalObjectValue = false)
         {
             Utils.ThrowIfNull(baseURI);
             Utils.ThrowIfEmpty(baseURI);
@@ -301,6 +302,8 @@ namespace Smartsheet.Api.Internal
                 JsonNetSerializer jsonNetSerializer = new JsonNetSerializer();
                 if(dateTimeFixOptOut)
                     jsonNetSerializer.DateParseHandling = Newtonsoft.Json.DateParseHandling.DateTime;
+                if(enableDecimalObjectValue)
+                    jsonNetSerializer.EnableDecimalObjectValue = true;
                 jsonSerializer = jsonNetSerializer;
             }
             this.jsonSerializer = jsonSerializer;

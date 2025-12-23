@@ -27,6 +27,20 @@ namespace Smartsheet.Api.Internal.Json
 {
     class CellTypeConverter : JsonConverter
     {
+        private readonly bool _enableDecimalObjectValue;
+
+        /// <summary>
+        /// Constructor that accepts configuration for decimal object value handling.
+        /// </summary>
+        /// <param name="enableDecimalObjectValue">
+        /// If true, numeric values are deserialized as DecimalObjectValue preserving decimal precision.
+        /// If false, numeric values are deserialized as NumberObjectValue converting to double (default behavior).
+        /// </param>
+        public CellTypeConverter(bool enableDecimalObjectValue)
+        {
+            _enableDecimalObjectValue = enableDecimalObjectValue;
+        }
+
         public override bool CanConvert(Type objectType)
         {
             return typeof(Cell).IsAssignableFrom(objectType);
@@ -53,7 +67,7 @@ namespace Smartsheet.Api.Internal.Json
             serializerHelper.ContractResolver = new ContractResolver();
             serializerHelper.Converters.Add(new JsonEnumTypeConverter());
             serializerHelper.Converters.Add(new PrimitiveObjectValueConverter());
-            serializerHelper.Converters.Add(new ObjectValueTypeConverter());
+            serializerHelper.Converters.Add(new ObjectValueTypeConverter(_enableDecimalObjectValue));
             serializerHelper.Converters.Add(new HyperlinkConverter());
             serializerHelper.Converters.Add(new CellLinkTypeConverter());
 

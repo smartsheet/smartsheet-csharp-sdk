@@ -411,3 +411,58 @@ static void Sample()
         .Build();
 }
 ```
+
+## Preserving Decimal Precision with DecimalObjectValue
+
+By default, the SDK deserializes numeric cell values as `NumberObjectValue` which stores values as `double`, potentially losing precision for certain decimal values. To preserve full decimal precision, you can enable `DecimalObjectValue` mode.
+
+### Enabling DecimalObjectValue
+
+To enable `DecimalObjectValue` mode, use the `SetEnableDecimalObjectValue` method when building your Smartsheet client:
+
+```csharp
+using Smartsheet.Api;
+using Smartsheet.Api.Models;
+
+// Initialize client with DecimalObjectValue enabled
+SmartsheetClient smartsheet = new SmartsheetBuilder()
+    .SetEnableDecimalObjectValue(true)
+    .Build();
+```
+
+### Important Considerations
+
+**Breaking Change Warning:** Enabling `DecimalObjectValue` is a breaking change if your application currently casts cell values to `NumberObjectValue`. You will need to update your code to handle `DecimalObjectValue` instead.
+
+**Thread Safety:** The `EnableDecimalObjectValue` setting modifies a shared static serializer. It is not thread-safe during reconfiguration and affects all Smartsheet client instances in your application.
+
+**When to Use:** Enable this feature if you:
+- Work with financial data or other values requiring exact decimal precision
+- Need to preserve the exact decimal representation received from the Smartsheet API
+- Can update your code to handle `DecimalObjectValue` instead of `NumberObjectValue`
+
+### Example: Working with DecimalObjectValue
+
+```csharp
+// Initialize client with decimal precision enabled
+SmartsheetClient smartsheet = new SmartsheetBuilder()
+    .SetEnableDecimalObjectValue(true)
+    .Build();
+
+// Get a sheet
+Sheet sheet = smartsheet.SheetResources.GetSheet(sheetId, null, null, null, null, null, null, null);
+
+// Access cell values with decimal precision
+foreach (Row row in sheet.Rows)
+{
+    foreach (Cell cell in row.Cells)
+    {
+        if (cell.ObjectValue is DecimalObjectValue decimalValue)
+        {
+            // Access the decimal value with full precision
+            decimal value = decimalValue.Value;
+            Console.WriteLine($"Decimal value: {value}");
+        }
+    }
+}
+```
