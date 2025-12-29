@@ -18,7 +18,8 @@
       {
         "files": [
           "api/*.{md,yml}",
-          "index.md"
+          "index.md",
+          "toc.yml"
         ],
         "exclude": [
           "_site/**"
