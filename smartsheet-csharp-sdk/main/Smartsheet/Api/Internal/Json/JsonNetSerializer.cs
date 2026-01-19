@@ -66,8 +66,9 @@ namespace Smartsheet.Api.Internal.Json
             // Disable converting strings that "look like" dates to C# DateTime objects
             serializer.DateParseHandling = DateParseHandling.None;
 
-            // Use Decimal for all floating point numbers to avoid precision loss
-            serializer.FloatParseHandling = FloatParseHandling.Decimal;
+            // Default to Double for backwards compatibility
+            // Can be changed to Decimal via EnableDecimalObjectValue property
+            serializer.FloatParseHandling = FloatParseHandling.Double;
 
             // Only include non-null properties in when serializing
             serializer.NullValueHandling = NullValueHandling.Ignore;
@@ -132,6 +133,10 @@ namespace Smartsheet.Api.Internal.Json
         {
             set
             {
+                // Set FloatParseHandling to control how primitive numeric values are parsed
+                // This fixes the issue where Cell.Value contains decimal primitives even when DecimalObjectValue is disabled
+                serializer.FloatParseHandling = value ? FloatParseHandling.Decimal : FloatParseHandling.Double;
+
                 // Replace the existing CellTypeConverter with a new one with the desired setting
                 var oldCellTypeConverter = serializer.Converters.OfType<CellTypeConverter>().FirstOrDefault();
                 if (oldCellTypeConverter != null)
