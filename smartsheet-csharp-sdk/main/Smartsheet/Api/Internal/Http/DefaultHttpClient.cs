@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,7 +35,7 @@ namespace Smartsheet.Api.Internal.Http
 
     /// <summary>
     /// This is the RestSharp based HttpClient implementation.
-    /// 
+    ///
     /// Thread Safety: This class is thread safe because it is immutable and the underlying http client is
     /// thread safe.
     /// </summary>
@@ -44,13 +44,13 @@ namespace Smartsheet.Api.Internal.Http
     {
         /// <summary>
         /// Represents the underlying http client.
-        /// 
+        ///
         /// It will be initialized in constructor and will not change afterwards. (might now....)
         /// </summary>
         protected RestClient httpClient;
 
         /// <summary>
-        /// static logger 
+        /// static logger
         /// </summary>
         protected static Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -77,7 +77,7 @@ namespace Smartsheet.Api.Internal.Http
         private String userAgent;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="previousAttempts"></param>
         /// <param name="totalElapsedTime"></param>
@@ -96,9 +96,9 @@ namespace Smartsheet.Api.Internal.Http
 
         /// <summary>
         /// Constructor.
-        /// 
+        ///
         /// Parameters: - HttpClient : the http client to use
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null
         /// </summary>
         /// <param name="httpClient"> the http client </param>
@@ -122,10 +122,10 @@ namespace Smartsheet.Api.Internal.Http
         /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
             HttpResponse response = new HttpResponse();
-            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead. 
+            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead.
             try {
                 var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
-                task.Wait(); 
+                task.Wait();
                 response = task.Result;
             } catch (AggregateException ex) {
                 throw new SmartsheetException(ex.InnerException.Message);
@@ -165,14 +165,14 @@ namespace Smartsheet.Api.Internal.Http
             restRequest.AddFile("file", File.ReadAllBytes(file), new FileInfo(file).Name, fileType);
             if (smartsheetRequest.Entity != null && smartsheetRequest.Entity.GetContent() != null)
             {
-                  
+
                 BodyParameter bodyParameter = new BodyParameter(objectType.ToLower(), System.Text.Encoding.Default.GetString(smartsheetRequest.Entity.Content),
                     smartsheetRequest.Entity.ContentType);
                 restRequest.AddParameter(bodyParameter);
             }
 
             restRequest.AlwaysMultipartFormData = true;
-           
+
             Stopwatch timer = new Stopwatch();
 
             // Make the HTTP request
@@ -205,7 +205,7 @@ namespace Smartsheet.Api.Internal.Http
                 if (restResponse.ContentLength != null) {
                     entity.ContentLength = restResponse.ContentLength.Value;
                 }
-                
+
 
                 entity.Content = restResponse.RawBytes;
                 smartsheetResponse.Entity = entity;
@@ -223,11 +223,11 @@ namespace Smartsheet.Api.Internal.Http
         /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
             HttpResponse response = new HttpResponse();
-            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead. 
+            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead.
             // This helps with error mock api tests.
             try {
             var task = this.RequestAsync(smartsheetRequest);
-            task.Wait(); 
+            task.Wait();
             response = task.Result;
             } catch (AggregateException ex) {
                 throw new SmartsheetException(ex.InnerException.Message);
@@ -285,7 +285,7 @@ namespace Smartsheet.Api.Internal.Http
                     }
 
                 }
-                
+
                 Stopwatch timer = new Stopwatch();
 
                 // Make the HTTP request
@@ -299,9 +299,9 @@ namespace Smartsheet.Api.Internal.Http
 
                 if (restResponse.ResponseStatus == ResponseStatus.Error)
                 {
-                    //JSON deserialize the exception we want from the Restsharp response. 
+                    //JSON deserialize the exception we want from the Restsharp response.
                     //Once we get this we can throw it up and make sure to pass it along from an inner exception inside an aggregate exception.
-                    RestResponseContent restResponseContent = this.jsonSerializer.deserialize<RestResponseContent>(restResponse.Content);       
+                    RestResponseContent restResponseContent = this.jsonSerializer.deserialize<RestResponseContent>(restResponse.Content);
                     throw new SmartsheetException(restResponseContent.message);
                 }
 
@@ -322,7 +322,7 @@ namespace Smartsheet.Api.Internal.Http
                     if (restResponse.ContentLength != null) {
                         entity.ContentLength = restResponse.ContentLength.Value;
                     }
-                    
+
 
                     entity.Content = restResponse.RawBytes;
                     smartsheetResponse.Entity = entity;
@@ -375,6 +375,10 @@ namespace Smartsheet.Api.Internal.Http
             else
             {
                 throw new System.NotSupportedException("Request method " + smartsheetRequest.Method + " is not supported!");
+            }
+            if (!string.IsNullOrEmpty(userAgent))
+            {
+                restRequest.AddHeader("User-Agent", userAgent);
             }
             return restRequest;
         }
@@ -499,7 +503,7 @@ namespace Smartsheet.Api.Internal.Http
         {
             // logger.Info(() =>
             // {
-            //     return string.Format("{0} {1}, Response Code:{2}, Request completed in {3} ms", 
+            //     return string.Format("{0} {1}, Response Code:{2}, Request completed in {3} ms",
             //         request.Method.ToString(), httpClient.BuildUri(request), response.StatusCode, durationMs);
             // });
             logger.Debug(() =>
@@ -521,11 +525,11 @@ namespace Smartsheet.Api.Internal.Http
                 {
                     if (body_element[0].ContentType != null /*&& body_element[0].ContentType.Contains("application/json")*/)
                     {
-                        if(body_element[0].Value.GetType() == typeof(string)) 
+                        if(body_element[0].Value.GetType() == typeof(string))
                         {
                             body = (string)body_element[0].Value;
                         }
-                        else 
+                        else
                         {
                             body = body_element[0].ToString();
                         }
@@ -558,7 +562,7 @@ namespace Smartsheet.Api.Internal.Http
         }
 
     /// <summary>
-    /// Little helper class to help us get the content of the RestSharp response. 
+    /// Little helper class to help us get the content of the RestSharp response.
     /// This holds the relevant error for the user that we have mock api test cases that test the error message.
     /// </summary>
     protected class RestResponseContent {
@@ -599,6 +603,6 @@ namespace Smartsheet.Api.Internal.Http
             get { return this.privateRefId; }
             set { this.privateRefId = value; }
         }
-    }    
+    }
     }
 }
