@@ -1,7 +1,7 @@
 //    #[license]
 //    SmartsheetClient SDK for C#
 //    %%
-//    Copyright (C) 2016 SmartsheetClient
+//    Copyright (C) 2014 SmartsheetClient
 //    %%
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -15,23 +15,26 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 //    %[license]
-namespace Smartsheet.Api.Models
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Smartsheet.Api
 {
     /// <summary>
-    /// An object representing a single asset (sheet or workspace) to be included in the scope of a report.
+    /// Represents the type of asset for report scope operations.
     /// </summary>
-    public class ReportScopeInclusion
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum ReportAssetType
     {
         /// <summary>
-        /// The asset type to be included in the scope of the report.
-        /// 
-        /// SHEET and WORKSPACE are the only supported asset types.
+        /// Sheet asset type
         /// </summary>
-        public ReportAssetType AssetType { get; set; }
+        SHEET,
 
         /// <summary>
-        /// The id of the asset according to its assetType.
+        /// Workspace asset type
         /// </summary>
-        public long AssetId { get; set; }
+        WORKSPACE,
     }
 }

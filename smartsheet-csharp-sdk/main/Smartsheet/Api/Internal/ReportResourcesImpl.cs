@@ -22,7 +22,6 @@ using Smartsheet.Api.Internal.Util;
 using System.IO;
 using Smartsheet.Api.Internal.Http;
 using System.Net;
-using Smartsheet.Api.Models.Inclusions;
 using Utils = Smartsheet.Api.Internal.Utility.Utility;
 using System.Linq;
 
@@ -314,21 +313,18 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// <para>
-        /// Removes one or more specified sheet or workspace from the report scope.
+        /// Adds one or more specified sheet or workspace to the report scope.
         /// </para>
         /// </summary>
         /// <param name="reportId"> the reportId </param>
         /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
-        /// <returns>
-        /// The status of the operation, which can be SUCCESS or PARTIAL_SUCCESS.
-        /// </returns>
         /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public RequestResult<Report> AddReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
+        public void AddReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
         {
             string path = "reports/" + reportId + "/scope";
 
@@ -352,14 +348,9 @@ namespace Smartsheet.Api.Internal
 
             HttpResponse response = smartsheet.HttpClient.Request(request);
 
-            RequestResult<Report> obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = smartsheet.JsonSerializer.deserializeResult<RequestResult<Report>>(
-                        response.Entity.GetContent()
-                    ).Result;
-
                     break;
                 default:
                     HandleError(response);
@@ -367,8 +358,6 @@ namespace Smartsheet.Api.Internal
             }
 
             smartsheet.HttpClient.ReleaseConnection();
-
-            return obj;
         }
 
         /// <summary>
@@ -378,16 +367,13 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="reportId"> the reportId </param>
         /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
-        /// <returns>
-        /// The status of the operation, which can be SUCCESS or PARTIAL_SUCCESS.
-        /// </returns>
         /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public RequestResult<Report> RemoveReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
+        public void RemoveReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
         {
             string path = "reports/" + reportId + "/scope";
 
@@ -411,13 +397,9 @@ namespace Smartsheet.Api.Internal
 
             HttpResponse response = smartsheet.HttpClient.Request(request);
 
-            RequestResult<Report> obj = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    obj = smartsheet.JsonSerializer.deserializeResult<RequestResult<Report>>(
-                        response.Entity.GetContent()
-                    ).Result;
                     break;
                 default:
                     HandleError(response);
@@ -425,8 +407,6 @@ namespace Smartsheet.Api.Internal
             }
 
             smartsheet.HttpClient.ReleaseConnection();
-
-            return obj;
         }
     }
 }
