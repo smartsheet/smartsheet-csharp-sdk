@@ -297,15 +297,6 @@ namespace Smartsheet.Api.Internal.Http
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
 
-                if (restResponse.ResponseStatus == ResponseStatus.Error)
-                {
-                    //JSON deserialize the exception we want from the Restsharp response.
-                    //Once we get this we can throw it up and make sure to pass it along from an inner exception inside an aggregate exception.
-                    RestResponseContent restResponseContent = this.jsonSerializer.deserialize<RestResponseContent>(restResponse.Content);
-                    throw new SmartsheetException(restResponseContent.message);
-                }
-
-
                 // Set returned Headers
                 smartsheetResponse.Headers = new Dictionary<string, string>();
                 foreach (var header in restResponse.Headers)
@@ -335,6 +326,13 @@ namespace Smartsheet.Api.Internal.Http
 
                 if (!ShouldRetry(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse))
                 {
+                    if (restResponse.ResponseStatus == ResponseStatus.Error)
+                    {
+                        //JSON deserialize the exception we want from the Restsharp response.
+                        //Once we get this we can throw it up and make sure to pass it along from an inner exception inside an aggregate exception.
+                        RestResponseContent restResponseContent = this.jsonSerializer.deserialize<RestResponseContent>(restResponse.Content);
+                        throw new SmartsheetException(restResponseContent.message);
+                    }
                     break;
                 }
             }
@@ -422,6 +420,16 @@ namespace Smartsheet.Api.Internal.Http
         /// <returns>true if this error code can be retried</returns>
         public virtual bool ShouldRetry(int previousAttempts, long totalElapsedTime, HttpResponse response)
         {
+            // Retry only for specific status codes regardless of response content type.
+            switch (response.StatusCode)
+            {
+
+                case HttpStatusCode.TooManyRequests:
+                case HttpStatusCode.BadGateway:
+                case HttpStatusCode.ServiceUnavailable:
+                    return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null);
+            }
+
             string contentType = response.Entity.ContentType;
             if (contentType != null && !contentType.StartsWith("application/json"))
             {
@@ -454,16 +462,27 @@ namespace Smartsheet.Api.Internal.Http
                 case 4002:
                 case 4003:
                 case 4004:
-                    break;
+                    return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error);
                 default:
                     return false;
             }
+        }
 
+        /// <summary>
+        /// Calculate backoff, log retry attempt, and sleep before retrying.
+        /// </summary>
+        /// <param name="previousAttempts">Number of previous attempts</param>
+        /// <param name="totalElapsedTime">Total elapsed time in milliseconds</param>
+        /// <param name="statusCode">HTTP status code for logging</param>
+        /// <param name="error">Error object (optional, can be null for status code-based retries)</param>
+        /// <returns>True if retry should proceed, false if max retry time exceeded</returns>
+        public virtual bool RetrySleep(int previousAttempts, long totalElapsedTime, HttpStatusCode statusCode, Api.Models.Error error)
+        {
             long backoff = CalcBackoff(previousAttempts, totalElapsedTime, error);
             if (backoff < 0)
                 return false;
 
-            logger.Info(string.Format("HttpError StatusCode={0}: Retrying in {1} milliseconds", response.StatusCode, backoff));
+            logger.Info(string.Format("HttpError StatusCode={0}: Retrying in {1} milliseconds", statusCode, backoff));
             Thread.Sleep(TimeSpan.FromMilliseconds(backoff));
             return true;
         }
