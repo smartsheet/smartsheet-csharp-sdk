@@ -43,6 +43,11 @@ namespace Smartsheet.Api.Internal.Http
     public class DefaultHttpClient : HttpClient
     {
         /// <summary>
+        /// HTTP 429 Too Many Requests status code (not available in netstandard2.0)
+        /// </summary>
+        private const HttpStatusCode TooManyRequests = (HttpStatusCode)429;
+
+        /// <summary>
         /// Represents the underlying http client.
         ///
         /// It will be initialized in constructor and will not change afterwards. (might now....)
@@ -424,7 +429,7 @@ namespace Smartsheet.Api.Internal.Http
             switch (response.StatusCode)
             {
 
-                case (HttpStatusCode)429: // TooManyRequests (not available in netstandard2.0)
+                case TooManyRequests: // HTTP 429 (not available in netstandard2.0)
                 case HttpStatusCode.BadGateway:
                 case HttpStatusCode.ServiceUnavailable:
                     return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null);
