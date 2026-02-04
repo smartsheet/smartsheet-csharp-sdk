@@ -30,12 +30,11 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
-            smartsheet.ReportResources.RemoveReportScope(123456789, scopesToRemove);
-
+            smartsheet.ReportResources.RemoveReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToRemove);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             
@@ -43,7 +42,7 @@ namespace mock_api_test_sdk_net80
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
-            Assert.AreEqual("/2.0/reports/123456789/scope", path);
+            Assert.AreEqual($"/2.0/reports/{CommonTestConstants.TEST_REPORT_ID}/scope", path);
             Assert.AreEqual("DELETE", foundRequest.Method);
         }
 
@@ -58,7 +57,7 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
@@ -72,7 +71,7 @@ namespace mock_api_test_sdk_net80
                 new Dictionary<string, object>
                 {
                     { "assetType", "SHEET" },
-                    { "assetId", 987654321 }
+                    { "assetId", CommonTestConstants.TEST_SHEET_ID }
                 }
             });
             
@@ -90,12 +89,12 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
-                smartsheet.ReportResources.RemoveReportScope(123456789, scopesToRemove)
+                smartsheet.ReportResources.RemoveReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToRemove)
             );
             
             Assert.IsTrue(exception.Message.Contains("Internal Server Error"));
@@ -112,12 +111,12 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
-                smartsheet.ReportResources.RemoveReportScope(123456789, scopesToRemove)
+                smartsheet.ReportResources.RemoveReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToRemove)
             );
             
             Assert.IsTrue(exception.Message.Contains("Malformed Request"));

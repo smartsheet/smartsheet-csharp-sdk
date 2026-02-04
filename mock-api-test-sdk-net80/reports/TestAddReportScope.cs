@@ -30,11 +30,11 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
-            smartsheet.ReportResources.AddReportScope(123456789, scopesToAdd);
+            smartsheet.ReportResources.AddReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToAdd);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -43,7 +43,7 @@ namespace mock_api_test_sdk_net80
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
-            Assert.AreEqual("/2.0/reports/123456789/scope", path);
+            Assert.AreEqual($"/2.0/reports/{CommonTestConstants.TEST_REPORT_ID}/scope", path);
             Assert.AreEqual("POST", foundRequest.Method);
         }
 
@@ -58,11 +58,11 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
-            smartsheet.ReportResources.AddReportScope(123456789, scopesToAdd);
+            smartsheet.ReportResources.AddReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToAdd);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -72,7 +72,7 @@ namespace mock_api_test_sdk_net80
                 new Dictionary<string, object>
                 {
                     { "assetType", "SHEET" },
-                    { "assetId", 987654321 }
+                    { "assetId", CommonTestConstants.TEST_SHEET_ID }
                 }
             });
             
@@ -90,12 +90,12 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
-                smartsheet.ReportResources.AddReportScope(123456789, scopesToAdd)
+                smartsheet.ReportResources.AddReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToAdd)
             );
             
             Assert.IsTrue(exception.Message.Contains("Internal Server Error"));
@@ -112,12 +112,12 @@ namespace mock_api_test_sdk_net80
                 new ReportScopeInclusion
                 {
                     AssetType = ReportAssetType.SHEET,
-                    AssetId = 987654321
+                    AssetId = CommonTestConstants.TEST_SHEET_ID
                 }
             };
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
-                smartsheet.ReportResources.AddReportScope(123456789, scopesToAdd)
+                smartsheet.ReportResources.AddReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToAdd)
             );
             
             Assert.IsTrue(exception.Message.Contains("Malformed Request"));

@@ -196,6 +196,7 @@ namespace Smartsheet.Api
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         void AddReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes);
 
@@ -211,6 +212,7 @@ namespace Smartsheet.Api
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         void RemoveReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes);
     }
