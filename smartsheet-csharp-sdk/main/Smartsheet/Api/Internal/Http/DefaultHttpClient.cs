@@ -424,7 +424,7 @@ namespace Smartsheet.Api.Internal.Http
             switch (response.StatusCode)
             {
 
-                case HttpStatusCode.TooManyRequests:
+                case (HttpStatusCode)429: // TooManyRequests (not available in netstandard2.0)
                 case HttpStatusCode.BadGateway:
                 case HttpStatusCode.ServiceUnavailable:
                     return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null);
