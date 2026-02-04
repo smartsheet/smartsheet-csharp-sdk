@@ -15,7 +15,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/add-report-scope/all-response-body-properties", requestId.ToString());
 
             Assert.ThrowsException<ArgumentException>(
-                () => smartsheet.ReportResources.AddReportScope(123456789, new List<ReportScopeInclusion>())
+                () => smartsheet.ReportResources.AddReportScope(CommonTestConstants.TEST_REPORT_ID, new List<ReportScopeInclusion>())
             );
         }
 

@@ -15,7 +15,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/remove-report-scope/all-response-body-properties", requestId.ToString());
 
             Assert.ThrowsException<ArgumentException>(
-                () => smartsheet.ReportResources.RemoveReportScope(123456789, new List<ReportScopeInclusion>())
+                () => smartsheet.ReportResources.RemoveReportScope(CommonTestConstants.TEST_REPORT_ID, new List<ReportScopeInclusion>())
             );
         }
 
@@ -61,7 +61,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            smartsheet.ReportResources.RemoveReportScope(123456789, scopesToRemove);
+            smartsheet.ReportResources.RemoveReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToRemove);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
