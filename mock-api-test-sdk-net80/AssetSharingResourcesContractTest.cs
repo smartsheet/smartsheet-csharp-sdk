@@ -100,7 +100,7 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -112,7 +112,7 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -188,7 +188,7 @@ namespace mock_api_test_sdk_net80
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -201,7 +201,7 @@ namespace mock_api_test_sdk_net80
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -344,7 +344,7 @@ namespace mock_api_test_sdk_net80
                 .SetEmail(TEST_EMAIL)
                 .Build();
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -360,7 +360,7 @@ namespace mock_api_test_sdk_net80
                 .SetEmail("invalid-email")
                 .Build();
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -451,7 +451,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -469,7 +469,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -519,7 +519,7 @@ namespace mock_api_test_sdk_net80
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -532,7 +532,7 @@ namespace mock_api_test_sdk_net80
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
     }

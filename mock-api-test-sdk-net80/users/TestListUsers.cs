@@ -106,7 +106,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -116,7 +116,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
     }
