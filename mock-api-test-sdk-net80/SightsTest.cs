@@ -10,8 +10,8 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void ListSights()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("List Sights");
-            PaginatedResult<Sight> sights = ss.SightResources.ListSights();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Sights");
+            PaginatedResult<Sight> sights = smartsheet.SightResources.ListSights();
             Assert.IsNotNull(sights?.TotalCount);
             Assert.AreEqual(6, (long)sights.TotalCount);
         }
@@ -19,8 +19,8 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetSight()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Sight");
-            Sight sight = ss.SightResources.GetSight(52);
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Sight");
+            Sight sight = smartsheet.SightResources.GetSight(52);
             Assert.IsNotNull(sight?.Id);
             Assert.AreEqual(52, (long)sight.Id);
         }
@@ -29,39 +29,39 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void CopySight()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Copy Sight");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Copy Sight");
             ContainerDestination dest = new ContainerDestination();
             dest.DestinationType = DestinationType.FOLDER;
             dest.DestinationId = 424;
             dest.NewName = "new sight";
-            Sight sight = ss.SightResources.CopySight(52, dest);
+            Sight sight = smartsheet.SightResources.CopySight(52, dest);
         }
 
         [TestMethod]
         public void UpdateSight()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Sight");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Sight");
             Sight sight = new Sight();
             sight.Id = 812;
             sight.Name = "new new sight";
-            ss.SightResources.UpdateSight(sight);
+            smartsheet.SightResources.UpdateSight(sight);
         }
 
         [TestMethod]
         public void SetPublishStatus()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Set Sight Publish Status");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Set Sight Publish Status");
             SightPublish publish = new SightPublish();
             publish.ReadOnlyFullEnabled = true;
             publish.ReadOnlyFullAccessibleBy = "ALL";
-            ss.SightResources.SetPublishStatus(812, publish);
+            smartsheet.SightResources.SetPublishStatus(812, publish);
         }
 
         [TestMethod]
         public void GetPublishStatus()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Sight Publish Status");
-            SightPublish publish = ss.SightResources.GetPublishStatus(812);
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Sight Publish Status");
+            SightPublish publish = smartsheet.SightResources.GetPublishStatus(812);
             Assert.IsNotNull(publish.ReadOnlyFullEnabled);
             Assert.IsTrue(publish.ReadOnlyFullEnabled.Value);
         }
@@ -69,8 +69,8 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void DeleteSight()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Delete Sight");
-            ss.SightResources.DeleteSight(700);
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Delete Sight");
+            smartsheet.SightResources.DeleteSight(700);
         }
     }
 }

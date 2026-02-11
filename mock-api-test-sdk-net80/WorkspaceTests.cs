@@ -11,10 +11,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetWorkspaceChildren_NoParams()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Workspace Children - No Params");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Workspace Children - No Params");
 
             // No params - use minimal required parameters
-            TokenPaginatedResult<object> children = ss.WorkspaceResources.GetWorkspaceChildren(123);
+            TokenPaginatedResult<object> children = smartsheet.WorkspaceResources.GetWorkspaceChildren(123);
 
             Assert.IsNotNull(children);
             Assert.IsNotNull(children.Data);
@@ -50,10 +50,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetWorkspaceChildren_IncludeSourceAndOwnerInfo()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Workspace Children - Include Source and OwnerInfo");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Workspace Children - Include Source and OwnerInfo");
 
             // Include source and owner info as specified in scenario title
-            TokenPaginatedResult<object> children = ss.WorkspaceResources.GetWorkspaceChildren(
+            TokenPaginatedResult<object> children = smartsheet.WorkspaceResources.GetWorkspaceChildren(
                 123,
                 null,
                 new List<ChildrenInclusion> { ChildrenInclusion.SOURCE, ChildrenInclusion.OWNER_INFO }
@@ -109,10 +109,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetWorkspaceChildren_FilterSheetsAndFolders()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Workspace Children - Filter Sheets and Folders");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Workspace Children - Filter Sheets and Folders");
 
             // Filter to only sheets and folders as specified in scenario title
-            TokenPaginatedResult<object> children = ss.WorkspaceResources.GetWorkspaceChildren(
+            TokenPaginatedResult<object> children = smartsheet.WorkspaceResources.GetWorkspaceChildren(
                 123,
                 new List<ChildrenResourceType> { ChildrenResourceType.FOLDERS, ChildrenResourceType.SHEETS }
             );
@@ -148,10 +148,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetWorkspaceMetadata_NoParams()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Workspace Metadata - No Params");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Workspace Metadata - No Params");
 
             // No params - use minimal required parameters
-            Workspace workspace = ss.WorkspaceResources.GetWorkspaceMetadata(123);
+            Workspace workspace = smartsheet.WorkspaceResources.GetWorkspaceMetadata(123);
 
             Assert.IsNotNull(workspace);
             Assert.AreEqual(123, workspace.Id);
@@ -165,10 +165,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetWorkspaceMetadata_IncludeSource()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Workspace Metadata - Include Source");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Workspace Metadata - Include Source");
 
             // Include source as specified in scenario title
-            Workspace workspace = ss.WorkspaceResources.GetWorkspaceMetadata(
+            Workspace workspace = smartsheet.WorkspaceResources.GetWorkspaceMetadata(
                 123,
                 new List<WorkspaceInclusion> { WorkspaceInclusion.SOURCE }
             );

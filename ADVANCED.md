@@ -148,9 +148,9 @@ To add new mock API tests:
     public void TestListUserPlansAllResponseBodyProperties()
     {
         Guid requestId = Guid.NewGuid();
-        SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
+        SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
 
-        TokenPaginatedResult<UserPlan> response = ss.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS);
+        TokenPaginatedResult<UserPlan> response = smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS);
 
         Assert.IsNotNull(response);
     }

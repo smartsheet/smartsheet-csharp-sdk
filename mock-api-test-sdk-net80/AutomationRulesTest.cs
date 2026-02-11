@@ -10,8 +10,8 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void ListAutomationRules()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("List Automation Rules");
-            PaginatedResult<AutomationRule> automationRules = ss.SheetResources.AutomationRuleResources.ListAutomationRules(324);
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Automation Rules");
+            PaginatedResult<AutomationRule> automationRules = smartsheet.SheetResources.AutomationRuleResources.ListAutomationRules(324);
 
             Assert.IsNotNull(automationRules.TotalCount);
             Assert.AreEqual(2, (long)automationRules.TotalCount);
@@ -20,8 +20,8 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetAutomationRule()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Automation Rule");
-            AutomationRule automationRule = ss.SheetResources.AutomationRuleResources.GetAutomationRule(324, 284);
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Automation Rule");
+            AutomationRule automationRule = smartsheet.SheetResources.AutomationRuleResources.GetAutomationRule(324, 284);
             Assert.IsNotNull(automationRule.Id);
             Assert.AreEqual(284, (long)automationRule.Id);
         }
@@ -29,7 +29,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateAutomationRule()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Automation Rule");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Automation Rule");
             AutomationAction autoRuleAction = new AutomationAction();
             Recipient recipient = new Recipient();
             recipient.Email = "jane@example.com";
@@ -39,14 +39,14 @@ namespace mock_api_test_sdk_net80
             AutomationRule autoRule = new AutomationRule();
             autoRule.Id = 284;
             autoRule.Action = autoRuleAction;
-            AutomationRule automationRule = ss.SheetResources.AutomationRuleResources.UpdateAutomationRule(324, autoRule);
+            AutomationRule automationRule = smartsheet.SheetResources.AutomationRuleResources.UpdateAutomationRule(324, autoRule);
         }
 
         [TestMethod]
         public void DeleteAutomationRule()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Delete Automation Rule");
-            ss.SheetResources.AutomationRuleResources.DeleteAutomationRule(324, 284);
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Delete Automation Rule");
+            smartsheet.SheetResources.AutomationRuleResources.DeleteAutomationRule(324, 284);
         }
     }
 }
