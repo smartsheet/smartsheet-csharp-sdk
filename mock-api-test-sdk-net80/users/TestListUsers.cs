@@ -27,11 +27,11 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-users/required-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-users/required-response-body-properties", requestId.ToString());
 
             PaginationParameters pagination = new PaginationParameters(TEST_INCLUDE_ALL, TEST_PAGE_SIZE, TEST_PAGE);
 
-            ss.UserResources.ListUsers(TEST_EMAILS, CommonTestConstants.TEST_PLAN_ID, TEST_SEAT_TYPE, pagination);
+            smartsheet.UserResources.ListUsers(TEST_EMAILS, CommonTestConstants.TEST_PLAN_ID, TEST_SEAT_TYPE, pagination);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -51,9 +51,9 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-users/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-users/all-response-body-properties", requestId.ToString());
 
-            PaginatedResult<User> response = ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
+            PaginatedResult<User> response = smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_SEAT_TYPE, response.Data[0].SeatType);
@@ -79,9 +79,9 @@ namespace mock_api_test_sdk_net80
         public async Task TestListUsersRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/users/list-users/required-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-users/required-response-body-properties", requestId.ToString());
 
-            PaginatedResult<User> response = ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
+            PaginatedResult<User> response = smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_SEAT_TYPE, response.Data[0].SeatType);
@@ -104,9 +104,9 @@ namespace mock_api_test_sdk_net80
         public void TestListUsersError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -114,9 +114,9 @@ namespace mock_api_test_sdk_net80
         public void TestListUsersError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
     }

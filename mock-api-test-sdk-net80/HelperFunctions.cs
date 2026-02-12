@@ -8,25 +8,25 @@ namespace mock_api_test_sdk_net80
         public static SmartsheetClient SetupClient(string apiScenario)
         {
             TestHttpClient testHttpClient = new TestHttpClient(apiScenario);
-            SmartsheetClient ss = new SmartsheetBuilder()
+            SmartsheetClient smartsheet = new SmartsheetBuilder()
             .SetBaseURI("http://localhost:8082/")
             .SetAccessToken("aaaaaaaaaaaaaaaaaaaaaaaaaa")
             .SetHttpClient(testHttpClient)
             .Build();
 
-            return ss;
+            return smartsheet;
         }
 
         public static SmartsheetClient SetupClient(string testName, string requestId)
         {
             TestHttpClientWithCustomHeader testHttpClient = new TestHttpClientWithCustomHeader(testName, requestId);
-            SmartsheetClient ss = new SmartsheetBuilder()
+            SmartsheetClient smartsheet = new SmartsheetBuilder()
             .SetBaseURI("http://localhost:8082/2.0/")
             .SetAccessToken("aaaaaaaaaaaaaaaaaaaaaaaaaa")
             .SetHttpClient(testHttpClient)
             .Build();
 
-            return ss;
+            return smartsheet;
         }
 
         ///<summary>
