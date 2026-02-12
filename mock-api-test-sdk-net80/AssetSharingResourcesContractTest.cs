@@ -23,14 +23,14 @@ namespace mock_api_test_sdk_net80
         public async Task TestListAssetSharesGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/list-asset-shares/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/list-asset-shares/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             ShareScope sharingInclude = ShareScope.Item;
 
             TokenPaginationParameters pagination = new TokenPaginationParameters(TEST_LAST_KEY, TEST_MAX_ITEMS);
 
-            ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, pagination, sharingInclude);
+            smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, pagination, sharingInclude);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             Assert.IsNotNull(foundRequest);
@@ -52,11 +52,11 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/list-asset-shares/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/list-asset-shares/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
-            ListAssetSharesResponse response = ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null);
+            ListAssetSharesResponse response = smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.LastKey);
@@ -78,11 +78,11 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/list-asset-shares/required-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/list-asset-shares/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
-            ListAssetSharesResponse response = ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null);
+            ListAssetSharesResponse response = smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Items);
@@ -96,11 +96,11 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response",requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response",requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -108,11 +108,11 @@ namespace mock_api_test_sdk_net80
         public void TestListAssetSharesError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ListAssetShares(assetType, TEST_ASSET_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -120,12 +120,12 @@ namespace mock_api_test_sdk_net80
         public async Task TestGetAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/get-asset-share/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/get-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
+            smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             Assert.IsNotNull(foundRequest);
@@ -144,12 +144,12 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/get-asset-share/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/get-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            AssetShare response = ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
+            AssetShare response = smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_ASSET_ID, response.Id);
@@ -166,12 +166,12 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/get-asset-share/required-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/get-asset-share/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            AssetShare response = ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
+            AssetShare response = smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_ASSET_ID, response.Id);
@@ -183,12 +183,12 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -196,12 +196,12 @@ namespace mock_api_test_sdk_net80
         public void TestGetAssetShareError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.GetAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -209,7 +209,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestShareAssetGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/share-asset/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             bool sendEmail = false;
@@ -218,7 +218,7 @@ namespace mock_api_test_sdk_net80
                 .SetEmail(TEST_EMAIL)
                 .Build();
 
-            ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, sendEmail);
+            smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, sendEmail);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             Assert.IsNotNull(foundRequest);
@@ -253,7 +253,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestShareAssetAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/share-asset/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -261,7 +261,7 @@ namespace mock_api_test_sdk_net80
                 .SetEmail(TEST_EMAIL)
                 .Build();
 
-            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
+            BulkItemResult<AssetShare> response = smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -300,7 +300,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestShareAssetRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/share-asset/required-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/share-asset/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -308,7 +308,7 @@ namespace mock_api_test_sdk_net80
                 .SetEmail(TEST_EMAIL)
                 .Build();
 
-            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
+            BulkItemResult<AssetShare> response = smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -336,7 +336,7 @@ namespace mock_api_test_sdk_net80
         public void TestShareAssetError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -344,7 +344,7 @@ namespace mock_api_test_sdk_net80
                 .SetEmail(TEST_EMAIL)
                 .Build();
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -352,7 +352,7 @@ namespace mock_api_test_sdk_net80
         public void TestShareAssetError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
 
@@ -360,7 +360,7 @@ namespace mock_api_test_sdk_net80
                 .SetEmail("invalid-email")
                 .Build();
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -368,7 +368,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestUpdateAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/update-asset-share/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/update-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -378,7 +378,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
+            smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -395,7 +395,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/update-asset-share/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/update-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -405,7 +405,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            AssetShare response = ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
+            AssetShare response = smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_ASSET_ID, response.Id);
@@ -419,7 +419,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareRequiredResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/update-asset-share/required-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/update-asset-share/required-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -429,7 +429,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            AssetShare response = ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
+            AssetShare response = smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_ASSET_ID, response.Id);
@@ -441,7 +441,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -451,7 +451,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -459,7 +459,7 @@ namespace mock_api_test_sdk_net80
         public void TestUpdateAssetShareError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
@@ -469,7 +469,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.UpdateAssetShare(assetType, TEST_ASSET_ID, shareId, updateRequest));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
@@ -477,12 +477,12 @@ namespace mock_api_test_sdk_net80
         public async Task TestDeleteAssetShareGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/delete-asset-share/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/delete-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId);
+            smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             Assert.IsNotNull(foundRequest);
@@ -501,25 +501,25 @@ namespace mock_api_test_sdk_net80
         public void TestDeleteAssetShareSuccess()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/sharing/delete-asset-share/all-response-body-properties", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/delete-asset-share/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
             // Should not throw any exception
-            ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId);
+            smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId);
         }
 
         [TestMethod]
         public void TestDeleteAssetShareError500Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -527,12 +527,12 @@ namespace mock_api_test_sdk_net80
         public void TestDeleteAssetShareError400Response()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
             string shareId = TEST_SHARE_ID;
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.DeleteAssetShare(assetType, TEST_ASSET_ID, shareId));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
     }

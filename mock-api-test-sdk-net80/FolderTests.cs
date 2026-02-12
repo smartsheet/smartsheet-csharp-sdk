@@ -11,10 +11,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetFolderChildren_NoParams()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Folder Children - No Params");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Folder Children - No Params");
 
             // No params - use minimal required parameters
-            TokenPaginatedResult<object> children = ss.FolderResources.GetFolderChildren(456);
+            TokenPaginatedResult<object> children = smartsheet.FolderResources.GetFolderChildren(456);
 
             Assert.IsNotNull(children);
             Assert.IsNotNull(children.Data);
@@ -50,10 +50,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetFolderChildren_IncludeSourceAndOwnerInfo()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Folder Children - Include Source and OwnerInfo");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Folder Children - Include Source and OwnerInfo");
 
             // Include source and owner info as specified in scenario title
-            TokenPaginatedResult<object> children = ss.FolderResources.GetFolderChildren(
+            TokenPaginatedResult<object> children = smartsheet.FolderResources.GetFolderChildren(
                 456,
                 null,
                 new List<ChildrenInclusion> { ChildrenInclusion.SOURCE, ChildrenInclusion.OWNER_INFO }
@@ -109,10 +109,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetFolderChildren_FilterSightsAndReports()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Folder Children - Filter Sights and Reports");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Folder Children - Filter Sights and Reports");
 
             // Filter to only sights and reports as specified in scenario title
-            TokenPaginatedResult<object> children = ss.FolderResources.GetFolderChildren(
+            TokenPaginatedResult<object> children = smartsheet.FolderResources.GetFolderChildren(
                 456,
                 new List<ChildrenResourceType> { ChildrenResourceType.REPORTS, ChildrenResourceType.SIGHTS }
             );
@@ -149,10 +149,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetFolderMetadata_NoParams()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Folder Metadata - No Params");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Folder Metadata - No Params");
 
             // No params - use minimal required parameters
-            Folder folder = ss.FolderResources.GetFolderMetadata(456);
+            Folder folder = smartsheet.FolderResources.GetFolderMetadata(456);
 
             Assert.IsNotNull(folder);
             Assert.AreEqual(456, folder.Id);
@@ -165,10 +165,10 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void GetFolderMetadata_IncludeSource()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Get Folder Metadata - Include Source");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Folder Metadata - Include Source");
 
             // Include source as specified in scenario title
-            Folder folder = ss.FolderResources.GetFolderMetadata(
+            Folder folder = smartsheet.FolderResources.GetFolderMetadata(
                 456,
                 new List<FolderInclusion> { FolderInclusion.SOURCE }
             );
