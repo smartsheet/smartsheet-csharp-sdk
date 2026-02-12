@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+## [6.6.5] - 2026-02-04
+### Fixed
+- Fix retry logic. Previously the SDK's retry logic was hindered by a generic error check and as a result the code could never reach the retry part.
+- Fix user agent for default HTTP client.
+
 ## [6.6.4] - 2026-01-19
 ### Fixed
 - Revert the default float parsing handler to double - [#157](https://github.com/smartsheet/smartsheet-csharp-sdk/pull/157)
