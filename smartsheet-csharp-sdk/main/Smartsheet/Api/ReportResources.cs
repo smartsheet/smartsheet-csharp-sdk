@@ -183,5 +183,14 @@ namespace Smartsheet.Api
         /// </summary>
         /// <returns> the share resources object </returns>
         ShareResources ShareResources { get; }
+
+        /// <summary>
+        /// Update a Report's definition based on the specified ID
+        /// <para>Note:</para>
+        /// <para>This endpoint supports partial updates <b>only on root level</b> properties of the report definition, such as <c>filters</c>, <c>groupingCriteria</c> and <c>aggregationCriteria</c>. For example, you can update the report's filters without affecting its grouping criteria. However, nested properties within these objects, such as a specific filter or grouping criterion, cannot be updated individually and require a full replacement of the respective section.</para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="definition"> the ReportDefinition object </param>
+        void UpdateReportDefinition(long reportId, ReportDefinition definition);
     }
 }
