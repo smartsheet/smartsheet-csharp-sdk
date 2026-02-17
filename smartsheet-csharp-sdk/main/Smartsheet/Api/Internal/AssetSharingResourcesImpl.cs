@@ -130,14 +130,14 @@ namespace Smartsheet.Api.Internal
         /// <param name="shareRequest"> the share request object </param>
         /// <param name="sendEmail">(optional): Either true or false to indicate whether or not
         ///     to notify the user by email. Default is false.</param>
-        /// <returns> the created share </returns>
+        /// <returns> result object containing an array of share response objects </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual AssetShare ShareAsset(AssetType assetType, string assetId, ShareAssetRequest shareRequest,
+        public virtual BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, ShareAssetRequest shareRequest,
             bool? sendEmail = null)
         {
             StringBuilder url = new StringBuilder("/2.0/shares");
@@ -166,11 +166,11 @@ namespace Smartsheet.Api.Internal
             request.Entity = serializeToEntity<ShareAssetRequest>(shareRequest);
             HttpResponse response = Smartsheet.HttpClient.Request(request);
 
-            AssetShare result = null;
+            BulkItemResult<AssetShare> result = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    result = Smartsheet.JsonSerializer.deserialize<AssetShare>(response.Entity.GetContent());
+                    result = Smartsheet.JsonSerializer.deserialize<BulkItemResult<AssetShare>>(response.Entity.GetContent());
                     break;
                 default:
                     HandleError(response);

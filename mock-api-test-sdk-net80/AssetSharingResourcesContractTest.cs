@@ -232,13 +232,10 @@ namespace mock_api_test_sdk_net80
 
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
-            var expectedBodyMap = new Dictionary<string, object>
-            {
-                { "accessLevel", "ADMIN" },
-                { "email", TEST_EMAIL }
-            };
-            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, object>>(foundRequest.Body ?? "{}");
-            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
+            var actualShareBody = JsonConvert.DeserializeObject<ShareAssetRequest>(foundRequest.Body ?? "{}");
+            Assert.IsNotNull(actualShareBody);
+            Assert.AreEqual(TEST_EMAIL, actualShareBody.Email);
+            Assert.AreEqual(AccessLevel.ADMIN, actualShareBody.AccessLevel);
 
             Assert.AreEqual("/2.0/shares", path);
             Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
@@ -260,7 +257,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            AssetShare response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false);
+            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -271,21 +268,20 @@ namespace mock_api_test_sdk_net80
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
-            var expectedBodyMap = new Dictionary<string, object>
-            {
-                { "accessLevel", "ADMIN" },
-                { "email", TEST_EMAIL }
-            };
-            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, object>>(foundRequest.Body ?? "{}");
-            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
+            var actualShareBody = JsonConvert.DeserializeObject<ShareAssetRequest>(foundRequest.Body ?? "{}");
+            Assert.IsNotNull(actualShareBody);
+            Assert.AreEqual(TEST_EMAIL, actualShareBody.Email);
+            Assert.AreEqual(AccessLevel.ADMIN, actualShareBody.AccessLevel);
         
             Assert.IsNotNull(response);
-            Assert.AreEqual(TEST_ASSET_ID, response.Id);
-            Assert.AreEqual(TEST_EMAIL, response.Email);
-            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
-            Assert.AreEqual(AssetShareScope.ITEM, response.Scope);
-            Assert.AreEqual(ShareType.USER, response.Type);
-            Assert.AreEqual(TEST_NAME, response.Name);
+            Assert.IsNotNull(response.Result);
+            Assert.AreEqual(1, response.Result.Count);
+            Assert.AreEqual(TEST_ASSET_ID, response.Result[0].Id);
+            Assert.AreEqual(TEST_EMAIL, response.Result[0].Email);
+            Assert.AreEqual(AccessLevel.ADMIN, response.Result[0].AccessLevel);
+            Assert.AreEqual(AssetShareScope.ITEM, response.Result[0].Scope);
+            Assert.AreEqual(ShareType.USER, response.Result[0].Type);
+            Assert.AreEqual(TEST_NAME, response.Result[0].Name);
         }
 
         [TestMethod]
@@ -302,7 +298,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel = AccessLevel.ADMIN
             };
 
-            AssetShare response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false);
+            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -318,9 +314,11 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(shareRequest.AccessLevel, actualShareBody.AccessLevel);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual(TEST_ASSET_ID, response.Id);
-            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
-            Assert.IsNull(response.Name);
+            Assert.IsNotNull(response.Result);
+            Assert.AreEqual(1, response.Result.Count);
+            Assert.AreEqual(TEST_ASSET_ID, response.Result[0].Id);
+            Assert.AreEqual(AccessLevel.ADMIN, response.Result[0].AccessLevel);
+            Assert.IsNull(response.Result[0].Name);
         }
 
         [TestMethod]
