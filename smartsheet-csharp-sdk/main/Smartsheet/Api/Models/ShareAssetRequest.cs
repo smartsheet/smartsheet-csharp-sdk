@@ -1,0 +1,101 @@
+//    #[license]
+//    SmartsheetClient SDK for C#
+//    %%
+//    Copyright (C) 2014 SmartsheetClient
+//    %%
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//        
+//            http://www.apache.org/licenses/LICENSE-2.0
+//        
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+//    %[license]
+
+namespace Smartsheet.Api.Models
+{
+    /// <summary>
+    /// Represents the request object for sharing an asset with a user or group.
+    /// One (and only one) of email or groupId is required (alongside accessLevel).
+    /// </summary>
+    public class ShareAssetRequest
+    {
+        /// <summary>
+        /// The primary email address of a user to share to.
+        /// Must be provided if groupId is not provided.
+        /// </summary>
+        private string email;
+
+        /// <summary>
+        /// The ID of the group to share to.
+        /// Must be provided if email is not provided.
+        /// </summary>
+        private long? groupId;
+
+        /// <summary>
+        /// The access level for this specific share. Required.
+        /// </summary>
+        private AccessLevel accessLevel;
+
+        /// <summary>
+        /// The subject of the email that is optionally sent to notify the recipient.
+        /// </summary>
+        private string subject;
+
+        /// <summary>
+        /// The message included in the body of the email that is optionally sent to the recipient.
+        /// </summary>
+        private string message;
+
+        /// <summary>
+        /// Gets or sets the primary email address of a user to share to.
+        /// Must be provided if GroupId is not provided.
+        /// </summary>
+        public string Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the ID of the group to share to.
+        /// Must be provided if Email is not provided.
+        /// </summary>
+        public long? GroupId
+        {
+            get { return groupId; }
+            set { groupId = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the access level for this specific share. Required.
+        /// </summary>
+        public AccessLevel AccessLevel
+        {
+            get { return accessLevel; }
+            set { accessLevel = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the subject of the email that is optionally sent to notify the recipient.
+        /// </summary>
+        public string Subject
+        {
+            get { return subject; }
+            set { subject = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the message included in the body of the email that is optionally sent to the recipient.
+        /// </summary>
+        public string Message
+        {
+            get { return message; }
+            set { message = value; }
+        }
+    }
+}

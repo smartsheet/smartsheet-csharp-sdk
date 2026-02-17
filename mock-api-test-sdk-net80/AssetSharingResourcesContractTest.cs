@@ -214,11 +214,13 @@ namespace mock_api_test_sdk_net80
             AssetType assetType = AssetType.SHEET;
             bool sendEmail = false;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
-                .SetEmail(TEST_EMAIL)
-                .Build();
+            ShareAssetRequest shareRequest = new ShareAssetRequest
+            {
+                Email = TEST_EMAIL,
+                AccessLevel = AccessLevel.ADMIN
+            };
 
-            ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, sendEmail);
+            ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, sendEmail);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             Assert.IsNotNull(foundRequest);
@@ -230,18 +232,13 @@ namespace mock_api_test_sdk_net80
 
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
-            var expectedBodyMap = new List<Dictionary<string, object>>
+            var expectedBodyMap = new Dictionary<string, object>
             {
-                new Dictionary<string, object>
-                {
-                    { "accessLevel", "ADMIN" },
-                    { "email", TEST_EMAIL },
-                    { "scope", "ITEM" }
-                }
+                { "accessLevel", "ADMIN" },
+                { "email", TEST_EMAIL }
             };
-            var actualBodyMap = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(foundRequest.Body ?? "[]");
-            Assert.AreEqual(1, actualBodyMap.Count);
-            CollectionAssert.AreEquivalent(expectedBodyMap.First(), actualBodyMap.First());
+            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, object>>(foundRequest.Body ?? "{}");
+            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
 
             Assert.AreEqual("/2.0/shares", path);
             Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
@@ -257,11 +254,13 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
-                .SetEmail(TEST_EMAIL)
-                .Build();
+            ShareAssetRequest shareRequest = new ShareAssetRequest
+            {
+                Email = TEST_EMAIL,
+                AccessLevel = AccessLevel.ADMIN
+            };
 
-            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
+            AssetShare response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -272,28 +271,21 @@ namespace mock_api_test_sdk_net80
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
-            var expectedBodyMap = new List<Dictionary<string, object>>
+            var expectedBodyMap = new Dictionary<string, object>
             {
-                new Dictionary<string, object>
-                {
-                    { "accessLevel", "ADMIN" },
-                    { "email", TEST_EMAIL },
-                    { "scope", "ITEM" }
-                }
+                { "accessLevel", "ADMIN" },
+                { "email", TEST_EMAIL }
             };
-            var actualBodyMap = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(foundRequest.Body ?? "[]");
-            Assert.AreEqual(1, actualBodyMap.Count);
-            CollectionAssert.AreEquivalent(expectedBodyMap.First(), actualBodyMap.First());
+            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, object>>(foundRequest.Body ?? "{}");
+            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Result);
-            Assert.AreEqual(1, response.Result.Count);
-            Assert.AreEqual(TEST_ASSET_ID, response.Result[0].Id);
-            Assert.AreEqual(TEST_EMAIL, response.Result[0].Email);
-            Assert.AreEqual(AccessLevel.ADMIN, response.Result[0].AccessLevel);
-            Assert.AreEqual(AssetShareScope.ITEM, response.Result[0].Scope);
-            Assert.AreEqual(ShareType.USER, response.Result[0].Type);
-            Assert.AreEqual(TEST_NAME, response.Result[0].Name);
+            Assert.AreEqual(TEST_ASSET_ID, response.Id);
+            Assert.AreEqual(TEST_EMAIL, response.Email);
+            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
+            Assert.AreEqual(AssetShareScope.ITEM, response.Scope);
+            Assert.AreEqual(ShareType.USER, response.Type);
+            Assert.AreEqual(TEST_NAME, response.Name);
         }
 
         [TestMethod]
@@ -304,11 +296,13 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
-                .SetEmail(TEST_EMAIL)
-                .Build();
+            ShareAssetRequest shareRequest = new ShareAssetRequest
+            {
+                Email = TEST_EMAIL,
+                AccessLevel = AccessLevel.ADMIN
+            };
 
-            BulkItemResult<AssetShare> response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false);
+            AssetShare response = ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -318,18 +312,15 @@ namespace mock_api_test_sdk_net80
             string path = uri.AbsolutePath;
 
             Assert.IsNotNull(foundRequest.Body);
-            var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
-            Assert.IsNotNull(actualShareBody.First());
-            Assert.AreEqual(newShare.Email, actualShareBody.First().Email);
-            Assert.AreEqual(newShare.Scope, actualShareBody.First().Scope);
-            Assert.AreEqual(newShare.AccessLevel, actualShareBody.First().AccessLevel);
+            var actualShareBody = JsonConvert.DeserializeObject<ShareAssetRequest>(foundRequest.Body ?? "{}");
+            Assert.IsNotNull(actualShareBody);
+            Assert.AreEqual(shareRequest.Email, actualShareBody.Email);
+            Assert.AreEqual(shareRequest.AccessLevel, actualShareBody.AccessLevel);
 
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Result);
-            Assert.AreEqual(1, response.Result.Count);
-            Assert.AreEqual(TEST_ASSET_ID, response.Result[0].Id);
-            Assert.AreEqual(AccessLevel.ADMIN, response.Result[0].AccessLevel);
-            Assert.IsNull(response.Result[0].Name);
+            Assert.AreEqual(TEST_ASSET_ID, response.Id);
+            Assert.AreEqual(AccessLevel.ADMIN, response.AccessLevel);
+            Assert.IsNull(response.Name);
         }
 
         [TestMethod]
@@ -340,11 +331,13 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
-                .SetEmail(TEST_EMAIL)
-                .Build();
+            ShareAssetRequest shareRequest = new ShareAssetRequest
+            {
+                Email = TEST_EMAIL,
+                AccessLevel = AccessLevel.ADMIN
+            };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -356,11 +349,13 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            AssetShare newShare = new AssetShare.CreateAssetShareBuilder(AccessLevel.ADMIN)
-                .SetEmail("invalid-email")
-                .Build();
+            ShareAssetRequest shareRequest = new ShareAssetRequest
+            {
+                Email = "invalid-email",
+                AccessLevel = AccessLevel.ADMIN
+            };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, new List<AssetShare> { newShare }, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => ss.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, shareRequest, false));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 

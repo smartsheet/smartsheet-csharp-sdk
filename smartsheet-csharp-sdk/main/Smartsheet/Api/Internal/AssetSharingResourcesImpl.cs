@@ -120,14 +120,14 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// <para>Shares an asset with the specified Users and Groups.</para>
-        /// 
+        /// <para>Shares an asset with the specified user or group.</para>
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         /// POST /shares?assetType={assetType}&assetId={assetId}</para>
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the Id of the asset </param>
-        /// <param name="shares"> the share objects </param>
+        /// <param name="shareRequest"> the share request object </param>
         /// <param name="sendEmail">(optional): Either true or false to indicate whether or not
         ///     to notify the user by email. Default is false.</param>
         /// <returns> the created share </returns>
@@ -137,7 +137,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, IEnumerable<AssetShare> shares,
+        public virtual AssetShare ShareAsset(AssetType assetType, string assetId, ShareAssetRequest shareRequest,
             bool? sendEmail = null)
         {
             StringBuilder url = new StringBuilder("/2.0/shares");
@@ -163,15 +163,15 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            request.Entity = serializeToEntity(shares);
+            request.Entity = serializeToEntity<ShareAssetRequest>(shareRequest);
             HttpResponse response = Smartsheet.HttpClient.Request(request);
 
-            BulkItemRowResult bulkItemResult = null;
+            AssetShare result = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    Smartsheet.HttpClient.ReleaseConnection();
-                    return Smartsheet.JsonSerializer.deserialize<BulkItemResult<AssetShare>>(response.Entity.GetContent());
+                    result = Smartsheet.JsonSerializer.deserialize<AssetShare>(response.Entity.GetContent());
+                    break;
                 default:
                     HandleError(response);
                     break;
@@ -179,7 +179,7 @@ namespace Smartsheet.Api.Internal
 
             Smartsheet.HttpClient.ReleaseConnection();
 
-            return null;
+            return result;
         }
 
         /// <summary>

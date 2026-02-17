@@ -69,14 +69,14 @@ namespace Smartsheet.Api
         AssetShare GetAssetShare(AssetType assetType, string assetId, string shareId);
 
         /// <summary>
-        /// <para>Shares an asset with the specified Users and Groups.</para>
-        /// 
+        /// <para>Shares an asset with the specified user or group.</para>
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         /// POST /shares?assetType={assetType}&assetId={assetId}</para>
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the Id of the asset </param>
-        /// <param name="shares"> the share objects </param>
+        /// <param name="shareRequest"> the share request object </param>
         /// <param name="sendEmail">(optional): Either true or false to indicate whether or not
         ///     to notify the user by email. Default is false.</param>
         /// <returns> the created share </returns>
@@ -86,7 +86,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, IEnumerable<AssetShare> shares,
+        AssetShare ShareAsset(AssetType assetType, string assetId, ShareAssetRequest shareRequest,
             bool? sendEmail = null);
 
         /// <summary>
