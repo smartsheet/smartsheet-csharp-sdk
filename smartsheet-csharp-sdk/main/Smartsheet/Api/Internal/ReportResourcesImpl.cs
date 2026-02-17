@@ -332,7 +332,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            request.Entity = request.Entity = serializeToEntity(definition);
+            request.Entity = serializeToEntity(definition);
 
             HttpResponse response = smartsheet.HttpClient.Request(request);
 
