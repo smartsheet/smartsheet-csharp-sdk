@@ -31,7 +31,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Sorting direction.
         /// </summary>
-        private SortDirection? sortingDirection;
+        private SortDirection sortingDirection;
 
         /// <summary>
         /// Force null values to the bottom of the sorted list.
@@ -52,7 +52,7 @@ namespace Smartsheet.Api.Models
         /// Gets the sorting direction.
         /// </summary>
         /// <returns> the sorting direction </returns>
-        public SortDirection? SortingDirection
+        public SortDirection SortingDirection
         {
             get { return sortingDirection; }
             set { sortingDirection = value; }

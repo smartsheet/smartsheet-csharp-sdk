@@ -21,7 +21,7 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Enum representing the type of aggregation for report data.
     /// </summary>
-    public enum AggregationType
+    public enum ReportAggregationType
     {
         /// <summary>
         /// Sum aggregation.

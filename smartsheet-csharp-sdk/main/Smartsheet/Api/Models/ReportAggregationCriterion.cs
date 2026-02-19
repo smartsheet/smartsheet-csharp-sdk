@@ -31,7 +31,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Type of aggregation.
         /// </summary>
-        private AggregationType? aggregationType;
+        private ReportAggregationType aggregationType;
 
         /// <summary>
         /// Indicates whether the group is expanded in the UI.
@@ -52,7 +52,7 @@ namespace Smartsheet.Api.Models
         /// Gets the type of aggregation.
         /// </summary>
         /// <returns> the aggregation type </returns>
-        public AggregationType? AggregationType
+        public ReportAggregationType AggregationType
         {
             get { return aggregationType; }
             set { aggregationType = value; }

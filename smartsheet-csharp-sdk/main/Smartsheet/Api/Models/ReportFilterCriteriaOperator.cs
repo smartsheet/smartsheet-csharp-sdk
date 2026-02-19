@@ -21,7 +21,7 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Enum representing the condition operator for filter criteria.
     /// </summary>
-    public enum ReportCriteriaOperator
+    public enum ReportFilterCriteriaOperator
     {
         /// <summary>
         /// Equal to.

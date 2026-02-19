@@ -36,7 +36,7 @@ namespace Smartsheet.Api.Models
         /// Column title to be matched from the source sheets.
         /// If primary is true, then this property can be used to customize the primary column title.
         /// </summary>
-        private string title;
+        private string? title;
 
         /// <summary>
         /// Column type to be matched from the source sheets.
@@ -58,7 +58,7 @@ namespace Smartsheet.Api.Models
         /// Gets the column title to be matched from the source sheets.
         /// </summary>
         /// <returns> the title </returns>
-        public string Title
+        public string? Title
         {
             get { return title; }
             set { title = value; }

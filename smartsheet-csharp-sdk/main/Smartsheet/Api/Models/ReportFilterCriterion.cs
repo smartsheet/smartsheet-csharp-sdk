@@ -33,7 +33,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Condition operator.
         /// </summary>
-        private ReportCriteriaOperator? operatorValue;
+        private ReportFilterCriteriaOperator operatorValue;
 
         /// <summary>
         /// List of filter values.
@@ -54,7 +54,7 @@ namespace Smartsheet.Api.Models
         /// Gets the condition operator.
         /// </summary>
         /// <returns> the operator </returns>
-        public ReportCriteriaOperator? Operator
+        public ReportFilterCriteriaOperator Operator
         {
             get { return operatorValue; }
             set { operatorValue = value; }

@@ -26,7 +26,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Grouping criteria id (read-only).
         /// </summary>
-        private string id;
+        private string? id;
 
         /// <summary>
         /// The column identifier.
@@ -36,7 +36,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Sorting direction within the group.
         /// </summary>
-        private SortDirection? sortingDirection;
+        private SortDirection sortingDirection;
 
         /// <summary>
         /// Indicates whether the group is expanded in the UI.
@@ -47,7 +47,7 @@ namespace Smartsheet.Api.Models
         /// Gets the grouping criteria id.
         /// </summary>
         /// <returns> the id </returns>
-        public string Id
+        public string? Id
         {
             get { return id; }
             set { id = value; }
@@ -67,7 +67,7 @@ namespace Smartsheet.Api.Models
         /// Gets the sorting direction within the group.
         /// </summary>
         /// <returns> the sorting direction </returns>
-        public SortDirection? SortingDirection
+        public SortDirection SortingDirection
         {
             get { return sortingDirection; }
             set { sortingDirection = value; }

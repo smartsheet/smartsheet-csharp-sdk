@@ -39,7 +39,7 @@ namespace mock_api_test_sdk_net80
                 {
                     new ReportAggregationCriterion
                     {
-                        AggregationType = AggregationType.COUNT,
+                        AggregationType = ReportAggregationType.COUNT,
                         Column = new ReportColumnIdentifier
                         {
                             Primary = true,
@@ -64,7 +64,7 @@ namespace mock_api_test_sdk_net80
                                 SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
                                 Title = "Primary Column",
                             },
-                            Operator = ReportCriteriaOperator.EQUAL,
+                            Operator = ReportFilterCriteriaOperator.EQUAL,
                             Values = new List<string> { "Test" },
                         }
                     }
