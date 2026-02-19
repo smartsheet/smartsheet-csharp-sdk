@@ -22,80 +22,38 @@ namespace Smartsheet.Api.Models
     /// Represents the request object for sharing an asset with a user or group.
     /// One (and only one) of email or groupId is required (alongside accessLevel).
     /// </summary>
-    public class ShareAssetRequest
+    public class CreateShareRequest
     {
-        /// <summary>
-        /// The primary email address of a user to share to.
-        /// Must be provided if groupId is not provided.
-        /// </summary>
-        private string email;
-
-        /// <summary>
-        /// The ID of the group to share to.
-        /// Must be provided if email is not provided.
-        /// </summary>
-        private long? groupId;
-
-        /// <summary>
-        /// The access level for this specific share. Required.
-        /// </summary>
-        private AccessLevel accessLevel;
-
-        /// <summary>
-        /// The subject of the email that is optionally sent to notify the recipient.
-        /// </summary>
-        private string subject;
-
-        /// <summary>
-        /// The message included in the body of the email that is optionally sent to the recipient.
-        /// </summary>
-        private string message;
-
         /// <summary>
         /// Gets or sets the primary email address of a user to share to.
         /// Must be provided if GroupId is not provided.
         /// </summary>
-        public string Email
-        {
-            get { return email; }
-            set { email = value; }
-        }
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the group to share to.
         /// Must be provided if Email is not provided.
         /// </summary>
-        public long? GroupId
-        {
-            get { return groupId; }
-            set { groupId = value; }
-        }
+        public long? GroupId { get; set; }
 
         /// <summary>
         /// Gets or sets the access level for this specific share. Required.
         /// </summary>
-        public AccessLevel AccessLevel
-        {
-            get { return accessLevel; }
-            set { accessLevel = value; }
-        }
+        public AccessLevel AccessLevel { get; set; }
 
         /// <summary>
         /// Gets or sets the subject of the email that is optionally sent to notify the recipient.
         /// </summary>
-        public string Subject
-        {
-            get { return subject; }
-            set { subject = value; }
-        }
+        public string Subject { get; set; }
 
         /// <summary>
         /// Gets or sets the message included in the body of the email that is optionally sent to the recipient.
         /// </summary>
-        public string Message
-        {
-            get { return message; }
-            set { message = value; }
-        }
+        public string Message { get; set; }
+        
+        /// <summary>
+        /// Gets or Sets whether to CC yourself in emails.
+        /// </summary>
+        public string CcMe { get; set; }
     }
 }
