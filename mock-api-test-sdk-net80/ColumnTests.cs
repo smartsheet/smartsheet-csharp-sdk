@@ -10,7 +10,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateColumn_ChangeType_Picklist()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Column - Change Type - Picklist");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Column - Change Type - Picklist");
 
             Column column = new Column
             {
@@ -27,7 +27,7 @@ namespace mock_api_test_sdk_net80
                 Width = 200
             };
 
-            Column updatedColumn = ss.SheetResources.ColumnResources.UpdateColumn(123, column);
+            Column updatedColumn = smartsheet.SheetResources.ColumnResources.UpdateColumn(123, column);
 
             Assert.AreEqual(ColumnType.PICKLIST, updatedColumn.Type);
             Assert.AreEqual(3, updatedColumn.Options.Count);
@@ -36,7 +36,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateColumn_ChangeType_ContactList()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Column - Change Type - Contact List");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Column - Change Type - Contact List");
 
             Column column = new Column
             {
@@ -60,7 +60,7 @@ namespace mock_api_test_sdk_net80
                 Width = 200
             };
 
-            Column updatedColumn = ss.SheetResources.ColumnResources.UpdateColumn(123, column);
+            Column updatedColumn = smartsheet.SheetResources.ColumnResources.UpdateColumn(123, column);
 
             Assert.AreEqual(ColumnType.CONTACT_LIST, updatedColumn.Type);
             Assert.AreEqual(2, updatedColumn.ContactOptions.Count);

@@ -10,7 +10,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_AssignValues_String()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Values - String");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - String");
 
             Row rowA = new Row
             {
@@ -43,7 +43,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA, rowB });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA, rowB });
 
             Row? row = addedRows.FirstOrDefault(r => r.Id == 10);
             Cell? cell = row?.Cells.FirstOrDefault(c => c.Value.Equals("Apple"));
@@ -55,7 +55,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_AssignValues_Int()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Values - Int");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Int");
 
             Row rowA = new Row
             {
@@ -88,7 +88,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA, rowB });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA, rowB });
 
             Row? row = addedRows.FirstOrDefault(r => r.Id == 10);
             Cell? cell = row?.Cells.FirstOrDefault(c => Convert.ToInt32(c.Value) == 100);
@@ -99,7 +99,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_AssignValues_Bool()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Values - Bool");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Bool");
 
             Row rowA = new Row
             {
@@ -132,7 +132,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA, rowB });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA, rowB });
 
             Row? row = addedRows.FirstOrDefault(r => r.Id == 10);
             Cell? cell = row?.Cells.FirstOrDefault(c => c.Value.Equals(true));
@@ -145,7 +145,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_AssignFormulae()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Formulae");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Formulae");
 
             Row rowA = new Row
             {
@@ -162,7 +162,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
 
             Cell? cell = addedRows[0].Cells.FirstOrDefault(c => c.Formula.Equals("=SUM([Column2]3, [Column2]3, [Column2]4)"));
             Assert.IsNotNull(cell);
@@ -172,7 +172,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_AssignValues_Hyperlink()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink");
 
             Row rowA = new Row
             {
@@ -195,7 +195,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
 
             Cell? cell = addedRows[0].Cells.FirstOrDefault(c => c.Value.Equals("Google"));
             Assert.IsNotNull(cell);
@@ -208,7 +208,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_AssignValues_HyperlinkSheetID()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink SheetID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink SheetID");
 
             Row rowA = new Row
             {
@@ -231,7 +231,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
             var cellsValue = addedRows[0].Cells;
             Cell? cell = cellsValue.FirstOrDefault(c => c.Value.Equals("Sheet3"));
             Assert.IsNotNull(cell);
@@ -244,7 +244,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_AssignValues_HyperlinkReportID()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink ReportID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink ReportID");
 
             Row rowA = new Row
             {
@@ -267,7 +267,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
 
             Cell? cell = addedRows[0].Cells.FirstOrDefault(c => c.Value.Equals("Report8"));
             Assert.IsNotNull(cell);
@@ -280,7 +280,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_Invalid_AssignValueAndFormulae()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Invalid - Assign Value and Formulae");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Invalid - Assign Value and Formulae");
 
             Row rowA = new Row
             {
@@ -300,14 +300,14 @@ namespace mock_api_test_sdk_net80
             };
 
             HelperFunctions.AssertRaisesException<SmartsheetException>(() =>
-                ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA }),
+                smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA }),
                 "If cell.formula is specified, then value, objectValue, image, hyperlink, and linkInFromCell must not be specified.");
         }
 
         [TestMethod]
         public void AddRows_Invalid_AssignHyperlinkUrlandSheetId()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Invalid - Assign Hyperlink URL and SheetId");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Invalid - Assign Hyperlink URL and SheetId");
 
             Row rowA = new Row
             {
@@ -333,14 +333,14 @@ namespace mock_api_test_sdk_net80
 
 
             HelperFunctions.AssertRaisesException<SmartsheetException>(() =>
-                ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA }),
+                smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA }),
                 "hyperlink.url must be null for sheet, report, or Sight hyperlinks.");
         }
 
         [TestMethod]
         public void AddRows_AssignObjectValue_PredecessorList()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Assign Object Value - Predecessor List (using floats)");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Object Value - Predecessor List (using floats)");
 
             Row rowA = new Row
             {
@@ -368,7 +368,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
 
             Cell predecessorCell = addedRows[0].Cells.Single(c => c.ColumnId == 101);
             Assert.AreEqual("2FS +2.5d", predecessorCell.Value);
@@ -377,7 +377,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_Location_Top()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Location - Top");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Location - Top");
 
             Row rowA = new Row
             {
@@ -396,7 +396,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
 
             Row? row = addedRows.FirstOrDefault(r => r.Id == 10);
             Cell? cell = row?.Cells.FirstOrDefault(c => c.Value.Equals("Apple"));
@@ -409,7 +409,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void AddRows_Location_Bottom()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Add Rows - Location - Bottom");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Location - Bottom");
 
             Row rowA = new Row
             {
@@ -428,7 +428,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> addedRows = ss.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
+            IList<Row> addedRows = smartsheet.SheetResources.RowResources.AddRows(1, new Row[] { rowA });
 
             Row? row = addedRows.FirstOrDefault(r => r.Id == 10);
             Cell? cell = row?.Cells.FirstOrDefault(c => c.Value.Equals("Apple"));
@@ -441,7 +441,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_AssignValues_String()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Assign Values - String");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - String");
 
             Row rowA = new Row
             {
@@ -476,7 +476,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA, rowB });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA, rowB });
 
             Row? row = updatedRows.Where(r => r.Id == 10).FirstOrDefault();
             Cell? cell = row?.Cells.Where(c => c.Value.Equals("Apple")).FirstOrDefault();
@@ -487,7 +487,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_AssignValues_Int()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Assign Values - Int");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Int");
 
             Row rowA = new Row
             {
@@ -522,7 +522,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, [rowA, rowB]);
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, [rowA, rowB]);
             Row? row = updatedRows.FirstOrDefault(r => r.Id == 10);
             Cell? cell = row?.Cells.FirstOrDefault(c => Convert.ToInt32(c.Value) == 100);
             Assert.IsNotNull(cell);
@@ -532,7 +532,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_AssignValues_Bool()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Assign Values - Bool");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Bool");
 
             Row rowA = new Row
             {
@@ -567,7 +567,7 @@ namespace mock_api_test_sdk_net80
             };
 
             // Update rows in sheet
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA, rowB });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA, rowB });
 
             Row? row = updatedRows.FirstOrDefault(r => r.Id == 10);
             Cell? cell = row?.Cells.FirstOrDefault(c => c.Value.Equals(true));
@@ -578,7 +578,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_AssignFormulae()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Assign Formulae");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Formulae");
 
             Row rowA = new Row
             {
@@ -596,7 +596,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Cell? cell = updatedRows[0].Cells.Where(c => c.Formula.Equals("=SUM([Column2]3, [Column2]3, [Column2]4)")).FirstOrDefault();
             Assert.IsNotNull(cell);
@@ -606,7 +606,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_AssignValues_Hyperlink()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink");
 
             Row rowA = new Row
             {
@@ -630,7 +630,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Cell? cell = updatedRows[0].Cells.Where(c => c.Value.Equals("Google")).FirstOrDefault();
             Assert.IsNotNull(cell);
@@ -643,7 +643,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_AssignValues_HyperlinkSheetID()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink SheetID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink SheetID");
 
             Row rowA = new Row
             {
@@ -667,7 +667,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
             var cells = updatedRows[0].Cells;
             Assert.IsNotNull(cells);
             Cell? cell = cells.FirstOrDefault(c => c.Value.Equals("Sheet3"));
@@ -681,7 +681,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_AssignValues_HyperlinkReportID()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink ReportID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink ReportID");
 
             Row rowA = new Row
             {
@@ -705,7 +705,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Cell? cell = updatedRows[0].Cells.FirstOrDefault(c => c.Value.Equals("Report8"));
             Assert.IsNotNull(cell);
@@ -718,7 +718,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_Invalid_AssignValueAndFormulae()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Value and Formulae");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Value and Formulae");
 
             Row rowA = new Row
             {
@@ -739,14 +739,14 @@ namespace mock_api_test_sdk_net80
             };
 
             HelperFunctions.AssertRaisesException<SmartsheetException>(() =>
-                ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA }),
+                smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA }),
                 "If cell.formula is specified, then value, objectValue, image, hyperlink, and linkInFromCell must not be specified.");
         }
 
         [TestMethod]
         public void UpdateRows_Invalid_AssignHyperlinkUrlandSheetId()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Hyperlink URL and SheetId");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Hyperlink URL and SheetId");
 
             Row rowA = new Row
             {
@@ -772,14 +772,14 @@ namespace mock_api_test_sdk_net80
             };
 
             HelperFunctions.AssertRaisesException<SmartsheetException>(() =>
-                ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA }),
+                smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA }),
                 "hyperlink.url must be null for sheet, report, or Sight hyperlinks.");
         }
 
         [TestMethod]
         public void UpdateRows_ClearValue_TextNumber()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Clear Value - Text Number");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Text Number");
 
             Row rowA = new Row
             {
@@ -794,7 +794,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Cell updatedCell = updatedRows[0].Cells.Single(c => c.ColumnId == 101);
             Assert.AreEqual(null, updatedCell.Value);
@@ -803,7 +803,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_ClearValue_Checkbox()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Clear Value - Checkbox");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Checkbox");
 
             Row rowA = new Row
             {
@@ -818,7 +818,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Cell updatedCell = updatedRows[0].Cells.Single(c => c.ColumnId == 101);
             Assert.AreEqual(false, updatedCell.Value);
@@ -827,7 +827,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_ClearValue_Hyperlink()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Clear Value - Hyperlink");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Hyperlink");
 
             Row rowA = new Row
             {
@@ -843,7 +843,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Cell updatedCell = updatedRows[0].Cells.Single(c => c.ColumnId == 101);
             Assert.AreEqual(null, updatedCell.Hyperlink);
@@ -853,7 +853,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_ClearValue_CellLink()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Clear Value - Cell Link");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Cell Link");
 
             Row rowA = new Row
             {
@@ -869,7 +869,7 @@ namespace mock_api_test_sdk_net80
                 }
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Cell updatedCell = updatedRows[0].Cells.Single(c => c.ColumnId == 101);
             Assert.AreEqual(null, updatedCell.LinkInFromCell);
@@ -879,7 +879,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_ClearValue_PredecessorList()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Clear Value - Predecessor List");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Predecessor List");
 
             Row rowA = new Row
             {
@@ -893,7 +893,7 @@ namespace mock_api_test_sdk_net80
                     }
                 }
             };
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
             Cell updatedCell = updatedRows[0].Cells.Single(c => c.ColumnId == 123);
             Assert.AreEqual(updatedRows[0].Id, 10);
             Assert.AreEqual(null, updatedCell.Value);
@@ -903,7 +903,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_Invalid_AssignHyperlinkAndCellLink()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Hyperlink and Cell Link");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Hyperlink and Cell Link");
 
             Row rowA = new Row
             {
@@ -929,14 +929,14 @@ namespace mock_api_test_sdk_net80
             };
 
             HelperFunctions.AssertRaisesException<SmartsheetException>(() =>
-                    ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA }),
+                    smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA }),
                 "Only one of cell.hyperlink or cell.linkInFromCell may be non-null.");
         }
 
         [TestMethod]
         public void UpdateRows_Location_Top()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Location - Top");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Location - Top");
 
             Row rowA = new Row
             {
@@ -944,7 +944,7 @@ namespace mock_api_test_sdk_net80
                 ToTop = true
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Row updateRow = updatedRows.Single(r => r.Id == 10);
             Assert.AreEqual(1, updateRow.RowNumber);
@@ -953,7 +953,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void UpdateRows_Location_Bottom()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Update Rows - Location - Bottom");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Location - Bottom");
 
             Row rowA = new Row
             {
@@ -961,7 +961,7 @@ namespace mock_api_test_sdk_net80
                 ToBottom = true
             };
 
-            IList<Row> updatedRows = ss.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
+            IList<Row> updatedRows = smartsheet.SheetResources.RowResources.UpdateRows(1, new Row[] { rowA });
 
             Row updateRow = updatedRows.Single(r => r.Id == 10);
             Assert.AreEqual(100, updateRow.RowNumber);
@@ -970,9 +970,9 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void MoveRow_AnotherSheet()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Move row to another sheet");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Move row to another sheet");
 
-            CopyOrMoveRowResult result = ss.SheetResources.RowResources.MoveRowsToAnotherSheet(
+            CopyOrMoveRowResult result = smartsheet.SheetResources.RowResources.MoveRowsToAnotherSheet(
                 1228520367122308,
                 new CopyOrMoveRowDirective
                 {
@@ -991,8 +991,8 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void CopyRow_AnotherSheet()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Copy row to another sheet");
-            CopyOrMoveRowResult result = ss.SheetResources.RowResources.CopyRowsToAnotherSheet(
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Copy row to another sheet");
+            CopyOrMoveRowResult result = smartsheet.SheetResources.RowResources.CopyRowsToAnotherSheet(
                 1228520367122308,
                 new CopyOrMoveRowDirective
                 {

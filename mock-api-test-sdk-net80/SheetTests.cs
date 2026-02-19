@@ -10,9 +10,9 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void ListSheets_NoParams()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("List Sheets - No Params");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Sheets - No Params");
 
-            PaginatedResult<Sheet> sheets = ss.SheetResources.ListSheets(null, null);
+            PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(null, null);
 
             Assert.IsNotNull(sheets.Data.Where(s => s.Name.Equals("Copy of Sample Sheet")).FirstOrDefault());
         }
@@ -20,9 +20,9 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void ListSheets_IncludeOwnerInfo()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("List Sheets - Include Owner Info");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Sheets - Include Owner Info");
 
-            PaginatedResult<Sheet> sheets = ss.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.OWNER_INFO });
+            PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.OWNER_INFO });
 
             Assert.IsNotNull(sheets.Data.Where(s => s.Owner.Equals("john.doe@smartsheet.com")).FirstOrDefault());
         }
@@ -30,7 +30,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void CreateSheet_NoColumns()
         {
-            SmartsheetClient ss = HelperFunctions.SetupClient("Create Sheet - Invalid - No Columns");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Create Sheet - Invalid - No Columns");
 
             Sheet sheetA = new Sheet
             {
@@ -39,7 +39,7 @@ namespace mock_api_test_sdk_net80
             };
 
             HelperFunctions.AssertRaisesException<SmartsheetException>(() =>
-                ss.SheetResources.CreateSheet(sheetA),
+                smartsheet.SheetResources.CreateSheet(sheetA),
                 "The new sheet requires either a fromId or columns.");
         }
     }
