@@ -233,10 +233,15 @@ namespace mock_api_test_sdk_net80
 
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
-            var expectedBody = JObject.FromObject(createShareRequest);
             var actualBody = JObject.Parse(foundRequest.Body ?? "{}");
-            Assert.IsTrue(JToken.DeepEquals(expectedBody, actualBody),
-                $"Request body mismatch. Expected: {expectedBody}, Actual: {actualBody}");
+            var expectedBody = new Dictionary<string, object>
+            {
+                { "email", createShareRequest.Email },
+                { "accessLevel", createShareRequest.AccessLevel.ToString() }
+            };
+            var expectedBodyJson = JObject.FromObject(expectedBody);
+            Assert.IsTrue(JToken.DeepEquals(expectedBodyJson, actualBody),
+                $"Request body mismatch. Expected: {expectedBodyJson}, Actual: {actualBody}");
 
             Assert.AreEqual("/2.0/shares", path);
             Assert.AreEqual(assetType.ToString().ToLower(), queryParams["assetType"]);
@@ -269,10 +274,15 @@ namespace mock_api_test_sdk_net80
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
-            var expectedBody = JObject.FromObject(createShareRequest);
             var actualBody = JObject.Parse(foundRequest.Body ?? "{}");
-            Assert.IsTrue(JToken.DeepEquals(expectedBody, actualBody),
-                $"Request body mismatch. Expected: {expectedBody}, Actual: {actualBody}");
+            var expectedBody = new Dictionary<string, object>
+            {
+                { "email", createShareRequest.Email },
+                { "accessLevel", createShareRequest.AccessLevel.ToString() }
+            };
+            var expectedBodyJson = JObject.FromObject(expectedBody);
+            Assert.IsTrue(JToken.DeepEquals(expectedBodyJson, actualBody),
+                $"Request body mismatch. Expected: {expectedBodyJson}, Actual: {actualBody}");
         
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
@@ -309,10 +319,15 @@ namespace mock_api_test_sdk_net80
             string path = uri.AbsolutePath;
 
             Assert.IsNotNull(foundRequest.Body);
-            var expectedBody = JObject.FromObject(createShareRequest);
             var actualBody = JObject.Parse(foundRequest.Body ?? "{}");
-            Assert.IsTrue(JToken.DeepEquals(expectedBody, actualBody),
-                $"Request body mismatch. Expected: {expectedBody}, Actual: {actualBody}");
+            var expectedBody = new Dictionary<string, object>
+            {
+                { "email", createShareRequest.Email },
+                { "accessLevel", createShareRequest.AccessLevel.ToString() }
+            };
+            var expectedBodyJson = JObject.FromObject(expectedBody);
+            Assert.IsTrue(JToken.DeepEquals(expectedBodyJson, actualBody),
+                $"Request body mismatch. Expected: {expectedBodyJson}, Actual: {actualBody}");
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
