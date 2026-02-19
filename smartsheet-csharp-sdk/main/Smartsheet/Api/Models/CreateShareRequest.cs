@@ -54,6 +54,6 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Gets or Sets whether to CC yourself in emails.
         /// </summary>
-        public string CcMe { get; set; }
+        public bool? CcMe { get; set; }
     }
 }

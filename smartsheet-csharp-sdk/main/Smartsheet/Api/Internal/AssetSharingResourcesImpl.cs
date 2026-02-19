@@ -169,6 +169,7 @@ namespace Smartsheet.Api.Internal
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
+                    smartsheet.HttpClient.ReleaseConnection();
                     return Smartsheet.JsonSerializer.deserialize<BulkItemResult<AssetShare>>(response.Entity.GetContent());
                 default:
                     HandleError(response);
