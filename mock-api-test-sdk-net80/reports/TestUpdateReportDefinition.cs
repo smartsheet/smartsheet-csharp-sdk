@@ -80,6 +80,7 @@ namespace mock_api_test_sdk_net80
                             SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         },
+                        SortingDirection = SortDirection.ASCENDING,
                         IsExpanded = true
                     }
                 },
@@ -141,6 +142,7 @@ namespace mock_api_test_sdk_net80
                                     { "primary", true },
                                 }
                             },
+                            { "sortingDirection", "ASCENDING" },
                             { "isExpanded", true }
                         }
                     }
@@ -158,7 +160,7 @@ namespace mock_api_test_sdk_net80
                                 }
                             },
                             { "aggregationType", "COUNT" },
-                        { "isExpanded", true }
+                            { "isExpanded", true }
                         }
                     }
                 },
