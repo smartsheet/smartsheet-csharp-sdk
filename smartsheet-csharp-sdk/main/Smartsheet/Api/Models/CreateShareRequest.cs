@@ -28,7 +28,7 @@ namespace Smartsheet.Api.Models
         /// Gets or sets the primary email address of a user to share to.
         /// Must be provided if GroupId is not provided.
         /// </summary>
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the group to share to.
@@ -44,12 +44,12 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Gets or sets the subject of the email that is optionally sent to notify the recipient.
         /// </summary>
-        public string Subject { get; set; }
+        public string? Subject { get; set; }
 
         /// <summary>
         /// Gets or sets the message included in the body of the email that is optionally sent to the recipient.
         /// </summary>
-        public string Message { get; set; }
+        public string? Message { get; set; }
         
         /// <summary>
         /// Gets or Sets whether to CC yourself in emails.

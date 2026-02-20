@@ -215,13 +215,16 @@ namespace mock_api_test_sdk_net80
             AssetType assetType = AssetType.SHEET;
             bool sendEmail = false;
 
-            CreateShareRequest createShareRequest = new CreateShareRequest
+            List<CreateShareRequest> createShareRequests = new List<CreateShareRequest>
             {
-                Email = TEST_EMAIL,
-                AccessLevel = AccessLevel.ADMIN
+                new CreateShareRequest
+                {
+                    Email = TEST_EMAIL,
+                    AccessLevel = AccessLevel.ADMIN
+                }
             };
 
-            smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequest, sendEmail);
+            smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequests, sendEmail);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             Assert.IsNotNull(foundRequest);
@@ -233,13 +236,16 @@ namespace mock_api_test_sdk_net80
 
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
 
-            var actualBody = JObject.Parse(foundRequest.Body ?? "{}");
-            var expectedBody = new Dictionary<string, object>
+            var actualBody = JArray.Parse(foundRequest.Body ?? "[]");
+            var expectedBody = new List<Dictionary<string, object>>
             {
-                { "email", createShareRequest.Email },
-                { "accessLevel", createShareRequest.AccessLevel.ToString() }
+                new Dictionary<string, object>
+                {
+                    { "email", createShareRequests[0].Email },
+                    { "accessLevel", createShareRequests[0].AccessLevel.ToString() }
+                }
             };
-            var expectedBodyJson = JObject.FromObject(expectedBody);
+            var expectedBodyJson = JArray.FromObject(expectedBody);
             Assert.IsTrue(JToken.DeepEquals(expectedBodyJson, actualBody),
                 $"Request body mismatch. Expected: {expectedBodyJson}, Actual: {actualBody}");
 
@@ -257,13 +263,16 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            CreateShareRequest createShareRequest = new CreateShareRequest
+            List<CreateShareRequest> createShareRequests = new List<CreateShareRequest>
             {
-                Email = TEST_EMAIL,
-                AccessLevel = AccessLevel.ADMIN
+                new CreateShareRequest
+                {
+                    Email = TEST_EMAIL,
+                    AccessLevel = AccessLevel.ADMIN
+                }
             };
 
-            BulkItemResult<AssetShare> response = smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequest, false);
+            BulkItemResult<AssetShare> response = smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequests, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -274,13 +283,16 @@ namespace mock_api_test_sdk_net80
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
 
-            var actualBody = JObject.Parse(foundRequest.Body ?? "{}");
-            var expectedBody = new Dictionary<string, object>
+            var actualBody = JArray.Parse(foundRequest.Body ?? "[]");
+            var expectedBody = new List<Dictionary<string, object>>
             {
-                { "email", createShareRequest.Email },
-                { "accessLevel", createShareRequest.AccessLevel.ToString() }
+                new Dictionary<string, object>
+                {
+                    { "email", createShareRequests[0].Email },
+                    { "accessLevel", createShareRequests[0].AccessLevel.ToString() }
+                }
             };
-            var expectedBodyJson = JObject.FromObject(expectedBody);
+            var expectedBodyJson = JArray.FromObject(expectedBody);
             Assert.IsTrue(JToken.DeepEquals(expectedBodyJson, actualBody),
                 $"Request body mismatch. Expected: {expectedBodyJson}, Actual: {actualBody}");
         
@@ -303,13 +315,16 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            CreateShareRequest createShareRequest = new CreateShareRequest
+            List<CreateShareRequest> createShareRequests = new List<CreateShareRequest>
             {
-                Email = TEST_EMAIL,
-                AccessLevel = AccessLevel.ADMIN
+                new CreateShareRequest
+                {
+                    Email = TEST_EMAIL,
+                    AccessLevel = AccessLevel.ADMIN
+                }
             };
 
-            BulkItemResult<AssetShare> response = smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequest, false);
+            BulkItemResult<AssetShare> response = smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequests, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -319,13 +334,16 @@ namespace mock_api_test_sdk_net80
             string path = uri.AbsolutePath;
 
             Assert.IsNotNull(foundRequest.Body);
-            var actualBody = JObject.Parse(foundRequest.Body ?? "{}");
-            var expectedBody = new Dictionary<string, object>
+            var actualBody = JArray.Parse(foundRequest.Body ?? "[]");
+            var expectedBody = new List<Dictionary<string, object>>
             {
-                { "email", createShareRequest.Email },
-                { "accessLevel", createShareRequest.AccessLevel.ToString() }
+                new Dictionary<string, object>
+                {
+                    { "email", createShareRequests[0].Email },
+                    { "accessLevel", createShareRequests[0].AccessLevel.ToString() }
+                }
             };
-            var expectedBodyJson = JObject.FromObject(expectedBody);
+            var expectedBodyJson = JArray.FromObject(expectedBody);
             Assert.IsTrue(JToken.DeepEquals(expectedBodyJson, actualBody),
                 $"Request body mismatch. Expected: {expectedBodyJson}, Actual: {actualBody}");
 
@@ -345,13 +363,16 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            CreateShareRequest createShareRequest = new CreateShareRequest
+            List<CreateShareRequest> createShareRequests = new List<CreateShareRequest>
             {
-                Email = TEST_EMAIL,
-                AccessLevel = AccessLevel.ADMIN
+                new CreateShareRequest
+                {
+                    Email = TEST_EMAIL,
+                    AccessLevel = AccessLevel.ADMIN
+                }
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequest, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequests, false));
             Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
@@ -363,13 +384,16 @@ namespace mock_api_test_sdk_net80
 
             AssetType assetType = AssetType.SHEET;
 
-            CreateShareRequest createShareRequest = new CreateShareRequest
+            List<CreateShareRequest> createShareRequests = new List<CreateShareRequest>
             {
-                Email = "invalid-email",
-                AccessLevel = AccessLevel.ADMIN
+                new CreateShareRequest
+                {
+                    Email = "invalid-email",
+                    AccessLevel = AccessLevel.ADMIN
+                }
             };
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequest, false));
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.AssetSharingResources.ShareAsset(assetType, TEST_ASSET_ID, createShareRequests, false));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 

@@ -120,14 +120,14 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// <para>Shares an asset with the specified user or group.</para>
+        /// <para>Shares an asset with the specified users or groups.</para>
         ///
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         /// POST /shares?assetType={assetType}&assetId={assetId}</para>
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the Id of the asset </param>
-        /// <param name="createShareRequest"> the share request object </param>
+        /// <param name="createShareRequests"> the list of share request objects </param>
         /// <param name="sendEmail">(optional): Either true or false to indicate whether or not
         ///     to notify the user by email. Default is false.</param>
         /// <returns> result object containing an array of share response objects </returns>
@@ -137,7 +137,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, CreateShareRequest createShareRequest,
+        public virtual BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, List<CreateShareRequest> createShareRequests,
             bool? sendEmail = null)
         {
             StringBuilder url = new StringBuilder("/2.0/shares");
@@ -163,7 +163,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            request.Entity = serializeToEntity(createShareRequest);
+            request.Entity = serializeToEntity(createShareRequests);
             HttpResponse response = Smartsheet.HttpClient.Request(request);
 
             switch (response.StatusCode)
