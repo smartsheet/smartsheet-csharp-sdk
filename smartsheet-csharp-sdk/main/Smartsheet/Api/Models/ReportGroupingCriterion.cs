@@ -23,10 +23,6 @@ namespace Smartsheet.Api.Models
     /// </summary>
     public class ReportGroupingCriterion
     {
-        /// <summary>
-        /// Grouping criteria id (read-only).
-        /// </summary>
-        private string? id;
 
         /// <summary>
         /// The column identifier.
@@ -42,16 +38,6 @@ namespace Smartsheet.Api.Models
         /// Indicates whether the group is expanded in the UI.
         /// </summary>
         private bool? isExpanded;
-
-        /// <summary>
-        /// Gets the grouping criteria id.
-        /// </summary>
-        /// <returns> the id </returns>
-        public string? Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
 
         /// <summary>
         /// Gets the column identifier.
