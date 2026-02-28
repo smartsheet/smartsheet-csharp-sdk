@@ -235,8 +235,7 @@ namespace mock_api_test_sdk_net80
                 new Dictionary<string, object>
                 {
                     { "accessLevel", "ADMIN" },
-                    { "email", TEST_EMAIL },
-                    { "scope", "ITEM" }
+                    { "email", TEST_EMAIL }
                 }
             };
             var actualBodyMap = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(foundRequest.Body ?? "[]");
@@ -277,8 +276,7 @@ namespace mock_api_test_sdk_net80
                 new Dictionary<string, object>
                 {
                     { "accessLevel", "ADMIN" },
-                    { "email", TEST_EMAIL },
-                    { "scope", "ITEM" }
+                    { "email", TEST_EMAIL }
                 }
             };
             var actualBodyMap = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(foundRequest.Body ?? "[]");
@@ -321,8 +319,9 @@ namespace mock_api_test_sdk_net80
             var actualShareBody = JsonConvert.DeserializeObject<List<AssetShare>>(foundRequest.Body ?? "{}");
             Assert.IsNotNull(actualShareBody.First());
             Assert.AreEqual(newShare.Email, actualShareBody.First().Email);
-            Assert.AreEqual(newShare.Scope, actualShareBody.First().Scope);
             Assert.AreEqual(newShare.AccessLevel, actualShareBody.First().AccessLevel);
+            // Scope should not be sent in request body - it's a response-only field
+            Assert.IsNull(actualShareBody.First().Scope);
 
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Result);
