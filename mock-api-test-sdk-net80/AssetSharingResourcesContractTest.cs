@@ -26,7 +26,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sharing/list-asset-shares/all-response-body-properties", requestId.ToString());
 
             AssetType assetType = AssetType.SHEET;
-            ShareScope sharingInclude = ShareScope.Item;
+            ShareScope sharingInclude = ShareScope.Workspace;
 
             TokenPaginationParameters pagination = new TokenPaginationParameters(TEST_LAST_KEY, TEST_MAX_ITEMS);
 
@@ -45,7 +45,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_ASSET_ID, queryParams["assetId"]);
             Assert.AreEqual(TEST_MAX_ITEMS.ToString(), queryParams["maxItems"]);
             Assert.AreEqual(TEST_LAST_KEY, queryParams["lastKey"]);
-            Assert.AreEqual(sharingInclude.ToString(), queryParams["sharingInclude"]);
+            Assert.AreEqual("workspaceShares", queryParams["include"]);
         }
 
         [TestMethod]

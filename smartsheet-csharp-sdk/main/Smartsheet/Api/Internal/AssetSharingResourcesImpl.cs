@@ -79,9 +79,9 @@ namespace Smartsheet.Api.Internal
                 }
             }
 
-            if (sharingInclude != null)
+            if (ShareScope.Workspace.Equals(sharingInclude))
             {
-                parameters.Add("sharingInclude", sharingInclude.ToString());
+                parameters.Add("include", "workspaceShares");
             }
 
             String path = QueryUtil.GenerateUrl("/2.0/shares", parameters);
