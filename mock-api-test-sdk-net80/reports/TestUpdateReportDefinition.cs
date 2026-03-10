@@ -44,7 +44,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = ReportSystemColumnType.SHEET_NAME,
                             Title = "Primary Column",
                         },
                     IsExpanded = true
@@ -61,7 +61,7 @@ namespace mock_api_test_sdk_net80
                             {
                                 Primary = true,
                                 Type = ColumnType.TEXT_NUMBER,
-                                SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                                SystemColumnType = ReportSystemColumnType.SHEET_NAME,
                                 Title = "Primary Column",
                             },
                             Operator = ReportFilterCriteriaOperator.EQUAL,
@@ -77,7 +77,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = ReportSystemColumnType.SHEET_NAME,
                             Title = "Primary Column",
                         },
                         SortingDirection = SortDirection.ASCENDING,
@@ -92,10 +92,9 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = ReportSystemColumnType.SHEET_NAME,
                             Title = "Primary Column",
                         },
-                        ForceNullsToBottom = true,
                         SortingDirection = SortDirection.ASCENDING
                     }
                 },
@@ -119,7 +118,7 @@ namespace mock_api_test_sdk_net80
                                             {
                                                 { "title", "Primary Column" },
                                                 { "type", "TEXT_NUMBER" },
-                                                { "systemColumnType", "AUTO_NUMBER" },
+                                                { "systemColumnType", "SHEET_NAME" },
                                                 { "primary", true },
                                             }
                                         },
@@ -138,7 +137,7 @@ namespace mock_api_test_sdk_net80
                                 {
                                     { "title", "Primary Column" },
                                     { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
+                                    { "systemColumnType", "SHEET_NAME" },
                                     { "primary", true },
                                 }
                             },
@@ -155,7 +154,7 @@ namespace mock_api_test_sdk_net80
                                 {
                                     { "title", "Primary Column" },
                                     { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
+                                    { "systemColumnType", "SHEET_NAME" },
                                     { "primary", true },
                                 }
                             },
@@ -172,12 +171,11 @@ namespace mock_api_test_sdk_net80
                                 {
                                     { "title", "Primary Column" },
                                     { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
+                                    { "systemColumnType", "SHEET_NAME" },
                                     { "primary", true },
                                 }
                             },
                             { "sortingDirection", "ASCENDING" },
-                            { "forceNullsToBottom", true },
                         }
                     }
                 },

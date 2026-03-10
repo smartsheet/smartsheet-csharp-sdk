@@ -25,11 +25,6 @@ namespace Smartsheet.Api.Models
     public enum ReportSystemColumnType
     {
         /// <summary>
-        /// Auto number columns generate values for every row in the sheet that contains data.
-        /// </summary>
-        AUTO_NUMBER,
-
-        /// <summary>
         /// Populated by who created the row.
         /// </summary>
         CREATED_BY,

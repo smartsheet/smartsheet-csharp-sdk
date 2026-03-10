@@ -34,11 +34,6 @@ namespace Smartsheet.Api.Models
         private SortDirection sortingDirection;
 
         /// <summary>
-        /// Force null values to the bottom of the sorted list.
-        /// </summary>
-        private bool? forceNullsToBottom;
-
-        /// <summary>
         /// Gets the column identifier.
         /// </summary>
         /// <returns> the column </returns>
@@ -56,16 +51,6 @@ namespace Smartsheet.Api.Models
         {
             get { return sortingDirection; }
             set { sortingDirection = value; }
-        }
-
-        /// <summary>
-        /// Gets whether null values are forced to the bottom of the sorted list.
-        /// </summary>
-        /// <returns> true if nulls are forced to bottom, false otherwise </returns>
-        public bool? ForceNullsToBottom
-        {
-            get { return forceNullsToBottom; }
-            set { forceNullsToBottom = value; }
         }
     }
 }
