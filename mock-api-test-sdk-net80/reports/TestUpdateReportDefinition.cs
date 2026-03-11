@@ -14,7 +14,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
 
 
-            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition());
+            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition(), true);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -25,6 +25,7 @@ namespace mock_api_test_sdk_net80
 
             Assert.AreEqual($"/2.0/reports/{CommonTestConstants.TEST_REPORT_ID}/definition", path);
             Assert.AreEqual("PATCH", foundRequest.Method);
+            Assert.AreEqual("updateFilters=true", uri.Query.TrimStart('?'));
         }
 
         [TestMethod]
