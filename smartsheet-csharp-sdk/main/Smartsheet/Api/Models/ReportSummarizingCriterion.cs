@@ -19,9 +19,9 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Represents an aggregation criterion for a report.
+    /// Represents a summarizing criterion for a report.
     /// </summary>
-    public class ReportAggregationCriterion
+    public class ReportSummarizingCriterion
     {
         /// <summary>
         /// The column identifier.

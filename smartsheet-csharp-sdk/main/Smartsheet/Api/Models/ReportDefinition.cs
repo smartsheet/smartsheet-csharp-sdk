@@ -38,9 +38,9 @@ namespace Smartsheet.Api.Models
         private IList<ReportGroupingCriterion> groupingCriteria;
 
         /// <summary>
-        /// Represents the list of report aggregation criteria.
+        /// Represents the list of report summarizing criteria.
         /// </summary>
-        private IList<ReportAggregationCriterion> aggregationCriteria;
+        private IList<ReportSummarizingCriterion> summarizingCriteria;
 
         /// <summary>
         /// Represents the list of report sorting criteria.
@@ -68,13 +68,13 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Gets the list of report aggregation criteria.
+        /// Gets the list of report summarizing criteria.
         /// </summary>
-        /// <returns> the aggregation criteria </returns>
-        public IList<ReportAggregationCriterion> AggregationCriteria
+        /// <returns> the summarizing criteria </returns>
+        public IList<ReportSummarizingCriterion> SummarizingCriteria
         {
-            get { return aggregationCriteria; }
-            set { aggregationCriteria = value; }
+            get { return summarizingCriteria; }
+            set { summarizingCriteria = value; }
         }
 
         /// <summary>
