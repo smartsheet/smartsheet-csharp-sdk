@@ -302,18 +302,6 @@ namespace Smartsheet.Api
                     Environment.GetEnvironmentVariable(SMARTSHEET_ACCESS_TOKEN, EnvironmentVariableTarget.Machine);
             }
 
-            // Create default HttpClient if none is provided
-            if (httpClient == null)
-            {
-                httpClient = new DefaultHttpClient();
-            }
-
-            // Create default JsonSerializer if none is provided
-            if (jsonSerializer == null)
-            {
-                jsonSerializer = new JsonNetSerializer();
-            }
-
             SmartsheetImpl smartsheet = new SmartsheetImpl(baseURI, accessToken, httpClient, jsonSerializer, dateTimeFixOptOut, enableDecimalObjectValue);
 
             if (changeAgent != null)
