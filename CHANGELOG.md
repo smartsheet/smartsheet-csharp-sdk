@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+### Added
+- `AssetSharingResources.ShareAsset` now uses a separate DTO (`CreateShareRequest`) for asset sharing. Fixes [#166](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/166)
+
 ## [6.6.5] - 2026-02-04
 ### Fixed
 - Fix retry logic. Previously the SDK's retry logic was hindered by a generic error check and as a result the code could never reach the retry part.
