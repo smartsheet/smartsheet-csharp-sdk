@@ -14,7 +14,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
 
 
-            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition(), true);
+            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition());
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -24,8 +24,7 @@ namespace mock_api_test_sdk_net80
             string path = uri.AbsolutePath;
 
             Assert.AreEqual($"/2.0/reports/{CommonTestConstants.TEST_REPORT_ID}/definition", path);
-            Assert.AreEqual("PATCH", foundRequest.Method);
-            Assert.AreEqual("updateFilters=true", uri.Query.TrimStart('?'));
+            Assert.AreEqual("PUT", foundRequest.Method);
         }
 
         [TestMethod]
@@ -101,7 +100,7 @@ namespace mock_api_test_sdk_net80
                 },
             };
 
-            ReportDefinition response = smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, definition);
+            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, definition);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -183,24 +182,6 @@ namespace mock_api_test_sdk_net80
             });
             
             Assert.AreEqual(expectedBody, foundRequest.Body);
-
-            Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Filters);
-            Assert.AreEqual(ReportFilterOperator.AND, response.Filters.Operator);
-            Assert.IsNotNull(response.Filters.Criteria);
-            Assert.AreEqual(1, response.Filters.Criteria.Count);
-            Assert.AreEqual(ReportFilterCriteriaOperator.EQUAL, response.Filters.Criteria[0].Operator);
-            Assert.IsNotNull(response.GroupingCriteria);
-            Assert.AreEqual(1, response.GroupingCriteria.Count);
-            Assert.AreEqual(SortDirection.ASCENDING, response.GroupingCriteria[0].SortingDirection);
-            Assert.IsTrue(response.GroupingCriteria[0].IsExpanded);
-            Assert.IsNotNull(response.SummarizingCriteria);
-            Assert.AreEqual(1, response.SummarizingCriteria.Count);
-            Assert.AreEqual(ReportAggregationType.COUNT, response.SummarizingCriteria[0].AggregationType);
-            Assert.IsTrue(response.SummarizingCriteria[0].IsExpanded);
-            Assert.IsNotNull(response.SortingCriteria);
-            Assert.AreEqual(1, response.SortingCriteria.Count);
-            Assert.AreEqual(SortDirection.ASCENDING, response.SortingCriteria[0].SortingDirection);
         }
 
         [TestMethod]
