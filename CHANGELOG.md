@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+## [6.6.6] - 2026-03-25
+### Fixed
+- Remove redundant http client and json serializer creation. Fixes [#168](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/168)
+
 ### Added
 - `AssetSharingResources.ShareAsset` now uses a separate DTO (`CreateShareRequest`) for asset sharing. Fixes [#166](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/166)
 
