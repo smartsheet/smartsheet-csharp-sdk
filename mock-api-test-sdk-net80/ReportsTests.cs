@@ -8,7 +8,7 @@ namespace mock_api_test_sdk_net80
         private const long TEST_REPORT_ID = 314159265359;
 
         [TestMethod]
-        public async void DeleteReport_GeneratedUrlIsCorrect()
+        public async void TestDeleteReportGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/reports/delete-report/all-response-body-properties", requestId.ToString());
@@ -25,7 +25,7 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void DeleteReport_TestDeleteResponse()
+        public void TestDeleteReportResponse()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/reports/delete-report/all-response-body-properties", requestId.ToString());
@@ -34,7 +34,7 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void DeleteReport_Error400Response()
+        public void TestDeleteReportError400Response()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
@@ -44,7 +44,7 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void DeleteReport_Error500Response()
+        public void TestDeleteReportError500Response()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient ss = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
