@@ -34,11 +34,6 @@ namespace Smartsheet.Api.Models
         private ReportAggregationType aggregationType;
 
         /// <summary>
-        /// Indicates whether the group is expanded in the UI.
-        /// </summary>
-        private bool? isExpanded;
-
-        /// <summary>
         /// Gets the column identifier.
         /// </summary>
         /// <returns> the column </returns>
@@ -56,16 +51,6 @@ namespace Smartsheet.Api.Models
         {
             get { return aggregationType; }
             set { aggregationType = value; }
-        }
-
-        /// <summary>
-        /// Gets whether the group is expanded in the UI.
-        /// </summary>
-        /// <returns> true if expanded, false otherwise </returns>
-        public bool? IsExpanded
-        {
-            get { return isExpanded; }
-            set { isExpanded = value; }
         }
     }
 }

@@ -19,43 +19,52 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Object used to match a sheet column for a report. One of [type, systemColumnType] or [primary=true] is required.
+    /// An object for matching a source sheet column for a report. It requires one of:
+    /// - [type, title] for regular columns
+    /// - [type, systemColumnType] for system columns
+    /// - [type=TEXT_NUMBER, primary=true] for the primary column
+    /// - [type=TEXT_NUMBER, sheetNameColumn=true] for the special sheet name report column
     ///
-    /// systemColumnType should be specified if you want to match a system column. Use primary=true to match primary columns.
-    /// When matching primary columns, title can be used to customize primary column name in the rendered report.
+    /// Note: You can combine multiple CHECKBOX columns or multiple PICKLIST columns from different sheets
+    /// into a single report column, even if their underlying symbols differ. However, you can't combine
+    /// a CHECKBOX column with a PICKLIST column, because they're different types.
     ///
-    /// Note: Columns in the report are matched by the combination of title and type (and systemColumnType if specified).
-    ///
-    /// Note: symbol is not used for matching and as a result CHECKBOX or PICKLIST columns with different symbols
-    /// (from different sheets) can be combined into the same column in the report. You cannot combine CHECKBOX with
-    /// PICKLIST into the same column in the report because they are different types.
+    /// Note: The system column type AUTO_NUMBER is matched together with columns having the same title
+    /// and type=TEXT_NUMBER. Therefore, title is a required property in this case.
     /// </summary>
     public class ReportColumnIdentifier
     {
         /// <summary>
-        /// Column title to be matched from the source sheets.
-        /// If primary is true, then this property can be used to customize the primary column title.
+        /// Title of a column to match.
+        /// Note: If you specified primary=true to match primary columns, you can set the resulting
+        /// report column title to this value.
         /// </summary>
         private string? title;
 
         /// <summary>
-        /// Column type to be matched from the source sheets.
+        /// Type of column to match. See Column Types.
         /// </summary>
         private ColumnType? type;
 
         /// <summary>
-        /// System column type to be matched from the source sheets.
-        /// SHEET_NAME is available as an extra option for reports.
+        /// System column type to match. See System Columns.
         /// </summary>
         private ReportSystemColumnType? systemColumnType;
 
         /// <summary>
-        /// Indicates if the matched column is primary.
+        /// Set this to true to match the primary column.
         /// </summary>
         private bool? primary;
 
         /// <summary>
-        /// Gets the column title to be matched from the source sheets.
+        /// Set this to true to match the special "Sheet Name" report column.
+        /// </summary>
+        private bool? sheetNameColumn;
+
+        /// <summary>
+        /// Gets or sets the title of a column to match.
+        /// Note: If you specified primary=true to match primary columns, you can set the resulting
+        /// report column title to this value.
         /// </summary>
         /// <returns> the title </returns>
         public string? Title
@@ -65,7 +74,7 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Gets the column type to be matched from the source sheets.
+        /// Gets or sets the type of column to match.
         /// </summary>
         /// <returns> the type </returns>
         public ColumnType? Type
@@ -75,7 +84,7 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Gets the system column type to be matched from the source sheets.
+        /// Gets or sets the system column type to match.
         /// </summary>
         /// <returns> the system column type </returns>
         public ReportSystemColumnType? SystemColumnType
@@ -85,13 +94,23 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Gets whether the matched column is primary.
+        /// Gets or sets whether to match the primary column.
         /// </summary>
         /// <returns> true if primary, false otherwise </returns>
         public bool? Primary
         {
             get { return primary; }
             set { primary = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets whether to match the special "Sheet Name" report column.
+        /// </summary>
+        /// <returns> true if sheet name column, false otherwise </returns>
+        public bool? SheetNameColumn
+        {
+            get { return sheetNameColumn; }
+            set { sheetNameColumn = value; }
         }
     }
 }
