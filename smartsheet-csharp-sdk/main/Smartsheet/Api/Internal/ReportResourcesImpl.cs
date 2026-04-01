@@ -17,13 +17,13 @@
 //    %[license]
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Smartsheet.Api.Internal.Utility;
 using Smartsheet.Api.Models;
 using Smartsheet.Api.Internal.Util;
 using System.IO;
 using Smartsheet.Api.Internal.Http;
 using System.Net;
+using Utils = Smartsheet.Api.Internal.Utility.Utility;
+using System.Linq;
 
 namespace Smartsheet.Api.Internal
 {
@@ -309,6 +309,106 @@ namespace Smartsheet.Api.Internal
             }
 
             Smartsheet.HttpClient.ReleaseConnection();
+        }
+
+        /// <summary>
+        /// <para>
+        /// Adds one or more specified sheet or workspace to the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public void AddReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
+        {
+            string path = "reports/" + reportId + "/scope";
+
+            Utils.ThrowIfNull(scopes);
+            if(scopes.Count() == 0)
+            {
+                throw new ArgumentException("scopes must contain at least one item");
+            }
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity(scopes);
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+        }
+
+        /// <summary>
+        /// <para>
+        /// Removes one or more specified sheet or workspace from the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public void RemoveReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
+        {
+            string path = "reports/" + reportId + "/scope";
+
+            Utils.ThrowIfNull(scopes);
+            if(scopes.Count() == 0)
+            {
+                throw new ArgumentException("scopes must contain at least one item");
+            }
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.DELETE);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity(scopes);
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
         }
     }
 }

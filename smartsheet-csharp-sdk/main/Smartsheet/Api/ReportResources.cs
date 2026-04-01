@@ -183,5 +183,37 @@ namespace Smartsheet.Api
         /// </summary>
         /// <returns> the share resources object </returns>
         ShareResources ShareResources { get; }
+
+        /// <summary>
+        /// <para>
+        /// Adds one or more specified sheet or workspace to the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        void AddReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes);
+
+        /// <summary>
+        /// <para>
+        /// Removes one or more specified sheet or workspace from the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        void RemoveReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes);
     }
 }
