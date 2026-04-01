@@ -6,9 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [X.X.X] - Unreleased
 ### Added
 - Add support for PATCH /reports/{id}/definition endpoint, Update Report Definition
+- Add 'Add Report Scope' and 'Remove Report Scope' endpoint support to ReportResources
+- Add support for DELETE /reports/{id} endpoint, Delete Report
 
 ### Refactor
 - Resolved double assignment of parameter in AbstractResources.cs
+
+## [6.6.6] - 2026-03-25
+### Fixed
+- Remove redundant http client and json serializer creation. Fixes [#168](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/168)
+
+### Added
+- `AssetSharingResources.ShareAsset` now uses a separate DTO (`CreateShareRequest`) for asset sharing. Fixes [#166](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/166)
 
 ## [6.6.5] - 2026-02-04
 ### Fixed

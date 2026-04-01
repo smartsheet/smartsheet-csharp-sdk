@@ -6,9 +6,9 @@
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//        
+//
 //            http://www.apache.org/licenses/LICENSE-2.0
-//        
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@ namespace Smartsheet.Api.Internal
 
     /// <summary>
     /// This is the implementation of the SharingResources.
-    /// 
+    ///
     /// Thread Safety: This class is thread safe because it is immutable and its base class is thread safe.
     /// </summary>
     public class AssetSharingResourcesImpl : AbstractResources, AssetSharingResources
@@ -91,7 +91,7 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// <para>Get a specific share for the specified asset.</para>
-        /// 
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         /// GET /shares/{shareId}?assetType={assetType}&assetId={assetId}</para>
         /// </summary>
@@ -120,24 +120,24 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// <para>Shares an asset with the specified Users and Groups.</para>
-        /// 
+        /// <para>Shares an asset with the specified users or groups.</para>
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         /// POST /shares?assetType={assetType}&assetId={assetId}</para>
         /// </summary>
         /// <param name="assetType"> the asset type (sheet, report, sight, workspace, etc.) </param>
         /// <param name="assetId"> the Id of the asset </param>
-        /// <param name="shares"> the share objects </param>
+        /// <param name="createShareRequests"> the list of share request objects </param>
         /// <param name="sendEmail">(optional): Either true or false to indicate whether or not
         ///     to notify the user by email. Default is false.</param>
-        /// <returns> the created share </returns>
+        /// <returns> result object containing an array of share response objects </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, IEnumerable<AssetShare> shares,
+        public virtual BulkItemResult<AssetShare> ShareAsset(AssetType assetType, string assetId, IEnumerable<CreateShareRequest> createShareRequests,
             bool? sendEmail = null)
         {
             StringBuilder url = new StringBuilder("/2.0/shares");
@@ -163,14 +163,13 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            request.Entity = serializeToEntity(shares);
+            request.Entity = serializeToEntity(createShareRequests);
             HttpResponse response = Smartsheet.HttpClient.Request(request);
 
-            BulkItemRowResult bulkItemResult = null;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    Smartsheet.HttpClient.ReleaseConnection();
+                    smartsheet.HttpClient.ReleaseConnection();
                     return Smartsheet.JsonSerializer.deserialize<BulkItemResult<AssetShare>>(response.Entity.GetContent());
                 default:
                     HandleError(response);
@@ -243,7 +242,7 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// List resources using SmartsheetClient REST API.
-        /// 
+        ///
         /// Exceptions:
         ///   IllegalArgumentException : if any argument is null, or path is an empty string
         ///   InvalidRequestException : if there is any problem with the REST API request
