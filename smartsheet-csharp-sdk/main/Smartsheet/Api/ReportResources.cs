@@ -140,6 +140,20 @@ namespace Smartsheet.Api
         void SendReport(long reportId, SheetEmail email);
 
         /// <summary>
+        /// <para>Deletes a report.</para>
+        /// 
+        /// <para>Mirrors the following Smartsheet REST API method: DELETE /reports/{reportId}</para>
+        /// </summary>
+        /// <param name="reportId"> the report Id </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        void DeleteReport(long reportId);
+
+        /// <summary>
         /// <para>Get the publish status of a report.</para>
         /// 
         /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{id}/publish</para>
