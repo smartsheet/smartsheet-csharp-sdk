@@ -20,9 +20,15 @@ namespace Smartsheet.Api.Models
 {
     /// <summary>
     /// Represents system column types for reports.
+    /// Includes standard system column types plus SHEET_NAME which is valid only for reports.
     /// </summary>
     public enum ReportSystemColumnType
     {
+        /// <summary>
+        /// Auto number columns generate values for every row in the sheet that contains data.
+        /// </summary>
+        AUTO_NUMBER,
+
         /// <summary>
         /// Populated by who created the row.
         /// </summary>
@@ -44,8 +50,8 @@ namespace Smartsheet.Api.Models
         MODIFIED_DATE,
 
         /// <summary>
-        /// Auto number system column type.
+        /// Sheet name column - a custom system column valid only for reports.
         /// </summary>
-        AUTO_NUMBER
+        SHEET_NAME
     }
 }

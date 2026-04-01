@@ -386,7 +386,7 @@ namespace Smartsheet.Api.Internal
             string path = "reports/" + reportId + "/scope";
 
             Utils.ThrowIfNull(scopes);
-            if(scopes.Count() == 0)
+            if (scopes.Count() == 0)
             {
                 throw new ArgumentException("scopes must contain at least one item");
             }
@@ -436,7 +436,7 @@ namespace Smartsheet.Api.Internal
             string path = "reports/" + reportId + "/scope";
 
             Utils.ThrowIfNull(scopes);
-            if(scopes.Count() == 0)
+            if (scopes.Count() == 0)
             {
                 throw new ArgumentException("scopes must contain at least one item");
             }

@@ -208,6 +208,8 @@ namespace Smartsheet.Api
         /// <param name="reportId"> the reportId </param>
         /// <param name="definition"> the ReportDefinition object </param>
         void UpdateReportDefinition(long reportId, ReportDefinition definition);
+
+        /// <summary>
         /// <para>
         /// Adds one or more specified sheet or workspace to the report scope.
         /// </para>

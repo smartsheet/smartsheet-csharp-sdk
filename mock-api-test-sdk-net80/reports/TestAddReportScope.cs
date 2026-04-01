@@ -38,7 +38,7 @@ namespace mock_api_test_sdk_net80
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
-            
+
             Assert.IsNotNull(foundRequest.AbsoluteUrl);
             var uri = new Uri(foundRequest.AbsoluteUrl);
             string path = uri.AbsolutePath;
@@ -66,7 +66,7 @@ namespace mock_api_test_sdk_net80
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
-            
+
             var expectedBody = JsonConvert.SerializeObject(new List<Dictionary<string, object>>
             {
                 new Dictionary<string, object>
@@ -75,7 +75,7 @@ namespace mock_api_test_sdk_net80
                     { "assetId", CommonTestConstants.TEST_SHEET_ID }
                 }
             });
-            
+
             Assert.AreEqual(expectedBody, foundRequest.Body);
         }
 
@@ -97,7 +97,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 smartsheet.ReportResources.AddReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToAdd)
             );
-            
+
             Assert.IsTrue(exception.Message.Contains("Internal Server Error"));
         }
 
@@ -119,7 +119,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 smartsheet.ReportResources.AddReportScope(CommonTestConstants.TEST_REPORT_ID, scopesToAdd)
             );
-            
+
             Assert.IsTrue(exception.Message.Contains("Malformed Request"));
         }
     }
