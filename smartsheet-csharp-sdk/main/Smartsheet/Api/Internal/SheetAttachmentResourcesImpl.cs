@@ -64,6 +64,28 @@ namespace Smartsheet.Api.Internal
         {
             return AttachFile("sheets/" + sheetId + "/attachments", file, fileType);
         }
+
+        /// <summary>
+        /// <para>Attaches a file to the Sheet using a Stream.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:<br />
+        /// POST /sheets/{sheetId}/attachments</para>
+        /// </summary>
+        /// <param name="stream">the file stream</param>
+        /// <param name="fileName">the file name</param>
+        /// <param name="contentType">the content type</param>
+        /// <param name="sheetId">the sheet Id</param>
+        /// <returns> the Attachment object </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual Attachment AttachFile(long sheetId, Stream stream, string fileName, string? contentType)
+        {
+            return AttachFile("sheets/" + sheetId + "/attachments", stream, fileName, contentType);
+        }
+
         /// <summary>
         /// Attach a url to a sheet
         /// </summary>
@@ -151,6 +173,60 @@ namespace Smartsheet.Api.Internal
 
             entity.Content = File.ReadAllBytes(file);
             entity.ContentLength = fi.Length;
+            request.Entity = entity;
+
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+
+            Attachment attachment = null;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    attachment = this.Smartsheet.JsonSerializer.deserializeResult<Attachment>(
+                        response.Entity.GetContent()).Result;
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            this.Smartsheet.HttpClient.ReleaseConnection();
+
+            return attachment;
+        }
+
+        /// <summary>
+        /// Attach file from stream.
+        /// </summary>
+        /// <param name="path"> the url path </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content Type </param>
+        /// <returns> the attachment </returns>
+        /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
+        private Attachment AttachFile(string path, Stream stream, string fileName, string? contentType)
+        {
+            Utility.Utility.ThrowIfNull(stream, fileName);
+
+            if (contentType == null)
+            {
+                contentType = "application/octet-stream";
+            }
+
+            HttpRequest request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path), HttpMethod.POST);
+
+            request.Headers["Content-Disposition"] = "attachment; filename=\"" + fileName + "\"";
+
+            HttpEntity entity = new HttpEntity();
+            entity.ContentType = contentType;
+
+            // Read stream into byte array
+            using (MemoryStream ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                entity.Content = ms.ToArray();
+                entity.ContentLength = ms.Length;
+            }
+
             request.Entity = entity;
 
             HttpResponse response = this.Smartsheet.HttpClient.Request(request);

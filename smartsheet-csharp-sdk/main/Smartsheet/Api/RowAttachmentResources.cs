@@ -17,6 +17,7 @@
 //    %[license]
 
 using System.Collections.Generic;
+using System.IO;
 
 namespace Smartsheet.Api
 {
@@ -65,6 +66,27 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Attachment AttachFile(long sheetId, long rowId, string file, string? fileType = null);
+
+        /// <summary>
+        /// <para>Attaches a file to the Row using a Stream.</para>
+        /// <para>This operation will always create a new attachment.
+        /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:
+        /// POST /sheets/{sheetId}/rows/{rowId}/attachments</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="rowId"> the row Id </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type, can be null </param>
+        /// <returns> the newly created Attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Attachment AttachFile(long sheetId, long rowId, Stream stream, string fileName, string? contentType = null);
 
         /// <summary>
         /// <para>Attaches a URL to the Row.</para>

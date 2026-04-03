@@ -18,6 +18,7 @@
 
 using Smartsheet.Api.Models;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Smartsheet.Api
 {
@@ -48,6 +49,28 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Attachment AttachNewVersion(long sheetId, long attachmentId, string file, string? fileType = null);
+
+        /// <summary>
+        /// <para>Uploads a new version of a file to a Sheet or Row using a Stream.
+        /// This operation can be performed using a simple upload or a multipart upload. For more information, see Posting an Attachment.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:<br />
+        ///  POST /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
+        ///  <remarks><para>Uploading new versions is not supported for attachments on Comments or for URL attachments.</para>
+        ///  <para>This is a resource-intensive operation and incurs 10 additional requests against the rate limit.</para></remarks>
+        /// </summary>
+        /// <param name="sheetId"> the sheet id </param>
+        /// <param name="attachmentId"> the attachment id </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type, can be null </param>
+        /// <returns> Attachment object for the newly created attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Attachment AttachNewVersion(long sheetId, long attachmentId, Stream stream, string fileName, string? contentType = null);
 
         /// <summary>
         /// <para>Deletes all versions of the attachment corresponding to the specified Attachment ID.

@@ -70,6 +70,31 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// <para>Uploads a new version of a file to a Sheet or Row using a Stream.
+        /// This operation can be performed using a simple upload or a multipart upload. For more information, see Posting an Attachment.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:<br />
+        ///  POST /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
+        ///  <remarks><para>Uploading new versions is not supported for attachments on Comments or for URL attachments.</para>
+        ///  <para>This is a resource-intensive operation and incurs 10 additional requests against the rate limit.</para></remarks>
+        /// </summary>
+        /// <param name="sheetId"> the sheet id </param>
+        /// <param name="attachmentId"> the attachment id </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type </param>
+        /// <returns> Attachment object for the newly created attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual Attachment AttachNewVersion(long sheetId, long attachmentId, Stream stream, string fileName, string? contentType)
+        {
+            return AttachFile("sheets/" + sheetId + "/attachments/" + attachmentId + "/versions", stream, fileName, contentType);
+        }
+
+        /// <summary>
         /// <para>Deletes all versions of the attachment corresponding to the specified Attachment ID.
         /// For attachments with multiple versions, this will effectively delete the attachment from the object that it’s attached to.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: DELETE /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
@@ -139,6 +164,59 @@ namespace Smartsheet.Api.Internal
 
             entity.Content = File.ReadAllBytes(file);
             entity.ContentLength = fi.Length;
+            request.Entity = entity;
+
+            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+
+            Attachment attachment = null;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    attachment = this.Smartsheet.JsonSerializer.deserializeResult<Attachment>(
+                        response.Entity.GetContent()).Result;
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            this.Smartsheet.HttpClient.ReleaseConnection();
+
+            return attachment;
+        }
+
+        /// <summary>
+        /// Attach file from stream.
+        /// </summary>
+        /// <param name="path"> the url path </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content Type </param>
+        /// <returns> the attachment </returns>
+        /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
+        private Attachment AttachFile(string path, Stream stream, string fileName, string? contentType)
+        {
+            Utility.Utility.ThrowIfNull(stream, fileName);
+            if (contentType == null)
+            {
+                contentType = "application/octet-stream";
+            }
+
+            HttpRequest request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path), HttpMethod.POST);
+
+            request.Headers["Content-Disposition"] = "attachment; filename=\"" + fileName + "\"";
+
+            HttpEntity entity = new HttpEntity();
+            entity.ContentType = contentType;
+
+            // Read stream into byte array
+            using (MemoryStream ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                entity.Content = ms.ToArray();
+                entity.ContentLength = ms.Length;
+            }
+
             request.Entity = entity;
 
             HttpResponse response = this.Smartsheet.HttpClient.Request(request);
