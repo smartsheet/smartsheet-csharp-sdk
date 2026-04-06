@@ -212,6 +212,11 @@ namespace Smartsheet.Api.Internal
             // Read stream into byte array
             using (MemoryStream ms = new MemoryStream())
             {
+                // Reset stream position if seekable to ensure complete content is read
+                if (stream.CanSeek)
+                {
+                    stream.Position = 0;
+                }
                 stream.CopyTo(ms);
                 entity.Content = ms.ToArray();
                 entity.ContentLength = ms.Length;
