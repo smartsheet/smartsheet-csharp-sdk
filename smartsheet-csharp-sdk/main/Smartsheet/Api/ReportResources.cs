@@ -206,8 +206,8 @@ namespace Smartsheet.Api
         /// <para>It mirrors to the following Smartsheet REST API method: PUT /reports/{reportId}/definition</para>
         /// </summary>
         /// <param name="reportId"> the reportId </param>
-        /// <param name="definition"> the ReportDefinition object </param>
-        void UpdateReportDefinition(long reportId, ReportDefinition definition);
+        /// <param name="reportDefinition"> the ReportDefinition object </param>
+        void UpdateReportDefinition(long reportId, ReportDefinition reportDefinition);
 
         /// <summary>
         /// <para>

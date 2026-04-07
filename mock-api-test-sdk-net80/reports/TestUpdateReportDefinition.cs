@@ -44,7 +44,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.SHEET_NAME,
+                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         }
                     }
@@ -60,7 +60,7 @@ namespace mock_api_test_sdk_net80
                             {
                                 Primary = true,
                                 Type = ColumnType.TEXT_NUMBER,
-                                SystemColumnType = ReportSystemColumnType.SHEET_NAME,
+                                SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
                                 Title = "Primary Column",
                             },
                             Operator = ReportFilterCriteriaOperator.EQUAL,
@@ -76,7 +76,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.SHEET_NAME,
+                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         },
                         SortingDirection = SortDirection.ASCENDING,
@@ -91,7 +91,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.SHEET_NAME,
+                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         },
                         SortingDirection = SortDirection.ASCENDING
@@ -117,7 +117,7 @@ namespace mock_api_test_sdk_net80
                                             {
                                                 { "title", "Primary Column" },
                                                 { "type", "TEXT_NUMBER" },
-                                                { "systemColumnType", "SHEET_NAME" },
+                                                { "systemColumnType", "AUTO_NUMBER" },
                                                 { "primary", true },
                                             }
                                         },
@@ -136,7 +136,7 @@ namespace mock_api_test_sdk_net80
                                 {
                                     { "title", "Primary Column" },
                                     { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "SHEET_NAME" },
+                                    { "systemColumnType", "AUTO_NUMBER" },
                                     { "primary", true },
                                 }
                             },
@@ -153,12 +153,11 @@ namespace mock_api_test_sdk_net80
                                 {
                                     { "title", "Primary Column" },
                                     { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "SHEET_NAME" },
+                                    { "systemColumnType", "AUTO_NUMBER" },
                                     { "primary", true },
                                 }
                             },
-                            { "aggregationType", "COUNT" },
-                            { "isExpanded", true }
+                            { "aggregationType", "COUNT" }
                         }
                     }
                 },
@@ -170,7 +169,7 @@ namespace mock_api_test_sdk_net80
                                 {
                                     { "title", "Primary Column" },
                                     { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "SHEET_NAME" },
+                                    { "systemColumnType", "AUTO_NUMBER" },
                                     { "primary", true },
                                 }
                             },
@@ -179,6 +178,22 @@ namespace mock_api_test_sdk_net80
                     }
                 },
             });
+
+            Assert.AreEqual(expectedBody, foundRequest.Body);
+        }
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionEmptyBody()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
+
+            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition());
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            var expectedBody = JsonConvert.SerializeObject(new Dictionary<string, object>());
 
             Assert.AreEqual(expectedBody, foundRequest.Body);
         }

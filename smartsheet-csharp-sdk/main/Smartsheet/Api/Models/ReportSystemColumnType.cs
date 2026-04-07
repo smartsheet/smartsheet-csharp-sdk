@@ -20,7 +20,6 @@ namespace Smartsheet.Api.Models
 {
     /// <summary>
     /// Represents system column types for reports.
-    /// Includes standard system column types plus SHEET_NAME which is valid only for reports.
     /// </summary>
     public enum ReportSystemColumnType
     {
@@ -48,10 +47,5 @@ namespace Smartsheet.Api.Models
         /// When a row is modified this column updates the date.
         /// </summary>
         MODIFIED_DATE,
-
-        /// <summary>
-        /// Sheet name column - a custom system column valid only for reports.
-        /// </summary>
-        SHEET_NAME
     }
 }

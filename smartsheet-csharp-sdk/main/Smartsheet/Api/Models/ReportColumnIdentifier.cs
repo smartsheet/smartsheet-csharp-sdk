@@ -44,7 +44,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Type of column to match. See Column Types.
         /// </summary>
-        private ColumnType? type;
+        private ColumnType type;
 
         /// <summary>
         /// System column type to match. See System Columns.
@@ -77,7 +77,7 @@ namespace Smartsheet.Api.Models
         /// Gets or sets the type of column to match.
         /// </summary>
         /// <returns> the type </returns>
-        public ColumnType? Type
+        public ColumnType Type
         {
             get { return type; }
             set { type = value; }

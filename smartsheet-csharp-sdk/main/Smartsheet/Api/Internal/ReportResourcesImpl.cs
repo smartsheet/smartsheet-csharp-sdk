@@ -336,8 +336,8 @@ namespace Smartsheet.Api.Internal
         /// <para>It mirrors to the following Smartsheet REST API method: PUT /reports/{reportId}/definition</para>
         /// </summary>
         /// <param name="reportId"> the reportId </param>
-        /// <param name="definition"> the ReportDefinition object </param>
-        public void UpdateReportDefinition(long reportId, ReportDefinition definition)
+        /// <param name="reportDefinition"> the ReportDefinition object </param>
+        public void UpdateReportDefinition(long reportId, ReportDefinition reportDefinition)
         {
             string path = "reports/" + reportId + "/definition";
 
@@ -351,7 +351,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            request.Entity = serializeToEntity(definition);
+            request.Entity = serializeToEntity(reportDefinition);
 
             HttpResponse response = smartsheet.HttpClient.Request(request);
 
