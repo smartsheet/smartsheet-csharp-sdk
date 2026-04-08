@@ -64,7 +64,7 @@ namespace mock_api_test_sdk_net80
                                 Title = "Primary Column",
                             },
                             Operator = ReportFilterCriteriaOperator.EQUAL,
-                            Values = new List<string> { "Test" },
+                            Values = new List<FilterValue> { new StringFilterValue("Test") },
                         }
                     }
                 },
@@ -222,6 +222,55 @@ namespace mock_api_test_sdk_net80
             );
 
             Assert.IsTrue(exception.Message.Contains("Malformed Request"));
+        }
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionWithAllFilterValueTypes()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
+
+            ReportDefinition definition = new ReportDefinition
+            {
+                Filters = new ReportFilterExpression
+                {
+                    Operator = ReportFilterOperator.AND,
+                    Criteria = new List<ReportFilterCriterion>
+                    {
+                        new ReportFilterCriterion
+                        {
+                            Column = new ReportColumnIdentifier
+                            {
+                                Primary = true,
+                                Type = ColumnType.TEXT_NUMBER,
+                                Title = "Primary Column",
+                            },
+                            Operator = ReportFilterCriteriaOperator.EQUAL,
+                            Values = new List<FilterValue>
+                            {
+                                new StringFilterValue("Test String"),
+                                new NumberFilterValue(42.5),
+                                new NullFilterValue(),
+                                new DateFilterValue("2024-01-15"),
+                                new CurrentUserFilterValue()
+                            },
+                        }
+                    }
+                }
+            };
+
+            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, definition);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            // Verify the request body contains all value types
+            Assert.IsTrue(foundRequest.Body.Contains("\"Test String\""));
+            Assert.IsTrue(foundRequest.Body.Contains("42.5"));
+            Assert.IsTrue(foundRequest.Body.Contains("null"));
+            Assert.IsTrue(foundRequest.Body.Contains("\"objectType\":\"DATE\""));
+            Assert.IsTrue(foundRequest.Body.Contains("\"value\":\"2024-01-15\""));
+            Assert.IsTrue(foundRequest.Body.Contains("\"objectType\":\"CURRENT_USER\""));
         }
     }
 }

@@ -36,9 +36,9 @@ namespace Smartsheet.Api.Models
         private ReportFilterCriteriaOperator operatorValue;
 
         /// <summary>
-        /// List of filter values.
+        /// List of filter values. Each value can be a string, number, null, or an object with objectType.
         /// </summary>
-        private IList<string> values;
+        private IList<FilterValue> values;
 
         /// <summary>
         /// Gets the column identifier.
@@ -61,10 +61,10 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Gets the list of filter values.
+        /// Gets the list of filter values. Each value can be a string, number, null, or an object with objectType.
         /// </summary>
         /// <returns> the values </returns>
-        public IList<string> Values
+        public IList<FilterValue> Values
         {
             get { return values; }
             set { values = value; }
