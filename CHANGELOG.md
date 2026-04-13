@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [X.X.X] - Unreleased
 ### Added
 - Add 'Add Report Scope' and 'Remove Report Scope' endpoint support to ReportResources
+- Add 'Add Report Columns' endpoint support to ReportResources (POST /2.0/reports/{reportId}/columns)
 
 ## [6.6.6] - 2026-03-25
 ### Fixed
