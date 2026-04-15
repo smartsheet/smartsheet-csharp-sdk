@@ -129,8 +129,54 @@ namespace mock_api_test_sdk_net80
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_DOWNGRADE_SEAT_TYPE));
-            
+
             Assert.IsTrue(exception.Message.Contains("Malformed Request"));
+        }
+
+        [TestMethod]
+        public async Task TestDowngradeUserToContributorGeneratedUrlIsCorrect()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/to-contributor", requestId.ToString());
+
+            smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            string path = uri.AbsolutePath;
+
+            Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans/{CommonTestConstants.TEST_PLAN_ID}/downgrade", path);
+            Assert.AreEqual("POST", foundRequest.Method);
+        }
+
+        [TestMethod]
+        public async Task TestDowngradeUserToContributorRequestBody()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/to-contributor", requestId.ToString());
+
+            smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "CONTRIBUTOR" } };
+            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
+            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
+        }
+
+        [TestMethod]
+        public async Task TestDowngradeUserToContributorResponse()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/to-contributor", requestId.ToString());
+
+            // Should not throw an exception
+            smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            Assert.IsNotNull(foundRequest);
+            Assert.AreEqual("POST", foundRequest.Method);
         }
     }
 }

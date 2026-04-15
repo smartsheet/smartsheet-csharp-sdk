@@ -119,5 +119,88 @@ namespace mock_api_test_sdk_net80
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
+
+        [TestMethod]
+        public async Task TestListUsersContributorSeatTypeFilter()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-users/contributor-seat-type-filter", requestId.ToString());
+
+            PaginationParameters pagination = new PaginationParameters(TEST_INCLUDE_ALL, TEST_PAGE_SIZE, TEST_PAGE);
+
+            PaginatedResult<User> response = smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, SeatType.CONTRIBUTOR, pagination);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(1, response.Data.Count);
+            Assert.AreEqual(SeatType.CONTRIBUTOR, response.Data[0].SeatType);
+            Assert.AreEqual("user3@example.com", response.Data[0].Email);
+            DateTime expectedSeatTypeLastChangedAt = DateTime.Parse("2025-10-15T08:22:13.456789Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
+            Assert.AreEqual(expectedSeatTypeLastChangedAt, response.Data[0].SeatTypeLastChangedAt);
+            Assert.IsFalse(response.Data[0].Admin);
+            Assert.IsFalse(response.Data[0].GroupAdmin);
+            Assert.IsFalse(response.Data[0].LicensedSheetCreator);
+            Assert.IsFalse(response.Data[0].ResourceViewer);
+            Assert.AreEqual(UserStatus.ACTIVE, response.Data[0].Status);
+            Assert.AreEqual(5, response.Data[0].SheetCount);
+            Assert.IsTrue(response.Data[0].IsInternal);
+        }
+
+        [TestMethod]
+        public async Task TestListUsersContributorSeatTypeResponse()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-users/contributor-seat-type-response", requestId.ToString());
+
+            PaginatedResult<User> response = smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(2, response.Data.Count);
+
+            // First user should be MEMBER
+            Assert.AreEqual(SeatType.MEMBER, response.Data[0].SeatType);
+            Assert.AreEqual("user1@example.com", response.Data[0].Email);
+            Assert.AreEqual("User", response.Data[0].FirstName);
+            Assert.AreEqual("One", response.Data[0].LastName);
+            Assert.IsTrue(response.Data[0].Admin);
+            Assert.IsTrue(response.Data[0].LicensedSheetCreator);
+
+            // Second user should be CONTRIBUTOR
+            Assert.AreEqual(SeatType.CONTRIBUTOR, response.Data[1].SeatType);
+            Assert.AreEqual("user3@example.com", response.Data[1].Email);
+            Assert.AreEqual("User", response.Data[1].FirstName);
+            Assert.AreEqual("Three", response.Data[1].LastName);
+            DateTime expectedSeatTypeLastChangedAt = DateTime.Parse("2025-10-15T08:22:13.456789Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
+            Assert.AreEqual(expectedSeatTypeLastChangedAt, response.Data[1].SeatTypeLastChangedAt);
+            Assert.IsFalse(response.Data[1].Admin);
+            Assert.IsFalse(response.Data[1].GroupAdmin);
+            Assert.IsFalse(response.Data[1].LicensedSheetCreator);
+            Assert.IsFalse(response.Data[1].ResourceViewer);
+            Assert.AreEqual(UserStatus.ACTIVE, response.Data[1].Status);
+            Assert.AreEqual(5, response.Data[1].SheetCount);
+            Assert.IsTrue(response.Data[1].IsInternal);
+        }
+
+        [TestMethod]
+        public async Task TestListUsersContributorSeatTypeGeneratedUrlIsCorrect()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-users/contributor-seat-type-filter", requestId.ToString());
+
+            PaginationParameters pagination = new PaginationParameters(TEST_INCLUDE_ALL, TEST_PAGE_SIZE, TEST_PAGE);
+
+            smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, SeatType.CONTRIBUTOR, pagination);
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            string path = uri.AbsolutePath;
+
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
+
+            Assert.AreEqual($"/2.0/users", path);
+            Assert.AreEqual(SeatType.CONTRIBUTOR.ToString(), queryParams["seatType"]);
+            Assert.AreEqual(TEST_PAGE.ToString(), queryParams["page"]);
+            Assert.AreEqual(TEST_PAGE_SIZE.ToString(), queryParams["pageSize"]);
+            Assert.IsFalse(bool.Parse(queryParams["includeAll"]));
+        }
     }
 }
