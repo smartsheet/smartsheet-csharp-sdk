@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Refactor
 - Resolved double assignment of parameter in AbstractResources.cs
+- Refactored ObjectValueTypeConverter and FilterValueTypeConverter to extend a common PrimitiveValueConverter base class, reducing code duplication for primitive type handling (string, number, boolean, null)
 
 ## [6.6.6] - 2026-03-25
 ### Fixed

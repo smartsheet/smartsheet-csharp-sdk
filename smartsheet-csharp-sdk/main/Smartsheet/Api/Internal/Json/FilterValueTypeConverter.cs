@@ -26,8 +26,15 @@ namespace Smartsheet.Api.Internal.Json
     /// <summary>
     /// Helper class to convert filter value types for JSON serialization/deserialization
     /// </summary>
-    class FilterValueTypeConverter : JsonConverter
+    class FilterValueTypeConverter : PrimitiveValueConverter
     {
+        /// <summary>
+        /// Constructor with default decimal handling (disabled)
+        /// </summary>
+        public FilterValueTypeConverter() : base(false)
+        {
+        }
+
         /// <summary>
         /// Determines if this converter can handle the given type
         /// </summary>
@@ -41,8 +48,6 @@ namespace Smartsheet.Api.Internal.Json
         /// </summary>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            FilterValue filterValue;
-
             if (reader.TokenType == JsonToken.StartObject)
             {
                 JObject obj = JObject.Load(reader);
@@ -57,36 +62,19 @@ namespace Smartsheet.Api.Internal.Json
                 {
                     case "DATE":
                         string dateValue = obj["value"]?.Value<string>();
-                        filterValue = new DateFilterValue(dateValue);
-                        break;
+                        return new DateFilterValue(dateValue);
 
                     case "CURRENT_USER":
-                        filterValue = new CurrentUserFilterValue();
-                        break;
+                        return new CurrentUserFilterValue();
 
                     default:
                         // Unknown objectType, return null
                         return null;
                 }
             }
-            else if (reader.TokenType == JsonToken.Null)
-            {
-                filterValue = new NullFilterValue();
-            }
-            else if (reader.TokenType == JsonToken.Integer || reader.TokenType == JsonToken.Float)
-            {
-                filterValue = new NumberFilterValue(Convert.ToDouble(reader.Value));
-            }
-            else if (reader.TokenType == JsonToken.String)
-            {
-                filterValue = new StringFilterValue((string)reader.Value);
-            }
-            else
-            {
-                return null;
-            }
 
-            return filterValue;
+            // Handle primitives using base class
+            return ReadPrimitiveValue(reader);
         }
 
         /// <summary>
@@ -141,5 +129,32 @@ namespace Smartsheet.Api.Internal.Json
                     break;
             }
         }
+
+        protected override object CreateBooleanValue(bool value)
+        {
+            // FilterValue doesn't support boolean primitives, return null
+            return null;
+        }
+
+        protected override object CreateNumberValue(double value)
+        {
+            return new NumberFilterValue(value);
+        }
+
+        protected override object CreateDecimalValue(decimal value)
+        {
+            return new NumberFilterValue((double)value);
+        }
+
+        protected override object CreateStringValue(string value)
+        {
+            return new StringFilterValue(value);
+        }
+
+        protected override object CreateNullValue()
+        {
+            return new NullFilterValue();
+        }
     }
 }
+
