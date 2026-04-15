@@ -73,8 +73,6 @@ namespace Smartsheet.Api
         /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
         /// <para>It mirrors to the following Smartsheet REST API method:
         /// POST /sheets/{sheetId}/rows/{rowId}/attachments</para>
-        /// <remarks>If the stream is seekable (CanSeek = true), its position will be automatically reset to 0 
-        /// before reading to ensure the complete content is uploaded.</remarks>
         /// </summary>
         /// <param name="sheetId"> the sheetId </param>
         /// <param name="rowId"> the row Id </param>

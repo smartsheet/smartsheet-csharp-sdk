@@ -56,9 +56,7 @@ namespace Smartsheet.Api
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
         ///  POST /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
         ///  <remarks><para>Uploading new versions is not supported for attachments on Comments or for URL attachments.</para>
-        ///  <para>This is a resource-intensive operation and incurs 10 additional requests against the rate limit.</para>
-        ///  <para>If the stream is seekable (CanSeek = true), its position will be automatically reset to 0 
-        /// before reading to ensure the complete content is uploaded.</para></remarks>
+        ///  <para>This is a resource-intensive operation and incurs 10 additional requests against the rate limit.</para></remarks>
         /// </summary>
         /// <param name="sheetId"> the sheet id </param>
         /// <param name="attachmentId"> the attachment id </param>

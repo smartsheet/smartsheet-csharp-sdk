@@ -1015,9 +1015,8 @@ namespace Smartsheet.Api.Internal
         /// <summary>
         /// Attach a file from a stream to a resource.
         /// 
-        /// This method reads the stream content into a byte array and uploads it.
-        /// For seekable streams, the position is automatically reset to 0 before reading
-        /// to ensure the complete content is uploaded.
+        /// This method reads the stream content from its current position into a byte array and uploads it.
+        /// The caller is responsible for ensuring the stream is positioned correctly before calling this method.
         /// 
         /// Exceptions:
         ///   IllegalArgumentException : if stream or fileName is null
@@ -1054,11 +1053,6 @@ namespace Smartsheet.Api.Internal
             // Read stream into byte array
             using (MemoryStream ms = new MemoryStream())
             {
-                // Reset stream position if seekable to ensure complete content is read
-                if (stream.CanSeek)
-                {
-                    stream.Position = 0;
-                }
                 stream.CopyTo(ms);
                 entity.Content = ms.ToArray();
                 entity.ContentLength = ms.Length;
