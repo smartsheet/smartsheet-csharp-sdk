@@ -73,12 +73,14 @@ namespace Smartsheet.Api
         /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
         /// <para>It mirrors to the following Smartsheet REST API method:
         /// POST /sheets/{sheetId}/rows/{rowId}/attachments</para>
+        /// <remarks>If the stream is seekable (CanSeek = true), its position will be automatically reset to 0 
+        /// before reading to ensure the complete content is uploaded.</remarks>
         /// </summary>
         /// <param name="sheetId"> the sheetId </param>
         /// <param name="rowId"> the row Id </param>
         /// <param name="stream"> the file stream </param>
         /// <param name="fileName"> the file name </param>
-        /// <param name="contentType"> the content type, can be null </param>
+        /// <param name="contentType"> the content type, can be null (defaults to "application/octet-stream") </param>
         /// <returns> the newly created Attachment </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>

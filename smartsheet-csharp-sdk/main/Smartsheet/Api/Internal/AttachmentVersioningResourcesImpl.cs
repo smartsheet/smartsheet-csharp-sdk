@@ -196,51 +196,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
         private Attachment AttachFile(string path, Stream stream, string fileName, string? contentType)
         {
-            Utility.Utility.ThrowIfNull(stream, fileName);
-            if (contentType == null)
-            {
-                contentType = "application/octet-stream";
-            }
-
-            HttpRequest request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path), HttpMethod.POST);
-
-            request.Headers["Content-Disposition"] = "attachment; filename=\"" + fileName + "\"";
-
-            HttpEntity entity = new HttpEntity();
-            entity.ContentType = contentType;
-
-            // Read stream into byte array
-            using (MemoryStream ms = new MemoryStream())
-            {
-                // Reset stream position if seekable to ensure complete content is read
-                if (stream.CanSeek)
-                {
-                    stream.Position = 0;
-                }
-                stream.CopyTo(ms);
-                entity.Content = ms.ToArray();
-                entity.ContentLength = ms.Length;
-            }
-
-            request.Entity = entity;
-
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
-
-            Attachment attachment = null;
-            switch (response.StatusCode)
-            {
-                case HttpStatusCode.OK:
-                    attachment = this.Smartsheet.JsonSerializer.deserializeResult<Attachment>(
-                        response.Entity.GetContent()).Result;
-                    break;
-                default:
-                    HandleError(response);
-                    break;
-            }
-
-            this.Smartsheet.HttpClient.ReleaseConnection();
-
-            return attachment;
+            return AttachFileFromStream(path, stream, fileName, contentType);
         }
     }
 }
