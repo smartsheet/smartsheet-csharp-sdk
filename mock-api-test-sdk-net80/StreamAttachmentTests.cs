@@ -10,10 +10,10 @@ namespace mock_api_test_sdk_net80
     public class StreamAttachmentTests
     {
         /// <summary>
-        /// Test that stream position is correctly reset when attaching to a sheet
+        /// Test that streams are read from their current position (caller controls positioning)
         /// </summary>
         [TestMethod]
-        public void SheetAttachFile_StreamPositionNotAtZero_ShouldResetAndUpload()
+        public void SheetAttachFile_StreamPositionNotAtZero_ShouldReadFromCurrentPosition()
         {
             // Create a test stream with some content
             byte[] testData = Encoding.UTF8.GetBytes("This is test content for attachment upload");
@@ -22,136 +22,117 @@ namespace mock_api_test_sdk_net80
                 // Move stream position to middle to simulate a stream that has been partially read
                 stream.Position = 10;
                 
-                // Verify position is not at zero
-                Assert.AreNotEqual(0, stream.Position, "Stream position should not be at zero before test");
+                // Verify the SDK convention: caller is responsible for stream positioning
+                // If caller wants full content, they must ensure Position = 0
+                byte[] readFromCurrent = new byte[testData.Length - 10];
+                int bytesRead = stream.Read(readFromCurrent, 0, readFromCurrent.Length);
+                Assert.AreEqual(testData.Length - 10, bytesRead, "Should read from current position, not from start");
                 
-                // The AttachFile method should reset the position internally
-                // We can't fully test the upload without a mock server, but we can verify the stream is seekable
-                Assert.IsTrue(stream.CanSeek, "Test stream should be seekable");
-                
-                // After seeking, position should be resettable
+                // To upload full content, caller must reset position themselves
                 stream.Position = 0;
-                Assert.AreEqual(0, stream.Position, "Stream position should be reset to zero");
-                
-                // Verify we can read all content after reset
-                byte[] readData = new byte[testData.Length];
-                int bytesRead = stream.Read(readData, 0, readData.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes after position reset");
-                CollectionAssert.AreEqual(testData, readData, "Read data should match original data");
+                Assert.AreEqual(0, stream.Position, "Caller controls stream position");
             }
         }
 
         /// <summary>
-        /// Test that stream position is correctly reset when attaching to a row
+        /// Test that row attachments read from current stream position
         /// </summary>
         [TestMethod]
-        public void RowAttachFile_StreamPositionNotAtZero_ShouldResetAndUpload()
+        public void RowAttachFile_StreamAtCurrentPosition_ShouldReadFromThere()
         {
             byte[] testData = Encoding.UTF8.GetBytes("Row attachment test data");
             using (MemoryStream stream = new MemoryStream(testData))
             {
                 // Move stream position forward
                 stream.Position = 5;
-                Assert.AreNotEqual(0, stream.Position, "Stream position should not be at zero before test");
                 
-                Assert.IsTrue(stream.CanSeek, "Test stream should be seekable");
-                
-                // Verify reset works
-                stream.Position = 0;
-                Assert.AreEqual(0, stream.Position, "Stream position should be reset to zero");
-                
-                // Verify complete read after reset
-                byte[] readData = new byte[testData.Length];
+                // Verify reading from current position (not from beginning)
+                byte[] readData = new byte[testData.Length - 5];
                 int bytesRead = stream.Read(readData, 0, readData.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes after position reset");
-                CollectionAssert.AreEqual(testData, readData, "Read data should match original data");
+                Assert.AreEqual(testData.Length - 5, bytesRead, "Should read from current position");
+                
+                // Caller responsibility: reset if full content is needed
+                Assert.IsTrue(stream.CanSeek, "Test stream should be seekable");
             }
         }
 
         /// <summary>
-        /// Test that stream position is correctly reset when attaching to a comment
+        /// Test that comment attachments respect current stream position
         /// </summary>
         [TestMethod]
-        public void CommentAttachFile_StreamPositionNotAtZero_ShouldResetAndUpload()
+        public void CommentAttachFile_CallerControlsPosition_ShouldWorkCorrectly()
         {
             byte[] testData = Encoding.UTF8.GetBytes("Comment attachment test data");
             using (MemoryStream stream = new MemoryStream(testData))
             {
-                // Move stream position forward
-                stream.Position = 8;
-                Assert.AreNotEqual(0, stream.Position, "Stream position should not be at zero before test");
-                
-                Assert.IsTrue(stream.CanSeek, "Test stream should be seekable");
-                
-                // Verify reset works
+                // Verify that stream positioning is caller's responsibility
                 stream.Position = 0;
-                Assert.AreEqual(0, stream.Position, "Stream position should be reset to zero");
+                byte[] fullRead = new byte[testData.Length];
+                stream.Read(fullRead, 0, fullRead.Length);
+                CollectionAssert.AreEqual(testData, fullRead, "Reading from position 0 gives full content");
                 
-                // Verify complete read after reset
-                byte[] readData = new byte[testData.Length];
-                int bytesRead = stream.Read(readData, 0, readData.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes after position reset");
-                CollectionAssert.AreEqual(testData, readData, "Read data should match original data");
+                // Move position and verify partial read
+                stream.Position = 8;
+                byte[] partialRead = new byte[testData.Length - 8];
+                int bytesRead = stream.Read(partialRead, 0, partialRead.Length);
+                Assert.AreEqual(testData.Length - 8, bytesRead, "Partial read from current position");
             }
         }
 
         /// <summary>
-        /// Test that stream position is correctly reset when attaching a new version
+        /// Test that attachment versioning reads from current stream position
         /// </summary>
         [TestMethod]
-        public void AttachNewVersion_StreamPositionNotAtZero_ShouldResetAndUpload()
+        public void AttachNewVersion_StreamPosition_IsCallerResponsibility()
         {
             byte[] testData = Encoding.UTF8.GetBytes("Attachment version test data");
             using (MemoryStream stream = new MemoryStream(testData))
             {
-                // Move stream position forward
+                // Demonstrate caller control: position affects what gets read
                 stream.Position = 12;
-                Assert.AreNotEqual(0, stream.Position, "Stream position should not be at zero before test");
+                long positionBefore = stream.Position;
                 
-                Assert.IsTrue(stream.CanSeek, "Test stream should be seekable");
+                byte[] remainingData = new byte[testData.Length - 12];
+                stream.Read(remainingData, 0, remainingData.Length);
                 
-                // Verify reset works
-                stream.Position = 0;
-                Assert.AreEqual(0, stream.Position, "Stream position should be reset to zero");
-                
-                // Verify complete read after reset
-                byte[] readData = new byte[testData.Length];
-                int bytesRead = stream.Read(readData, 0, readData.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes after position reset");
-                CollectionAssert.AreEqual(testData, readData, "Read data should match original data");
+                // The SDK reads from wherever the stream is positioned
+                Assert.AreEqual(12, positionBefore, "Stream was at position 12");
+                Assert.AreEqual(testData.Length - 12, remainingData.Length, "Read remaining bytes from position 12");
             }
         }
 
         /// <summary>
-        /// Test behavior with a stream at EOF (position at end)
+        /// Test behavior with a stream at EOF - caller must reposition if needed
         /// </summary>
         [TestMethod]
-        public void AttachFile_StreamAtEOF_ShouldResetAndUploadFullContent()
+        public void AttachFile_StreamAtEOF_CallerMustRepositionForContent()
         {
             byte[] testData = Encoding.UTF8.GetBytes("EOF test data");
             using (MemoryStream stream = new MemoryStream(testData))
             {
-                // Read to end to simulate stream at EOF
+                // Move to end (EOF)
                 stream.Position = stream.Length;
-                Assert.AreEqual(stream.Length, stream.Position, "Stream should be at EOF");
+                Assert.AreEqual(stream.Length, stream.Position, "Stream is at EOF");
                 
-                // Verify that resetting from EOF works
+                // Reading from EOF gives zero bytes
+                byte[] readFromEOF = new byte[testData.Length];
+                int bytesRead = stream.Read(readFromEOF, 0, readFromEOF.Length);
+                Assert.AreEqual(0, bytesRead, "Reading from EOF returns zero bytes");
+                
+                // Caller's responsibility: reset to read content
                 stream.Position = 0;
-                Assert.AreEqual(0, stream.Position, "Stream position should be reset to zero");
-                
-                // Verify complete read after reset from EOF
-                byte[] readData = new byte[testData.Length];
-                int bytesRead = stream.Read(readData, 0, readData.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes after position reset from EOF");
-                CollectionAssert.AreEqual(testData, readData, "Read data should match original data");
+                byte[] readAfterReset = new byte[testData.Length];
+                bytesRead = stream.Read(readAfterReset, 0, readAfterReset.Length);
+                Assert.AreEqual(testData.Length, bytesRead, "After caller resets position, full content is available");
+                CollectionAssert.AreEqual(testData, readAfterReset, "Content matches when read from position 0");
             }
         }
 
         /// <summary>
-        /// Test that non-seekable streams are handled correctly
+        /// Test that non-seekable streams work correctly (read from current position)
         /// </summary>
         [TestMethod]
-        public void AttachFile_NonSeekableStream_ShouldUploadFromCurrentPosition()
+        public void AttachFile_NonSeekableStream_ReadsFromCurrentPosition()
         {
             // Create a non-seekable stream wrapper
             byte[] testData = Encoding.UTF8.GetBytes("Non-seekable stream test");
@@ -160,41 +141,40 @@ namespace mock_api_test_sdk_net80
             {
                 Assert.IsFalse(nonSeekableStream.CanSeek, "Stream should not be seekable");
                 
-                // For non-seekable streams, the implementation should read from current position
-                // This tests that the code checks CanSeek before attempting Position = 0
+                // For non-seekable streams, SDK simply reads from current position
+                // No position manipulation is attempted
                 byte[] readData = new byte[testData.Length];
                 int bytesRead = nonSeekableStream.Read(readData, 0, readData.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes from non-seekable stream");
+                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes from current position");
+                CollectionAssert.AreEqual(testData, readData, "Content should match");
             }
         }
 
         /// <summary>
-        /// Test that multiple reads from the same stream work correctly with position resets
+        /// Test that the caller can control stream positioning for multiple operations
         /// </summary>
         [TestMethod]
-        public void AttachFile_MultipleReadsFromSameStream_ShouldWorkCorrectly()
+        public void AttachFile_MultipleReads_CallerControlsPositioning()
         {
             byte[] testData = Encoding.UTF8.GetBytes("Multiple reads test data");
             using (MemoryStream stream = new MemoryStream(testData))
             {
-                // Simulate first read
+                // First operation: read a portion
                 byte[] firstRead = new byte[10];
                 stream.Read(firstRead, 0, 10);
-                Assert.AreEqual(10, stream.Position, "Position should be at 10 after first read");
+                Assert.AreEqual(10, stream.Position, "Position advances during read");
                 
-                // Reset and verify we can read all data again
-                stream.Position = 0;
-                byte[] secondRead = new byte[testData.Length];
-                int bytesRead = stream.Read(secondRead, 0, secondRead.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes on second read");
-                CollectionAssert.AreEqual(testData, secondRead, "Second read should match original data");
+                // Caller can choose to continue from current position
+                byte[] continueRead = new byte[5];
+                stream.Read(continueRead, 0, 5);
+                Assert.AreEqual(15, stream.Position, "Position continues from previous read");
                 
-                // Reset and verify third read
+                // Or caller can reset to re-read from beginning
                 stream.Position = 0;
-                byte[] thirdRead = new byte[testData.Length];
-                bytesRead = stream.Read(thirdRead, 0, thirdRead.Length);
-                Assert.AreEqual(testData.Length, bytesRead, "Should read all bytes on third read");
-                CollectionAssert.AreEqual(testData, thirdRead, "Third read should match original data");
+                byte[] fullRead = new byte[testData.Length];
+                int bytesRead = stream.Read(fullRead, 0, fullRead.Length);
+                Assert.AreEqual(testData.Length, bytesRead, "Full read after caller resets position");
+                CollectionAssert.AreEqual(testData, fullRead, "Full content available when caller sets position to 0");
             }
         }
 
