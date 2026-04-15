@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 ### Added
-- Add support for PATCH /reports/{id}/definition endpoint, Update Report Definition
+- Add support for PUT /reports/{id}/definition endpoint, Update Report Definition
 - Add 'Add Report Scope' and 'Remove Report Scope' endpoint support to ReportResources
 - Add support for DELETE /reports/{id} endpoint, Delete Report
 

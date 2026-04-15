@@ -38,7 +38,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// List of filter values. Each value can be a string, number, null, or an object with objectType.
         /// </summary>
-        private IList<FilterValue> values;
+        private IList<ReportFilterValue> values;
 
         /// <summary>
         /// Gets the column identifier.
@@ -64,7 +64,7 @@ namespace Smartsheet.Api.Models
         /// Gets the list of filter values. Each value can be a string, number, null, or an object with objectType.
         /// </summary>
         /// <returns> the values </returns>
-        public IList<FilterValue> Values
+        public IList<ReportFilterValue> Values
         {
             get { return values; }
             set { values = value; }

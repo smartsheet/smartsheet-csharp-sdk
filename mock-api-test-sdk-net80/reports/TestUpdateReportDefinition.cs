@@ -64,7 +64,7 @@ namespace mock_api_test_sdk_net80
                                 Title = "Primary Column",
                             },
                             Operator = ReportFilterCriteriaOperator.EQUAL,
-                            Values = new List<FilterValue> { new StringFilterValue("Test") },
+                            Values = new List<ReportFilterValue> { new StringReportFilterValue("Test") },
                         }
                     }
                 },
@@ -246,13 +246,13 @@ namespace mock_api_test_sdk_net80
                                 Title = "Primary Column",
                             },
                             Operator = ReportFilterCriteriaOperator.EQUAL,
-                            Values = new List<FilterValue>
+                            Values = new List<ReportFilterValue>
                             {
-                                new StringFilterValue("Test String"),
-                                new NumberFilterValue(42.5),
-                                new NullFilterValue(),
-                                new DateFilterValue("2024-01-15"),
-                                new CurrentUserFilterValue()
+                                new StringReportFilterValue("Test String"),
+                                new NumberReportFilterValue(42.5),
+                                new NullReportFilterValue(),
+                                new DateReportFilterValue("2024-01-15"),
+                                new CurrentUserReportFilterValue()
                             },
                         }
                     }

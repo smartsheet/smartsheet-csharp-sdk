@@ -19,36 +19,23 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Represents a numeric filter value.
+    /// Represents a null filter value.
     /// </summary>
-    public class NumberFilterValue : FilterValue
+    public class NullReportFilterValue : ReportFilterValue
     {
-        private double value;
-
         /// <summary>
-        /// Constructor for numeric filter value.
+        /// Constructor for null filter value.
         /// </summary>
-        /// <param name="value"></param>
-        public NumberFilterValue(double value)
+        public NullReportFilterValue()
         {
-            this.value = value;
-        }
-
-        /// <summary>
-        /// Gets or sets the numeric value.
-        /// </summary>
-        public double Value
-        {
-            get { return this.value; }
-            set { this.value = value; }
         }
 
         /// <summary>
         /// Gets the filter value type.
         /// </summary>
-        public FilterValueType? ValueType
+        public ReportFilterValueType? ValueType
         {
-            get { return FilterValueType.NUMBER; }
+            get { return ReportFilterValueType.NULL; }
         }
     }
 }

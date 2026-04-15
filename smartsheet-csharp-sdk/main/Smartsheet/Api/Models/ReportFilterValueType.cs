@@ -19,46 +19,29 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Represents a date filter value with objectType.
+    /// Types of values a report filter value can have.
     /// </summary>
-    public class DateFilterValue : FilterValue
+    public enum ReportFilterValueType
     {
-        private string objectType;
-        private string value;
-
         /// <summary>
-        /// Constructor for date filter value.
+        /// A string value
         /// </summary>
-        /// <param name="value">The date string value</param>
-        public DateFilterValue(string value)
-        {
-            this.objectType = "DATE";
-            this.value = value;
-        }
-
+        STRING,
         /// <summary>
-        /// Gets the objectType (always "DATE").
+        /// A numeric value
         /// </summary>
-        public string ObjectType
-        {
-            get { return this.objectType; }
-        }
-
+        NUMBER,
         /// <summary>
-        /// Gets or sets the date value.
+        /// A null value
         /// </summary>
-        public string Value
-        {
-            get { return this.value; }
-            set { this.value = value; }
-        }
-
+        NULL,
         /// <summary>
-        /// Gets the filter value type.
+        /// A date object with objectType and value
         /// </summary>
-        public FilterValueType? ValueType
-        {
-            get { return FilterValueType.DATE; }
-        }
+        DATE,
+        /// <summary>
+        /// A current user object with objectType
+        /// </summary>
+        CURRENT_USER
     }
 }

@@ -19,23 +19,34 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Represents a null filter value.
+    /// Represents a current user report filter value with objectType.
     /// </summary>
-    public class NullFilterValue : FilterValue
+    public class CurrentUserReportFilterValue : ReportFilterValue
     {
+        private string objectType;
+
         /// <summary>
-        /// Constructor for null filter value.
+        /// Constructor for current user report filter value.
         /// </summary>
-        public NullFilterValue()
+        public CurrentUserReportFilterValue()
         {
+            this.objectType = "CURRENT_USER";
         }
 
         /// <summary>
-        /// Gets the filter value type.
+        /// Gets the objectType (always "CURRENT_USER").
         /// </summary>
-        public FilterValueType? ValueType
+        public string ObjectType
         {
-            get { return FilterValueType.NULL; }
+            get { return this.objectType; }
+        }
+
+        /// <summary>
+        /// Gets the report filter value type.
+        /// </summary>
+        public ReportFilterValueType? ValueType
+        {
+            get { return ReportFilterValueType.CURRENT_USER; }
         }
     }
 }

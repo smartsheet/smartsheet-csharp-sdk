@@ -24,14 +24,14 @@ using Smartsheet.Api.Models;
 namespace Smartsheet.Api.Internal.Json
 {
     /// <summary>
-    /// Helper class to convert filter value types for JSON serialization/deserialization
+    /// Helper class to convert report filter value types for JSON serialization/deserialization
     /// </summary>
-    class FilterValueTypeConverter : PrimitiveValueConverter
+    class ReportFilterValueTypeConverter : PrimitiveValueConverter
     {
         /// <summary>
         /// Constructor with default decimal handling (disabled)
         /// </summary>
-        public FilterValueTypeConverter() : base(false)
+        public ReportFilterValueTypeConverter() : base(false)
         {
         }
 
@@ -40,7 +40,7 @@ namespace Smartsheet.Api.Internal.Json
         /// </summary>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(FilterValue).IsAssignableFrom(objectType);
+            return typeof(ReportFilterValue).IsAssignableFrom(objectType);
         }
 
         /// <summary>
@@ -62,10 +62,10 @@ namespace Smartsheet.Api.Internal.Json
                 {
                     case "DATE":
                         string dateValue = obj["value"]?.Value<string>();
-                        return new DateFilterValue(dateValue);
+                        return new DateReportFilterValue(dateValue);
 
                     case "CURRENT_USER":
-                        return new CurrentUserFilterValue();
+                        return new CurrentUserReportFilterValue();
 
                     default:
                         // Unknown objectType, return null
@@ -88,26 +88,26 @@ namespace Smartsheet.Api.Internal.Json
                 return;
             }
 
-            FilterValue filterValue = (FilterValue)value;
+            ReportFilterValue filterValue = (ReportFilterValue)value;
 
             switch (filterValue.ValueType)
             {
-                case FilterValueType.STRING:
-                    StringFilterValue stringValue = (StringFilterValue)filterValue;
+                case ReportFilterValueType.STRING:
+                    StringReportFilterValue stringValue = (StringReportFilterValue)filterValue;
                     writer.WriteValue(stringValue.Value);
                     break;
 
-                case FilterValueType.NUMBER:
-                    NumberFilterValue numberValue = (NumberFilterValue)filterValue;
+                case ReportFilterValueType.NUMBER:
+                    NumberReportFilterValue numberValue = (NumberReportFilterValue)filterValue;
                     writer.WriteValue(numberValue.Value);
                     break;
 
-                case FilterValueType.NULL:
+                case ReportFilterValueType.NULL:
                     writer.WriteNull();
                     break;
 
-                case FilterValueType.DATE:
-                    DateFilterValue dateValue = (DateFilterValue)filterValue;
+                case ReportFilterValueType.DATE:
+                    DateReportFilterValue dateValue = (DateReportFilterValue)filterValue;
                     writer.WriteStartObject();
                     writer.WritePropertyName("objectType");
                     writer.WriteValue(dateValue.ObjectType);
@@ -116,8 +116,8 @@ namespace Smartsheet.Api.Internal.Json
                     writer.WriteEndObject();
                     break;
 
-                case FilterValueType.CURRENT_USER:
-                    CurrentUserFilterValue currentUserValue = (CurrentUserFilterValue)filterValue;
+                case ReportFilterValueType.CURRENT_USER:
+                    CurrentUserReportFilterValue currentUserValue = (CurrentUserReportFilterValue)filterValue;
                     writer.WriteStartObject();
                     writer.WritePropertyName("objectType");
                     writer.WriteValue(currentUserValue.ObjectType);
@@ -132,28 +132,28 @@ namespace Smartsheet.Api.Internal.Json
 
         protected override object CreateBooleanValue(bool value)
         {
-            // FilterValue doesn't support boolean primitives, return null
+            // ReportFilterValue doesn't support boolean primitives, return null
             return null;
         }
 
         protected override object CreateNumberValue(double value)
         {
-            return new NumberFilterValue(value);
+            return new NumberReportFilterValue(value);
         }
 
         protected override object CreateDecimalValue(decimal value)
         {
-            return new NumberFilterValue((double)value);
+            return new NumberReportFilterValue((double)value);
         }
 
         protected override object CreateStringValue(string value)
         {
-            return new StringFilterValue(value);
+            return new StringReportFilterValue(value);
         }
 
         protected override object CreateNullValue()
         {
-            return new NullFilterValue();
+            return new NullReportFilterValue();
         }
     }
 }

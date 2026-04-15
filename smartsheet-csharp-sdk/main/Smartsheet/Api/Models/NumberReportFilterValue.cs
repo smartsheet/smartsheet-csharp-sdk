@@ -19,25 +19,25 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Represents a string filter value.
+    /// Represents a numeric report filter value.
     /// </summary>
-    public class StringFilterValue : FilterValue
+    public class NumberReportFilterValue : ReportFilterValue
     {
-        private string value;
+        private double value;
 
         /// <summary>
-        /// Constructor for string filter value.
+        /// Constructor for numeric report filter value.
         /// </summary>
         /// <param name="value"></param>
-        public StringFilterValue(string value)
+        public NumberReportFilterValue(double value)
         {
             this.value = value;
         }
 
         /// <summary>
-        /// Gets or sets the string value.
+        /// Gets or sets the numeric value.
         /// </summary>
-        public string Value
+        public double Value
         {
             get { return this.value; }
             set { this.value = value; }
@@ -46,9 +46,9 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Gets the filter value type.
         /// </summary>
-        public FilterValueType? ValueType
+        public ReportFilterValueType? ValueType
         {
-            get { return FilterValueType.STRING; }
+            get { return ReportFilterValueType.NUMBER; }
         }
     }
 }

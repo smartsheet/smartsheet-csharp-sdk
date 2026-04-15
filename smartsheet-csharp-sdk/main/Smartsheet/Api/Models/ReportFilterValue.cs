@@ -19,14 +19,14 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Interface to represent a filter value that can be a string, number, null, or an object with objectType
+    /// Interface to represent a report filter value that can be a string, number, null, or an object with objectType
     /// </summary>
-    public interface FilterValue
+    public interface ReportFilterValue
     {
         /// <summary>
-        /// Gets the FilterValue Type.
+        /// Gets the ReportFilterValue Type.
         /// </summary>
         /// <returns> the Type </returns>
-        FilterValueType? ValueType { get; }
+        ReportFilterValueType? ValueType { get; }
     }
 }
