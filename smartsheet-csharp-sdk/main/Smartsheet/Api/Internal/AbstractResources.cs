@@ -417,7 +417,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            request.Entity = request.Entity = serializeToEntity<T>(@object);
+            request.Entity = serializeToEntity<T>(@object);
 
             HttpResponse response = this.smartsheet.HttpClient.Request(request);
 
@@ -469,7 +469,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            request.Entity = request.Entity = serializeToEntity(body);
+            request.Entity = serializeToEntity(body);
 
             HttpResponse response = smartsheet.HttpClient.Request(request);
 

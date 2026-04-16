@@ -329,6 +329,45 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// Update a Report's definition based on the specified ID
+        /// <para>Note:</para>
+        /// <para>This endpoint supports partial updates <b>only on root level</b> properties of the report definition, such as <c>filters</c>, <c>groupingCriteria</c> and <c>summarizingCriteria</c>. For example, you can update the report's filters without affecting its grouping criteria. However, nested properties within these objects, such as a specific filter or grouping criterion, cannot be updated individually and require a full replacement of the respective section.</para>
+        /// 
+        /// <para>It mirrors to the following Smartsheet REST API method: PUT /reports/{reportId}/definition</para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="reportDefinition"> the ReportDefinition object </param>
+        public void UpdateReportDefinition(long reportId, ReportDefinition reportDefinition)
+        {
+            string path = "reports/" + reportId + "/definition";
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.PUT);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity(reportDefinition);
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+        }
+
+        /// <summary>
         /// <para>
         /// Adds one or more specified sheet or workspace to the report scope.
         /// </para>
@@ -347,7 +386,7 @@ namespace Smartsheet.Api.Internal
             string path = "reports/" + reportId + "/scope";
 
             Utils.ThrowIfNull(scopes);
-            if(scopes.Count() == 0)
+            if (scopes.Count() == 0)
             {
                 throw new ArgumentException("scopes must contain at least one item");
             }
@@ -397,7 +436,7 @@ namespace Smartsheet.Api.Internal
             string path = "reports/" + reportId + "/scope";
 
             Utils.ThrowIfNull(scopes);
-            if(scopes.Count() == 0)
+            if (scopes.Count() == 0)
             {
                 throw new ArgumentException("scopes must contain at least one item");
             }
