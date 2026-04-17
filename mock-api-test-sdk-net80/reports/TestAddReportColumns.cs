@@ -26,18 +26,8 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4
-                },
-                new ReportColumn
-                {
-                    Title = "Sheet name",
-                    Type = ColumnType.TEXT_NUMBER,
-                    Index = 5
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4 },
+                new ReportColumn { Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, Index = 5 }
             };
 
             smartsheet.ReportResources.AddReportColumns(CommonTestConstants.TEST_REPORT_ID, columnsToAdd);
@@ -61,84 +51,36 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4
-                },
-                new ReportColumn
-                {
-                    Title = "Sheet name",
-                    Type = ColumnType.TEXT_NUMBER,
-                    Index = 5
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4 },
+                new ReportColumn { Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, Index = 5 }
             };
 
             IList<ReportColumn> result = smartsheet.ReportResources.AddReportColumns(CommonTestConstants.TEST_REPORT_ID, columnsToAdd);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(5, result.Count);
 
-            var expected0 = new Dictionary<string, object?>
+            // Validate all 5 columns returned by comparing ReportColumn objects
+            var expected = new List<ReportColumn>
             {
-                { "VirtualId", 12345L },
-                { "SheetNameColumn", null },
-                { "SystemColumnType", null },
-                { "Type", 4 },
-                { "AutoNumberFormat", null },
-                { "ContactOptions", null },
-                { "Description", null },
-                { "Format", null },
-                { "Formula", null },
-                { "Hidden", null },
-                { "Index", 4 },
-                { "Locked", null },
-                { "LockedForUser", null },
-                { "Options", null },
-                { "Primary", null },
-                { "Symbol", null },
-                { "Tags", null },
-                { "Title", "Item selected" },
-                { "Validation", null },
-                { "Version", null },
-                { "Width", null },
-                { "Id", null }
+                // Column 0: CHECKBOX
+                new ReportColumn { VirtualId = 12345, Index = 4, Title = "Item selected", Type = ColumnType.CHECKBOX, Version = 0 },
+                // Column 1: Sheet name
+                new ReportColumn { VirtualId = 12346, Index = 5, Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, SheetNameColumn = true, Version = 0 },
+                // Column 2: Created By (system column)
+                new ReportColumn { VirtualId = 12347, Index = 6, Title = "Created By", Type = ColumnType.CONTACT_LIST, SystemColumnType = SystemColumnType.CREATED_BY, Version = 0 },
+                // Column 3: Primary column
+                new ReportColumn { VirtualId = 12348, Index = 7, Title = "Primary", Type = ColumnType.TEXT_NUMBER, Primary = true, Version = 0 },
+                // Column 4: Auto-number with format
+                new ReportColumn { VirtualId = 12349, Index = 8, Title = "Row Number", Type = ColumnType.TEXT_NUMBER, SystemColumnType = SystemColumnType.AUTO_NUMBER, Version = 0, AutoNumberFormat = new AutoNumberFormat { Fill = "000", Prefix = "TASK-", StartingNumber = 1, Suffix = "" } }
             };
 
-            var expected1 = new Dictionary<string, object?>
+            for (int i = 0; i < 5; i++)
             {
-                { "VirtualId", 12346L },
-                { "SheetNameColumn", null },
-                { "SystemColumnType", null },
-                { "Type", 0 },
-                { "AutoNumberFormat", null },
-                { "ContactOptions", null },
-                { "Description", null },
-                { "Format", null },
-                { "Formula", null },
-                { "Hidden", null },
-                { "Index", 4 },
-                { "Locked", null },
-                { "LockedForUser", null },
-                { "Options", null },
-                { "Primary", null },
-                { "Symbol", null },
-                { "Tags", null },
-                { "Title", "Sheet name" },
-                { "Validation", null },
-                { "Version", null },
-                { "Width", null },
-                { "Id", null }
-            };
-
-            var actualJson0 = JsonConvert.SerializeObject(result[0]);
-            var actualJson1 = JsonConvert.SerializeObject(result[1]);
-            var expectedJson0 = JsonConvert.SerializeObject(expected0);
-            var expectedJson1 = JsonConvert.SerializeObject(expected1);
-
-            Assert.AreEqual(expectedJson0, actualJson0);
-            Assert.AreEqual(expectedJson1, actualJson1);
+                var actualJson = JsonConvert.SerializeObject(result[i]);
+                var expectedJson = JsonConvert.SerializeObject(expected[i]);
+                Assert.AreEqual(expectedJson, actualJson, $"Column {i} mismatch");
+            }
         }
 
         [TestMethod]
@@ -149,23 +91,8 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4,
-                    Hidden = false,
-                    Width = 150
-                },
-                new ReportColumn
-                {
-                    Title = "Sheet name",
-                    Type = ColumnType.TEXT_NUMBER,
-                    Index = 5,
-                    Hidden = false,
-                    Width = 150,
-                    SheetNameColumn = true
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4, Hidden = false, Width = 150 },
+                new ReportColumn { Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, Index = 5, Hidden = false, Width = 150, SheetNameColumn = true }
             };
 
             smartsheet.ReportResources.AddReportColumns(CommonTestConstants.TEST_REPORT_ID, columnsToAdd);
@@ -189,89 +116,36 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4,
-                    Hidden = false,
-                    Width = 150
-                },
-                new ReportColumn
-                {
-                    Title = "Sheet name",
-                    Type = ColumnType.TEXT_NUMBER,
-                    Index = 5,
-                    Hidden = false,
-                    Width = 150,
-                    SheetNameColumn = true
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4, Hidden = false, Width = 150 },
+                new ReportColumn { Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, Index = 5, Hidden = false, Width = 150, SheetNameColumn = true }
             };
 
             IList<ReportColumn> result = smartsheet.ReportResources.AddReportColumns(CommonTestConstants.TEST_REPORT_ID, columnsToAdd);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(5, result.Count);
 
-            var expected0 = new Dictionary<string, object?>
+            // Validate all 5 columns returned by comparing ReportColumn objects
+            var expected = new List<ReportColumn>
             {
-                { "VirtualId", 12345L },
-                { "SheetNameColumn", null },
-                { "SystemColumnType", null },
-                { "Type", 4 },
-                { "AutoNumberFormat", null },
-                { "ContactOptions", null },
-                { "Description", null },
-                { "Format", null },
-                { "Formula", null },
-                { "Hidden", false },
-                { "Index", 4 },
-                { "Locked", null },
-                { "LockedForUser", null },
-                { "Options", null },
-                { "Primary", null },
-                { "Symbol", null },
-                { "Tags", null },
-                { "Title", "Item selected" },
-                { "Validation", null },
-                { "Version", 0 },
-                { "Width", 150 },
-                { "Id", null }
+                // Column 0: CHECKBOX
+                new ReportColumn { VirtualId = 12345, Index = 4, Title = "Item selected", Type = ColumnType.CHECKBOX, Hidden = false, Validation = false, Version = 0, Width = 150 },
+                // Column 1: Sheet name
+                new ReportColumn { VirtualId = 12346, Index = 5, Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, SheetNameColumn = true, Hidden = false, Validation = false, Version = 0, Width = 150 },
+                // Column 2: Created By (system column)
+                new ReportColumn { VirtualId = 12347, Index = 6, Title = "Created By", Type = ColumnType.CONTACT_LIST, SystemColumnType = SystemColumnType.CREATED_BY, Hidden = false, Validation = false, Version = 0, Width = 150 },
+                // Column 3: Primary column
+                new ReportColumn { VirtualId = 12348, Index = 7, Title = "Primary", Type = ColumnType.TEXT_NUMBER, Primary = true, Hidden = false, Validation = false, Version = 0, Width = 200 },
+                // Column 4: Auto-number with format
+                new ReportColumn { VirtualId = 12349, Index = 8, Title = "Row Number", Type = ColumnType.TEXT_NUMBER, SystemColumnType = SystemColumnType.AUTO_NUMBER, Hidden = false, Validation = false, Version = 0, Width = 100, AutoNumberFormat = new AutoNumberFormat { Fill = "000", Prefix = "TASK-", StartingNumber = 1, Suffix = "" } }
             };
 
-            var expected1 = new Dictionary<string, object?>
+            for (int i = 0; i < 5; i++)
             {
-                { "VirtualId", 12346L },
-                { "SheetNameColumn", true },
-                { "SystemColumnType", null },
-                { "Type", 0 },
-                { "AutoNumberFormat", null },
-                { "ContactOptions", null },
-                { "Description", null },
-                { "Format", null },
-                { "Formula", null },
-                { "Hidden", false },
-                { "Index", 4 },
-                { "Locked", null },
-                { "LockedForUser", null },
-                { "Options", null },
-                { "Primary", null },
-                { "Symbol", null },
-                { "Tags", null },
-                { "Title", "Sheet name" },
-                { "Validation", null },
-                { "Version", 0 },
-                { "Width", 150 },
-                { "Id", null }
-            };
-
-            var actualJson0 = JsonConvert.SerializeObject(result[0]);
-            var actualJson1 = JsonConvert.SerializeObject(result[1]);
-            var expectedJson0 = JsonConvert.SerializeObject(expected0);
-            var expectedJson1 = JsonConvert.SerializeObject(expected1);
-
-            Assert.AreEqual(expectedJson0, actualJson0);
-            Assert.AreEqual(expectedJson1, actualJson1);
+                var actualJson = JsonConvert.SerializeObject(result[i]);
+                var expectedJson = JsonConvert.SerializeObject(expected[i]);
+                Assert.AreEqual(expectedJson, actualJson, $"Column {i} mismatch");
+            }
         }
 
         [TestMethod]
@@ -282,18 +156,8 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4
-                },
-                new ReportColumn
-                {
-                    Title = "Sheet name",
-                    Type = ColumnType.TEXT_NUMBER,
-                    Index = 5
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4 },
+                new ReportColumn { Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, Index = 5 }
             };
 
             smartsheet.ReportResources.AddReportColumns(CommonTestConstants.TEST_REPORT_ID, columnsToAdd);
@@ -303,18 +167,8 @@ namespace mock_api_test_sdk_net80
 
             var expectedBody = JsonConvert.SerializeObject(new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object>
-                {
-                    { "type", "CHECKBOX" },
-                    { "index", 4 },
-                    { "title", "Item selected" }
-                },
-                new Dictionary<string, object>
-                {
-                    { "type", "TEXT_NUMBER" },
-                    { "index", 5 },
-                    { "title", "Sheet name" }
-                }
+                new Dictionary<string, object> { { "type", "CHECKBOX" }, { "index", 4 }, { "title", "Item selected" } },
+                new Dictionary<string, object> { { "type", "TEXT_NUMBER" }, { "index", 5 }, { "title", "Sheet name" } }
             });
 
             Assert.AreEqual(expectedBody, foundRequest.Body);
@@ -328,23 +182,8 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4,
-                    Hidden = false,
-                    Width = 150
-                },
-                new ReportColumn
-                {
-                    Title = "Sheet name",
-                    Type = ColumnType.TEXT_NUMBER,
-                    Index = 5,
-                    Hidden = false,
-                    Width = 150,
-                    SheetNameColumn = true
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4, Hidden = false, Width = 150 },
+                new ReportColumn { Title = "Sheet name", Type = ColumnType.TEXT_NUMBER, Index = 5, Hidden = false, Width = 150, SheetNameColumn = true }
             };
 
             smartsheet.ReportResources.AddReportColumns(CommonTestConstants.TEST_REPORT_ID, columnsToAdd);
@@ -354,23 +193,8 @@ namespace mock_api_test_sdk_net80
 
             var expectedBody = JsonConvert.SerializeObject(new List<Dictionary<string, object>>
             {
-                new Dictionary<string, object>
-                {
-                    { "type", "CHECKBOX" },
-                    { "hidden", false },
-                    { "index", 4 },
-                    { "title", "Item selected" },
-                    { "width", 150 }
-                },
-                new Dictionary<string, object>
-                {
-                    { "sheetNameColumn", true },
-                    { "type", "TEXT_NUMBER" },
-                    { "hidden", false },
-                    { "index", 5 },
-                    { "title", "Sheet name" },
-                    { "width", 150 }
-                }
+                new Dictionary<string, object> { { "type", "CHECKBOX" }, { "hidden", false }, { "index", 4 }, { "title", "Item selected" }, { "width", 150 } },
+                new Dictionary<string, object> { { "sheetNameColumn", true }, { "type", "TEXT_NUMBER" }, { "hidden", false }, { "index", 5 }, { "title", "Sheet name" }, { "width", 150 } }
             });
 
             Assert.AreEqual(expectedBody, foundRequest.Body);
@@ -384,12 +208,7 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4 }
             };
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
@@ -407,12 +226,7 @@ namespace mock_api_test_sdk_net80
 
             var columnsToAdd = new List<ReportColumn>
             {
-                new ReportColumn
-                {
-                    Title = "Item selected",
-                    Type = ColumnType.CHECKBOX,
-                    Index = 4
-                }
+                new ReportColumn { Title = "Item selected", Type = ColumnType.CHECKBOX, Index = 4 }
             };
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
