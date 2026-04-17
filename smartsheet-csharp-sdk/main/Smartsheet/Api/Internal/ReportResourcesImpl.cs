@@ -466,5 +466,35 @@ namespace Smartsheet.Api.Internal
 
             smartsheet.HttpClient.ReleaseConnection();
         }
+
+        /// <summary>
+        /// <para>
+        /// Add columns to a report specified by a report ID. Note: all indexes of the columns must be equal.
+        /// </para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /reports/{reportId}/columns</para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="reportColumns"> list of report columns to be added (minItems: 1, maxItems: 400) </param>
+        /// <returns> list of report columns that were added </returns>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if reportColumns list is empty or exceeds 400 items </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public IList<ReportColumn> AddReportColumns(long reportId, IEnumerable<ReportColumn> reportColumns)
+        {
+            Utils.ThrowIfNull(reportColumns);
+
+            int columnCount = reportColumns.Count();
+            if (columnCount == 0)
+            {
+                throw new ArgumentException("reportColumns list must contain at least one item");
+            }
+
+            string path = "reports/" + reportId + "/columns";
+            return this.PostAndReceiveList<IEnumerable<ReportColumn>, ReportColumn>(path, reportColumns, typeof(ReportColumn));
+        }
     }
 }
