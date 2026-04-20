@@ -108,6 +108,16 @@ namespace Smartsheet.Api.Internal
         private WorkspaceResources workspaces;
 
         /// <summary>
+        /// Represents the AtomicReference to WorkspaceResources.
+        /// 
+        /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
+        /// as null, and will be initialized to non-null the first time it is accessed via corresponding getter, therefore
+        /// effectively the underlying value is lazily created in a thread safe manner.
+        /// </summary>
+        private WorkspaceFolderResources workspaceFolders;
+
+
+        /// <summary>
         /// Represents the AtomicReference to FolderResources.
         /// 
         /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
@@ -115,6 +125,8 @@ namespace Smartsheet.Api.Internal
         /// effectively the underlying value is lazily created in a thread safe manner.
         /// </summary>
         private FolderResources folders;
+
+        private FolderSheetResources folderSheets;
 
         /// <summary>
         /// Represents the AtomicReference to TemplateResources.
@@ -142,6 +154,8 @@ namespace Smartsheet.Api.Internal
         /// effectively the underlying value is lazily created in a thread safe manner.
         /// </summary>
         private SheetResources sheets;
+
+        private SheetRowResources sheetRows;
 
         /// <summary>
         /// Represents the AtomicReference to SightResources.
@@ -429,6 +443,19 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// Returns the WorkspaceFolderResources instance that provides access to the workspace folders resources.
+        /// </summary>
+        /// <returns> the workspace folder resources</returns>
+        public virtual WorkspaceFolderResources WorkspaceFolderResources
+        {
+            get
+            {
+                Interlocked.CompareExchange<WorkspaceFolderResources>(ref workspaceFolders, new WorkspaceFolderResourcesImpl(this), null);
+                return workspaceFolders;
+            }
+        }
+
+        /// <summary>
         /// Returns the FolderResources instance that provides access to folder resources.
         /// </summary>
         /// <returns> the folder resources </returns>
@@ -438,6 +465,19 @@ namespace Smartsheet.Api.Internal
             {
                 Interlocked.CompareExchange<FolderResources>(ref folders, new FolderResourcesImpl(this), null);
                 return folders;
+            }
+        }
+
+        /// <summary>
+        /// Returns the FolderSheetResources instance that provides access to folder's sheet resources.
+        /// </summary>
+        /// <returns> the folder sheet resources </returns>
+        public virtual FolderSheetResources FolderSheetResources
+        {
+            get
+            {
+                Interlocked.CompareExchange<FolderSheetResources>(ref folderSheets, new FolderSheetResourcesImpl(this), null);
+                return folderSheets;
             }
         }
 
@@ -477,6 +517,15 @@ namespace Smartsheet.Api.Internal
             {
                 Interlocked.CompareExchange<SheetResources>(ref sheets, new SheetResourcesImpl(this), null);
                 return sheets;
+            }
+        }
+
+        public virtual SheetRowResources SheetRowResources
+        {
+            get
+            {
+                Interlocked.CompareExchange<SheetRowResources>(ref sheetRows, new SheetRowResourcesImpl(this), null);
+                return sheetRows;
             }
         }
 

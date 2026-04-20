@@ -65,10 +65,22 @@ namespace Smartsheet.Api
         WorkspaceResources WorkspaceResources { get; }
 
         /// <summary>
+        /// <para>Returns the WorkspaceFolderResources instance that provides access to Folder resources within the workspace.</para>
+        /// </summary>
+        /// <returns>The workspace's folders resource</returns>
+        WorkspaceFolderResources WorkspaceFolderResources { get; }
+
+        /// <summary>
         /// <para>Returns the FolderResources instance that provides access to Folder resources.</para>
         /// </summary>
         /// <returns> the folder resources instance </returns>
         FolderResources FolderResources { get; }
+
+        /// <summary>
+        /// <para>Returns the FolderSheetResources instance that provides access to a folder's Sheet resources.</para>
+        /// </summary>
+        /// <returns> the folderSheet resources instance </returns>
+        FolderSheetResources FolderSheetResources { get; }
 
         /// <summary>
         /// <para>Returns the TemplateResources instance that provides access to Template resources.</para>
@@ -87,6 +99,8 @@ namespace Smartsheet.Api
         /// </summary>
         /// <returns> the sheet resources instance </returns>
         SheetResources SheetResources { get; }
+
+        SheetRowResources SheetRowResources { get; }
 
         /// <summary>
         /// <para>Returns the SightResources instance that provides access to Sight resources.</para>
