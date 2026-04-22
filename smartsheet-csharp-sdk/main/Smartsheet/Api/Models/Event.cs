@@ -56,6 +56,11 @@ namespace Smartsheet.Api.Models
         private object objectId;
 
         /// <summary>
+        /// Alphanumeric object identifier for v2.0+ support
+        /// </summary>
+        private string objectIdStr;
+
+        /// <summary>
         /// The Smartsheet resource impacted by the event
         /// </summary>
         private EventObjectType objectType;
@@ -132,6 +137,16 @@ namespace Smartsheet.Api.Models
         {
             get { return objectId; }
             set { objectId = value; }
+        }
+
+        /// <summary>
+        /// Gets the alphanumeric object identifier
+        /// </summary>
+        /// <returns>the alphanumeric object identifier</returns>
+        public string ObjectIdStr
+        {
+            get { return objectIdStr; }
+            set { objectIdStr = value; }
         }
 
         /// <summary>
