@@ -44,7 +44,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         }
                     }
@@ -60,7 +60,7 @@ namespace mock_api_test_sdk_net80
                             {
                                 Primary = true,
                                 Type = ColumnType.TEXT_NUMBER,
-                                SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                                SystemColumnType = SystemColumnType.AUTO_NUMBER,
                                 Title = "Primary Column",
                             },
                             Operator = ReportFilterCriteriaOperator.EQUAL,
@@ -76,7 +76,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         },
                         SortingDirection = SortDirection.ASCENDING,
@@ -91,7 +91,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         },
                         SortingDirection = SortDirection.ASCENDING
@@ -215,7 +215,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         }
                     }
@@ -231,7 +231,7 @@ namespace mock_api_test_sdk_net80
                             {
                                 Primary = true,
                                 Type = ColumnType.TEXT_NUMBER,
-                                SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                                SystemColumnType = SystemColumnType.AUTO_NUMBER,
                                 Title = "Primary Column",
                             },
                             Operator = ReportFilterCriteriaOperator.EQUAL,
@@ -247,7 +247,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         },
                         SortingDirection = SortDirection.ASCENDING,
@@ -262,7 +262,7 @@ namespace mock_api_test_sdk_net80
                         {
                             Primary = true,
                             Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = ReportSystemColumnType.AUTO_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
                             Title = "Primary Column",
                         },
                         SortingDirection = SortDirection.ASCENDING
