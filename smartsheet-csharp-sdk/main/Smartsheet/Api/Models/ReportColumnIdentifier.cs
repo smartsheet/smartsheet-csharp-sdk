@@ -49,7 +49,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// System column type to match. See System Columns.
         /// </summary>
-        private ReportSystemColumnType? systemColumnType;
+        private SystemColumnType? systemColumnType;
 
         /// <summary>
         /// Set this to true to match the primary column.
@@ -87,7 +87,7 @@ namespace Smartsheet.Api.Models
         /// Gets or sets the system column type to match.
         /// </summary>
         /// <returns> the system column type </returns>
-        public ReportSystemColumnType? SystemColumnType
+        public SystemColumnType? SystemColumnType
         {
             get { return systemColumnType; }
             set { systemColumnType = value; }
