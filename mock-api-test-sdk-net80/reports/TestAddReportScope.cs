@@ -71,7 +71,7 @@ namespace mock_api_test_sdk_net80
             {
                 new Dictionary<string, object>
                 {
-                    { "assetType", "SHEET" },
+                    { "assetType", "sheet" },
                     { "assetId", CommonTestConstants.TEST_SHEET_ID }
                 }
             });

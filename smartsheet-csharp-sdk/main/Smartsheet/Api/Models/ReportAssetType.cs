@@ -18,6 +18,7 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace Smartsheet.Api
 {
@@ -30,11 +31,13 @@ namespace Smartsheet.Api
         /// <summary>
         /// Sheet asset type
         /// </summary>
+        [EnumMember(Value = "sheet")]
         SHEET,
 
         /// <summary>
         /// Workspace asset type
         /// </summary>
+        [EnumMember(Value = "workspace")]
         WORKSPACE,
     }
 }
