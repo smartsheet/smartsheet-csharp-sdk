@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Support for CONTRIBUTOR seat type in SeatType enum
 - Support for CONTRIBUTOR seat type in DowngradeSeatType enum
+- Support for `displayContributorSeatType` query parameter in GET /2.0/users endpoint
+- Support for `displayContributorSeatType` query parameter in GET /2.0/users/{userId}/plans endpoint
+- WireMock integration tests for `displayContributorSeatType` parameter functionality
 
 ## [6.6.6] - 2026-03-25
 ### Fixed

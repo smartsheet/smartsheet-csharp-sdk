@@ -84,5 +84,53 @@ namespace mock_api_test_sdk_net80
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
+
+        [TestMethod]
+        public async Task TestListUserPlansDisplayContributorSeatTypeTrueReturnsContributor()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/display-contributor-seat-type-true", requestId.ToString());
+
+            TokenPaginatedResult<UserPlan> response = smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null, true);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(CommonTestConstants.TEST_PLAN_ID, response.Data[0].PlanId);
+            Assert.AreEqual(SeatType.CONTRIBUTOR, response.Data[0].SeatType);
+            Assert.AreEqual(TEST_SEAT_TYPE_LAST_CHANGED_AT, response.Data[0].SeatTypeLastChangedAt);
+            Assert.AreEqual(TEST_PROVISIONAL_EXPIRATION_DATE, response.Data[0].ProvisionalExpirationDate);
+            Assert.IsFalse(response.Data[0].IsInternal);
+        }
+
+        [TestMethod]
+        public async Task TestListUserPlansDisplayContributorSeatTypeTrueGeneratedUrlIsCorrect()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/display-contributor-seat-type-true", requestId.ToString());
+
+            smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null, true);
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            string path = uri.AbsolutePath;
+
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
+
+            Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans", path);
+            Assert.AreEqual("true", queryParams["displayContributorSeatType"]);
+        }
+
+        [TestMethod]
+        public async Task TestListUserPlansDisplayContributorSeatTypeFalseReturnsViewer()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/display-contributor-seat-type-false", requestId.ToString());
+
+            TokenPaginatedResult<UserPlan> response = smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null, false);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(1234567890123457L, response.Data[0].PlanId);
+            Assert.AreEqual(SeatType.VIEWER, response.Data[0].SeatType);
+            Assert.IsFalse(response.Data[0].IsInternal);
+        }
     }
 }
