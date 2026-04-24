@@ -496,5 +496,26 @@ namespace Smartsheet.Api.Internal
             string path = "reports/" + reportId + "/columns";
             return this.PostAndReceiveList<IEnumerable<ReportColumn>, ReportColumn>(path, reportColumns, typeof(ReportColumn));
         }
+
+        /// <summary>
+        /// <para>
+        /// Create a new report by specifying name, destination, scope, columns and definition.
+        /// </para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /reports</para>
+        /// </summary>
+        /// <param name="request"> the create report request containing name, destination, scope, columns, and optional definition </param>
+        /// <returns> the created report result containing id, name, accessLevel, and permalink </returns>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public CreateReportResult CreateReport(CreateReportRequest request)
+        {
+            Utils.ThrowIfNull(request);
+            var results = this.PostAndReceiveList<CreateReportRequest, CreateReportResult>("reports", request, typeof(CreateReportResult));
+            return results != null && results.Count > 0 ? results[0] : null;
+        }
     }
 }
