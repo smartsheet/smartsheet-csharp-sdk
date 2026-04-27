@@ -3,7 +3,7 @@ using Smartsheet.Api;
 namespace mock_api_test_sdk_net80
 {
     [TestClass]
-    public class ReportsTests
+    public class TestDeleteReport
     {
         private const long TEST_REPORT_ID = 314159265359;
 
