@@ -137,7 +137,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestDowngradeUserToContributorGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/to-contributor", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
 
             smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -153,7 +153,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestDowngradeUserToContributorRequestBody()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/to-contributor", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
 
             smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
 
@@ -168,7 +168,7 @@ namespace mock_api_test_sdk_net80
         public async Task TestDowngradeUserToContributorResponse()
         {
             Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/to-contributor", requestId.ToString());
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
 
             // Should not throw an exception
             smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
