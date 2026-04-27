@@ -71,8 +71,8 @@ namespace mock_api_test_sdk_net80
             CreateReportResult result = smartsheet.ReportResources.CreateReport(request);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(4583614634583940L, result.Id);
-            Assert.AreEqual("Q2 Earnings", result.Name);
+            Assert.AreEqual(987654321L, result.Id);
+            Assert.AreEqual("Q2 Earnings Report", result.Name);
             Assert.AreEqual(AccessLevel.OWNER, result.AccessLevel);
             Assert.AreEqual("https://app.smartsheet.com/reports/c8gJxw87cXpRCvCC5PPw6jFhFRrf5r8PxCrxvW21", result.Permalink);
         }
@@ -143,11 +143,18 @@ namespace mock_api_test_sdk_net80
             CreateReportResult result = smartsheet.ReportResources.CreateReport(request);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(4583614634583940L, result.Id);
-            Assert.AreEqual("Q2 Earnings", result.Name);
+            Assert.AreEqual(987654321L, result.Id);
+            Assert.AreEqual("Q2 Earnings Report", result.Name);
             Assert.AreEqual(AccessLevel.OWNER, result.AccessLevel);
             Assert.AreEqual("https://app.smartsheet.com/reports/c8gJxw87cXpRCvCC5PPw6jFhFRrf5r8PxCrxvW21", result.Permalink);
             Assert.AreEqual(false, result.IsSummaryReport);
+            Assert.IsNotNull(result.Columns);
+            Assert.AreEqual(4, result.Columns.Count);
+            Assert.AreEqual("Primary column", result.Columns[0].Title);
+            Assert.AreEqual(ColumnType.TEXT_NUMBER, result.Columns[0].Type);
+            Assert.AreEqual(true, result.Columns[0].Primary);
+            Assert.AreEqual("Sheet name", result.Columns[1].Title);
+            Assert.AreEqual(true, result.Columns[1].SheetNameColumn);
         }
 
         [TestMethod]

@@ -16,6 +16,8 @@
 //    limitations under the License.
 //    %[license]
 
+using System.Collections.Generic;
+
 namespace Smartsheet.Api.Models
 {
     /// <summary>
@@ -47,5 +49,10 @@ namespace Smartsheet.Api.Models
         /// Set to true if the report is a sheet summary report; otherwise it is a row report.
         /// </summary>
         public bool? IsSummaryReport { get; set; }
+
+        /// <summary>
+        /// Array of report columns.
+        /// </summary>
+        public IList<ReportColumn> Columns { get; set; }
     }
 }

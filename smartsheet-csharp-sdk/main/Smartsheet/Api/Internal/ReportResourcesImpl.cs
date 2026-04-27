@@ -514,8 +514,36 @@ namespace Smartsheet.Api.Internal
         public CreateReportResult CreateReport(CreateReportRequest request)
         {
             Utils.ThrowIfNull(request);
-            var results = this.PostAndReceiveList<CreateReportRequest, CreateReportResult>("reports", request, typeof(CreateReportResult));
-            return results != null && results.Count > 0 ? results[0] : null;
+            Utils.ThrowIfEmpty("reports");
+
+            HttpRequest httpRequest;
+            try
+            {
+                httpRequest = CreateHttpRequest(new Uri(smartsheet.BaseURI, "reports"), HttpMethod.POST);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            httpRequest.Entity = serializeToEntity(request);
+
+            HttpResponse response = smartsheet.HttpClient.Request(httpRequest);
+
+            CreateReportResult result;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    result = smartsheet.JsonSerializer.deserializeResult<CreateReportResult>(response.Entity.GetContent()).Result;
+                    break;
+                default:
+                    HandleError(response);
+                    return null;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+
+            return result;
         }
     }
 }
