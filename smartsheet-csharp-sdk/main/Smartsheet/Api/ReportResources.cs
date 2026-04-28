@@ -258,5 +258,21 @@ namespace Smartsheet.Api
         /// <exception cref="ArgumentException"> if reportColumns list is empty or exceeds 400 items </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         IList<ReportColumn> AddReportColumns(long reportId, IEnumerable<ReportColumn> reportColumns);
+
+        /// <summary>
+        /// <para>
+        /// Create a new report by specifying name, destination, scope, columns and definition.
+        /// </para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /reports</para>
+        /// </summary>
+        /// <param name="request"> the create report request containing name, destination, scope, columns, and optional definition </param>
+        /// <returns> the created report result containing id, name, accessLevel, and permalink </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        CreateReportResult CreateReport(CreateReportRequest request);
     }
 }

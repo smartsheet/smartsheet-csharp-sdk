@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add 'Add Report Scope' and 'Remove Report Scope' endpoint support to ReportResources
 - Add 'Add Report Columns' endpoint support to ReportResources (POST /2.0/reports/{reportId}/columns)
 - Add support for DELETE /reports/{id} endpoint, Delete Report
+- Add 'Create Report' endpoint support to ReportResources (POST /2.0/reports)
 
 ### Refactor
 - Resolved double assignment of parameter in AbstractResources.cs
