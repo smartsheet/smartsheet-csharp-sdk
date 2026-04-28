@@ -514,7 +514,6 @@ namespace Smartsheet.Api.Internal
         public CreateReportResult CreateReport(CreateReportRequest request)
         {
             Utils.ThrowIfNull(request);
-            Utils.ThrowIfEmpty("reports");
 
             HttpRequest httpRequest;
             try
