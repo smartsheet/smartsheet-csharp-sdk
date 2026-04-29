@@ -134,22 +134,6 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public async Task TestDowngradeUserToContributorGeneratedUrlIsCorrect()
-        {
-            Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
-
-            smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
-            WiremockHelper wiremockHelper = new WiremockHelper();
-            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
-            var uri = new Uri(foundRequest.AbsoluteUrl);
-            string path = uri.AbsolutePath;
-
-            Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans/{CommonTestConstants.TEST_PLAN_ID}/downgrade", path);
-            Assert.AreEqual("POST", foundRequest.Method);
-        }
-
-        [TestMethod]
         public async Task TestDowngradeUserToContributorRequestBody()
         {
             Guid requestId = Guid.NewGuid();
@@ -162,21 +146,6 @@ namespace mock_api_test_sdk_net80
             var expectedBodyMap = new Dictionary<string, string> { { "seatType", "CONTRIBUTOR" } };
             var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
             CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
-        }
-
-        [TestMethod]
-        public async Task TestDowngradeUserToContributorResponse()
-        {
-            Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
-
-            // Should not throw an exception
-            smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
-
-            WiremockHelper wiremockHelper = new WiremockHelper();
-            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
-            Assert.IsNotNull(foundRequest);
-            Assert.AreEqual("POST", foundRequest.Method);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace mock_api_test_sdk_net80
 
             PaginationParameters pagination = new PaginationParameters(TEST_INCLUDE_ALL, TEST_PAGE_SIZE, TEST_PAGE);
 
-            smartsheet.UserResources.ListUsers(TEST_EMAILS, CommonTestConstants.TEST_PLAN_ID, TEST_SEAT_TYPE, pagination);
+            smartsheet.UserResources.ListUsers(TEST_EMAILS, CommonTestConstants.TEST_PLAN_ID, TEST_SEAT_TYPE, pagination, displayContributorSeatType: true);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -45,6 +45,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_PAGE.ToString(), queryParams["page"]);
             Assert.AreEqual(TEST_PAGE_SIZE.ToString(), queryParams["pageSize"]);
             Assert.IsFalse(bool.Parse(queryParams["includeAll"]));
+            Assert.AreEqual("true", queryParams["displayContributorSeatType"]);
             Assert.AreEqual(TEST_EMAILS.Contains(queryParams["email"]), true);
         }
 

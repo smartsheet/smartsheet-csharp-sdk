@@ -19,7 +19,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
             
-            smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS);
+            smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS, displayContributorSeatType: true);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -30,6 +30,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans", path);
             Assert.AreEqual(TEST_MAX_ITEMS.ToString(), queryParams["maxItems"]);
             Assert.AreEqual(TEST_LAST_KEY, queryParams["lastKey"]);
+            Assert.AreEqual("true", queryParams["displayContributorSeatType"]);
         }
 
         [TestMethod]
