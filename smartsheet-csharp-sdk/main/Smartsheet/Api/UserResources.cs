@@ -37,6 +37,7 @@ namespace Smartsheet.Api
         /// <param name="emails">list of email addresses on which to filter the results</param>
         /// <param name="includes">elements to include in response</param>
         /// <param name="paging"> the pagination</param>
+        /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <returns> the list of all Users </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -44,7 +45,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes = null, PaginationParameters? paging = null);
+        PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes = null, PaginationParameters? paging = null, bool? displayContributorSeatType = null);
 
         /// <summary>
         /// <para>Gets the list of Users in the organization with plan and seat type filtering.</para>
@@ -54,6 +55,7 @@ namespace Smartsheet.Api
         /// <param name="planId">plan ID to filter users</param>
         /// <param name="seatType">seat type to filter users</param>
         /// <param name="paging">the pagination</param>
+        /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <returns>the list of filtered Users</returns>
         /// <exception cref="System.InvalidOperationException">if any argument is null or empty string</exception>
         /// <exception cref="InvalidRequestException">if there is any problem with the REST API request</exception>
@@ -61,7 +63,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">if the resource cannot be found</exception>
         /// <exception cref="ServiceUnavailableException">if the REST API service is not available (possibly due to rate limiting)</exception>
         /// <exception cref="SmartsheetException">if there is any other error during the operation</exception>
-        PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging = null);
+        PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging = null, bool? displayContributorSeatType = null);
 
         /// <summary>
         /// <para>Add a user to the organization</para>
@@ -141,6 +143,7 @@ namespace Smartsheet.Api
         /// <param name="userId">The ID of the user to fetch plans for.</param>
         /// <param name="lastKey">The last key for pagination.</param>
         /// <param name="maxItems">The maximum number of items to return.</param>
+        /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <returns><see cref="TokenPaginatedResult{T}"/> object containing <see cref="UserPlan"/>.</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
@@ -148,7 +151,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems);
+        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems, bool? displayContributorSeatType = null);
 
         /// <summary>
         /// <para>Removes a user from a plan.</para>

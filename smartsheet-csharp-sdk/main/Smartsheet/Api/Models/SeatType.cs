@@ -41,7 +41,12 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Provisional member seat type - member with trial access
         /// </summary>
-        PROVISIONAL_MEMBER
+        PROVISIONAL_MEMBER,
+
+        /// <summary>
+        /// Contributor seat type - can view, comment, and attach
+        /// </summary>
+        CONTRIBUTOR
     }
 
     /// <summary>
@@ -57,7 +62,12 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Downgrade to guest seat type
         /// </summary>
-        GUEST
+        GUEST,
+
+        /// <summary>
+        /// Downgrade to contributor seat type
+        /// </summary>
+        CONTRIBUTOR
     }
 
     /// <summary>

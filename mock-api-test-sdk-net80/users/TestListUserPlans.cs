@@ -19,7 +19,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
             
-            smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS);
+            smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS, displayContributorSeatType: true);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -30,6 +30,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual($"/2.0/users/{CommonTestConstants.TEST_USER_ID}/plans", path);
             Assert.AreEqual(TEST_MAX_ITEMS.ToString(), queryParams["maxItems"]);
             Assert.AreEqual(TEST_LAST_KEY, queryParams["lastKey"]);
+            Assert.AreEqual("true", queryParams["displayContributorSeatType"]);
         }
 
         [TestMethod]
@@ -42,11 +43,20 @@ namespace mock_api_test_sdk_net80
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_LAST_KEY, response.LastKey);
+            Assert.AreEqual(2, response.Data.Count);
+
+            // Verify first plan (MEMBER)
             Assert.AreEqual(CommonTestConstants.TEST_PLAN_ID, response.Data[0].PlanId);
             Assert.AreEqual(TEST_SEAT_TYPE, response.Data[0].SeatType);
             Assert.AreEqual(TEST_SEAT_TYPE_LAST_CHANGED_AT, response.Data[0].SeatTypeLastChangedAt);
             Assert.AreEqual(TEST_PROVISIONAL_EXPIRATION_DATE, response.Data[0].ProvisionalExpirationDate);
             Assert.IsFalse(response.Data[0].IsInternal);
+
+            // Verify second plan (CONTRIBUTOR)
+            Assert.AreEqual(SeatType.CONTRIBUTOR, response.Data[1].SeatType);
+            Assert.AreEqual(TEST_SEAT_TYPE_LAST_CHANGED_AT, response.Data[1].SeatTypeLastChangedAt);
+            Assert.AreEqual(TEST_PROVISIONAL_EXPIRATION_DATE, response.Data[1].ProvisionalExpirationDate);
+            Assert.IsFalse(response.Data[1].IsInternal);
         }
 
         [TestMethod]
@@ -84,5 +94,6 @@ namespace mock_api_test_sdk_net80
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
+
     }
 }
