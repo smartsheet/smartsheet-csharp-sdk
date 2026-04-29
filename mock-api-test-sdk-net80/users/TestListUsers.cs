@@ -22,6 +22,7 @@ namespace mock_api_test_sdk_net80
         private static readonly DateTime TEST_PROVISIONAL_EXPIRATION_DATE = DateTime.Parse("2026-12-13T12:17:52.525696Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
         private static readonly DateTime TEST_LAST_LOGIN = DateTime.Parse("2020-10-04T18:32:47Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
         private static readonly DateTime TEST_CUSTOM_WELCOME_SCREEN_VIEWED = DateTime.Parse("2020-08-25T12:15:47Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
+        private const string TEST_CONTRIBUTOR_EMAIL = "contributor.user@smartsheet.com";
 
         [TestMethod]
         public async Task TestListUsersGeneratedUrlIsCorrect()
@@ -31,7 +32,7 @@ namespace mock_api_test_sdk_net80
 
             PaginationParameters pagination = new PaginationParameters(TEST_INCLUDE_ALL, TEST_PAGE_SIZE, TEST_PAGE);
 
-            smartsheet.UserResources.ListUsers(TEST_EMAILS, CommonTestConstants.TEST_PLAN_ID, TEST_SEAT_TYPE, pagination);
+            smartsheet.UserResources.ListUsers(TEST_EMAILS, CommonTestConstants.TEST_PLAN_ID, TEST_SEAT_TYPE, pagination, displayContributorSeatType: true);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -44,6 +45,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_PAGE.ToString(), queryParams["page"]);
             Assert.AreEqual(TEST_PAGE_SIZE.ToString(), queryParams["pageSize"]);
             Assert.IsFalse(bool.Parse(queryParams["includeAll"]));
+            Assert.AreEqual("true", queryParams["displayContributorSeatType"]);
             Assert.AreEqual(TEST_EMAILS.Contains(queryParams["email"]), true);
         }
 
@@ -56,6 +58,9 @@ namespace mock_api_test_sdk_net80
             PaginatedResult<User> response = smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null);
 
             Assert.IsNotNull(response);
+            Assert.AreEqual(2, response.Data.Count);
+
+            // Verify first user (MEMBER)
             Assert.AreEqual(TEST_SEAT_TYPE, response.Data[0].SeatType);
             Assert.AreEqual(TEST_SEAT_TYPE_LAST_CHANGED_AT, response.Data[0].SeatTypeLastChangedAt);
             Assert.AreEqual(TEST_PROVISIONAL_EXPIRATION_DATE, response.Data[0].ProvisionalExpirationDate);
@@ -73,6 +78,10 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_LAST_LOGIN, response.Data[0].LastLogin);
             Assert.AreEqual(TEST_CUSTOM_WELCOME_SCREEN_VIEWED, response.Data[0].CustomWelcomeScreenViewed);
             Assert.AreEqual(CommonTestConstants.TEST_PLAN_ID, response.Data[0].Id);
+
+            // Verify second user (CONTRIBUTOR)
+            Assert.AreEqual(SeatType.CONTRIBUTOR, response.Data[1].SeatType);
+            Assert.AreEqual(TEST_CONTRIBUTOR_EMAIL, response.Data[1].Email);
         }
 
         [TestMethod]
@@ -119,5 +128,6 @@ namespace mock_api_test_sdk_net80
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() => smartsheet.UserResources.ListUsers(null, CommonTestConstants.TEST_PLAN_ID, null, null));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
+
     }
 }

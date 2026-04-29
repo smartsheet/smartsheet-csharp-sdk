@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 ### Added
+- Support for CONTRIBUTOR seat type in SeatType enum
+- Support for CONTRIBUTOR seat type in DowngradeSeatType enum
+- Support for `displayContributorSeatType` query parameter in GET /2.0/users endpoint
+- Support for `displayContributorSeatType` query parameter in GET /2.0/users/{userId}/plans endpoint
+- WireMock integration tests for `displayContributorSeatType` parameter functionality
 - Stream-based attachment upload support. Added `AttachFile` and `AttachNewVersion` method overloads that accept `Stream` parameters for `RowAttachmentResources`, `SheetAttachmentResources`, `CommentAttachmentResources`, and `AttachmentVersioningResources`. This enables direct upload from memory without requiring temporary files. Fixes [#178](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/178)
 
 ## [6.6.6] - 2026-03-25
