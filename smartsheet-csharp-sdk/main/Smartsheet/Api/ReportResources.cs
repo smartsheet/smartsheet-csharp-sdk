@@ -140,6 +140,20 @@ namespace Smartsheet.Api
         void SendReport(long reportId, SheetEmail email);
 
         /// <summary>
+        /// <para>Deletes a report.</para>
+        /// 
+        /// <para>Mirrors the following Smartsheet REST API method: DELETE /reports/{reportId}</para>
+        /// </summary>
+        /// <param name="reportId"> the report Id </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        void DeleteReport(long reportId);
+
+        /// <summary>
         /// <para>Get the publish status of a report.</para>
         /// 
         /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{id}/publish</para>
@@ -183,5 +197,82 @@ namespace Smartsheet.Api
         /// </summary>
         /// <returns> the share resources object </returns>
         ShareResources ShareResources { get; }
+
+        /// <summary>
+        /// Update a Report's definition based on the specified ID
+        /// <para>Note:</para>
+        /// <para>This endpoint supports partial updates <b>only on root level</b> properties of the report definition, such as <c>filters</c>, <c>groupingCriteria</c> and <c>summarizingCriteria</c>. For example, you can update the report's filters without affecting its grouping criteria. However, nested properties within these objects, such as a specific filter or grouping criterion, cannot be updated individually and require a full replacement of the respective section.</para>
+        /// 
+        /// <para>It mirrors to the following Smartsheet REST API method: PUT /reports/{reportId}/definition</para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="reportDefinition"> the ReportDefinition object </param>
+        void UpdateReportDefinition(long reportId, ReportDefinition reportDefinition);
+
+        /// <summary>
+        /// <para>
+        /// Adds one or more specified sheet or workspace to the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        void AddReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes);
+
+        /// <summary>
+        /// <para>
+        /// Removes one or more specified sheet or workspace from the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        void RemoveReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes);
+
+        /// <summary>
+        /// <para>
+        /// Add columns to a report specified by a report ID. Note: all indexes of the columns must be equal.
+        /// </para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /reports/{reportId}/columns</para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="reportColumns"> list of report columns to be added (minItems: 1, maxItems: 400) </param>
+        /// <returns> list of report columns that were added </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if reportColumns list is empty or exceeds 400 items </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        IList<ReportColumn> AddReportColumns(long reportId, IEnumerable<ReportColumn> reportColumns);
+
+        /// <summary>
+        /// <para>
+        /// Create a new report by specifying name, destination, scope, columns and definition.
+        /// </para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /reports</para>
+        /// </summary>
+        /// <param name="request"> the create report request containing name, destination, scope, columns, and optional definition </param>
+        /// <returns> the created report result containing id, name, accessLevel, and permalink </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        CreateReportResult CreateReport(CreateReportRequest request);
     }
 }

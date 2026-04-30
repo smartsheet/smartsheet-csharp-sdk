@@ -5,12 +5,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 ### Added
+- Add support for PUT /reports/{id}/definition endpoint, Update Report Definition
+- Add 'Add Report Scope' and 'Remove Report Scope' endpoint support to ReportResources
+- Add 'Add Report Columns' endpoint support to ReportResources (POST /2.0/reports/{reportId}/columns)
+- Add support for DELETE /reports/{id} endpoint, Delete Report
+- Add 'Create Report' endpoint support to ReportResources (POST /2.0/reports)
 - Support for CONTRIBUTOR seat type in SeatType enum
 - Support for CONTRIBUTOR seat type in DowngradeSeatType enum
 - Support for `displayContributorSeatType` query parameter in GET /2.0/users endpoint
 - Support for `displayContributorSeatType` query parameter in GET /2.0/users/{userId}/plans endpoint
 - WireMock integration tests for `displayContributorSeatType` parameter functionality
 - Stream-based attachment upload support. Added `AttachFile` and `AttachNewVersion` method overloads that accept `Stream` parameters for `RowAttachmentResources`, `SheetAttachmentResources`, `CommentAttachmentResources`, and `AttachmentVersioningResources`. This enables direct upload from memory without requiring temporary files. Fixes [#178](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/178)
+
+
+### Refactor
+- Resolved double assignment of parameter in AbstractResources.cs
+- Refactored ObjectValueTypeConverter and FilterValueTypeConverter to extend a common PrimitiveValueConverter base class, reducing code duplication for primitive type handling (string, number, boolean, null)
 
 ## [6.6.6] - 2026-03-25
 ### Fixed

@@ -17,13 +17,13 @@
 //    %[license]
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Smartsheet.Api.Internal.Utility;
 using Smartsheet.Api.Models;
 using Smartsheet.Api.Internal.Util;
 using System.IO;
 using Smartsheet.Api.Internal.Http;
 using System.Net;
+using Utils = Smartsheet.Api.Internal.Utility.Utility;
+using System.Linq;
 
 namespace Smartsheet.Api.Internal
 {
@@ -209,6 +209,23 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// <para>Deletes a report.</para>
+        /// 
+        /// <para>Mirrors the following Smartsheet REST API method: DELETE /reports/{reportId}</para>
+        /// </summary>
+        /// <param name="reportId"> the report Id </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual void DeleteReport(long reportId)
+        {
+            this.DeleteResource<Report>("reports/" + reportId, typeof(Report));
+        }
+
+        /// <summary>
         /// <para>Get the publish status of a report.</para>
         /// 
         /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{id}/publish</para>
@@ -309,6 +326,223 @@ namespace Smartsheet.Api.Internal
             }
 
             Smartsheet.HttpClient.ReleaseConnection();
+        }
+
+        /// <summary>
+        /// Update a Report's definition based on the specified ID
+        /// <para>Note:</para>
+        /// <para>This endpoint supports partial updates <b>only on root level</b> properties of the report definition, such as <c>filters</c>, <c>groupingCriteria</c> and <c>summarizingCriteria</c>. For example, you can update the report's filters without affecting its grouping criteria. However, nested properties within these objects, such as a specific filter or grouping criterion, cannot be updated individually and require a full replacement of the respective section.</para>
+        /// 
+        /// <para>It mirrors to the following Smartsheet REST API method: PUT /reports/{reportId}/definition</para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="reportDefinition"> the ReportDefinition object </param>
+        public void UpdateReportDefinition(long reportId, ReportDefinition reportDefinition)
+        {
+            string path = "reports/" + reportId + "/definition";
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.PUT);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity(reportDefinition);
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+        }
+
+        /// <summary>
+        /// <para>
+        /// Adds one or more specified sheet or workspace to the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public void AddReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
+        {
+            string path = "reports/" + reportId + "/scope";
+
+            Utils.ThrowIfNull(scopes);
+            if (scopes.Count() == 0)
+            {
+                throw new ArgumentException("scopes must contain at least one item");
+            }
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.POST);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity(scopes);
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+        }
+
+        /// <summary>
+        /// <para>
+        /// Removes one or more specified sheet or workspace from the report scope.
+        /// </para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="scopes"> an array of one or more objects denoting the sheets or workspaces associated with the report </param>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if scopes are empty </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public void RemoveReportScope(long reportId, IEnumerable<ReportScopeInclusion> scopes)
+        {
+            string path = "reports/" + reportId + "/scope";
+
+            Utils.ThrowIfNull(scopes);
+            if (scopes.Count() == 0)
+            {
+                throw new ArgumentException("scopes must contain at least one item");
+            }
+
+            HttpRequest request;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.DELETE);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity(scopes);
+
+            HttpResponse response = smartsheet.HttpClient.Request(request);
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+        }
+
+        /// <summary>
+        /// <para>
+        /// Add columns to a report specified by a report ID. Note: all indexes of the columns must be equal.
+        /// </para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /reports/{reportId}/columns</para>
+        /// </summary>
+        /// <param name="reportId"> the reportId </param>
+        /// <param name="reportColumns"> list of report columns to be added (minItems: 1, maxItems: 400) </param>
+        /// <returns> list of report columns that were added </returns>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="ArgumentException"> if reportColumns list is empty or exceeds 400 items </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public IList<ReportColumn> AddReportColumns(long reportId, IEnumerable<ReportColumn> reportColumns)
+        {
+            Utils.ThrowIfNull(reportColumns);
+
+            int columnCount = reportColumns.Count();
+            if (columnCount == 0)
+            {
+                throw new ArgumentException("reportColumns list must contain at least one item");
+            }
+
+            string path = "reports/" + reportId + "/columns";
+            return this.PostAndReceiveList<IEnumerable<ReportColumn>, ReportColumn>(path, reportColumns, typeof(ReportColumn));
+        }
+
+        /// <summary>
+        /// <para>
+        /// Create a new report by specifying name, destination, scope, columns and definition.
+        /// </para>
+        /// <para>It mirrors to the following Smartsheet REST API method: POST /reports</para>
+        /// </summary>
+        /// <param name="request"> the create report request containing name, destination, scope, columns, and optional definition </param>
+        /// <returns> the created report result containing id, name, accessLevel, and permalink </returns>
+        /// <exception cref="InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public CreateReportResult CreateReport(CreateReportRequest request)
+        {
+            Utils.ThrowIfNull(request);
+
+            HttpRequest httpRequest;
+            try
+            {
+                httpRequest = CreateHttpRequest(new Uri(smartsheet.BaseURI, "reports"), HttpMethod.POST);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            httpRequest.Entity = serializeToEntity(request);
+
+            HttpResponse response = smartsheet.HttpClient.Request(httpRequest);
+
+            CreateReportResult result;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    result = smartsheet.JsonSerializer.deserializeResult<CreateReportResult>(response.Entity.GetContent()).Result;
+                    break;
+                default:
+                    HandleError(response);
+                    return null;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+
+            return result;
         }
     }
 }

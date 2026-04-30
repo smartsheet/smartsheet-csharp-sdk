@@ -27,10 +27,8 @@ namespace Smartsheet.Api.Internal.Json
     /// <summary>
     /// Helper class to convert object types
     /// </summary>
-    class ObjectValueTypeConverter : JsonConverter
+    class ObjectValueTypeConverter : PrimitiveValueConverter
     {
-        private readonly bool _enableDecimalObjectValue;
-
         /// <summary>
         /// Constructor that accepts configuration for decimal object value handling.
         /// </summary>
@@ -38,9 +36,8 @@ namespace Smartsheet.Api.Internal.Json
         /// If true, numeric values are deserialized as DecimalObjectValue preserving decimal precision.
         /// If false, numeric values are deserialized as NumberObjectValue converting to double (default behavior).
         /// </param>
-        public ObjectValueTypeConverter(bool enableDecimalObjectValue)
+        public ObjectValueTypeConverter(bool enableDecimalObjectValue) : base(enableDecimalObjectValue)
         {
-            _enableDecimalObjectValue = enableDecimalObjectValue;
         }
 
         /// <summary>
@@ -125,41 +122,8 @@ namespace Smartsheet.Api.Internal.Json
             }
             else
             {
-                if (reader.TokenType == JsonToken.Boolean)
-                {
-                    objectValue = new BooleanObjectValue((bool)reader.Value);
-                }
-                else if (reader.TokenType == JsonToken.Integer)
-                {
-                    if (_enableDecimalObjectValue)
-                    {
-                        objectValue = new DecimalObjectValue(Convert.ToDecimal(reader.Value));
-                    }
-                    else
-                    {
-                        objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
-                    }
-                }
-                else if (reader.TokenType == JsonToken.Float)
-                {
-                    if (_enableDecimalObjectValue)
-                    {
-                        objectValue = new DecimalObjectValue((decimal)reader.Value);
-                    }
-                    else
-                    {
-                        // reader.Value is decimal due to FloatParseHandling.Decimal, convert to double
-                        objectValue = new NumberObjectValue(Convert.ToDouble(reader.Value));
-                    }
-                }
-                else if (reader.TokenType == JsonToken.Date)
-                {
-                    objectValue = new StringObjectValue(((DateTime)reader.Value).ToString("yyyy-MM-ddTHH:mm:ssZ"));
-                }
-                else
-                {
-                    objectValue = new StringObjectValue((string)reader.Value);
-                }
+                // Handle primitives using base class
+                objectValue = (ObjectValue)ReadPrimitiveValue(reader);
             }
             return objectValue;
         }
@@ -180,6 +144,32 @@ namespace Smartsheet.Api.Internal.Json
             serializerHelper.ContractResolver = new ContractResolver();
             serializerHelper.Converters.Add(new JsonEnumTypeConverter());
             serializerHelper.Serialize(writer, value);
+        }
+
+        protected override object CreateBooleanValue(bool value)
+        {
+            return new BooleanObjectValue(value);
+        }
+
+        protected override object CreateNumberValue(double value)
+        {
+            return new NumberObjectValue(value);
+        }
+
+        protected override object CreateDecimalValue(decimal value)
+        {
+            return new DecimalObjectValue(value);
+        }
+
+        protected override object CreateStringValue(string value)
+        {
+            return new StringObjectValue(value);
+        }
+
+        protected override object CreateNullValue()
+        {
+            // ObjectValue doesn't have a null value object, return null
+            return null;
         }
 
         /// <summary>

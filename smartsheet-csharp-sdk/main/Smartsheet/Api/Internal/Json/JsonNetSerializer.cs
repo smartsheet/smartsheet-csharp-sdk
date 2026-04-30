@@ -88,6 +88,9 @@ namespace Smartsheet.Api.Internal.Json
             // Handles objectValue serialization
             serializer.Converters.Add(new ObjectValueTypeConverter(false));
 
+            // Handles report filter value serialization
+            serializer.Converters.Add(new ReportFilterValueTypeConverter());
+
             // Handles widget content deserialization
             serializer.Converters.Add(new WidgetContentConverter());
 
