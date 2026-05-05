@@ -862,5 +862,28 @@ namespace Smartsheet.Api.Internal
                 output.Write(buffer, 0, len);
             }
         }
+
+        /// <summary>
+        /// <para>Sets the data classification of a sheet.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: PUT /sheets/{sheetId}/dataclassification</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="dataClassification"> the data classification to set </param>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual void SetDataClassification(long sheetId, SheetDataClassification dataClassification)
+        {
+            this.UpdateResource("sheets/" + sheetId + "/dataclassification", typeof(SheetDataClassification), dataClassification);
+        }
+
+        /// <summary>
+        /// <para>Removes the data classification of a sheet.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: DELETE /sheets/{sheetId}/dataclassification</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual void DeleteDataClassification(long sheetId)
+        {
+            this.DeleteResource<SheetDataClassification>("sheets/" + sheetId + "/dataclassification", typeof(SheetDataClassification));
+        }
     }
 }
