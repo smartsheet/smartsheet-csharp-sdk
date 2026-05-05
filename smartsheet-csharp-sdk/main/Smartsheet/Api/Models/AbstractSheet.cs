@@ -79,6 +79,11 @@ namespace Smartsheet.Api.Models
         private bool? dependenciesEnabled;
 
         /// <summary>
+        /// Represents the data classification of the sheet.
+        /// </summary>
+        private DataClassificationType? dataClassification;
+
+        /// <summary>
         /// Represents the discussions for the sheet.
         /// </summary>
         private IList<Discussion> discussions;
@@ -270,6 +275,16 @@ namespace Smartsheet.Api.Models
         {
             get { return dependenciesEnabled; }
             set { dependenciesEnabled = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the data classification of the sheet.
+        /// </summary>
+        /// <returns> the data classification </returns>
+        public DataClassificationType? DataClassification
+        {
+            get { return dataClassification; }
+            set { dataClassification = value; }
         }
 
         /// <summary>
