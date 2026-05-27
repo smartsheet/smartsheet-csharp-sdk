@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+### Added
+- AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
+
 ## [6.7.0] - 2026-04-30
 ### Added
 - Add support for PUT /reports/{id}/definition endpoint, Update Report Definition

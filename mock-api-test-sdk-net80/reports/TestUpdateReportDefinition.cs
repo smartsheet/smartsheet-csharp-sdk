@@ -7,8 +7,149 @@ namespace mock_api_test_sdk_net80
     [TestClass]
     public class TestUpdateReportDefinition
     {
+        private static readonly ReportDefinition DEFINITION_ALL = new ReportDefinition
+        {
+            SummarizingCriteria = new List<ReportSummarizingCriterion>
+            {
+                new ReportSummarizingCriterion
+                {
+                    AggregationType = ReportAggregationType.COUNT,
+                    Column = new ReportColumnIdentifier
+                    {
+                        Primary = true,
+                        Type = ColumnType.TEXT_NUMBER,
+                        SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                        Title = "Primary Column",
+                    }
+                }
+            },
+            Filters = new ReportFilterExpression
+            {
+                Operator = ReportFilterOperator.AND,
+                Criteria = new List<ReportFilterCriterion>
+                {
+                    new ReportFilterCriterion
+                    {
+                        Column = new ReportColumnIdentifier
+                        {
+                            Primary = true,
+                            Type = ColumnType.TEXT_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                            Title = "Primary Column",
+                        },
+                        Operator = ReportFilterCriteriaOperator.EQUAL,
+                        Values = new List<ReportFilterValue> { new StringReportFilterValue("Test") },
+                    }
+                }
+            },
+            GroupingCriteria = new List<ReportGroupingCriterion>
+            {
+                new ReportGroupingCriterion
+                {
+                    Column = new ReportColumnIdentifier
+                    {
+                        Primary = true,
+                        Type = ColumnType.TEXT_NUMBER,
+                        SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                        Title = "Primary Column",
+                    },
+                    SortingDirection = SortDirection.ASCENDING,
+                    IsExpanded = true
+                }
+            },
+            SortingCriteria = new List<ReportSortingCriterion>
+            {
+                new ReportSortingCriterion
+                {
+                    Column = new ReportColumnIdentifier
+                    {
+                        Primary = true,
+                        Type = ColumnType.TEXT_NUMBER,
+                        SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                        Title = "Primary Column",
+                    },
+                    SortingDirection = SortDirection.ASCENDING
+                }
+            },
+        };
+
+        private static readonly string EXPECTED_ALL_REQUEST_BODY = JsonConvert.SerializeObject(new Dictionary<string, object>
+        {
+            { "filters", new Dictionary<string, object>
+                    {
+                        { "operator", "AND" },
+                        { "criteria", new List<Dictionary<string, object>>
+                            {
+                                new Dictionary<string, object>
+                                {
+                                    { "column", new Dictionary<string, object>
+                                        {
+                                            { "title", "Primary Column" },
+                                            { "type", "TEXT_NUMBER" },
+                                            { "systemColumnType", "AUTO_NUMBER" },
+                                            { "primary", true },
+                                        }
+                                    },
+                                    { "operator", "EQUAL" },
+                                    { "values", new List<string> { "Test" } }
+                                }
+                            }
+                        }
+                    }
+            },
+            { "groupingCriteria", new List<Dictionary<string, object>>
+                {
+                    new Dictionary<string, object>
+                    {
+                        { "column", new Dictionary<string, object>
+                            {
+                                { "title", "Primary Column" },
+                                { "type", "TEXT_NUMBER" },
+                                { "systemColumnType", "AUTO_NUMBER" },
+                                { "primary", true },
+                            }
+                        },
+                        { "sortingDirection", "ASCENDING" },
+                        { "isExpanded", true }
+                    }
+                }
+            },
+            { "summarizingCriteria", new List<Dictionary<string, object>>
+                {
+                    new Dictionary<string, object>
+                    {
+                        { "column", new Dictionary<string, object>
+                            {
+                                { "title", "Primary Column" },
+                                { "type", "TEXT_NUMBER" },
+                                { "systemColumnType", "AUTO_NUMBER" },
+                                { "primary", true },
+                            }
+                        },
+                        { "aggregationType", "COUNT" }
+                    }
+                }
+            },
+            { "sortingCriteria", new List<Dictionary<string, object>>
+                {
+                    new Dictionary<string, object>
+                    {
+                        { "column", new Dictionary<string, object>
+                            {
+                                { "title", "Primary Column" },
+                                { "type", "TEXT_NUMBER" },
+                                { "systemColumnType", "AUTO_NUMBER" },
+                                { "primary", true },
+                            }
+                        },
+                        { "sortingDirection", "ASCENDING" },
+                    }
+                }
+            },
+        });
+
         [TestMethod]
-        public async Task TestUpdateReportDefinitionAllGeneratedUrlIsCorrect()
+        public async Task TestUpdateReportDefinitionGeneratedUrlIsCorrect()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
@@ -25,6 +166,7 @@ namespace mock_api_test_sdk_net80
 
             Assert.AreEqual($"/2.0/reports/{CommonTestConstants.TEST_REPORT_ID}/definition", path);
             Assert.AreEqual("PUT", foundRequest.Method);
+            Assert.AreEqual(string.Empty, uri.Query);
         }
 
         [TestMethod]
@@ -33,153 +175,12 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
 
-            ReportDefinition definition = new ReportDefinition
-            {
-                SummarizingCriteria = new List<ReportSummarizingCriterion>
-                {
-                    new ReportSummarizingCriterion
-                    {
-                        AggregationType = ReportAggregationType.COUNT,
-                        Column = new ReportColumnIdentifier
-                        {
-                            Primary = true,
-                            Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                            Title = "Primary Column",
-                        }
-                    }
-                },
-                Filters = new ReportFilterExpression
-                {
-                    Operator = ReportFilterOperator.AND,
-                    Criteria = new List<ReportFilterCriterion>
-                    {
-                        new ReportFilterCriterion
-                        {
-                            Column = new ReportColumnIdentifier
-                            {
-                                Primary = true,
-                                Type = ColumnType.TEXT_NUMBER,
-                                SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                                Title = "Primary Column",
-                            },
-                            Operator = ReportFilterCriteriaOperator.EQUAL,
-                            Values = new List<ReportFilterValue> { new StringReportFilterValue("Test") },
-                        }
-                    }
-                },
-                GroupingCriteria = new List<ReportGroupingCriterion>
-                {
-                    new ReportGroupingCriterion
-                    {
-                        Column = new ReportColumnIdentifier
-                        {
-                            Primary = true,
-                            Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                            Title = "Primary Column",
-                        },
-                        SortingDirection = SortDirection.ASCENDING,
-                        IsExpanded = true
-                    }
-                },
-                SortingCriteria = new List<ReportSortingCriterion>
-                {
-                    new ReportSortingCriterion
-                    {
-                        Column = new ReportColumnIdentifier
-                        {
-                            Primary = true,
-                            Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                            Title = "Primary Column",
-                        },
-                        SortingDirection = SortDirection.ASCENDING
-                    }
-                },
-            };
-
-            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, definition);
+            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, DEFINITION_ALL);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
 
-            var expectedBody = JsonConvert.SerializeObject(new Dictionary<string, object>
-            {
-                { "filters", new Dictionary<string, object>
-                        {
-                            { "operator", "AND" },
-                            { "criteria", new List<Dictionary<string, object>>
-                                {
-                                    new Dictionary<string, object>
-                                    {
-                                        { "column", new Dictionary<string, object>
-                                            {
-                                                { "title", "Primary Column" },
-                                                { "type", "TEXT_NUMBER" },
-                                                { "systemColumnType", "AUTO_NUMBER" },
-                                                { "primary", true },
-                                            }
-                                        },
-                                        { "operator", "EQUAL" },
-                                        { "values", new List<string> { "Test" } }
-                                    }
-                                }
-                            }
-                        }
-                },
-                { "groupingCriteria", new List<Dictionary<string, object>>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            { "column", new Dictionary<string, object>
-                                {
-                                    { "title", "Primary Column" },
-                                    { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
-                                    { "primary", true },
-                                }
-                            },
-                            { "sortingDirection", "ASCENDING" },
-                            { "isExpanded", true }
-                        }
-                    }
-                },
-                { "summarizingCriteria", new List<Dictionary<string, object>>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            { "column", new Dictionary<string, object>
-                                {
-                                    { "title", "Primary Column" },
-                                    { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
-                                    { "primary", true },
-                                }
-                            },
-                            { "aggregationType", "COUNT" }
-                        }
-                    }
-                },
-                { "sortingCriteria", new List<Dictionary<string, object>>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            { "column", new Dictionary<string, object>
-                                {
-                                    { "title", "Primary Column" },
-                                    { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
-                                    { "primary", true },
-                                }
-                            },
-                            { "sortingDirection", "ASCENDING" },
-                        }
-                    }
-                },
-            });
-
-            Assert.AreEqual(expectedBody, foundRequest.Body);
+            Assert.AreEqual(EXPECTED_ALL_REQUEST_BODY, foundRequest.Body);
         }
 
         [TestMethod]
@@ -198,160 +199,6 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(expectedBody, foundRequest.Body);
         }
 
-        [TestMethod]
-        public async Task TestUpdateReportDefinitionAllRequestBody()
-        {
-            Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
-
-            ReportDefinition reportDefinition = new ReportDefinition
-            {
-                SummarizingCriteria = new List<ReportSummarizingCriterion>
-                {
-                    new ReportSummarizingCriterion
-                    {
-                        AggregationType = ReportAggregationType.COUNT,
-                        Column = new ReportColumnIdentifier
-                        {
-                            Primary = true,
-                            Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                            Title = "Primary Column",
-                        }
-                    }
-                },
-                Filters = new ReportFilterExpression
-                {
-                    Operator = ReportFilterOperator.AND,
-                    Criteria = new List<ReportFilterCriterion>
-                    {
-                        new ReportFilterCriterion
-                        {
-                            Column = new ReportColumnIdentifier
-                            {
-                                Primary = true,
-                                Type = ColumnType.TEXT_NUMBER,
-                                SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                                Title = "Primary Column",
-                            },
-                            Operator = ReportFilterCriteriaOperator.EQUAL,
-                            Values = new List<ReportFilterValue> { new StringReportFilterValue("Test") },
-                        }
-                    }
-                },
-                GroupingCriteria = new List<ReportGroupingCriterion>
-                {
-                    new ReportGroupingCriterion
-                    {
-                        Column = new ReportColumnIdentifier
-                        {
-                            Primary = true,
-                            Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                            Title = "Primary Column",
-                        },
-                        SortingDirection = SortDirection.ASCENDING,
-                        IsExpanded = true
-                    }
-                },
-                SortingCriteria = new List<ReportSortingCriterion>
-                {
-                    new ReportSortingCriterion
-                    {
-                        Column = new ReportColumnIdentifier
-                        {
-                            Primary = true,
-                            Type = ColumnType.TEXT_NUMBER,
-                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
-                            Title = "Primary Column",
-                        },
-                        SortingDirection = SortDirection.ASCENDING
-                    }
-                },
-            };
-
-            smartsheet.ReportResources.UpdateReportDefinition(CommonTestConstants.TEST_REPORT_ID, reportDefinition);
-
-            WiremockHelper wiremockHelper = new WiremockHelper();
-            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
-
-            var expectedBody = JsonConvert.SerializeObject(new Dictionary<string, object>
-            {
-                { "filters", new Dictionary<string, object>
-                        {
-                            { "operator", "AND" },
-                            { "criteria", new List<Dictionary<string, object>>
-                                {
-                                    new Dictionary<string, object>
-                                    {
-                                        { "column", new Dictionary<string, object>
-                                            {
-                                                { "title", "Primary Column" },
-                                                { "type", "TEXT_NUMBER" },
-                                                { "systemColumnType", "AUTO_NUMBER" },
-                                                { "primary", true },
-                                            }
-                                        },
-                                        { "operator", "EQUAL" },
-                                        { "values", new List<string> { "Test" } }
-                                    }
-                                }
-                            }
-                        }
-                },
-                { "groupingCriteria", new List<Dictionary<string, object>>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            { "column", new Dictionary<string, object>
-                                {
-                                    { "title", "Primary Column" },
-                                    { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
-                                    { "primary", true },
-                                }
-                            },
-                            { "sortingDirection", "ASCENDING" },
-                            { "isExpanded", true }
-                        }
-                    }
-                },
-                { "summarizingCriteria", new List<Dictionary<string, object>>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            { "column", new Dictionary<string, object>
-                                {
-                                    { "title", "Primary Column" },
-                                    { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
-                                    { "primary", true },
-                                }
-                            },
-                            { "aggregationType", "COUNT" }
-                        }
-                    }
-                },
-                { "sortingCriteria", new List<Dictionary<string, object>>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            { "column", new Dictionary<string, object>
-                                {
-                                    { "title", "Primary Column" },
-                                    { "type", "TEXT_NUMBER" },
-                                    { "systemColumnType", "AUTO_NUMBER" },
-                                    { "primary", true },
-                                }
-                            },
-                            { "sortingDirection", "ASCENDING" },
-                        }
-                    }
-                },
-            });
-
-            Assert.AreEqual(expectedBody, foundRequest.Body);
-        }
 
         [TestMethod]
         public async Task TestUpdateReportDefinitionFiltersOnlyRequestBody()
@@ -480,13 +327,40 @@ namespace mock_api_test_sdk_net80
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
 
-            // Verify the request body contains all value types
-            Assert.IsTrue(foundRequest.Body.Contains("\"Test String\""));
-            Assert.IsTrue(foundRequest.Body.Contains("42.5"));
-            Assert.IsTrue(foundRequest.Body.Contains("null"));
-            Assert.IsTrue(foundRequest.Body.Contains("\"objectType\":\"DATE\""));
-            Assert.IsTrue(foundRequest.Body.Contains("\"value\":\"2024-01-15\""));
-            Assert.IsTrue(foundRequest.Body.Contains("\"objectType\":\"CURRENT_USER\""));
+            var expectedBody = JsonConvert.SerializeObject(new Dictionary<string, object>
+            {
+                { "filters", new Dictionary<string, object>
+                    {
+                        { "operator", "AND" },
+                        { "criteria", new List<Dictionary<string, object>>
+                            {
+                                new Dictionary<string, object>
+                                {
+                                    { "column", new Dictionary<string, object>
+                                        {
+                                            { "title", "Primary Column" },
+                                            { "type", "TEXT_NUMBER" },
+                                            { "primary", true },
+                                        }
+                                    },
+                                    { "operator", "EQUAL" },
+                                    { "values", new List<object>
+                                        {
+                                            "Test String",
+                                            42.5,
+                                            null,
+                                            new Dictionary<string, object> { { "objectType", "DATE" }, { "value", "2024-01-15" } },
+                                            new Dictionary<string, object> { { "objectType", "CURRENT_USER" } }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            Assert.AreEqual(expectedBody, foundRequest.Body);
         }
     }
 }
