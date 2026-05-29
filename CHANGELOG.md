@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - ⚠️ **BREAKING**: Removed deprecated `ListWorkspaces(PaginationParameters?)` overload returning `PaginatedResult<Workspace>`. These offset parameters were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). `ListWorkspaces` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Workspace>`. The new shape mirrors `ListSights`.
 - ⚠️ **BREAKING**: Removed `ListWorkspacesTokenPaginationParameters` class. It only added an explicit `PaginationType` property that is already hardcoded to `"token"` in the base `TokenPaginationParameters.toDictionary()`. Use `TokenPaginationParameters` directly with `ListWorkspaces`.
 
+### Changed
+
+- `ListWebhooks` XML documentation updated to reflect Smartsheet API behavior changes effective Jun-03-2026: `includeAll` is no longer honored by the server for this endpoint and is ignored if set on `PaginationParameters` (`PaginationParameters` remains a shared class — other endpoints still support `includeAll`), `PageSize` is server-capped at 10,000, `TotalCount` and `TotalPages` are returned as `-1`, and webhooks are sorted by creation date (most recent first) instead of name. SDK signature unchanged. See [Smartsheet API changelog 2025-08-04](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04).
+
 ## [6.7.0] - 2026-04-30
 ### Added
 - Add support for PUT /reports/{id}/definition endpoint, Update Report Definition
