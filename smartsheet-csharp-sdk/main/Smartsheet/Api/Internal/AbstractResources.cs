@@ -26,6 +26,8 @@ namespace Smartsheet.Api.Internal
     using System.IO;
     using System.Net;
     using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
     using HttpEntity = Api.Internal.Http.HttpEntity;
     using HttpMethod = Api.Internal.Http.HttpMethod;
     using HttpRequest = Api.Internal.Http.HttpRequest;
@@ -204,6 +206,85 @@ namespace Smartsheet.Api.Internal
             }
 
             HttpResponse response = this.smartsheet.HttpClient.Request(request);
+
+            Object obj = null;
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    try
+                    {
+                        obj = this.smartsheet.JsonSerializer.deserialize<T>(response.Entity.GetContent());
+                    }
+                    catch (JsonSerializationException ex)
+                    {
+                        throw new SmartsheetException(ex);
+                    }
+                    catch (Newtonsoft.Json.JsonException ex)
+                    {
+                        throw new SmartsheetException(ex);
+                    }
+                    catch (IOException ex)
+                    {
+                        throw new SmartsheetException(ex);
+                    }
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+
+            return (T)obj;
+        }
+
+        /// <summary>
+        /// Get a resource from SmartsheetClient REST API.
+        /// 
+        /// Parameters: - 
+        ///   path : the relative path of the resource
+        ///   objectClass : the resource object class
+        ///   cancellationToken : the cancellation token
+        /// 
+        /// Returns: the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
+        /// rather than returning null).
+        /// 
+        /// Exceptions: -
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource. </param>
+        /// <param name="objectClass"> the object class </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<T> GetResource<T>(string path, Type objectClass, CancellationToken cancellationToken = default)
+        {
+            Utils.ThrowIfNull(path, objectClass);
+
+            if (path == null || path.Length == 0)
+            {
+                Api.Models.Error error = new Api.Models.Error();
+                error.Message = "An empty path was provided.";
+                throw new ResourceNotFoundException(error);
+            }
+
+            HttpRequest request = null;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.GET);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken);
 
             Object obj = null;
 

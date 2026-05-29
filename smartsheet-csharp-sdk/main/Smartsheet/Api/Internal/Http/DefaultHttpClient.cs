@@ -146,7 +146,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
+        public async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -244,9 +244,10 @@ namespace Smartsheet.Api.Internal.Http
         /// Make an HTTP request and return the response.
         /// </summary>
         /// <param name="smartsheetRequest"> the Smartsheet request </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest)
+        public async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, CancellationToken cancellationToken = default)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -295,7 +296,7 @@ namespace Smartsheet.Api.Internal.Http
 
                 // Make the HTTP request
                 timer.Start();
-                Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
+                Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest, cancellationToken);
                 restResponseAsTask.Wait();
                 restResponse = restResponseAsTask.Result;
                 timer.Stop();

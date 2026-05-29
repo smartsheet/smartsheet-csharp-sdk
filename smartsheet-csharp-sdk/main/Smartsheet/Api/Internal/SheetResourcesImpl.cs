@@ -34,6 +34,8 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Util;
     using System.Text;
     using Smartsheet.Api.Internal.Http;
+    using System.Threading.Tasks;
+    using System.Threading;
 
     /// <summary>
     /// This is the implementation of the SheetResources.
@@ -188,30 +190,7 @@ namespace Smartsheet.Api.Internal
             return this.ListResourcesWithWrapper<Sheet>(path.ToString());
         }
 
-        /// <summary>
-        /// <para>Gets a sheet.</para>
-        /// 
-        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}</para>
-        /// </summary>
-        /// <param name="sheetId"> the Id of the sheet </param>
-        /// <param name="includes"> used to specify the optional objects to include. </param>
-        /// <param name="excludes"> used to specify the optional objects to include. </param>
-        /// <param name="rowIds"> used to specify the optional objects to include. </param>
-        /// <param name="rowNumbers"> used to specify the optional objects to include. </param>
-        /// <param name="columnIds"> used to specify the optional objects to include. </param>
-        /// <param name="pageSize"> used to specify the optional objects to include. </param>
-        /// <param name="page"> used to specify the optional objects to include. </param>
-        /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
-        /// <param name="level"> compatibility level </param>
-        /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
-        /// ResourceNotFoundException rather than returning null). </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+        private IDictionary<string, string> CreateSheetParameters(IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
             IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince, long? ifVersionAfter, int? level)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
@@ -255,7 +234,69 @@ namespace Smartsheet.Api.Internal
                 parameters.Add("level", level.ToString());
             }
 
+            return parameters;
+        }
+
+        /// <summary>
+        /// <para>Gets a sheet.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}</para>
+        /// </summary>
+        /// <param name="sheetId"> the Id of the sheet </param>
+        /// <param name="includes"> used to specify the optional objects to include. </param>
+        /// <param name="excludes"> used to specify the optional objects to include. </param>
+        /// <param name="rowIds"> used to specify the optional objects to include. </param>
+        /// <param name="rowNumbers"> used to specify the optional objects to include. </param>
+        /// <param name="columnIds"> used to specify the optional objects to include. </param>
+        /// <param name="pageSize"> used to specify the optional objects to include. </param>
+        /// <param name="page"> used to specify the optional objects to include. </param>
+        /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
+        /// <param name="level"> compatibility level </param>
+        /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
+        /// ResourceNotFoundException rather than returning null). </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince, long? ifVersionAfter, int? level)
+        {
+            IDictionary<string, string> parameters = CreateSheetParameters(includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, rowsModifiedSince, ifVersionAfter, level);
             return this.GetResource<Sheet>("sheets/" + sheetId + QueryUtil.GenerateUrl(null, parameters), typeof(Sheet));
+        }
+
+        /// <summary>
+        /// <para>Asychronously gets a sheet.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}</para>
+        /// </summary>
+        /// <param name="sheetId"> the Id of the sheet </param>
+        /// <param name="includes"> used to specify the optional objects to include. </param>
+        /// <param name="excludes"> used to specify the optional objects to include. </param>
+        /// <param name="rowIds"> used to specify the optional objects to include. </param>
+        /// <param name="rowNumbers"> used to specify the optional objects to include. </param>
+        /// <param name="columnIds"> used to specify the optional objects to include. </param>
+        /// <param name="pageSize"> used to specify the optional objects to include. </param>
+        /// <param name="page"> used to specify the optional objects to include. </param>
+        /// <param name="rowsModifiedSince"></param>
+        /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
+        /// <param name="level"> compatibility level </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
+        /// ResourceNotFoundException rather than returning null). </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual Task<Sheet> GetSheetAsync(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+            IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince, long? ifVersionAfter, int? level, CancellationToken cancellationToken = default)
+        {
+            IDictionary<string, string> parameters = CreateSheetParameters(includes, excludes, rowIds, rowNumbers, columnIds, pageSize, page, rowsModifiedSince, ifVersionAfter, level);
+            return this.GetResource<Sheet>("sheets/" + sheetId + QueryUtil.GenerateUrl(null, parameters), typeof(Sheet), cancellationToken);
         }
 
         /// <summary>

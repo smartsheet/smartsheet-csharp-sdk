@@ -23,6 +23,8 @@ using System.Collections.Generic;
 namespace Smartsheet.Api
 {
     using System.IO;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Api.Models;
 
     /// <summary>
@@ -111,6 +113,45 @@ namespace Smartsheet.Api
                     DateTime? rowsModifiedSince = null,
                     long? ifVersionAfter = null,
                     int? level = null);
+
+        /// <summary>
+        /// <para>Gets a sheet asynchronously.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}</para>
+        /// </summary>
+        /// <param name="sheetId"> the Id of the sheet </param>
+        /// <param name="includes"> used to specify the optional objects to include. </param>
+        /// <param name="excludes"> used to specify the optional objects to include. </param>
+        /// <param name="rowIds"> used to specify the optional objects to include. </param>
+        /// <param name="rowNumbers"> used to specify the optional objects to include. </param>
+        /// <param name="columnIds"> used to specify the optional objects to include. </param>
+        /// <param name="pageSize"> used to specify the optional objects to include. </param>
+        /// <param name="page"> used to specify the optional objects to include. </param>
+        /// <param name="rowsModifiedSince"></param>
+        /// <param name="ifVersionAfter"></param>
+        /// <param name="level"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
+        /// ResourceNotFoundException rather than returning null). </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<Sheet> GetSheetAsync(
+                    long sheetId,
+                    IEnumerable<SheetLevelInclusion>? includes = null,
+                    IEnumerable<SheetLevelExclusion>? excludes = null,
+                    IEnumerable<long>? rowIds = null,
+                    IEnumerable<int>? rowNumbers = null,
+                    IEnumerable<long>? columnIds = null,
+                    long? pageSize = null,
+                    long? page = null,
+                    DateTime? rowsModifiedSince = null,
+                    long? ifVersionAfter = null,
+                    int? level = null,
+                    CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Gets a sheet as an Excel file.</para>
