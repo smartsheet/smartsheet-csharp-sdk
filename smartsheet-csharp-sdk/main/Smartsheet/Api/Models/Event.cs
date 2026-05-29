@@ -56,6 +56,12 @@ namespace Smartsheet.Api.Models
         private object objectId;
 
         /// <summary>
+        /// The alphanumeric identifier of the object impacted by the event.
+        /// Present for object types that use string-based identifiers.
+        /// </summary>
+        private string objectIdStr;
+
+        /// <summary>
         /// The Smartsheet resource impacted by the event
         /// </summary>
         private EventObjectType objectType;
@@ -132,6 +138,17 @@ namespace Smartsheet.Api.Models
         {
             get { return objectId; }
             set { objectId = value; }
+        }
+
+        /// <summary>
+        /// Gets the alphanumeric identifier of the object impacted by the event.
+        /// Present for object types that use string-based identifiers.
+        /// </summary>
+        /// <returns>the alphanumeric object ID string, or null if not present</returns>
+        public string ObjectIdStr
+        {
+            get { return objectIdStr; }
+            set { objectIdStr = value; }
         }
 
         /// <summary>
