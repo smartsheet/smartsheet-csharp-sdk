@@ -34,20 +34,6 @@ namespace Smartsheet.Api
         /// <summary>
         /// <para>List all Workspaces.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /Workspaces</para>
-        /// <remarks>This operation supports pagination of results. For more information, see Paging.</remarks>
-        /// </summary>
-        /// <returns> the list of Workspaces (note that an empty list will be returned if there are none) </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        PaginatedResult<Workspace> ListWorkspaces(PaginationParameters? paging = null);
-
-        /// <summary>
-        /// <para>List all Workspaces using token-based pagination.</para>
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /Workspaces</para>
         /// <remarks>This operation supports token-based pagination of results.</remarks>
         /// </summary>
         /// <param name="tokenPaging">Token-based pagination parameters</param>
@@ -58,7 +44,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        TokenPaginatedResult<Workspace> ListWorkspaces(ListWorkspacesTokenPaginationParameters? tokenPaging);
+        TokenPaginatedResult<Workspace> ListWorkspaces(TokenPaginationParameters? tokenPaging = null);
 
         /// <summary>
         /// <para>Gets the specified Workspace (and lists its contents).</para>

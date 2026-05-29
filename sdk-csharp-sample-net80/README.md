@@ -57,7 +57,7 @@ Edit `sdk-csharp-sample-net80.csproj` and change the `<StartupObject>` to point 
 
 ```csharp
 // Create token pagination parameters for ListWorkspaces
-ListWorkspacesTokenPaginationParameters tokenParams = new ListWorkspacesTokenPaginationParameters(null, 100);
+TokenPaginationParameters tokenParams = new TokenPaginationParameters(null, 100);
 
 // Get first page
 TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
@@ -65,10 +65,7 @@ TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorks
 // Navigate to next page using lastKey
 if (result.LastKey != null)
 {
-    ListWorkspacesTokenPaginationParameters nextPageParams = new ListWorkspacesTokenPaginationParameters(result.LastKey, 100);
+    TokenPaginationParameters nextPageParams = new TokenPaginationParameters(result.LastKey, 100);
     TokenPaginatedResult<Workspace> nextPage = smartsheet.WorkspaceResources.ListWorkspaces(nextPageParams);
 }
-
-// For other operations that do not require params specific to ListWorkspaces, use the base class.
-TokenPaginationParameters baseParams = new TokenPaginationParameters(null, 200);
 ```
