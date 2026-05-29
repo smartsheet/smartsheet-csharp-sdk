@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
 
+### Removed
+- ⚠️ **BREAKING**: Removed deprecated `ListSights(PaginationParameters?, DateTime?)` overload and `modifiedSince` parameter from `ListSights`. These were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#deprecated-includeall-and-offset-based-pagination-for-dashboards) (sunset Jun-03-2026). `ListSights` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Sight>`. The response no longer includes `TotalCount`, `TotalPages`, `PageNumber`, or `PageSize`.
+
 ## [6.7.0] - 2026-04-30
 ### Added
 - Add support for PUT /reports/{id}/definition endpoint, Update Report Definition
