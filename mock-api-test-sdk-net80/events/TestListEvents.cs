@@ -161,7 +161,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/events/list-events/all-response-body-properties", requestId.ToString());
 
-            smartsheet.EventResources.ListEvents(SINCE, null, 100, false);
+            smartsheet.EventResources.ListEvents(SINCE, NEXT_STREAM_POSITION, 100, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -177,6 +177,7 @@ namespace mock_api_test_sdk_net80
                 new Dictionary<string, string>
                 {
                     { "since", SINCE_STRING },
+                    { "streamPosition", NEXT_STREAM_POSITION },
                     { "maxCount", "100" },
                     { "numericDates", "False" }
                 },
