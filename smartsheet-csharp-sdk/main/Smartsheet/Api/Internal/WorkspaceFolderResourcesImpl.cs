@@ -22,7 +22,6 @@ using System.Collections.Generic;
 namespace Smartsheet.Api.Internal
 {
     using Api.Models;
-    using System.Text;
 
     /// <summary>
     /// This is the implementation of the WorkspaceFolderResources.
@@ -40,37 +39,6 @@ namespace Smartsheet.Api.Internal
         public WorkspaceFolderResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {
-        }
-
-        /// <summary>
-        /// <para>List Folders of a given workspace.</para>
-        ///
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceId}/Folders</para>
-        /// </summary>
-        /// <param name="workspaceId">the workspace Id</param>
-        /// <param name="paging">the pagination information</param>
-        /// <returns>the list of Folders (note that an empty list will be returned if no child folder is found), limited to the following attributes:
-        /// <list type="bullet">
-        /// <item><description>id</description></item>
-        /// <item><description>name</description></item>
-        /// <item><description>permalink</description></item>
-        /// </list>
-        /// </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        [Obsolete("This method is deprecated. Use GetWorkspaceChildren instead.")]
-        public virtual PaginatedResult<Folder> ListFolders(long workspaceId, PaginationParameters? paging)
-        {
-            StringBuilder path = new StringBuilder("workspaces/" + workspaceId + "/folders");
-            if (paging != null)
-            {
-                path.Append(paging.ToQueryString());
-            }
-            return this.ListResourcesWithWrapper<Folder>(path.ToString());
         }
 
         /// <summary>
