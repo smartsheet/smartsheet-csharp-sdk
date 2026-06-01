@@ -47,13 +47,6 @@ namespace Smartsheet.Api.Internal
         private WorkspaceSheetResources sheets;
 
         /// <summary>
-        /// Represents the ShareResources.
-        ///
-        /// It will be initialized in constructor and will not change afterwards.
-        /// </summary>
-        private ShareResources shares;
-
-        /// <summary>
         /// Constructor.
         ///
         /// Exceptions:
@@ -65,7 +58,6 @@ namespace Smartsheet.Api.Internal
         {
             this.folders = new WorkspaceFolderResourcesImpl(smartsheet);
             this.sheets = new WorkspaceSheetResourcesImpl(smartsheet);
-            this.shares = new ShareResourcesImpl(smartsheet, "workspaces");
         }
 
         /// <summary>
@@ -196,15 +188,6 @@ namespace Smartsheet.Api.Internal
         public virtual WorkspaceFolderResources FolderResources
         {
             get { return this.folders; }
-        }
-
-        /// <summary>
-        /// Return the ShareResources object that provides access to Share resources associated with Workspace resources.
-        /// </summary>
-        /// <returns> the share resources </returns>
-        public virtual ShareResources ShareResources
-        {
-            get { return this.shares; }
         }
 
         /// <summary>

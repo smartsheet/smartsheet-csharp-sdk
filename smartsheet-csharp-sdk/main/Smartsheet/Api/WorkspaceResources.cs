@@ -126,13 +126,6 @@ namespace Smartsheet.Api
         WorkspaceSheetResources SheetResources { get; }
 
         /// <summary>
-        /// <para>Return the ShareResources object that provides access to Share resources associated with Workspace
-        /// resources.</para>
-        /// </summary>
-        /// <returns> the share resources object </returns>
-        ShareResources ShareResources { get; }
-
-        /// <summary>
         /// <para>Gets a page of a workspace's children of the specified type.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceId}/children</para>
         /// </summary>

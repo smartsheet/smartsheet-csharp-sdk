@@ -48,12 +48,6 @@ namespace Smartsheet.Api.Internal
         private const int BUFFER_SIZE = 4098;
 
         /// <summary>
-        /// Represents the ShareResources.
-        /// 
-        /// It will be initialized in the constructor and will not change afterwards.
-        /// </summary>
-        private ShareResources shares;
-        /// <summary>
         /// Represents the SheetRowResources.
         /// 
         /// It will be initialized in the constructor and will not change afterwards.
@@ -123,7 +117,6 @@ namespace Smartsheet.Api.Internal
         public SheetResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {
-            this.shares = new ShareResourcesImpl(smartsheet, "sheets");
             this.rows = new SheetRowResourcesImpl(smartsheet);
             this.columns = new SheetColumnResourcesImpl(smartsheet);
             this.attachments = new SheetAttachmentResourcesImpl(smartsheet);
@@ -644,15 +637,6 @@ namespace Smartsheet.Api.Internal
             }
             return ImportSheet("sheets/import", file, sheetName, headerRowIndex, primaryColumnIndex, 
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        }
-
-        /// <summary>
-        /// Returns the ShareResources object that provides access to share resources associated with sheet resources.
-        /// </summary>
-        /// <returns> the ShareResources object </returns>
-        public virtual ShareResources ShareResources
-        {
-            get { return this.shares; }
         }
 
         /// <summary>

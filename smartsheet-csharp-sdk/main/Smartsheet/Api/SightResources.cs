@@ -178,11 +178,5 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         SightPublish SetPublishStatus(long sightId, SightPublish sightPublish);
-        
-        /// <summary>
-        /// <para>Returns the ShareResources object that provides access to Share resources associated with Sight resources.</para>
-        /// </summary>
-        /// <returns> the share resources object </returns>
-        ShareResources ShareResources { get; }
     }
 }

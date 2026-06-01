@@ -427,12 +427,6 @@ namespace Smartsheet.Api
         Sheet ImportXlsSheet(string file, string? sheetName = null, int? headerRowIndex = null, int? primaryColumnIndex = null);
 
         /// <summary>
-        /// <para>Returns the ShareResources object that provides access to share resources associated with sheet resources.</para>
-        /// </summary>
-        /// <returns> the ShareResources object </returns>
-        ShareResources ShareResources { get; }
-
-        /// <summary>
         /// <para>Returns the SheetRowResources object that provides access to row resources associated with sheet resources.</para>
         /// </summary>
         /// <returns> the SheetRowResources object </returns>
