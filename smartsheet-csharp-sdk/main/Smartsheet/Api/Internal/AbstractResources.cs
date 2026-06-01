@@ -186,61 +186,13 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual T GetResource<T>(string path, Type objectClass)
         {
-            Utils.ThrowIfNull(path, objectClass);
-
-            if (path == null || path.Length == 0)
-            {
-                Api.Models.Error error = new Api.Models.Error();
-                error.Message = "An empty path was provided.";
-                throw new ResourceNotFoundException(error);
-            }
-
-            HttpRequest request = null;
-            try
-            {
-                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.GET);
-            }
-            catch (Exception e)
-            {
-                throw new SmartsheetException(e);
-            }
-
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
-
-            Object obj = null;
-
-            switch (response.StatusCode)
-            {
-                case HttpStatusCode.OK:
-                    try
-                    {
-                        obj = this.smartsheet.JsonSerializer.deserialize<T>(response.Entity.GetContent());
-                    }
-                    catch (JsonSerializationException ex)
-                    {
-                        throw new SmartsheetException(ex);
-                    }
-                    catch (Newtonsoft.Json.JsonException ex)
-                    {
-                        throw new SmartsheetException(ex);
-                    }
-                    catch (IOException ex)
-                    {
-                        throw new SmartsheetException(ex);
-                    }
-                    break;
-                default:
-                    HandleError(response);
-                    break;
-            }
-
-            smartsheet.HttpClient.ReleaseConnection();
-
-            return (T)obj;
+            var task = GetResourceAsync<T>(path, objectClass);
+            task.Wait();
+            return task.Result;
         }
 
         /// <summary>
-        /// Get a resource from SmartsheetClient REST API.
+        /// Asynchronously get a resource from SmartsheetClient REST API.
         /// 
         /// Parameters: - 
         ///   path : the relative path of the resource
@@ -263,7 +215,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="cancellationToken"> the cancellation token </param>
         /// <returns> the resource </returns>
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
-        protected internal virtual async Task<T> GetResource<T>(string path, Type objectClass, CancellationToken cancellationToken = default)
+        protected internal virtual async Task<T> GetResourceAsync<T>(string path, Type objectClass, CancellationToken cancellationToken = default)
         {
             Utils.ThrowIfNull(path, objectClass);
 
