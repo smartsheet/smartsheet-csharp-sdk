@@ -161,7 +161,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/events/list-events/all-response-body-properties", requestId.ToString());
 
-            smartsheet.EventResources.ListEvents(SINCE, null, null, null);
+            smartsheet.EventResources.ListEvents(SINCE, null, 100, false);
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
@@ -174,7 +174,12 @@ namespace mock_api_test_sdk_net80
 
             var queryParams = HttpUtility.ParseQueryString(uri.Query);
             CollectionAssert.AreEquivalent(
-                new Dictionary<string, string> { { "since", SINCE_STRING } },
+                new Dictionary<string, string>
+                {
+                    { "since", SINCE_STRING },
+                    { "maxCount", "100" },
+                    { "numericDates", "False" }
+                },
                 queryParams.AllKeys.ToDictionary(k => k, k => queryParams[k])
             );
         }
