@@ -236,7 +236,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
 
