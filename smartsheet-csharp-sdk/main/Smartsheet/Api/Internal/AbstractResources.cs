@@ -287,6 +287,29 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual S CreateResource<S, T>(string path, T @object)
         {
+            var task = CreateResourceAsync<S, T>(path, @object);
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// Create a resource using SmartsheetClient REST API.
+        /// 
+        /// Exceptions: 
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="object"> the object to create </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the created resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<S> CreateResourceAsync<S, T>(string path, T @object, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, @object);
             Utils.ThrowIfEmpty(path);
 
@@ -302,7 +325,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -339,6 +362,30 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual T CreateResource<T>(string path, Type objectClass, T @object)
         {
+            var task = CreateResourceAsync<T>(path, objectClass, @object);
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// Create a resource using SmartsheetClient REST API.
+        /// 
+        /// Exceptions: 
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="objectClass"> the resource object class </param>
+        /// <param name="object"> the object to create </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the created resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal async virtual Task<T> CreateResourceAsync<T>(string path, Type objectClass, T @object, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, @object);
             Utils.ThrowIfEmpty(path);
 
@@ -354,7 +401,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -437,6 +484,30 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual T UpdateResource<T>(string path, Type objectClass, T @object)
         {
+            var task = UpdateResourceAsync<T>(path, objectClass, @object);
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// Asynchronously update a resource using SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="objectClass"> the resource object class </param>
+        /// <param name="object"> the object to create </param>
+        /// <returns> the updated resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<T> UpdateResourceAsync<T>(string path, Type objectClass, T @object, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, @object);
             Utils.ThrowIfEmpty(path);
 
@@ -452,7 +523,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)

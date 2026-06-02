@@ -93,6 +93,9 @@ namespace Smartsheet.Api
         /// <param name="columnIds"> used to specify the optional objects to include. </param>
         /// <param name="pageSize"> used to specify the optional objects to include. </param>
         /// <param name="page"> used to specify the optional objects to include. </param>
+        /// <param name="rowsModifiedSince"></param>
+        /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
+        /// <param name="level"> compatibility level </param>
         /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
         /// ResourceNotFoundException rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
@@ -128,9 +131,9 @@ namespace Smartsheet.Api
         /// <param name="pageSize"> used to specify the optional objects to include. </param>
         /// <param name="page"> used to specify the optional objects to include. </param>
         /// <param name="rowsModifiedSince"></param>
-        /// <param name="ifVersionAfter"></param>
-        /// <param name="level"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="ifVersionAfter"> only fetch sheet if more recent version available </param>
+        /// <param name="level"> compatibility level </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <returns> the sheet resource (note that if there is no such resource, this method will throw 
         /// ResourceNotFoundException rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
@@ -302,6 +305,26 @@ namespace Smartsheet.Api
         Sheet UpdateSheet(Sheet sheet);
 
         /// <summary>
+        /// <para>Updates a sheet.</para>
+        /// <para>To modify sheet contents, see Add Rows, Update Rows, and Update Column.</para>
+        /// <para>This operation can be used to update an individual users sheet settings. 
+        /// If the request body contains only the userSettings attribute, 
+        /// this operation may be performed even if the user only has read-only access to the sheet 
+        /// (i.e., the user has viewer permissions, or the sheet is read-only).</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: PUT /sheets/{sheetId}</para>
+        /// </summary>
+        /// <param name="sheet"> the sheet to update </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the updated sheet </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<Sheet> UpdateSheetAsync(Sheet sheet, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// <para>Gets the sheet version without loading the entire sheet.</para>
         /// 
         /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/version</para>
@@ -318,6 +341,23 @@ namespace Smartsheet.Api
         int? GetSheetVersion(long sheetId);
 
         /// <summary>
+        /// <para>Asynchronously gets the sheet version without loading the entire sheet.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/version</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the sheet version (note that if there is no such resource, this method will throw
+        /// ResourceNotFoundException) </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<int?> GetSheetVersionAsync(long sheetId, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// <para>Sends a sheet as a PDF attachment via email to the designated recipients.</para>
         /// 
         /// <para>Mirrors to the following Smartsheet REST API method: POST /sheets/{sheetId}/emails</para>
@@ -331,6 +371,22 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         void SendSheet(long sheetId, SheetEmail email);
+
+        /// <summary>
+        /// <para>Asynchronously sends a sheet as a PDF attachment via email to the designated recipients.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: POST /sheets/{sheetId}/emails</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="email"> the email </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task SendSheetAsync(long sheetId, SheetEmail email, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Creates an update request for the specified rows within the sheet. An email notification
@@ -363,6 +419,22 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         SheetPublish GetPublishStatus(long sheetId);
+
+        /// <summary>
+        /// <para>Asynchronously gets the status of the publish settings of the sheet, including the URLs of any enabled publishings.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/publish</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the publish status (note that if there is no such resource, this method will throw ResourceNotFoundException rather than returning null) </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<SheetPublish> GetPublishStatusAsync(long sheetId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Sets the publish status of a sheet and returns the new status, including the URLs of any enabled publishings.</para>

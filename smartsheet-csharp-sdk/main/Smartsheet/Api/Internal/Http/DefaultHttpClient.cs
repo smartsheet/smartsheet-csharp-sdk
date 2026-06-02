@@ -286,7 +286,7 @@ namespace Smartsheet.Api.Internal.Http
 
                 // Make the HTTP request
                 timer.Start();
-                RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest, cancellationToken);
+                RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest, cancellationToken).ConfigureAwait(false);
                 timer.Stop();
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -318,7 +318,7 @@ namespace Smartsheet.Api.Internal.Http
                     break;
                 }
 
-                bool shouldRetry = await ShouldRetryAsync(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse, cancellationToken);
+                bool shouldRetry = await ShouldRetryAsync(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse, cancellationToken).ConfigureAwait(false);
                 if (!shouldRetry)
                 {
                     if (restResponse.ResponseStatus == ResponseStatus.Error)
@@ -437,7 +437,7 @@ namespace Smartsheet.Api.Internal.Http
                 case TooManyRequests: // HTTP 429 (not available in netstandard2.0)
                 case HttpStatusCode.BadGateway:
                 case HttpStatusCode.ServiceUnavailable:
-                    return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null, cancellationToken);
+                    return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null, cancellationToken).ConfigureAwait(false);
             }
 
             string contentType = response.Entity.ContentType;
@@ -472,7 +472,7 @@ namespace Smartsheet.Api.Internal.Http
                 case 4002:
                 case 4003:
                 case 4004:
-                    return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error);
+                    return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error, cancellationToken).ConfigureAwait(false);
                 default:
                     return false;
             }
@@ -494,7 +494,7 @@ namespace Smartsheet.Api.Internal.Http
                 return false;
 
             logger.Info(string.Format("HttpError StatusCode={0}: Retrying in {1} milliseconds", statusCode, backoff));
-            await Task.Delay(TimeSpan.FromMilliseconds(backoff), cancellationToken);
+            await Task.Delay(TimeSpan.FromMilliseconds(backoff), cancellationToken).ConfigureAwait(false);
             return true;
         }
 

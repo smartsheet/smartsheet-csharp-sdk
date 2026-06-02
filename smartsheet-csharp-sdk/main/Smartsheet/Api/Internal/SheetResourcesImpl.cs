@@ -247,7 +247,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual Task<Sheet> GetSheetAsync(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+        public virtual async Task<Sheet> GetSheetAsync(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
             IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page, DateTime? rowsModifiedSince, long? ifVersionAfter, int? level, CancellationToken cancellationToken = default)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
@@ -291,7 +291,8 @@ namespace Smartsheet.Api.Internal
                 parameters.Add("level", level.ToString());
             }
 
-            return this.GetResourceAsync<Sheet>("sheets/" + sheetId + QueryUtil.GenerateUrl(null, parameters), typeof(Sheet), cancellationToken);
+            Sheet sheet = await this.GetResourceAsync<Sheet>("sheets/" + sheetId + QueryUtil.GenerateUrl(null, parameters), typeof(Sheet), cancellationToken).ConfigureAwait(false);
+            return sheet;
         }
 
         /// <summary>
@@ -432,7 +433,33 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Sheet UpdateSheet(Sheet sheet)
         {
-            return this.UpdateResource("sheets/" + sheet.Id, typeof(Sheet), sheet);
+            var task = UpdateSheetAsync(sheet);
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// <para>Asynchronously updates a sheet.</para>
+        /// <para>to modify sheet contents, see Add Rows, Update Rows, and Update Column.</para>
+        /// <para>This operation can be used to update an individual users sheet settings. 
+        /// If the request body contains only the userSettings attribute, 
+        /// this operation may be performed even if the user only has read-only access to the sheet 
+        /// (i.e., the user has viewer permissions, or the sheet is read-only).</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: PUT /sheets/{sheetId}</para>
+        /// </summary>
+        /// <param name="sheet"> the sheet to update </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the updated sheet </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public async virtual Task<Sheet> UpdateSheetAsync(Sheet sheet, CancellationToken cancellationToken = default)
+        {
+            Sheet updatedSheet = await this.UpdateResourceAsync<Sheet>("sheets/" + sheet.Id, typeof(Sheet), sheet, cancellationToken).ConfigureAwait(false);
+            return updatedSheet;
         }
 
         /// <summary>
@@ -473,7 +500,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual async Task<int?> GetSheetVersionAsync(long sheetId, CancellationToken cancellationToken = default)
         {
-            Sheet sheet = await this.GetResourceAsync<Sheet>("sheets/" + sheetId + "/version", typeof(Sheet));
+            Sheet sheet = await this.GetResourceAsync<Sheet>("sheets/" + sheetId + "/version", typeof(Sheet), cancellationToken).ConfigureAwait(false);
             return sheet.Version;
         }
 
@@ -492,7 +519,26 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual void SendSheet(long sheetId, SheetEmail email)
         {
-            this.CreateResource<SheetEmail>("sheets/" + sheetId + "/emails", typeof(SheetEmail), email);
+            this.SendSheetAsync(sheetId, email).Wait();
+        }
+
+        /// <summary>
+        /// <para>Asynchronously sends a sheet as a PDF attachment via email to the designated recipients.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: POST /sheets/{sheetId}/emails</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="email"> the email </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task SendSheetAsync(long sheetId, SheetEmail email, CancellationToken cancellationToken = default)
+        {
+            await this.CreateResourceAsync<SheetEmail>("sheets/" + sheetId + "/emails", typeof(SheetEmail), email, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -576,7 +622,28 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual SheetPublish GetPublishStatus(long sheetId)
         {
-            return this.GetResource<SheetPublish>("sheets/" + sheetId + "/publish", typeof(SheetPublish));
+            var task = GetPublishStatusAsync(sheetId);
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// <para>Asynchronously get the status of the publish settings of the sheet, including the URLs of any enabled publishings.</para>
+        /// 
+        /// <para>Mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/publish</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the publish status (note that if there is no such resource, this method will throw ResourceNotFoundException rather than returning null) </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public async virtual Task<SheetPublish> GetPublishStatusAsync(long sheetId, CancellationToken cancellationToken = default)
+        {
+            SheetPublish sheetPublish = await this.GetResourceAsync<SheetPublish>("sheets/" + sheetId + "/publish", typeof(SheetPublish), cancellationToken).ConfigureAwait(false);
+            return sheetPublish;
         }
 
         /// <summary>
