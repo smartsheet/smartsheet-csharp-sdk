@@ -395,7 +395,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request).ConfigureAwait(false);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)
