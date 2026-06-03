@@ -70,6 +70,18 @@ namespace Smartsheet.Api.Internal.Http
         Task<HttpResponse> RequestAsync(HttpRequest request, CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Make an asynchronous multipart HTTP request and return the response.
+        /// </summary>
+        /// <param name="request"> the Smartsheet request </param>
+        /// <param name="file">the full file path</param>
+        /// <param name="fileType">the file type, or also called the conent type of the file</param>
+        /// <param name="cancellationToken"> cancellation token </param>
+        /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
+        /// <returns> the HTTP response </returns>
+        /// <exception cref="HttpClientException"> the HTTP client exception </exception>
+        Task<HttpResponse> RequestAsync(HttpRequest request, string objectType, string file, string fileType, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Release connection.
         /// </summary>
         void ReleaseConnection();

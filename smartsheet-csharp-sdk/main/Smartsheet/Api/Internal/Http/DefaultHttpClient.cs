@@ -135,10 +135,11 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="smartsheetRequest"> the Smartsheet request </param>
         /// <param name="file">the full file path</param>
         /// <param name="fileType">the file type, or also called the conent type of the file</param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        public async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
+        public async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, string objectType, string file, string fileType, CancellationToken cancellationToken = default)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -174,7 +175,7 @@ namespace Smartsheet.Api.Internal.Http
 
             // Make the HTTP request
             timer.Start();
-            RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest);
+            RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest, cancellationToken).ConfigureAwait(false);
             timer.Stop();
 
             LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -415,9 +416,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <returns>true if this error code can be retried</returns>
         public virtual bool ShouldRetry(int previousAttempts, long totalElapsedTime, HttpResponse response)
         {
-            var task = ShouldRetryAsync(previousAttempts, totalElapsedTime, response);
-            task.Wait();
-            return task.Result;
+            return ShouldRetryAsync(previousAttempts, totalElapsedTime, response).GetAwaiter().GetResult();
         }
 
         /// <summary>

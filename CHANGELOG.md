@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
 
+### Changed
+- ⚠️ **BREAKING**: Change `DefaultHttpClient.RetrySleep()` into an async method that returns a boolean wrapped in a Task
+
 ## [6.7.0] - 2026-04-30
 ### Added
 - Add support for PUT /reports/{id}/definition endpoint, Update Report Definition
