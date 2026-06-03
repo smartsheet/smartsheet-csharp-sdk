@@ -183,7 +183,7 @@ namespace Smartsheet.Api.Internal
                 parameters.Add("modifiedSince", ((DateTime)modifiedSince).ToUniversalTime().ToString("o"));
             }
 
-            PaginatedResult<Sheet> paginatedSheets = await this.ListResourcesWithWrapperAsync<Sheet>("sheets" + QueryUtil.GenerateUrl(null, parameters)).ConfigureAwait(false);
+            PaginatedResult<Sheet> paginatedSheets = await this.ListResourcesWithWrapperAsync<Sheet>("sheets" + QueryUtil.GenerateUrl(null, parameters), cancellationToken).ConfigureAwait(false);
             return paginatedSheets;
         }
 
@@ -221,7 +221,7 @@ namespace Smartsheet.Api.Internal
             {
                 path.Append(paging.ToQueryString());
             }
-            PaginatedResult<Sheet> paginatedSheets = await this.ListResourcesWithWrapperAsync<Sheet>(path.ToString()).ConfigureAwait(false);
+            PaginatedResult<Sheet> paginatedSheets = await this.ListResourcesWithWrapperAsync<Sheet>(path.ToString(), cancellationToken).ConfigureAwait(false);
             return paginatedSheets;
         }
 
@@ -846,6 +846,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="id"> the sheet Id </param>
         /// <param name="sortSpecifier"> the sort criteria </param>
         /// <param name="level"> compatibility level </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <returns> the sheet (note that if there is no such resource, this method will throw a ResourceNotFoundException rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
