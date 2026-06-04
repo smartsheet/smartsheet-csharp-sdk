@@ -118,16 +118,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <returns></returns>
         /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
-            HttpResponse response = new HttpResponse();
-            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead.
-            try {
-                var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
-                task.Wait();
-                response = task.Result;
-            } catch (AggregateException ex) {
-                throw new SmartsheetException(ex.InnerException.Message);
-            }
-            return response;
+            return this.RequestAsync(smartsheetRequest, objectType, file, fileType).GetAwaiter().GetResult();
         }
         /// <summary>
         /// Make a multipart HTTP request and return the response.
@@ -218,18 +209,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <returns></returns>
         /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
-            HttpResponse response = new HttpResponse();
-            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead.
-            // This helps with error mock api tests.
-            try {
-                var task = this.RequestAsync(smartsheetRequest);
-                task.Wait();
-                response = task.Result;
-            } catch (AggregateException ex) {
-                throw new SmartsheetException(ex.InnerException.Message);
-            }
-
-            return response;
+            return this.RequestAsync(smartsheetRequest).GetAwaiter().GetResult();
         }
         /// <summary>
         /// Make an HTTP request and return the response.

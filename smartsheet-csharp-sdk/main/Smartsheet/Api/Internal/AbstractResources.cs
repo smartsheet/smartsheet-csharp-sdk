@@ -512,6 +512,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="path"> the relative path of the resource </param>
         /// <param name="objectClass"> the resource object class </param>
         /// <param name="object"> the object to create </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <returns> the updated resource </returns>
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual async Task<T> UpdateResourceAsync<T>(string path, Type objectClass, T @object, CancellationToken cancellationToken = default)
@@ -769,6 +770,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="path"> the relative path of the resource collections </param>
         /// <param name="objectClass"> the resource object class </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <returns> the resources </returns>
         /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
         protected async internal virtual Task<IList<T>> ListResourcesAsync<T>(string path, Type objectClass, CancellationToken cancellationToken = default)
@@ -887,7 +889,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual void DeleteResource<T>(string path, Type objectClass)
         {
-            this.DeleteResourceAsync<T>(path, objectClass).Wait();
+            this.DeleteResourceAsync<T>(path, objectClass).GetAwaiter().GetResult();
         }
 
         /// <summary>
