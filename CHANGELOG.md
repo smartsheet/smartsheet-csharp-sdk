@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - ⚠️ **BREAKING**: Change `DefaultHttpClient.RetrySleep()` into an async method that returns a boolean wrapped in a Task
-- ⚠️ **BREAKING**: Add `HttpClient.RequestAsync()` which must be overridden in custom HttpClient implementations to affect async resource methods
+- ⚠️ **BREAKING**: Add `RequestAsync()` to `HttpClient` interface, which must be overridden in custom HttpClient implementations to affect async resource methods
 
 ## [6.7.0] - 2026-04-30
 ### Added
