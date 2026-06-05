@@ -29,8 +29,8 @@ namespace mock_api_test_sdk_net80
             }
 
             // Override RetrySleep to optionally skip the actual sleep for fast tests
-            public override bool RetrySleep(int previousAttempts, long totalElapsedTime,
-                HttpStatusCode statusCode, Error error)
+            public override async Task<bool> RetrySleep(int previousAttempts, long totalElapsedTime,
+                HttpStatusCode statusCode, Error error, CancellationToken cancellationToken = default)
             {
                 long backoff = CalcBackoff(previousAttempts, totalElapsedTime, error);
                 if (backoff < 0)
@@ -41,7 +41,7 @@ namespace mock_api_test_sdk_net80
 
                 // Skip sleep in tests for fast execution
                 if (!SkipSleep)
-                    Thread.Sleep(TimeSpan.FromMilliseconds(backoff));
+                    await Task.Delay(TimeSpan.FromMilliseconds(backoff), cancellationToken).ConfigureAwait(false);
 
                 return true;
             }

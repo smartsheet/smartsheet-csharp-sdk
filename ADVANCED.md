@@ -336,13 +336,13 @@ Cross-references: Exception throwing integrates with [Response Handling](#respon
 
 ### Retry Logic and Backoff
 
-The SDK implements automatic retry logic with exponential backoff for transient failures, handling rate limiting and temporary server errors transparently within `DefaultHttpClient.RequestAsync()` (`DefaultHttpClient.cs:249-345`). The retry mechanism evaluates error conditions, calculates progressive delay intervals, enforces timeout boundaries, and logs retry attempts at INFO level for operational visibility.
+The SDK implements automatic retry logic with exponential backoff for transient failures, handling rate limiting and temporary server errors transparently within `DefaultHttpClient.RequestAsync()` (`DefaultHttpClient.cs:221-316`). The retry mechanism evaluates error conditions, calculates progressive delay intervals, enforces timeout boundaries, and logs retry attempts at INFO level for operational visibility.
 
-Retry eligibility determination occurs in `ShouldRetry()` method (`DefaultHttpClient.cs:426-474`), which classifies errors into retryable and non-retryable categories. Retryable conditions include HTTP status codes (429 Too Many Requests, 502 Bad Gateway, 503 Service Unavailable) and Smartsheet-specific error codes (4001-4004 indicating rate limiting, concurrent updates, or temporary unavailability). Non-retryable errors encompass client mistakes (400 Bad Request, 401 Unauthorized, 404 Not Found) and SDK-specific 1xxx error codes signaling invalid parameters or malformed requests that cannot succeed upon retry. Status code evaluation precedes JSON parsing: HTTP 429, 502, 503 trigger immediate retry without inspecting response body, while other non-200 codes require JSON deserialization to extract `ErrorCode` property for granular classification. Content-Type validation (`contentType.StartsWith("application/json")`) prevents parse exceptions on HTML error pages from proxies or load balancers, treating non-JSON responses as non-retryable to avoid indefinite retry loops on infrastructure failures.
+Retry eligibility determination occurs in `ShouldRetry()` for sync requests, and `ShouldRetryAsync()` for async methods (`DefaultHttpClient.cs:397-458`), both of which classify errors into retryable and non-retryable categories. Retryable conditions include HTTP status codes (429 Too Many Requests, 502 Bad Gateway, 503 Service Unavailable) and Smartsheet-specific error codes (4001-4004 indicating rate limiting, concurrent updates, or temporary unavailability). Non-retryable errors encompass client mistakes (400 Bad Request, 401 Unauthorized, 404 Not Found) and SDK-specific 1xxx error codes signaling invalid parameters or malformed requests that cannot succeed upon retry. Status code evaluation precedes JSON parsing: HTTP 429, 502, 503 trigger immediate retry without inspecting response body, while other non-200 codes require JSON deserialization to extract `ErrorCode` property for granular classification. Content-Type validation (`contentType.StartsWith("application/json")`) prevents parse exceptions on HTML error pages from proxies or load balancers, treating non-JSON responses as non-retryable to avoid indefinite retry loops on infrastructure failures.
 
-Backoff calculation follows exponential delay pattern in `CalcBackoff()` method (`DefaultHttpClient.cs:406-416`), computing wait time as `2^attempt * 1000ms + random(0-1000ms)`. The exponential base doubles delay with each attempt (1st retry ~2 seconds, 2nd ~4 seconds, 3rd ~8 seconds), while jitter component adds randomness to prevent synchronized retry storms when multiple clients encounter rate limits simultaneously. For example, third retry attempt calculates `2^3 * 1000 + 500 = 8500ms` backoff assuming 500ms random jitter. `MaxRetryTimeout` enforcement (default 15000ms, configurable via `SmartsheetBuilder.SetMaxRetryTimeout()`) bounds total elapsed time: `CalcBackoff()` returns -1 when `totalElapsedTime + backoffMillis > maxRetryTimeout`, signaling retry loop termination and exception propagation to caller. This timeout represents cumulative request duration including all retry delays, not per-attempt limit, ensuring predictable worst-case latency for API operations.
+Backoff calculation follows exponential delay pattern in `CalcBackoff()` method (`DefaultHttpClient.cs:377-387`), computing wait time as `2^attempt * 1000ms + random(0-1000ms)`. The exponential base doubles delay with each attempt (1st retry ~2 seconds, 2nd ~4 seconds, 3rd ~8 seconds), while jitter component adds randomness to prevent synchronized retry storms when multiple clients encounter rate limits simultaneously. For example, third retry attempt calculates `2^3 * 1000 + 500 = 8500ms` backoff assuming 500ms random jitter. `MaxRetryTimeout` enforcement (default 15000ms, configurable via `SmartsheetBuilder.SetMaxRetryTimeout()`) bounds total elapsed time: `CalcBackoff()` returns -1 when `totalElapsedTime + backoffMillis > maxRetryTimeout`, signaling retry loop termination and exception propagation to caller. This timeout represents cumulative request duration including all retry delays, not per-attempt limit, ensuring predictable worst-case latency for API operations.
 
-The retry loop in `RequestAsync()` (`DefaultHttpClient.cs:263-344`) executes HTTP requests within `while (true)` construct, evaluating response after each attempt. Success path (HTTP 200) breaks immediately, returning response to caller without retry overhead. Non-200 responses invoke `ShouldRetry(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse)`, passing incremented attempt counter and stopwatch-tracked elapsed time. When `ShouldRetry()` returns true, control flow remains in loop, reconstructing `RestRequest` and re-executing HTTP transmission with identical parameters. When `ShouldRetry()` returns false (non-retryable error or timeout exceeded), loop exits via `break` statement, delegating error response to resource method's `HandleError()` for exception construction (see [Error Handling and Exceptions](#error-handling-and-exceptions)). Thread sleep occurs within `RetrySleep()` helper method (`DefaultHttpClient.cs:484-493`), which invokes `CalcBackoff()`, logs retry attempt at INFO level, and calls `Thread.Sleep(TimeSpan.FromMilliseconds(backoff))` to delay execution before next attempt.
+The retry loop in `RequestAsync()` (`DefaultHttpClient.cs:221-316`) executes HTTP requests within `while (true)` construct, evaluating response after each attempt. Success path (HTTP 200) breaks immediately, returning response to caller without retry overhead. Non-200 responses invoke `ShouldRetryAsync(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse, cancellationToken)`, passing incremented attempt counter and stopwatch-tracked elapsed time. When `ShouldRetryAsync()` returns true, control flow remains in loop, reconstructing `RestRequest` and re-executing HTTP transmission with identical parameters. When `ShouldRetryAsync()` returns false (non-retryable error or timeout exceeded), loop exits via `break` statement, delegating error response to resource method's `HandleError()` for exception construction (see [Error Handling and Exceptions](#error-handling-and-exceptions)). Thread sleep occurs within `RetrySleep()` helper method (`DefaultHttpClient.cs:469-478`), which invokes `CalcBackoff()`, logs retry attempt at INFO level, and calls `Task.Delay(TimeSpan.FromMilliseconds(backoff), cancellationToken)` to delay execution before next attempt.
 
 ```
 Execute Request
@@ -377,11 +377,11 @@ Check Status
                  └─ Retry Request (loop)
 ```
 
-Custom retry behavior extends via method overrides in `DefaultHttpClient` subclass. Override `ShouldRetry()` to modify retry eligibility (e.g., adding custom error codes to retryable set), override `CalcBackoff()` to implement alternative delay strategies (linear backoff, fixed intervals, API-provided Retry-After header inspection), or override both for comprehensive control. Example implementation in [Overriding HTTP Client Behavior](#overriding-http-client-behavior) demonstrates adding fictional error code 9999 to retryable conditions while preserving default exponential backoff calculation. Virtual method pattern enables selective customization: subclass calls `base.CalcBackoff()` or `base.ShouldRetry()` to delegate to default implementation for standard cases, overriding logic only for specialized requirements.
+Custom retry behavior extends via method overrides in `DefaultHttpClient` subclass. Override `ShouldRetryAsync()` to modify retry eligibility (e.g., adding custom error codes to retryable set), override `CalcBackoff()` to implement alternative delay strategies (linear backoff, fixed intervals, API-provided Retry-After header inspection), or override both for comprehensive control. Example implementation in [Overriding HTTP Client Behavior](#overriding-http-client-behavior) demonstrates adding fictional error code 9999 to retryable conditions while preserving default exponential backoff calculation. Virtual method pattern enables selective customization: subclass calls `base.CalcBackoff()` or `base.ShouldRetryAsync()` to delegate to default implementation for standard cases, overriding logic only for specialized requirements.
 
 ```csharp
 // DefaultHttpClient.cs - Retry loop with status evaluation
-private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest)
+private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, CancellationToken cancellationToken)
 {
     int attempt = 0;
     HttpResponse smartsheetResponse = null;
@@ -399,9 +399,7 @@ private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest)
         
         Stopwatch timer = new Stopwatch();
         timer.Start();
-        Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
-        restResponseAsTask.Wait();
-        restResponse = restResponseAsTask.Result;
+        RestResponse restResponseAsTask = await this.httpClient.ExecuteAsync(restRequest, cancellationToken).ConfigureAwait(false);
         timer.Stop();
         
         // Convert RestResponse to HttpResponse (lines 306-325)
@@ -419,7 +417,8 @@ private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest)
         }
         
         // Evaluate retry eligibility for non-OK responses
-        if (!ShouldRetry(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse))
+        bool shouldRetry = await ShouldRetryAsync(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse, cancellationToken).ConfigureAwait(false);
+        if (!shouldRetry)
         {
             break;  // Exit loop, return error for exception handling
         }
@@ -430,7 +429,7 @@ private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest)
 }
 
 // DefaultHttpClient.cs - Retry eligibility evaluation
-public virtual bool ShouldRetry(int previousAttempts, long totalElapsedTime, HttpResponse response)
+public async virtual Task<bool> ShouldRetryAsync(int previousAttempts, long totalElapsedTime, HttpResponse response, CancellationToken cancellationToken)
 {
     // Status code-based retry (no JSON parsing required)
     switch (response.StatusCode)
@@ -438,7 +437,7 @@ public virtual bool ShouldRetry(int previousAttempts, long totalElapsedTime, Htt
         case TooManyRequests:  // HTTP 429
         case HttpStatusCode.BadGateway:  // HTTP 502
         case HttpStatusCode.ServiceUnavailable:  // HTTP 503
-            return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null);
+            return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null, cancellationToken).ConfigureAwait(false);
     }
     
     // Validate JSON content type before parsing
@@ -467,7 +466,7 @@ public virtual bool ShouldRetry(int previousAttempts, long totalElapsedTime, Htt
         case 4002:  // Concurrent update conflict
         case 4003:  // Temporary unavailability
         case 4004:  // System maintenance
-            return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error);
+            return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error, cancellationToken).ConfigureAwait(false);
         default:
             return false;  // Non-retryable error
     }
@@ -489,7 +488,7 @@ public virtual long CalcBackoff(int previousAttempts, long totalElapsedTime, Api
 }
 
 // DefaultHttpClient.cs - Backoff execution with logging
-public virtual bool RetrySleep(int previousAttempts, long totalElapsedTime, HttpStatusCode statusCode, Api.Models.Error error)
+public async virtual Task<bool> RetrySleep(int previousAttempts, long totalElapsedTime, HttpStatusCode statusCode, Api.Models.Error error, CancellationToken cancellationToken)
 {
     long backoff = CalcBackoff(previousAttempts, totalElapsedTime, error);
     if (backoff < 0)
@@ -497,7 +496,7 @@ public virtual bool RetrySleep(int previousAttempts, long totalElapsedTime, Http
     
     // Log retry attempt at INFO level for operational visibility
     logger.Info(string.Format("HttpError StatusCode={0}: Retrying in {1} milliseconds", statusCode, backoff));
-    Thread.Sleep(TimeSpan.FromMilliseconds(backoff));
+    await Task.Delay(TimeSpan.FromMilliseconds(backoff), cancellationToken).ConfigureAwait(false);
     return true;
 }
 ```

@@ -70,14 +70,6 @@ namespace Smartsheet.Api.Internal.Http
         protected long maxRetryTimeout = 15000;
 
         /// <summary>
-        /// The http request. </summary>
-        private RestRequest restRequest;
-
-        /// <summary>
-        /// The http response. </summary>
-        private RestResponse restResponse;
-
-        /// <summary>
         /// UserAgent. </summary>
         private String userAgent;
 
@@ -126,16 +118,7 @@ namespace Smartsheet.Api.Internal.Http
         /// <returns></returns>
         /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest, string objectType, string file, string fileType) {
-            HttpResponse response = new HttpResponse();
-            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead.
-            try {
-                var task = this.RequestAsync(smartsheetRequest, objectType, file, fileType);
-                task.Wait();
-                response = task.Result;
-            } catch (AggregateException ex) {
-                throw new SmartsheetException(ex.InnerException.Message);
-            }
-            return response;
+            return this.RequestAsync(smartsheetRequest, objectType, file, fileType).GetAwaiter().GetResult();
         }
         /// <summary>
         /// Make a multipart HTTP request and return the response.
@@ -143,10 +126,11 @@ namespace Smartsheet.Api.Internal.Http
         /// <param name="smartsheetRequest"> the Smartsheet request </param>
         /// <param name="file">the full file path</param>
         /// <param name="fileType">the file type, or also called the conent type of the file</param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <param name="objectType">the object name, for example 'comment', or 'discussion'</param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, string objectType, string file, string fileType)
+        public async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, string objectType, string file, string fileType, CancellationToken cancellationToken = default)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -156,7 +140,7 @@ namespace Smartsheet.Api.Internal.Http
 
             HttpResponse smartsheetResponse = new HttpResponse();
 
-            restRequest = CreateRestRequest(smartsheetRequest);
+            RestRequest restRequest = CreateRestRequest(smartsheetRequest);
 
             // Set HTTP Headers
             if (smartsheetRequest.Headers != null)
@@ -182,9 +166,7 @@ namespace Smartsheet.Api.Internal.Http
 
             // Make the HTTP request
             timer.Start();
-            Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
-            restResponseAsTask.Wait();
-            restResponse = restResponseAsTask.Result;
+            RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest, cancellationToken).ConfigureAwait(false);
             timer.Stop();
 
             LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -227,26 +209,16 @@ namespace Smartsheet.Api.Internal.Http
         /// <returns></returns>
         /// <exception cref="SmartsheetException"></exception>
         public virtual HttpResponse Request(HttpRequest smartsheetRequest) {
-            HttpResponse response = new HttpResponse();
-            // C# tasks will wrap any responses in an AggregateException we will unwrap and send the first inner exception instead.
-            // This helps with error mock api tests.
-            try {
-            var task = this.RequestAsync(smartsheetRequest);
-            task.Wait();
-            response = task.Result;
-            } catch (AggregateException ex) {
-                throw new SmartsheetException(ex.InnerException.Message);
-            }
-
-            return response;
+            return this.RequestAsync(smartsheetRequest).GetAwaiter().GetResult();
         }
         /// <summary>
         /// Make an HTTP request and return the response.
         /// </summary>
         /// <param name="smartsheetRequest"> the Smartsheet request </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
         /// <returns> the HTTP response </returns>
         /// <exception cref="HttpClientException"> the HTTP client exception </exception>
-        private async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest)
+        public async Task<HttpResponse> RequestAsync(HttpRequest smartsheetRequest, CancellationToken cancellationToken = default)
         {
             Util.ThrowIfNull(smartsheetRequest);
             if (smartsheetRequest.Uri == null)
@@ -264,7 +236,7 @@ namespace Smartsheet.Api.Internal.Http
             {
                 smartsheetResponse = new HttpResponse();
 
-                restRequest = CreateRestRequest(smartsheetRequest);
+                RestRequest restRequest = CreateRestRequest(smartsheetRequest);
 
                 // Set HTTP Headers
                 if (smartsheetRequest.Headers != null)
@@ -295,9 +267,7 @@ namespace Smartsheet.Api.Internal.Http
 
                 // Make the HTTP request
                 timer.Start();
-                Task<RestResponse> restResponseAsTask = this.httpClient.ExecuteAsync(restRequest);
-                restResponseAsTask.Wait();
-                restResponse = restResponseAsTask.Result;
+                RestResponse restResponse = await this.httpClient.ExecuteAsync(restRequest, cancellationToken).ConfigureAwait(false);
                 timer.Stop();
 
                 LogRequest(restRequest, restResponse, timer.ElapsedMilliseconds);
@@ -329,7 +299,8 @@ namespace Smartsheet.Api.Internal.Http
                     break;
                 }
 
-                if (!ShouldRetry(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse))
+                bool shouldRetry = await ShouldRetryAsync(++attempt, totalElapsed.ElapsedMilliseconds, smartsheetResponse, cancellationToken).ConfigureAwait(false);
+                if (!shouldRetry)
                 {
                     if (restResponse.ResponseStatus == ResponseStatus.Error)
                     {
@@ -425,14 +396,27 @@ namespace Smartsheet.Api.Internal.Http
         /// <returns>true if this error code can be retried</returns>
         public virtual bool ShouldRetry(int previousAttempts, long totalElapsedTime, HttpResponse response)
         {
+            return ShouldRetryAsync(previousAttempts, totalElapsedTime, response).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Called by DefaultHttpClient when an async request fails to determine if we can retry the request. Calls
+        /// calcBackoff to determine time in between retries.
+        /// </summary>
+        /// <param name="previousAttempts"></param>
+        /// <param name="totalElapsedTime"></param>
+        /// <param name="response"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>true if this error code can be retried</returns>
+        public async virtual Task<bool> ShouldRetryAsync(int previousAttempts, long totalElapsedTime, HttpResponse response, CancellationToken cancellationToken = default)
+        {
             // Retry only for specific status codes regardless of response content type.
             switch (response.StatusCode)
             {
-
                 case TooManyRequests: // HTTP 429 (not available in netstandard2.0)
                 case HttpStatusCode.BadGateway:
                 case HttpStatusCode.ServiceUnavailable:
-                    return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null);
+                    return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null, cancellationToken).ConfigureAwait(false);
             }
 
             string contentType = response.Entity.ContentType;
@@ -467,28 +451,29 @@ namespace Smartsheet.Api.Internal.Http
                 case 4002:
                 case 4003:
                 case 4004:
-                    return RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error);
+                    return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error, cancellationToken).ConfigureAwait(false);
                 default:
                     return false;
             }
         }
 
         /// <summary>
-        /// Calculate backoff, log retry attempt, and sleep before retrying.
+        /// Asynchronously calculate backoff, log retry attempt, and sleep before retrying.
         /// </summary>
         /// <param name="previousAttempts">Number of previous attempts</param>
         /// <param name="totalElapsedTime">Total elapsed time in milliseconds</param>
         /// <param name="statusCode">HTTP status code for logging</param>
         /// <param name="error">Error object (optional, can be null for status code-based retries)</param>
+        /// <param name="cancellationToken">Cancellation token (optional)</param>
         /// <returns>True if retry should proceed, false if max retry time exceeded</returns>
-        public virtual bool RetrySleep(int previousAttempts, long totalElapsedTime, HttpStatusCode statusCode, Api.Models.Error error)
+        public async virtual Task<bool> RetrySleep(int previousAttempts, long totalElapsedTime, HttpStatusCode statusCode, Api.Models.Error error, CancellationToken cancellationToken = default)
         {
             long backoff = CalcBackoff(previousAttempts, totalElapsedTime, error);
             if (backoff < 0)
                 return false;
 
             logger.Info(string.Format("HttpError StatusCode={0}: Retrying in {1} milliseconds", statusCode, backoff));
-            Thread.Sleep(TimeSpan.FromMilliseconds(backoff));
+            await Task.Delay(TimeSpan.FromMilliseconds(backoff), cancellationToken).ConfigureAwait(false);
             return true;
         }
 
