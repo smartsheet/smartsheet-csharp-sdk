@@ -8,9 +8,9 @@ namespace mock_api_test_sdk_net80
     public class SheetTestsAsync
     {
         [TestMethod]
-        public async void ListSheetsAsync_NoParams()
+        public async Task ListSheetsAsync_NoParams()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Sheets Async - No Params");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Sheets - No Params");
 
             PaginatedResult<Sheet> sheets = await smartsheet.SheetResources.ListSheetsAsync(null, null);
 
@@ -18,9 +18,9 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public async void ListSheetsAsync_IncludeOwnerInfo()
+        public async Task ListSheetsAsync_IncludeOwnerInfo()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Sheets Async - Include Owner Info");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Sheets - Include Owner Info");
 
             PaginatedResult<Sheet> sheets = await smartsheet.SheetResources.ListSheetsAsync(new List<SheetInclusion> { SheetInclusion.OWNER_INFO });
 
@@ -28,9 +28,9 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public async void CreateSheetFromTemplateAsync_NoColumns()
+        public async Task CreateSheetFromTemplateAsync_NoColumns()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Create Sheet From Template Async - Invalid - No Columns");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Create Sheet - Invalid - No Columns");
 
             Sheet sheetA = new Sheet
             {
@@ -38,8 +38,8 @@ namespace mock_api_test_sdk_net80
                 Columns = new List<Column>()
             };
 
-            HelperFunctions.AssertRaisesException<SmartsheetException>(async () =>
-                await smartsheet.SheetResources.CreateSheetFromTemplateAsync(sheetA),
+            await HelperFunctions.AssertRaisesExceptionAsync<SmartsheetException>(
+                () => smartsheet.SheetResources.CreateSheetFromTemplateAsync(sheetA),
                 "The new sheet requires either a fromId or columns.");
         }
     }
