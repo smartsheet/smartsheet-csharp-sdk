@@ -466,7 +466,7 @@ public async virtual Task<bool> ShouldRetryAsync(int previousAttempts, long tota
         case 4002:  // Concurrent update conflict
         case 4003:  // Temporary unavailability
         case 4004:  // System maintenance
-            return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null, cancellationToken).ConfigureAwait(false);
+            return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error, cancellationToken).ConfigureAwait(false);
         default:
             return false;  // Non-retryable error
     }
