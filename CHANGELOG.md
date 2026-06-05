@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [X.X.X] - Unreleased
 
 ### Added
+- Added `ObjectIdStr` property to `Event` model to support alphanumeric object identifiers (AUD-905)
 - AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
 
 ### Changed
