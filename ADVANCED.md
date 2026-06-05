@@ -15,6 +15,7 @@
   - [Passthrough Internals](#passthrough-internals)
   - [Logging Infrastructure](#logging-infrastructure)
   - [Authentication Flow](#authentication-flow)
+- [Asynchronous API (Task-based Methods)](#asynchronous-api-task-based-methods)
 - [Logging](#logging)
 - [Passthrough Option](#passthrough-option)
 - [Testing](#testing)
@@ -336,7 +337,7 @@ Cross-references: Exception throwing integrates with [Response Handling](#respon
 
 ### Retry Logic and Backoff
 
-The SDK implements automatic retry logic with exponential backoff for transient failures, handling rate limiting and temporary server errors transparently within `DefaultHttpClient.RequestAsync()` (`DefaultHttpClient.cs:221-316`). The retry mechanism evaluates error conditions, calculates progressive delay intervals, enforces timeout boundaries, and logs retry attempts at INFO level for operational visibility.
+The SDK implements automatic retry logic with exponential backoff for transient failures, handling rate limiting and temporary server errors transparently within `DefaultHttpClient.RequestAsync()` (`DefaultHttpClient.cs:221-316`). The retry mechanism evaluates error conditions, calculates progressive delay intervals, enforces timeout boundaries, and logs retry attempts at INFO level for operational visibility. Both retry eligibility (`ShouldRetryAsync`) and the backoff delay (`RetrySleep`) are asynchronous, returning `Task<bool>`; the retry loop in `RequestAsync()` awaits them. Custom `HttpClient` subclasses that customize retries should override these async methods (see [Overriding HTTP Client Behavior](#overriding-http-client-behavior)).
 
 Retry eligibility determination occurs in `ShouldRetry()` for sync requests, and `ShouldRetryAsync()` for async methods (`DefaultHttpClient.cs:397-458`), both of which classify errors into retryable and non-retryable categories. Retryable conditions include HTTP status codes (429 Too Many Requests, 502 Bad Gateway, 503 Service Unavailable) and Smartsheet-specific error codes (4001-4004 indicating rate limiting, concurrent updates, or temporary unavailability). Non-retryable errors encompass client mistakes (400 Bad Request, 401 Unauthorized, 404 Not Found) and SDK-specific 1xxx error codes signaling invalid parameters or malformed requests that cannot succeed upon retry. Status code evaluation precedes JSON parsing: HTTP 429, 502, 503 trigger immediate retry without inspecting response body, while other non-200 codes require JSON deserialization to extract `ErrorCode` property for granular classification. Content-Type validation (`contentType.StartsWith("application/json")`) prevents parse exceptions on HTML error pages from proxies or load balancers, treating non-JSON responses as non-retryable to avoid indefinite retry loops on infrastructure failures.
 
@@ -1272,6 +1273,70 @@ File paths referenced:
 
 Cross-references: Passthrough resource construction integrates with [Client Initialization](#client-initialization) via same lazy initialization pattern as typed resources, accessing shared `HttpClient` through constructor injection. Raw payload handling contrasts with automatic serialization detailed in [Serialization and Deserialization](#serialization-and-deserialization), highlighting tradeoffs between convenience and control. HTTP request execution follows identical path through [Request Lifecycle](#request-lifecycle) including authentication header injection and retry coordination. Resource hierarchy nesting described in [Resource Organization](#resource-organization) applies equally to `PassthroughResources` property on `SmartsheetImpl`.
 
+## Asynchronous API (Task-based Methods)
+
+The SDK exposes Task-based asynchronous counterparts for resource methods, enabling non-blocking I/O, cooperative cancellation, and parity with the synchronous API. Async support was introduced in PR #195 and currently covers `SheetResources`, the shared `AbstractResources` helpers, and the `HttpClient` / `DefaultHttpClient` HTTP layer.
+
+### Naming and Signature Convention
+
+Each asynchronous method mirrors its synchronous counterpart with an `Async` suffix, returns `Task<T>` (or `Task` for void operations), and accepts a trailing `CancellationToken cancellationToken = default`. Optional parameters use nullable types with default values.
+
+```csharp
+// Public interface (SheetResources.cs) — sync and async pair
+Sheet GetSheet(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+    IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page,
+    DateTime? rowsModifiedSince, long? ifVersionAfter, int? level);
+
+Task<Sheet> GetSheetAsync(long sheetId, IEnumerable<SheetLevelInclusion>? includes, IEnumerable<SheetLevelExclusion>? excludes,
+    IEnumerable<long>? rowIds, IEnumerable<int>? rowNumbers, IEnumerable<long>? columnIds, long? pageSize, long? page,
+    DateTime? rowsModifiedSince, long? ifVersionAfter, int? level, CancellationToken cancellationToken = default);
+```
+
+Async methods are declared on BOTH the public interface (e.g. `SheetResources.cs`) and the internal implementation (e.g. `SheetResourcesImpl.cs`).
+
+### Async Internals: ConfigureAwait and Helper Methods
+
+Resource implementations await the HTTP layer with `ConfigureAwait(false)` — library code should not capture the caller's synchronization context — and delegate to the async `AbstractResources` helpers, each of which accepts a trailing `CancellationToken`:
+
+- `GetResourceAsync`, `CreateResourceAsync`, `CreateResourceWithAttachmentAsync`
+- `UpdateResourceAsync`, `DeleteResourceAsync`
+- `ListResourcesAsync`, `ListResourcesWithWrapperAsync`, `ListResourcesWithTokenWrapperAsync`
+
+```csharp
+// SheetResourcesImpl.cs — async implementation builds params then awaits a helper
+public virtual async Task<Sheet> GetSheetAsync(long sheetId, /* ... */, CancellationToken cancellationToken = default)
+{
+    IDictionary<string, string> parameters = new Dictionary<string, string>();
+    // ... populate query parameters (identical to the sync method) ...
+
+    Sheet sheet = await this.GetResourceAsync<Sheet>(
+        "sheets/" + sheetId + QueryUtil.GenerateUrl(null, parameters),
+        typeof(Sheet),
+        cancellationToken).ConfigureAwait(false);
+    return sheet;
+}
+```
+
+The `cancellationToken` must be threaded through every await in the call chain, all the way down to `HttpClient.RequestAsync`.
+
+### Sync-over-Async Delegation
+
+Synchronous methods delegate to their async counterpart with `.GetAwaiter().GetResult()`. This replaced the older `.Wait()` + `.Result` pattern (which wrapped failures in `AggregateException` and required manual unwrapping):
+
+```csharp
+// SheetResourcesImpl.cs — sync method delegates to async
+public virtual Sheet GetSheet(long sheetId, /* ... */)
+{
+    return this.GetSheetAsync(sheetId, /* ... */).GetAwaiter().GetResult();
+}
+```
+
+Do not use `.Wait()` / `.Result` or catch `AggregateException` in new code.
+
+### Cancellation
+
+Passing a `CancellationToken` allows callers to cancel in-flight requests, including during retry backoff delays (`await Task.Delay(..., cancellationToken)`). When omitted, `default` is used and the operation runs to completion.
+
 ## Logging
 The Smartsheet C# SDK references the [NLog project](http://nlog-project.org) for SDK logging. NLog is highly configurable for console
 and file logging. The root folder contains an `NLog.config` file which specifies the logging configuration of the SDK. Targets for File and ColorConsole logging are used by the SDK.
@@ -1590,6 +1655,8 @@ Common customizations may include:
 - injecting additional HTTP headers
 - overriding default timeout or retry behavior
  
+> **Note:** Custom `HttpClient` implementations should override `RequestAsync` so that asynchronous resource methods pick up the customization — the synchronous `Request` delegates to `RequestAsync` via `.GetAwaiter().GetResult()`, so overriding only `Request` will not affect async calls. Likewise, customize retries by overriding `ShouldRetryAsync` and `RetrySleep` rather than only the synchronous `ShouldRetry` (which delegates to `ShouldRetryAsync`).
+
 ### Sample ProxyHttpClient
 The following example shows how to enable a proxy by providing the SmartsheetBuilder with an HttpClient that extends 
 DefaultHttpClient.  
@@ -1698,6 +1765,67 @@ namespace sdk_csharp_sample
         }
     }
 }
+```
+
+### Sample Async Override
+
+When customizing retry behavior for asynchronous calls, override `ShouldRetryAsync` (and, if needed, `RetrySleep`) instead of the synchronous `ShouldRetry`. The async overrides receive the `CancellationToken` and await the backoff delay:
+
+```csharp
+using System.Threading;
+using System.Threading.Tasks;
+using Smartsheet.Api;
+using Smartsheet.Api.Models;
+using Smartsheet.Api.Internal.Http;
+
+namespace sdk_csharp_sample
+{
+    class AsyncRetryHttpClient : DefaultHttpClient
+    {
+        public override async Task<bool> ShouldRetryAsync(int previousAttempts, long totalElapsedTime,
+            HttpResponse response, CancellationToken cancellationToken = default)
+        {
+            // Delegate to the default behavior for standard cases...
+            if (await base.ShouldRetryAsync(previousAttempts, totalElapsedTime, response, cancellationToken)
+                .ConfigureAwait(false))
+            {
+                return true;
+            }
+
+            // ...then add custom logic, e.g. retry a fictional error code 9999.
+            string contentType = response.Entity.ContentType;
+            if (contentType != null && !contentType.StartsWith("application/json"))
+            {
+                return false;
+            }
+
+            Error error;
+            try
+            {
+                error = jsonSerializer.deserialize<Error>(response.Entity.GetContent());
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new SmartsheetException(ex);
+            }
+
+            if (error.ErrorCode == 9999)
+            {
+                return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, error, cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            return false;
+        }
+    }
+}
+```
+
+Register it the same way as any custom client:
+
+```csharp
+SmartsheetClient smartsheet = new SmartsheetBuilder()
+    .SetHttpClient(new AsyncRetryHttpClient())
+    .Build();
 ```
 
 ## Event Reporting

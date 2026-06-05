@@ -8,10 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Added `ObjectIdStr` property to `Event` model to support alphanumeric object identifiers (AUD-905)
 - AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
+- ⚠️ **BREAKING**: Added `RequestAsync()` to `HttpClient` interface, which must be overridden in custom HttpClient implementations to affect async resource methods.
+- Added asynchronous (`*Async`) counterparts to `SheetResources`: `ListSheetsAsync`, `GetSheetAsync`, `GetSheetVersionAsync`, `CreateSheetFromTemplateAsync`, `CopySheetAsync`, `MoveSheetAsync`, `UpdateSheetAsync`, `DeleteSheetAsync`, `SortSheetAsync`, `SendSheetAsync`, `GetPublishStatusAsync`, and `UpdatePublishStatusAsync`.
 
 ### Changed
 - ⚠️ **BREAKING**: Change `DefaultHttpClient.RetrySleep()` into an async method that returns a boolean wrapped in a Task
-- ⚠️ **BREAKING**: Add `RequestAsync()` to `HttpClient` interface, which must be overridden in custom HttpClient implementations to affect async resource methods
 
 ## [6.7.0] - 2026-04-30
 ### Added
