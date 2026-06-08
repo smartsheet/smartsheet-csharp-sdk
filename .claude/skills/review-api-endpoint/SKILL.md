@@ -50,6 +50,8 @@ Before ANY other review activity, check if this PR breaks the public SDK contrac
 - Removing enum values that users may be using
 - Renaming public classes, methods, or properties
 - Changing exception types thrown by methods
+- Changing an existing `*Async` method signature (params, return type, removing the `CancellationToken`)
+- Altering the `HttpClient` interface, `RequestAsync`, `ShouldRetryAsync`, or `RetrySleep` contracts (e.g. the v6 PR #195 made `RetrySleep` async — a documented breaking change)
 
 **NOT BREAKING:**
 - Adding new methods (overloads OK if old signature kept)
@@ -156,7 +158,8 @@ Report GetReport(long id, ReportOptions options);  // New signature added
 | 2. Compare Parameters | Verify ALL query/path/body params match spec | Missing parameters = incomplete functionality |
 | 3. Verify Models | Check response properties align with spec exactly | Wrong mapping = API contract violation |
 | 4. Validate Tests | Confirm tests cover ALL spec-defined properties | Gaps in tests = unverified functionality |
-| 5. Check Architecture | Evaluate patterns, deprecations, code quality | Only after functional correctness verified |
+| 5. Verify Async Parity | Confirm `*Async` method exists with full async test coverage | Async is a mandatory, blocking requirement |
+| 6. Check Architecture | Evaluate patterns, deprecations, code quality | Only after functional correctness verified |
 
 ## Review Workflow
 
@@ -373,6 +376,23 @@ Minimum required (if spec defines these):
 - Verify correct exception type thrown
 - Match error code to SDK exception hierarchy
 
+#### Async Test Coverage (MANDATORY)
+
+A new or modified endpoint with an `*Async` method requires full async parity. Confirm all four async tests exist:
+
+- [ ] `Test{Method}AsyncGeneratedUrlIsCorrect`
+- [ ] `Test{Method}AsyncAllResponseBodyProperties`
+- [ ] `Test{Method}AsyncError400Response`
+- [ ] `Test{Method}AsyncError500Response`
+
+Also verify:
+- [ ] Tests are `public async Task` (never `async void`)
+- [ ] Error tests use `AssertRaisesExceptionAsync` (not the sync `AssertRaisesException`)
+- [ ] The `*Async` method is declared on BOTH the public interface and the `*Impl`
+- [ ] The sync method delegates via `.GetAwaiter().GetResult()` (not `.Result`/`.Wait()`)
+
+**Missing `*Async` method OR missing async tests = REQUEST CHANGES.**
+
 ### Step 5: Evaluate Architecture (After Spec Verification)
 
 Only after spec compliance verified, check:
@@ -418,11 +438,13 @@ Only after spec compliance verified, check:
 4. **Incorrect required/optional handling**
 5. **Tests don't cover all spec properties**
 6. **Tests don't cover all error cases from spec**
+7. **Missing `*Async` counterpart for a new/modified endpoint**
+8. **Missing async test coverage (the four `*Async` tests)**
 
 **ARCHITECTURE - BLOCKING:**
 
-7. **Implementing deprecated pattern**
-8. **Duplicating existing functionality**
+9. **Implementing deprecated pattern**
+10. **Duplicating existing functionality**
 
 ### COMMENT (Not Blocking) If:
 
@@ -500,6 +522,8 @@ Only after spec compliance verified, check:
 - [ ] Verified required/optional correct
 - [ ] Verified test coverage complete
 - [ ] Verified error handling complete
+- [ ] Verified `*Async` counterpart exists (interface + impl)
+- [ ] Verified all four `*Async` tests present and using `AssertRaisesExceptionAsync` for errors
 
 **If any unchecked → REQUEST CHANGES**
 
@@ -542,6 +566,9 @@ Checked against spec schema `{SchemaName}`:
 - [x] 404 error tested
 - [x] 500 error tested
 - [ ] 400 error tested - **MISSING**
+- [x] Async URL generation tested
+- [x] Async all-properties tested
+- [ ] Async 400/500 errors tested - **verify**
 
 ### Required/Optional Handling
 - [x] Spec `"required": []` - all properties optional

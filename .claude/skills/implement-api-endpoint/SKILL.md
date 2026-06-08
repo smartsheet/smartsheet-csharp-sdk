@@ -32,8 +32,8 @@ Never trust existing patterns without spec verification - patterns can propagate
 | 1. Fetch Spec | Get OpenAPI JSON for the endpoint | Source of truth for all implementation decisions |
 | 2. Analyze Spec | Extract request params, response schema, required fields | Prevents assumptions and circular validation |
 | 3. Map Models | Verify/create C# models matching spec exactly | Type safety and API contract compliance |
-| 4. Implement | Follow AbstractResources pattern from ADVANCED.md | Consistency with SDK architecture |
-| 5. Test Comprehensively | URL, request body, all response properties, errors | Spec compliance verification, not code validation |
+| 4. Implement | Follow AbstractResources pattern from ADVANCED.md — sync method AND `*Async` counterpart | Consistency with SDK architecture; async is mandatory |
+| 5. Test Comprehensively | URL, request body, all response properties, errors — sync AND async | Spec compliance verification, not code validation |
 
 ## Implementation Workflow
 
@@ -163,6 +163,35 @@ public virtual {ReturnType} {MethodName}({parameters})
 - Use `this.GetResource<T>()` for single object endpoints
 - Exceptions throw automatically via `HandleError()` - no manual exception handling needed
 
+**Async counterpart (MANDATORY):**
+
+Every new or modified endpoint must ship an `*Async` method alongside the synchronous one. Declare it on BOTH the public interface and the `*Impl` class.
+
+```csharp
+// Public interface — async mirrors sync with Async suffix, Task<T> return, trailing CancellationToken
+Task<ReturnType> MethodNameAsync(/* same params */, CancellationToken cancellationToken = default);
+
+// Impl — build params identically, await an async helper with ConfigureAwait(false)
+public virtual async Task<ReturnType> MethodNameAsync(/* same params */, CancellationToken cancellationToken = default)
+{
+    IDictionary<string, string> parameters = new Dictionary<string, string>();
+    // ... populate parameters exactly as the sync method does ...
+
+    return await this.GetResourceAsync<ReturnType>(
+        "path" + QueryUtil.GenerateUrl(null, parameters),
+        typeof(ReturnType),
+        cancellationToken).ConfigureAwait(false);
+}
+
+// Sync method delegates to async — NOT .Wait()/.Result, NOT AggregateException unwrap
+public virtual ReturnType MethodName(/* same params */)
+{
+    return this.MethodNameAsync(/* same params */).GetAwaiter().GetResult();
+}
+```
+
+Use the async helper matching the HTTP verb: `GetResourceAsync`, `CreateResourceAsync`, `UpdateResourceAsync`, `DeleteResourceAsync`, `ListResourcesWithWrapperAsync`, `ListResourcesWithTokenWrapperAsync`, `CreateResourceWithAttachmentAsync`. Pass `cancellationToken` through every await. See ADVANCED.md "Asynchronous API (Task-based Methods)" for the full convention.
+
 ### Step 5: Create Comprehensive Tests
 
 **Test file location:** `/mock-api-test-sdk-net80/{ResourceName}Test.cs`
@@ -289,6 +318,38 @@ LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.
 Assert.AreEqual(EXPECTED_REQUEST_BODY, foundRequest.Body);
 ```
 
+#### 6. Async Tests (MANDATORY — full parity)
+
+Every required sync test needs an `*Async` counterpart: `Test{Method}AsyncGeneratedUrlIsCorrect`, `Test{Method}AsyncAllResponseBodyProperties`, `Test{Method}AsyncError400Response`, `Test{Method}AsyncError500Response`. Reuse the same expected-body/response constants as the sync tests.
+
+```csharp
+[TestMethod]
+public async Task Test{Method}AsyncAllResponseProperties()
+{
+    Guid requestId = Guid.NewGuid();
+    SmartsheetClient smartsheet = HelperFunctions.SetupClient("/path/all-response-body-properties", requestId.ToString());
+
+    ResultType result = await smartsheet.ResourceName.MethodAsync(REQUEST_ALL);
+
+    WiremockHelper wiremockHelper = new WiremockHelper();
+    LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+    Assert.AreEqual(EXPECTED_ALL_REQUEST_BODY, foundRequest.Body);
+    Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_ALL_RESPONSE), JsonConvert.SerializeObject(result));
+}
+
+[TestMethod]
+public async Task Test{Method}AsyncError404Response()
+{
+    SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/404-response", Guid.NewGuid().ToString());
+
+    await HelperFunctions.AssertRaisesExceptionAsync<ResourceNotFoundException>(
+        () => smartsheet.ResourceName.MethodAsync(params),
+        "Not Found");
+}
+```
+
+Async tests are `public async Task` (never `async void`); error cases use `AssertRaisesExceptionAsync` (not the sync `AssertRaisesException`). See TESTING.md "Async Test Requirements" and `mock-api-test-sdk-net80/SheetAsyncTests.cs`.
+
 ### Step 6: Verify Build
 
 ```bash
@@ -308,6 +369,8 @@ All tests must compile. Running tests requires WireMock stubs (separate concern)
 | "Required properties are obvious" | Only spec `"required": []` array defines required. Check it. |
 | "I'll test main cases, skip edge cases" | Test EVERY property, EVERY parameter, EVERY error code from spec. |
 | "Enum values seem standard" | Enum values change. Verify against spec exactly. |
+| "I'll add the async version later" | Async is mandatory. Ship sync + `*Async` together, both tested. |
+| "Sync can just call `.Result` on the async method" | Use `.GetAwaiter().GetResult()`. `.Result`/`.Wait()` wrap errors in `AggregateException`. |
 
 ## Red Flags - STOP and Check Spec
 
@@ -317,6 +380,8 @@ All tests must compile. Running tests requires WireMock stubs (separate concern)
 - "Let me implement first, then validate"
 - "Tests based on code are good enough"
 - "Spec check can wait until later"
+- "I implemented the sync method, async can follow in another PR"
+- "The async method doesn't need its own tests, it shares the code path"
 
 **All of these mean: STOP. Fetch OpenAPI spec. Validate BEFORE coding.**
 

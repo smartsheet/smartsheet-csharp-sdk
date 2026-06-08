@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Added `ObjectIdStr` property to `Event` model to support alphanumeric object identifiers (AUD-905)
 - AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
+- ⚠️ **BREAKING**: Added `RequestAsync()` to `HttpClient` interface, which must be overridden in custom HttpClient implementations to affect async resource methods.
+- Added asynchronous (`*Async`) counterparts to `SheetResources`: `ListSheetsAsync`, `GetSheetAsync`, `GetSheetVersionAsync`, `CreateSheetFromTemplateAsync`, `CopySheetAsync`, `MoveSheetAsync`, `UpdateSheetAsync`, `DeleteSheetAsync`, `SortSheetAsync`, `SendSheetAsync`, `GetPublishStatusAsync`, and `UpdatePublishStatusAsync`.
 
 ### Removed
 - ⚠️ **BREAKING**: Removed deprecated `ListSights(PaginationParameters?, DateTime?)` overload and `modifiedSince` parameter from `ListSights`. These were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#deprecated-includeall-and-offset-based-pagination-for-dashboards) (sunset Jun-03-2026). `ListSights` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Sight>`. The response no longer includes `TotalCount`, `TotalPages`, `PageNumber`, or `PageSize`.
@@ -22,7 +24,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `ListWebhooks` XML documentation updated to reflect Smartsheet API behavior changes effective Jun-03-2026: `includeAll` is no longer honored by the server for this endpoint and is ignored if set on `PaginationParameters` (`PaginationParameters` remains a shared class — other endpoints still support `includeAll`), `PageSize` is server-capped at 10,000, `TotalCount` and `TotalPages` are returned as `-1`, and webhooks are sorted by creation date (most recent first) instead of name. SDK signature unchanged. See [Smartsheet API changelog 2025-08-04](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04).
 - ⚠️ **BREAKING**: Change `DefaultHttpClient.RetrySleep()` into an async method that returns a boolean wrapped in a Task
-- ⚠️ **BREAKING**: Add `RequestAsync()` to `HttpClient` interface, which must be overridden in custom HttpClient implementations to affect async resource methods
 
 ## [6.7.0] - 2026-04-30
 ### Added
