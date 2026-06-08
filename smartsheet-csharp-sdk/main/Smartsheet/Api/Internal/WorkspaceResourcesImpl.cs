@@ -23,7 +23,6 @@ namespace Smartsheet.Api.Internal
 {
     using Smartsheet.Api.Internal.Util;
     using Smartsheet.Api.Models;
-    using System.Text;
     using Workspace = Api.Models.Workspace;
 
     /// <summary>
@@ -48,13 +47,6 @@ namespace Smartsheet.Api.Internal
         private WorkspaceSheetResources sheets;
 
         /// <summary>
-        /// Represents the ShareResources.
-        ///
-        /// It will be initialized in constructor and will not change afterwards.
-        /// </summary>
-        private ShareResources shares;
-
-        /// <summary>
         /// Constructor.
         ///
         /// Exceptions:
@@ -66,34 +58,11 @@ namespace Smartsheet.Api.Internal
         {
             this.folders = new WorkspaceFolderResourcesImpl(smartsheet);
             this.sheets = new WorkspaceSheetResourcesImpl(smartsheet);
-            this.shares = new ShareResourcesImpl(smartsheet, "workspaces");
         }
 
         /// <summary>
         /// <para>List all Workspaces.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /Workspaces</para>
-        /// <remarks>This operation supports pagination of results. For more information, see Paging.</remarks>
-        /// </summary>
-        /// <returns> the list of Workspaces (note that an empty list will be returned if there are none) </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<Workspace> ListWorkspaces(PaginationParameters? paging)
-        {
-            StringBuilder path = new StringBuilder("workspaces");
-            if (paging != null)
-            {
-                path.Append(paging.ToQueryString());
-            }
-            return this.ListResourcesWithWrapper<Workspace>(path.ToString());
-        }
-
-        /// <summary>
-        /// <para>List all Workspaces using token-based pagination.</para>
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces</para>
         /// <remarks>This operation supports token-based pagination of results.</remarks>
         /// </summary>
         /// <param name="tokenPaging">Token-based pagination parameters</param>
@@ -104,48 +73,15 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual TokenPaginatedResult<Workspace> ListWorkspaces(ListWorkspacesTokenPaginationParameters? tokenPaging)
-        {
-            StringBuilder path = new StringBuilder("workspaces");
-            if (tokenPaging != null)
-            {
-                path.Append(tokenPaging.ToQueryString());
-            }
-            return this.ListResourcesWithTokenWrapper<Workspace>(path.ToString());
-        }
-
-        /// <summary>
-        /// <para>Gets the specified Workspace (and lists its contents).</para>
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /workspaces/{workspaceid}</para>
-        /// <remarks><para>By default, this operation only returns the top-level items in the Workspace. To load all of the contents,
-        /// including nested Folders, include the loadAll query string parameter with a value of true.</para>
-        /// <para>If no Folders, Sheets, Reports, or Templates are present in the Workspace, the corresponding attribute
-        /// (e.g., "folders", "sheets") will not be present in the response object.</para></remarks>
-        /// </summary>
-        /// <param name="workspaceId">the workspace id</param>
-        /// <param name="loadAll"> Defaults to false. If true, loads all of the contents, including nested Folders. </param>
-        /// <param name="include"> When specified with a value of "source", response will include the source for any sheet that was created from another sheet or template</param>
-        /// <returns> the workspace (note that if there is no such resource, this method will throw ResourceNotFoundException
-        /// rather than returning null) </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        [Obsolete("This method is deprecated. Use GetWorkspaceChildren and GetWorkspaceMetadata instead.")]
-        public virtual Workspace GetWorkspace(long workspaceId, bool? loadAll, IEnumerable<WorkspaceInclusion>? include)
+        public virtual TokenPaginatedResult<Workspace> ListWorkspaces(TokenPaginationParameters? tokenPaging = null)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
-            if (loadAll.HasValue)
+            if (tokenPaging != null)
             {
-                parameters.Add("loadAll", loadAll.ToString());
+                parameters = tokenPaging.toDictionary();
             }
-            if (include != null)
-            {
-                parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
-            }
-            return this.GetResource<Workspace>(QueryUtil.GenerateUrl("workspaces/" + workspaceId, parameters), typeof(Workspace));
+
+            return this.ListResourcesWithTokenWrapper<Workspace>(QueryUtil.GenerateUrl("workspaces", parameters));
         }
 
         /// <summary>
@@ -252,15 +188,6 @@ namespace Smartsheet.Api.Internal
         public virtual WorkspaceFolderResources FolderResources
         {
             get { return this.folders; }
-        }
-
-        /// <summary>
-        /// Return the ShareResources object that provides access to Share resources associated with Workspace resources.
-        /// </summary>
-        /// <returns> the share resources </returns>
-        public virtual ShareResources ShareResources
-        {
-            get { return this.shares; }
         }
 
         /// <summary>

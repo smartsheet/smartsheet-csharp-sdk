@@ -71,12 +71,6 @@ namespace Smartsheet.Api
         FolderResources FolderResources { get; }
 
         /// <summary>
-        /// <para>Returns the TemplateResources instance that provides access to Template resources.</para>
-        /// </summary>
-        /// <returns> the template resources instance </returns>
-        TemplateResources TemplateResources { get; }
-
-        /// <summary>
         /// <para>Returns the ReportResources instance that provides access to Report resources.</para>
         /// </summary>
         /// <returns> the report resources instance </returns>

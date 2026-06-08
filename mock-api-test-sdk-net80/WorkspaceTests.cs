@@ -9,6 +9,71 @@ namespace mock_api_test_sdk_net80
     public class WorkspaceTests
     {
         [TestMethod]
+        public void ListWorkspaces_FirstPage()
+        {
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Workspaces - First Page with Pagination");
+            TokenPaginatedResult<Workspace> workspaces = smartsheet.WorkspaceResources.ListWorkspaces(
+                new TokenPaginationParameters(null, 100)
+            );
+            Assert.IsNotNull(workspaces?.Data);
+            Assert.AreEqual(2, workspaces.Data.Count);
+            Assert.AreEqual("eyJsYXN0SWQiOjEwMDJ9", workspaces.LastKey);
+
+            var workspacesList = workspaces.Data.ToList();
+
+            Workspace? marketing = workspacesList.FirstOrDefault(w => w.Id == 1001);
+            Assert.IsNotNull(marketing);
+            Assert.AreEqual("Marketing Workspace", marketing.Name);
+            Assert.AreEqual(AccessLevel.OWNER, marketing.AccessLevel);
+
+            Workspace? sales = workspacesList.FirstOrDefault(w => w.Id == 1002);
+            Assert.IsNotNull(sales);
+            Assert.AreEqual("Sales Workspace", sales.Name);
+            Assert.AreEqual(AccessLevel.ADMIN, sales.AccessLevel);
+        }
+
+        [TestMethod]
+        public void ListWorkspaces_MiddlePage()
+        {
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Workspaces - Middle Page with Pagination");
+            TokenPaginatedResult<Workspace> workspaces = smartsheet.WorkspaceResources.ListWorkspaces(
+                new TokenPaginationParameters("eyJsYXN0SWQiOjEwMDJ9", 100)
+            );
+            Assert.IsNotNull(workspaces?.Data);
+            Assert.AreEqual(2, workspaces.Data.Count);
+            Assert.AreEqual("eyJsYXN0SWQiOjEwMDR9", workspaces.LastKey);
+
+            var workspacesList = workspaces.Data.ToList();
+
+            Workspace? engineering = workspacesList.FirstOrDefault(w => w.Id == 1003);
+            Assert.IsNotNull(engineering);
+            Assert.AreEqual("Engineering Workspace", engineering.Name);
+            Assert.AreEqual(AccessLevel.EDITOR, engineering.AccessLevel);
+
+            Workspace? hr = workspacesList.FirstOrDefault(w => w.Id == 1004);
+            Assert.IsNotNull(hr);
+            Assert.AreEqual("HR Workspace", hr.Name);
+            Assert.AreEqual(AccessLevel.VIEWER, hr.AccessLevel);
+        }
+
+        [TestMethod]
+        public void ListWorkspaces_FinalPage()
+        {
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("List Workspaces - Final Page with Pagination");
+            TokenPaginatedResult<Workspace> workspaces = smartsheet.WorkspaceResources.ListWorkspaces(
+                new TokenPaginationParameters("eyJsYXN0SWQiOjEwMDR9", 100)
+            );
+            Assert.IsNotNull(workspaces?.Data);
+            Assert.AreEqual(1, workspaces.Data.Count);
+            Assert.IsNull(workspaces.LastKey);
+
+            Workspace? compliance = workspaces.Data.FirstOrDefault(w => w.Id == 1005);
+            Assert.IsNotNull(compliance);
+            Assert.AreEqual("Compliance Workspace", compliance.Name);
+            Assert.AreEqual(AccessLevel.VIEWER, compliance.AccessLevel);
+        }
+
+        [TestMethod]
         public void GetWorkspaceChildren_NoParams()
         {
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("Get Workspace Children - No Params");

@@ -117,15 +117,6 @@ namespace Smartsheet.Api.Internal
         private FolderResources folders;
 
         /// <summary>
-        /// Represents the AtomicReference to TemplateResources.
-        /// 
-        /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
-        /// as null, and will be initialized to non-null at the first time it is accessed via corresponding getter, therefore
-        /// effectively the underlying value is lazily created in a thread safe manner.
-        /// </summary>
-        private TemplateResources templates;
-
-        /// <summary>
         /// Represents the AtomicReference to ReportResources.
         /// 
         /// It will be initialized in constructor and will not change afterwards. The underlying value will be initially set
@@ -438,19 +429,6 @@ namespace Smartsheet.Api.Internal
             {
                 Interlocked.CompareExchange<FolderResources>(ref folders, new FolderResourcesImpl(this), null);
                 return folders;
-            }
-        }
-
-        /// <summary>
-        /// Returns the TemplateResources instance that provides access to template resources.
-        /// </summary>
-        /// <returns> the template resources </returns>
-        public virtual TemplateResources TemplateResources
-        {
-            get
-            {
-                Interlocked.CompareExchange<TemplateResources>(ref templates, new TemplateResourcesImpl(this), null);
-                return templates;
             }
         }
 

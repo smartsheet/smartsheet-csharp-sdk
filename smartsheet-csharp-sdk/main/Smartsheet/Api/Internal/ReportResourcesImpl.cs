@@ -34,22 +34,14 @@ namespace Smartsheet.Api.Internal
     public class ReportResourcesImpl : AbstractResources, ReportResources
     {
         /// <summary>
-        /// Represents the ShareResources.
-        /// 
-        /// It will be initialized in constructor and will not change afterwards.
-        /// </summary>
-        private ShareResources shares;
-
-        /// <summary>
         /// Constructor.
-        /// 
+        ///
         /// Exceptions: - IllegalArgumentException : if any argument is null
         /// </summary>
         /// <param name="smartsheet"> the Smartsheet </param>
         public ReportResourcesImpl(SmartsheetImpl smartsheet)
             : base(smartsheet)
         {
-            this.shares = new ShareResourcesImpl(smartsheet, "reports");
         }
 
         /// <summary>
@@ -268,18 +260,6 @@ namespace Smartsheet.Api.Internal
         public ReportPublish UpdatePublishStatus(long reportId, ReportPublish reportPublish)
         {
             return this.UpdateResource<ReportPublish>("reports/" + reportId + "/publish", typeof(ReportPublish), reportPublish);
-        }
-
-        /// <summary>
-        /// <para>Return the ShareResources object that provides access to Share resources associated with Report resources.</para>
-        /// </summary>
-        /// <returns> the ShareResources object </returns>
-        public virtual ShareResources ShareResources
-        {
-            get
-            {
-                return this.shares;
-            }
         }
 
         /// <summary>
