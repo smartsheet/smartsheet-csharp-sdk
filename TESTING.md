@@ -9,6 +9,7 @@ This guide establishes the mandatory patterns for mock API testing in the Smarts
   - [Running Mock API Tests](#running-mock-api-tests)
 - [Mock API Test Standards](#mock-api-test-standards)
   - [Standardized Test Cases](#standardized-test-cases)
+  - [Async Test Requirements](#async-test-requirements)
   - [Key Principles](#key-principles)
   - [Test Suite Structure](#test-suite-structure)
 - [Additional Rules](#additional-rules)
@@ -66,6 +67,57 @@ Every endpoint must implement these test cases (using PascalCase naming for C#):
 - **`Test<Operation>RequiredResponseBodyProperties`** — Include ONLY if a corresponding WireMock mapping exists for the required-properties variant. Asserts request body and minimal response body.
 - **Endpoint-specific tests** — Additional tests for unique endpoint behaviors (e.g., scope variants, pagination edge cases).
 
+### Async Test Requirements
+
+Every endpoint with an asynchronous (`*Async`) counterpart requires **full async parity**: each of the four required sync test cases must have an `*Async` version.
+
+**Required async tests:**
+
+1. **`Test<Operation>AsyncGeneratedUrlIsCorrect`**
+2. **`Test<Operation>AsyncAllResponseBodyProperties`**
+3. **`Test<Operation>AsyncError400Response`**
+4. **`Test<Operation>AsyncError500Response`**
+
+These mirror the synchronous required tests one-for-one. The optional tests (`RequiredResponseBodyProperties`, endpoint-specific variants) follow the same async-parity rule only when their sync counterpart exists.
+
+**Async test rules:**
+
+- Test methods are `public async Task` (never `async void`), and `await` the `*Async` resource method:
+
+```csharp
+[TestMethod]
+public async Task TestGetSheetAsyncAllResponseBodyProperties()
+{
+    Guid requestId = Guid.NewGuid();
+    SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sheets/get-sheet/all-response-body-properties", requestId.ToString());
+
+    Sheet result = await smartsheet.SheetResources.GetSheetAsync(TEST_SHEET_ID, null, null, null, null, null, null, null, null, null, null);
+
+    WiremockHelper wiremockHelper = new WiremockHelper();
+    LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+    Assert.AreEqual(string.Empty, foundRequest.Body);
+    Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_GET_SHEET_RESPONSE), JsonConvert.SerializeObject(result));
+}
+```
+
+- Error-case tests assert with `HelperFunctions.AssertRaisesExceptionAsync<TException>` (NOT the synchronous `AssertRaisesException`). This observes the exception on the awaited task rather than letting it escape on an async-void continuation:
+
+```csharp
+[TestMethod]
+public async Task TestGetSheetAsyncError404Response()
+{
+    SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sheets/get-sheet/error-404", Guid.NewGuid().ToString());
+
+    await HelperFunctions.AssertRaisesExceptionAsync<ResourceNotFoundException>(
+        () => smartsheet.SheetResources.GetSheetAsync(TEST_SHEET_ID, null, null, null, null, null, null, null, null, null, null),
+        "Not Found");
+}
+```
+
+- Because the `*Async` method shares the same request/response code path as the sync method, the expected request bodies and response objects are **identical** to the sync test constants — reuse the same file-scoped `const`/`static readonly` fields rather than redefining them.
+
+**Reference example:** See `mock-api-test-sdk-net80/SheetAsyncTests.cs` for working async tests, and `HelperFunctions.AssertRaisesExceptionAsync` in `mock-api-test-sdk-net80/HelperFunctions.cs`.
+
 ### Key Principles
 
 #### Full-Object Assertions
@@ -95,6 +147,7 @@ See [smartsheet-sdk-tests](https://github.com/smartsheet/smartsheet-sdk-tests) f
 - **One test file per endpoint:** `mock-api-test-sdk-net80/<resource>/Test<OperationName>.cs`
 - **One constants file per resource:** `mock-api-test-sdk-net80/<resource>/CommonTestConstants.cs` (or the shared `users/CommonTestConstants.cs` for cross-resource IDs)
 - **Gold standard examples:** See Reports tests in `mock-api-test-sdk-net80/reports/`
+- **Async test example:** See `mock-api-test-sdk-net80/SheetAsyncTests.cs` for the async test pattern
 
 ---
 
