@@ -47,12 +47,20 @@ namespace Smartsheet.Api.Internal
 
         /// <summary>
         /// <para>Gets the list of all Webhooks that the user owns (if a user generated token was used to make the request)
-        /// or the list of all Webhooks associated with the third-party app (if a third-party app made the request). Items 
-        /// in the response are ordered by API Client name, then Webhook name, then creation date.</para>
-        /// 
+        /// or the list of all Webhooks associated with the third-party app (if a third-party app made the request).</para>
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method: GET /webhooks</para>
+        ///
+        /// <para>Note: as of the Jun-03-2026 sunset date:</para>
+        /// <list type="bullet">
+        ///   <item><description><c>IncludeAll</c> is no longer honored by the server for this endpoint and is ignored if set on <see cref="PaginationParameters"/>. <see cref="PaginationParameters"/> remains a shared class — other endpoints still support <c>IncludeAll</c>.</description></item>
+        ///   <item><description><c>PageSize</c> is server-capped at 10,000.</description></item>
+        ///   <item><description><c>TotalCount</c> and <c>TotalPages</c> on the response are returned as <c>-1</c>.</description></item>
+        ///   <item><description>Webhooks are sorted by creation date (most recent first), no longer by name.</description></item>
+        /// </list>
+        /// <para>See <a href="https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04">Smartsheet API changelog 2025-08-04</a>.</para>
         /// </summary>
-        /// <returns>IndexResult object containing an array of Webhook objects</returns>
+        /// <returns>PaginatedResult object containing an array of Webhook objects</returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>

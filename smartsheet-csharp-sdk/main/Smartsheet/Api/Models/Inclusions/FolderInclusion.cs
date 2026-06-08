@@ -28,16 +28,6 @@ namespace Smartsheet.Api.Models
     public enum FolderInclusion
     {
         /// <summary>
-        /// Includes the owner’s email address and user ID for each sheet.
-        /// </summary>
-        OWNER_INFO,
-
-        /// <summary>
-        /// Includes the sheet version for any sheet returned in this folder.
-        /// </summary>
-        SHEET_VERSION,
-
-        /// <summary>
         /// Includes the source for any sheet that was created from another sheet or template.
         /// </summary>
         SOURCE

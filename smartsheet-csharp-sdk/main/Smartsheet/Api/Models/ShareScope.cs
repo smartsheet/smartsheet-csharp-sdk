@@ -19,7 +19,7 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Represents the scope of a share. For use with the <see cref="ShareResources.ListShares(long, PaginationParameters, ShareScope)"/>.
+    /// Represents the scope of a share. For use with the <see cref="Smartsheet.Api.AssetSharingResources.ListAssetShares"/>.
     /// </summary>
     /// <remarks>
     /// See http://smartsheet-platform.github.io/api-docs/#share-object and http://smartsheet-platform.github.io/api-docs/#list-sheet-shares for more information.
