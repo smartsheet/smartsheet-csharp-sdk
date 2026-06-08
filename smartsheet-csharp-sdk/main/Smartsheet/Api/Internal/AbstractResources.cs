@@ -960,6 +960,33 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual IList<S> PostAndReceiveList<T, S>(string path, T objectToPost, Type objectClassToReceive)
         {
+            return this.PostAndReceiveListAsync<T, S>(path, objectToPost, objectClassToReceive).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Post an object to SmartsheetClient REST API and receive a list of objects from response.
+        /// 
+        /// Parameters: - path : the relative path of the resource collections - objectToPost : the object to post -
+        /// objectClassToReceive : the resource object class to receive
+        /// 
+        /// Returns: the object list
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the path </param>
+        /// <param name="objectToPost"> the object to post </param>
+        /// <param name="objectClassToReceive"> the object class to receive </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the list </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected async internal virtual Task<IList<S>> PostAndReceiveListAsync<T, S>(string path, T objectToPost, Type objectClassToReceive, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, objectToPost, objectClassToReceive);
             Utils.ThrowIfEmpty(path);
 
@@ -975,7 +1002,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPost);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             IList<S> obj = null;
             switch (response.StatusCode)
@@ -1011,6 +1038,28 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual IList<S> PutAndReceiveList<T, S>(string path, T objectToPut, Type objectClassToReceive)
         {
+            return this.PutAndReceiveListAsync<T, S>(path, objectToPut, objectClassToReceive).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Put an object to SmartsheetClient REST API and receive a list of objects from response.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="objectToPut"> the object to put </param>
+        /// <param name="objectClassToReceive"> the resource object class to receive </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the object list </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<IList<S>> PutAndReceiveListAsync<T, S>(string path, T objectToPut, Type objectClassToReceive, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, objectToPut, objectClassToReceive);
             Utils.ThrowIfEmpty(path);
 
@@ -1026,7 +1075,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPut);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             IList<S> obj = null;
             switch (response.StatusCode)
