@@ -964,7 +964,7 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// Post an object to SmartsheetClient REST API and receive a list of objects from response.
+        /// Asynchronously post an object to SmartsheetClient REST API and receive a list of objects from response.
         /// 
         /// Parameters: - path : the relative path of the resource collections - objectToPost : the object to post -
         /// objectClassToReceive : the resource object class to receive
@@ -1042,7 +1042,7 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// Put an object to SmartsheetClient REST API and receive a list of objects from response.
+        /// Asynchronously put an object to SmartsheetClient REST API and receive a list of objects from response.
         /// 
         /// Exceptions:
         ///   IllegalArgumentException : if any argument is null, or path is an empty string
