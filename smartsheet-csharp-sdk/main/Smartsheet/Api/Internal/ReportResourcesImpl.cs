@@ -24,6 +24,8 @@ using Smartsheet.Api.Internal.Http;
 using System.Net;
 using Utils = Smartsheet.Api.Internal.Utility.Utility;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api.Internal
 {
@@ -523,6 +525,29 @@ namespace Smartsheet.Api.Internal
             smartsheet.HttpClient.ReleaseConnection();
 
             return result;
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/path</para>
+        /// </summary>
+        /// <param name="reportId"> the report Id </param>
+        /// <returns> a ReportPathNode representing the workspace root, with nested folders down to the target report </returns>
+        public virtual ReportPathNode GetReportPath(long reportId)
+        {
+            return this.GetReportPathAsync(reportId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified report asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/path</para>
+        /// </summary>
+        /// <param name="reportId"> the report Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a ReportPathNode representing the workspace root, with nested folders down to the target report </returns>
+        public virtual async Task<ReportPathNode> GetReportPathAsync(long reportId, CancellationToken cancellationToken = default)
+        {
+            return await this.GetResourceAsync<ReportPathNode>("reports/" + reportId + "/path", typeof(ReportPathNode), cancellationToken).ConfigureAwait(false);
         }
     }
 }

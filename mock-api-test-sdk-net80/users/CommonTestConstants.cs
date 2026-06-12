@@ -7,5 +7,13 @@ namespace mock_api_test_sdk_net80
         public const long TEST_SHEET_ID = 9876543210L;
         public const long TEST_WORKSPACE_ID = 1122334455L;
         public const long TEST_REPORT_ID = 2233445566L;
+        public const long TEST_SIGHT_ID = 5544332211L;
+        public const long TEST_FOLDER_ID = 6655443322L;
+
+        public const long TEST_PATH_WORKSPACE_ID = 4509918431602564L;
+        public const long TEST_PATH_FOLDER_1_ID = 1234567890123456L;
+        public const long TEST_PATH_FOLDER_2_ID = 2345678901234567L;
+        public const long TEST_PATH_NESTED_LEAF_ID = 3456789012345678L;
+        public const long TEST_PATH_ROOT_LEAF_ID = 5678901234567890L;
     }
 }

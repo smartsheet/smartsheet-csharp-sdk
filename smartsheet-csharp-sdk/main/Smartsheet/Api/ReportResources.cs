@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using Smartsheet.Api.Models;
 using System.IO;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api
 {
@@ -268,5 +270,28 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         CreateReportResult CreateReport(CreateReportRequest request);
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/path</para>
+        /// </summary>
+        /// <param name="reportId"> the report Id </param>
+        /// <returns> a ReportPathNode representing the workspace root, with nested folders down to the target report </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        ReportPathNode GetReportPath(long reportId);
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified report asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/path</para>
+        /// </summary>
+        /// <param name="reportId"> the report Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a ReportPathNode representing the workspace root, with nested folders down to the target report </returns>
+        Task<ReportPathNode> GetReportPathAsync(long reportId, CancellationToken cancellationToken = default);
     }
 }
