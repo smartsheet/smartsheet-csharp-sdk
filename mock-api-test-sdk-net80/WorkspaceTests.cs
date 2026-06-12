@@ -220,7 +220,7 @@ namespace mock_api_test_sdk_net80
 
             Assert.IsNotNull(workspace);
             Assert.AreEqual(123, workspace.Id);
-            Assert.AreEqual("Sample Workspace", workspace.Name);
+            Assert.AreEqual(CommonTestConstants.TEST_PATH_WORKSPACE_NAME, workspace.Name);
             Assert.AreEqual("https://app.smartsheet.com/b/home?lx=*****************", workspace.Permalink);
             Assert.AreEqual(AccessLevel.VIEWER, workspace.AccessLevel);
             Assert.IsNotNull(workspace.CreatedAt);
@@ -240,7 +240,7 @@ namespace mock_api_test_sdk_net80
 
             Assert.IsNotNull(workspace);
             Assert.AreEqual(123, workspace.Id);
-            Assert.AreEqual("Sample Workspace", workspace.Name);
+            Assert.AreEqual(CommonTestConstants.TEST_PATH_WORKSPACE_NAME, workspace.Name);
             Assert.AreEqual(AccessLevel.ADMIN, workspace.AccessLevel);
             Assert.IsNotNull(workspace.Source);
             Assert.AreEqual(999, workspace.Source.Id);

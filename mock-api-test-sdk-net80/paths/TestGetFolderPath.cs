@@ -10,29 +10,29 @@ namespace mock_api_test_sdk_net80
         private static readonly FolderPathNode EXPECTED_NESTED_RESPONSE = new FolderPathNode
         {
             Id = CommonTestConstants.TEST_PATH_WORKSPACE_ID,
-            Name = "Sample Workspace",
-            Permalink = "https://app.smartsheet.com/workspaces/mock_workspace_id",
+            Name = CommonTestConstants.TEST_PATH_WORKSPACE_NAME,
+            Permalink = CommonTestConstants.TEST_PATH_WORKSPACE_PERMALINK,
             AccessLevel = AccessLevel.OWNER,
             Folders = new List<FolderPathNode>
             {
                 new FolderPathNode
                 {
                     Id = CommonTestConstants.TEST_PATH_FOLDER_1_ID,
-                    Name = "Project Plans",
-                    Permalink = "https://app.smartsheet.com/folders/1234567890123456",
+                    Name = CommonTestConstants.TEST_PATH_FOLDER_1_NAME,
+                    Permalink = CommonTestConstants.TEST_PATH_FOLDER_1_PERMALINK,
                     Folders = new List<FolderPathNode>
                     {
                         new FolderPathNode
                         {
                             Id = CommonTestConstants.TEST_PATH_FOLDER_2_ID,
-                            Name = "Project Plans Subfolder",
-                            Permalink = "https://app.smartsheet.com/folders/2345678901234567",
+                            Name = CommonTestConstants.TEST_PATH_FOLDER_2_NAME,
+                            Permalink = CommonTestConstants.TEST_PATH_FOLDER_2_PERMALINK,
                             Folders = new List<FolderPathNode>
                             {
                                 new FolderPathNode
                                 {
                                     Id = CommonTestConstants.TEST_PATH_NESTED_LEAF_ID,
-                                    Name = "Project Plans Sub-Subfolder",
+                                    Name = CommonTestConstants.TEST_PATH_NESTED_LEAF_NAME,
                                     Permalink = "https://app.smartsheet.com/folders/3456789012345678"
                                 }
                             }
@@ -45,8 +45,8 @@ namespace mock_api_test_sdk_net80
         private static readonly FolderPathNode EXPECTED_ROOT_RESPONSE = new FolderPathNode
         {
             Id = CommonTestConstants.TEST_PATH_WORKSPACE_ID,
-            Name = "Sample Workspace",
-            Permalink = "https://app.smartsheet.com/workspaces/mock_workspace_id",
+            Name = CommonTestConstants.TEST_PATH_WORKSPACE_NAME,
+            Permalink = CommonTestConstants.TEST_PATH_WORKSPACE_PERMALINK,
             AccessLevel = AccessLevel.OWNER,
             Folders = new List<FolderPathNode>
             {
@@ -120,7 +120,7 @@ namespace mock_api_test_sdk_net80
             FolderPathNode leaf = result.GetLeafFolder();
             Assert.IsNotNull(leaf);
             Assert.AreEqual(CommonTestConstants.TEST_PATH_NESTED_LEAF_ID, leaf.Id);
-            Assert.AreEqual("Project Plans Sub-Subfolder", leaf.Name);
+            Assert.AreEqual(CommonTestConstants.TEST_PATH_NESTED_LEAF_NAME, leaf.Name);
             Assert.AreEqual("/Sample Workspace/Project Plans/Project Plans Subfolder/Project Plans Sub-Subfolder", result.GetLeafFolderPath());
         }
 

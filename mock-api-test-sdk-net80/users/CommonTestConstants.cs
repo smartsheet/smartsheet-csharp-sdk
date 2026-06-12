@@ -11,9 +11,16 @@ namespace mock_api_test_sdk_net80
         public const long TEST_FOLDER_ID = 6655443322L;
 
         public const long TEST_PATH_WORKSPACE_ID = 4509918431602564L;
+        public const String TEST_PATH_WORKSPACE_NAME = "Sample Workspace";
+        public const String TEST_PATH_WORKSPACE_PERMALINK = "https://app.smartsheet.com/workspaces/mock_workspace_id";
         public const long TEST_PATH_FOLDER_1_ID = 1234567890123456L;
+        public const String TEST_PATH_FOLDER_1_NAME = "Project Plans";
+        public const String TEST_PATH_FOLDER_1_PERMALINK = "https://app.smartsheet.com/folders/1234567890123456";
         public const long TEST_PATH_FOLDER_2_ID = 2345678901234567L;
+        public const String TEST_PATH_FOLDER_2_NAME = "Project Plans Subfolder";
+        public const String TEST_PATH_FOLDER_2_PERMALINK = "https://app.smartsheet.com/folders/2345678901234567";
         public const long TEST_PATH_NESTED_LEAF_ID = 3456789012345678L;
+        public const String TEST_PATH_NESTED_LEAF_NAME = "Project Plans Sub-Subfolder";
         public const long TEST_PATH_ROOT_LEAF_ID = 5678901234567890L;
     }
 }

@@ -11,23 +11,23 @@ namespace mock_api_test_sdk_net80
         private static readonly SightPathNode EXPECTED_NESTED_RESPONSE = new SightPathNode
         {
             Id = CommonTestConstants.TEST_PATH_WORKSPACE_ID,
-            Name = "Sample Workspace",
-            Permalink = "https://app.smartsheet.com/workspaces/mock_workspace_id",
+            Name = CommonTestConstants.TEST_PATH_WORKSPACE_NAME,
+            Permalink = CommonTestConstants.TEST_PATH_WORKSPACE_PERMALINK,
             AccessLevel = AccessLevel.OWNER,
             Folders = new List<SightPathNode>
             {
                 new SightPathNode
                 {
                     Id = CommonTestConstants.TEST_PATH_FOLDER_1_ID,
-                    Name = "Project Plans",
-                    Permalink = "https://app.smartsheet.com/folders/1234567890123456",
+                    Name = CommonTestConstants.TEST_PATH_FOLDER_1_NAME,
+                    Permalink = CommonTestConstants.TEST_PATH_FOLDER_1_PERMALINK,
                     Folders = new List<SightPathNode>
                     {
                         new SightPathNode
                         {
                             Id = CommonTestConstants.TEST_PATH_FOLDER_2_ID,
-                            Name = "Project Plans Subfolder",
-                            Permalink = "https://app.smartsheet.com/folders/2345678901234567",
+                            Name = CommonTestConstants.TEST_PATH_FOLDER_2_NAME,
+                            Permalink = CommonTestConstants.TEST_PATH_FOLDER_2_PERMALINK,
                             Sights = new List<PathLeaf>
                             {
                                 new PathLeaf
@@ -49,8 +49,8 @@ namespace mock_api_test_sdk_net80
         private static readonly SightPathNode EXPECTED_ROOT_RESPONSE = new SightPathNode
         {
             Id = CommonTestConstants.TEST_PATH_WORKSPACE_ID,
-            Name = "Sample Workspace",
-            Permalink = "https://app.smartsheet.com/workspaces/mock_workspace_id",
+            Name = CommonTestConstants.TEST_PATH_WORKSPACE_NAME,
+            Permalink = CommonTestConstants.TEST_PATH_WORKSPACE_PERMALINK,
             AccessLevel = AccessLevel.OWNER,
             Sights = new List<PathLeaf>
             {
