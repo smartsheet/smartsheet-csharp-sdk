@@ -550,7 +550,86 @@ namespace Smartsheet.Api.Internal
 
             return (T)obj;
         }
-        
+
+        /// <summary>
+        /// Update a resource using SmartsheetClient REST API, where the request body type
+        /// differs from the response type.
+        ///
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <typeparam name="S"> the response resource type </typeparam>
+        /// <typeparam name="T"> the request body type </typeparam>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="object"> the object to send as the request body </param>
+        /// <returns> the updated resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual S UpdateResource<S, T>(string path, T @object)
+        {
+            return this.UpdateResourceAsync<S, T>(path, @object).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously update a resource using SmartsheetClient REST API, where the request
+        /// body type differs from the response type.
+        ///
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <typeparam name="S"> the response resource type </typeparam>
+        /// <typeparam name="T"> the request body type </typeparam>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="object"> the object to send as the request body </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the updated resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<S> UpdateResourceAsync<S, T>(string path, T @object, CancellationToken cancellationToken = default)
+        {
+            Utils.ThrowIfNull(path, @object);
+            Utils.ThrowIfEmpty(path);
+
+            HttpRequest request = null;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.PUT);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity<T>(@object);
+
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
+
+            Object obj = null;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    obj = this.smartsheet.JsonSerializer.deserializeResult<S>(response.Entity.GetContent()).Result;
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+
+            return (S)obj;
+        }
+
         /// <summary>
         /// Partially update a resource using Smartsheet REST API with PATCH method.
         /// 

@@ -7,5 +7,6 @@ namespace mock_api_test_sdk_net80
         public const long TEST_SHEET_ID = 9876543210L;
         public const long TEST_WORKSPACE_ID = 1122334455L;
         public const long TEST_REPORT_ID = 2233445566L;
+        public const long TEST_COLUMN_VIRTUAL_ID = 7001L;
     }
 }
