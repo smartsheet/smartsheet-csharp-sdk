@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Hardcode `paginationType=token` for `listWorkspaces`.
+- Support for GET /2.0/reports/{reportId}/definition (Get Report Definition)
+- Support for GET /2.0/reports/{reportId}/columns (List Report Columns)
+- Support for GET /2.0/reports/{reportId}/columns/{columnVirtualId} (Get Report Column)
+- Support for PUT /2.0/reports/{reportId}/columns/{columnVirtualId} (Update Report Column)
+- Support for DELETE /2.0/reports/{reportId}/columns/{columnVirtualId} (Delete Report Column)
+- Support for GET /2.0/reports/{reportId}/scope (List Report Scope)
 
 ## [7.0.0] - 2026-06-08
 
