@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Hardcode `paginationType=token` for `listWorkspaces`.
+- Added support for GET /2.0/sheets/{sheetId}/path endpoint (`GetSheetPath`)
+- Added support for GET /2.0/reports/{reportId}/path endpoint (`GetReportPath`)
+- Added support for GET /2.0/sights/{sightId}/path endpoint (`GetSightPath`)
+- Added support for GET /2.0/folders/{folderId}/path endpoint (`GetFolderPath`)
+- Added helper methods `GetLeaf<Asset>()` and `GetLeaf<Asset>Path()` to the responses of the path endpoints for convenient traversal
 
 ## [7.0.0] - 2026-06-08
 
@@ -20,11 +25,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
 - ⚠️ **BREAKING**: Added `RequestAsync()` to `HttpClient` interface, which must be overridden in custom HttpClient implementations to affect async resource methods.
 - Added asynchronous (`*Async`) counterparts to `SheetResources`: `ListSheetsAsync`, `GetSheetAsync`, `GetSheetVersionAsync`, `CreateSheetFromTemplateAsync`, `CopySheetAsync`, `MoveSheetAsync`, `UpdateSheetAsync`, `DeleteSheetAsync`, `SortSheetAsync`, `SendSheetAsync`, `GetPublishStatusAsync`, and `UpdatePublishStatusAsync`.
-- Added support for GET /2.0/sheets/{sheetId}/path endpoint (`GetSheetPath`)
-- Added support for GET /2.0/reports/{reportId}/path endpoint (`GetReportPath`)
-- Added support for GET /2.0/sights/{sightId}/path endpoint (`GetSightPath`)
-- Added support for GET /2.0/folders/{folderId}/path endpoint (`GetFolderPath`)
-- Added helper methods `GetLeaf<Asset>()` and `GetLeaf<Asset>Path()` to the responses of the path endpoints for convenient traversal
 
 ### Removed
 - ⚠️ **BREAKING**: Removed deprecated `ListSights(PaginationParameters?, DateTime?)` overload and `modifiedSince` parameter from `ListSights`. These were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#deprecated-includeall-and-offset-based-pagination-for-dashboards) (sunset Jun-03-2026). `ListSights` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Sight>`. The response no longer includes `TotalCount`, `TotalPages`, `PageNumber`, or `PageSize`.
