@@ -160,6 +160,16 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
+        public void TestGetSightPathError404Response()
+        {
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/404-response", Guid.NewGuid().ToString());
+
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
+                smartsheet.SightResources.GetSightPath(CommonTestConstants.TEST_SIGHT_ID));
+            Assert.IsTrue(exception.Message.Contains("Not Found"));
+        }
+
+        [TestMethod]
         public void TestGetSightPathError500Response()
         {
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", Guid.NewGuid().ToString());
@@ -224,6 +234,16 @@ namespace mock_api_test_sdk_net80
             await HelperFunctions.AssertRaisesExceptionAsync<SmartsheetException>(
                 () => smartsheet.SightResources.GetSightPathAsync(CommonTestConstants.TEST_SIGHT_ID),
                 "Malformed Request");
+        }
+
+        [TestMethod]
+        public async Task TestGetSightPathAsyncError404Response()
+        {
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/404-response", Guid.NewGuid().ToString());
+
+            await HelperFunctions.AssertRaisesExceptionAsync<SmartsheetException>(
+                () => smartsheet.SightResources.GetSightPathAsync(CommonTestConstants.TEST_SIGHT_ID),
+                "Not Found");
         }
 
         [TestMethod]
