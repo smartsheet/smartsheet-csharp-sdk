@@ -164,7 +164,7 @@ namespace mock_api_test_sdk_net80
         {
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/404-response", Guid.NewGuid().ToString());
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
+            ResourceNotFoundException exception = Assert.ThrowsException<ResourceNotFoundException>(() =>
                 smartsheet.SheetResources.GetSheetPath(CommonTestConstants.TEST_SHEET_ID));
             Assert.IsTrue(exception.Message.Contains("Not Found"));
         }
