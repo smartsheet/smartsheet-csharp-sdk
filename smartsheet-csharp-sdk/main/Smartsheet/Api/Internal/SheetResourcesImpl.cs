@@ -305,7 +305,8 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("page", page.ToString());
             }
-            if (rowsModifiedSince != null) {
+            if (rowsModifiedSince != null)
+            {
                 parameters.Add("rowsModifiedSince", ((DateTime)rowsModifiedSince).ToUniversalTime().ToString("o"));
             }
             if (ifVersionAfter != null)
@@ -857,7 +858,7 @@ namespace Smartsheet.Api.Internal
                 {
                     path += "?level=" + level.ToString();
                 }
-                    
+
                 request = CreateHttpRequest(new Uri(this.Smartsheet.BaseURI, path), HttpMethod.POST);
             }
             catch (Exception e)
@@ -929,12 +930,12 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Sheet ImportXlsSheet(string file, string sheetName, int? headerRowIndex, int? primaryColumnIndex)
         {
-            if(sheetName == null)
+            if (sheetName == null)
             {
                 FileInfo fi = new FileInfo(file);
                 sheetName = fi.Name;
             }
-            return ImportSheet("sheets/import", file, sheetName, headerRowIndex, primaryColumnIndex, 
+            return ImportSheet("sheets/import", file, sheetName, headerRowIndex, primaryColumnIndex,
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
@@ -1144,6 +1145,29 @@ namespace Smartsheet.Api.Internal
             {
                 output.Write(buffer, 0, len);
             }
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sheet.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/path</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <returns> a SheetPathNode representing the workspace root, with nested folders down to the target sheet </returns>
+        public virtual SheetPathNode GetSheetPath(long sheetId)
+        {
+            return this.GetSheetPathAsync(sheetId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sheet asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/path</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a SheetPathNode representing the workspace root, with nested folders down to the target sheet </returns>
+        public virtual async Task<SheetPathNode> GetSheetPathAsync(long sheetId, CancellationToken cancellationToken = default)
+        {
+            return await this.GetResourceAsync<SheetPathNode>("sheets/" + sheetId + "/path", typeof(SheetPathNode), cancellationToken).ConfigureAwait(false);
         }
     }
 }

@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Hardcode `paginationType=token` for `listWorkspaces`.
+- Added support for GET /2.0/sheets/{sheetId}/path endpoint (`GetSheetPath`)
+- Added support for GET /2.0/reports/{reportId}/path endpoint (`GetReportPath`)
+- Added support for GET /2.0/sights/{sightId}/path endpoint (`GetSightPath`)
+- Added support for GET /2.0/folders/{folderId}/path endpoint (`GetFolderPath`)
+- Added helper methods `GetLeaf<Asset>()` and `GetLeaf<Asset>Path()` to the responses of the path endpoints for convenient traversal
 
 ## [7.0.0] - 2026-06-08
 
