@@ -149,7 +149,7 @@ namespace mock_api_test_sdk_net80
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 smartsheet.FolderResources.GetFolderPath(CommonTestConstants.TEST_FOLDER_ID));
-            Assert.IsTrue(exception.Message.Contains("Malformed Request"));
+            Assert.AreEqual("Malformed Request", exception.Message);
         }
 
         [TestMethod]
@@ -159,7 +159,7 @@ namespace mock_api_test_sdk_net80
 
             ResourceNotFoundException exception = Assert.ThrowsException<ResourceNotFoundException>(() =>
                 smartsheet.FolderResources.GetFolderPath(CommonTestConstants.TEST_FOLDER_ID));
-            Assert.IsTrue(exception.Message.Contains("Not Found"));
+            Assert.AreEqual("Not Found", exception.Message);
         }
 
         [TestMethod]
@@ -169,7 +169,7 @@ namespace mock_api_test_sdk_net80
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 smartsheet.FolderResources.GetFolderPath(CommonTestConstants.TEST_FOLDER_ID));
-            Assert.IsTrue(exception.Message.Contains("Internal Server Error"));
+            Assert.AreEqual("Internal Server Error", exception.Message);
         }
 
         [TestMethod]
@@ -234,7 +234,7 @@ namespace mock_api_test_sdk_net80
         {
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/404-response", Guid.NewGuid().ToString());
 
-            await HelperFunctions.AssertRaisesExceptionAsync<SmartsheetException>(
+            await HelperFunctions.AssertRaisesExceptionAsync<ResourceNotFoundException>(
                 () => smartsheet.FolderResources.GetFolderPathAsync(CommonTestConstants.TEST_FOLDER_ID),
                 "Not Found");
         }
