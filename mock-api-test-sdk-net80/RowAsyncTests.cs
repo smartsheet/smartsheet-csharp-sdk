@@ -244,7 +244,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_AssignValues_HyperlinkReportID()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Assign Values - Hyperlink ReportID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink ReportID");
 
             Row rowA = new Row
             {
@@ -280,7 +280,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_Invalid_AssignValueAndFormulae()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Invalid - Assign Value and Formulae");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Invalid - Assign Value and Formulae");
 
             Row rowA = new Row
             {
@@ -307,7 +307,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_Invalid_AssignHyperlinkUrlandSheetId()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Invalid - Assign Hyperlink URL and SheetId");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Invalid - Assign Hyperlink URL and SheetId");
 
             Row rowA = new Row
             {
@@ -340,7 +340,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_AssignObjectValue_PredecessorList()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Assign Object Value - Predecessor List (using floats)");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Object Value - Predecessor List (using floats)");
 
             Row rowA = new Row
             {
@@ -377,7 +377,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_Location_Top()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Location - Top");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Location - Top");
 
             Row rowA = new Row
             {
@@ -409,7 +409,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_Location_Bottom()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Location - Bottom");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Location - Bottom");
 
             Row rowA = new Row
             {
@@ -441,7 +441,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_AssignValues_String()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Assign Values - String");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - String");
 
             Row rowA = new Row
             {
@@ -487,7 +487,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_AssignValues_Int()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Assign Values - Int");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Int");
 
             Row rowA = new Row
             {
@@ -532,7 +532,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_AssignValues_Bool()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Assign Values - Bool");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Bool");
 
             Row rowA = new Row
             {
@@ -643,7 +643,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_AssignValues_HyperlinkSheetID()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Assign Values - Hyperlink SheetID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink SheetID");
 
             Row rowA = new Row
             {
@@ -681,7 +681,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_AssignValues_HyperlinkReportID()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Assign Values - Hyperlink ReportID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Assign Values - Hyperlink ReportID");
 
             Row rowA = new Row
             {
@@ -718,7 +718,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_Invalid_AssignValueAndFormulae()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Invalid - Assign Value and Formulae");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Value and Formulae");
 
             Row rowA = new Row
             {
@@ -746,7 +746,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_Invalid_AssignHyperlinkUrlandSheetId()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Invalid - Assign Hyperlink URL and SheetId");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Hyperlink URL and SheetId");
 
             Row rowA = new Row
             {
@@ -779,7 +779,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_ClearValue_TextNumber()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Clear Value - Text Number");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Text Number");
 
             Row rowA = new Row
             {
@@ -803,7 +803,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_ClearValue_Checkbox()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Clear Value - Checkbox");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Checkbox");
 
             Row rowA = new Row
             {
@@ -827,7 +827,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_ClearValue_Hyperlink()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Clear Value - Hyperlink");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Hyperlink");
 
             Row rowA = new Row
             {
@@ -853,7 +853,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_ClearValue_CellLink()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Clear Value - Cell Link");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Cell Link");
 
             Row rowA = new Row
             {
@@ -879,7 +879,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_ClearValue_PredecessorList()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Clear Value - Predecessor List");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Clear Value - Predecessor List");
 
             Row rowA = new Row
             {
@@ -903,7 +903,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_Invalid_AssignHyperlinkAndCellLink()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Invalid - Assign Hyperlink and Cell Link");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Invalid - Assign Hyperlink and Cell Link");
 
             Row rowA = new Row
             {
@@ -936,7 +936,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_Location_Top()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Location - Top");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Location - Top");
 
             Row rowA = new Row
             {
@@ -953,7 +953,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task UpdateRowsAsync_Location_Bottom()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows Async - Location - Bottom");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Update Rows - Location - Bottom");
 
             Row rowA = new Row
             {
