@@ -208,7 +208,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_AssignValues_HyperlinkSheetID()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Assign Values - Hyperlink SheetID");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Hyperlink SheetID");
 
             Row rowA = new Row
             {
