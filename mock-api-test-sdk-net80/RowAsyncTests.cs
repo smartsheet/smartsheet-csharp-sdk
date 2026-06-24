@@ -55,7 +55,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_AssignValues_Int()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Assign Values - Int");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - Int");
 
             Row rowA = new Row
             {
