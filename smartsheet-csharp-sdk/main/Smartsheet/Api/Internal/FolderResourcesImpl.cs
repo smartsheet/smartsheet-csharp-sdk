@@ -17,6 +17,8 @@
 //    %[license]
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api.Internal
 {
@@ -256,6 +258,29 @@ namespace Smartsheet.Api.Internal
             }
 
             return this.GetResource<Folder>(QueryUtil.GenerateUrl("folders/" + folderId + "/metadata", parameters), typeof(Folder));
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified folder.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/path</para>
+        /// </summary>
+        /// <param name="folderId"> the folder Id </param>
+        /// <returns> a FolderPathNode representing the workspace root, with nested folders down to the target folder </returns>
+        public virtual FolderPathNode GetFolderPath(long folderId)
+        {
+            return this.GetFolderPathAsync(folderId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified folder asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/path</para>
+        /// </summary>
+        /// <param name="folderId"> the folder Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a FolderPathNode representing the workspace root, with nested folders down to the target folder </returns>
+        public virtual async Task<FolderPathNode> GetFolderPathAsync(long folderId, CancellationToken cancellationToken = default)
+        {
+            return await this.GetResourceAsync<FolderPathNode>("folders/" + folderId + "/path", typeof(FolderPathNode), cancellationToken).ConfigureAwait(false);
         }
     }
 

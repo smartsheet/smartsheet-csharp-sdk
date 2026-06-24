@@ -618,7 +618,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Sheet SortSheet(long sheetId, SortSpecifier sortSpecifier, int? level= null);
+        Sheet SortSheet(long sheetId, SortSpecifier sortSpecifier, int? level = null);
 
         /// <summary>
         /// <para>Asynchronously sorts a sheet according to the sort criteria.</para>
@@ -636,7 +636,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        Task<Sheet> SortSheetAsync(long sheetId, SortSpecifier sortSpecifier, int? level= null, CancellationToken cancellationToken = default);
+        Task<Sheet> SortSheetAsync(long sheetId, SortSpecifier sortSpecifier, int? level = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Imports a sheet (from CSV). </para>
@@ -739,5 +739,28 @@ namespace Smartsheet.Api
         /// </summary>
         /// <returns> the SheetSummaryResources object </returns>
         SheetSummaryResources SummaryResources { get; }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sheet.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/path</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <returns> a SheetPathNode representing the workspace root, with nested folders down to the target sheet </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        SheetPathNode GetSheetPath(long sheetId);
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sheet asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/path</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a SheetPathNode representing the workspace root, with nested folders down to the target sheet </returns>
+        Task<SheetPathNode> GetSheetPathAsync(long sheetId, CancellationToken cancellationToken = default);
     }
 }

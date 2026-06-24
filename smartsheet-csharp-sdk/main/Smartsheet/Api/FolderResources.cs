@@ -18,6 +18,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api
 {
@@ -156,5 +158,28 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Folder GetFolderMetadata(long folderId, IEnumerable<FolderInclusion>? include = null, bool? numericDates = null);
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified folder.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/path</para>
+        /// </summary>
+        /// <param name="folderId"> the folder Id </param>
+        /// <returns> a FolderPathNode representing the workspace root, with nested folders down to the target folder </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        FolderPathNode GetFolderPath(long folderId);
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified folder asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/path</para>
+        /// </summary>
+        /// <param name="folderId"> the folder Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a FolderPathNode representing the workspace root, with nested folders down to the target folder </returns>
+        Task<FolderPathNode> GetFolderPathAsync(long folderId, CancellationToken cancellationToken = default);
     }
 }

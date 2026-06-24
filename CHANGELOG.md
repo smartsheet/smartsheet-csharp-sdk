@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+### Fixed
+
+- Deprecation related corrections
+
+### Added
+
+- Hardcode `paginationType=token` for `listWorkspaces`.
+- Added support for GET /2.0/sheets/{sheetId}/path endpoint (`GetSheetPath`)
+- Added support for GET /2.0/reports/{reportId}/path endpoint (`GetReportPath`)
+- Added support for GET /2.0/sights/{sightId}/path endpoint (`GetSightPath`)
+- Added support for GET /2.0/folders/{folderId}/path endpoint (`GetFolderPath`)
+- Added helper methods `GetLeaf<Asset>()` and `GetLeaf<Asset>Path()` to the responses of the path endpoints for convenient traversal
+
 ## [7.0.0] - 2026-06-08
 
 ### Added
@@ -17,7 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - ⚠️ **BREAKING**: Removed deprecated `ListSights(PaginationParameters?, DateTime?)` overload and `modifiedSince` parameter from `ListSights`. These were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#deprecated-includeall-and-offset-based-pagination-for-dashboards) (sunset Jun-03-2026). `ListSights` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Sight>`. The response no longer includes `TotalCount`, `TotalPages`, `PageNumber`, or `PageSize`.
 - ⚠️ **BREAKING**: Removed deprecated `ListWorkspaces(PaginationParameters?)` overload returning `PaginatedResult<Workspace>`. These offset parameters were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). `ListWorkspaces` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Workspace>`. The new shape mirrors `ListSights`.
 - ⚠️ **BREAKING**: Removed `ListWorkspacesTokenPaginationParameters` class. It only added an explicit `PaginationType` property that is already hardcoded to `"token"` in the base `TokenPaginationParameters.toDictionary()`. Use `TokenPaginationParameters` directly with `ListWorkspaces`.
-- ⚠️ **BREAKING**: Removed `ListPublicTemplates` and `ListUserCreatedTemplates` from `TemplateResources`. The `TemplateResources` interface, implementation, and `SmartsheetClient.TemplateResources` accessor have been removed entirely. The underlying `GET /templates` and `GET /templates/public` endpoints were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). Migrate to `GetWorkspaceChildren` / `GetFolderChildren` with `ChildrenResourceTypes` including `TEMPLATES` to list templates within a specific workspace or folder.
+- ⚠️ **BREAKING**: Removed `ListPublicTemplates` and `ListUserCreatedTemplates` from `TemplateResources`. The `TemplateResources` interface, implementation, and `SmartsheetClient.TemplateResources` accessor have been removed entirely. The underlying `GET /templates` and `GET /templates/public` endpoints were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). Migrate to `GetWorkspaceChildren` / `GetFolderChildren` with `ChildrenResourceTypes` including `TEMPLATES,SHEETS` to list templates within a specific workspace or folder.
 - ⚠️ **BREAKING**: Removed `GetFolder` and `ListFolders` from `FolderResources`, `GetWorkspace` from `WorkspaceResources`, and `ListFolders` from `WorkspaceFolderResources`. (`WorkspaceFolderResources.CreateFolder` is retained.) `FolderInclusion` and `WorkspaceInclusion` no longer include `OWNER_INFO` or `SHEET_VERSION`; only `SOURCE` is retained. The underlying `GET /folders/{folderId}`, `GET /folders/{folderId}/folders`, `GET /workspaces/{workspaceId}`, and `GET /workspaces/{workspaceId}/folders` endpoints were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). Migrate to `GetFolderMetadata` + `GetFolderChildren` and `GetWorkspaceMetadata` + `GetWorkspaceChildren`. Use `ChildrenResourceTypes` to filter the children response (e.g., `FOLDERS` to replicate the old list-folders behavior).
 - ⚠️ **BREAKING**: Removed the deprecated `ShareResources` interface and the `ShareResources()` accessor from `SheetResources`, `ReportResources`, `SightResources`, and `WorkspaceResources`. The underlying asset-specific sharing endpoints (`GET`/`POST`/`PUT`/`DELETE` on `/sheets/{id}/shares`, `/reports/{id}/shares`, `/sights/{id}/shares`, `/workspaces/{id}/shares` and their `/{shareId}` variants) were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). Migrate to `AssetSharingResources` (`ListAssetShares`, `GetAssetShare`, `ShareAsset`, `UpdateAssetShare`, `DeleteAssetShare`), passing `AssetType` and `assetId`. Note updates now use `PATCH` instead of `PUT`.
 

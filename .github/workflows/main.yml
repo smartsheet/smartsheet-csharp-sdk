@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Setup .Net Core
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x'
       - name: Install Dependencies
@@ -23,11 +23,11 @@ jobs:
       - name: Build
         working-directory: ./
         run: dotnet build --configuration Release --no-restore
-      - name: Clone smartsheet/smartsheet-sdk-tests PUBLIC repository
-        uses: GuillaumeFalourd/clone-github-repo-action@v2
+      - name: Checkout smartsheet-sdk-tests
+        uses: actions/checkout@v6
         with:
-          owner: 'smartsheet'
-          repository: 'smartsheet-sdk-tests'
+          repository: smartsheet/smartsheet-sdk-tests
+          path: smartsheet-sdk-tests
       - name: Setup Mock API
         run: |
           docker compose -f smartsheet-sdk-tests/docker-compose.yml up -d --wait
