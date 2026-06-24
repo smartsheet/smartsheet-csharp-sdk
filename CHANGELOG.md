@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added support for GET /2.0/sights/{sightId}/path endpoint (`GetSightPath`)
 - Added support for GET /2.0/folders/{folderId}/path endpoint (`GetFolderPath`)
 - Added helper methods `GetLeaf<Asset>()` and `GetLeaf<Asset>Path()` to the responses of the path endpoints for convenient traversal
+- Added asynchronous (`*Async`) counterparts to `SheetResources.RowResources`: `AddRowsAsync`, `AddRowsAllowPartialSuccessAsync`, `GetRowAsync`, `CopyRowsToAnotherSheetAsync`, `DeleteRowsAsync`, `MoveRowsToAnotherSheetAsync`, `SendRowsAsync`, `CreateResourceAsync`, `UpdateRowsAsync`, and `UpdateRowsAllowPartialSuccessAsync`.
+- Added asynchronous (`*Async`) counterparts to `ReportResources`: `GetReportAsync`, `ListReportsAsync`, `SendReportAsync`, `DeleteReportAsync`, `GetPublishStatusAsync`, `UpdatePublishStatusAsync`, `UpdateReportDefinitionAsync`, `AddReportScopeAsync`, `RemoveReportScopeAsync`, `AddReportColumnsAsync`, `CreateReportAsync`, and `GetReportPathAsync`.
 
 ## [7.0.0] - 2026-06-08
 
