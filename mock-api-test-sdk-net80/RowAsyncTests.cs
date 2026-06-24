@@ -10,7 +10,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_AssignValues_String()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Assign Values - String");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - String");
 
             Row rowA = new Row
             {
