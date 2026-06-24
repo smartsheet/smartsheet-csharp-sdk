@@ -145,7 +145,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task AddRowsAsync_AssignFormulae()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows Async - Assign Formulae");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Formulae");
 
             Row rowA = new Row
             {
