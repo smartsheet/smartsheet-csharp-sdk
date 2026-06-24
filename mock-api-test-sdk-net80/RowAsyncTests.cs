@@ -991,7 +991,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task CopyRowAsync_AnotherSheet()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Copy row to another sheet (async)");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Copy row to another sheet");
             CopyOrMoveRowResult result = await smartsheet.SheetResources.RowResources.CopyRowsToAnotherSheetAsync(
                 1228520367122308,
                 new CopyOrMoveRowDirective
