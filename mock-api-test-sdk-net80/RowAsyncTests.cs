@@ -970,7 +970,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public async Task MoveRowAsync_AnotherSheet()
         {
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Move row to another sheet (async)");
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Move row to another sheet");
 
             CopyOrMoveRowResult result = await smartsheet.SheetResources.RowResources.MoveRowsToAnotherSheetAsync(
                 1228520367122308,
