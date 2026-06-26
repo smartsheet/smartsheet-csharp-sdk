@@ -1,0 +1,367 @@
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Smartsheet.Api;
+using Smartsheet.Api.Models;
+
+namespace mock_api_test_sdk_net80
+{
+    [TestClass]
+    public class TestUpdateReportDefinitionAsync
+    {
+        private static readonly ReportDefinition DEFINITION_ALL = new ReportDefinition
+        {
+            SummarizingCriteria = new List<ReportSummarizingCriterion>
+            {
+                new ReportSummarizingCriterion
+                {
+                    AggregationType = ReportAggregationType.COUNT,
+                    Column = new ReportColumnIdentifier
+                    {
+                        Primary = true,
+                        Type = ColumnType.TEXT_NUMBER,
+                        SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                        Title = "Primary Column",
+                    }
+                }
+            },
+            Filters = new ReportFilterExpression
+            {
+                Operator = ReportFilterOperator.AND,
+                Criteria = new List<ReportFilterCriterion>
+                {
+                    new ReportFilterCriterion
+                    {
+                        Column = new ReportColumnIdentifier
+                        {
+                            Primary = true,
+                            Type = ColumnType.TEXT_NUMBER,
+                            SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                            Title = "Primary Column",
+                        },
+                        Operator = ReportFilterCriteriaOperator.EQUAL,
+                        Values = new List<ReportFilterValue> { new StringReportFilterValue("Test") },
+                    }
+                }
+            },
+            GroupingCriteria = new List<ReportGroupingCriterion>
+            {
+                new ReportGroupingCriterion
+                {
+                    Column = new ReportColumnIdentifier
+                    {
+                        Primary = true,
+                        Type = ColumnType.TEXT_NUMBER,
+                        SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                        Title = "Primary Column",
+                    },
+                    SortingDirection = SortDirection.ASCENDING,
+                    IsExpanded = true
+                }
+            },
+            SortingCriteria = new List<ReportSortingCriterion>
+            {
+                new ReportSortingCriterion
+                {
+                    Column = new ReportColumnIdentifier
+                    {
+                        Primary = true,
+                        Type = ColumnType.TEXT_NUMBER,
+                        SystemColumnType = SystemColumnType.AUTO_NUMBER,
+                        Title = "Primary Column",
+                    },
+                    SortingDirection = SortDirection.ASCENDING
+                }
+            },
+        };
+
+        private static readonly string EXPECTED_ALL_REQUEST_BODY = JsonConvert.SerializeObject(new Dictionary<string, object>
+        {
+            { "filters", new Dictionary<string, object>
+                    {
+                        { "operator", "AND" },
+                        { "criteria", new List<Dictionary<string, object>>
+                            {
+                                new Dictionary<string, object>
+                                {
+                                    { "column", new Dictionary<string, object>
+                                        {
+                                            { "title", "Primary Column" },
+                                            { "type", "TEXT_NUMBER" },
+                                            { "systemColumnType", "AUTO_NUMBER" },
+                                            { "primary", true },
+                                        }
+                                    },
+                                    { "operator", "EQUAL" },
+                                    { "values", new List<string> { "Test" } }
+                                }
+                            }
+                        }
+                    }
+            },
+            { "groupingCriteria", new List<Dictionary<string, object>>
+                {
+                    new Dictionary<string, object>
+                    {
+                        { "column", new Dictionary<string, object>
+                            {
+                                { "title", "Primary Column" },
+                                { "type", "TEXT_NUMBER" },
+                                { "systemColumnType", "AUTO_NUMBER" },
+                                { "primary", true },
+                            }
+                        },
+                        { "sortingDirection", "ASCENDING" },
+                        { "isExpanded", true }
+                    }
+                }
+            },
+            { "summarizingCriteria", new List<Dictionary<string, object>>
+                {
+                    new Dictionary<string, object>
+                    {
+                        { "column", new Dictionary<string, object>
+                            {
+                                { "title", "Primary Column" },
+                                { "type", "TEXT_NUMBER" },
+                                { "systemColumnType", "AUTO_NUMBER" },
+                                { "primary", true },
+                            }
+                        },
+                        { "aggregationType", "COUNT" }
+                    }
+                }
+            },
+            { "sortingCriteria", new List<Dictionary<string, object>>
+                {
+                    new Dictionary<string, object>
+                    {
+                        { "column", new Dictionary<string, object>
+                            {
+                                { "title", "Primary Column" },
+                                { "type", "TEXT_NUMBER" },
+                                { "systemColumnType", "AUTO_NUMBER" },
+                                { "primary", true },
+                            }
+                        },
+                        { "sortingDirection", "ASCENDING" },
+                    }
+                }
+            },
+        });
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionAsyncGeneratedUrlIsCorrect()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
+
+
+            await smartsheet.ReportResources.UpdateReportDefinitionAsync(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition());
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            string path = uri.AbsolutePath;
+
+            Assert.AreEqual($"/2.0/reports/{CommonTestConstants.TEST_REPORT_ID}/definition", path);
+            Assert.AreEqual("PUT", foundRequest.Method);
+            Assert.AreEqual(string.Empty, uri.Query);
+        }
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionAsyncAllResponseProperties()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
+
+            await smartsheet.ReportResources.UpdateReportDefinitionAsync(CommonTestConstants.TEST_REPORT_ID, DEFINITION_ALL);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.AreEqual(EXPECTED_ALL_REQUEST_BODY, foundRequest.Body);
+        }
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionAsyncEmptyBody()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
+
+            await smartsheet.ReportResources.UpdateReportDefinitionAsync(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition());
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            var expectedBody = JsonConvert.SerializeObject(new Dictionary<string, object>());
+
+            Assert.AreEqual(expectedBody, foundRequest.Body);
+        }
+
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionAsyncFiltersOnlyRequestBody()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
+
+            ReportDefinition definition = new ReportDefinition
+            {
+                Filters = new ReportFilterExpression
+                {
+                    Operator = ReportFilterOperator.AND,
+                    Criteria = new List<ReportFilterCriterion>
+                    {
+                        new ReportFilterCriterion
+                        {
+                            Column = new ReportColumnIdentifier
+                            {
+                                Primary = true,
+                                Type = ColumnType.TEXT_NUMBER,
+                                Title = "Primary Column",
+                            },
+                            Operator = ReportFilterCriteriaOperator.EQUAL,
+                            Values = new List<ReportFilterValue> { new StringReportFilterValue("Test") },
+                        }
+                    }
+                }
+            };
+
+            await smartsheet.ReportResources.UpdateReportDefinitionAsync(CommonTestConstants.TEST_REPORT_ID, definition);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            var expectedBody = JsonConvert.SerializeObject(new Dictionary<string, object>
+            {
+                { "filters", new Dictionary<string, object>
+                        {
+                            { "operator", "AND" },
+                            { "criteria", new List<Dictionary<string, object>>
+                                {
+                                    new Dictionary<string, object>
+                                    {
+                                        { "column", new Dictionary<string, object>
+                                            {
+                                                { "title", "Primary Column" },
+                                                { "type", "TEXT_NUMBER" },
+                                                { "primary", true },
+                                            }
+                                        },
+                                        { "operator", "EQUAL" },
+                                        { "values", new List<string> { "Test" } }
+                                    }
+                                }
+                            }
+                        }
+                }
+            });
+
+            Assert.AreEqual(expectedBody, foundRequest.Body);
+        }
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionAsyncError500Response()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
+
+            SmartsheetException exception = await Assert.ThrowsExceptionAsync<SmartsheetException>(() =>
+                smartsheet.ReportResources.UpdateReportDefinitionAsync(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition())
+            );
+
+            Assert.IsTrue(exception.Message.Contains("Internal Server Error"));
+        }
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionAsyncError400Response()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+
+            SmartsheetException exception = await Assert.ThrowsExceptionAsync<SmartsheetException>(() =>
+                smartsheet.ReportResources.UpdateReportDefinitionAsync(CommonTestConstants.TEST_REPORT_ID, new ReportDefinition())
+            );
+
+            Assert.IsTrue(exception.Message.Contains("Malformed Request"));
+        }
+
+        [TestMethod]
+        public async Task TestUpdateReportDefinitionAsyncWithAllFilterValueTypes()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/update-report-definition/all-response-body-properties", requestId.ToString());
+
+            ReportDefinition definition = new ReportDefinition
+            {
+                Filters = new ReportFilterExpression
+                {
+                    Operator = ReportFilterOperator.AND,
+                    Criteria = new List<ReportFilterCriterion>
+                    {
+                        new ReportFilterCriterion
+                        {
+                            Column = new ReportColumnIdentifier
+                            {
+                                Primary = true,
+                                Type = ColumnType.TEXT_NUMBER,
+                                Title = "Primary Column",
+                            },
+                            Operator = ReportFilterCriteriaOperator.EQUAL,
+                            Values = new List<ReportFilterValue>
+                            {
+                                new StringReportFilterValue("Test String"),
+                                new NumberReportFilterValue(42.5),
+                                new NullReportFilterValue(),
+                                new DateReportFilterValue("2024-01-15"),
+                                new CurrentUserReportFilterValue()
+                            },
+                        }
+                    }
+                }
+            };
+
+            await smartsheet.ReportResources.UpdateReportDefinitionAsync(CommonTestConstants.TEST_REPORT_ID, definition);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            var expectedBody = JsonConvert.SerializeObject(new Dictionary<string, object>
+            {
+                { "filters", new Dictionary<string, object>
+                    {
+                        { "operator", "AND" },
+                        { "criteria", new List<Dictionary<string, object>>
+                            {
+                                new Dictionary<string, object>
+                                {
+                                    { "column", new Dictionary<string, object>
+                                        {
+                                            { "title", "Primary Column" },
+                                            { "type", "TEXT_NUMBER" },
+                                            { "primary", true },
+                                        }
+                                    },
+                                    { "operator", "EQUAL" },
+                                    { "values", new List<object>
+                                        {
+                                            "Test String",
+                                            42.5,
+                                            null,
+                                            new Dictionary<string, object> { { "objectType", "DATE" }, { "value", "2024-01-15" } },
+                                            new Dictionary<string, object> { { "objectType", "CURRENT_USER" } }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            Assert.AreEqual(expectedBody, foundRequest.Body);
+        }
+    }
+}
