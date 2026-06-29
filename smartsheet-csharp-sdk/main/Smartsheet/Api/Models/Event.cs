@@ -16,6 +16,7 @@
 //    limitations under the License.
 //    %[license]
 
+using System;
 using System.Collections.Generic;
 
 namespace Smartsheet.Api.Models
@@ -131,9 +132,10 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Get the object ID of the object associated with the event
+        /// Get the object ID of the object associated with the event.
         /// </summary>
         /// <returns>the object ID</returns>
+        [Obsolete("Use ObjectIdStr instead. ObjectId is numeric only and returns -1 for non-numeric identifiers. It is not scheduled for removal, but new code should read ObjectIdStr.", false)]
         public object ObjectId
         {
             get { return objectId; }
