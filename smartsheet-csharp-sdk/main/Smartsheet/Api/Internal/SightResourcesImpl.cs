@@ -17,6 +17,8 @@
 //    %[license]
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api.Internal
 {
@@ -231,6 +233,29 @@ namespace Smartsheet.Api.Internal
         public SightPublish SetPublishStatus(long sightId, SightPublish sightPublish)
         {
             return this.UpdateResource<SightPublish>("sights/" + sightId + "/publish", typeof(SightPublish), sightPublish);
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sight.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sights/{sightId}/path</para>
+        /// </summary>
+        /// <param name="sightId"> the sight Id </param>
+        /// <returns> a SightPathNode representing the workspace root, with nested folders down to the target sight </returns>
+        public virtual SightPathNode GetSightPath(long sightId)
+        {
+            return this.GetSightPathAsync(sightId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sight asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sights/{sightId}/path</para>
+        /// </summary>
+        /// <param name="sightId"> the sight Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a SightPathNode representing the workspace root, with nested folders down to the target sight </returns>
+        public virtual async Task<SightPathNode> GetSightPathAsync(long sightId, CancellationToken cancellationToken = default)
+        {
+            return await this.GetResourceAsync<SightPathNode>("sights/" + sightId + "/path", typeof(SightPathNode), cancellationToken).ConfigureAwait(false);
         }
     }
 }
