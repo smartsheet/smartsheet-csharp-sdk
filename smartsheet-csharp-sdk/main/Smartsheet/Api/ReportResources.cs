@@ -284,19 +284,19 @@ namespace Smartsheet.Api
         /// <para>Lists the columns for the specified report.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/columns</para>
         /// </summary>
-        TokenPaginatedResult<ReportColumn> ListReportColumns(long reportId, TokenPaginationParameters? tokenPaginationParameters = null);
+        TokenPaginatedResult<ReportColumn> ListReportColumns(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, int? level = null);
 
         /// <summary>Async version of <see cref="ListReportColumns"/>.</summary>
-        Task<TokenPaginatedResult<ReportColumn>> ListReportColumnsAsync(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, CancellationToken cancellationToken = default);
+        Task<TokenPaginatedResult<ReportColumn>> ListReportColumnsAsync(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, int? level = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Gets the specified column in the report.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/columns/{columnVirtualId}</para>
         /// </summary>
-        ReportColumn GetReportColumn(long reportId, long columnVirtualId);
+        ReportColumn GetReportColumn(long reportId, long columnVirtualId, int? level = null);
 
         /// <summary>Async version of <see cref="GetReportColumn"/>.</summary>
-        Task<ReportColumn> GetReportColumnAsync(long reportId, long columnVirtualId, CancellationToken cancellationToken = default);
+        Task<ReportColumn> GetReportColumnAsync(long reportId, long columnVirtualId, int? level = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Updates the specified column in the report.</para>

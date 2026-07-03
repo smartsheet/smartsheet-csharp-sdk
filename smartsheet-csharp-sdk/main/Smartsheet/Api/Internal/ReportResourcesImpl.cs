@@ -584,6 +584,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="reportId"> the Id of the report </param>
         /// <param name="tokenPaginationParameters"> the token-based pagination parameters (optional) </param>
+        /// <param name="level"> compatibility level </param>
         /// <returns> a token-paginated result of report columns </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -591,9 +592,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual TokenPaginatedResult<ReportColumn> ListReportColumns(long reportId, TokenPaginationParameters? tokenPaginationParameters = null)
+        public virtual TokenPaginatedResult<ReportColumn> ListReportColumns(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, int? level = null)
         {
-            return this.ListReportColumnsAsync(reportId, tokenPaginationParameters).GetAwaiter().GetResult();
+            return this.ListReportColumnsAsync(reportId, tokenPaginationParameters, level).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -602,6 +603,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="reportId"> the Id of the report </param>
         /// <param name="tokenPaginationParameters"> the token-based pagination parameters (optional) </param>
+        /// <param name="level"> compatibility level </param>
         /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
         /// <returns> a token-paginated result of report columns </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
@@ -610,7 +612,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual async Task<TokenPaginatedResult<ReportColumn>> ListReportColumnsAsync(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<TokenPaginatedResult<ReportColumn>> ListReportColumnsAsync(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, int? level = null, CancellationToken cancellationToken = default)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (tokenPaginationParameters != null)
@@ -624,6 +626,10 @@ namespace Smartsheet.Api.Internal
                     parameters.Add("maxItems", tokenPaginationParameters.MaxItems.ToString());
                 }
             }
+            if (level != null)
+            {
+                parameters.Add("level", level.ToString());
+            }
 
             return await this.ListResourcesWithTokenWrapperAsync<ReportColumn>(
                 QueryUtil.GenerateUrl("reports/" + reportId + "/columns", parameters), cancellationToken).ConfigureAwait(false);
@@ -635,6 +641,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="reportId"> the Id of the report </param>
         /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <param name="level"> compatibility level </param>
         /// <returns> the report column (note that if there is no such resource, this method will throw
         /// ResourceNotFoundException rather than returning null). </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
@@ -643,9 +650,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual ReportColumn GetReportColumn(long reportId, long columnVirtualId)
+        public virtual ReportColumn GetReportColumn(long reportId, long columnVirtualId, int? level = null)
         {
-            return this.GetReportColumnAsync(reportId, columnVirtualId).GetAwaiter().GetResult();
+            return this.GetReportColumnAsync(reportId, columnVirtualId, level).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -654,6 +661,7 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         /// <param name="reportId"> the Id of the report </param>
         /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <param name="level"> compatibility level </param>
         /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
         /// <returns> the report column (note that if there is no such resource, this method will throw
         /// ResourceNotFoundException rather than returning null). </returns>
@@ -663,10 +671,16 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual async Task<ReportColumn> GetReportColumnAsync(long reportId, long columnVirtualId, CancellationToken cancellationToken = default)
+        public virtual async Task<ReportColumn> GetReportColumnAsync(long reportId, long columnVirtualId, int? level = null, CancellationToken cancellationToken = default)
         {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+            if (level != null)
+            {
+                parameters.Add("level", level.ToString());
+            }
+
             return await this.GetResourceAsync<ReportColumn>(
-                "reports/" + reportId + "/columns/" + columnVirtualId, typeof(ReportColumn), cancellationToken).ConfigureAwait(false);
+                QueryUtil.GenerateUrl("reports/" + reportId + "/columns/" + columnVirtualId, parameters), typeof(ReportColumn), cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
