@@ -49,6 +49,26 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
+        public async Task TestGetReportColumnWithLevelGeneratedUrlIsCorrect()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/reports/get-report-column/all-response-body-properties", requestId.ToString());
+
+            smartsheet.ReportResources.GetReportColumn(CommonTestConstants.TEST_REPORT_ID, CommonTestConstants.TEST_COLUMN_VIRTUAL_ID, 3);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+            Assert.AreEqual($"/2.0/reports/{CommonTestConstants.TEST_REPORT_ID}/columns/{CommonTestConstants.TEST_COLUMN_VIRTUAL_ID}", uri.AbsolutePath);
+            Assert.AreEqual("GET", foundRequest.Method);
+            Assert.AreEqual("3", queryParams["level"]);
+        }
+
+        [TestMethod]
         public async Task TestGetReportColumnRequiredResponseProperties()
         {
             Guid requestId = Guid.NewGuid();
