@@ -820,5 +820,277 @@ namespace Smartsheet.Api.Internal
         {
             return await this.GetResourceAsync<ReportPathNode>("reports/" + reportId + "/path", typeof(ReportPathNode), cancellationToken).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// <para>Lists the scope (source sheets and workspaces) for the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/scope</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="tokenPaginationParameters"> the token-based pagination parameters (optional) </param>
+        /// <returns> a token-paginated result of report scope inclusions </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual TokenPaginatedResult<ReportScopeInclusion> GetReportScope(long reportId, TokenPaginationParameters? tokenPaginationParameters = null)
+        {
+            return this.GetReportScopeAsync(reportId, tokenPaginationParameters).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Lists the scope (source sheets and workspaces) for the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/scope</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="tokenPaginationParameters"> the token-based pagination parameters (optional) </param>
+        /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
+        /// <returns> a token-paginated result of report scope inclusions </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<TokenPaginatedResult<ReportScopeInclusion>> GetReportScopeAsync(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, CancellationToken cancellationToken = default)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+            if (tokenPaginationParameters != null)
+            {
+                if (tokenPaginationParameters.LastKey != null)
+                {
+                    parameters.Add("lastKey", tokenPaginationParameters.LastKey);
+                }
+                if (tokenPaginationParameters.MaxItems != null)
+                {
+                    parameters.Add("maxItems", tokenPaginationParameters.MaxItems.ToString());
+                }
+            }
+
+            return await this.ListResourcesWithTokenWrapperAsync<ReportScopeInclusion>(
+                QueryUtil.GenerateUrl("reports/" + reportId + "/scope", parameters), cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// <para>Lists the columns for the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/columns</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="tokenPaginationParameters"> the token-based pagination parameters (optional) </param>
+        /// <param name="level"> compatibility level </param>
+        /// <returns> a token-paginated result of report columns </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual TokenPaginatedResult<ReportColumn> ListReportColumns(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, int? level = null)
+        {
+            return this.ListReportColumnsAsync(reportId, tokenPaginationParameters, level).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Lists the columns for the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/columns</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="tokenPaginationParameters"> the token-based pagination parameters (optional) </param>
+        /// <param name="level"> compatibility level </param>
+        /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
+        /// <returns> a token-paginated result of report columns </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<TokenPaginatedResult<ReportColumn>> ListReportColumnsAsync(long reportId, TokenPaginationParameters? tokenPaginationParameters = null, int? level = null, CancellationToken cancellationToken = default)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+            if (tokenPaginationParameters != null)
+            {
+                if (tokenPaginationParameters.LastKey != null)
+                {
+                    parameters.Add("lastKey", tokenPaginationParameters.LastKey);
+                }
+                if (tokenPaginationParameters.MaxItems != null)
+                {
+                    parameters.Add("maxItems", tokenPaginationParameters.MaxItems.ToString());
+                }
+            }
+            if (level != null)
+            {
+                parameters.Add("level", level.ToString());
+            }
+
+            return await this.ListResourcesWithTokenWrapperAsync<ReportColumn>(
+                QueryUtil.GenerateUrl("reports/" + reportId + "/columns", parameters), cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// <para>Gets the specified column in the report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/columns/{columnVirtualId}</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <param name="level"> compatibility level </param>
+        /// <returns> the report column (note that if there is no such resource, this method will throw
+        /// ResourceNotFoundException rather than returning null). </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual ReportColumn GetReportColumn(long reportId, long columnVirtualId, int? level = null)
+        {
+            return this.GetReportColumnAsync(reportId, columnVirtualId, level).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets the specified column in the report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/columns/{columnVirtualId}</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <param name="level"> compatibility level </param>
+        /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
+        /// <returns> the report column (note that if there is no such resource, this method will throw
+        /// ResourceNotFoundException rather than returning null). </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<ReportColumn> GetReportColumnAsync(long reportId, long columnVirtualId, int? level = null, CancellationToken cancellationToken = default)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+            if (level != null)
+            {
+                parameters.Add("level", level.ToString());
+            }
+
+            return await this.GetResourceAsync<ReportColumn>(
+                QueryUtil.GenerateUrl("reports/" + reportId + "/columns/" + columnVirtualId, parameters), typeof(ReportColumn), cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// <para>Updates the specified column in the report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: PUT /reports/{reportId}/columns/{columnVirtualId}</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <param name="request"> the update report column request </param>
+        /// <returns> the updated report column </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual ReportColumn UpdateReportColumn(long reportId, long columnVirtualId, UpdateReportColumnRequest request)
+        {
+            return this.UpdateReportColumnAsync(reportId, columnVirtualId, request).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Updates the specified column in the report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: PUT /reports/{reportId}/columns/{columnVirtualId}</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <param name="request"> the update report column request </param>
+        /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
+        /// <returns> the updated report column </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<ReportColumn> UpdateReportColumnAsync(long reportId, long columnVirtualId, UpdateReportColumnRequest request, CancellationToken cancellationToken = default)
+        {
+            Utils.ThrowIfNull(request);
+
+            return await this.UpdateResourceAsync<ReportColumn, UpdateReportColumnRequest>(
+                "reports/" + reportId + "/columns/" + columnVirtualId, request, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// <para>Deletes the specified column from the report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: DELETE /reports/{reportId}/columns/{columnVirtualId}</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual void DeleteReportColumn(long reportId, long columnVirtualId)
+        {
+            this.DeleteReportColumnAsync(reportId, columnVirtualId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Deletes the specified column from the report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: DELETE /reports/{reportId}/columns/{columnVirtualId}</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="columnVirtualId"> the virtual Id of the report column </param>
+        /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task DeleteReportColumnAsync(long reportId, long columnVirtualId, CancellationToken cancellationToken = default)
+        {
+            await this.DeleteResourceAsync<ReportColumn>(
+                "reports/" + reportId + "/columns/" + columnVirtualId, typeof(ReportColumn), cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// <para>Gets the definition (filters, grouping, summarizing, and sorting criteria) for the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/definition</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <returns> the report definition (note that if there is no such resource, this method will throw
+        /// ResourceNotFoundException rather than returning null). </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual ReportDefinition GetReportDefinition(long reportId)
+        {
+            return this.GetReportDefinitionAsync(reportId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets the definition (filters, grouping, summarizing, and sorting criteria) for the specified report.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /reports/{reportId}/definition</para>
+        /// </summary>
+        /// <param name="reportId"> the Id of the report </param>
+        /// <param name="cancellationToken"> the token to monitor for cancellation requests </param>
+        /// <returns> the report definition (note that if there is no such resource, this method will throw
+        /// ResourceNotFoundException rather than returning null). </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<ReportDefinition> GetReportDefinitionAsync(long reportId, CancellationToken cancellationToken = default)
+        {
+            return await this.GetResourceAsync<ReportDefinition>(
+                "reports/" + reportId + "/definition", typeof(ReportDefinition), cancellationToken).ConfigureAwait(false);
+        }
     }
 }

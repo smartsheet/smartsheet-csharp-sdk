@@ -22,5 +22,6 @@ namespace mock_api_test_sdk_net80
         public const long TEST_PATH_NESTED_LEAF_ID = 3456789012345678L;
         public const string TEST_PATH_NESTED_LEAF_NAME = "Project Plans Sub-Subfolder";
         public const long TEST_PATH_ROOT_LEAF_ID = 5678901234567890L;
+        public const long TEST_COLUMN_VIRTUAL_ID = 7001L;
     }
 }
