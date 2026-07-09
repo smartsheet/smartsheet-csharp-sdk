@@ -1851,6 +1851,23 @@ Many events have additional information available as part of the event. That inf
 Dictionary stored in the `AdditionalDetails` property. Information about the additional details provided can be found
 [here.](https://smartsheet.redoc.ly/tag/eventsDescription)
 
+Each event identifies the object it affected. Use the `ObjectIdStr` property, which holds the object
+identifier as a string and supports both numeric and non-numeric identifiers. The older `ObjectId`
+property is deprecated and kept only for backward compatibility: when the identifier is numeric it
+contains the number, and when the identifier is non-numeric it contains `-1` while the real value is
+available in `ObjectIdStr`. New code should read `ObjectIdStr`.
+
+```csharp
+foreach (Event _event in events)
+{
+    // Preferred: works for all identifier types
+    Console.WriteLine(_event.ObjectIdStr);
+
+    // Deprecated: numeric only; returns -1 for non-numeric identifiers
+    // Console.WriteLine(_event.ObjectId);
+}
+```
+
 ```csharp
 class Program
 {

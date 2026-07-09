@@ -5,6 +5,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+### Added
+- Support for GET /2.0/reports/{reportId}/definition (Get Report Definition) via `ReportResources.GetReportDefinition`
+- Support for GET /2.0/reports/{reportId}/columns (List Report Columns) via `ReportResources.ListReportColumns`
+- Support for GET /2.0/reports/{reportId}/columns/{columnVirtualId} (Get Report Column) via `ReportResources.GetReportColumn`
+- Support for PUT /2.0/reports/{reportId}/columns/{columnVirtualId} (Update Report Column) via `ReportResources.UpdateReportColumn`
+- Support for DELETE /2.0/reports/{reportId}/columns/{columnVirtualId} (Delete Report Column) via `ReportResources.DeleteReportColumn`
+- Support for GET /2.0/reports/{reportId}/scope (List Report Scope) via `ReportResources.GetReportScope`
+
+### Deprecated
+
+- Deprecated `Event.ObjectId`; use `Event.ObjectIdStr` instead. `ObjectId` is numeric only and returns -1 for non-numeric identifiers. It is not scheduled for removal.
+
+## [7.1.0] - 2026-06-26
+
 ### Fixed
 
 - Deprecation related corrections
@@ -12,12 +26,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Hardcode `paginationType=token` for `listWorkspaces`.
-- Support for GET /2.0/reports/{reportId}/definition (Get Report Definition) via `ReportResources.GetReportDefinition`
-- Support for GET /2.0/reports/{reportId}/columns (List Report Columns) via `ReportResources.ListReportColumns`
-- Support for GET /2.0/reports/{reportId}/columns/{columnVirtualId} (Get Report Column) via `ReportResources.GetReportColumn`
-- Support for PUT /2.0/reports/{reportId}/columns/{columnVirtualId} (Update Report Column) via `ReportResources.UpdateReportColumn`
-- Support for DELETE /2.0/reports/{reportId}/columns/{columnVirtualId} (Delete Report Column) via `ReportResources.DeleteReportColumn`
-- Support for GET /2.0/reports/{reportId}/scope (List Report Scope) via `ReportResources.GetReportScope`
+- Added support for GET /2.0/sheets/{sheetId}/path endpoint (`GetSheetPath`)
+- Added support for GET /2.0/reports/{reportId}/path endpoint (`GetReportPath`)
+- Added support for GET /2.0/sights/{sightId}/path endpoint (`GetSightPath`)
+- Added support for GET /2.0/folders/{folderId}/path endpoint (`GetFolderPath`)
+- Added helper methods `GetLeaf<Asset>()` and `GetLeaf<Asset>Path()` to the responses of the path endpoints for convenient traversal
+- Added asynchronous (`*Async`) counterparts to `SheetResources.RowResources`: `AddRowsAsync`, `AddRowsAllowPartialSuccessAsync`, `GetRowAsync`, `CopyRowsToAnotherSheetAsync`, `DeleteRowsAsync`, `MoveRowsToAnotherSheetAsync`, `SendRowsAsync`, `CreateResourceAsync`, `UpdateRowsAsync`, and `UpdateRowsAllowPartialSuccessAsync`.
+- Added asynchronous (`*Async`) counterparts to `ReportResources`: `GetReportAsync`, `ListReportsAsync`, `SendReportAsync`, `DeleteReportAsync`, `GetPublishStatusAsync`, `UpdatePublishStatusAsync`, `UpdateReportDefinitionAsync`, `AddReportScopeAsync`, `RemoveReportScopeAsync`, `AddReportColumnsAsync`, `CreateReportAsync`, and `GetReportPathAsync`.
 
 ## [7.0.0] - 2026-06-08
 
