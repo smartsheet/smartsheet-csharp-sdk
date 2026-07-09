@@ -115,7 +115,8 @@ namespace Smartsheet.Api.Models
                 ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
                 Source = childResource.Source,
                 OwnerId = childResource.OwnerId,
-                Owner = childResource.Owner
+                Owner = childResource.Owner,
+                ResourceType = childResource.ResourceType
             };
         }
 
@@ -132,7 +133,8 @@ namespace Smartsheet.Api.Models
                 Permalink = childResource.Permalink,
                 CreatedAt = DateTimeConverter.ConvertToDateTime(childResource.CreatedAt),
                 ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
-                Source = childResource.Source
+                Source = childResource.Source,
+                ResourceType = childResource.ResourceType
             };
         }
 
@@ -149,7 +151,8 @@ namespace Smartsheet.Api.Models
                 Permalink = childResource.Permalink,
                 CreatedAt = DateTimeConverter.ConvertToDateTime(childResource.CreatedAt),
                 ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
-                Source = childResource.Source
+                Source = childResource.Source,
+                ResourceType = childResource.ResourceType
             };
         }
 
@@ -165,7 +168,8 @@ namespace Smartsheet.Api.Models
                 Permalink = childResource.Permalink,
                 CreatedAt = childResource.CreatedAt,
                 ModifiedAt = childResource.ModifiedAt,
-                Source = childResource.Source
+                Source = childResource.Source,
+                ResourceType = childResource.ResourceType
             };
         }
 
@@ -178,7 +182,11 @@ namespace Smartsheet.Api.Models
             {
                 Id = childResource.Id,
                 Name = childResource.Name,
-                AccessLevel = childResource.AccessLevel
+                AccessLevel = childResource.AccessLevel,
+                Permalink = childResource.Permalink,
+                CreatedAt = childResource.CreatedAt,
+                ModifiedAt = childResource.ModifiedAt,
+                ResourceType = childResource.ResourceType
             };
         }
     }

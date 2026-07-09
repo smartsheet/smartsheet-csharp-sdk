@@ -92,24 +92,28 @@ namespace mock_api_test_sdk_net80
             var projectFolder = childrenList.FirstOrDefault(c => GetItemId(c) == 456) as Folder;
             Assert.IsNotNull(projectFolder);
             Assert.AreEqual("Project Folder", projectFolder.Name);
+            Assert.AreEqual("folder", projectFolder.ResourceType);
 
             // Budget Sheet (id: 789)
             var budgetSheet = childrenList.FirstOrDefault(c => GetItemId(c) == 789) as Sheet;
             Assert.IsNotNull(budgetSheet);
             Assert.AreEqual("Budget Sheet", budgetSheet.Name);
             Assert.AreEqual(AccessLevel.EDITOR, budgetSheet.AccessLevel);
+            Assert.AreEqual("sheet", budgetSheet.ResourceType);
 
             // Dashboard Overview (id: 321)
             var dashboardOverview = childrenList.FirstOrDefault(c => GetItemId(c) == 321) as Sight;
             Assert.IsNotNull(dashboardOverview);
             Assert.AreEqual("Dashboard Overview", dashboardOverview.Name);
             Assert.AreEqual(AccessLevel.VIEWER, dashboardOverview.AccessLevel);
+            Assert.AreEqual("sight", dashboardOverview.ResourceType);
 
             // Monthly Report (id: 654)
             var monthlyReport = childrenList.FirstOrDefault(c => GetItemId(c) == 654) as Report;
             Assert.IsNotNull(monthlyReport);
             Assert.AreEqual("Monthly Report", monthlyReport.Name);
             Assert.AreEqual(AccessLevel.ADMIN, monthlyReport.AccessLevel);
+            Assert.AreEqual("report", monthlyReport.ResourceType);
         }
 
         [TestMethod]
@@ -142,6 +146,7 @@ namespace mock_api_test_sdk_net80
                         Assert.IsNotNull(projectFolder.Source);
                         Assert.AreEqual(888L, projectFolder.Source.Id);
                         Assert.AreEqual("folder", projectFolder.Source.Type);
+                        Assert.AreEqual("folder", projectFolder.ResourceType);
                         break;
                     case 789: // Budget Sheet
                         var budgetSheet = item as Sheet;
@@ -152,6 +157,7 @@ namespace mock_api_test_sdk_net80
                         // Verify owner info for sheet
                         Assert.AreEqual("john.doe@example.com", budgetSheet.Owner);
                         Assert.AreEqual(1001L, budgetSheet.OwnerId);
+                        Assert.AreEqual("sheet", budgetSheet.ResourceType);
                         break;
                     case 321: // Dashboard Overview
                         var dashboardOverview = item as Sight;
@@ -159,6 +165,7 @@ namespace mock_api_test_sdk_net80
                         Assert.IsNotNull(dashboardOverview.Source);
                         Assert.AreEqual(666L, dashboardOverview.Source.Id);
                         Assert.AreEqual("sight", dashboardOverview.Source.Type);
+                        Assert.AreEqual("sight", dashboardOverview.ResourceType);
                         break;
                     case 654: // Monthly Report
                         var monthlyReport = item as Report;
@@ -166,6 +173,7 @@ namespace mock_api_test_sdk_net80
                         Assert.IsNotNull(monthlyReport.Source);
                         Assert.AreEqual(555L, monthlyReport.Source.Id);
                         Assert.AreEqual("report", monthlyReport.Source.Type);
+                        Assert.AreEqual("report", monthlyReport.ResourceType);
                         break;
                 }
             }
@@ -193,18 +201,21 @@ namespace mock_api_test_sdk_net80
             var projectFolder = childrenList.FirstOrDefault(c => GetItemId(c) == 456) as Folder;
             Assert.IsNotNull(projectFolder);
             Assert.AreEqual("Project Folder", projectFolder.Name);
+            Assert.AreEqual("folder", projectFolder.ResourceType);
 
             // Budget Sheet (id: 789)
             var budgetSheet = childrenList.FirstOrDefault(c => GetItemId(c) == 789) as Sheet;
             Assert.IsNotNull(budgetSheet);
             Assert.AreEqual("Budget Sheet", budgetSheet.Name);
             Assert.AreEqual(AccessLevel.EDITOR, budgetSheet.AccessLevel);
+            Assert.AreEqual("sheet", budgetSheet.ResourceType);
 
             // Project Timeline (id: 1234)
             var projectTimeline = childrenList.FirstOrDefault(c => GetItemId(c) == 1234) as Sheet;
             Assert.IsNotNull(projectTimeline);
             Assert.AreEqual("Project Timeline", projectTimeline.Name);
             Assert.AreEqual(AccessLevel.EDITOR, projectTimeline.AccessLevel);
+            Assert.AreEqual("sheet", projectTimeline.ResourceType);
 
             // Verify only folders and sheets are returned (no sights or reports)
             Assert.IsTrue(childrenList.All(item => item is Folder || item is Sheet));
