@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+## [7.2.0] - 2026-07-09
+
 ### Added
 - Support for GET /2.0/reports/{reportId}/definition (Get Report Definition) via `ReportResources.GetReportDefinition`
 - Support for GET /2.0/reports/{reportId}/columns (List Report Columns) via `ReportResources.ListReportColumns`
