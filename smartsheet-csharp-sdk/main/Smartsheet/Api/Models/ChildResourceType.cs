@@ -16,6 +16,8 @@
 //    limitations under the License.
 //    %[license]
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
 namespace Smartsheet.Api.Models
@@ -23,6 +25,7 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Represents the resourceType field value returned in API responses for child resources.
     /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum ChildResourceType
     {
         /// <summary>
