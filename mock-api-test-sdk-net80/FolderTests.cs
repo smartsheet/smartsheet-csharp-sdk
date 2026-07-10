@@ -151,7 +151,7 @@ namespace mock_api_test_sdk_net80
             Assert.IsNotNull(executiveSummary);
             Assert.AreEqual("Executive Summary", executiveSummary.Name);
             Assert.AreEqual(AccessLevel.VIEWER, executiveSummary.AccessLevel);
-            Assert.AreEqual("sight", executiveSummary.ResourceType);
+            Assert.AreEqual(ChildResourceType.SIGHT, executiveSummary.ResourceType);
 
             // Verify only sights and reports are returned (no folders or sheets)
             Assert.IsTrue(childrenList.All(item => item is Sight || item is Report));
