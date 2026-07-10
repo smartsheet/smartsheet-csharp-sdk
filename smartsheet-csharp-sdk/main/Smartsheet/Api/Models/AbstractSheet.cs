@@ -188,7 +188,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// The resource type
         /// </summary>
-        private string resourceType;
+        private ChildResourceType resourceType;
 
         /// <summary>
         /// Gets the Id of the sheet/template from which the sheet was created.
@@ -490,7 +490,7 @@ namespace Smartsheet.Api.Models
         /// Gets the resource type
         /// </summary>
         /// <returns> the resource type </returns>
-        public string ResourceType
+        public ChildResourceType ResourceType
         {
             get { return resourceType; }
             set { resourceType = value; }

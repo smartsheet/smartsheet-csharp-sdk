@@ -82,7 +82,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// The resource type
         /// </summary>
-        private string resourceType;
+        private ChildResourceType resourceType;
 
         /// <summary>
         /// User’s permissions on the Sight. valid values:
@@ -192,7 +192,7 @@ namespace Smartsheet.Api.Models
         /// Gets the resource type
         /// </summary>
         /// <returns> the resource type </returns>
-        public string ResourceType
+        public ChildResourceType ResourceType
         {
             get { return resourceType; }
             set { resourceType = value; }

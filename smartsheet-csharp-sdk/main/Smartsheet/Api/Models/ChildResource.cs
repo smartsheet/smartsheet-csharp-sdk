@@ -29,9 +29,9 @@ namespace Smartsheet.Api.Models
     public class ChildResource : NamedModel
     {
         /// <summary>
-        /// The resource type (sheet, report, sight, folder)
+        /// The resource type (sheet, report, sight, folder, template)
         /// </summary>
-        public string ResourceType { get; set; }
+        public ChildResourceType ResourceType { get; set; }
 
         /// <summary>
         /// The user's access level for the resource
@@ -83,17 +83,17 @@ namespace Smartsheet.Api.Models
             if (childResource == null)
                 return null;
 
-            switch (childResource.ResourceType?.ToLower())
+            switch (childResource.ResourceType)
             {
-                case "sheet":
+                case ChildResourceType.SHEET:
                     return ConvertToSheet(childResource);
-                case "report":
+                case ChildResourceType.REPORT:
                     return ConvertToReport(childResource);
-                case "sight":
+                case ChildResourceType.SIGHT:
                     return ConvertToSight(childResource);
-                case "folder":
+                case ChildResourceType.FOLDER:
                     return ConvertToFolder(childResource);
-                case "template":
+                case ChildResourceType.TEMPLATE:
                     return ConvertToTemplate(childResource);
                 default:
                     throw new InvalidOperationException($"Unknown resourceType: {childResource.ResourceType}");
