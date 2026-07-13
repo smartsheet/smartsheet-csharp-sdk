@@ -18,7 +18,7 @@ namespace mock_api_test_sdk_net80
 
             Assert.IsNotNull(children);
             Assert.IsNotNull(children.Data);
-            Assert.AreEqual(4, children.Data.Count);
+            Assert.AreEqual(5, children.Data.Count);
 
             // Find specific items by ID and validate their properties using proper model classes
             var childrenList = children.Data.ToList();
