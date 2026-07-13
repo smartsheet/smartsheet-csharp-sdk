@@ -186,11 +186,6 @@ namespace Smartsheet.Api.Models
         private Workspace workspace;
 
         /// <summary>
-        /// The resource type
-        /// </summary>
-        private ChildResourceType? resourceType;
-
-        /// <summary>
         /// Gets the Id of the sheet/template from which the sheet was created.
         /// </summary>
         /// <returns> the from Id </returns>
@@ -484,16 +479,6 @@ namespace Smartsheet.Api.Models
         {
             get { return workspace; }
             set { workspace = value; }
-        }
-
-        /// <summary>
-        /// Gets the resource type
-        /// </summary>
-        /// <returns> the resource type </returns>
-        public ChildResourceType? ResourceType
-        {
-            get { return resourceType; }
-            set { resourceType = value; }
         }
 
         /// <summary>

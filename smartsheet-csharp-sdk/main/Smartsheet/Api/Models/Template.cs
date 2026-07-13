@@ -76,26 +76,6 @@ namespace Smartsheet.Api.Models
         private IList<string> tags;
 
         /// <summary>
-        /// The resource permalink
-        /// </summary>
-        private string permalink;
-
-        /// <summary>
-        /// The resource creation date
-        /// </summary>
-        private object createdAt;
-
-        /// <summary>
-        /// The resource last updated date
-        /// </summary>
-        private object modifiedAt;
-
-        /// <summary>
-        /// The resource type
-        /// </summary>
-        private ChildResourceType? resourceType;
-
-        /// <summary>
         /// Gets the type of the template. One of “sheet” or “report”.
         /// </summary>
         /// <returns> "sheet" or "report" </returns>
@@ -193,48 +173,6 @@ namespace Smartsheet.Api.Models
         {
             get { return tags; }
             set { tags = value; }
-        }
-
-        /// <summary>
-        /// Gets the permalink
-        /// </summary>
-        /// <returns> the permalink </returns>
-        public string Permalink
-        {
-            get { return permalink; }
-            set { permalink = value; }
-        }
-
-        /// <summary>
-        /// Gets the creation date
-        /// Either a DateTime object, or Long if numericDates parameter is true on API call.
-        /// </summary>
-        /// <returns> the created at </returns>
-        public object CreatedAt
-        {
-            get { return createdAt; }
-            set { createdAt = value; }
-        }
-
-        /// <summary>
-        /// Gets the last modified date
-        /// Either a DateTime object, or Long if numericDates parameter is true on API call.
-        /// </summary>
-        /// <returns> the modified at </returns>
-        public object ModifiedAt
-        {
-            get { return modifiedAt; }
-            set { modifiedAt = value; }
-        }
-
-        /// <summary>
-        /// Gets the resource type
-        /// </summary>
-        /// <returns> the resource type </returns>
-        public ChildResourceType? ResourceType
-        {
-            get { return resourceType; }
-            set { resourceType = value; }
         }
     }
 }

@@ -27,28 +27,30 @@ namespace mock_api_test_sdk_net80
             var subfolder = childrenList.FirstOrDefault(c => GetItemId(c) == 987) as Folder;
             Assert.IsNotNull(subfolder);
             Assert.AreEqual("Subfolder", subfolder.Name);
-            Assert.AreEqual(ChildResourceType.FOLDER, subfolder.ResourceType);
 
             // Task List (id: 234)
             var taskList = childrenList.FirstOrDefault(c => GetItemId(c) == 234) as Sheet;
             Assert.IsNotNull(taskList);
             Assert.AreEqual("Task List", taskList.Name);
             Assert.AreEqual(AccessLevel.EDITOR, taskList.AccessLevel);
-            Assert.AreEqual(ChildResourceType.SHEET, taskList.ResourceType);
 
             // Project Dashboard (id: 567)
             var projectDashboard = childrenList.FirstOrDefault(c => GetItemId(c) == 567) as Sight;
             Assert.IsNotNull(projectDashboard);
             Assert.AreEqual("Project Dashboard", projectDashboard.Name);
             Assert.AreEqual(AccessLevel.EDITOR, projectDashboard.AccessLevel);
-            Assert.AreEqual(ChildResourceType.SIGHT, projectDashboard.ResourceType);
 
             // Status Report (id: 890)
             var statusReport = childrenList.FirstOrDefault(c => GetItemId(c) == 890) as Report;
             Assert.IsNotNull(statusReport);
             Assert.AreEqual("Status Report", statusReport.Name);
             Assert.AreEqual(AccessLevel.VIEWER, statusReport.AccessLevel);
-            Assert.AreEqual(ChildResourceType.REPORT, statusReport.ResourceType);
+
+            // Project Template (id: 990)
+            var projectTemplate = childrenList.FirstOrDefault(c => GetItemId(c) == 990) as Template;
+            Assert.IsNotNull(projectTemplate);
+            Assert.AreEqual("Project Template", projectTemplate.Name);
+            Assert.AreEqual(AccessLevel.VIEWER, projectTemplate.AccessLevel);
         }
 
         [TestMethod]
@@ -81,7 +83,6 @@ namespace mock_api_test_sdk_net80
                         Assert.IsNotNull(subfolder.Source);
                         Assert.AreEqual(444L, subfolder.Source.Id);
                         Assert.AreEqual("folder", subfolder.Source.Type);
-                        Assert.AreEqual(ChildResourceType.FOLDER, subfolder.ResourceType);
                         break;
                     case 234: // Task List
                         var taskList = item as Sheet;
@@ -92,7 +93,6 @@ namespace mock_api_test_sdk_net80
                         // Verify owner info for sheet
                         Assert.AreEqual("jane.smith@example.com", taskList.Owner);
                         Assert.AreEqual(2002L, taskList.OwnerId);
-                        Assert.AreEqual(ChildResourceType.SHEET, taskList.ResourceType);
                         break;
                     case 567: // Project Dashboard
                         var projectDashboard = item as Sight;
@@ -100,7 +100,6 @@ namespace mock_api_test_sdk_net80
                         Assert.IsNotNull(projectDashboard.Source);
                         Assert.AreEqual(222L, projectDashboard.Source.Id);
                         Assert.AreEqual("sight", projectDashboard.Source.Type);
-                        Assert.AreEqual(ChildResourceType.SIGHT, projectDashboard.ResourceType);
                         break;
                     case 890: // Status Report
                         var statusReport = item as Report;
@@ -108,7 +107,6 @@ namespace mock_api_test_sdk_net80
                         Assert.IsNotNull(statusReport.Source);
                         Assert.AreEqual(111L, statusReport.Source.Id);
                         Assert.AreEqual("report", statusReport.Source.Type);
-                        Assert.AreEqual(ChildResourceType.REPORT, statusReport.ResourceType);
                         break;
                 }
             }
@@ -137,21 +135,18 @@ namespace mock_api_test_sdk_net80
             Assert.IsNotNull(projectDashboard);
             Assert.AreEqual("Project Dashboard", projectDashboard.Name);
             Assert.AreEqual(AccessLevel.EDITOR, projectDashboard.AccessLevel);
-            Assert.AreEqual(ChildResourceType.SIGHT, projectDashboard.ResourceType);
 
             // Status Report (id: 890)
             var statusReport = childrenList.FirstOrDefault(c => GetItemId(c) == 890) as Report;
             Assert.IsNotNull(statusReport);
             Assert.AreEqual("Status Report", statusReport.Name);
             Assert.AreEqual(AccessLevel.VIEWER, statusReport.AccessLevel);
-            Assert.AreEqual(ChildResourceType.REPORT, statusReport.ResourceType);
 
             // Executive Summary (id: 1567)
             var executiveSummary = childrenList.FirstOrDefault(c => GetItemId(c) == 1567) as Sight;
             Assert.IsNotNull(executiveSummary);
             Assert.AreEqual("Executive Summary", executiveSummary.Name);
             Assert.AreEqual(AccessLevel.VIEWER, executiveSummary.AccessLevel);
-            Assert.AreEqual(ChildResourceType.SIGHT, executiveSummary.ResourceType);
 
             // Verify only sights and reports are returned (no folders or sheets)
             Assert.IsTrue(childrenList.All(item => item is Sight || item is Report));

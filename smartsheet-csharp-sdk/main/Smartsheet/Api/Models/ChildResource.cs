@@ -115,8 +115,7 @@ namespace Smartsheet.Api.Models
                 ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
                 Source = childResource.Source,
                 OwnerId = childResource.OwnerId,
-                Owner = childResource.Owner,
-                ResourceType = childResource.ResourceType
+                Owner = childResource.Owner
             };
         }
 
@@ -133,8 +132,7 @@ namespace Smartsheet.Api.Models
                 Permalink = childResource.Permalink,
                 CreatedAt = DateTimeConverter.ConvertToDateTime(childResource.CreatedAt),
                 ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
-                Source = childResource.Source,
-                ResourceType = childResource.ResourceType
+                Source = childResource.Source
             };
         }
 
@@ -151,8 +149,7 @@ namespace Smartsheet.Api.Models
                 Permalink = childResource.Permalink,
                 CreatedAt = DateTimeConverter.ConvertToDateTime(childResource.CreatedAt),
                 ModifiedAt = DateTimeConverter.ConvertToDateTime(childResource.ModifiedAt),
-                Source = childResource.Source,
-                ResourceType = childResource.ResourceType
+                Source = childResource.Source
             };
         }
 
@@ -168,8 +165,7 @@ namespace Smartsheet.Api.Models
                 Permalink = childResource.Permalink,
                 CreatedAt = childResource.CreatedAt,
                 ModifiedAt = childResource.ModifiedAt,
-                Source = childResource.Source,
-                ResourceType = childResource.ResourceType
+                Source = childResource.Source
             };
         }
 
@@ -185,8 +181,7 @@ namespace Smartsheet.Api.Models
                 AccessLevel = childResource.AccessLevel,
                 Permalink = childResource.Permalink,
                 CreatedAt = childResource.CreatedAt,
-                ModifiedAt = childResource.ModifiedAt,
-                ResourceType = childResource.ResourceType
+                ModifiedAt = childResource.ModifiedAt
             };
         }
     }

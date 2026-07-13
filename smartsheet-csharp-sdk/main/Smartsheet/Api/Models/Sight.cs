@@ -80,11 +80,6 @@ namespace Smartsheet.Api.Models
         private Workspace workspace;
 
         /// <summary>
-        /// The resource type
-        /// </summary>
-        private ChildResourceType? resourceType;
-
-        /// <summary>
         /// User’s permissions on the Sight. valid values:
         ///        OWNER, ADMIN, VIEWER
         /// </summary>
@@ -186,16 +181,6 @@ namespace Smartsheet.Api.Models
         {
             get { return workspace; }
             set { workspace = value; }
-        }
-
-        /// <summary>
-        /// Gets the resource type
-        /// </summary>
-        /// <returns> the resource type </returns>
-        public ChildResourceType? ResourceType
-        {
-            get { return resourceType; }
-            set { resourceType = value; }
         }
     }
 }

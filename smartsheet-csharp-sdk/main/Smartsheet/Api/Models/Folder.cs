@@ -78,11 +78,6 @@ namespace Smartsheet.Api.Models
         private Source? source;
 
         /// <summary>
-        /// The resource type
-        /// </summary>
-        private ChildResourceType? resourceType;
-
-        /// <summary>
         /// Gets and sets whether this folder is favorited.
         /// </summary>
         /// <returns> the sheets </returns>
@@ -183,16 +178,6 @@ namespace Smartsheet.Api.Models
         {
             get { return source; }
             set { source = value; }
-        }
-
-        /// <summary>
-        /// Gets the resource type
-        /// </summary>
-        /// <returns> the resource type </returns>
-        public ChildResourceType? ResourceType
-        {
-            get { return resourceType; }
-            set { resourceType = value; }
         }
 
         /// <summary>
