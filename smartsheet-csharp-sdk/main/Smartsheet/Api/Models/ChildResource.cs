@@ -178,10 +178,7 @@ namespace Smartsheet.Api.Models
             {
                 Id = childResource.Id,
                 Name = childResource.Name,
-                AccessLevel = childResource.AccessLevel,
-                Permalink = childResource.Permalink,
-                CreatedAt = childResource.CreatedAt,
-                ModifiedAt = childResource.ModifiedAt
+                AccessLevel = childResource.AccessLevel
             };
         }
     }
