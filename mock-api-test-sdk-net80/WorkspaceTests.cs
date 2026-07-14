@@ -83,7 +83,7 @@ namespace mock_api_test_sdk_net80
 
             Assert.IsNotNull(children);
             Assert.IsNotNull(children.Data);
-            Assert.AreEqual(4, children.Data.Count);
+            Assert.AreEqual(5, children.Data.Count);
 
             // Find specific items by ID and validate their properties
             var childrenList = children.Data.ToList();
@@ -110,6 +110,12 @@ namespace mock_api_test_sdk_net80
             Assert.IsNotNull(monthlyReport);
             Assert.AreEqual("Monthly Report", monthlyReport.Name);
             Assert.AreEqual(AccessLevel.ADMIN, monthlyReport.AccessLevel);
+
+            // Budget Template (id: 995)
+            var budgetTemplate = childrenList.FirstOrDefault(c => GetItemId(c) == 995) as Template;
+            Assert.IsNotNull(budgetTemplate);
+            Assert.AreEqual("Budget Template", budgetTemplate.Name);
+            Assert.AreEqual(AccessLevel.ADMIN, budgetTemplate.AccessLevel);
         }
 
         [TestMethod]
