@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `ChildResourceType` enum 
 - Test cases for a template resource type
 
+### Fixed
+- `NullReferenceException` when the API returns an error response with an empty or body-less payload (e.g. `GetSheetAsCSV` with a low-privilege token); the SDK now raises a `SmartsheetException` instead (#211)
+
 ## [7.2.0] - 2026-07-09
 
 ### Added
