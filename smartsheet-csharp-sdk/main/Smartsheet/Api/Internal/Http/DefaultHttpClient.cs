@@ -306,8 +306,15 @@ namespace Smartsheet.Api.Internal.Http
                     {
                         //JSON deserialize the exception we want from the Restsharp response.
                         //Once we get this we can throw it up and make sure to pass it along from an inner exception inside an aggregate exception.
-                        RestResponseContent restResponseContent = this.jsonSerializer.deserialize<RestResponseContent>(restResponse.Content);
-                        throw new SmartsheetException(restResponseContent.message);
+                        RestResponseContent restResponseContent = string.IsNullOrEmpty(restResponse.Content)
+                            ? null
+                            : this.jsonSerializer.deserialize<RestResponseContent>(restResponse.Content);
+                        // A body-less error response deserializes to null; fall back to the status code
+                        // so we still throw a meaningful message instead of a NullReferenceException.
+                        string message = restResponseContent != null && !string.IsNullOrEmpty(restResponseContent.message)
+                            ? restResponseContent.message
+                            : string.Format("HTTP {0} {1}", (int)smartsheetResponse.StatusCode, smartsheetResponse.StatusCode);
+                        throw new SmartsheetException(message);
                     }
                     break;
                 }
@@ -419,6 +426,12 @@ namespace Smartsheet.Api.Internal.Http
                     return await RetrySleep(previousAttempts, totalElapsedTime, response.StatusCode, null, cancellationToken).ConfigureAwait(false);
             }
 
+            // A response with no entity carries no retryable error code; don't retry.
+            if (response.Entity == null)
+            {
+                return false;
+            }
+
             string contentType = response.Entity.ContentType;
             if (contentType != null && !contentType.StartsWith("application/json"))
             {
@@ -443,6 +456,12 @@ namespace Smartsheet.Api.Internal.Http
             catch (IOException ex)
             {
                 throw new SmartsheetException(ex);
+            }
+
+            // An empty or non-error body deserializes to null; there's no code to retry on.
+            if (error == null)
+            {
+                return false;
             }
 
             switch (error.ErrorCode)

@@ -1280,8 +1280,10 @@ namespace Smartsheet.Api.Internal
             Api.Models.Error error;
             try
             {
-                error = this.smartsheet.JsonSerializer.deserialize<Api.Models.Error>(
-                    response.Entity.GetContent());
+                error = response.Entity == null
+                    ? null
+                    : this.smartsheet.JsonSerializer.deserialize<Api.Models.Error>(
+                        response.Entity.GetContent());
             }
             catch (JsonSerializationException ex)
             {
@@ -1294,6 +1296,16 @@ namespace Smartsheet.Api.Internal
             catch (IOException ex)
             {
                 throw new SmartsheetException(ex);
+            }
+
+            // A body-less or non-JSON error response yields no Error; synthesize one so the
+            // status code still maps to a meaningful typed exception instead of an NRE.
+            if (error == null)
+            {
+                error = new Api.Models.Error
+                {
+                    Message = string.Format("HTTP {0} {1} (no response body)", (int)response.StatusCode, response.StatusCode)
+                };
             }
 
             ErrorCode code = ErrorCode.getErrorCode(response.StatusCode);
