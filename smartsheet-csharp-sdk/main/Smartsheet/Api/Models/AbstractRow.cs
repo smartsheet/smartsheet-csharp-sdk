@@ -108,6 +108,10 @@ namespace Smartsheet.Api.Models
         private string permalink;
 
         /// <summary>
+        /// Represents the Proof for this row. </summary>
+        private Proof proof;
+
+        /// <summary>
         /// Represents the row number. </summary>
         private int? rowNumber;
 
@@ -173,6 +177,16 @@ namespace Smartsheet.Api.Models
         {
             get { return attachments; }
             set { attachments = value; }
+        }
+
+        /// <summary>
+        /// Gets the Proof.
+        /// </summary>
+        /// <returns> the Proof </returns>
+        public Proof Proof
+        {
+            get { return proof; }
+            set { proof = value; }
         }
 
         /// <summary>
