@@ -48,6 +48,11 @@ namespace Smartsheet.Api.Models
         OBJECT_VALUE,
 
         /// <summary>
+        /// Includes the proof object containing proof information associated with each row.
+        /// </summary>
+        PROOFS,
+
+        /// <summary>
         /// Adds the report's scope to the response
         /// </summary>
         SCOPE,

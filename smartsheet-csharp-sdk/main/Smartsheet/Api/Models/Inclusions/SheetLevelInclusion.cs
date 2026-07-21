@@ -78,6 +78,11 @@ namespace Smartsheet.Api.Models
         OWNER_INFO,
 
         /// <summary>
+        /// Includes the proof object containing proof information associated with each row.
+        /// </summary>
+        PROOFS,
+
+        /// <summary>
         /// Includes a permalink attribute for each row. A row permalink represents a direct link to the row in the Smartsheet application.
         /// </summary>
         ROW_PERMALINK,
