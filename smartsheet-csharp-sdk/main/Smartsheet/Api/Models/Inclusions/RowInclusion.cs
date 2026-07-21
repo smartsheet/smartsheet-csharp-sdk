@@ -74,6 +74,11 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Includes objectValue attribute on cells containing values.
         /// </summary>
-        OBJECT_VALUE
+        OBJECT_VALUE,
+
+        /// <summary>
+        /// Includes the proof object containing proof information associated with the row.
+        /// </summary>
+        PROOFS
     }
 }
