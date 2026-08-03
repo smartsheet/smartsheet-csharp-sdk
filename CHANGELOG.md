@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `Proof` property on rows returned by `GetSheet` and `GetReport`
 - `PROOFS` include value for `SheetLevelInclusion`, `ReportInclusion`, and `RowInclusion`
 
+### Fixed
+- `COMMENTER` value for `AccessLevel`, which previously deserialized to `null` on sheets, reports, workspaces, and shares, and could not be used to create or update a share. Fixes [#218](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/218)
+
 ## [7.3.0] - 2026-07-20
 
 ### Added

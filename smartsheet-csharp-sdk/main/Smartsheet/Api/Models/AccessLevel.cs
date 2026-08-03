@@ -42,6 +42,11 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Owner access level
         /// </summary>
-        OWNER
+        OWNER,
+        /// <summary>
+        /// Commenter access level. The same as VIEWER, but with the ability to leave comments
+        /// and add attachments.
+        /// </summary>
+        COMMENTER
     }
 }
