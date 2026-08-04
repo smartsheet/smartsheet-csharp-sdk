@@ -102,9 +102,11 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void AccessLevel_ContainsEveryDocumentedValue()
+        public void AccessLevel_MatchesDocumentedValuesInSpecificationOrder()
         {
-            // Mirrors the AccessLevel enum in the public API specification.
+            // Declaration order mirrors the AccessLevel enum in the public API specification.
+            // VIEWER must stay first: CreateShareRequest.AccessLevel is a non-nullable value
+            // type, so an unset access level falls back to the value declared at ordinal 0.
             var expected = new[]
             {
                 AccessLevel.VIEWER,
@@ -115,7 +117,7 @@ namespace mock_api_test_sdk_net80
                 AccessLevel.OWNER
             };
 
-            CollectionAssert.AreEquivalent(expected, Enum.GetValues<AccessLevel>());
+            CollectionAssert.AreEqual(expected, Enum.GetValues<AccessLevel>());
         }
 
         #region Helper Methods

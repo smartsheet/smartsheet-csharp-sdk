@@ -20,13 +20,18 @@ namespace Smartsheet.Api.Models
 {
     /// <summary>
     /// Represents access levels that Users can have. </summary>
-    /// <seealso href="http://www.Smartsheet.com/developers/Api-documentation#h.umfgm4xt25dq">Access Level Help</seealso>
+    /// <seealso href="https://developers.smartsheet.com/api/smartsheet/guides/basics/resource-access-levels">Resource Access Levels</seealso>
     public enum AccessLevel
     {
         /// <summary>
         /// Viewer access level
         /// </summary>
         VIEWER,
+        /// <summary>
+        /// Commenter access level. The same as VIEWER, but with the ability to leave comments
+        /// and add attachments.
+        /// </summary>
+        COMMENTER,
         /// <summary>
         /// Editor access level
         /// </summary>
@@ -42,11 +47,6 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Owner access level
         /// </summary>
-        OWNER,
-        /// <summary>
-        /// Commenter access level. The same as VIEWER, but with the ability to leave comments
-        /// and add attachments.
-        /// </summary>
-        COMMENTER
+        OWNER
     }
 }
