@@ -144,6 +144,15 @@ namespace Smartsheet.Api
         /// <param name="lastKey">The last key for pagination.</param>
         /// <param name="maxItems">The maximum number of items to return.</param>
         /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
+        /// <param name="includes">
+        /// <para>used to specify the optional objects to include, currently PLAN_NAMES is supported.</para>
+        /// <para>
+        /// When PLAN_NAMES is included, each returned plan carries the name of its owning
+        /// organization in <see cref="UserPlan.PlanName"/>. Organization names are cached
+        /// server-side for several hours, so a recently renamed organization may briefly
+        /// return its previous name.
+        /// </para>
+        /// </param>
         /// <returns><see cref="TokenPaginatedResult{T}"/> object containing <see cref="UserPlan"/>.</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
@@ -151,7 +160,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems, bool? displayContributorSeatType = null);
+        TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems, bool? displayContributorSeatType = null, IEnumerable<UserPlanInclusion>? includes = null);
 
         /// <summary>
         /// <para>Removes a user from a plan.</para>
