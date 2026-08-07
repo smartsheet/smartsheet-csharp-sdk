@@ -27,6 +27,6 @@ namespace Smartsheet.Api.Models
         /// Includes the name of the organization that owns each returned plan in
         /// <see cref="UserPlan.PlanName"/>.
         /// </summary>
-        PLAN_NAMES,
+        PLAN_NAME,
     }
 }

@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `Proof` model and `ProofType` enum
 - `Proof` property on rows returned by `GetSheet` and `GetReport`
 - `PROOFS` include value for `SheetLevelInclusion`, `ReportInclusion`, and `RowInclusion`
-- Support for the `include` query parameter on GET /2.0/users/{userId}/plans (List User Plans) via a new optional `includes` argument on `UserResources.ListUserPlans` and the new `UserPlanInclusion` enum, whose only value is `PLAN_NAMES`
-- `PlanName` property on `UserPlan`, populated when `PLAN_NAMES` is requested
+- Support for the `include` query parameter on GET /2.0/users/{userId}/plans (List User Plans) via a new optional `includes` argument on `UserResources.ListUserPlans` and the new `UserPlanInclusion` enum, whose only value is `PLAN_NAME`
+- `PlanName` property on `UserPlan`, populated when `PLAN_NAME` is requested
 
 ### Fixed
 - `COMMENTER` value for `AccessLevel`, which previously deserialized to `null` on sheets, reports, workspaces, and shares, and could not be used to create or update a share. Fixes [#218](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/218)

@@ -264,9 +264,9 @@ namespace Smartsheet.Api.Internal
         /// <param name="maxItems">The maximum number of items to return.</param>
         /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <param name="includes">
-        /// <para>used to specify the optional objects to include, currently PLAN_NAMES is supported.</para>
+        /// <para>used to specify the optional objects to include, currently PLAN_NAME is supported.</para>
         /// <para>
-        /// When PLAN_NAMES is included, each returned plan carries the name of its owning
+        /// When PLAN_NAME is included, each returned plan carries the name of its owning
         /// organization in <see cref="UserPlan.PlanName"/>. Organization names are cached
         /// server-side for several hours, so a recently renamed organization may briefly
         /// return its previous name.

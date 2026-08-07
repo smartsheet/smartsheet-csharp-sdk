@@ -15,7 +15,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// <para>Gets or sets the name of the organization that owns the plan.</para>
         /// <para>
-        /// This is null unless <c>planNames</c> was requested via the <c>include</c> parameter of
+        /// This is null unless <c>planName</c> was requested via the <c>include</c> parameter of
         /// List User Plans, and is also null for a plan whose owning organization has no name.
         /// </para>
         /// </summary>

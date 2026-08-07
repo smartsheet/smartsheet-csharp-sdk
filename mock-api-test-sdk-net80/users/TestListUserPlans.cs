@@ -12,7 +12,7 @@ namespace mock_api_test_sdk_net80
         private const SeatType TEST_SEAT_TYPE = SeatType.MEMBER;
         private static readonly DateTime TEST_SEAT_TYPE_LAST_CHANGED_AT = DateTime.Parse("2025-01-01T00:00:00.123456789Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
         private static readonly DateTime TEST_PROVISIONAL_EXPIRATION_DATE = DateTime.Parse("2026-12-13T12:17:52.525696Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
-        private static readonly UserPlanInclusion[] TEST_INCLUDES = new[] { UserPlanInclusion.PLAN_NAMES };
+        private static readonly UserPlanInclusion[] TEST_INCLUDES = new[] { UserPlanInclusion.PLAN_NAME };
         private const string TEST_PLAN_NAME = "Acme Corporation";
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_MAX_ITEMS.ToString(), queryParams["maxItems"]);
             Assert.AreEqual(TEST_LAST_KEY, queryParams["lastKey"]);
             Assert.AreEqual("true", queryParams["displayContributorSeatType"]);
-            Assert.AreEqual("planNames", queryParams["include"]);
+            Assert.AreEqual("planName", queryParams["include"]);
         }
 
         [TestMethod]
