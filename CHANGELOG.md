@@ -190,6 +190,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - ListFolders method in WorkspaceFolderResources (use GetWorkspaceChildren instead)
 - HomeFolderResources interface and all its methods (See the API docs article on [migrating off the Sheets folder](https://developers.smartsheet.com/api/smartsheet/guides/updating-code/migrate-from-using-the-sheets-folder))
 
+## [3.0.1] - 2023-07-21
+### Fixed
+- `AutomationAction` object property updated to match Smartsheet API
+
 ## [3.0.0] - 2022-12-07
 ### Updated
 - Migrated SDK to new project
