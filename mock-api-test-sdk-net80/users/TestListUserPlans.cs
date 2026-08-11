@@ -12,7 +12,7 @@ namespace mock_api_test_sdk_net80
         private const SeatType TEST_SEAT_TYPE = SeatType.MEMBER;
         private static readonly DateTime TEST_SEAT_TYPE_LAST_CHANGED_AT = DateTime.Parse("2025-01-01T00:00:00.123456789Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
         private static readonly DateTime TEST_PROVISIONAL_EXPIRATION_DATE = DateTime.Parse("2026-12-13T12:17:52.525696Z", null, System.Globalization.DateTimeStyles.RoundtripKind);
-        private static readonly UserPlanInclusion[] TEST_INCLUDES = new[] { UserPlanInclusion.PLAN_NAME };
+        private static readonly UserPlanInclusion[] TEST_INCLUDE = new[] { UserPlanInclusion.PLAN_NAME };
         private const string TEST_PLAN_NAME = "Acme Corporation";
 
         [TestMethod]
@@ -21,7 +21,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
             
-            smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS, displayContributorSeatType: true, includes: TEST_INCLUDES);
+            smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS, displayContributorSeatType: true, include: TEST_INCLUDE);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
             var uri = new Uri(foundRequest.AbsoluteUrl);
@@ -42,7 +42,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/list-user-plans/all-response-body-properties", requestId.ToString());
 
-            TokenPaginatedResult<UserPlan> response = smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS, includes: TEST_INCLUDES);
+            TokenPaginatedResult<UserPlan> response = smartsheet.UserResources.ListUserPlans(CommonTestConstants.TEST_USER_ID, TEST_LAST_KEY, TEST_MAX_ITEMS, include: TEST_INCLUDE);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(TEST_LAST_KEY, response.LastKey);

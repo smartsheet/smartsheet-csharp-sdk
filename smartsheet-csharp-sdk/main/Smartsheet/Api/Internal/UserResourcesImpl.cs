@@ -263,7 +263,7 @@ namespace Smartsheet.Api.Internal
         /// <param name="lastKey">The last key for pagination.</param>
         /// <param name="maxItems">The maximum number of items to return.</param>
         /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
-        /// <param name="includes">
+        /// <param name="include">
         /// <para>used to specify the optional objects to include, currently PLAN_NAME is supported.</para>
         /// <para>
         /// When PLAN_NAME is included, each returned plan carries the name of its owning
@@ -279,7 +279,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems, bool? displayContributorSeatType, IEnumerable<UserPlanInclusion>? includes = null)
+        public virtual TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems, bool? displayContributorSeatType, IEnumerable<UserPlanInclusion>? include = null)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (lastKey != null)
@@ -294,9 +294,9 @@ namespace Smartsheet.Api.Internal
             {
                 parameters.Add("displayContributorSeatType", displayContributorSeatType.ToString().ToLower());
             }
-            if (includes != null)
+            if (include != null)
             {
-                parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(includes));
+                parameters.Add("include", QueryUtil.GenerateCommaSeparatedList(include));
             }
             string path = $"users/{userId}/plans" + QueryUtil.GenerateUrl(null, parameters);
 
