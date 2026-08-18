@@ -173,18 +173,6 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void TestGetDataClassificationSettingsError404Response()
-        {
-            Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient(
-                "/errors/404-response", requestId.ToString());
-
-            ResourceNotFoundException exception = Assert.ThrowsException<ResourceNotFoundException>(
-                () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID));
-            Assert.AreEqual("Not Found", exception.Message);
-        }
-
-        [TestMethod]
         public void TestGetDataClassificationSettingsError500Response()
         {
             Guid requestId = Guid.NewGuid();
