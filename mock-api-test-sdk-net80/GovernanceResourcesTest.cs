@@ -155,7 +155,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient(
                 "/errors/400-response", requestId.ToString());
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(
+            InvalidRequestException exception = Assert.ThrowsException<InvalidRequestException>(
                 () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
@@ -167,7 +167,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient(
                 "/errors/403-response", requestId.ToString());
 
-            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(
+            AuthorizationException exception = Assert.ThrowsException<AuthorizationException>(
                 () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID));
             Assert.AreEqual("You are not authorized to perform this action.", exception.Message);
         }
