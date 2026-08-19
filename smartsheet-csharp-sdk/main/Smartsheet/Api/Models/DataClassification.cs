@@ -24,14 +24,15 @@ namespace Smartsheet.Api.Models
     public class SheetDataClassification
     {
         /// <summary>
-        /// The data classification level.
+        /// The data classification label.
         /// </summary>
-        private DataClassificationType? dataClassification;
+        private string dataClassification;
 
         /// <summary>
-        /// Gets or sets the data classification.
+        /// Gets or sets the data classification, which is a label from the plan's
+        /// published classification labels (configured by a plan admin in Admin Center).
         /// </summary>
-        public DataClassificationType? DataClassification
+        public string DataClassification
         {
             get { return dataClassification; }
             set { dataClassification = value; }

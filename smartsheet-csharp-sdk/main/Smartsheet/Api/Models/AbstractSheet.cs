@@ -81,7 +81,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Represents the data classification of the sheet.
         /// </summary>
-        private DataClassificationType? dataClassification;
+        private string dataClassification;
 
         /// <summary>
         /// Represents the discussions for the sheet.
@@ -278,10 +278,11 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Gets or sets the data classification of the sheet.
+        /// Gets or sets the data classification of the sheet, which is a label from the
+        /// plan's published classification labels (configured by a plan admin in Admin Center).
         /// </summary>
         /// <returns> the data classification </returns>
-        public DataClassificationType? DataClassification
+        public string DataClassification
         {
             get { return dataClassification; }
             set { dataClassification = value; }
