@@ -58,5 +58,37 @@ namespace mock_api_test_sdk_net80
                 Assert.Fail("Expected exception of type: {0}, actual type: {1}", (typeof(TException).Name), ex.GetType().Name);
             }
         }
+
+        ///<summary>
+        /// Awaits the asynchronous action and asserts that it throws an exception with the expected type and message.
+        /// Use this instead of the Action overload for async calls so the exception is observed on the awaited task
+        /// rather than escaping on an async-void continuation.
+        ///</summary>
+        ///<typeparam name="TException"></typeparam>
+        ///<param name="action"></param>
+        ///<param name="expectedMessage"></param>
+        public static async Task AssertRaisesExceptionAsync<TException>(Func<Task> action, string expectedMessage)
+            where TException : Exception
+        {
+            try
+            {
+                await action();
+                Assert.Fail("Call suceeded. Expected exception of type: {0} with message: {1}", (typeof(TException).Name), expectedMessage);
+            }
+            catch (TException ex)
+            {
+                Assert.AreEqual(expectedMessage, ex.Message, "Expected message: {0}", expectedMessage);
+            }
+            catch (AssertFailedException ex)
+            {
+#pragma warning disable CA2200 // Rethrow to preserve stack details
+                throw ex;
+#pragma warning restore CA2200 // Rethrow to preserve stack details
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Expected exception of type: {0}, actual type: {1}", (typeof(TException).Name), ex.GetType().Name);
+            }
+        }
     }
 }

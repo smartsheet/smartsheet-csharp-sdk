@@ -26,6 +26,8 @@ namespace Smartsheet.Api.Internal
     using System.IO;
     using System.Net;
     using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
     using HttpEntity = Api.Internal.Http.HttpEntity;
     using HttpMethod = Api.Internal.Http.HttpMethod;
     using HttpRequest = Api.Internal.Http.HttpRequest;
@@ -184,6 +186,35 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual T GetResource<T>(string path, Type objectClass)
         {
+            return GetResourceAsync<T>(path, objectClass).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously get a resource from SmartsheetClient REST API.
+        /// 
+        /// Parameters: - 
+        ///   path : the relative path of the resource
+        ///   objectClass : the resource object class
+        ///   cancellationToken : the cancellation token
+        /// 
+        /// Returns: the resource (note that if there is no such resource, this method will throw ResourceNotFoundException
+        /// rather than returning null).
+        /// 
+        /// Exceptions: -
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource. </param>
+        /// <param name="objectClass"> the object class </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<T> GetResourceAsync<T>(string path, Type objectClass, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, objectClass);
 
             if (path == null || path.Length == 0)
@@ -203,7 +234,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
 
@@ -254,6 +285,27 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual S CreateResource<S, T>(string path, T @object)
         {
+            return this.CreateResourceAsync<S, T>(path, @object).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Create a resource using SmartsheetClient REST API.
+        /// 
+        /// Exceptions: 
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="object"> the object to create </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the created resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<S> CreateResourceAsync<S, T>(string path, T @object, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, @object);
             Utils.ThrowIfEmpty(path);
 
@@ -269,7 +321,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -306,6 +358,28 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual T CreateResource<T>(string path, Type objectClass, T @object)
         {
+            return this.CreateResourceAsync<T>(path, objectClass, @object).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Create a resource using SmartsheetClient REST API.
+        /// 
+        /// Exceptions: 
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="objectClass"> the resource object class </param>
+        /// <param name="object"> the object to create </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the created resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal async virtual Task<T> CreateResourceAsync<T>(string path, Type objectClass, T @object, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, @object);
             Utils.ThrowIfEmpty(path);
 
@@ -321,7 +395,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -352,6 +426,22 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="InvalidOperationException"> if any argument is null, or path is an empty string </exception>
         protected internal virtual T CreateResourceWithAttachment<T>(string path, T @object, string objectType, string file, string fileType)
         {
+            return this.CreateResourceWithAttachmentAsync(path, @object, objectType, file, fileType).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Create a resource with an attachment.
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="object">the object to create </param>
+        /// <param name="file"> the file path </param>
+        /// <param name="fileType"> the file type, can be null </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <param name="objectType"> the object type to return as </param>
+        /// <returns> the created resource </returns>
+        /// <exception cref="InvalidOperationException"> if any argument is null, or path is an empty string </exception>
+        protected async internal virtual Task<T> CreateResourceWithAttachmentAsync<T>(string path, T @object, string objectType, string file, string fileType, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, @object);
             Utils.ThrowIfEmpty(path);
 
@@ -366,7 +456,7 @@ namespace Smartsheet.Api.Internal
             }
 
             request.Entity = serializeToEntity<T>(@object);
-            HttpResponse response = this.smartsheet.HttpClient.Request(request, objectType, file, fileType);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, objectType, file, fileType, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -404,6 +494,29 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual T UpdateResource<T>(string path, Type objectClass, T @object)
         {
+            return this.UpdateResourceAsync<T>(path, objectClass, @object).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously update a resource using SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="objectClass"> the resource object class </param>
+        /// <param name="object"> the object to create </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the updated resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<T> UpdateResourceAsync<T>(string path, Type objectClass, T @object, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, @object);
             Utils.ThrowIfEmpty(path);
 
@@ -419,7 +532,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(@object);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Object obj = null;
             switch (response.StatusCode)
@@ -437,7 +550,86 @@ namespace Smartsheet.Api.Internal
 
             return (T)obj;
         }
-        
+
+        /// <summary>
+        /// Update a resource using SmartsheetClient REST API, where the request body type
+        /// differs from the response type.
+        ///
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <typeparam name="S"> the response resource type </typeparam>
+        /// <typeparam name="T"> the request body type </typeparam>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="object"> the object to send as the request body </param>
+        /// <returns> the updated resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual S UpdateResource<S, T>(string path, T @object)
+        {
+            return this.UpdateResourceAsync<S, T>(path, @object).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously update a resource using SmartsheetClient REST API, where the request
+        /// body type differs from the response type.
+        ///
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <typeparam name="S"> the response resource type </typeparam>
+        /// <typeparam name="T"> the request body type </typeparam>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="object"> the object to send as the request body </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the updated resource </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<S> UpdateResourceAsync<S, T>(string path, T @object, CancellationToken cancellationToken = default)
+        {
+            Utils.ThrowIfNull(path, @object);
+            Utils.ThrowIfEmpty(path);
+
+            HttpRequest request = null;
+            try
+            {
+                request = CreateHttpRequest(new Uri(smartsheet.BaseURI, path), HttpMethod.PUT);
+            }
+            catch (Exception e)
+            {
+                throw new SmartsheetException(e);
+            }
+
+            request.Entity = serializeToEntity<T>(@object);
+
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
+
+            Object obj = null;
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    obj = this.smartsheet.JsonSerializer.deserializeResult<S>(response.Entity.GetContent()).Result;
+                    break;
+                default:
+                    HandleError(response);
+                    break;
+            }
+
+            smartsheet.HttpClient.ReleaseConnection();
+
+            return (S)obj;
+        }
+
         /// <summary>
         /// Partially update a resource using Smartsheet REST API with PATCH method.
         /// 
@@ -505,6 +697,26 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
         protected internal virtual PaginatedResult<T> ListResourcesWithWrapper<T>(string path)
         {
+            return this.ListResourcesWithWrapperAsync<T>(path).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously list resources using SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the resources </returns>
+        /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
+        protected internal async virtual Task<PaginatedResult<T>> ListResourcesWithWrapperAsync<T>(string path, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path);
             Utils.ThrowIfEmpty(path);
 
@@ -518,7 +730,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             PaginatedResult<T> obj = null;
             switch (response.StatusCode)
@@ -553,6 +765,26 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
         protected internal virtual TokenPaginatedResult<T> ListResourcesWithTokenWrapper<T>(string path)
         {
+            return this.ListResourcesWithTokenWrapperAsync<T>(path).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// List resources using SmartsheetClient REST API with token-based pagination.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the resources with token-based pagination </returns>
+        /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
+        protected internal async virtual Task<TokenPaginatedResult<T>> ListResourcesWithTokenWrapperAsync<T>(string path, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path);
             Utils.ThrowIfEmpty(path);
 
@@ -566,7 +798,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             TokenPaginatedResult<T> obj = null;
             switch (response.StatusCode)
@@ -601,6 +833,27 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
         protected internal virtual IList<T> ListResources<T>(string path, Type objectClass)
         {
+            return this.ListResourcesAsync<T>(path, objectClass).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// List resources using SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="objectClass"> the resource object class </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the resources </returns>
+        /// <exception cref="SmartsheetException"> if an error occurred during the operation </exception>
+        protected async internal virtual Task<IList<T>> ListResourcesAsync<T>(string path, Type objectClass, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, objectClass);
             Utils.ThrowIfEmpty(path);
 
@@ -614,7 +867,7 @@ namespace Smartsheet.Api.Internal
                 throw new SmartsheetException(e);
             }
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             IList<T> obj = null;
             switch (response.StatusCode)
@@ -649,6 +902,26 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual T DeleteResource<T>(string path)
         {
+            return this.DeleteResourceAsync<T>(path).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Delete a resource from SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected async internal virtual Task<T> DeleteResourceAsync<T>(string path, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path);
             Utils.ThrowIfEmpty(path);
 
@@ -661,7 +934,7 @@ namespace Smartsheet.Api.Internal
             {
                 throw new SmartsheetException(e);
             }
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
             Object obj = null;
             switch (response.StatusCode)
             {
@@ -695,6 +968,27 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual void DeleteResource<T>(string path, Type objectClass)
         {
+            this.DeleteResourceAsync<T>(path, objectClass).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously delete a resource from SmartsheetClient REST API.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="objectClass"> the resource object class </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal async virtual Task DeleteResourceAsync<T>(string path, Type objectClass, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, objectClass);
             Utils.ThrowIfEmpty(path);
 
@@ -707,7 +1001,7 @@ namespace Smartsheet.Api.Internal
             {
                 throw new SmartsheetException(e);
             }
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             switch (response.StatusCode)
             {
@@ -745,6 +1039,33 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual IList<S> PostAndReceiveList<T, S>(string path, T objectToPost, Type objectClassToReceive)
         {
+            return this.PostAndReceiveListAsync<T, S>(path, objectToPost, objectClassToReceive).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously post an object to SmartsheetClient REST API and receive a list of objects from response.
+        /// 
+        /// Parameters: - path : the relative path of the resource collections - objectToPost : the object to post -
+        /// objectClassToReceive : the resource object class to receive
+        /// 
+        /// Returns: the object list
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the path </param>
+        /// <param name="objectToPost"> the object to post </param>
+        /// <param name="objectClassToReceive"> the object class to receive </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the list </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected async internal virtual Task<IList<S>> PostAndReceiveListAsync<T, S>(string path, T objectToPost, Type objectClassToReceive, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, objectToPost, objectClassToReceive);
             Utils.ThrowIfEmpty(path);
 
@@ -760,7 +1081,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPost);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             IList<S> obj = null;
             switch (response.StatusCode)
@@ -796,6 +1117,28 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
         protected internal virtual IList<S> PutAndReceiveList<T, S>(string path, T objectToPut, Type objectClassToReceive)
         {
+            return this.PutAndReceiveListAsync<T, S>(path, objectToPut, objectClassToReceive).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Asynchronously put an object to SmartsheetClient REST API and receive a list of objects from response.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if any argument is null, or path is an empty string
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource collections </param>
+        /// <param name="objectToPut"> the object to put </param>
+        /// <param name="objectClassToReceive"> the resource object class to receive </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the object list </returns>
+        /// <exception cref="SmartsheetException"> the SmartsheetClient exception </exception>
+        protected internal virtual async Task<IList<S>> PutAndReceiveListAsync<T, S>(string path, T objectToPut, Type objectClassToReceive, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(path, objectToPut, objectClassToReceive);
             Utils.ThrowIfEmpty(path);
 
@@ -811,7 +1154,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = serializeToEntity<T>(objectToPut);
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             IList<S> obj = null;
             switch (response.StatusCode)
@@ -937,8 +1280,10 @@ namespace Smartsheet.Api.Internal
             Api.Models.Error error;
             try
             {
-                error = this.smartsheet.JsonSerializer.deserialize<Api.Models.Error>(
-                    response.Entity.GetContent());
+                error = response.Entity == null
+                    ? null
+                    : this.smartsheet.JsonSerializer.deserialize<Api.Models.Error>(
+                        response.Entity.GetContent());
             }
             catch (JsonSerializationException ex)
             {
@@ -951,6 +1296,16 @@ namespace Smartsheet.Api.Internal
             catch (IOException ex)
             {
                 throw new SmartsheetException(ex);
+            }
+
+            // A body-less or non-JSON error response yields no Error; synthesize one so the
+            // status code still maps to a meaningful typed exception instead of an NRE.
+            if (error == null)
+            {
+                error = new Api.Models.Error
+                {
+                    Message = string.Format("HTTP {0} {1} (no response body)", (int)response.StatusCode, response.StatusCode)
+                };
             }
 
             ErrorCode code = ErrorCode.getErrorCode(response.StatusCode);

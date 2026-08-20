@@ -56,14 +56,13 @@ namespace sdk_csharp_tokenPaginationExample
             Console.WriteLine("Fetching workspaces with token pagination (maxItems=100)...\n");
 
             // Create token pagination parameters for ListWorkspaces
-            ListWorkspacesTokenPaginationParameters tokenParams = new ListWorkspacesTokenPaginationParameters(null, 100);
+            TokenPaginationParameters tokenParams = new TokenPaginationParameters(null, 100);
 
             // Get first page using token pagination
             TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
 
             Console.WriteLine($"✓ Retrieved {result.Data?.Count ?? 0} workspaces");
             Console.WriteLine($"✓ Last Key: {result.LastKey ?? "null (last page)"}");
-            Console.WriteLine($"✓ Pagination Type: {tokenParams.PaginationType}");
 
             // Display workspace details
             if (result.Data != null && result.Data.Count > 0)
@@ -93,7 +92,7 @@ namespace sdk_csharp_tokenPaginationExample
             do
             {
                 // Create pagination parameters with lastKey from previous page
-                ListWorkspacesTokenPaginationParameters tokenParams = new ListWorkspacesTokenPaginationParameters(lastKey, 100);
+                TokenPaginationParameters tokenParams = new TokenPaginationParameters(lastKey, 100);
 
                 // Get page
                 TokenPaginatedResult<Workspace> result = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
@@ -133,27 +132,27 @@ namespace sdk_csharp_tokenPaginationExample
         {
             Console.WriteLine("Comparing traditional offset vs token-based pagination...\n");
 
-            // 1. Traditional offset-based pagination
-            Console.WriteLine("Traditional Pagination (PaginationParameters):");
-            var traditionalParams = new PaginationParameters(false, 100, 0); // page size 5, offset 0
-            var traditionalResult = smartsheet.WorkspaceResources.ListWorkspaces(traditionalParams);
+            // 1. Traditional offset-based pagination (demonstrated against ListWebhooks, which still
+            //    accepts offset paging; ListWorkspaces is now token-only as of Jun-03-2026).
+            Console.WriteLine("Traditional Pagination (PaginationParameters) — ListWebhooks:");
+            var traditionalParams = new PaginationParameters(false, 100, 1); // pageSize 100, page 1
+            var traditionalResult = smartsheet.WebhookResources.ListWebhooks(traditionalParams);
 
             Console.WriteLine($"  ├─ Type: Offset-based");
             Console.WriteLine($"  ├─ Page Size: {traditionalParams.PageSize}");
-            Console.WriteLine($"  ├─ Retrieved: {traditionalResult.Data?.Count ?? 0} workspaces");
+            Console.WriteLine($"  ├─ Retrieved: {traditionalResult.Data?.Count ?? 0} webhooks");
             Console.WriteLine($"  ├─ Total Count: {traditionalResult.TotalCount ?? 0}");
             Console.WriteLine($"  └─ Has More: {traditionalResult.TotalCount > (traditionalParams.Page * traditionalParams.PageSize)}");
 
             Console.WriteLine();
 
-            // 2. Token-based pagination
-            Console.WriteLine("Token-Based Pagination (ListWorkspacesTokenPaginationParameters):");
-            var tokenParams = new ListWorkspacesTokenPaginationParameters(null, 100, "token");
+            // 2. Token-based pagination — ListWorkspaces is token-only.
+            Console.WriteLine("Token-Based Pagination (TokenPaginationParameters) — ListWorkspaces:");
+            var tokenParams = new TokenPaginationParameters(null, 100);
             var tokenResult = smartsheet.WorkspaceResources.ListWorkspaces(tokenParams);
 
             Console.WriteLine($"  ├─ Type: Token-based");
             Console.WriteLine($"  ├─ Max Items: {tokenParams.MaxItems}");
-            Console.WriteLine($"  ├─ Pagination Type: {tokenParams.PaginationType}");
             Console.WriteLine($"  ├─ Retrieved: {tokenResult.Data?.Count ?? 0} workspaces");
             Console.WriteLine($"  ├─ Last Key: {tokenResult.LastKey ?? "null"}");
             Console.WriteLine($"  └─ Has More: {tokenResult.LastKey != null}");
@@ -162,6 +161,8 @@ namespace sdk_csharp_tokenPaginationExample
             Console.WriteLine("   • Traditional: Uses offset/limit, provides total count");
             Console.WriteLine("   • Token-based: Uses lastKey, more efficient for large datasets");
             Console.WriteLine("   • Token approach prevents issues with data changes during pagination");
+            Console.WriteLine("   • Note: As of the Jun-03-2026 sunset, several endpoints (e.g. ListWorkspaces, ListSights) are token-only,");
+            Console.WriteLine("     while others (e.g. ListWebhooks, ListUsers) still accept offset PaginationParameters.");
         }
     }
 }

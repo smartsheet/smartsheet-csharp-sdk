@@ -13,6 +13,15 @@ namespace Smartsheet.Api.Models
         public long PlanId { get; set; }
 
         /// <summary>
+        /// <para>Gets or sets the name of the organization that owns the plan.</para>
+        /// <para>
+        /// This is null unless <c>planName</c> was requested via the <c>include</c> parameter of
+        /// List User Plans, and is also null for a plan whose owning organization has no name.
+        /// </para>
+        /// </summary>
+        public string? PlanName { get; set; }
+
+        /// <summary>
         /// Gets or sets the seat type.
         /// </summary>
         public SeatType SeatType { get; set; }

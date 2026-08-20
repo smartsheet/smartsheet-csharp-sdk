@@ -16,6 +16,7 @@
 //    limitations under the License.
 //    %[license]
 
+using System;
 using System.Collections.Generic;
 
 namespace Smartsheet.Api.Models
@@ -54,6 +55,12 @@ namespace Smartsheet.Api.Models
         /// The identifier of the object impacted by the event
         /// </summary>
         private object objectId;
+
+        /// <summary>
+        /// The alphanumeric identifier of the object impacted by the event.
+        /// Present for object types that use string-based identifiers.
+        /// </summary>
+        private string objectIdStr;
 
         /// <summary>
         /// The Smartsheet resource impacted by the event
@@ -125,13 +132,25 @@ namespace Smartsheet.Api.Models
         }
 
         /// <summary>
-        /// Get the object ID of the object associated with the event
+        /// Get the object ID of the object associated with the event.
         /// </summary>
         /// <returns>the object ID</returns>
+        [Obsolete("Use ObjectIdStr instead. ObjectId is numeric only and returns -1 for non-numeric identifiers. It is not scheduled for removal, but new code should read ObjectIdStr.", false)]
         public object ObjectId
         {
             get { return objectId; }
             set { objectId = value; }
+        }
+
+        /// <summary>
+        /// Gets the alphanumeric identifier of the object impacted by the event.
+        /// Present for object types that use string-based identifiers.
+        /// </summary>
+        /// <returns>the alphanumeric object ID string, or null if not present</returns>
+        public string ObjectIdStr
+        {
+            get { return objectIdStr; }
+            set { objectIdStr = value; }
         }
 
         /// <summary>

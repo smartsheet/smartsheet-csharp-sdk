@@ -17,13 +17,14 @@
 //    %[license]
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api.Internal
 {
     using Api.Models;
     using Smartsheet.Api.Internal.Util;
     using System;
-    using System.Text;
 
     /// <summary>
     /// This is the implementation of the FolderResources.
@@ -43,31 +44,6 @@ namespace Smartsheet.Api.Internal
             : base(smartsheet)
         {
             this.sheets = new FolderSheetResourcesImpl(smartsheet);
-        }
-
-        /// <summary>
-        /// <para>Gets the specified Folder (and lists its contents).</para>
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}</para>
-        /// </summary>
-        /// <param name="folderId"> the folder Id </param>
-        /// <param name="include"> (optional) – comma-separated list of elements to include in the respons</param>
-        /// <returns> the folder (note that if there is no such resource, this method will throw ResourceNotFoundException
-        /// rather than returning null) </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        [Obsolete("This method is deprecated. Use GetFolderChildren and GetFolderMetadata instead.")]
-        public virtual Folder GetFolder(long folderId, IEnumerable<FolderInclusion>? include)
-        {
-            StringBuilder path = new StringBuilder("folders/" + folderId);
-            if (include != null)
-            {
-                path.Append("?include=" + QueryUtil.GenerateCommaSeparatedList(include));
-            }
-            return this.GetResource<Folder>(path.ToString(), typeof(Folder));
         }
 
         /// <summary>
@@ -103,37 +79,6 @@ namespace Smartsheet.Api.Internal
         public virtual void DeleteFolder(long folderId)
         {
             this.DeleteResource<Folder>("folders/" + folderId, typeof(Folder));
-        }
-
-        /// <summary>
-        /// <para>Gets a list of the top-level child Folders within the specified Folder.</para>
-        /// <remarks>This operation supports pagination of results. For more information, see Paging.</remarks>
-        /// <para>It mirrors to the following Smartsheet REST API method:<br /> GET /folders/{folderId}/folders</para>
-        /// </summary>
-        /// <param name="folderId"> the folderId</param>
-        /// <param name="paging">the pagination information</param>
-        /// <returns>the child Folders (note that an empty list will be returned if no child folder is found), limited to the following attributes:
-        /// <list type="bullet">
-        /// <item><description>id</description></item>
-        /// <item><description>name</description></item>
-        /// <item><description>permalink</description></item>
-        /// </list>
-        /// </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        [Obsolete("This method is deprecated. Use GetFolderChildren instead.")]
-        public virtual PaginatedResult<Folder> ListFolders(long folderId, PaginationParameters? paging)
-        {
-            StringBuilder path = new StringBuilder("folders/" + folderId + "/folders");
-            if (paging != null)
-            {
-                path.Append(paging.ToQueryString());
-            }
-            return this.ListResourcesWithWrapper<Folder>(path.ToString());
         }
 
         /// <summary>
@@ -313,6 +258,29 @@ namespace Smartsheet.Api.Internal
             }
 
             return this.GetResource<Folder>(QueryUtil.GenerateUrl("folders/" + folderId + "/metadata", parameters), typeof(Folder));
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified folder.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/path</para>
+        /// </summary>
+        /// <param name="folderId"> the folder Id </param>
+        /// <returns> a FolderPathNode representing the workspace root, with nested folders down to the target folder </returns>
+        public virtual FolderPathNode GetFolderPath(long folderId)
+        {
+            return this.GetFolderPathAsync(folderId).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified folder asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /folders/{folderId}/path</para>
+        /// </summary>
+        /// <param name="folderId"> the folder Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a FolderPathNode representing the workspace root, with nested folders down to the target folder </returns>
+        public virtual async Task<FolderPathNode> GetFolderPathAsync(long folderId, CancellationToken cancellationToken = default)
+        {
+            return await this.GetResourceAsync<FolderPathNode>("folders/" + folderId + "/path", typeof(FolderPathNode), cancellationToken).ConfigureAwait(false);
         }
     }
 

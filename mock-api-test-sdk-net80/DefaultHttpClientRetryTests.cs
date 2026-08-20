@@ -29,8 +29,8 @@ namespace mock_api_test_sdk_net80
             }
 
             // Override RetrySleep to optionally skip the actual sleep for fast tests
-            public override bool RetrySleep(int previousAttempts, long totalElapsedTime,
-                HttpStatusCode statusCode, Error error)
+            public override async Task<bool> RetrySleep(int previousAttempts, long totalElapsedTime,
+                HttpStatusCode statusCode, Error error, CancellationToken cancellationToken = default)
             {
                 long backoff = CalcBackoff(previousAttempts, totalElapsedTime, error);
                 if (backoff < 0)
@@ -41,7 +41,7 @@ namespace mock_api_test_sdk_net80
 
                 // Skip sleep in tests for fast execution
                 if (!SkipSleep)
-                    Thread.Sleep(TimeSpan.FromMilliseconds(backoff));
+                    await Task.Delay(TimeSpan.FromMilliseconds(backoff), cancellationToken).ConfigureAwait(false);
 
                 return true;
             }
@@ -500,6 +500,36 @@ namespace mock_api_test_sdk_net80
             bool result = client.TestShouldRetry(1, 0, response);
 
             Assert.IsFalse(result, "Should not retry when content-type is XML");
+        }
+
+        [TestMethod]
+        public void ShouldRetry_NullEntity_ReturnsFalse()
+        {
+            // Regression for issue #211: a non-retryable status with no response entity must not
+            // throw NullReferenceException when ShouldRetry inspects the (absent) entity.
+            var client = new TestableDefaultHttpClient();
+
+            var response = CreateMockResponse(HttpStatusCode.Unauthorized, null, null);
+            Assert.IsNull(response.Entity, "Precondition: response should have no entity");
+
+            bool result = client.TestShouldRetry(1, 0, response);
+
+            Assert.IsFalse(result, "Should not retry (and not throw) when the response has no entity");
+        }
+
+        [TestMethod]
+        public void ShouldRetry_NullDeserializedError_ReturnsFalse()
+        {
+            // Regression for issue #211: an empty/body-less JSON response deserializes to a null
+            // Error; reading error.ErrorCode must not throw NullReferenceException.
+            var mockSerializer = new MockJsonSerializer((Error)null);
+            var client = new TestableDefaultHttpClient(mockSerializer);
+
+            var response = CreateMockResponse(HttpStatusCode.Unauthorized, "application/json", "");
+
+            bool result = client.TestShouldRetry(1, 0, response);
+
+            Assert.IsFalse(result, "Should not retry (and not throw) when the error deserializes to null");
         }
 
         #endregion

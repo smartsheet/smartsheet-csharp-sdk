@@ -17,6 +17,8 @@
 //    %[license]
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api
 {
@@ -30,11 +32,11 @@ namespace Smartsheet.Api
     {
         /// <summary>
         /// <para>Gets the list of all Sights that the User has access to.</para>
-        /// 
+        ///
         /// <para>It mirrors to the following Smartsheet REST API method: GET /sights</para>
         /// </summary>
-        /// <returns>IndexResult object containing an array of Sight objects limited to the following attributes:
-        ///        id, name, accessLevel, permalink, createdAt, modifiedAt 
+        /// <returns>TokenPaginatedResult object containing an array of Sight objects limited to the following attributes:
+        ///        id, name, accessLevel, permalink, createdAt, modifiedAt
         /// </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -42,24 +44,7 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        [Obsolete("This method is deprecated. Please use the overload that accepts TokenPaginationParameters instead.")]
-        PaginatedResult<Sight> ListSights(PaginationParameters? paging = null, DateTime? modifiedSince = null);
-
-        /// <summary>
-        /// <para>Gets the list of all Sights that the User has access to.</para>
-        /// 
-        /// <para>It mirrors to the following Smartsheet REST API method: GET /sights</para>
-        /// </summary>
-        /// <returns>IndexResult object containing an array of Sight objects limited to the following attributes:
-        ///        id, name, accessLevel, permalink, createdAt, modifiedAt 
-        /// </returns>
-        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
-        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
-        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
-        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
-        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        TokenPaginatedResult<Sight> ListSights(TokenPaginationParameters? tokenPaging, DateTime? modifiedSince = null);
+        TokenPaginatedResult<Sight> ListSights(TokenPaginationParameters? tokenPaging = null);
 
         /// <summary>
         /// <para>Get a specified Sight.</para>
@@ -195,11 +180,28 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         SightPublish SetPublishStatus(long sightId, SightPublish sightPublish);
-        
+
         /// <summary>
-        /// <para>Returns the ShareResources object that provides access to Share resources associated with Sight resources.</para>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sight.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sights/{sightId}/path</para>
         /// </summary>
-        /// <returns> the share resources object </returns>
-        ShareResources ShareResources { get; }
+        /// <param name="sightId"> the sight Id </param>
+        /// <returns> a SightPathNode representing the workspace root, with nested folders down to the target sight </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        SightPathNode GetSightPath(long sightId);
+
+        /// <summary>
+        /// <para>Gets the path (workspace/folder hierarchy) of the specified sight asynchronously.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sights/{sightId}/path</para>
+        /// </summary>
+        /// <param name="sightId"> the sight Id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> a SightPathNode representing the workspace root, with nested folders down to the target sight </returns>
+        Task<SightPathNode> GetSightPathAsync(long sightId, CancellationToken cancellationToken = default);
     }
 }

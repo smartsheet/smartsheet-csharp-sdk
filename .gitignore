@@ -199,3 +199,8 @@ $RECYCLE.BIN/
 
 .vs/*
 .vscode/*
+
+# Claude Code settings
+.claude/settings.local.json
+# Superpowers documentation
+docs/superpowers

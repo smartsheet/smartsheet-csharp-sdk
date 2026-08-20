@@ -8,6 +8,27 @@ namespace mock_api_test_sdk_net80
     public class RowTests
     {
         [TestMethod]
+        public void GetRow_Serialization_Proof()
+        {
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("Serialization - Proof");
+
+            Row row = smartsheet.SheetResources.RowResources.GetRow(
+                1, 2, new List<RowInclusion> { RowInclusion.PROOFS }, null);
+
+            Proof proof = row.Proof;
+            Assert.IsNotNull(proof);
+            Assert.AreEqual(100L, proof.Id);
+            Assert.AreEqual(100L, proof.OriginalId);
+            Assert.AreEqual("Sample Proof Document", proof.Name);
+            Assert.AreEqual(ProofType.IMAGE, proof.Type);
+            Assert.AreEqual("NONE", proof.DocumentType);
+            Assert.AreEqual("https://app.smartsheet.com/b/proofs/sheets/test123/proofs/proof456", proof.ProofRequestUrl);
+            Assert.AreEqual(1, proof.Version);
+            Assert.AreEqual("john.doe@smartsheet.com", proof.LastUpdatedBy.Email);
+            Assert.AreEqual(false, proof.IsCompleted);
+        }
+
+        [TestMethod]
         public void AddRows_AssignValues_String()
         {
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("Add Rows - Assign Values - String");

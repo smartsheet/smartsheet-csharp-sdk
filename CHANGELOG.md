@@ -9,6 +9,78 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add support for DELETE /sheets/{sheetId}/dataclassification endpoint, Remove Data Classification
 - Add `DataClassification` field to Sheet model
 
+## [7.4.0] - 2026-08-12
+
+### Added
+- `Proof` model and `ProofType` enum
+- `Proof` property on rows returned by `GetSheet` and `GetReport`
+- `PROOFS` include value for `SheetLevelInclusion`, `ReportInclusion`, and `RowInclusion`
+- Support for the `include` query parameter on GET /2.0/users/{userId}/plans (List User Plans) via a new optional `include` argument on `UserResources.ListUserPlans` and the new `UserPlanInclusion` enum, whose only value is `PLAN_NAME`
+- `PlanName` property on `UserPlan`, populated when `PLAN_NAME` is requested
+
+### Fixed
+- `COMMENTER` value for `AccessLevel`, which previously deserialized to `null` on sheets, reports, workspaces, and shares, and could not be used to create or update a share. Fixes [#218](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/218)
+
+## [7.3.0] - 2026-07-20
+
+### Added
+- `ChildResourceType` enum 
+- Test cases for a template resource type
+
+### Fixed
+- `NullReferenceException` when the API returns an error response with an empty or body-less payload (e.g. `GetSheetAsCSV` with a low-privilege token); the SDK now raises a `SmartsheetException` instead. Fixes [#211](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/211)
+
+## [7.2.0] - 2026-07-09
+
+### Added
+- Support for GET /2.0/reports/{reportId}/definition (Get Report Definition) via `ReportResources.GetReportDefinition`
+- Support for GET /2.0/reports/{reportId}/columns (List Report Columns) via `ReportResources.ListReportColumns`
+- Support for GET /2.0/reports/{reportId}/columns/{columnVirtualId} (Get Report Column) via `ReportResources.GetReportColumn`
+- Support for PUT /2.0/reports/{reportId}/columns/{columnVirtualId} (Update Report Column) via `ReportResources.UpdateReportColumn`
+- Support for DELETE /2.0/reports/{reportId}/columns/{columnVirtualId} (Delete Report Column) via `ReportResources.DeleteReportColumn`
+- Support for GET /2.0/reports/{reportId}/scope (List Report Scope) via `ReportResources.GetReportScope`
+
+### Deprecated
+
+- Deprecated `Event.ObjectId`; use `Event.ObjectIdStr` instead. `ObjectId` is numeric only and returns -1 for non-numeric identifiers. It is not scheduled for removal.
+
+## [7.1.0] - 2026-06-26
+
+### Fixed
+
+- Deprecation related corrections
+
+### Added
+
+- Hardcode `paginationType=token` for `listWorkspaces`.
+- Added support for GET /2.0/sheets/{sheetId}/path endpoint (`GetSheetPath`)
+- Added support for GET /2.0/reports/{reportId}/path endpoint (`GetReportPath`)
+- Added support for GET /2.0/sights/{sightId}/path endpoint (`GetSightPath`)
+- Added support for GET /2.0/folders/{folderId}/path endpoint (`GetFolderPath`)
+- Added helper methods `GetLeaf<Asset>()` and `GetLeaf<Asset>Path()` to the responses of the path endpoints for convenient traversal
+- Added asynchronous (`*Async`) counterparts to `SheetResources.RowResources`: `AddRowsAsync`, `AddRowsAllowPartialSuccessAsync`, `GetRowAsync`, `CopyRowsToAnotherSheetAsync`, `DeleteRowsAsync`, `MoveRowsToAnotherSheetAsync`, `SendRowsAsync`, `CreateResourceAsync`, `UpdateRowsAsync`, and `UpdateRowsAllowPartialSuccessAsync`.
+- Added asynchronous (`*Async`) counterparts to `ReportResources`: `GetReportAsync`, `ListReportsAsync`, `SendReportAsync`, `DeleteReportAsync`, `GetPublishStatusAsync`, `UpdatePublishStatusAsync`, `UpdateReportDefinitionAsync`, `AddReportScopeAsync`, `RemoveReportScopeAsync`, `AddReportColumnsAsync`, `CreateReportAsync`, and `GetReportPathAsync`.
+
+## [7.0.0] - 2026-06-08
+
+### Added
+- Added `ObjectIdStr` property to `Event` model to support alphanumeric object identifiers (AUD-905)
+- AI assisted workflows via claude skills (`implement-api-endpoint` and `review-api-endpoint`).
+- ⚠️ **BREAKING**: Added `RequestAsync()` to `HttpClient` interface, which must be overridden in custom HttpClient implementations to affect async resource methods.
+- Added asynchronous (`*Async`) counterparts to `SheetResources`: `ListSheetsAsync`, `GetSheetAsync`, `GetSheetVersionAsync`, `CreateSheetFromTemplateAsync`, `CopySheetAsync`, `MoveSheetAsync`, `UpdateSheetAsync`, `DeleteSheetAsync`, `SortSheetAsync`, `SendSheetAsync`, `GetPublishStatusAsync`, and `UpdatePublishStatusAsync`.
+
+### Removed
+- ⚠️ **BREAKING**: Removed deprecated `ListSights(PaginationParameters?, DateTime?)` overload and `modifiedSince` parameter from `ListSights`. These were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#deprecated-includeall-and-offset-based-pagination-for-dashboards) (sunset Jun-03-2026). `ListSights` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Sight>`. The response no longer includes `TotalCount`, `TotalPages`, `PageNumber`, or `PageSize`.
+- ⚠️ **BREAKING**: Removed deprecated `ListWorkspaces(PaginationParameters?)` overload returning `PaginatedResult<Workspace>`. These offset parameters were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). `ListWorkspaces` now accepts only `TokenPaginationParameters?` and returns `TokenPaginatedResult<Workspace>`. The new shape mirrors `ListSights`.
+- ⚠️ **BREAKING**: Removed `ListWorkspacesTokenPaginationParameters` class. It only added an explicit `PaginationType` property that is already hardcoded to `"token"` in the base `TokenPaginationParameters.toDictionary()`. Use `TokenPaginationParameters` directly with `ListWorkspaces`.
+- ⚠️ **BREAKING**: Removed `ListPublicTemplates` and `ListUserCreatedTemplates` from `TemplateResources`. The `TemplateResources` interface, implementation, and `SmartsheetClient.TemplateResources` accessor have been removed entirely. The underlying `GET /templates` and `GET /templates/public` endpoints were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). Migrate to `GetWorkspaceChildren` / `GetFolderChildren` with `ChildrenResourceTypes` including `TEMPLATES,SHEETS` to list templates within a specific workspace or folder.
+- ⚠️ **BREAKING**: Removed `GetFolder` and `ListFolders` from `FolderResources`, `GetWorkspace` from `WorkspaceResources`, and `ListFolders` from `WorkspaceFolderResources`. (`WorkspaceFolderResources.CreateFolder` is retained.) `FolderInclusion` and `WorkspaceInclusion` no longer include `OWNER_INFO` or `SHEET_VERSION`; only `SOURCE` is retained. The underlying `GET /folders/{folderId}`, `GET /folders/{folderId}/folders`, `GET /workspaces/{workspaceId}`, and `GET /workspaces/{workspaceId}/folders` endpoints were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). Migrate to `GetFolderMetadata` + `GetFolderChildren` and `GetWorkspaceMetadata` + `GetWorkspaceChildren`. Use `ChildrenResourceTypes` to filter the children response (e.g., `FOLDERS` to replicate the old list-folders behavior).
+- ⚠️ **BREAKING**: Removed the deprecated `ShareResources` interface and the `ShareResources()` accessor from `SheetResources`, `ReportResources`, `SightResources`, and `WorkspaceResources`. The underlying asset-specific sharing endpoints (`GET`/`POST`/`PUT`/`DELETE` on `/sheets/{id}/shares`, `/reports/{id}/shares`, `/sights/{id}/shares`, `/workspaces/{id}/shares` and their `/{shareId}` variants) were [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04) (sunset Jun-03-2026). Migrate to `AssetSharingResources` (`ListAssetShares`, `GetAssetShare`, `ShareAsset`, `UpdateAssetShare`, `DeleteAssetShare`), passing `AssetType` and `assetId`. Note updates now use `PATCH` instead of `PUT`.
+
+### Changed
+- `ListWebhooks` XML documentation updated to reflect Smartsheet API behavior changes effective Jun-03-2026: `includeAll` is no longer honored by the server for this endpoint and is ignored if set on `PaginationParameters` (`PaginationParameters` remains a shared class — other endpoints still support `includeAll`), `PageSize` is server-capped at 10,000, `TotalCount` and `TotalPages` are returned as `-1`, and webhooks are sorted by creation date (most recent first) instead of name. SDK signature unchanged. See [Smartsheet API changelog 2025-08-04](https://developers.smartsheet.com/api/smartsheet/changelog#2025-08-04).
+- ⚠️ **BREAKING**: Change `DefaultHttpClient.RetrySleep()` into an async method that returns a boolean wrapped in a Task
+
 ## [6.7.0] - 2026-04-30
 ### Added
 - Add support for PUT /reports/{id}/definition endpoint, Update Report Definition
