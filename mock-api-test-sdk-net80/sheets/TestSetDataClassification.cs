@@ -22,6 +22,8 @@ namespace mock_api_test_sdk_net80
             string path = uri.AbsolutePath;
 
             Assert.AreEqual($"/2.0/sheets/{SheetCommonTestConstants.TEST_SHEET_ID}/dataclassification", path);
+            Assert.AreEqual("PUT", foundRequest.Method);
+            Assert.AreEqual(string.Empty, uri.Query);
         }
 
         [TestMethod]
