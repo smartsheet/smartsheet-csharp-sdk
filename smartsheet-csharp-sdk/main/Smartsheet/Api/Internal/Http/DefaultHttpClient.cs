@@ -105,6 +105,9 @@ namespace Smartsheet.Api.Internal.Http
             Util.ThrowIfNull(httpClient);
 
             this.httpClient = httpClient;
+            // Override RestSharp's default Accept header (which includes legacy types like text/xml)
+            // to avoid issues with server-side routing that does exact matching on Accept values.
+            this.httpClient.AcceptedContentTypes = new[] { "application/json" };
             this.jsonSerializer = jsonSerializer;
         }
 
