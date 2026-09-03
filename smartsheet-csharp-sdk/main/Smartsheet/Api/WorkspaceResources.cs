@@ -135,7 +135,7 @@ namespace Smartsheet.Api
         /// <param name="numericDates">If true, dates are accepted and returned in Unix epoch time. Default is false, which means ISO-8601 format</param>
         /// <param name="accessApiLevel">Allows COMMENTER access for inputs and return values. For backwards-compatibility, VIEWER is the default</param>
         /// <param name="lastKey">The lastKey token returned from the previous page of results</param>
-        /// <param name="maxItems">The maximum number of items to return in the response (default: 100, min: 100, max: 500)</param>
+        /// <param name="maxItems">The maximum number of items to return in the response (default: 100, min: 100, max: 1000)</param>
         /// <returns>An array of asset references with a pagination token if there are more results</returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
