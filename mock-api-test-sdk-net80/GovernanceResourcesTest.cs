@@ -146,7 +146,38 @@ namespace mock_api_test_sdk_net80
             Assert.IsNull(response.DowngradeApprovalSettings.LabelApprovers);
         }
 
-        // ── Error responses ────────────────────────────────────────────────────
+        // ── assetType + assetId ────────────────────────────────────────────────
+
+        [TestMethod]
+        public void TestGetDataClassificationSettings_ByAsset_UrlContainsAssetParams()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient(
+                "/governance/get-data-classification-settings/all-response-body-properties",
+                requestId.ToString());
+
+            DataClassificationSettings settings =
+                smartsheet.GovernanceResources.GetDataClassificationSettings("sheet", 112398785741L);
+
+            Assert.IsNotNull(settings);
+        }
+
+        [TestMethod]
+        public void TestGetDataClassificationSettings_ByAsset_ReturnsSettings()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient(
+                "/governance/get-data-classification-settings/all-response-body-properties",
+                requestId.ToString());
+
+            DataClassificationSettings settings =
+                smartsheet.GovernanceResources.GetDataClassificationSettings("sheet", 112398785741L);
+
+            Assert.IsNotNull(settings.PlanId);
+            Assert.IsNotNull(settings.OrgId);
+        }
+
+// ── Error responses ────────────────────────────────────────────────────
 
         [TestMethod]
         public void TestGetDataClassificationSettingsError400Response()
