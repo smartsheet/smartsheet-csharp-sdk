@@ -28,5 +28,19 @@ namespace Smartsheet.Api.Internal
                 "governance/data-classification/settings" + QueryUtil.GenerateUrl(null, parameters),
                 typeof(DataClassificationSettings));
         }
+
+        /// <summary>
+        /// Gets the data classification settings by resolving the plan from an asset.
+        /// Accepted assetType values: "sheet", "report", "sight" (dashboard).
+        /// </summary>
+        public virtual DataClassificationSettings GetDataClassificationSettings(string assetType, long assetId)
+        {
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("assetType", assetType);
+            parameters.Add("assetId", assetId.ToString());
+            return GetResource<DataClassificationSettings>(
+                "governance/data-classification/settings" + QueryUtil.GenerateUrl(null, parameters),
+                typeof(DataClassificationSettings));
+        }
     }
 }
