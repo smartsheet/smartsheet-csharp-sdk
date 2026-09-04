@@ -149,21 +149,27 @@ namespace mock_api_test_sdk_net80
         // ── assetType + assetId ────────────────────────────────────────────────
 
         [TestMethod]
-        public void TestGetDataClassificationSettings_ByAsset_UrlContainsAssetParams()
+        public async Task TestGetDataClassificationSettings_ByAsset_UrlContainsAssetParams()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient(
                 "/governance/get-data-classification-settings/all-response-body-properties",
                 requestId.ToString());
 
-            DataClassificationSettings settings =
-                smartsheet.GovernanceResources.GetDataClassificationSettings("sheet", 112398785741L);
+            smartsheet.GovernanceResources.GetDataClassificationSettings("sheet", 112398785741L);
 
-            Assert.IsNotNull(settings);
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsNotNull(foundRequest);
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            Assert.AreEqual("/2.0/governance/data-classification/settings", uri.AbsolutePath);
+            Assert.AreEqual("sheet", HttpUtility.ParseQueryString(uri.Query)["assetType"]);
+            Assert.AreEqual("112398785741", HttpUtility.ParseQueryString(uri.Query)["assetId"]);
         }
 
         [TestMethod]
-        public void TestGetDataClassificationSettings_ByAsset_ReturnsSettings()
+        public async Task TestGetDataClassificationSettings_ByAsset_ReturnsSettings()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient(
@@ -173,6 +179,14 @@ namespace mock_api_test_sdk_net80
             DataClassificationSettings settings =
                 smartsheet.GovernanceResources.GetDataClassificationSettings("sheet", 112398785741L);
 
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsNotNull(foundRequest);
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+            Assert.AreEqual("/2.0/governance/data-classification/settings", uri.AbsolutePath);
+            Assert.AreEqual("sheet", HttpUtility.ParseQueryString(uri.Query)["assetType"]);
+            Assert.AreEqual("112398785741", HttpUtility.ParseQueryString(uri.Query)["assetId"]);
             Assert.IsNotNull(settings.PlanId);
             Assert.IsNotNull(settings.OrgId);
         }
@@ -201,6 +215,18 @@ namespace mock_api_test_sdk_net80
             AuthorizationException exception = Assert.ThrowsException<AuthorizationException>(
                 () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID));
             Assert.AreEqual("You are not authorized to perform this action.", exception.Message);
+        }
+
+        [TestMethod]
+        public void TestGetDataClassificationSettingsError404Response()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient(
+                "/errors/404-response", requestId.ToString());
+
+            ResourceNotFoundException exception = Assert.ThrowsException<ResourceNotFoundException>(
+                () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID));
+            Assert.AreEqual("Not Found", exception.Message);
         }
 
         [TestMethod]
