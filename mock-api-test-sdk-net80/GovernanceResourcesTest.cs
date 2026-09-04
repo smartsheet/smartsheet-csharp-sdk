@@ -15,6 +15,7 @@ namespace mock_api_test_sdk_net80
 
         // ── URL construction ──────────────────────────────────────────────────
 
+        /// <summary>Verifies the request URL and planId query param are correct.</summary>
         [TestMethod]
         public async Task TestGetDataClassificationSettingsGeneratedUrlIsCorrect()
         {
@@ -36,6 +37,7 @@ namespace mock_api_test_sdk_net80
 
         // ── CUSTOM mode — all optional fields ────────────────────────────────
 
+        /// <summary>Verifies all fields are deserialized correctly in CUSTOM mode.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsCustomMode()
         {
@@ -77,6 +79,7 @@ namespace mock_api_test_sdk_net80
 
         // ── APPROVAL_NEEDED mode ──────────────────────────────────────────────
 
+        /// <summary>Verifies top-level approvers are deserialized in APPROVAL_NEEDED mode.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsApprovalNeededMode()
         {
@@ -101,6 +104,7 @@ namespace mock_api_test_sdk_net80
 
         // ── NONE mode (required-only fields) ──────────────────────────────────
 
+        /// <summary>Verifies optional fields are null when absent in NONE mode.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsRequiredFieldsNoneMode()
         {
@@ -126,6 +130,7 @@ namespace mock_api_test_sdk_net80
 
         // ── Disabled plan ──────────────────────────────────────────────────────
 
+        /// <summary>Verifies labels is empty and settings are omitted when the plan is disabled.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsDisabledPlan()
         {
@@ -148,6 +153,7 @@ namespace mock_api_test_sdk_net80
 
         // ── assetType + assetId ────────────────────────────────────────────────
 
+        /// <summary>Verifies assetType and assetId are sent as query params when using asset-based lookup.</summary>
         [TestMethod]
         public async Task TestGetDataClassificationSettings_ByAsset_UrlContainsAssetParams()
         {
@@ -168,6 +174,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual("112398785741", HttpUtility.ParseQueryString(uri.Query)["assetId"]);
         }
 
+        /// <summary>Verifies a non-null response is returned when using assetType + assetId.</summary>
         [TestMethod]
         public async Task TestGetDataClassificationSettings_ByAsset_ReturnsSettings()
         {
@@ -193,6 +200,7 @@ namespace mock_api_test_sdk_net80
 
 // ── Error responses ────────────────────────────────────────────────────
 
+        /// <summary>Verifies a 400 response throws InvalidRequestException.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsError400Response()
         {
@@ -205,6 +213,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
+        /// <summary>Verifies a 403 response throws AuthorizationException.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsError403Response()
         {
@@ -217,6 +226,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual("You are not authorized to perform this action.", exception.Message);
         }
 
+        /// <summary>Verifies a 404 response throws ResourceNotFoundException.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsError404Response()
         {
@@ -229,6 +239,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual("Not Found", exception.Message);
         }
 
+        /// <summary>Verifies a 500 response throws SmartsheetException.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsError500Response()
         {
