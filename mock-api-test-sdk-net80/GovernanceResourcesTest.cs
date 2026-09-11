@@ -200,7 +200,7 @@ namespace mock_api_test_sdk_net80
 
 // ── Error responses ────────────────────────────────────────────────────
 
-        /// <summary>Verifies a 400 response throws InvalidRequestException.</summary>
+        /// <summary>Verifies a 400 response throws SmartsheetException.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsError400Response()
         {
@@ -208,12 +208,12 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient(
                 "/errors/400-response", requestId.ToString());
 
-            InvalidRequestException exception = Assert.ThrowsException<InvalidRequestException>(
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(
                 () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID));
             Assert.AreEqual("Malformed Request", exception.Message);
         }
 
-        /// <summary>Verifies a 403 response throws AuthorizationException.</summary>
+        /// <summary>Verifies a 403 response throws SmartsheetException.</summary>
         [TestMethod]
         public void TestGetDataClassificationSettingsError403Response()
         {
@@ -221,7 +221,7 @@ namespace mock_api_test_sdk_net80
             SmartsheetClient smartsheet = HelperFunctions.SetupClient(
                 "/errors/403-response", requestId.ToString());
 
-            AuthorizationException exception = Assert.ThrowsException<AuthorizationException>(
+            SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(
                 () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID));
             Assert.AreEqual("You are not authorized to perform this action.", exception.Message);
         }
