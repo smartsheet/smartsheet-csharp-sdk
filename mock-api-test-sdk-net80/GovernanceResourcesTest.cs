@@ -7,8 +7,8 @@ namespace mock_api_test_sdk_net80
     [TestClass]
     public class GovernanceResourcesTest
     {
-        private const long TEST_PLAN_ID = 41878788L;
-        private const long TEST_ORG_ID = 1244212L;
+        private const long TEST_PLAN_ID = 1148023251199876L;
+        private const long TEST_ORG_ID = 1556806293055364L;
         private const string TEST_GUIDELINES_URL = "https://wiki.example.com/classification-guide";
         private const string TEST_LABEL_ID = "3fa85f64-5717-4562-b3fc-2c963f66afa6";
         private const string TEST_LABEL_ID_2 = "4aa85f64-5717-4562-b3fc-2c963f66afa7";
@@ -59,7 +59,7 @@ namespace mock_api_test_sdk_net80
             Assert.AreEqual(TEST_LABEL_ID, response.Labels[0].Id);
             Assert.AreEqual("Confidential", response.Labels[0].Name);
             Assert.AreEqual("Highly sensitive information", response.Labels[0].Description);
-            Assert.AreEqual("#FFE0E3", response.Labels[0].Color);
+            Assert.AreEqual("#ffe0e3", response.Labels[0].Color);
             Assert.AreEqual(1, response.Labels[0].SensitivityOrder);
             Assert.AreEqual(false, response.Labels[0].IsDefault);
 
