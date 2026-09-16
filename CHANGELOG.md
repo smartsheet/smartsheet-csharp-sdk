@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 - ⚠️ **BREAKING**: `Close()` is removed from the `HttpClient` interface and from `DefaultHttpClient`. Call `Dispose()` instead, or use a `using` statement. Subclasses that released their own resources in an overridden `Close()` must move that logic to `Dispose(bool)`.
 
+### Added
+- `GovernanceResources.GetDataClassificationSettings(long planId)` and `GovernanceResources.GetDataClassificationSettings(string assetType, long assetId)` to retrieve data classification settings for a plan.
+- `DataClassificationSettings`, `ClassificationLabel`, `DowngradeApprovalSettings`, `ClassificationLabelApproverEntry`, and `LabelApproverEntry` models.
+
 ## [7.4.0] - 2026-08-12
 
 ### Added
