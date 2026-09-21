@@ -29,17 +29,6 @@ namespace Smartsheet.Api.Models
         private string dataClassification;
 
         /// <summary>
-        /// Constructor. The API request to set data classification requires this value, so it
-        /// must be supplied on construction.
-        /// </summary>
-        /// <param name="dataClassification"> the data classification, as a label from the plan's
-        /// published classification labels (configured by a plan admin in Admin Center) </param>
-        public SheetDataClassification(string dataClassification)
-        {
-            this.dataClassification = dataClassification;
-        }
-
-        /// <summary>
         /// Gets or sets the data classification, which is a label from the plan's
         /// published classification labels (configured by a plan admin in Admin Center).
         /// </summary>
