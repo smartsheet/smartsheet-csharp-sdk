@@ -1160,17 +1160,6 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// <para>Removes the data classification of a sheet.</para>
-        /// <para>Mirrors to the following Smartsheet REST API method: DELETE /sheets/{sheetId}/dataclassification</para>
-        /// </summary>
-        /// <param name="sheetId"> the sheet Id </param>
-        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual void DeleteDataClassification(long sheetId)
-        {
-            this.DeleteResource<SheetDataClassification>("sheets/" + sheetId + "/dataclassification", typeof(SheetDataClassification));
-        }
-
-        /// <summary>
         /// <para>Gets the path (workspace/folder hierarchy) of the specified sheet.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/path</para>
         /// </summary>
