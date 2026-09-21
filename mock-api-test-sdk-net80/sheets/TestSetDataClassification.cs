@@ -12,8 +12,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sheets/set-data-classification/all-response-body-properties", requestId.ToString());
 
-            SheetDataClassification dataClassification = new SheetDataClassification();
-            dataClassification.DataClassification = "CONFIDENTIAL";
+            SheetDataClassification dataClassification = new SheetDataClassification("CONFIDENTIAL");
 
             smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -32,8 +31,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sheets/set-data-classification/all-response-body-properties", requestId.ToString());
 
-            SheetDataClassification dataClassification = new SheetDataClassification();
-            dataClassification.DataClassification = "CONFIDENTIAL";
+            SheetDataClassification dataClassification = new SheetDataClassification("CONFIDENTIAL");
 
             smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -48,8 +46,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/sheets/set-data-classification/all-response-body-properties", requestId.ToString());
 
-            SheetDataClassification dataClassification = new SheetDataClassification();
-            dataClassification.DataClassification = "Top Secret";
+            SheetDataClassification dataClassification = new SheetDataClassification("Top Secret");
 
             smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -64,8 +61,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
 
-            SheetDataClassification dataClassification = new SheetDataClassification();
-            dataClassification.DataClassification = "CONFIDENTIAL";
+            SheetDataClassification dataClassification = new SheetDataClassification("CONFIDENTIAL");
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification));
@@ -79,8 +75,7 @@ namespace mock_api_test_sdk_net80
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
 
-            SheetDataClassification dataClassification = new SheetDataClassification();
-            dataClassification.DataClassification = "CONFIDENTIAL";
+            SheetDataClassification dataClassification = new SheetDataClassification("CONFIDENTIAL");
 
             SmartsheetException exception = Assert.ThrowsException<SmartsheetException>(() =>
                 smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification));
