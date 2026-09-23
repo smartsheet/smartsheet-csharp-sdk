@@ -29,6 +29,11 @@ namespace Smartsheet.Api.Models
         private string dataClassification;
 
         /// <summary>
+        /// The justification for setting this data classification on the sheet.
+        /// </summary>
+        private string justification;
+
+        /// <summary>
         /// Gets or sets the data classification, which is a label from the plan's
         /// published classification labels (configured by a plan admin in Admin Center).
         /// </summary>
@@ -36,6 +41,15 @@ namespace Smartsheet.Api.Models
         {
             get { return dataClassification; }
             set { dataClassification = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the justification for setting this data classification on the sheet. Required.
+        /// </summary>
+        public string Justification
+        {
+            get { return justification; }
+            set { justification = value; }
         }
     }
 }

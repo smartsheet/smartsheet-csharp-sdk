@@ -14,6 +14,7 @@ namespace mock_api_test_sdk_net80
 
             SheetDataClassification dataClassification = new SheetDataClassification();
             dataClassification.DataClassification = "CONFIDENTIAL";
+            dataClassification.Justification = "Contains customer PII";
 
             smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification);
             WiremockHelper wiremockHelper = new WiremockHelper();
@@ -34,12 +35,13 @@ namespace mock_api_test_sdk_net80
 
             SheetDataClassification dataClassification = new SheetDataClassification();
             dataClassification.DataClassification = "CONFIDENTIAL";
+            dataClassification.Justification = "Contains customer PII";
 
             smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
 
-            Assert.AreEqual("{\"dataClassification\":\"CONFIDENTIAL\"}", foundRequest.Body);
+            Assert.AreEqual("{\"dataClassification\":\"CONFIDENTIAL\",\"justification\":\"Contains customer PII\"}", foundRequest.Body);
         }
 
         [TestMethod]
@@ -50,12 +52,13 @@ namespace mock_api_test_sdk_net80
 
             SheetDataClassification dataClassification = new SheetDataClassification();
             dataClassification.DataClassification = "Top Secret";
+            dataClassification.Justification = "Contains customer PII";
 
             smartsheet.SheetResources.SetDataClassification(SheetCommonTestConstants.TEST_SHEET_ID, dataClassification);
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
 
-            Assert.AreEqual("{\"dataClassification\":\"Top Secret\"}", foundRequest.Body);
+            Assert.AreEqual("{\"dataClassification\":\"Top Secret\",\"justification\":\"Contains customer PII\"}", foundRequest.Body);
         }
 
         [TestMethod]
