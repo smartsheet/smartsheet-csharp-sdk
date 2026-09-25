@@ -49,6 +49,12 @@ namespace Smartsheet.Api.Internal
         private readonly HttpClient httpClient;
 
         /// <summary>
+        /// Tracks whether Dispose has run. Guarded with Interlocked because this class
+        /// documents itself as thread safe.
+        /// </summary>
+        private int disposed;
+
+        /// <summary>
         /// Represents the JsonSerializer.
         /// 
         /// It will be initialized in the constructor and will not change afterwards.
@@ -303,12 +309,32 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// Finalizes the object, this method is overridden to close the HttpClient.
+        /// Releases the resources held by this client, including the underlying HTTP client
+        /// and its connections.
         /// </summary>
-        /// <exception cref="System.IO.IOException"> Signals that an I/O exception has occurred. </exception>
-        ~SmartsheetImpl()
+        public void Dispose()
         {
-            this.httpClient.Close();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases the resources held by this client.
+        /// </summary>
+        /// <param name="disposing">true when called from <see cref="Dispose()"/>; false when called from a finalizer</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (Interlocked.Exchange(ref disposed, 1) != 0)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                // Disposed whether the SDK created the client or the caller injected it via
+                // SmartsheetBuilder.SetHttpClient.
+                this.httpClient.Dispose();
+            }
         }
 
         /// <summary>

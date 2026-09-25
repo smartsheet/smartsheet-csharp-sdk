@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Smartsheet.Api.Internal.OAuth
 {
@@ -61,6 +62,12 @@ namespace Smartsheet.Api.Internal.OAuth
         /// It will be initialized in constructor and will not change afterwards.
         /// </summary>
         private HttpClient httpClient;
+
+        /// <summary>
+        /// Tracks whether Dispose has run. Guarded with Interlocked because this class
+        /// documents itself as thread safe.
+        /// </summary>
+        private int disposed;
 
         /// <summary>
         /// Represents the JsonSerializer.
@@ -657,6 +664,35 @@ namespace Smartsheet.Api.Internal.OAuth
             }
 
             return hashStr;
+        }
+
+        /// <summary>
+        /// Releases the resources held by this OAuth flow, including the underlying HTTP
+        /// client and its connections.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases the resources held by this OAuth flow.
+        /// </summary>
+        /// <param name="disposing">true when called from <see cref="Dispose()"/>; false when called from a finalizer</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (Interlocked.Exchange(ref disposed, 1) != 0)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                // Disposed whether OAuthFlowBuilder created the client or the caller
+                // injected it.
+                this.httpClient.Dispose();
+            }
         }
 
     }

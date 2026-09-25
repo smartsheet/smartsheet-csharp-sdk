@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+### Changed
+- ⚠️ **BREAKING**: `SmartsheetClient`, `OAuthFlow`, and the `HttpClient` interface now extend `IDisposable`, so callers can release HTTP resources deterministically with a `using` statement. Implementations of these interfaces must add `Dispose()`; ones compiled against an earlier version fail to load with `TypeLoadException`. Fixes [#220](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/220)
+- Disposing a client no longer calls `NLog.LogManager.Flush()`. That flush ran only from the `~SmartsheetImpl()` finalizer, at GC time. Call `LogManager.Flush()` yourself if you need a deterministic flush.
+
+### Removed
+- ⚠️ **BREAKING**: `Close()` is removed from the `HttpClient` interface and from `DefaultHttpClient`. Call `Dispose()` instead, or use a `using` statement. Subclasses that released their own resources in an overridden `Close()` must move that logic to `Dispose(bool)`.
+
 ## [7.4.0] - 2026-08-12
 
 ### Added
