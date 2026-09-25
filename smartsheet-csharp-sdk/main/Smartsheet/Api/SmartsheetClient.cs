@@ -159,5 +159,11 @@ namespace Smartsheet.Api
         /// </summary>
         /// <returns> the sharing resources instance </returns>
         AssetSharingResources AssetSharingResources { get; }
+
+        /// <summary>
+        /// <para>Returns the GovernanceResources instance that provides access to governance resources.</para>
+        /// </summary>
+        /// <returns> the governance resources instance </returns>
+        GovernanceResources GovernanceResources { get; }
     }
 }

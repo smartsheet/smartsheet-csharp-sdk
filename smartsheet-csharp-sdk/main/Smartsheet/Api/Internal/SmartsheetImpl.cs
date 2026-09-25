@@ -251,6 +251,15 @@ namespace Smartsheet.Api.Internal
         private AssetSharingResources assetSharing;
 
         /// <summary>
+        /// Represents the AtomicReference for governance resources.
+        ///
+        /// It will be initialized in the constructor and will not change afterwards. The underlying value will be initially set
+        /// as null, and will be initialized to non-null the first time it is accessed via corresponding getter, therefore
+        /// effectively the underlying value is lazily created in a thread safe manner.
+        /// </summary>
+        private GovernanceResources governance;
+
+        /// <summary>
         /// static logger 
         /// </summary>
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -624,6 +633,19 @@ namespace Smartsheet.Api.Internal
             {
                 Interlocked.CompareExchange<AssetSharingResources>(ref assetSharing, new AssetSharingResourcesImpl(this), null);
                 return assetSharing;
+            }
+        }
+
+        /// <summary>
+        /// Returns the GovernanceResources instance that provides access to governance resources.
+        /// </summary>
+        /// <returns> the governance resources </returns>
+        public virtual GovernanceResources GovernanceResources
+        {
+            get
+            {
+                Interlocked.CompareExchange<GovernanceResources>(ref governance, new GovernanceResourcesImpl(this), null);
+                return governance;
             }
         }
 
