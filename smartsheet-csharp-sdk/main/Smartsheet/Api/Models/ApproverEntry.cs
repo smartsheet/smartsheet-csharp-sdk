@@ -8,9 +8,9 @@ namespace Smartsheet.Api.Models
     public class ApproverEntry
     {
         /// <summary>
-        /// Gets or sets the approver type (e.g. "USERS", "GROUPS", "WORKSPACE_ADMINS").
+        /// Gets or sets the approver type.
         /// </summary>
-        public string? Type { get; set; }
+        public ApproverType? Type { get; set; }
 
         /// <summary>
         /// Gets or sets the list of approver IDs.

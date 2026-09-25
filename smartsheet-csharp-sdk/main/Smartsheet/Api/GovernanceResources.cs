@@ -23,10 +23,10 @@ namespace Smartsheet.Api
 
         /// <summary>
         /// Gets the data classification settings by resolving the plan from an asset.
-        /// Accepted assetType values: "sheet", "report", "sight" (dashboard).
+        /// Supported asset types: <see cref="AssetType.SHEET"/>, <see cref="AssetType.REPORT"/>, <see cref="AssetType.SIGHT"/> (dashboard).
         /// GET /2.0/governance/data-classification/settings?assetType={assetType}&amp;assetId={assetId}
         /// </summary>
-        /// <param name="assetType"> the type of the asset (sheet, report, sight) </param>
+        /// <param name="assetType"> the type of the asset (<see cref="AssetType.SHEET"/>, <see cref="AssetType.REPORT"/> or <see cref="AssetType.SIGHT"/>) </param>
         /// <param name="assetId"> the ID of the asset </param>
         /// <returns> the data classification settings </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
@@ -35,6 +35,6 @@ namespace Smartsheet.Api
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        DataClassificationSettings GetDataClassificationSettings(string assetType, long assetId);
+        DataClassificationSettings GetDataClassificationSettings(AssetType assetType, long assetId);
     }
 }

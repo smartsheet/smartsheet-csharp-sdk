@@ -8,9 +8,9 @@ namespace Smartsheet.Api.Models
     public class DowngradeApprovalSettings
     {
         /// <summary>
-        /// Gets or sets the approval mode (e.g. "NONE", "CUSTOM").
+        /// Gets or sets the approval mode.
         /// </summary>
-        public string? Mode { get; set; }
+        public DowngradeApprovalMode? Mode { get; set; }
 
         /// <summary>
         /// Gets or sets the global approver entries.
