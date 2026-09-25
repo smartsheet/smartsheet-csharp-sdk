@@ -16,6 +16,7 @@
   - [Logging Infrastructure](#logging-infrastructure)
   - [Authentication Flow](#authentication-flow)
 - [Asynchronous API (Task-based Methods)](#asynchronous-api-task-based-methods)
+- [Client Lifetime and Disposal](#client-lifetime-and-disposal)
 - [Logging](#logging)
 - [Passthrough Option](#passthrough-option)
 - [Testing](#testing)
@@ -1336,6 +1337,37 @@ Do not use `.Wait()` / `.Result` or catch `AggregateException` in new code.
 ### Cancellation
 
 Passing a `CancellationToken` allows callers to cancel in-flight requests, including during retry backoff delays (`await Task.Delay(..., cancellationToken)`). When omitted, `default` is used and the operation runs to completion.
+
+## Client Lifetime and Disposal
+
+`SmartsheetClient` and `OAuthFlow` implement `IDisposable`. Disposing a client disposes the underlying `RestSharp.RestClient`. When the SDK created that transport — the default, and any case where you let `RestClient` allocate its own `HttpClient` — this also releases the inner `System.Net.Http.HttpClient`, its message handler, and their sockets. If you construct a `RestClient` over an `HttpClient` you own, RestSharp's `disposeHttpClient` parameter defaults to `false`, so that instance and its sockets remain yours to dispose.
+
+```csharp
+using (SmartsheetClient smartsheet = new SmartsheetBuilder()
+    .SetAccessToken("JKlMNOpQ12RStUVwxYZAbcde3F5g6hijklM789")
+    .Build())
+{
+    Sheet sheet = smartsheet.SheetResources.GetSheet(sheetId);
+}
+```
+
+### When to dispose
+
+A `SmartsheetClient` is thread safe and designed to be reused; creating one per request wastes connections. Prefer a long-lived client for the lifetime of your application or DI scope, and dispose it when that scope ends. If you do create short-lived clients, dispose each one — otherwise its connections are not released.
+
+Using a client after disposing it throws `ObjectDisposedException` from the HTTP layer, raised by the disposed `RestClient`.
+
+### Ownership
+
+Disposal releases whatever HTTP client the instance holds, whether the SDK created it or you supplied it via `SmartsheetBuilder.SetHttpClient`. This means a single `HttpClient` instance shared across two `SmartsheetClient` instances is released when the first of them is disposed — give each client its own transport, or manage the shared instance's lifetime yourself and do not dispose the clients.
+
+### Custom HttpClient implementations
+
+The `HttpClient` interface (`Smartsheet.Api.Internal.Http.HttpClient`) extends `IDisposable`, so every implementation supplies a `Dispose()` that releases its transport. Disposing a `SmartsheetClient` or `OAuthFlow` calls it, whether the SDK created the transport or you injected it via `SetHttpClient`.
+
+Subclasses of `DefaultHttpClient` inherit disposal automatically; override `protected virtual void Dispose(bool disposing)` to release resources of your own, and call `base.Dispose(disposing)`. If you implement the interface directly, put your cleanup in `Dispose()`.
+
+Cross-references: Client construction and HTTP client injection are covered in [Client Initialization](#client-initialization). Customizing the HTTP layer is covered in [Overriding HTTP Client Behavior](#overriding-http-client-behavior).
 
 ## Logging
 The Smartsheet C# SDK references the [NLog project](http://nlog-project.org) for SDK logging. NLog is highly configurable for console

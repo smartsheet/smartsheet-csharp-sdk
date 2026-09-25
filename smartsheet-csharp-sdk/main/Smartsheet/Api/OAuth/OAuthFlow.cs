@@ -28,7 +28,7 @@ namespace Smartsheet.Api.OAuth
     /// 
     /// <para>Thread Safety: Implementation of this interface must be thread safe.</para>
     /// </summary>
-    public interface OAuthFlow
+    public interface OAuthFlow : System.IDisposable
     {
 
         /// <summary>

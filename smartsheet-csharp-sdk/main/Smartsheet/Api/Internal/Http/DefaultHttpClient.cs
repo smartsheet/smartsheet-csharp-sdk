@@ -40,7 +40,7 @@ namespace Smartsheet.Api.Internal.Http
     /// thread safe.
     /// </summary>
 
-    public class DefaultHttpClient : HttpClient
+    public class DefaultHttpClient : HttpClient, IDisposable
     {
         /// <summary>
         /// HTTP 429 Too Many Requests status code (not available in netstandard2.0)
@@ -72,6 +72,13 @@ namespace Smartsheet.Api.Internal.Http
         /// <summary>
         /// UserAgent. </summary>
         private String userAgent;
+
+        /// <summary>
+        /// Tracks whether Dispose has run. Guarded with Interlocked because this class
+        /// documents itself as thread safe; concurrent Dispose calls must not double-dispose
+        /// the underlying RestClient.
+        /// </summary>
+        private int disposed;
 
         /// <summary>
         ///
@@ -506,11 +513,29 @@ namespace Smartsheet.Api.Internal.Http
         }
 
         /// <summary>
-        /// Close the HttpClient.
+        /// Releases the underlying RestSharp client and its connections.
         /// </summary>
-        public virtual void Close()
+        public void Dispose()
         {
-            LogManager.Flush();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases the resources held by this instance.
+        /// </summary>
+        /// <param name="disposing">true when called from <see cref="Dispose()"/>; false when called from a finalizer</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (Interlocked.Exchange(ref disposed, 1) != 0)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                this.httpClient.Dispose();
+            }
         }
 
         /// <summary>
