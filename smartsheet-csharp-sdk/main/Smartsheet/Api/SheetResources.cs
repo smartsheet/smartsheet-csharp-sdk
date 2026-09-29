@@ -741,6 +741,37 @@ namespace Smartsheet.Api
         SheetSummaryResources SummaryResources { get; }
 
         /// <summary>
+        /// <para>Sets the data classification of a sheet.</para>
+        ///
+        /// <para>Mirrors to the following Smartsheet REST API method: PUT /sheets/{sheetId}/dataclassification</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="dataClassification"> the data classification to set </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        void SetDataClassification(long sheetId, SheetDataClassification dataClassification);
+
+        /// <summary>
+        /// <para>Sets the data classification of a sheet asynchronously.</para>
+        ///
+        /// <para>Mirrors to the following Smartsheet REST API method: PUT /sheets/{sheetId}/dataclassification</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="dataClassification"> the data classification to set </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task SetDataClassificationAsync(long sheetId, SheetDataClassification dataClassification, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// <para>Gets the path (workspace/folder hierarchy) of the specified sheet.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/path</para>
         /// </summary>
