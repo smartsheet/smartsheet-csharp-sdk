@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add support for PUT /sheets/{sheetId}/dataclassification endpoint, Set Data Classification
 - Add `DataClassification` field to Sheet model
 
+### Changed
+- `DefaultHttpClient` now defaults to `Accept: application/json` instead of RestSharp's broader default set. Requests with an explicit `Accept` header (e.g. CSV/PDF export) are not affected.
+
 ## [7.4.0] - 2026-08-12
 
 ### Added
