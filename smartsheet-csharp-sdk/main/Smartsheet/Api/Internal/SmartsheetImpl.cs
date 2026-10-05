@@ -49,8 +49,7 @@ namespace Smartsheet.Api.Internal
         private readonly HttpClient httpClient;
 
         /// <summary>
-        /// Tracks whether Dispose has run. Guarded with Interlocked because this class
-        /// documents itself as thread safe.
+        /// Non-zero once disposed. Interlocked ensures concurrent Dispose calls dispose the HttpClient once.
         /// </summary>
         private int disposed;
 

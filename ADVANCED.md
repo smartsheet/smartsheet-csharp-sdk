@@ -1353,7 +1353,9 @@ using (SmartsheetClient smartsheet = new SmartsheetBuilder()
 
 ### When to dispose
 
-A `SmartsheetClient` is thread safe and designed to be reused; creating one per request wastes connections. Prefer a long-lived client for the lifetime of your application or DI scope, and dispose it when that scope ends. If you do create short-lived clients, dispose each one — otherwise its connections are not released.
+Creating a `SmartsheetClient` per request wastes connections. Prefer a long-lived client for the lifetime of your application or DI scope, and dispose it when that scope ends. If you do create short-lived clients, dispose each one — otherwise its connections are not released.
+
+Threads can share a client for concurrent calls, but changing its settings is not thread safe: a value assigned to `AccessToken`, `AssumedUser`, `ChangeAgent`, `UserAgent` or `MaxRetryTimeout` applies to calls from every thread. Set them before sharing the client, or give each identity its own client.
 
 Using a client after disposing it throws `ObjectDisposedException` from the HTTP layer, raised by the disposed `RestClient`.
 

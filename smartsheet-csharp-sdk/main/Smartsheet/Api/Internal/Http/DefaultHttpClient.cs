@@ -74,9 +74,7 @@ namespace Smartsheet.Api.Internal.Http
         private String userAgent;
 
         /// <summary>
-        /// Tracks whether Dispose has run. Guarded with Interlocked because this class
-        /// documents itself as thread safe; concurrent Dispose calls must not double-dispose
-        /// the underlying RestClient.
+        /// Non-zero once disposed. Interlocked ensures concurrent Dispose calls dispose the RestClient once.
         /// </summary>
         private int disposed;
 
