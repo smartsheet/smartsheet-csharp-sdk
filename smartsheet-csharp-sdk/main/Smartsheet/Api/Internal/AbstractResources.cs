@@ -1460,5 +1460,30 @@ namespace Smartsheet.Api.Internal
 
             return attachment;
         }
+
+        /// <summary>
+        /// Asynchronously reads a file into memory.
+        /// </summary>
+        /// <param name="filePath">The path to the file to read.</param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns>The file as a byte array.</returns>
+        protected async Task<byte[]> ReadFileAsync(string filePath, CancellationToken cancellationToken = default)
+        {
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, useAsync: true))
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    byte[] buffer = new byte[4096];
+                    
+                    int bytesRead;
+                    while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false)) > 0)
+                    {
+                        await memoryStream.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
+                    }
+
+                    return memoryStream.ToArray();
+                }
+            }
+        }
     }
 }
