@@ -28,6 +28,8 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Internal.Http;
     using System.Net;
     using System;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// <para>
@@ -67,7 +69,32 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Attachment AttachFile(long sheetId, long commentId, string file, string fileType)
         {
-            return AttachFile("sheets/" + sheetId + "/comments/" + commentId + "/attachments", file, fileType);
+            return this.AttachFileAsync(sheetId, commentId, file, fileType).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Attaches a file to the Comment.</para>
+        /// <para>This operation will always create a new attachment.
+        /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:
+        /// POST /sheets/{sheetId}/comments/{commentId}/attachments</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="commentId"> the comment Id </param>
+        /// <param name="file"> the file path </param>
+        /// <param name="fileType"> the file type </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the newly created Attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<Attachment> AttachFileAsync(long sheetId, long commentId, string file, string fileType, CancellationToken cancellationToken = default)
+        {
+            Attachment attachment = await this.AttachFileAsync("sheets/" + sheetId + "/comments/" + commentId + "/attachments", file, fileType, cancellationToken).ConfigureAwait(false);
+            return attachment;
         }
 
         /// <summary>
@@ -91,7 +118,33 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Attachment AttachFile(long sheetId, long commentId, Stream stream, string fileName, string? contentType)
         {
-            return AttachFile("sheets/" + sheetId + "/comments/" + commentId + "/attachments", stream, fileName, contentType);
+            return this.AttachFileAsync(sheetId, commentId, stream, fileName, contentType).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Attaches a file to the Comment using a Stream.</para>
+        /// <para>This operation will always create a new attachment.
+        /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:
+        /// POST /sheets/{sheetId}/comments/{commentId}/attachments</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="commentId"> the comment Id </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the newly created Attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<Attachment> AttachFileAsync(long sheetId, long commentId, Stream stream, string fileName, string? contentType, CancellationToken cancellationToken = default)
+        {
+            Attachment attachment = await this.AttachFileAsync("sheets/" + sheetId + "/comments/" + commentId + "/attachments", stream, fileName, contentType, cancellationToken).ConfigureAwait(false);
+            return attachment;
         }
 
         /// <summary>
@@ -117,7 +170,35 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual Attachment AttachUrl(long sheetId, long commentId, Attachment attachment)
         {
-            return this.CreateResource("sheets/" + sheetId + "/comments/" + commentId + "/attachments", typeof(Attachment), attachment);
+            return this.AttachUrlAsync(sheetId, commentId, attachment).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Attaches a URL to the Comment.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:
+        /// POST /sheets/{sheetId}/comments/{commentId}/attachments</para>
+        /// <remarks><para>attachmentSubType is valid only for GOOGLE_DRIVE attachments which are Google Docs.
+        /// It can optionally be included to indicate the type of a file.
+        /// The following attachmentSubTypes are valid for GOOGLE_DRIVE attachments "DOCUMENT", "SPREADSHEET", "PRESENTATION", "PDF", "DRAWING".</para>
+        /// <para>When the attachment type is BOX_COM, DROPBOX, or GOOGLE_DRIVE (without an attachmentSubType specified),
+        /// the mimeType will be derived by the file extension specified on the "name".</para>
+        /// </remarks>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="commentId"> the comment Id </param>
+        /// <param name="attachment"> the attachment object </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the newly created Attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<Attachment> AttachUrlAsync(long sheetId, long commentId, Attachment attachment, CancellationToken cancellationToken = default)
+        {
+            Attachment newAttachment = await this.CreateResourceAsync("sheets/" + sheetId + "/comments/" + commentId + "/attachments", typeof(Attachment), attachment, cancellationToken).ConfigureAwait(false);
+            return newAttachment;
         }
 
         /// <summary>
@@ -130,6 +211,21 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="FileNotFoundException"> the file not found exception </exception>
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
         private Attachment AttachFile(string path, string file, string contentType)
+        {
+            return this.AttachFileAsync(path, file, contentType).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Attach file.
+        /// </summary>
+        /// <param name="path"> the url path </param>
+        /// <param name="file"> the file </param>
+        /// <param name="contentType"> the content Type </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the attachment </returns>
+        /// <exception cref="FileNotFoundException"> the file not found exception </exception>
+        /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
+        private async Task<Attachment> AttachFileAsync(string path, string file, string contentType, CancellationToken cancellationToken = default)
         {
             Utility.Utility.ThrowIfNull(path, file);
             if (contentType == null)
@@ -145,11 +241,17 @@ namespace Smartsheet.Api.Internal
             HttpEntity entity = new HttpEntity();
             entity.ContentType = contentType;
 
-            entity.Content = File.ReadAllBytes(file);
-            entity.ContentLength = fi.Length;
+            using (FileStream fs = fi.OpenRead())
+            {
+                byte[] buffer = new byte[fs.Length];
+                await fs.ReadAsync(buffer, 0, (int)fs.Length, cancellationToken).ConfigureAwait(false);
+                entity.Content = buffer;
+                entity.ContentLength = fs.Length;
+            }
+
             request.Entity = entity;
 
-            HttpResponse response = this.Smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.Smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Attachment attachment = null;
             switch (response.StatusCode)
@@ -179,7 +281,23 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
         private Attachment AttachFile(string path, Stream stream, string fileName, string? contentType)
         {
-            return AttachFileFromStream(path, stream, fileName, contentType);
+            return this.AttachFileAsync(path, stream, fileName, contentType).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Attach file from stream.
+        /// </summary>
+        /// <param name="path"> the url path </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content Type </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the attachment </returns>
+        /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
+        private async Task<Attachment> AttachFileAsync(string path, Stream stream, string fileName, string? contentType, CancellationToken cancellationToken = default)
+        {
+            Attachment attachment = await this.AttachFileFromStreamAsync(path, stream, fileName, contentType, cancellationToken).ConfigureAwait(false);
+            return attachment;
         }
     }
 }

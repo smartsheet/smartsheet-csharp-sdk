@@ -1390,6 +1390,33 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
         protected Attachment AttachFileFromStream(string path, Stream stream, string fileName, string? contentType)
         {
+            return this.AttachFileFromStreamAsync(path, stream, fileName, contentType).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Attach a file from a stream to a resource.
+        /// 
+        /// This method reads the stream content from its current position into a byte array and uploads it.
+        /// The caller is responsible for ensuring the stream is positioned correctly before calling this method.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if stream or fileName is null
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type, can be null (defaults to "application/octet-stream") </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the Attachment object </returns>
+        /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
+        protected async Task<Attachment> AttachFileFromStreamAsync(string path, Stream stream, string fileName, string? contentType, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(stream, fileName);
             
             if (contentType == null)
@@ -1415,7 +1442,7 @@ namespace Smartsheet.Api.Internal
 
             request.Entity = entity;
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Attachment attachment = null;
             switch (response.StatusCode)
