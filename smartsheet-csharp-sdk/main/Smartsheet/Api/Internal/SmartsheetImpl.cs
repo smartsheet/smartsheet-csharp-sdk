@@ -313,6 +313,11 @@ namespace Smartsheet.Api.Internal
         /// </summary>
         public void Dispose()
         {
+            if (Interlocked.Exchange(ref disposed, 1) != 0)
+            {
+                return;
+            }
+
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -323,11 +328,6 @@ namespace Smartsheet.Api.Internal
         /// <param name="disposing">true when called from <see cref="Dispose()"/>; false when called from a finalizer</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (Interlocked.Exchange(ref disposed, 1) != 0)
-            {
-                return;
-            }
-
             if (disposing)
             {
                 // Disposed whether the SDK created the client or the caller injected it via

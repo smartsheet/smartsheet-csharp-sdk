@@ -1,5 +1,6 @@
 using Smartsheet.Api;
 using Smartsheet.Api.Internal.Http;
+using Smartsheet.Api.Internal.OAuth;
 using Smartsheet.Api.OAuth;
 using RestSharp;
 
@@ -52,6 +53,18 @@ namespace mock_api_test_sdk_net80
                 "DefaultHttpClient.Dispose() must be idempotent; the RestClient should be disposed exactly once.");
         }
 
+        [TestMethod]
+        public void TestDefaultHttpClientDisposeRunsOverrideOnce()
+        {
+            DisposableTestHttpClient httpClient = new DisposableTestHttpClient();
+
+            httpClient.Dispose();
+            httpClient.Dispose();
+
+            Assert.AreEqual(1, httpClient.DisposeCallCount,
+                "A Dispose(bool) override must run once, however many times Dispose() is called.");
+        }
+
         /// <summary>
         /// A second RestClient.Dispose() does not throw, so counting calls is the only way to
         /// observe DefaultHttpClient's own guard.
@@ -87,6 +100,7 @@ namespace mock_api_test_sdk_net80
         /// <summary>
         /// A custom HTTP client implementing the interface directly rather than subclassing
         /// DefaultHttpClient, to prove the SDK disposes a third-party implementation.
+        /// It has no dispose guard, so it counts every call that reaches it.
         /// </summary>
         private class CustomTestHttpClient : Smartsheet.Api.Internal.Http.HttpClient
         {
@@ -192,7 +206,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void TestSmartsheetClientDisposeIsIdempotent()
         {
-            DisposableTestHttpClient httpClient = new DisposableTestHttpClient();
+            CustomTestHttpClient httpClient = new CustomTestHttpClient();
             SmartsheetClient smartsheet = new SmartsheetBuilder()
                 .SetBaseURI("http://localhost:9/")
                 .SetAccessToken("aaaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -228,7 +242,7 @@ namespace mock_api_test_sdk_net80
         [TestMethod]
         public void TestOAuthFlowDisposeIsIdempotent()
         {
-            DisposableTestHttpClient httpClient = new DisposableTestHttpClient();
+            CustomTestHttpClient httpClient = new CustomTestHttpClient();
             OAuthFlow oauthFlow = new OAuthFlowBuilder()
                 .SetClientId("aaaaaaaaaaaa")
                 .SetClientSecret("bbbbbbbbbbbb")
@@ -241,6 +255,22 @@ namespace mock_api_test_sdk_net80
 
             Assert.AreEqual(1, httpClient.DisposeCallCount,
                 "OAuthFlow.Dispose() must be idempotent; the HTTP client should be disposed exactly once.");
+        }
+
+        [TestMethod]
+        public void TestOAuthFlowHttpClientSetterRejectsNull()
+        {
+            CustomTestHttpClient httpClient = new CustomTestHttpClient();
+            OAuthFlowImpl oauthFlow = (OAuthFlowImpl)new OAuthFlowBuilder()
+                .SetClientId("aaaaaaaaaaaa")
+                .SetClientSecret("bbbbbbbbbbbb")
+                .SetRedirectURL("https://example.com/callback")
+                .SetHttpClient(httpClient)
+                .Build();
+
+            Assert.ThrowsException<ArgumentException>(() => { oauthFlow.HttpClient = null!; });
+            Assert.AreSame(httpClient, oauthFlow.HttpClient,
+                "A rejected null must leave the flow's HTTP client in place for Dispose().");
         }
     }
 }
