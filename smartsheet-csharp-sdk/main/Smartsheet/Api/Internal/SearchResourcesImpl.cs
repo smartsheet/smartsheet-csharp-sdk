@@ -25,6 +25,7 @@ namespace Smartsheet.Api.Internal
     using Api.Models;
     using Smartsheet.Api.Internal.Util;
     using SearchResult = Api.Models.SearchResult;
+    using SearchResponse = Api.Models.SearchResponse;
 
     /// <summary>
     /// This is the implementation of the SearchResources.
@@ -57,7 +58,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual SearchResult Search(string query)
+        public virtual SearchResponse Search(string query)
         {
             return this.Search(query, null, null, null);
         }
@@ -77,8 +78,8 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual SearchResult Search(string query, IEnumerable<SearchInclusion>? includes,
-            DateTime? modifiedSince, IEnumerable<SearchScope>? scopes) 
+        public virtual SearchResponse Search(string query, IEnumerable<SearchInclusion>? includes,
+            DateTime? modifiedSince, IEnumerable<SearchScope>? scopes)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -95,7 +96,7 @@ namespace Smartsheet.Api.Internal
                 parameters.Add("scopes", QueryUtil.GenerateCommaSeparatedList(scopes));
             }
             parameters.Add("query", query);
-            return this.GetResource<SearchResult>("search" + QueryUtil.GenerateUrl(null, parameters), typeof(SearchResult));
+            return this.GetResource<SearchResponse>("search" + QueryUtil.GenerateUrl(null, parameters), typeof(SearchResponse));
         }
 
         /// <summary>
@@ -111,9 +112,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual SearchResult SearchSheet(long sheetId, string query)
+        public virtual SearchResponse SearchSheet(long sheetId, string query)
         {
-            return this.GetResource<SearchResult>("search/sheets/" + sheetId + "?query=" + Uri.EscapeDataString(query), typeof(SearchResult));
+            return this.GetResource<SearchResponse>("search/sheets/" + sheetId + "?query=" + Uri.EscapeDataString(query), typeof(SearchResponse));
         }
     }
 }
