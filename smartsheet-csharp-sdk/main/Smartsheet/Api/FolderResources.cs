@@ -134,7 +134,7 @@ namespace Smartsheet.Api
         /// <param name="accessApiLevel">Allows COMMENTER access for inputs and return values. For backwards-compatibility, VIEWER is the default</param>
         /// <param name="lastKey">The lastKey token returned from the previous page of results</param>
         /// <param name="maxItems">The maximum number of items to return in the response (default: 100, min: 100, max: 500)</param>
-        /// <returns>An array of asset references with a pagination token if there are more results</returns>
+        /// <returns>An object containing the items and a pagination token if additional results exist. If <paramref name="childrenResourceTypes"/> is specified, the items are restricted to those types; otherwise, the collection may contain a mix of <see cref="Folder"/>, <see cref="Sheet"/>, <see cref="Report"/>, <see cref="Sight"/>, or <see cref="Template"/> instances.</returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
         /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
