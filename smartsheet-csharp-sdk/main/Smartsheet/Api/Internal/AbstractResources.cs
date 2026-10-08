@@ -1435,7 +1435,7 @@ namespace Smartsheet.Api.Internal
             // Read stream into byte array
             using (MemoryStream ms = new MemoryStream())
             {
-                stream.CopyTo(ms);
+                await stream.CopyToAsync(ms, bufferSize: 81920, cancellationToken).ConfigureAwait(false);
                 entity.Content = ms.ToArray();
                 entity.ContentLength = ms.Length;
             }
