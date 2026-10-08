@@ -282,7 +282,7 @@ namespace Smartsheet.Api.Internal
 
             HttpEntity entity = new HttpEntity();
             entity.ContentType = contentType;
-            entity.Content = await this.ReadFileAsync(file, cancellationToken);
+            entity.Content = await this.ReadFileAsync(file, cancellationToken).ConfigureAwait(false);
             entity.ContentLength = fi.Length;
 
             request.Entity = entity;

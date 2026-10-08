@@ -1471,18 +1471,19 @@ namespace Smartsheet.Api.Internal
         {
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, useAsync: true))
             {
-                using (MemoryStream memoryStream = new MemoryStream())
+                byte[] content = new byte[fileStream.Length];
+                
+                int offset = 0;
+                while (offset < content.Length)
                 {
-                    byte[] buffer = new byte[4096];
-                    
-                    int bytesRead;
-                    while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false)) > 0)
+                    int bytesRead = await fileStream.ReadAsync(content, offset, content.Length - offset, cancellationToken).ConfigureAwait(false);
+                    if (bytesRead == 0)
                     {
-                        await memoryStream.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
+                        throw new EndOfStreamException();
                     }
-
-                    return memoryStream.ToArray();
+                    offset += bytesRead;
                 }
+                return content;
             }
         }
     }

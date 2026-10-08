@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added asynchronous (`*Async`) counterparts to `SheetAttachmentResources`: `AttachFileAsync`, `AttachUrlAsync`, `DeleteAttachmentAsync`, `GetAttachmentAsync`, `ListAttachmentsAsync`.
 - Added asynchronous (`*Async`) counterparts to `AttachmentVersioningResources`: `AttachNewVersionAsync`, `DeleteAllVersionsAsync`, `ListVersionsAsync`.
 - Added asynchronous (`*Async`) counterparts to `CommentAttachmentResources`: `AttachFileAsync`, `AttachUrlAsync`.
+- Added asynchronous (`*Async`) counterpart to `DiscussionAttachmentResources`: `ListAttachmentsAsync`.
 
 ## [7.4.0] - 2026-08-12
 

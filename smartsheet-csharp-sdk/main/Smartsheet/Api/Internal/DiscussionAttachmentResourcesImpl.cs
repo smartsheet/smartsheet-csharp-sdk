@@ -21,6 +21,8 @@ namespace Smartsheet.Api.Internal
     using Smartsheet.Api.Models;
     using System;
     using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// This is the implementation of the AssociatedAttachmentResources for Discussions.
@@ -59,12 +61,34 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         public virtual PaginatedResult<Attachment> ListAttachments(long sheetId, long discussionId, PaginationParameters? paging)
         {
+            return this.ListAttachmentsAsync(sheetId, discussionId, paging).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Gets a list of all Attachments that are in the Discussion</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: <br />
+        /// GET /sheets/{sheetId}/discussions/{discussionId}/attachments</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="discussionId"> the discussion Id </param>
+        /// <param name="paging"> the paging </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> list of all Attachments that are in the Discussion. </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task<PaginatedResult<Attachment>> ListAttachmentsAsync(long sheetId, long discussionId, PaginationParameters? paging, CancellationToken cancellationToken = default)
+        {
             StringBuilder path = new StringBuilder("sheets/" + sheetId + "/discussions/" + discussionId + "/attachments");
             if (paging != null)
             {
                 path.Append(paging.ToQueryString());
             }
-            return this.ListResourcesWithWrapper<Attachment>(path.ToString());
+            PaginatedResult<Attachment> paginatedAttachments = await this.ListResourcesWithWrapperAsync<Attachment>(path.ToString(), cancellationToken).ConfigureAwait(false);
+            return paginatedAttachments;
         }
     }
 }
