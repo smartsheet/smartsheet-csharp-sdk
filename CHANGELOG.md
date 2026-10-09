@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
+### Added
+- Added asynchronous (`*Async`) counterparts to `RowAttachmentResources`: `ListAttachmentsAsync`, `AttachFileAsync`, `AttachUrlAsync`.
+- Added asynchronous (`*Async`) counterparts to `SheetAttachmentResources`: `AttachFileAsync`, `AttachUrlAsync`, `DeleteAttachmentAsync`, `GetAttachmentAsync`, `ListAttachmentsAsync`.
+- Added asynchronous (`*Async`) counterparts to `AttachmentVersioningResources`: `AttachNewVersionAsync`, `DeleteAllVersionsAsync`, `ListVersionsAsync`.
+- Added asynchronous (`*Async`) counterparts to `CommentAttachmentResources`: `AttachFileAsync`, `AttachUrlAsync`.
+- Added asynchronous (`*Async`) counterpart to `DiscussionAttachmentResources`: `ListAttachmentsAsync`.
 
 ### Changed
 - ⚠️ **BREAKING**: `SmartsheetClient`, `OAuthFlow`, and the `HttpClient` interface now extend `IDisposable`, so callers can release HTTP resources deterministically with a `using` statement. Implementations of these interfaces must add `Dispose()`; ones compiled against an earlier version fail to load with `TypeLoadException`. Fixes [#220](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/220)
