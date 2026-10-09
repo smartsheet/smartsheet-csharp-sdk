@@ -74,6 +74,12 @@ namespace Smartsheet.Api.Internal.Http
         private String userAgent;
 
         /// <summary>
+        /// Non-zero once disposed. Checked in Dispose() rather than Dispose(bool) so overrides run once too;
+        /// Interlocked covers concurrent Dispose calls.
+        /// </summary>
+        private int disposed;
+
+        /// <summary>
         ///
         /// </summary>
         /// <param name="previousAttempts"></param>
@@ -506,11 +512,29 @@ namespace Smartsheet.Api.Internal.Http
         }
 
         /// <summary>
-        /// Close the HttpClient.
+        /// Releases the underlying RestSharp client and its connections.
         /// </summary>
-        public virtual void Close()
+        public void Dispose()
         {
-            LogManager.Flush();
+            if (Interlocked.Exchange(ref disposed, 1) != 0)
+            {
+                return;
+            }
+
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases the resources held by this instance.
+        /// </summary>
+        /// <param name="disposing">true when called from <see cref="Dispose()"/>; false when called from a finalizer</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.httpClient.Dispose();
+            }
         }
 
         /// <summary>

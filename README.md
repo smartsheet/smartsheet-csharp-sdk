@@ -29,20 +29,21 @@ using Smartsheet.Api.Models;
 
 static void Sample()
 {
-    SmartsheetClient smartsheet = new SmartsheetBuilder()
+    using (SmartsheetClient smartsheet = new SmartsheetBuilder()
         // TODO: Set your API access in environment variable SMARTSHEET_ACCESS_TOKEN or else here
         // .SetAccessToken("JKlMNOpQ12RStUVwxYZAbcde3F5g6hijklM789")
-        .Build();
+        .Build())
+    {
+        PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.SHEET_VERSION });
+        Console.WriteLine("Found " + sheets.TotalCount + " sheets");
 
-    PaginatedResult<Sheet> sheets = smartsheet.SheetResources.ListSheets(new List<SheetInclusion> { SheetInclusion.SHEET_VERSION });
-    Console.WriteLine("Found " + sheets.TotalCount + " sheets");
+        long sheetId = (long) sheets.Data[0].Id;
 
-    long sheetId = (long) sheets.Data[0].Id;
+        Console.WriteLine("Loading sheet id: " + sheetId);
 
-    Console.WriteLine("Loading sheet id: " + sheetId);
-
-    var sheet = smartsheet.SheetResources.GetSheet(sheetId);
-    Console.WriteLine("Loaded " + sheet.Rows.Count + " rows from sheet: " + sheet.Name);
+        var sheet = smartsheet.SheetResources.GetSheet(sheetId);
+        Console.WriteLine("Loaded " + sheet.Rows.Count + " rows from sheet: " + sheet.Name);
+    }
 }
 ```
 A simple, but complete sample application project is here: https://github.com/smartsheet-samples/csharp-read-write-sheet
