@@ -25,7 +25,7 @@ namespace Smartsheet.Api
     ///
     ///<p>Thread Safety: Implementation of this interface must be thread safe.</p>
     ///</summary>
-    public interface SmartsheetClient
+    public interface SmartsheetClient : IDisposable
     {
         /// <summary>
         /// Set the access token to use.
