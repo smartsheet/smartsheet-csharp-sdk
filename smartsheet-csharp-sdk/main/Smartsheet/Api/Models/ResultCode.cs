@@ -1,17 +1,17 @@
 namespace Smartsheet.Api.Models
 {
     /// <summary>
-    /// Types of values an object can have.
+    /// Possible result codes for BulkItemResult or RequestResult
     /// </summary>
     public static class ResultCode
     {
         /// <summary>
-        /// a successful bulk operation occurred with no errors.
+        /// a successful operation occurred with no errors.
         /// </summary>
         public const int SUCCESS = 0;
         /// <summary>
-        /// a bulk operation partially succeeded.
+        /// an operation partially succeeded.
         /// </summary>
-        PARTIAL_SUCCESS = 3
+        public const int PARTIAL_SUCCESS = 3;
     }
 }
