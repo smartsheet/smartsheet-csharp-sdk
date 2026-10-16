@@ -25,7 +25,7 @@ namespace Smartsheet.Api.Models
 {
     /// <summary>
     /// Represents the BulkItemResult object. </summary>
-    /// <seealso href="http://smartsheet-platform.github.io/api-docs/?shell#partial-success">Partial Success</seealso>
+    /// <seealso href="https://developers.smartsheet.com/api/smartsheet/guides/advanced-topics/scalability-options#bulk-operations">Bulk Operations</seealso>
     public class BulkItemResult<T>
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Array of BulkItemFailure objects which represents the items that failed to be added or updated
         /// </summary>
-        private IList<BulkItemFailure> failedItems;
+        private IList<BulkItemFailure>? failedItems;
 
         /// <summary>
         /// Gets the result Code.
@@ -82,7 +82,7 @@ namespace Smartsheet.Api.Models
         /// Array of BulkItemFailure objects which represents the items that failed to be added or updated. 
         /// </summary>
         /// <returns> the Description </returns>
-        public IList<BulkItemFailure> FailedItems
+        public IList<BulkItemFailure>? FailedItems
         {
             get { return failedItems; }
             set { failedItems = value; }
