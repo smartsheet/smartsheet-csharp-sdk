@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Removed
 - ⚠️ **BREAKING**: `Close()` is removed from the `HttpClient` interface and from `DefaultHttpClient`. Call `Dispose()` instead, or use a `using` statement. Subclasses that released their own resources in an overridden `Close()` must move that logic to `Dispose(bool)`.
 
+### Added
+
+- `SearchObjectType` enum: added 6 new values — `GRID_ROW`, `FORM`, `COLLECTION_TITLE`, `PORTFOLIO_TITLE`, `PROJECT_TITLE`, `SCENARIO_PLAN_TITLE`.
+- `SearchResponse` model for the unified search-service response (`SearchResults`, `TotalCount`, `Workspaces`, `PersonalWorkspaceId`). `SearchResources.Search()` and `SearchResources.SearchSheet()` now return `SearchResponse`.
+- New properties on `SearchResultItem`: `WorkspaceId`, `ContainerId`, `ModifyDateTime`, `PrimaryColumnCellText` (GRID_ROW only), `AttachmentSource` (ATTACHMENT only), `AttachmentDescription` (ATTACHMENT only), `IsTemplate` (SHEET only).
+
 ## [7.4.0] - 2026-08-12
 
 ### Added
