@@ -7,9 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add support for PUT /sheets/{sheetId}/dataclassification endpoint, Set Data Classification
 - Add `DataClassification` field to Sheet model
+- Added asynchronous (`*Async`) counterparts to `RowAttachmentResources`: `ListAttachmentsAsync`, `AttachFileAsync`, `AttachUrlAsync`.
+- Added asynchronous (`*Async`) counterparts to `SheetAttachmentResources`: `AttachFileAsync`, `AttachUrlAsync`, `DeleteAttachmentAsync`, `GetAttachmentAsync`, `ListAttachmentsAsync`.
+- Added asynchronous (`*Async`) counterparts to `AttachmentVersioningResources`: `AttachNewVersionAsync`, `DeleteAllVersionsAsync`, `ListVersionsAsync`.
+- Added asynchronous (`*Async`) counterparts to `CommentAttachmentResources`: `AttachFileAsync`, `AttachUrlAsync`.
+- Added asynchronous (`*Async`) counterpart to `DiscussionAttachmentResources`: `ListAttachmentsAsync`.
 
 ### Changed
+- ⚠️ **BREAKING**: `SmartsheetClient`, `OAuthFlow`, and the `HttpClient` interface now extend `IDisposable`, so callers can release HTTP resources deterministically with a `using` statement. Implementations of these interfaces must add `Dispose()`; ones compiled against an earlier version fail to load with `TypeLoadException`. Fixes [#220](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/220)
+- Disposing a client no longer calls `NLog.LogManager.Flush()`. That flush ran only from the `~SmartsheetImpl()` finalizer, at GC time. Call `LogManager.Flush()` yourself if you need a deterministic flush.
 - `DefaultHttpClient` now defaults to `Accept: application/json` instead of RestSharp's broader default set. Requests with an explicit `Accept` header (e.g. CSV/PDF export) are not affected.
+
+### Removed
+- ⚠️ **BREAKING**: `Close()` is removed from the `HttpClient` interface and from `DefaultHttpClient`. Call `Dispose()` instead, or use a `using` statement. Subclasses that released their own resources in an overridden `Close()` must move that logic to `Dispose(bool)`.
 
 ## [7.4.0] - 2026-08-12
 

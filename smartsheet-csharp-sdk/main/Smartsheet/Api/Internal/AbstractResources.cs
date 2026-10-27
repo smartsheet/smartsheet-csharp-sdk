@@ -1390,6 +1390,33 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
         protected Attachment AttachFileFromStream(string path, Stream stream, string fileName, string? contentType)
         {
+            return this.AttachFileFromStreamAsync(path, stream, fileName, contentType).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Attach a file from a stream to a resource.
+        /// 
+        /// This method reads the stream content from its current position into a byte array and uploads it.
+        /// The caller is responsible for ensuring the stream is positioned correctly before calling this method.
+        /// 
+        /// Exceptions:
+        ///   IllegalArgumentException : if stream or fileName is null
+        ///   InvalidRequestException : if there is any problem with the REST API request
+        ///   AuthorizationException : if there is any problem with the REST API authorization (access token)
+        ///   ResourceNotFoundException : if the resource cannot be found
+        ///   ServiceUnavailableException : if the REST API service is not available (possibly due to rate limiting)
+        ///   SmartsheetRestException : if any other REST API related error occurred during the operation
+        ///   SmartsheetException : if any other error occurred during the operation
+        /// </summary>
+        /// <param name="path"> the relative path of the resource </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type, can be null (defaults to "application/octet-stream") </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the Attachment object </returns>
+        /// <exception cref="SmartsheetException"> the Smartsheet exception </exception>
+        protected async Task<Attachment> AttachFileFromStreamAsync(string path, Stream stream, string fileName, string? contentType, CancellationToken cancellationToken = default)
+        {
             Utils.ThrowIfNull(stream, fileName);
             
             if (contentType == null)
@@ -1408,14 +1435,14 @@ namespace Smartsheet.Api.Internal
             // Read stream into byte array
             using (MemoryStream ms = new MemoryStream())
             {
-                stream.CopyTo(ms);
+                await stream.CopyToAsync(ms, bufferSize: 81920, cancellationToken).ConfigureAwait(false);
                 entity.Content = ms.ToArray();
                 entity.ContentLength = ms.Length;
             }
 
             request.Entity = entity;
 
-            HttpResponse response = this.smartsheet.HttpClient.Request(request);
+            HttpResponse response = await this.smartsheet.HttpClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
 
             Attachment attachment = null;
             switch (response.StatusCode)
@@ -1432,6 +1459,32 @@ namespace Smartsheet.Api.Internal
             this.smartsheet.HttpClient.ReleaseConnection();
 
             return attachment;
+        }
+
+        /// <summary>
+        /// Asynchronously reads a file into memory.
+        /// </summary>
+        /// <param name="filePath">The path to the file to read.</param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns>The file as a byte array.</returns>
+        protected async Task<byte[]> ReadFileAsync(string filePath, CancellationToken cancellationToken = default)
+        {
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, useAsync: true))
+            {
+                byte[] content = new byte[fileStream.Length];
+                
+                int offset = 0;
+                while (offset < content.Length)
+                {
+                    int bytesRead = await fileStream.ReadAsync(content, offset, content.Length - offset, cancellationToken).ConfigureAwait(false);
+                    if (bytesRead == 0)
+                    {
+                        throw new EndOfStreamException();
+                    }
+                    offset += bytesRead;
+                }
+                return content;
+            }
         }
     }
 }

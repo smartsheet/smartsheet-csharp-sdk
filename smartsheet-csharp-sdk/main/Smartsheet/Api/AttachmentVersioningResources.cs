@@ -19,6 +19,8 @@
 using Smartsheet.Api.Models;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Smartsheet.Api
 {
@@ -51,6 +53,28 @@ namespace Smartsheet.Api
         Attachment AttachNewVersion(long sheetId, long attachmentId, string file, string? fileType = null);
 
         /// <summary>
+        /// <para>Uploads a new version of a file to a Sheet or Row.
+        /// This operation can be performed using a simple upload or a multipart upload. For more information, see Posting an Attachment.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:<br />
+        ///  POST /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
+        ///  <remarks><para>Uploading new versions is not supported for attachments on Comments or for URL attachments.</para>
+        ///  <para>This is a resource-intensive operation and incurs 10 additional requests against the rate limit.</para></remarks>
+        /// </summary>
+        /// <param name="sheetId"> the sheet id </param>
+        /// <param name="attachmentId"> the attachment id </param>
+        /// <param name="file"> the file path </param>
+        /// <param name="fileType"> the file type, can be null </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> Attachment object for the newly created attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<Attachment> AttachNewVersionAsync(long sheetId, long attachmentId, string file, string? fileType = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// <para>Uploads a new version of a file to a Sheet or Row using a Stream.
         /// This operation can be performed using a simple upload or a multipart upload. For more information, see Posting an Attachment.</para>
         /// <para>It mirrors to the following Smartsheet REST API method:<br />
@@ -73,6 +97,29 @@ namespace Smartsheet.Api
         Attachment AttachNewVersion(long sheetId, long attachmentId, Stream stream, string fileName, string? contentType = null);
 
         /// <summary>
+        /// <para>Uploads a new version of a file to a Sheet or Row using a Stream.
+        /// This operation can be performed using a simple upload or a multipart upload. For more information, see Posting an Attachment.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:<br />
+        ///  POST /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
+        ///  <remarks><para>Uploading new versions is not supported for attachments on Comments or for URL attachments.</para>
+        ///  <para>This is a resource-intensive operation and incurs 10 additional requests against the rate limit.</para></remarks>
+        /// </summary>
+        /// <param name="sheetId"> the sheet id </param>
+        /// <param name="attachmentId"> the attachment id </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type, can be null (defaults to "application/octet-stream") </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> Attachment object for the newly created attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<Attachment> AttachNewVersionAsync(long sheetId, long attachmentId, Stream stream, string fileName, string? contentType = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// <para>Deletes all versions of the attachment corresponding to the specified Attachment ID.
         /// For attachments with multiple versions, this will effectively delete the attachment from the object that it’s attached to.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: DELETE /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
@@ -86,6 +133,22 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         void DeleteAllVersions(long sheetId, long attachmentId);
+
+        /// <summary>
+        /// <para>Deletes all versions of the attachment corresponding to the specified Attachment ID.
+        /// For attachments with multiple versions, this will effectively delete the attachment from the object that it’s attached to.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: DELETE /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="attachmentId"> the attachment id </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task DeleteAllVersionsAsync(long sheetId, long attachmentId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Gets a list of all versions of the given Attachment ID, in order from newest to oldest.</para>
@@ -104,5 +167,24 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         PaginatedResult<Attachment> ListVersions(long sheetId, long attachmentId, PaginationParameters? paging = null);
+
+        /// <summary>
+        /// <para>Gets a list of all versions of the given Attachment ID, in order from newest to oldest.</para>
+        /// <remarks><para>This operation supports pagination of results. For more information, see Paging.</para>
+        /// <para>to retrieve a download URL for a file attachment, use the Get Attachment operation for the specific version you want to download.</para></remarks>
+        /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/attachments/{attachmentId}/versions</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet id </param>
+        /// <param name="attachmentId"> the attachment id </param>
+        /// <param name="paging">the pagination</param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns>  list of all versions of the given Attachment ID. </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<PaginatedResult<Attachment>> ListVersionsAsync(long sheetId, long attachmentId, PaginationParameters? paging = null, CancellationToken cancellationToken = default);
     }
 }

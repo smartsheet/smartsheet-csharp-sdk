@@ -15,6 +15,7 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 //    %[license]
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 namespace Smartsheet.Api.Internal.Http
@@ -24,7 +25,7 @@ namespace Smartsheet.Api.Internal.Http
     /// 
     /// Thread Safety: Implementation of this interface must be thread safe.
     /// </summary>
-    public interface HttpClient
+    public interface HttpClient : IDisposable
     {
 
         /// <summary>
@@ -85,11 +86,6 @@ namespace Smartsheet.Api.Internal.Http
         /// Release connection.
         /// </summary>
         void ReleaseConnection();
-        
-        /// <summary>
-        /// Closes this instance.
-        /// </summary>
-        void Close();
     }
 
 }

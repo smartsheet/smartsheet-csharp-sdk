@@ -21,6 +21,8 @@ using System.IO;
 
 namespace Smartsheet.Api
 {
+    using System.Threading;
+    using System.Threading.Tasks;
     using Api.Models;
 
     /// <summary>
@@ -48,6 +50,24 @@ namespace Smartsheet.Api
         PaginatedResult<Attachment> ListAttachments(long sheetId, long rowId, PaginationParameters? paging = null);
 
         /// <summary>
+        /// <para>Gets a list of all Attachments that are on the Row, including Row and Discussion level Attachments.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method: <br />
+        /// GET /sheets/{sheetId}/rows/{rowId}/attachments</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="rowId"> the row Id </param>
+        /// <param name="paging"> the paging </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> list of all Attachments that are in the Discussion. </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<PaginatedResult<Attachment>> ListAttachmentsAsync(long sheetId, long rowId, PaginationParameters? paging = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// <para>Attaches a file to the Row.</para>
         /// <para>This operation will always create a new attachment.
         /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
@@ -66,6 +86,27 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Attachment AttachFile(long sheetId, long rowId, string file, string? fileType = null);
+
+        /// <summary>
+        /// <para>Attaches a file to the Row.</para>
+        /// <para>This operation will always create a new attachment.
+        /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:
+        /// POST /sheets/{sheetId}/rows/{rowId}/attachments</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="rowId"> the row Id </param>
+        /// <param name="file"> the file path </param>
+        /// <param name="fileType"> the file type, can be null </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the newly created Attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<Attachment> AttachFileAsync(long sheetId, long rowId, string file, string? fileType = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>Attaches a file to the Row using a Stream.</para>
@@ -89,6 +130,28 @@ namespace Smartsheet.Api
         Attachment AttachFile(long sheetId, long rowId, Stream stream, string fileName, string? contentType = null);
 
         /// <summary>
+        /// <para>Attaches a file to the Row using a Stream.</para>
+        /// <para>This operation will always create a new attachment.
+        /// To upload a new version of the same attachment, use the Attach New Version operation.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:
+        /// POST /sheets/{sheetId}/rows/{rowId}/attachments</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="rowId"> the row Id </param>
+        /// <param name="stream"> the file stream </param>
+        /// <param name="fileName"> the file name </param>
+        /// <param name="contentType"> the content type, can be null (defaults to "application/octet-stream") </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the newly created Attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<Attachment> AttachFileAsync(long sheetId, long rowId, Stream stream, string fileName, string? contentType = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// <para>Attaches a URL to the Row.</para>
         /// <para>It mirrors to the following Smartsheet REST API method:
         /// POST /sheets/{sheetId}/rows/{rowId}/attachments</para>
@@ -110,6 +173,30 @@ namespace Smartsheet.Api
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
         Attachment AttachUrl(long sheetId, long rowId, Attachment attachment);
+
+        /// <summary>
+        /// <para>Attaches a URL to the Row.</para>
+        /// <para>It mirrors to the following Smartsheet REST API method:
+        /// POST /sheets/{sheetId}/rows/{rowId}/attachments</para>
+        /// <remarks><para>attachmentSubType is valid only for GOOGLE_DRIVE attachments which are Google Docs.
+        /// It can optionally be included to indicate the type of a file.
+        /// The following attachmentSubTypes are valid for GOOGLE_DRIVE attachments "DOCUMENT", "SPREADSHEET", "PRESENTATION", "PDF", "DRAWING".</para>
+        /// <para>When the attachment type is BOX_COM, DROPBOX, or GOOGLE_DRIVE (without an attachmentSubType specified),
+        /// the mimeType will be derived by the file extension specified on the “name”.</para>
+        /// </remarks>
+        /// </summary>
+        /// <param name="sheetId"> the sheetId </param>
+        /// <param name="rowId"> the row Id </param>
+        /// <param name="attachment"> the attachment object </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <returns> the newly created Attachment </returns>
+        /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
+        /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
+        /// <exception cref="AuthorizationException"> if there is any problem with  the REST API authorization (access token) </exception>
+        /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
+        /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        Task<Attachment> AttachUrlAsync(long sheetId, long rowId, Attachment attachment, CancellationToken cancellationToken = default);
     }
 
 }
