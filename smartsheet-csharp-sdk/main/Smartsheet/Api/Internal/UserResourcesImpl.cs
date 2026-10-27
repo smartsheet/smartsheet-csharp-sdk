@@ -67,7 +67,6 @@ namespace Smartsheet.Api.Internal
         /// <param name="emails">list of emails</param>
         /// <param name="includes">elements to include in response</param>
         /// <param name="paging"> the pagination</param>
-        /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <returns> the list of all users </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -75,9 +74,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException"> if the resource cannot be found </exception>
         /// <exception cref="ServiceUnavailableException"> if the REST API service is not available (possibly due to rate limiting) </exception>
         /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
-        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging, bool? displayContributorSeatType)
+        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging)
         {
-            return ListUsersInternal(emails, null, null, includes, paging, displayContributorSeatType);
+            return ListUsersInternal(emails, null, null, includes, paging);
         }
 
         /// <summary>
@@ -88,7 +87,6 @@ namespace Smartsheet.Api.Internal
         /// <param name="planId">plan ID to filter users</param>
         /// <param name="seatType">seat type to filter users</param>
         /// <param name="paging">the pagination</param>
-        /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <returns>the list of filtered Users</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
@@ -96,9 +94,9 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging, bool? displayContributorSeatType)
+        public virtual PaginatedResult<User> ListUsers(IEnumerable<string> emails, long? planId, SeatType? seatType, PaginationParameters? paging)
         {
-            return ListUsersInternal(emails, planId, seatType, null, paging, displayContributorSeatType);
+            return ListUsersInternal(emails, planId, seatType, null, paging);
         }
 
         /// <summary>
@@ -110,7 +108,6 @@ namespace Smartsheet.Api.Internal
         /// <param name="seatType">seat type to filter users</param>
         /// <param name="includes">elements to include in response</param>
         /// <param name="paging">the pagination</param>
-        /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <returns>the list of filtered Users</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException">If there is any problem with the REST API request.</exception>
@@ -118,7 +115,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        private PaginatedResult<User> ListUsersInternal(IEnumerable<string> emails, long? planId, SeatType? seatType, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging, bool? displayContributorSeatType) {
+        private PaginatedResult<User> ListUsersInternal(IEnumerable<string> emails, long? planId, SeatType? seatType, IEnumerable<ListUserInclusion>? includes, PaginationParameters? paging) {
             StringBuilder path = new StringBuilder("users");
 
             IDictionary<string, string> parameters = new Dictionary<string,string>();
@@ -142,10 +139,6 @@ namespace Smartsheet.Api.Internal
             if (seatType != null)
             {
                 parameters.Add("seatType", seatType.ToString());
-            }
-            if (displayContributorSeatType != null)
-            {
-                parameters.Add("displayContributorSeatType", displayContributorSeatType.ToString().ToLower());
             }
 
             path.Append(QueryUtil.GenerateUrl(null, parameters));
@@ -262,7 +255,6 @@ namespace Smartsheet.Api.Internal
         /// <param name="userId">The ID of the user to fetch plans for.</param>
         /// <param name="lastKey">The last key for pagination.</param>
         /// <param name="maxItems">The maximum number of items to return.</param>
-        /// <param name="displayContributorSeatType">if true, VIEWER seat types are returned as CONTRIBUTOR</param>
         /// <param name="include">
         /// <para>used to specify the optional objects to include, currently PLAN_NAME is supported.</para>
         /// <para>
@@ -279,7 +271,7 @@ namespace Smartsheet.Api.Internal
         /// <exception cref="ResourceNotFoundException">If the user cannot be found (404 Not Found).</exception>
         /// <exception cref="ServiceUnavailableException">If the REST API service is not available (possibly due to rate limiting or 500 Internal Server Error).</exception>
         /// <exception cref="SmartsheetException">If there is any other error during the operation.</exception>
-        public virtual TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems, bool? displayContributorSeatType, IEnumerable<UserPlanInclusion>? include = null)
+        public virtual TokenPaginatedResult<UserPlan> ListUserPlans(long userId, string? lastKey, long? maxItems, IEnumerable<UserPlanInclusion>? include = null)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (lastKey != null)
@@ -289,10 +281,6 @@ namespace Smartsheet.Api.Internal
             if (maxItems != null)
             {
                 parameters.Add("maxItems", maxItems.ToString());
-            }
-            if (displayContributorSeatType != null)
-            {
-                parameters.Add("displayContributorSeatType", displayContributorSeatType.ToString().ToLower());
             }
             if (include != null)
             {
@@ -352,12 +340,12 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// <para>Downgrades a user's seat type within your Smartsheet organization or plan from a licensed Member, Provisional Member or Guest to a non-licensed Viewer or Guest.</para>
+        /// <para>Downgrades a user's seat type within your Smartsheet organization or plan from a licensed Member, Provisional Member or Guest to a non-licensed Contributor or Guest.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: POST /users/{userId}/plans/{planId}/downgrade</para>
         /// </summary>
         /// <param name="userId">The ID of the user to downgrade.</param>
         /// <param name="planId">The ID of the plan.</param>
-        /// <param name="seatType">The seat type to downgrade to ("VIEWER" or "GUEST").</param>
+        /// <param name="seatType">The seat type to downgrade to ("CONTRIBUTOR" or "GUEST").</param>
         /// <returns>void</returns>
         /// <exception cref="System.InvalidOperationException">If any argument is null or empty string.</exception>
         /// <exception cref="InvalidRequestException"> User is not eligible for downgrade (e.g., not Active, not Member/Provisional/Guest, or is an admin and removeAdminStatus is false).</exception>
