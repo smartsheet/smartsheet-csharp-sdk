@@ -1148,6 +1148,31 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
+        /// <para>Sets the data classification of a sheet.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: PUT /sheets/{sheetId}/dataclassification</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="dataClassification"> the data classification to set </param>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual void SetDataClassification(long sheetId, SheetDataClassification dataClassification)
+        {
+            this.SetDataClassificationAsync(sheetId, dataClassification).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// <para>Sets the data classification of a sheet asynchronously.</para>
+        /// <para>Mirrors to the following Smartsheet REST API method: PUT /sheets/{sheetId}/dataclassification</para>
+        /// </summary>
+        /// <param name="sheetId"> the sheet Id </param>
+        /// <param name="dataClassification"> the data classification to set </param>
+        /// <param name="cancellationToken"> the cancellation token </param>
+        /// <exception cref="SmartsheetException"> if there is any other error during the operation </exception>
+        public virtual async Task SetDataClassificationAsync(long sheetId, SheetDataClassification dataClassification, CancellationToken cancellationToken = default)
+        {
+            await this.UpdateResourceAsync("sheets/" + sheetId + "/dataclassification", typeof(SheetDataClassification), dataClassification, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// <para>Gets the path (workspace/folder hierarchy) of the specified sheet.</para>
         /// <para>It mirrors to the following Smartsheet REST API method: GET /sheets/{sheetId}/path</para>
         /// </summary>
