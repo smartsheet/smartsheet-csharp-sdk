@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - ⚠️ **BREAKING**: `SmartsheetClient`, `OAuthFlow`, and the `HttpClient` interface now extend `IDisposable`, so callers can release HTTP resources deterministically with a `using` statement. Implementations of these interfaces must add `Dispose()`; ones compiled against an earlier version fail to load with `TypeLoadException`. Fixes [#220](https://github.com/smartsheet/smartsheet-csharp-sdk/issues/220)
 - Disposing a client no longer calls `NLog.LogManager.Flush()`. That flush ran only from the `~SmartsheetImpl()` finalizer, at GC time. Call `LogManager.Flush()` yourself if you need a deterministic flush.
-- ⚠️ **BREAKING**: `CONTRIBUTOR` is now the first member of `SeatType` and `DowngradeSeatType` (integer value `0`). An unrecognised seat type in `UserPlan.SeatType` now reads as `CONTRIBUTOR` instead of `VIEWER`.
+- ⚠️ **BREAKING**: `CONTRIBUTOR` is now the first member of `SeatType` and `DowngradeSeatType`, with integer value `0` (previously `4` and `2`). The other members keep their values. An unrecognised seat type in `UserPlan.SeatType` now reads as `CONTRIBUTOR` instead of `VIEWER`.
 
 ### Removed
 - ⚠️ **BREAKING**: `Close()` is removed from the `HttpClient` interface and from `DefaultHttpClient`. Call `Dispose()` instead, or use a `using` statement. Subclasses that released their own resources in an overridden `Close()` must move that logic to `Dispose(bool)`.
