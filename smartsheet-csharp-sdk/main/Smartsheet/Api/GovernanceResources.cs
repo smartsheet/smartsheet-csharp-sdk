@@ -9,9 +9,10 @@ namespace Smartsheet.Api
     {
         /// <summary>
         /// Gets the data classification settings for a plan.
+        /// Use this overload to get the settings for a plan.
         /// GET /2.0/governance/data-classification/settings?planId={planId}
         /// </summary>
-        /// <param name="planId"> the plan ID </param>
+        /// <param name="planId"> the ID of the plan whose classification settings to return </param>
         /// <returns> the data classification settings </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>
@@ -22,12 +23,13 @@ namespace Smartsheet.Api
         DataClassificationSettings GetDataClassificationSettings(long planId);
 
         /// <summary>
-        /// Gets the data classification settings by resolving the plan from an asset.
+        /// Gets the data classification settings for a plan.
+        /// Use this overload when your request relates to a specific sheet, report, or dashboard.
         /// Supported asset types: <see cref="AssetType.SHEET"/>, <see cref="AssetType.REPORT"/>, <see cref="AssetType.SIGHT"/> (dashboard).
         /// GET /2.0/governance/data-classification/settings?assetType={assetType}&amp;assetId={assetId}
         /// </summary>
         /// <param name="assetType"> the type of the asset (<see cref="AssetType.SHEET"/>, <see cref="AssetType.REPORT"/> or <see cref="AssetType.SIGHT"/>) </param>
-        /// <param name="assetId"> the ID of the asset </param>
+        /// <param name="assetId"> the ID of the sheet, report, or dashboard </param>
         /// <returns> the data classification settings </returns>
         /// <exception cref="System.InvalidOperationException"> if any argument is null or an empty string </exception>
         /// <exception cref="InvalidRequestException"> if there is any problem with the REST API request </exception>

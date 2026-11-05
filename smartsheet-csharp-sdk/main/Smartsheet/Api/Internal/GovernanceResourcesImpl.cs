@@ -18,7 +18,7 @@ namespace Smartsheet.Api.Internal
         /// <summary>
         /// Gets the data classification settings for a plan.
         /// </summary>
-        /// <param name="planId"> the plan ID </param>
+        /// <param name="planId"> the ID of the plan whose classification settings to return </param>
         /// <returns> the data classification settings </returns>
         public virtual DataClassificationSettings GetDataClassificationSettings(long planId)
         {
@@ -30,11 +30,12 @@ namespace Smartsheet.Api.Internal
         }
 
         /// <summary>
-        /// Gets the data classification settings by resolving the plan from an asset.
+        /// Gets the data classification settings for a plan.
+        /// Use this overload when your request relates to a specific sheet, report, or dashboard.
         /// Supported asset types: <see cref="AssetType.SHEET"/>, <see cref="AssetType.REPORT"/>, <see cref="AssetType.SIGHT"/> (dashboard).
         /// </summary>
         /// <param name="assetType"> the type of the asset </param>
-        /// <param name="assetId"> the ID of the asset </param>
+        /// <param name="assetId"> the ID of the sheet, report, or dashboard </param>
         /// <returns> the data classification settings </returns>
         public virtual DataClassificationSettings GetDataClassificationSettings(AssetType assetType, long assetId)
         {
