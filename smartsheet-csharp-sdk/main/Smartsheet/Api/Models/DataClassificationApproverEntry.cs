@@ -5,12 +5,12 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Represents a set of approvers (by type and IDs) for downgrade approval settings.
     /// </summary>
-    public class ApproverEntry
+    public class DataClassificationApproverEntry
     {
         /// <summary>
         /// Gets or sets the approver type.
         /// </summary>
-        public ApproverType? Type { get; set; }
+        public DataClassificationApproverType? Type { get; set; }
 
         /// <summary>
         /// Gets or sets the list of approver IDs.

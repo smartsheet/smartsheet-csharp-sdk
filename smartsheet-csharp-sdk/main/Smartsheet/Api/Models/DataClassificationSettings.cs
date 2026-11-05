@@ -36,11 +36,11 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Gets or sets the list of classification labels defined for this plan.
         /// </summary>
-        public IList<ClassificationLabel>? Labels { get; set; }
+        public IList<DataClassificationLabel>? Labels { get; set; }
 
         /// <summary>
         /// Gets or sets the downgrade approval settings.
         /// </summary>
-        public DowngradeApprovalSettings? DowngradeApprovalSettings { get; set; }
+        public DataClassificationDowngradeApprovalSettings? DowngradeApprovalSettings { get; set; }
     }
 }

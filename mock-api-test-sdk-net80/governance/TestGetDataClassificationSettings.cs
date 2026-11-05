@@ -13,7 +13,7 @@ namespace mock_api_test_sdk_net80
         private const long TEST_ASSET_ID = 112398785741L;
         private const string TEST_PATH = "/2.0/governance/data-classification/settings";
 
-        private static readonly ClassificationLabel CONFIDENTIAL_LABEL_REQUIRED = new ClassificationLabel
+        private static readonly DataClassificationLabel CONFIDENTIAL_LABEL_REQUIRED = new DataClassificationLabel
         {
             Id = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
             Name = "Confidential",
@@ -29,9 +29,9 @@ namespace mock_api_test_sdk_net80
             IsDisabled = false,
             GuidelinesUrl = "https://wiki.example.com/classification-guide",
             AllowManualChange = true,
-            Labels = new List<ClassificationLabel>
+            Labels = new List<DataClassificationLabel>
             {
-                new ClassificationLabel
+                new DataClassificationLabel
                 {
                     Id = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
                     Name = "Confidential",
@@ -40,7 +40,7 @@ namespace mock_api_test_sdk_net80
                     SensitivityOrder = 1,
                     IsDefault = false
                 },
-                new ClassificationLabel
+                new DataClassificationLabel
                 {
                     Id = "4aa85f64-5717-4562-b3fc-2c963f66afa7",
                     Name = "Internal",
@@ -50,18 +50,18 @@ namespace mock_api_test_sdk_net80
                     IsDefault = true
                 }
             },
-            DowngradeApprovalSettings = new DowngradeApprovalSettings
+            DowngradeApprovalSettings = new DataClassificationDowngradeApprovalSettings
             {
-                Mode = DowngradeApprovalMode.CUSTOM,
-                LabelApprovers = new List<LabelApproverEntry>
+                Mode = DataClassificationDowngradeApprovalMode.CUSTOM,
+                LabelApprovers = new List<DataClassificationLabelApproverEntry>
                 {
-                    new LabelApproverEntry
+                    new DataClassificationLabelApproverEntry
                     {
                         LabelId = "4aa85f64-5717-4562-b3fc-2c963f66afa7",
-                        Approvers = new List<ApproverEntry>
+                        Approvers = new List<DataClassificationApproverEntry>
                         {
-                            new ApproverEntry { Type = ApproverType.USERS, Ids = new List<long> { 5448085317937028L } },
-                            new ApproverEntry { Type = ApproverType.WORKSPACE_ADMINS, Ids = new List<long>() }
+                            new DataClassificationApproverEntry { Type = DataClassificationApproverType.USERS, Ids = new List<long> { 5448085317937028L } },
+                            new DataClassificationApproverEntry { Type = DataClassificationApproverType.WORKSPACE_ADMINS, Ids = new List<long>() }
                         }
                     }
                 }
@@ -73,8 +73,8 @@ namespace mock_api_test_sdk_net80
             OrgId = TEST_ORG_ID,
             PlanId = TEST_PLAN_ID,
             IsDisabled = false,
-            Labels = new List<ClassificationLabel> { CONFIDENTIAL_LABEL_REQUIRED },
-            DowngradeApprovalSettings = new DowngradeApprovalSettings { Mode = DowngradeApprovalMode.NONE }
+            Labels = new List<DataClassificationLabel> { CONFIDENTIAL_LABEL_REQUIRED },
+            DowngradeApprovalSettings = new DataClassificationDowngradeApprovalSettings { Mode = DataClassificationDowngradeApprovalMode.NONE }
         };
 
         private static readonly DataClassificationSettings EXPECTED_DISABLED_PLAN = new DataClassificationSettings
@@ -82,8 +82,8 @@ namespace mock_api_test_sdk_net80
             OrgId = TEST_ORG_ID,
             PlanId = TEST_PLAN_ID,
             IsDisabled = true,
-            Labels = new List<ClassificationLabel>(),
-            DowngradeApprovalSettings = new DowngradeApprovalSettings { Mode = DowngradeApprovalMode.NONE }
+            Labels = new List<DataClassificationLabel>(),
+            DowngradeApprovalSettings = new DataClassificationDowngradeApprovalSettings { Mode = DataClassificationDowngradeApprovalMode.NONE }
         };
 
         private static readonly DataClassificationSettings EXPECTED_APPROVAL_NEEDED = new DataClassificationSettings
@@ -92,14 +92,14 @@ namespace mock_api_test_sdk_net80
             PlanId = TEST_PLAN_ID,
             IsDisabled = false,
             AllowManualChange = true,
-            Labels = new List<ClassificationLabel> { CONFIDENTIAL_LABEL_REQUIRED },
-            DowngradeApprovalSettings = new DowngradeApprovalSettings
+            Labels = new List<DataClassificationLabel> { CONFIDENTIAL_LABEL_REQUIRED },
+            DowngradeApprovalSettings = new DataClassificationDowngradeApprovalSettings
             {
-                Mode = DowngradeApprovalMode.APPROVAL_NEEDED,
-                Approvers = new List<ApproverEntry>
+                Mode = DataClassificationDowngradeApprovalMode.APPROVAL_NEEDED,
+                Approvers = new List<DataClassificationApproverEntry>
                 {
-                    new ApproverEntry { Type = ApproverType.GROUPS, Ids = new List<long> { 5129226945881988L, 2877427132196740L } },
-                    new ApproverEntry { Type = ApproverType.USERS, Ids = new List<long> { 5448085317937028L } }
+                    new DataClassificationApproverEntry { Type = DataClassificationApproverType.GROUPS, Ids = new List<long> { 5129226945881988L, 2877427132196740L } },
+                    new DataClassificationApproverEntry { Type = DataClassificationApproverType.USERS, Ids = new List<long> { 5448085317937028L } }
                 }
             }
         };

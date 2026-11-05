@@ -5,21 +5,21 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Represents the downgrade approval settings for a data classification plan.
     /// </summary>
-    public class DowngradeApprovalSettings
+    public class DataClassificationDowngradeApprovalSettings
     {
         /// <summary>
         /// Gets or sets the approval mode.
         /// </summary>
-        public DowngradeApprovalMode? Mode { get; set; }
+        public DataClassificationDowngradeApprovalMode? Mode { get; set; }
 
         /// <summary>
         /// Gets or sets the global approver entries.
         /// </summary>
-        public IList<ApproverEntry>? Approvers { get; set; }
+        public IList<DataClassificationApproverEntry>? Approvers { get; set; }
 
         /// <summary>
         /// Gets or sets the per-label approver entries.
         /// </summary>
-        public IList<LabelApproverEntry>? LabelApprovers { get; set; }
+        public IList<DataClassificationLabelApproverEntry>? LabelApprovers { get; set; }
     }
 }

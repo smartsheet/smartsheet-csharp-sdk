@@ -5,7 +5,7 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Associates a classification label with its set of approvers for downgrade.
     /// </summary>
-    public class LabelApproverEntry
+    public class DataClassificationLabelApproverEntry
     {
         /// <summary>
         /// Gets or sets the label ID this approver entry applies to.
@@ -15,6 +15,6 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Gets or sets the list of approver entries for this label.
         /// </summary>
-        public IList<ApproverEntry>? Approvers { get; set; }
+        public IList<DataClassificationApproverEntry>? Approvers { get; set; }
     }
 }

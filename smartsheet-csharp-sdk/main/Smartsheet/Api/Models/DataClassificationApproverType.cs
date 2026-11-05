@@ -21,7 +21,7 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Represents the type of approver who can approve a classification downgrade.
     /// </summary>
-    public enum ApproverType
+    public enum DataClassificationApproverType
     {
         /// <summary>
         /// The approvers are groups.

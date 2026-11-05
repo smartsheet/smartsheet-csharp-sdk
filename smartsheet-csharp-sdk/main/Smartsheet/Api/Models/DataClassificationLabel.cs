@@ -3,7 +3,7 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Represents a single data classification label.
     /// </summary>
-    public class ClassificationLabel
+    public class DataClassificationLabel
     {
         /// <summary>
         /// Gets or sets the label ID (UUID string).

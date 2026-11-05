@@ -21,7 +21,7 @@ namespace Smartsheet.Api.Models
     /// <summary>
     /// Represents the approval mode applied when a classification label is downgraded to a less sensitive level.
     /// </summary>
-    public enum DowngradeApprovalMode
+    public enum DataClassificationDowngradeApprovalMode
     {
         /// <summary>
         /// No approval is required.
