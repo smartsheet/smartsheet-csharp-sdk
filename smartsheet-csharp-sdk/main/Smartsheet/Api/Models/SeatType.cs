@@ -24,9 +24,9 @@ namespace Smartsheet.Api.Models
     public enum SeatType
     {
         /// <summary>
-        /// Viewer seat type - can view sheets but has limited permissions
+        /// Contributor seat type - can view, comment, and attach
         /// </summary>
-        VIEWER,
+        CONTRIBUTOR,
 
         /// <summary>
         /// Guest seat type - external user with limited access
@@ -41,12 +41,7 @@ namespace Smartsheet.Api.Models
         /// <summary>
         /// Provisional member seat type - member with trial access
         /// </summary>
-        PROVISIONAL_MEMBER,
-
-        /// <summary>
-        /// Contributor seat type - can view, comment, and attach
-        /// </summary>
-        CONTRIBUTOR
+        PROVISIONAL_MEMBER
     }
 
     /// <summary>
@@ -55,19 +50,14 @@ namespace Smartsheet.Api.Models
     public enum DowngradeSeatType
     {
         /// <summary>
-        /// Downgrade to viewer seat type
+        /// Downgrade to contributor seat type
         /// </summary>
-        VIEWER,
+        CONTRIBUTOR,
 
         /// <summary>
         /// Downgrade to guest seat type
         /// </summary>
-        GUEST,
-
-        /// <summary>
-        /// Downgrade to contributor seat type
-        /// </summary>
-        CONTRIBUTOR
+        GUEST
     }
 
     /// <summary>

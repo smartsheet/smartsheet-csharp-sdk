@@ -9,7 +9,7 @@ namespace mock_api_test_sdk_net80
     public class TestUserUpgradeDowngrade
     {
         private const UpgradeSeatType TEST_UPGRADE_SEAT_TYPE = UpgradeSeatType.MEMBER;
-        private const DowngradeSeatType TEST_DOWNGRADE_SEAT_TYPE = DowngradeSeatType.VIEWER;
+        private const DowngradeSeatType TEST_DOWNGRADE_SEAT_TYPE = DowngradeSeatType.CONTRIBUTOR;
 
         [TestMethod]
         public async Task TestUpgradeUserGeneratedUrlIsCorrect()
@@ -104,7 +104,7 @@ namespace mock_api_test_sdk_net80
 
             WiremockHelper wiremockHelper = new WiremockHelper();
             LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
-            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "VIEWER" } };
+            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "CONTRIBUTOR" } };
             var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
             CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
@@ -131,21 +131,6 @@ namespace mock_api_test_sdk_net80
                 smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, TEST_DOWNGRADE_SEAT_TYPE));
 
             Assert.IsTrue(exception.Message.Contains("Malformed Request"));
-        }
-
-        [TestMethod]
-        public async Task TestDowngradeUserToContributorRequestBody()
-        {
-            Guid requestId = Guid.NewGuid();
-            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/users/downgrade-user/all-response-body-properties", requestId.ToString());
-
-            smartsheet.UserResources.DowngradeUser(CommonTestConstants.TEST_USER_ID, CommonTestConstants.TEST_PLAN_ID, DowngradeSeatType.CONTRIBUTOR);
-
-            WiremockHelper wiremockHelper = new WiremockHelper();
-            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
-            var expectedBodyMap = new Dictionary<string, string> { { "seatType", "CONTRIBUTOR" } };
-            var actualBodyMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(foundRequest.Body ?? "{}");
-            CollectionAssert.AreEquivalent(expectedBodyMap, actualBodyMap);
         }
     }
 }
