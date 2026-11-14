@@ -78,6 +78,26 @@ namespace Smartsheet.Api.Models
         /// Workspace search object type.
         /// </summary>
         [EnumMember(Value = "workspace")]
-        WORKSPACE
+        WORKSPACE,
+
+        // New UPPER_SNAKE_CASE values returned by the search-service path
+        /// <summary>Grid row search object type.</summary>
+        [EnumMember(Value = "GRID_ROW")]
+        GRID_ROW,
+        /// <summary>Form search object type.</summary>
+        [EnumMember(Value = "FORM")]
+        FORM,
+        /// <summary>Collection title search object type.</summary>
+        [EnumMember(Value = "COLLECTION_TITLE")]
+        COLLECTION_TITLE,
+        /// <summary>Portfolio title search object type.</summary>
+        [EnumMember(Value = "PORTFOLIO_TITLE")]
+        PORTFOLIO_TITLE,
+        /// <summary>Project title search object type.</summary>
+        [EnumMember(Value = "PROJECT_TITLE")]
+        PROJECT_TITLE,
+        /// <summary>Scenario plan title search object type.</summary>
+        [EnumMember(Value = "SCENARIO_PLAN_TITLE")]
+        SCENARIO_PLAN_TITLE
     }
 }

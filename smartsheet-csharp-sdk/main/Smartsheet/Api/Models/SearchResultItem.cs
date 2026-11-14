@@ -188,5 +188,36 @@ namespace Smartsheet.Api.Models
             get { return text; }
             set { text = value; }
         }
+
+        // Fields added for the unified search-service response
+
+        private string workspaceId;
+        private string containerId;
+        private long? modifyDateTime;
+        private string primaryColumnCellText;
+        private string attachmentSource;
+        private string attachmentDescription;
+        private bool? isTemplate;
+
+        /// <summary>ID of the workspace containing this result.</summary>
+        public string WorkspaceId { get { return workspaceId; } set { workspaceId = value; } }
+
+        /// <summary>ID of the direct container (sheet or folder) for this result.</summary>
+        public string ContainerId { get { return containerId; } set { containerId = value; } }
+
+        /// <summary>Last-modified timestamp in milliseconds since the Unix epoch (UTC).</summary>
+        public long? ModifyDateTime { get { return modifyDateTime; } set { modifyDateTime = value; } }
+
+        /// <summary>Primary-column cell text. Only populated for GRID_ROW results.</summary>
+        public string PrimaryColumnCellText { get { return primaryColumnCellText; } set { primaryColumnCellText = value; } }
+
+        /// <summary>Object type the attachment belongs to. Only populated for ATTACHMENT results.</summary>
+        public string AttachmentSource { get { return attachmentSource; } set { attachmentSource = value; } }
+
+        /// <summary>User-provided attachment description. Only populated for ATTACHMENT results.</summary>
+        public string AttachmentDescription { get { return attachmentDescription; } set { attachmentDescription = value; } }
+
+        /// <summary>True if this sheet result is a template. Only populated for SHEET results.</summary>
+        public bool? IsTemplate { get { return isTemplate; } set { isTemplate = value; } }
     }
 }

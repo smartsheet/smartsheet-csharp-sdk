@@ -23,6 +23,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - ⚠️ **BREAKING**: `Close()` is removed from the `HttpClient` interface and from `DefaultHttpClient`. Call `Dispose()` instead, or use a `using` statement. Subclasses that released their own resources in an overridden `Close()` must move that logic to `Dispose(bool)`.
 - ⚠️ **BREAKING**: Removed `VIEWER` from `SeatType` and `DowngradeSeatType`, and removed the `displayContributorSeatType` parameter from `ListUsers` and `ListUserPlans`. `include` on `ListUserPlans` moves to 4th position. The `VIEWER` seat type was [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#deprecated-viewer-seat-type-in-favor-of-contributor-new) in favor of `CONTRIBUTOR` (sunset Nov-15-2026). Use `CONTRIBUTOR` instead of `VIEWER` and drop the `displayContributorSeatType` argument.
 
+### Added
+
+- `SearchObjectType` enum: added 6 new values — `GRID_ROW`, `FORM`, `COLLECTION_TITLE`, `PORTFOLIO_TITLE`, `PROJECT_TITLE`, `SCENARIO_PLAN_TITLE`.
+- `SearchResponse` model for the unified search-service response (`SearchResults`, `TotalCount`, `Workspaces`, `PersonalWorkspaceId`). `SearchResources.Search()` and `SearchResources.SearchSheet()` now return `SearchResponse`.
+- New properties on `SearchResultItem`: `WorkspaceId`, `ContainerId`, `ModifyDateTime`, `PrimaryColumnCellText` (GRID_ROW only), `AttachmentSource` (ATTACHMENT only), `AttachmentDescription` (ATTACHMENT only), `IsTemplate` (SHEET only).
+
 ## [7.4.0] - 2026-08-12
 
 ### Added
