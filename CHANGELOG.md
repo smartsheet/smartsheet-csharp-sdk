@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - ⚠️ **BREAKING**: `Close()` is removed from the `HttpClient` interface and from `DefaultHttpClient`. Call `Dispose()` instead, or use a `using` statement. Subclasses that released their own resources in an overridden `Close()` must move that logic to `Dispose(bool)`.
 - ⚠️ **BREAKING**: Removed `VIEWER` from `SeatType` and `DowngradeSeatType`, and removed the `displayContributorSeatType` parameter from `ListUsers` and `ListUserPlans`. `include` on `ListUserPlans` moves to 4th position. The `VIEWER` seat type was [deprecated by the Smartsheet API](https://developers.smartsheet.com/api/smartsheet/changelog#deprecated-viewer-seat-type-in-favor-of-contributor-new) in favor of `CONTRIBUTOR` (sunset Nov-15-2026). Use `CONTRIBUTOR` instead of `VIEWER` and drop the `displayContributorSeatType` argument.
 
+### Added
+- `GovernanceResources.GetDataClassificationSettings(long planId)` and `GovernanceResources.GetDataClassificationSettings(AssetType assetType, long assetId)` to retrieve data classification settings for a plan.
+- `DataClassificationSettings`, `DataClassificationLabel`, `DataClassificationDowngradeApprovalSettings`, `DataClassificationApproverEntry`, and `DataClassificationLabelApproverEntry` models.
+- `DataClassificationDowngradeApprovalMode` and `DataClassificationApproverType` enums.
+
 ## [7.4.0] - 2026-08-12
 
 ### Added
