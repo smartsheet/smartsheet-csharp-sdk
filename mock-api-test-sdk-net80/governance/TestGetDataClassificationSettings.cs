@@ -73,8 +73,7 @@ namespace mock_api_test_sdk_net80
             OrgId = TEST_ORG_ID,
             PlanId = TEST_PLAN_ID,
             IsDisabled = false,
-            Labels = new List<DataClassificationLabel> { CONFIDENTIAL_LABEL_REQUIRED },
-            DowngradeApprovalSettings = new DataClassificationDowngradeApprovalSettings { Mode = DataClassificationDowngradeApprovalMode.NONE }
+            Labels = new List<DataClassificationLabel> { CONFIDENTIAL_LABEL_REQUIRED }
         };
 
         private static readonly DataClassificationSettings EXPECTED_DISABLED_PLAN = new DataClassificationSettings
@@ -236,13 +235,17 @@ namespace mock_api_test_sdk_net80
         }
 
         [TestMethod]
-        public void TestGetDataClassificationSettingsByAssetAllResponseBodyProperties()
+        public async Task TestGetDataClassificationSettingsByAssetAllResponseBodyProperties()
         {
             Guid requestId = Guid.NewGuid();
             SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/all-response-body-properties", requestId.ToString());
 
             DataClassificationSettings result = smartsheet.GovernanceResources.GetDataClassificationSettings(AssetType.SHEET, TEST_ASSET_ID);
 
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsTrue(string.IsNullOrEmpty(foundRequest.Body));
             Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_ALL), JsonConvert.SerializeObject(result));
         }
 
@@ -254,6 +257,169 @@ namespace mock_api_test_sdk_net80
 
             HelperFunctions.AssertRaisesException<ResourceNotFoundException>(
                 () => smartsheet.GovernanceResources.GetDataClassificationSettings(TEST_PLAN_ID),
+                "Not Found");
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncGeneratedUrlIsCorrect()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/all-response-body-properties", requestId.ToString());
+
+            await smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+
+            Assert.AreEqual(TEST_PATH, uri.AbsolutePath);
+            Assert.AreEqual("GET", foundRequest.Method);
+
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
+            CollectionAssert.AreEquivalent(
+                new Dictionary<string, string> { { "planId", TEST_PLAN_ID.ToString() } },
+                queryParams.AllKeys.ToDictionary(k => k!, k => queryParams[k])
+            );
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncAllResponseBodyProperties()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/all-response-body-properties", requestId.ToString());
+
+            DataClassificationSettings result = await smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsTrue(string.IsNullOrEmpty(foundRequest.Body));
+            Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_ALL), JsonConvert.SerializeObject(result));
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncRequiredResponseBodyProperties()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/required-response-body-properties", requestId.ToString());
+
+            DataClassificationSettings result = await smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsTrue(string.IsNullOrEmpty(foundRequest.Body));
+            Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_REQUIRED), JsonConvert.SerializeObject(result));
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncError400Response()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/400-response", requestId.ToString());
+
+            await HelperFunctions.AssertRaisesExceptionAsync<SmartsheetException>(
+                () => smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID),
+                "Malformed Request");
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncError500Response()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/500-response", requestId.ToString());
+
+            await HelperFunctions.AssertRaisesExceptionAsync<SmartsheetException>(
+                () => smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID),
+                "Internal Server Error");
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncDisabledPlan()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/disabled-plan", requestId.ToString());
+
+            DataClassificationSettings result = await smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsTrue(string.IsNullOrEmpty(foundRequest.Body));
+            Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_DISABLED_PLAN), JsonConvert.SerializeObject(result));
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncDowngradeApprovalModeApprovalNeeded()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/downgrade-approval-mode-approval-needed", requestId.ToString());
+
+            DataClassificationSettings result = await smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsTrue(string.IsNullOrEmpty(foundRequest.Body));
+            Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_APPROVAL_NEEDED), JsonConvert.SerializeObject(result));
+        }
+
+        [DataTestMethod]
+        [DataRow(AssetType.SHEET, "sheet")]
+        [DataRow(AssetType.REPORT, "report")]
+        [DataRow(AssetType.SIGHT, "sight")]
+        public async Task TestGetDataClassificationSettingsAsyncByAssetGeneratedUrlIsCorrect(AssetType assetType, string expectedAssetType)
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/all-response-body-properties", requestId.ToString());
+
+            await smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(assetType, TEST_ASSET_ID);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsNotNull(foundRequest.AbsoluteUrl);
+            var uri = new Uri(foundRequest.AbsoluteUrl);
+
+            Assert.AreEqual(TEST_PATH, uri.AbsolutePath);
+            Assert.AreEqual("GET", foundRequest.Method);
+
+            var queryParams = HttpUtility.ParseQueryString(uri.Query);
+            CollectionAssert.AreEquivalent(
+                new Dictionary<string, string>
+                {
+                    { "assetType", expectedAssetType },
+                    { "assetId", TEST_ASSET_ID.ToString() }
+                },
+                queryParams.AllKeys.ToDictionary(k => k!, k => queryParams[k])
+            );
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncByAssetAllResponseBodyProperties()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/governance/get-data-classification-settings/all-response-body-properties", requestId.ToString());
+
+            DataClassificationSettings result = await smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(AssetType.SHEET, TEST_ASSET_ID);
+
+            WiremockHelper wiremockHelper = new WiremockHelper();
+            LogModel foundRequest = await wiremockHelper.FindWiremockRequestAsync(requestId.ToString());
+
+            Assert.IsTrue(string.IsNullOrEmpty(foundRequest.Body));
+            Assert.AreEqual(JsonConvert.SerializeObject(EXPECTED_ALL), JsonConvert.SerializeObject(result));
+        }
+
+        [TestMethod]
+        public async Task TestGetDataClassificationSettingsAsyncError404Response()
+        {
+            Guid requestId = Guid.NewGuid();
+            SmartsheetClient smartsheet = HelperFunctions.SetupClient("/errors/404-response", requestId.ToString());
+
+            await HelperFunctions.AssertRaisesExceptionAsync<ResourceNotFoundException>(
+                () => smartsheet.GovernanceResources.GetDataClassificationSettingsAsync(TEST_PLAN_ID),
                 "Not Found");
         }
     }
