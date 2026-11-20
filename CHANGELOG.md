@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ## [X.X.X] - Unreleased
 
+### Added
+- `GovernanceResources.GetDataClassificationSettings(long planId)` and `GovernanceResources.GetDataClassificationSettings(AssetType assetType, long assetId)` to retrieve data classification settings for a plan, with the asynchronous counterparts `GetDataClassificationSettingsAsync(long planId, CancellationToken)` and `GetDataClassificationSettingsAsync(AssetType assetType, long assetId, CancellationToken)`.
+- `DataClassificationSettings`, `DataClassificationLabel`, `DataClassificationDowngradeApprovalSettings`, `DataClassificationApproverEntry`, and `DataClassificationLabelApproverEntry` models.
+- `DataClassificationDowngradeApprovalMode` and `DataClassificationApproverType` enums.
+
 ## [8.0.0] - 2026-11-16
 
 ### Added
