@@ -13,7 +13,7 @@ Releases follow [Semantic Versioning](https://semver.org/) and [Keep a Changelog
 ## Prerequisites
 
 - Write access to the `smartsheet/smartsheet-csharp-sdk` repository.
-- NuGet credentials are not needed locally — publishing uses a `NUGET_TOKEN` stored as a GitHub Actions secret.
+- NuGet credentials are not needed locally — publishing uses [NuGet trusted publishing](https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing). The `NUGET_USER` GitHub Actions secret holds the nuget.org profile name that owns the policy.
 
 ## Step-by-Step Process
 
@@ -76,7 +76,7 @@ The tag is created automatically when the release is published — no separate `
 
 Publishing the release (not just saving as a draft) triggers two workflows:
 
-- **publish.yml**: restores dependencies, builds, runs mock API tests, packages with `dotnet pack`, and publishes to NuGet using the `NUGET_TOKEN` secret.
+- **publish.yml**: restores dependencies, builds, runs mock API tests, packages with `dotnet pack`, and publishes to NuGet with a short-lived key from trusted publishing.
 - **docs.yml**: generates DocFX documentation and deploys to GitHub Pages.
 
 ### 5. Verify the publish workflow
@@ -107,8 +107,6 @@ GitHub Release (published) → publish.yml → dotnet pack → dotnet nuget push
                            → docs.yml → DocFX → GitHub Pages
 ```
 
-The workflow uses a `NUGET_TOKEN` GitHub Actions secret — no local credentials needed.
-
 ## Troubleshooting
 
 **CI fails on the PR**
@@ -119,7 +117,7 @@ Check the `main.yml` run for build or mock API test failures.
 
 The tag and GitHub Release already exist — do not delete them. Instead:
 
-1. Investigate the failure in the Actions log (common cause: expired `NUGET_TOKEN`).
+1. Investigate the failure in the Actions log (common cause: the `NuGet login` step fails because `NUGET_USER` is wrong or the nuget.org trusted publishing policy does not match `publish.yml`).
 2. Re-trigger via **Actions → Publish Nuget Package → Run workflow** (the workflow supports `workflow_dispatch`) after fixing the root cause.
 3. If the root cause requires a code fix, cut a patch release instead.
 
