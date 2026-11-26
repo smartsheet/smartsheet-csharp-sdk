@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 
 namespace Smartsheet.Api.Models
@@ -88,6 +89,7 @@ namespace Smartsheet.Api.Models
         /// Column Id for each item
         /// </summary>
         /// <returns>the column Id</returns>
+        [JsonProperty("columnId")]
         public long? ColumnId
         {
             get { return columnId; }
@@ -98,6 +100,7 @@ namespace Smartsheet.Api.Models
         /// Row Id for each item
         /// </summary>
         /// <returns>the row Id</returns>
+        [JsonProperty("rowId")]
         public long? RowId
         {
             get { return rowId; }
@@ -108,6 +111,7 @@ namespace Smartsheet.Api.Models
         /// Sheet Id for each item
         /// </summary>
         /// <returns>the sheet Id</returns>
+        [JsonProperty("sheetId")]
         public long? SheetId
         {
             get { return sheetId; }
@@ -118,6 +122,7 @@ namespace Smartsheet.Api.Models
         /// The type of data returned will depend on the cell type and the data in the cell.
         /// </summary>
         /// <returns> an object </returns>
+        [JsonProperty("objectValue")]
         public object ObjectValue
         {
             get { return objectValue; }
@@ -128,6 +133,7 @@ namespace Smartsheet.Api.Models
         /// Cell Object.
         /// </summary>
         /// <returns> the Cell Object </returns>
+        [JsonProperty("cell")]
         public Cell Cell
         {
             get { return cell; }
@@ -138,6 +144,7 @@ namespace Smartsheet.Api.Models
         /// CELL
         /// </summary>
         /// <returns>the dataSource string</returns>
+        [JsonProperty("dataSource")]
         public string DataSource
         {
             get { return dataSource; }
@@ -148,6 +155,7 @@ namespace Smartsheet.Api.Models
         /// Label for the data point. This will be either the column name or a user-provided string.
         /// </summary>
         /// <returns> the label </returns>
+        [JsonProperty("label")]
         public string Label
         {
             get { return label; }
@@ -158,6 +166,7 @@ namespace Smartsheet.Api.Models
         /// formatDescriptor.
         /// </summary>
         /// <returns> the labelFormat </returns>
+        [JsonProperty("labelFormat")]
         public string LabelFormat
         {
             get { return labelFormat; }
@@ -168,6 +177,7 @@ namespace Smartsheet.Api.Models
         /// The display order for the CellDataItem.
         /// </summary>
         /// <returns> the display order </returns>
+        [JsonProperty("order")]
         public int? Order
         {
             get { return order; }
@@ -178,6 +188,7 @@ namespace Smartsheet.Api.Models
         /// Contains the SummaryField when dataSource is SUMMARY_FIELD
         /// </summary>
         /// <returns> SummaryField object </returns>
+        [JsonProperty("profileField")]
         public SummaryField ProfileField
         {
             get { return profileField; }
@@ -188,6 +199,7 @@ namespace Smartsheet.Api.Models
         /// formatDescriptor.
         /// </summary>
         /// <returns> the valueFormat </returns>
+        [JsonProperty("valueFormat")]
         public string ValueFormat
         {
             get { return valueFormat; }
